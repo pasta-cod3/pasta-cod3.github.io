@@ -37,25 +37,17 @@ body {
     text-shadow: 0px 0px 5px #00ff00;
 }
 
-.cyber-nav a::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 2px;
-    text-shadow: -2px 0 #00ff00;
-    clip: rect(0, 0, 0, 0);
-    animation: glitch 0.3s infinite;
+/* STILE PER I TESTI CLICCABILI NELLE SEZIONI */
+.panel-content a {
+    color: #fff;  /* Testo bianco */
+    font-weight: bold; /* Più spesso */
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-@keyframes glitch {
-    0% {
-        clip: rect(24px, 550px, 90px, 0);
-    }
-    50% {
-        clip: rect(10px, 550px, 80px, 0);
-    }
-    100% {
-        clip: rect(30px, 550px, 100px, 0);
-    }
+.panel-content a:hover {
+    color: #fff; /* Mantiene il bianco in hover */
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8); /* Effetto di luminosità */
 }
 
 .cyber-button {
