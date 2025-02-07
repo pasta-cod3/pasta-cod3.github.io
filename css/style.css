@@ -37,17 +37,25 @@ body {
     text-shadow: 0px 0px 5px #00ff00;
 }
 
-/* STILE PER I TESTI CLICCABILI NELLE SEZIONI */
-.panel-content a {
-    color: #fff;  /* Testo bianco */
-    font-weight: bold; /* Più spesso */
-    text-decoration: none;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+.cyber-nav a::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -2px 0 #00ff00;
+    clip: rect(0, 0, 0, 0);
+    animation: glitch 0.3s infinite;
 }
 
-.panel-content a:hover {
-    color: #fff; /* Mantiene il bianco in hover */
-    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8); /* Effetto di luminosità */
+@keyframes glitch {
+    0% {
+        clip: rect(24px, 550px, 90px, 0);
+    }
+    50% {
+        clip: rect(10px, 550px, 80px, 0);
+    }
+    100% {
+        clip: rect(30px, 550px, 100px, 0);
+    }
 }
 
 .cyber-button {
@@ -131,5 +139,68 @@ body {
     .cyber-panel img {
         width: 100%;
         margin-bottom: 20px;
+    }
+}
+
+/* 🌍 Responsive Design per Mobile */
+@media (max-width: 768px) {
+    /* I cyber-panel saranno centrati invece di alternati */
+    .cyber-panel {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    /* Le immagini diventeranno più adattabili */
+    .cyber-panel img {
+        width: 100%;
+        height: auto;
+    }
+    
+    /* Miglioriamo lo spazio per il testo */
+    .panel-content {
+        padding: 15px;
+    }
+
+    /* I bottoni saranno più facili da premere su mobile */
+    .cyber-button {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin: 10px 0;
+        padding: 12px;
+    }
+
+    /* Ridimensioniamo i font per renderli leggibili */
+    body {
+        font-size: 16px;
+    }
+    
+    h2 {
+        font-size: 20px;
+    }
+
+    /* Il menu di navigazione diventa più compatto */
+    .cyber-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cyber-nav a {
+        padding: 10px;
+        width: 90%;
+        text-align: center;
+    }
+
+    /* Ottimizzazione per il footer */
+    .cyber-footer {
+        text-align: center;
+        padding: 20px;
+    }
+    
+    /* Lazy loading delle immagini per il caricamento più veloce */
+    img {
+        loading: lazy;
     }
 }
