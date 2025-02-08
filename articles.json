@@ -1,0 +1,51 @@
+[
+    {
+        "title": "Come trasformare un sito statico in dinamico con PHP",
+        "url": "articoli/php-dinamico.html",
+        "date": "2025-01-11",
+        "category": "Web Development",
+        "description": "Come usare PHP per gestire inclusioni e struttura in un sito web."
+    },
+    {
+        "title": "Scelta del sistema operativo per Raspberry Pi 2",
+        "url": "articoli/dietpi-raspberry.html",
+        "date": "2024-12-30",
+        "category": "Hardware",
+        "description": "Perché usare DietPi su Raspberry Pi 2 e quali vantaggi offre."
+    },
+    {
+        "title": "Come creare un sito statico e aggiornare gli articoli manualmente",
+        "url": "articoli/sito-statico.html",
+        "date": "2024-12-30",
+        "category": "Web Development",
+        "description": "Guida alla creazione di un sito statico senza CMS o database."
+    },
+    {
+        "title": "Configurare una eGPU tramite Thunderbolt",
+        "url": "articoli/egpu-thunderbolt.html",
+        "date": "2024-11-07",
+        "category": "Hardware",
+        "description": "Come collegare e configurare una GPU esterna via Thunderbolt."
+    },
+    {
+        "title": "Installare Parrot OS per la cybersecurity",
+        "url": "articoli/parrot-os.html",
+        "date": "2024-11-14",
+        "category": "Cybersecurity",
+        "description": "Perché scegliere Parrot OS per la sicurezza informatica e il pentesting."
+    },
+    {
+        "title": "Boot issues: Windows salta il menu di avvio",
+        "url": "articoli/windows-boot-issue.html",
+        "date": "2024-11-03",
+        "category": "Sistemi Operativi",
+        "description": "Soluzione per il problema di Windows che avvia direttamente senza menu di boot."
+    },
+    {
+        "title": "Risoluzione di problemi di rete con worm su Windows",
+        "url": "articoli/worm-windows-network.html",
+        "date": "2024-09-16",
+        "category": "Cybersecurity",
+        "description": "Come individuare e rimuovere un worm all'interno di una rete di PC Windows."
+    }
+]
