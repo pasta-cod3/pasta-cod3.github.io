@@ -205,7 +205,10 @@ body {
 .search-container {
     text-align: center;
     margin-top: 15px;
+    flex-direction: column;
+
 }
+
 
 #search {
     width: 80%;
