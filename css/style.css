@@ -199,10 +199,7 @@ body {
         padding: 20px;
     }
     
-    /* Lazy loading delle immagini per il caricamento più veloce */
-    img {
-        loading:lazy;
-    }
+
 }
 
 .search-container {
@@ -219,4 +216,6 @@ body {
     border: 2px solid #007BFF;
     border-radius: 5px;
     outline: none;
+    flex-direction: column;
+
 }
