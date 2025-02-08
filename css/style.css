@@ -215,5 +215,7 @@ body {
     border: 2px solid #007BFF;
     border-radius: 5px;
     outline: none;
+    flex-direction: column;
+
 }
 }
