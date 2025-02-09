@@ -291,3 +291,27 @@ a:hover {
     max-width: 200px; /* Mantiene il pulsante compatto */
     text-align: center;
 }
+
+/* 🌍 Evita lo scorrimento orizzontale */
+html, body {
+    overflow-x: hidden; /* Nasconde lo scorrimento laterale */
+    width: 100%;
+}
+
+/* Assicura che tutti i contenuti rimangano dentro i limiti */
+.container, .scroll-container, .cyber-panel {
+    max-width: 100vw; /* Impedisce agli elementi di superare la larghezza dello schermo */
+    overflow-x: hidden;
+}
+
+/* Sezioni che potrebbero uscire dai limiti */
+.cyber-panel {
+    display: flex;
+    flex-wrap: wrap; /* Evita che i contenuti escano fuori dallo schermo */
+    justify-content: center; /* Centra i contenuti */
+}
+
+/* Evita che elementi assoluti escano dai limiti */
+* {
+    box-sizing: border-box;
+}
