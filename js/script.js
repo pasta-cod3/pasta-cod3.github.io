@@ -62,3 +62,43 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error("Errore nel caricamento del JSON:", error));
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector("#search-bar"); // Campo input della ricerca
+    const searchButton = document.querySelector("#search-button"); // Bottone della ricerca
+
+    function highlightText(keyword) {
+        // Rimuove eventuali evidenziazioni precedenti
+        document.querySelectorAll("mark").forEach(mark => {
+            const parent = mark.parentNode;
+            parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        });
+
+        if (!keyword.trim()) return; // Esce se il campo è vuoto
+
+        const regex = new RegExp(keyword, "gi");
+        let found = false;
+
+        document.querySelectorAll(".panel-content, p, h2").forEach(element => {
+            if (element.textContent.match(regex)) {
+                found = true;
+                element.innerHTML = element.innerHTML.replace(regex, match => `<mark>${match}</mark>`);
+            }
+        });
+
+        if (!found) {
+            alert("Nessun risultato trovato.");
+        }
+    }
+
+    searchButton.addEventListener("click", () => {
+        highlightText(searchInput.value);
+    });
+
+    searchInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            highlightText(searchInput.value);
+        }
+    });
+});
+
+
