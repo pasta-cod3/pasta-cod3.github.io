@@ -5,7 +5,7 @@ body {
     font-family: 'Courier New', monospace;
     background: url('../img/bg-pattern.png') #0a0a0a;
     color: #00ff00;
-    
+
     /*backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     */
@@ -175,7 +175,7 @@ body {
         padding: 12px;
     }
 
-    /* Ridimensioniamo i font per renderli leggibili */
+
     body {
         font-size: 16px;
     }
@@ -225,4 +225,25 @@ body {
     outline: none;
     flex-direction: column;
 
+}
+
+@media (max-width: 768px) {
+    .cyber-panel {
+        flex-direction: column !important; /* Disposizione verticale su mobile */
+        text-align: center;
+        align-items: center;
+    }
+    
+    .cyber-panel.right {
+        flex-direction: column-reverse !important; 
+    }
+
+    .cyber-panel img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .panel-content {
+        padding: 15px;
+    }
 }
