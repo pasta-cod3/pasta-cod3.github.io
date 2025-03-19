@@ -1,18 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-body {
-    margin: 0;
-    font-family: 'Courier New', monospace;
-    background: url('../img/bg-pattern.png') #0a0a0a;
-    color: #00ff00;
-
-
-    
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('../img/bg-pattern.gif') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
 }
 
+
+
 .cyber-nav {
+    
     padding: 20px;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(255, 255, 255, 0);
     text-align: center;
     position: sticky;
     top: 0;
@@ -21,11 +26,11 @@ body {
 
 .cyber-nav a {
     text-decoration: none;
-    color: #0f0;
+    color: rgb(92, 215, 234);
     font-weight: bold;
     margin: 0 10px;
     padding: 12px 24px;
-    border: 2px solid #0f0;
+    border: 2px solid rgb(92, 215, 234);
     display: inline-block;
     transition: all 0.3s ease;
     text-transform: uppercase;
@@ -34,17 +39,17 @@ body {
 }
 
 .cyber-nav a:hover {
-    background: #0f0;
-    color: #000;
-    box-shadow: 0 0 15px #0f0;
-    text-shadow: 0px 0px 5px #00ff00;
+    background: rgb(92, 215, 234);
+    color: #000000;
+    box-shadow: 0 0 15px rgb(92, 215, 234);
+    text-shadow: 0px 0px 5px rgb(92, 215, 234);
 }
 
 .cyber-nav a::after {
     content: attr(data-text);
     position: absolute;
     left: 2px;
-    text-shadow: -2px 0 #00ff00;
+    text-shadow: -2px 0 rgb(92, 215, 234);
     clip: rect(0, 0, 0, 0);
     animation: glitch 0.3s infinite;
 }
@@ -63,9 +68,9 @@ body {
 
 .cyber-button {
     display: inline-block;
-    background: #000;
-    color: #0f0;
-    border: 2px solid #0f0;
+    background: #000000;
+    color: rgb(92, 215, 234);
+    border: 2px solid rgb(92, 215, 234);
     padding: 12px 24px;
     margin: 0 10px;
     cursor: pointer;
@@ -76,9 +81,9 @@ body {
 }
 
 .cyber-button:hover {
-    background: #0f0;
-    color: #000;
-    box-shadow: 0 0 15px #0f0;
+    background: rgb(92, 215, 234);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgb(92, 215, 234);
 }
 
 .scroll-container {
@@ -94,16 +99,16 @@ body {
     display: flex;
     align-items: center;
     margin: 50px 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.569);
     padding: 20px;
-    border-left: 3px solid #0f0;
+    border-left: 3px solid rgb(92, 215, 234);
 }
 
 .cyber-panel.right {
     transform: translateX(100%);
     flex-direction: row-reverse;
     border-left: none;
-    border-right: 3px solid #0f0;
+    border-right: 3px solid rgb(92, 215, 234);
 }
 
 .cyber-panel.active {
@@ -115,12 +120,14 @@ body {
     width: 400px;
     height: 250px;
     object-fit: cover;
-    border: 2px solid #0f0;
+    border: 2px solid rgb(92, 215, 234);
 }
 
 .panel-content {
     padding: 0 40px;
+    color: #ffffff !important; /* Forza il colore bianco su tutto il testo */
 }
+
 
 .cyber-footer {
     text-align: center;
@@ -256,8 +263,9 @@ a {
 
 /* Effetto hover per migliorare la visibilità */
 a:hover {
-    color: #0f0 !important; /* Cambia colore al passaggio del mouse (verde in linea col tema) */
-    text-shadow: 0px 0px 10px rgba(0, 255, 0, 0.8); /* Aggiunge un effetto luminoso */
+    color: rgb(227, 106, 203) !important; /* ✅ Spazio prima di !important */
+    text-shadow: 0px 0px 10px
+
 }
 
 /* Contenitore della barra di ricerca */
@@ -276,9 +284,9 @@ a:hover {
     max-width: 400px; /* Limita la larghezza su schermi grandi */
     padding: 10px;
     font-size: 16px;
-    border: 2px solid #0f0;
-    background: #000;
-    color: #0f0;
+    border: 2px solid rgb(92, 215, 234);
+    background: #ffffff;
+    color: rgb(92, 215, 234);
     text-align: center;
     border-radius: 5px;
     outline: none;
@@ -314,4 +322,64 @@ html, body {
 /* Evita che elementi assoluti escano dai limiti */
 * {
     box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Stile per il titolo glitchato */
+.glitch {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
+    color: rgb(92, 215, 234); /* Azzurro cyberpunk */
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    animation: flicker 1.5s infinite alternate;
+}
+
+/* Effetto glitch */
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    clip: rect(0, 0, 0, 0);
+    animation: glitch 0.5s infinite alternate;
+}
+
+/* Colore dei glitch */
+.glitch::before {
+    color: rgb(0, 255, 255); /* Un azzurro più chiaro per l'effetto */
+    left: 2px;
+    text-shadow: -2px 0 rgba(0, 255, 255, 0.8);
+    animation: glitch 0.3s infinite alternate-reverse;
+}
+
+.glitch::after {
+    color: rgb(191, 16, 162); /* Viola per contrasto */
+    left: -2px;
+    text-shadow: -2px 0 rgba(191, 16, 162, 0.8);
+    animation: glitch 0.3s infinite alternate;
+}
+
+/* Effetto glitch */
+@keyframes glitch {
+    0% {
+        clip: rect(20px, 9999px, 50px, 0);
+    }
+    50% {
+        clip: rect(40px, 9999px, 100px, 0);
+    }
+    100% {
+        clip: rect(60px, 9999px, 30px, 0);
+    }
+}
+
+/* Effetto lampeggiante */
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
 }
