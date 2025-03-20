@@ -103,9 +103,9 @@ body::before {
     transition: all 0.8s ease;
     display: flex;
     align-items: center;
-    margin: 50px 0;
+    margin: 80px 0;
     background: rgba(0, 0, 0, 0.569);
-    padding: 20px;
+    padding: 40px;
     border-left: 3px solid rgb(92, 215, 234);
 }
 
