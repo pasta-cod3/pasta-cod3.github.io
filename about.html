@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi sono — Pasta-Cod3</title>
+  <meta name="description" content="Chi c'è dietro Pasta-Cod3, blog italiano di cybersecurity." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo">pasta-cod3</a>
+
+    <button class="nav-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')">☰ menu</button>
+
+    <nav class="site-nav">
+      <a href="index.html"                     class="nav-link">Home</a>
+      <a href="index.html?cat=red-team"        class="nav-link nav-red">Red Team</a>
+      <a href="index.html?cat=blue-team"       class="nav-link nav-blue">Blue Team</a>
+      <a href="index.html?cat=storia"          class="nav-link nav-gold">Storia</a>
+      <a href="index.html?cat=fondamentali"     class="nav-link nav-cyan">Fondamentali</a>
+      <a href="about.html"                     class="nav-link active">Chi sono</a>
+      <a href="contatti.html"                  class="nav-link">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══ MAIN ════════════════════════════════════════════════ -->
+<main class="page-content">
+  <div class="container">
+
+    <div class="page-hero">
+      <p class="eyebrow">// whoami</p>
+      <h1>_chi_sono</h1>
+      <p class="subtitle">Un po' di contesto su chi c'è dietro questo blog.</p>
+    </div>
+
+    <div class="static-page">
+
+      <div class="terminal-block">
+        whoami && cat /etc/motd
+      </div>
+
+      <p>
+        Ciao. Sono <strong style="color:var(--accent-green)">Stefano</strong>, un appassionato di
+        cybersecurity che ha deciso di mettere per iscritto quello che impara lungo la strada.
+        Questo blog nasce dalla voglia di condividere contenuti tecnici seri, senza
+        le solite semplificazioni da "hacking per dummies".
+      </p>
+
+      <h2>// cosa trovi qui</h2>
+      <p>
+        Scrivo principalmente di quattro aree: <span style="color:var(--accent-red)">Red Team</span> —
+        tecniche offensive, penetration testing, simulazioni d'attacco; <span style="color:var(--accent-blue)">Blue Team</span> —
+        difesa, detection, incident response, SIEM; e <span style="color:var(--accent-gold)">Storia</span> —
+        perché capire da dove veniamo aiuta a capire dove andiamo. Scrivo anche per parlare dei fondamenti dell'informatica, in modo da non farvi perdere nei meandri di questo mondo nel mentre che leggete.
+      </p>
+
+      <h2>// background</h2>
+      <p>
+        Ho iniziato a interessarmi alla sicurezza informatica da autodidatta, tra CTF, lab su
+        TryHackMe/HackTheBox e tanto studio. Non scrivo per sembrare esperto — scrivo per
+        capire meglio le cose che studio.
+      </p>
+
+      <h2>// disclaimer</h2>
+      <p>
+        Tutti i contenuti pubblicati hanno scopo puramente educativo e informativo.
+        Le tecniche descritte sono intese per ambienti controllati, test autorizzati o
+        studio accademico. Non mi assumo responsabilità per usi impropri delle informazioni presenti sul blog.
+      </p>
+
+      <div class="terminal-block" style="margin-top:32px">
+        exit 0 # fine del profilo — ora vai a leggere gli articoli
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 <span>Pasta-Cod3</span> — "Proteggi i tuoi dati, proteggi il tuo futuro."</p>
+    <div class="footer-links">
+      <a href="about.html">Chi sono</a>
+      <a href="contatti.html">Contatti</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
