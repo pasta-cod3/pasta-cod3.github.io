@@ -1,27 +1,94 @@
-# pasta-cod3.github.io
-Sito web Pasta-Cod3 hacking based
-Il sito è un portale dedicato al mondo della sicurezza informatica e dell’hacking etico, con un focus particolare sul penetration testing e l’analisi delle vulnerabilità. Offre contenuti mirati per appassionati e professionisti della cybersecurity, con guide, tecniche e strumenti utili per comprendere e migliorare la sicurezza di sistemi e reti.
+# Pasta-Cod3
 
-Gli articoli coprono argomenti come metodologie di attacco e difesa, exploit più comuni, crittografia, OSINT e forensic analysis. Inoltre, vengono presentati strumenti essenziali per l’hacking etico e test di sicurezza, con esempi pratici e approfondimenti sulle migliori pratiche per proteggere dati e infrastrutture digitali.
+<p align="center">
+  <strong>Hacking Based • Ethical Mindset • Defensive First</strong><br>
+  Portale dedicato alla Cybersecurity, al Penetration Testing e all’analisi delle vulnerabilità.
+</p>
 
-Il sito è pensato per chi vuole approfondire il mondo della cybersecurity, comprendere le logiche dietro le vulnerabilità e affinare le proprie competenze in un ambiente didattico e informativo. Ogni articolo è strutturato per essere chiaro ed efficace, con esempi pratici e spiegazioni dettagliate.
+<p align="center">
+  <img src="https://img.shields.io/badge/Cybersecurity-Research-darkred?style=for-the-badge&logo=hackaday&logoColor=white" />
+  <img src="https://img.shields.io/badge/Penetration-Testing-black?style=for-the-badge&logo=kalilinux&logoColor=white" />
+  <img src="https://img.shields.io/badge/OSINT-Analysis-1f1f1f?style=for-the-badge&logo=torproject&logoColor=white" />
+  <img src="https://img.shields.io/badge/Cryptography-Applied-002b36?style=for-the-badge&logo=letsencrypt&logoColor=white" />
+</p>
 
-Se sei interessato alla sicurezza informatica, vuoi scoprire le tecniche usate dai professionisti del settore e migliorare le tue abilità, questo sito è il posto giusto per te.
-
+<p align="center">
+  <img src="https://img.shields.io/badge/TryHackMe-Labs-red?style=for-the-badge&logo=tryhackme&logoColor=white" />
+  <img src="https://img.shields.io/badge/HackTheBox-Training-9fef00?style=for-the-badge&logo=hackthebox&logoColor=black" />
+</p>
 
 ---
 
-⢀⣀⣀⣀⣀⣀⣀⡀  
-   ⣀⣾⠿⠛⠉⠉⠉⠉⠙⠛⠻⢿⣦⡀  
-  ⣾⠉      ⣿      ⠉⣷  
- ⢸⡇      ⣿      ⢸⡇  
- ⠘⣧⡀  ⣀⣀⣿⣀⣀  ⣰⠇  
-   ⠙⠻⢿⣿⣿⣿⡿⠟⠋   
-    ⢀⡴⠛⠉⠉⠛⢦⡀  
-   ⡾      ⢷  
-  ⢰⠃  ⢀⡀  ⠈⣆  
-  ⠘⢦⣀⡀⢀⣀⡴⠃  
-     ⠈⠉⠉  
-  『𝙃𝘼𝘾𝙆 𝙏𝙃𝙀 𝙎𝙔𝙎𝙏𝙀𝙈』
-    (▀̿Ĺ̯▀̿ ̿)
+## About
 
+Pasta-Cod3 è un portale focalizzato sul mondo della sicurezza informatica e dell’hacking etico, con un approccio tecnico, pratico e orientato alla comprensione profonda delle vulnerabilità.
+
+L’obiettivo è studiare le tecniche offensive per rafforzare la difesa, comprendere le logiche dietro gli attacchi e migliorare la sicurezza di sistemi, reti e infrastrutture digitali.
+
+Il progetto è pensato per:
+- Studenti di cybersecurity
+- Aspiranti penetration tester
+- Professionisti IT
+- Appassionati di sicurezza informatica
+
+---
+
+## Contenuti
+
+### Metodologie di Attacco e Difesa
+- Studio delle principali tecniche offensive
+- Analisi delle superfici di attacco
+- Strategie difensive e best practice
+
+### Vulnerabilità ed Exploit
+- Exploit comuni spiegati tecnicamente
+- Vulnerability assessment
+- Analisi di casi reali
+
+### Crittografia
+- Fondamenti teorici
+- Applicazioni pratiche
+- Errori comuni di implementazione
+
+### OSINT
+- Raccolta e analisi di informazioni
+- Strumenti operativi
+- Metodologie investigative
+
+### Forensic Analysis
+- Analisi di file e sistemi compromessi
+- Indicatori di compromissione (IOC)
+- Tecniche di indagine digitale
+
+---
+
+## Strumenti e Ambienti di Studio
+
+Strumenti trattati nel portale:
+- Nmap
+- Metasploit Framework
+- Burp Suite
+- Wireshark
+- John the Ripper
+- Hashcat
+
+Percorsi di pratica e formazione:
+- TryHackMe
+- Hack The Box
+
+---
+
+## Filosofia
+
+Ogni articolo è strutturato per essere:
+- Tecnico ma chiaro
+- Diretto e pratico
+- Basato su esempi concreti
+
+Pasta-Cod3 promuove un approccio etico e responsabile: comprendere le vulnerabilità per proteggere, non per danneggiare.
+
+---
+
+<p align="center">
+  Built for learning. Built for defense. Built for growth.
+</p>
