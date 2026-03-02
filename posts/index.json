@@ -1,0 +1,577 @@
+[
+  {
+    "id": "2026-03-10-morris-worm",
+    "title": "Il Morris Worm (1988): il primo grande attacco su Internet",
+    "date": "2026-03-10",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "morris worm",
+      "ARPANET",
+      "buffer overflow",
+      "CERT"
+    ],
+    "excerpt": "Come uno studente di 23 anni paralizzò migliaia di computer su ARPANET nel 1988 sfruttando vulnerabilità concatenate e dando origine al primo CERT della storia.",
+    "file": "posts/2026-03-10-morris-worm.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-09-kevin-mitnick",
+    "title": "Kevin Mitnick: l'hacker più ricercato d'America",
+    "date": "2026-03-09",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "kevin mitnick",
+      "ingegneria sociale",
+      "social engineering",
+      "phone phreaking"
+    ],
+    "excerpt": "La storia del fuggitivo informatico più ricercato degli Stati Uniti: quando la manipolazione psicologica era più potente di qualsiasi exploit tecnico.",
+    "file": "posts/2026-03-09-kevin-mitnick.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-08-stuxnet",
+    "title": "Stuxnet: quando un malware sabotò un programma nucleare",
+    "date": "2026-03-08",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "stuxnet",
+      "ICS",
+      "SCADA",
+      "cyberwarfare",
+      "Iran"
+    ],
+    "excerpt": "Il malware più sofisticato mai costruito: quattro zero-day, sistemi SCADA compromessi e centrifughe iraniane sabotate dall'interno senza sparare un colpo.",
+    "file": "posts/2026-03-08-stuxnet.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-07-anonymous-lulzsec",
+    "title": "Anonymous e LulzSec: hacking come atto politico",
+    "date": "2026-03-07",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "anonymous",
+      "lulzsec",
+      "hacktivism",
+      "OPSEC"
+    ],
+    "excerpt": "Dal caos di 4chan alle operazioni contro governi e multinazionali: come l'hacktivismo ha trasformato l'hacking in uno strumento politico globale.",
+    "file": "posts/2026-03-07-anonymous-lulzsec.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-06-caso-hess-cuckoo-egg",
+    "title": "Il Caso Hess: come 75 centesimi smascherarono una rete di spionaggio",
+    "date": "2026-03-06",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "clifford stoll",
+      "markus hess",
+      "KGB",
+      "honeypot",
+      "spionaggio"
+    ],
+    "excerpt": "Nel 1986 una discrepanza contabile di 75 centesimi portò alla scoperta di una rete di spionaggio informatico collegata al KGB durante la Guerra Fredda.",
+    "file": "posts/2026-03-06-caso-hess-cuckoo-egg.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-05-sony-hack-2014",
+    "title": "La Breach di Sony Pictures (2014): quando un hack diventa crisi diplomatica",
+    "date": "2026-03-05",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "sony",
+      "breach",
+      "wiper",
+      "Corea del Nord",
+      "Lazarus Group"
+    ],
+    "excerpt": "100 terabyte di dati esfiltrati, sistemi distrutti da un wiper e tensioni internazionali: il caso Sony segnò una nuova era nella cyberwarfare.",
+    "file": "posts/2026-03-05-sony-hack-2014.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-04-storia-ransomware",
+    "title": "Storia del Ransomware: dal floppy disk ai miliardi di dollari",
+    "date": "2026-03-04",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "ransomware",
+      "CryptoLocker",
+      "WannaCry",
+      "NotPetya",
+      "Bitcoin"
+    ],
+    "excerpt": "Dal bizzarro AIDS Trojan del 1989 distribuito su floppy disk fino agli attacchi globali come WannaCry e NotPetya: l'evoluzione di un modello criminale miliardario.",
+    "file": "posts/2026-03-04-storia-ransomware.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-03-wikileaks-assange",
+    "title": "WikiLeaks e Julian Assange: la guerra per la trasparenza",
+    "date": "2026-03-03",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "wikileaks",
+      "assange",
+      "chelsea manning",
+      "whistleblowing",
+      "Cablegate"
+    ],
+    "excerpt": "Dalle prime pubblicazioni fino al Cablegate: la storia di WikiLeaks e della lunga battaglia legale e politica del suo fondatore.",
+    "file": "posts/2026-03-03-wikileaks-assange.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-02-edward-snowden",
+    "title": "Edward Snowden e la sorveglianza di massa: quando l'NSA spiava tutti",
+    "date": "2026-03-02",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "snowden",
+      "NSA",
+      "PRISM",
+      "sorveglianza",
+      "privacy"
+    ],
+    "excerpt": "Nel 2013 un contractor rivelò al mondo i programmi di sorveglianza globale dell'NSA, aprendo il più grande dibattito moderno su privacy e sicurezza.",
+    "file": "posts/2026-03-02-edward-snowden.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-01-cypherpunks",
+    "title": "I Cypherpunk: i rivoluzionari che hanno inventato la privacy digitale",
+    "date": "2026-03-01",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "cypherpunk",
+      "PGP",
+      "Bitcoin",
+      "Tor",
+      "crittografia",
+      "privacy"
+    ],
+    "excerpt": "Nel 1992 una mailing list diede vita a un movimento convinto che la crittografia fosse uno strumento politico: da lì nacquero tecnologie che hanno cambiato Internet.",
+    "file": "posts/2026-03-01-cypherpunks.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-12-cose-il-blue-team",
+    "title": "Cosè il Blue Team: difendere i sistemi informatici",
+    "date": "2026-02-12",
+    "category": "blue-team",
+    "tags": [
+      "blue team",
+      "SOC",
+      "introduzione",
+      "MITRE ATT&CK"
+    ],
+    "excerpt": "Cosa fa il Blue Team, le figure professionali (SOC Analyst, IR, Threat Hunter), gli strumenti fondamentali e da dove iniziare.",
+    "file": "posts/2026-02-12-cose-il-blue-team.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-11-analisi-log-windows-event-id",
+    "title": "Analisi dei Log Windows: gli Event ID che devi conoscere",
+    "date": "2026-02-11",
+    "category": "blue-team",
+    "tags": [
+      "Windows",
+      "Event ID",
+      "log analysis",
+      "Sysmon",
+      "SOC"
+    ],
+    "excerpt": "Gli Event ID fondamentali: autenticazione (4624, 4625), account (4720, 4732), processi (4688), Sysmon e query PowerShell per l analisi.",
+    "file": "posts/2026-02-11-analisi-log-windows-event-id.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-10-wireshark-analisi-traffico",
+    "title": "Wireshark: analisi del traffico di rete per il Blue Team",
+    "date": "2026-02-10",
+    "category": "blue-team",
+    "tags": [
+      "Wireshark",
+      "network analysis",
+      "DNS tunneling",
+      "pcap"
+    ],
+    "excerpt": "Display filter, analisi HTTP, rilevamento DNS tunneling, scansioni Nmap nel traffico e ricostruzione di conversazioni con Follow Stream.",
+    "file": "posts/2026-02-10-wireshark-analisi-traffico.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-09-incident-response-processo",
+    "title": "Incident Response: processo pratico dall alert alla risoluzione",
+    "date": "2026-02-09",
+    "category": "blue-team",
+    "tags": [
+      "incident response",
+      "IR",
+      "forensics",
+      "contenimento"
+    ],
+    "excerpt": "Triage, identificazione, contenimento, acquisizione evidenze, eradicazione, recovery e post-mortem con comandi pratici e checklist.",
+    "file": "posts/2026-02-09-incident-response-processo.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-08-ids-ips-suricata",
+    "title": "IDS e IPS: rilevare gli attacchi con Suricata",
+    "date": "2026-02-08",
+    "category": "blue-team",
+    "tags": [
+      "IDS",
+      "IPS",
+      "Suricata",
+      "Emerging Threats"
+    ],
+    "excerpt": "Differenza IDS/IPS, configurazione Suricata, sintassi delle regole, ruleset Emerging Threats e gestione dei falsi positivi.",
+    "file": "posts/2026-02-08-ids-ips-suricata.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-07-threat-intelligence-principianti",
+    "title": "Threat Intelligence per principianti",
+    "date": "2026-02-07",
+    "category": "blue-team",
+    "tags": [
+      "threat intelligence",
+      "IOC",
+      "VirusTotal",
+      "MISP",
+      "TTP"
+    ],
+    "excerpt": "I tre livelli di TI, gli IOC, fonti gratuite (VirusTotal, AbuseIPDB, OTX, feed ET), integrazione nel SIEM e la differenza tra IOC e TTP.",
+    "file": "posts/2026-02-07-threat-intelligence-principianti.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-06-hardening-windows",
+    "title": "Hardening Windows: ridurre la superficie d attacco",
+    "date": "2026-02-06",
+    "category": "blue-team",
+    "tags": [
+      "hardening",
+      "Windows",
+      "Sysmon",
+      "audit policy"
+    ],
+    "excerpt": "Aggiornamenti, gestione account, Defender, disabilitazione servizi, PowerShell logging, protezione LSASS e CIS Benchmark.",
+    "file": "posts/2026-02-06-hardening-windows.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-05-hardening-linux",
+    "title": "Hardening Linux: configurare un server sicuro da zero",
+    "date": "2026-02-05",
+    "category": "blue-team",
+    "tags": [
+      "hardening",
+      "Linux",
+      "SSH",
+      "UFW",
+      "Fail2Ban"
+    ],
+    "excerpt": "Aggiornamenti automatici, SSH con chiavi, UFW, Fail2Ban, eliminazione servizi inutili, permessi file e audit con auditd e Lynis.",
+    "file": "posts/2026-02-05-hardening-linux.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-04-vulnerability-management",
+    "title": "Vulnerability Management: identificare e gestire le vulnerabilità",
+    "date": "2026-02-04",
+    "category": "blue-team",
+    "tags": [
+      "vulnerability management",
+      "OpenVAS",
+      "CVSS",
+      "EPSS"
+    ],
+    "excerpt": "Il ciclo VM: asset discovery, scanning con OpenVAS, prioritizzazione con CVSS ed EPSS, remediation e SLA tipici.",
+    "file": "posts/2026-02-04-vulnerability-management.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-03-phishing-riconoscere-rispondere",
+    "title": "Phishing: riconoscerlo, analizzarlo e risponderci",
+    "date": "2026-02-03",
+    "category": "blue-team",
+    "tags": [
+      "phishing",
+      "email security",
+      "SPF",
+      "DKIM",
+      "GoPhish"
+    ],
+    "excerpt": "Analisi header email, verifica SPF/DKIM/DMARC, analisi link e allegati in sandbox, risposta a una campagna e simulazioni con GoPhish.",
+    "file": "posts/2026-02-03-phishing-riconoscere-rispondere.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-02-analisi-malware-base",
+    "title": "Analisi del Malware: prime tecniche per il Blue Team",
+    "date": "2026-02-02",
+    "category": "blue-team",
+    "tags": [
+      "malware analysis",
+      "sandbox",
+      "strings",
+      "VirusTotal",
+      "YARA"
+    ],
+    "excerpt": "Analisi statica (strings, VirusTotal, PE) e dinamica (sandbox Any.run), IOC da estrarre e risorse per esercitarsi su campioni reali.",
+    "file": "posts/2026-02-02-analisi-malware-base.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-02-01-threat-hunting-intro",
+    "title": "Threat Hunting: cercare minacce nascoste senza aspettare gli alert",
+    "date": "2026-02-01",
+    "category": "blue-team",
+    "tags": [
+      "threat hunting",
+      "MITRE ATT&CK",
+      "Sigma",
+      "YARA",
+      "Velociraptor"
+    ],
+    "excerpt": "Il ciclo di threat hunting, ipotesi pratiche (PowerShell offuscato, scheduled tasks, DNS anomalo), Sigma, YARA e come documentare le hunt.",
+    "file": "posts/2026-02-01-threat-hunting-intro.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-12-cose-il-penetration-testing",
+    "title": "Cosè il Penetration Testing",
+    "date": "2026-01-12",
+    "category": "red-team",
+    "tags": [
+      "pentest",
+      "introduzione",
+      "metodologia"
+    ],
+    "excerpt": "Cosè un penetration test, perché esiste, black/white/grey box e le fasi di un engagement.",
+    "file": "posts/2026-01-12-cose-il-penetration-testing.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-11-ricognizione-passiva-osint",
+    "title": "Ricognizione Passiva: raccogliere informazioni senza farsi notare",
+    "date": "2026-01-11",
+    "category": "red-team",
+    "tags": [
+      "OSINT",
+      "ricognizione",
+      "google dorking",
+      "shodan"
+    ],
+    "excerpt": "WHOIS, DNS, Google Dorking, Shodan, theHarvester e metadata: tutto quello che puoi sapere del target prima di toccarlo.",
+    "file": "posts/2026-01-11-ricognizione-passiva-osint.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-10-ricognizione-attiva-nmap",
+    "title": "Ricognizione Attiva con Nmap: scansione di porte e servizi",
+    "date": "2026-01-10",
+    "category": "red-team",
+    "tags": [
+      "nmap",
+      "port scanning",
+      "NSE"
+    ],
+    "excerpt": "Tipi di scansione, NSE, timing e workflow pratico per analizzare un host in modo sistematico.",
+    "file": "posts/2026-01-10-ricognizione-attiva-nmap.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-09-introduzione-metasploit",
+    "title": "Introduzione a Metasploit Framework",
+    "date": "2026-01-09",
+    "category": "red-team",
+    "tags": [
+      "metasploit",
+      "exploitation",
+      "meterpreter"
+    ],
+    "excerpt": "Struttura exploit/payload/auxiliary, come configurare e lanciare un exploit e comandi essenziali di Meterpreter.",
+    "file": "posts/2026-01-09-introduzione-metasploit.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-08-password-cracking-hashcat-hydra",
+    "title": "Password Cracking: hashcat e hydra per principianti",
+    "date": "2026-01-08",
+    "category": "red-team",
+    "tags": [
+      "hashcat",
+      "hydra",
+      "brute force",
+      "wordlist"
+    ],
+    "excerpt": "Cracking offline con Hashcat e brute force online con Hydra. Esempi pratici su hash NTLM e SSH.",
+    "file": "posts/2026-01-08-password-cracking-hashcat-hydra.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-07-sql-injection-basi",
+    "title": "SQL Injection: capire e sfruttare la vulnerabilità più classica del web",
+    "date": "2026-01-07",
+    "category": "red-team",
+    "tags": [
+      "SQL injection",
+      "SQLmap",
+      "OWASP"
+    ],
+    "excerpt": "Tipi di SQLi, exploit manuale con UNION, automazione con SQLMap e difese con prepared statement.",
+    "file": "posts/2026-01-07-sql-injection-basi.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-06-xss-cross-site-scripting",
+    "title": "Cross-Site Scripting (XSS): iniettare codice nei browser altrui",
+    "date": "2026-01-06",
+    "category": "red-team",
+    "tags": [
+      "XSS",
+      "web hacking",
+      "BeEF",
+      "OWASP"
+    ],
+    "excerpt": "Reflected, Stored e DOM-based XSS, payload pratici, bypass filtri e difese con CSP.",
+    "file": "posts/2026-01-06-xss-cross-site-scripting.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-05-privilege-escalation-linux",
+    "title": "Privilege Escalation su Linux: da utente normale a root",
+    "date": "2026-01-05",
+    "category": "red-team",
+    "tags": [
+      "privilege escalation",
+      "linux",
+      "SUID",
+      "sudo",
+      "LinPEAS"
+    ],
+    "excerpt": "SUID abuse, sudo misconfiguration, cron job, capabilities, PATH hijacking e LinPEAS.",
+    "file": "posts/2026-01-05-privilege-escalation-linux.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-04-privilege-escalation-windows",
+    "title": "Privilege Escalation su Windows: da utente a SYSTEM",
+    "date": "2026-01-04",
+    "category": "red-team",
+    "tags": [
+      "privilege escalation",
+      "windows",
+      "token impersonation",
+      "WinPEAS"
+    ],
+    "excerpt": "Token impersonation, unquoted service paths, AlwaysInstallElevated, DLL hijacking e WinPEAS.",
+    "file": "posts/2026-01-04-privilege-escalation-windows.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-03-reverse-shell-bind-shell",
+    "title": "Reverse Shell e Bind Shell: ottenere accesso remoto",
+    "date": "2026-01-03",
+    "category": "red-team",
+    "tags": [
+      "reverse shell",
+      "netcat",
+      "msfvenom",
+      "RCE"
+    ],
+    "excerpt": "Bind vs reverse shell, listener, payload Bash/Python/PHP/PowerShell, upgrade a TTY e trasferimento file.",
+    "file": "posts/2026-01-03-reverse-shell-bind-shell.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-02-burp-suite-basi",
+    "title": "Burp Suite: il proxy essenziale per il web hacking",
+    "date": "2026-01-02",
+    "category": "red-team",
+    "tags": [
+      "Burp Suite",
+      "proxy",
+      "web hacking",
+      "Repeater"
+    ],
+    "excerpt": "Setup, Proxy/Repeater/Intruder/Decoder, workflow tipico e estensioni gratuite.",
+    "file": "posts/2026-01-02-burp-suite-basi.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-01-01-report-penetration-test",
+    "title": "Come scrivere un Report di Penetration Test",
+    "date": "2026-01-01",
+    "category": "red-team",
+    "tags": [
+      "report",
+      "CVSS",
+      "metodologia"
+    ],
+    "excerpt": "Struttura del report, executive summary, CVSS, come documentare le prove e tono verso il cliente.",
+    "file": "posts/2026-01-01-report-penetration-test.md",
+    "cover": ""
+  },
+  {
+    "id": "2025-01-10-lateral-movement-red-team",
+    "title": "Lateral Movement: tecniche Red Team su Active Directory",
+    "date": "2025-01-10",
+    "category": "red-team",
+    "tags": [
+      "lateral movement",
+      "active directory",
+      "mimikatz",
+      "kerberos"
+    ],
+    "excerpt": "Pass-the-Hash, Pass-the-Ticket, Kerberoasting: tecniche di movimento laterale su ambienti Windows AD.",
+    "file": "posts/2025-01-10-lateral-movement-red-team.md",
+    "cover": ""
+  },
+  {
+    "id": "2025-01-05-siem-blue-team",
+    "title": "SIEM e Blue Team: guida pratica all analisi dei log",
+    "date": "2025-01-05",
+    "category": "blue-team",
+    "tags": [
+      "SIEM",
+      "SOC",
+      "log analysis",
+      "detection"
+    ],
+    "excerpt": "Strutturare un analisi efficace dei log con un SIEM: query base, correlation rule, gestione alert e riduzione falsi positivi.",
+    "file": "posts/2025-01-05-siem-blue-team.md",
+    "cover": ""
+  },
+  {
+    "id": "2024-12-20-storia-hacking-captain-crunch",
+    "title": "Captain Crunch e la nascita del Phone Phreaking",
+    "date": "2024-12-20",
+    "category": "storia",
+    "tags": [
+      "storia",
+      "phreaking",
+      "john draper",
+      "AT&T"
+    ],
+    "excerpt": "Come un fischietto trovato in una scatola di cereali riuscì a bucare la rete telefonica AT&T negli anni 70.",
+    "file": "posts/2024-12-20-storia-hacking-captain-crunch.md",
+    "cover": ""
+  }
+]

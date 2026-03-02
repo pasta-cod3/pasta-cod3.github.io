@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pasta-Cod3 | Cybersecurity Blog</title>
+  <meta name="description" content="Blog italiano di cybersecurity: Red Team, Blue Team, storia dell'hacking." />
+
+  <!-- Fonts & CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo">PASTA-COD3</a>
+
+    <button class="nav-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')">☰ menu</button>
+
+    <nav class="site-nav">
+      <a href="index.html"                     class="nav-link">Home</a>
+      <a href="index.html?cat=red-team"        class="nav-link nav-red">Red Team</a>
+      <a href="index.html?cat=blue-team"       class="nav-link nav-blue">Blue Team</a>
+      <a href="index.html?cat=storia"          class="nav-link nav-gold">Storia</a>
+      <a href="index.html?cat=fondamentali"     class="nav-link nav-cyan">Fondamentali</a>
+      <a href="about.html"                     class="nav-link">Chi sono</a>
+      <a href="contatti.html"                  class="nav-link">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══ MAIN ════════════════════════════════════════════════ -->
+<main class="page-content">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="page-hero">
+      <p class="eyebrow">// blog</p>
+      <h1>_articoli</h1>
+      <p class="subtitle">Red Team, Blue Team, storia dell'hacking e fondamentali — in italiano, senza filtri.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-cat="all">Tutti</button>
+      <button class="filter-btn" data-cat="red-team">Red Team</button>
+      <button class="filter-btn" data-cat="blue-team">Blue Team</button>
+      <button class="filter-btn" data-cat="storia">Storia</button>
+      <button class="filter-btn" data-cat="fondamentali">Fondamentali</button>
+
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input
+          class="search-input"
+          id="searchInput"
+          type="text"
+          placeholder="cerca..."
+          autocomplete="off"
+          aria-label="Cerca articoli"
+        />
+      </div>
+    </div>
+
+    <!-- Article grid -->
+    <div class="articles-grid" id="articlesGrid">
+      <!-- populated by main.js -->
+    </div>
+
+  </div>
+</main>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 <span>Pasta-Cod3</span> — "Proteggi i tuoi dati, proteggi il tuo futuro."</p>
+    <div class="footer-links">
+      <a href="about.html">Chi sono</a>
+      <a href="contatti.html">Contatti</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
