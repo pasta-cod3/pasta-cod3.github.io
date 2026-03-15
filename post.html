@@ -1,4 +1,42 @@
 <!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pasta-cod3</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+(function(){ const t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+
+<nav class="site-header">
+<a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+<div class="nav-right">
+<a href="index.html" class="nav-back">← Tutti gli articoli</a>
+<button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+</div>
+</nav>
+
+<div id="postContainer">
+<div class="loading">CARICAMENTO ARTICOLO</div>
+</div>
+
+<footer class="site-footer">
+<div class="f-left">
+<div class="f-logo">pasta<em>-</em>cod3</div>
+<div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+</div>
+<div class="f-status"><div class="dot"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="js/post.js"></script>
+</body>
+</html><!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
