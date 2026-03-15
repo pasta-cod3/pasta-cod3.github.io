@@ -1,68 +1,129 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contatti — Pasta-Cod3</title>
-  <meta name="description" content="Come contattare Pasta-Cod3." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pasta-cod3 — Contatti</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  (function(){ const t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+</script>
 </head>
 <body>
 
-<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<canvas id="spaceCanvas"></canvas>
+
 <header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo">pasta-cod3</a>
-
-    <button class="nav-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')">☰ menu</button>
-
-    <nav class="site-nav">
-      <a href="index.html"                     class="nav-link">Home</a>
-      <a href="index.html?cat=red-team"        class="nav-link nav-red">Red Team</a>
-      <a href="index.html?cat=blue-team"       class="nav-link nav-blue">Blue Team</a>
-      <a href="index.html?cat=storia"          class="nav-link nav-gold">Storia</a>
-      <a href="index.html?cat=fondamentali"     class="nav-link nav-cyan">Fondamentali</a>
-      <a href="about.html"                     class="nav-link">Chi sono</a>
-      <a href="contatti.html"                  class="nav-link active">Contatti</a>
-    </nav>
+  <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+  <div class="nav-center">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html" data-cat="red-team">Red Team</a></li>
+      <li><a href="index.html" data-cat="blue-team">Blue Team</a></li>
+      <li><a href="index.html" data-cat="storia">Storia</a></li>
+      <li><a href="index.html" data-cat="fondamentali">Fondamentali</a></li>
+      <li><a href="index.html" data-cat="notizie">Notizie</a></li>
+      <li><a href="about.html">Chi sono</a></li>
+      <li><a href="contatti.html" class="active">Contatti</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
-<!-- ══ MAIN ════════════════════════════════════════════════ -->
-<main class="page-content">
-  <div class="container">
+<!-- Mobile nav drawer -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer">
+  <a href="index.html"    class="nav-drawer-link">Home</a>
+  <a href="index.html#articles" class="nav-drawer-link">Articoli</a>
+  <a href="about.html"    class="nav-drawer-link">Chi sono</a>
+  <a href="contatti.html" class="nav-drawer-link active">Contatti</a>
+</nav>
 
-    <div class="page-hero">
-      <p class="eyebrow">// contatto</p>
-      <h1>_contatti</h1>
-      <p class="subtitle">Per domande, segnalazioni o collaborazioni.</p>
+<main class="static-main">
+
+  <div class="static-hero">
+    <div class="static-hero-inner">
+      <div class="eyebrow">05 / Contatti</div>
+      <h1 class="static-page-title">Scrivimi</h1>
+      <p class="static-subtitle">Per segnalazioni, collaborazioni, domande o saluti — rispondo a tutto.</p>
+    </div>
+  </div>
+
+  <div class="static-content contact-content">
+
+    <!-- EMAIL PRINCIPALE -->
+    <div class="contact-main-block">
+      <div class="contact-label-top">EMAIL</div>
+      <a href="mailto:stefano.comida@protonmail.com" class="contact-email-big">
+        stefano.comida@protonmail.com
+      </a>
+      <div class="contact-note">Rispondo entro 24-48 ore. In italiano o inglese.</div>
     </div>
 
-    <div class="contact-card">
-      <p class="contact-label">// invia una mail</p>
+    <div class="about-divider"></div>
 
-	<a href="mailto:stefano.comida@protonmail.com" class="contact-email">
-	✉ stefano.comida@protonmail.com
-	</a>
-	<a href="https://t.me/Stewe28" target="_blank" class="contact-telegram">
-	💬 Telegram
-	</a>
-      <p class="contact-note">
-        Rispondo il prima possibile. Per segnalazioni di contenuti errati, collaborazioni o
-        semplici domande tecniche — scrivi pure.
-      </p>
+    <!-- MOTIVI PER SCRIVERE -->
+    <div class="contact-reasons">
+      <div class="about-block-num">Posso aiutarti con —</div>
+      <div class="contact-reason-grid">
+        <div class="contact-reason">
+          <div class="cr-icon t-accent">⊛</div>
+          <div class="cr-title">Segnalazioni</div>
+          <div class="cr-desc">Hai trovato un errore tecnico in un articolo, un link rotto, o un'imprecisione? Segnalalo — il blog migliora grazie alle correzioni.</div>
+        </div>
+        <div class="contact-reason">
+          <div class="cr-icon t-blue">⊛</div>
+          <div class="cr-title">Domande tecniche</div>
+          <div class="cr-desc">Stai studiando per una certificazione o hai dubbi su un argomento trattato nel blog? Scrivi, rispondo nei limiti del possibile.</div>
+        </div>
+        <div class="contact-reason">
+          <div class="cr-icon t-fond">⊛</div>
+          <div class="cr-title">Collaborazioni</div>
+          <div class="cr-desc">Vuoi contribuire con un articolo, proporre un argomento, o fare una review? Il blog è aperto a collaborazioni con chi condivide l'approccio.</div>
+        </div>
+        <div class="contact-reason">
+          <div class="cr-icon t-news">⊛</div>
+          <div class="cr-title">Notizie e CVE</div>
+          <div class="cr-desc">Sei un ricercatore di sicurezza con una scoperta interessante da condividere? O vuoi segnalare un'analisi di un breach recente? Scrivimi.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-divider"></div>
+
+    <!-- NOTA OPSEC -->
+    <div class="contact-opsec">
+      <div class="opsec-icon">🔒</div>
+      <div class="opsec-body">
+        <div class="opsec-title">Comunicazioni sensibili</div>
+        <div class="opsec-text">
+          Se devi inviare informazioni sensibili — vulnerability disclosure, dati personali, comunicazioni riservate — usa <strong>Proton Mail</strong> per la cifratura end-to-end automatica. L'indirizzo <code>stefano.comida@protonmail.com</code> supporta la cifratura nativa su Proton-to-Proton e PGP per tutti gli altri client.
+        </div>
+      </div>
     </div>
 
   </div>
 </main>
 
-<!-- ══ FOOTER ══════════════════════════════════════════════ -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <p class="footer-copy">© 2026 <span>Pasta-Cod3</span> — "Proteggi i tuoi dati, proteggi il tuo futuro."</p>
-    <div class="footer-links
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+  </div>
+  <div class="f-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">Chi sono</a>
+    <a href="contatti.html">Contatti</a>
+  </div>
+  <div class="f-status"><div class="dot"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="js/static-pages.js"></script>
+</body>
+</html>
