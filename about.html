@@ -1,56 +1,93 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chi sono — Pasta-Cod3</title>
-  <meta name="description" content="Chi c'è dietro Pasta-Cod3, blog italiano di cybersecurity." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pasta-cod3 — Chi sono</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  (function(){ const t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+</script>
 </head>
 <body>
 
-<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<canvas id="spaceCanvas"></canvas>
+
 <header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo">pasta-cod3</a>
-
-    <button class="nav-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')">☰ menu</button>
-
-    <nav class="site-nav">
-      <a href="index.html"                     class="nav-link">Home</a>
-      <a href="index.html?cat=red-team"        class="nav-link nav-red">Red Team</a>
-      <a href="index.html?cat=blue-team"       class="nav-link nav-blue">Blue Team</a>
-      <a href="index.html?cat=storia"          class="nav-link nav-gold">Storia</a>
-      <a href="index.html?cat=fondamentali"     class="nav-link nav-cyan">Fondamentali</a>
-      <a href="about.html"                     class="nav-link active">Chi sono</a>
-      <a href="contatti.html"                  class="nav-link">Contatti</a>
-    </nav>
+  <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+  <div class="nav-center">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html" data-cat="red-team">Red Team</a></li>
+      <li><a href="index.html" data-cat="blue-team">Blue Team</a></li>
+      <li><a href="index.html" data-cat="storia">Storia</a></li>
+      <li><a href="index.html" data-cat="fondamentali">Fondamentali</a></li>
+      <li><a href="index.html" data-cat="notizie">Notizie</a></li>
+      <li><a href="about.html" class="active">Chi sono</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
-<!-- ══ MAIN ════════════════════════════════════════════════ -->
-<main class="page-content">
-  <div class="container">
+<!-- Mobile nav drawer -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer">
+  <a href="index.html"    class="nav-drawer-link">Home</a>
+  <a href="index.html#articles" class="nav-drawer-link">Red Team</a>
+  <a href="index.html#articles" class="nav-drawer-link">Blue Team</a>
+  <a href="index.html#articles" class="nav-drawer-link">Storia</a>
+  <a href="index.html#articles" class="nav-drawer-link">Fondamentali</a>
+  <a href="index.html#articles" class="nav-drawer-link">Notizie</a>
+  <a href="about.html"    class="nav-drawer-link active">Chi sono</a>
+  <a href="contatti.html" class="nav-drawer-link">Contatti</a>
+</nav>
 
-    <div class="page-hero">
-      <p class="eyebrow">// whoami</p>
-      <h1>_chi_sono</h1>
-      <p class="subtitle">Un po' di contesto su chi c'è dietro questo blog.</p>
+<main class="static-main">
+
+  <!-- HERO -->
+  <div class="static-hero">
+    <div class="static-hero-inner">
+      <div class="eyebrow">00 / Chi sono</div>
+      <h1 class="static-page-title">pasta<span style="color:var(--dim)">-</span>cod3</h1>
+      <p class="static-subtitle">Blog di cybersecurity in italiano — offensive, defensive, storia, fondamentali.</p>
+    </div>
+  </div>
+
+  <div class="static-content">
+
+    <!-- BLOCCO 01: IL PROGETTO -->
+    <div class="about-block">
+      <div class="about-block-num">01 /</div>
+      <div class="about-block-body">
+        <h2>Il progetto</h2>
+        <p>
+          <strong>pasta-cod3</strong> nasce da una semplice osservazione: la maggior parte delle risorse di qualità sulla cybersecurity è in inglese, e chi inizia in Italia fatica a trovare materiale che sia allo stesso tempo <em>accurato</em>, <em>pratico</em> e <em>in italiano</em>.
+        </p>
+        <p>
+          Questo blog non è un tutorial per principianti assoluti né un paper accademico. È il posto dove trovi articoli lunghi, dettagliati, con contesto storico e tecnico — scritti come vorresti che qualcuno te li avesse spiegati quando hai iniziato.
+        </p>
+        <p>
+          Le categorie riflettono come penso al settore: <strong class="t-red">Red Team</strong> per l'offensiva, <strong class="t-blue">Blue Team</strong> per la difesa, <strong class="t-storia">Storia</strong> per capire da dove veniamo, <strong class="t-fond">Fondamentali</strong> per le basi che non si dovrebbero mai dare per scontate, <strong class="t-news">Notizie</strong> per restare aggiornati.
+        </p>
+      </div>
     </div>
 
-    <div class="static-page">
+    <div class="about-divider"></div>
 
-      <div class="terminal-block">
-        whoami && cat /etc/motd
-      </div>
-
-      <p>
-        Ciao. Sono <strong style="color:var(--accent-green)">Stefano</strong>, un appassionato di
+    <!-- BLOCCO 02:  -->
+    <div class="about-block">
+      <div class="about-block-num">02 /</div>
+      <div class="about-block-body">
+        <h2>Chi c'è dietro</h2>
+        <p>
+           Ciao. Sono <strong style="color:var(--accent-green)">Stefano</strong>, un appassionato di
         cybersecurity che ha deciso di mettere per iscritto quello che impara lungo la strada.
         Questo blog nasce dalla voglia di condividere contenuti tecnici seri, senza
         le solite semplificazioni da "hacking per dummies".
@@ -76,27 +113,96 @@
         Tutti i contenuti pubblicati hanno scopo puramente educativo e informativo.
         Le tecniche descritte sono intese per ambienti controllati, test autorizzati o
         studio accademico. Non mi assumo responsabilità per usi impropri delle informazioni presenti sul blog.
-      </p>
-
-      <div class="terminal-block" style="margin-top:32px">
-        exit 0 # fine del profilo — ora vai a leggere gli articoli
       </div>
+    </div>
 
+    <div class="about-divider"></div>
+
+    <!-- BLOCCO 03: COSA TROVI QUI -->
+    <div class="about-block">
+      <div class="about-block-num">03 /</div>
+      <div class="about-block-body">
+        <h2>Cosa trovi qui</h2>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon t-red">▸</div>
+            <div>
+              <div class="about-feature-title">Red Team</div>
+              <div class="about-feature-desc">Reconnaissance, exploitation, privilege escalation, post-exploitation. Metodologie pratiche di penetration testing spiegate con contesto reale.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-blue">▸</div>
+            <div>
+              <div class="about-feature-title">Blue Team</div>
+              <div class="about-feature-desc">SIEM, incident response, threat hunting, hardening. Come difendere sistemi nel mondo reale, non nei laboratori ideali.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-storia">▸</div>
+            <div>
+              <div class="about-feature-title">Storia</div>
+              <div class="about-feature-desc">Da Morris Worm a Snowden, da Stuxnet a Lapsus$. I casi che hanno cambiato il settore — raccontati con dettagli tecnici, non solo titoli.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-fond">▸</div>
+            <div>
+              <div class="about-feature-title">Fondamentali</div>
+              <div class="about-feature-desc">TCP/IP, crittografia, DNS, PKI, modello OSI, autenticazione. Le basi che stanno sotto tutto il resto — spiegate bene, con diagrammi.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-news">▸</div>
+            <div>
+              <div class="about-feature-title">Notizie</div>
+              <div class="about-feature-desc">Breach recenti, nuove CVE, campagne APT, ransomware, politiche cyber. Il mondo della sicurezza si muove veloce — questo è il posto per tenersi aggiornati in italiano.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-divider"></div>
+
+    <!-- BLOCCO 04: STRUMENTI -->
+    <div class="about-block">
+      <div class="about-block-num">04 /</div>
+      <div class="about-block-body">
+        <h2>Stack e strumenti</h2>
+        <div class="about-stack">
+          <div class="stack-item"><span class="stack-label">OS</span> Parrot Os </div>
+          <div class="stack-item"><span class="stack-label">Pentest</span> Metasploit Framework, Nmap, Burp Suite</div>
+          <div class="stack-item"><span class="stack-label">Training</span> INE (eJPTv2), TryHackMe, HackTheBox</div>
+          <div class="stack-item"><span class="stack-label">Lab</span> Kali, Parrot, Win Server, Metasploitable</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-divider"></div>
+
+    <!-- CTA -->
+    <div class="about-cta">
+      <div class="about-cta-text">Hai domande, vuoi segnalare un errore, o semplicemente vuoi scrivere?</div>
+      <a href="contatti.html" class="btn-primary">Scrivimi →</a>
     </div>
 
   </div>
 </main>
 
-<!-- ══ FOOTER ══════════════════════════════════════════════ -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <p class="footer-copy">© 2026 <span>Pasta-Cod3</span> — "Proteggi i tuoi dati, proteggi il tuo futuro."</p>
-    <div class="footer-links">
-      <a href="about.html">Chi sono</a>
-      <a href="contatti.html">Contatti</a>
-    </div>
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
   </div>
+  <div class="f-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">Chi sono</a>
+    <a href="contatti.html">Contatti</a>
+  </div>
+  <div class="f-status"><div class="dot"></div>SISTEMA ONLINE</div>
 </footer>
 
+<script src="js/static-pages.js"></script>
 </body>
 </html>
