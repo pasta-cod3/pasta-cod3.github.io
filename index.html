@@ -1,4 +1,231 @@
 <!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pasta-cod3 — Cybersecurity Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+(function(){ const t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+</script>
+</head>
+<body>
+
+<!-- FULL PAGE SPACE BACKGROUND -->
+<canvas id="spaceCanvas"></canvas>
+
+<!-- NAV OVERLAY (mobile) -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- NAV DRAWER (mobile) -->
+<nav class="nav-drawer" id="navDrawer">
+<a href="#" class="nav-drawer-link" data-cat="red-team">Red Team</a>
+<a href="#" class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
+<a href="#" class="nav-drawer-link" data-cat="storia">Storia</a>
+<a href="#" class="nav-drawer-link" data-cat="fondamentali">Fondamentali</a>
+<a href="#" class="nav-drawer-link" data-cat="notizie">Notizie</a>
+</nav>
+
+<!-- FILTER SHEET OVERLAY (mobile) -->
+<div class="nav-overlay" id="filterOverlay"></div>
+
+<!-- FILTER SHEET (mobile) -->
+<div class="filter-sheet" id="filterSheet">
+<div class="filter-sheet-header">
+<div class="filter-sheet-title">Filtri</div>
+<button class="filter-sheet-close" id="filterSheetClose">✕ Chiudi</button>
+</div>
+<div class="filter-sheet-section">
+<div class="filter-sheet-section-title">Categoria</div>
+<div class="filter-sheet-cats" id="filterSheetCats">
+<button class="filter-sheet-cat-btn active" data-cat="">Tutte</button>
+<button class="filter-sheet-cat-btn c-red"    data-cat="red-team">Red Team</button>
+<button class="filter-sheet-cat-btn c-blue"   data-cat="blue-team">Blue Team</button>
+<button class="filter-sheet-cat-btn c-storia" data-cat="storia">Storia</button>
+<button class="filter-sheet-cat-btn c-fond"   data-cat="fondamentali">Fondamentali</button>
+<button class="filter-sheet-cat-btn c-news"   data-cat="notizie">Notizie</button>
+</div>
+</div>
+<div class="filter-sheet-section">
+<div class="filter-sheet-section-title">Tag</div>
+<div class="filter-sheet-tags" id="filterSheetTags"></div>
+</div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+<a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+
+<div class="nav-center">
+<ul class="nav-links">
+<li><a href="#" data-cat="red-team">Red Team</a></li>
+<li><a href="#" data-cat="blue-team">Blue Team</a></li>
+<li><a href="#" data-cat="storia">Storia</a></li>
+<li><a href="#" data-cat="fondamentali">Fondamentali</a></li>
+<li><a href="#" data-cat="notizie">Notizie</a></li>
+</ul>
+</div>
+
+<div class="nav-right">
+<!-- Search desktop -->
+<div class="search-wrap" id="searchWrap">
+<span class="search-icon">⌕</span>
+<input class="search-input" id="searchInput" type="text" placeholder="Cerca articoli..." autocomplete="off">
+<div class="search-dropdown" id="searchDropdown"></div>
+</div>
+
+<!-- Search toggle mobile -->
+<button class="search-toggle-btn" id="searchToggleBtn" style="display:none" aria-label="Cerca">⌕</button>
+
+<button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+
+<!-- Hamburger -->
+<button class="hamburger" id="hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero page-hero">
+<div class="hero-glow"></div>
+<div class="hero-left">
+<div class="eyebrow">Cybersecurity Blog — ITA</div>
+<h1>
+<div class="line1">HACK THE</div>
+<div class="line2">SYSTEM</div>
+<div class="line3">DEFEND IT.</div>
+</h1>
+<p class="subtitle">Red team, blue team, storia dell'hacking, fondamentali e notizie dalmondo della sicurezza informatica. In italiano. Senza filtri.</p>
+<div class="hero-cta">
+<a href="#articles" class="btn-primary">Inizia a leggere</a>
+<a href="#categories" class="btn-ghost">Categorie</a>
+</div>
+</div>
+<div class="hero-right">
+<div class="stats-grid" id="statsGrid">
+<div class="stat-box s1" data-cat="red-team"><div class="stat-num" id="cnt-red">—</div><div class="stat-label">Red Team</div></div>
+<div class="stat-box s2" data-cat="blue-team"><div class="stat-num" id="cnt-blue">—</div><div class="stat-label">Blue Team</div></div>
+<div class="stat-box s3" data-cat="storia"><div class="stat-num" id="cnt-storia">—</div><div class="stat-label">Storia</div></div>
+<div class="stat-box s4" data-cat="fondamentali"><div class="stat-num" id="cnt-fond">—</div><div class="stat-label">Fondamentali</div></div>
+<div class="stat-box s5" data-cat="notizie"><div class="stat-num" id="cnt-news">—</div><div class="stat-label">Notizie</div></div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+<div class="section-hdr">
+<div class="hdr-left"><span class="s-label">01 /</span><h2 class="s-title">Categorie</h2></div>
+</div>
+<div class="cat-grid">
+<div class="cat-card c-red" data-cat="red-team">
+<div class="cat-bar"></div>
+<div class="cat-num">CAT — 001</div>
+<div class="cat-name">Red Team</div>
+<div class="cat-desc">Offensive security, exploitation, privilege escalation, post-exploitation e metodologia del penetration test.</div>
+<div class="cat-footer"><div class="cat-count" id="cc-red">— articoli</div><div class="cat-arrow">→</div></div>
+</div>
+<div class="cat-card c-blue" data-cat="blue-team">
+<div class="cat-bar"></div>
+<div class="cat-num">CAT — 002</div>
+<div class="cat-name">Blue Team</div>
+<div class="cat-desc">Difesa, incident response, SIEM, threat hunting, hardening e vulnerability management.</div>
+<div class="cat-footer"><div class="cat-count" id="cc-blue">— articoli</div><div class="cat-arrow">→</div></div>
+</div>
+<div class="cat-card c-storia" data-cat="storia">
+<div class="cat-bar"></div>
+<div class="cat-num">CAT — 003</div>
+<div class="cat-name">Storia</div>
+<div class="cat-desc">I casi che hanno cambiato la sicurezza informatica per sempre: da Morris Worm a Snowden.</div>
+<div class="cat-footer"><div class="cat-count" id="cc-storia">— articoli</div><div class="cat-arrow">→</div></div>
+</div>
+<div class="cat-card c-fond" data-cat="fondamentali">
+<div class="cat-bar"></div>
+<div class="cat-num">CAT — 004</div>
+<div class="cat-name">Fondamentali</div>
+<div class="cat-desc">Le basi che ogni professionista della sicurezza informatica deveconoscere: TCP/IP, crittografia, DNS, firewall e molto altro.</div>
+<div class="cat-footer"><div class="cat-count" id="cc-fond">— articoli</div><div class="cat-arrow">→</div></div>
+</div>
+<div class="cat-card c-news" data-cat="notizie">
+<div class="cat-bar"></div>
+<div class="cat-num">CAT — 005</div>
+<div class="cat-name">Notizie</div>
+<div class="cat-desc">Notizie fresche dal mondo della cybersecurity: breach, vulnerabilità, ransomware, policy e scenari geopolitici.</div>
+<div class="cat-footer"><div class="cat-count" id="cc-news">— articoli</div><div class="cat-arrow">→</div></div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ARTICLES + SIDEBAR -->
+<section class="section" id="articles">
+<div class="section-hdr">
+<div class="hdr-left"><span class="s-label">02 /</span><h2 class="s-title" id="articlesSectionTitle">Tutti gli articoli</h2></div>
+<button class="s-link" id="resetFilter" style="display:none">× Reset filtro</button>
+</div>
+
+<!-- Filter drawer button (mobile only) -->
+<button class="filter-drawer-btn" id="filterDrawerBtn">
+⊞ Filtra articoli
+<span class="fdb-count" id="fdbCount">—</span>
+</button>
+
+<div class="articles-layout">
+
+<!-- SIDEBAR (desktop) -->
+<aside class="filter-sidebar">
+<div class="sidebar-section">
+<div class="sidebar-section-title">Categoria</div>
+<div class="sidebar-cats" id="sidebarCats">
+<button class="sidebar-cat-btn active" data-cat="">Tutte</button>
+<button class="sidebar-cat-btn c-red"    data-cat="red-team">Red Team</button>
+<button class="sidebar-cat-btn c-blue"   data-cat="blue-team">Blue Team</button>
+<button class="sidebar-cat-btn c-storia" data-cat="storia">Storia</button>
+<button class="sidebar-cat-btn c-fond"   data-cat="fondamentali">Fondamentali</button>
+<button class="sidebar-cat-btn c-news"   data-cat="notizie">Notizie</button>
+</div>
+</div>
+<div class="sidebar-section">
+<div class="sidebar-section-title">Tag</div>
+<div class="sidebar-tags" id="sidebarTags"></div>
+</div>
+<div class="sidebar-count" id="sidebarCount">— articoli</div>
+</aside>
+
+<!-- ARTICLES -->
+<div class="articles-main">
+<div class="article-list" id="articleList"></div>
+<div class="no-results" id="noResults">Nessun articolo trovato.</div>
+</div>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+<footer class="site-footer">
+<div class="f-left">
+<div class="f-logo">pasta<em>-</em>cod3</div>
+<div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+</div>
+<div class="f-nav">
+<a href="#" data-cat="red-team">Red Team</a>
+<a href="#" data-cat="blue-team">Blue Team</a>
+<a href="#" data-cat="storia">Storia</a>
+<a href="#" data-cat="fondamentali">Fondamentali</a>
+<a href="#" data-cat="notizie">Notizie</a>
+</div>
+<div class="f-status"><div class="dot"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html><!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
