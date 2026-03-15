@@ -1,4 +1,304 @@
 [
+{
+  "id": "2026-03-15-apple-coruna-webkit-exploit-i-legacy",
+  "title": "Apple Coruna: exploit WebKit su sistemi legacy ancora senza patch",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Apple", "WebKit", "exploit", "legacy", "zero-day", "iOS"],
+  "excerpt": "Un nuovo exploit soprannominato 'Coruna' prende di mira il motore WebKit su versioni legacy di Safari e iOS, esponendo dispositivi non aggiornati a esecuzione di codice remoto.",
+  "file": "posts/2026-03-15-apple-coruna-webkit-exploit-ios-legacy.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-blackcat-professionisti",
+  "title": "BlackCat colpisce studi professionali: nuova ondata di ransomware mirato",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["BlackCat", "ALPHV", "ransomware", "studi professionali", "esfiltrazione"],
+  "excerpt": "Il gruppo BlackCat/ALPHV torna a colpire studi legali e contabili con una variante aggiornata del proprio ransomware, combinando cifratura e doppia estorsione.",
+  "file": "posts/2026-03-15-blackcat-professionisti-cybersec-condannati.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-codewall-ai-agent-mckinsey-lilli",
+  "title": "CodeWall: l'agente AI di McKinsey 'Lilli' esposto a prompt injection",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["AI", "prompt injection", "McKinsey", "Lilli", "LLM", "agent security"],
+  "excerpt": "Ricercatori dimostrano come l'agente AI interno di McKinsey, noto come Lilli, sia vulnerabile ad attacchi di prompt injection tramite documenti malevoli iniettati nel contesto.",
+  "file": "posts/2026-03-15-codewall-ai-agent-mckinsey-lilli.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-commissione-europea-avanti",
+  "title": "Commissione Europea: nuovi regolamenti cyber in avanzamento rapido",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Commissione Europea", "NIS2", "CRA", "regolamentazione", "compliance", "ENISA"],
+  "excerpt": "La Commissione Europea accelera l'adozione di nuovi strumenti normativi in ambito cybersecurity, con implicazioni dirette per vendor e operatori di infrastrutture critiche.",
+  "file": "posts/2026-03-15-commissione-europea-breach-ivanti.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-crackarmor-linux-apparmor-lita",
+  "title": "CrackArmor: tecnica di bypass di AppArmor su kernel Linux recenti",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Linux", "AppArmor", "privilege escalation", "kernel", "bypass", "LSM"],
+  "excerpt": "Un nuovo metodo di bypass denominato CrackArmor permette ad un processo confinato da AppArmor di aggirare i profili di sicurezza su distribuzioni Linux aggiornate.",
+  "file": "posts/2026-03-15-crackarmor-linux-apparmor-vulnerabilita.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-cve-2026-3909-3910-chrome-zero-day",
+  "title": "CVE-2026-3909 e CVE-2026-3910: doppio zero-day su Google Chrome sfruttato in the wild",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Chrome", "zero-day", "CVE-2026-3909", "CVE-2026-3910", "Google", "browser security"],
+  "excerpt": "Google rilascia patch d'emergenza per due vulnerabilità zero-day su Chrome attivamente sfruttate. Entrambe riguardano il motore V8 e permettono esecuzione arbitraria di codice.",
+  "file": "posts/2026-03-15-cve-2026-3909-3910-chrome-zero-day.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-cve-2026-20127-cisco-sdwan-cvss10",
+  "title": "CVE-2026-20127: vulnerabilità CVSS 10 su Cisco SD-WAN, patch urgente disponibile",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Cisco", "SD-WAN", "CVE-2026-20127", "CVSS 10", "RCE", "networking"],
+  "excerpt": "Cisco pubblica un advisory critico per una vulnerabilità con punteggio CVSS massimo nel componente vManage di SD-WAN. Lo sfruttamento consente RCE non autenticato.",
+  "file": "posts/2026-03-15-cve-2026-20127-cisco-sdwan-cvss10.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-fortigate-ngfw-credenziali-vizio",
+  "title": "FortiGate NGFW: credenziali amministrative esfiltrate e pubblicate online",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Fortinet", "FortiGate", "NGFW", "credential leak", "firewall", "accesso non autorizzato"],
+  "excerpt": "Un dataset contenente credenziali di accesso a migliaia di firewall FortiGate è stato pubblicato su forum underground. Fortinet consiglia la rotazione immediata delle password.",
+  "file": "posts/2026-03-15-fortigate-ngfw-credenziali-servizio.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-glassworm-supply-chain-vscode",
+  "title": "GlassWorm: campagna supply chain tramite estensioni malevole di VSCode",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["VSCode", "supply chain", "GlassWorm", "estensioni malevole", "sviluppatori", "malware"],
+  "excerpt": "La campagna GlassWorm prende di mira gli sviluppatori attraverso estensioni VSCode trojanizzate pubblicate sul Marketplace ufficiale, con payload che esfiltrano segreti dal filesystem.",
+  "file": "posts/2026-03-15-glassworm-supply-chain-vscode.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-illinois-minnesota-dati-governo-esposti",
+  "title": "Illinois e Minnesota: dati governativi di milioni di cittadini esposti online",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["governo USA", "data breach", "Illinois", "Minnesota", "dati personali", "pubblica amministrazione"],
+  "excerpt": "Due stati americani, Illinois e Minnesota, confermano l'esposizione di dati sensibili di numerosi cittadini a causa di configurazioni errate su bucket cloud della pubblica amministrazione.",
+  "file": "posts/2026-03-15-illinois-minnesota-dati-governo-esposti.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-lacoste-ransomware-lapsus",
+  "title": "Lacoste colpita da ransomware: rivendicazione del gruppo Lapsus$",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Lacoste", "Lapsus$", "ransomware", "retail", "esfiltrazione dati", "estorsione"],
+  "excerpt": "Il brand di moda Lacoste subisce un attacco ransomware rivendicato dal gruppo Lapsus$. Dati interni, contratti e informazioni sui clienti sarebbero stati sottratti prima della cifratura.",
+  "file": "posts/2026-03-15-lacoste-ransomware-lapsus.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-lexisnexis-breach-aws-lexis1234",
+  "title": "LexisNexis: breach tramite credenziale AWS debole 'lexis1234' esposta su GitHub",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["LexisNexis", "AWS", "credential exposure", "GitHub", "secret leak", "cloud security"],
+  "excerpt": "Una credenziale AWS con password banale trovata in un repository GitHub pubblico ha permesso l'accesso a dati sensibili di LexisNexis. Il caso evidenzia i rischi del secret sprawl.",
+  "file": "posts/2026-03-15-lexisnexis-breach-aws-lexis1234.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-match-group-dating-apps-breach",
+  "title": "Match Group: violazione dati su Tinder, Hinge e OkCupid espone profili utenti",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Match Group", "Tinder", "Hinge", "OkCupid", "data breach", "privacy"],
+  "excerpt": "Match Group conferma una violazione che ha interessato le principali app di dating del gruppo. Dati di profilo, preferenze e messaggi privati di milioni di utenti risultano compromessi.",
+  "file": "posts/2026-03-15-match-group-dating-apps-breach.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-panera-bread-shinyhunters-breach",
+  "title": "Panera Bread: ShinyHunters rivendica il furto di dati di 28 milioni di clienti",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Panera Bread", "ShinyHunters", "data breach", "food & beverage", "PII", "credential stuffing"],
+  "excerpt": "Il gruppo ShinyHunters afferma di aver sottratto dati personali di decine di milioni di clienti Panera Bread, inclusi indirizzi email, nomi e cronologie ordini.",
+  "file": "posts/2026-03-15-panera-bread-shinyhunters-breach.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-rust-crates-malicious-cicd-env",
+  "title": "Rust crates malevoli nel CI/CD: campagna di poisoning su crates.io colpisce le pipeline",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Rust", "crates.io", "CI/CD", "supply chain", "malware", "pipeline poisoning"],
+  "excerpt": "Ricercatori individuano un gruppo di crate Rust pubblicati su crates.io contenenti codice malevolo che si attiva durante la build, estraendo variabili d'ambiente e segreti dalle pipeline CI/CD.",
+  "file": "posts/2026-03-15-rust-crates-malicious-cicd-env.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-storm-2561-seo-poisoning-vpn",
+  "title": "STORM-2561: campagna SEO poisoning distribuisce falsi client VPN",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["STORM-2561", "SEO poisoning", "VPN", "malvertising", "trojan", "initial access"],
+  "excerpt": "Il cluster di attività STORM-2561 sfrutta tecniche di SEO poisoning per posizionare siti fake ai vertici dei motori di ricerca, inducendo le vittime a scaricare installer VPN trojanizzati.",
+  "file": "posts/2026-03-15-storm-2561-seo-poisoning-vpn.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-stryker-handala-wiper-intune",
+  "title": "Stryker sotto attacco: il wiper Handala distribuito via Microsoft Intune",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["Stryker", "Handala", "wiper", "Microsoft Intune", "MDM abuse", "hacktivism"],
+  "excerpt": "Il gruppo hacktivista Handala ha compromesso l'istanza Microsoft Intune di Stryker per distribuire un wiper su endpoint aziendali, causando la cancellazione irreversibile di dati su device gestiti.",
+  "file": "posts/2026-03-15-stryker-handala-wiper-intune.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-trump-cyber-strategy-offensiva",
+  "title": "Trump e la nuova strategia cyber offensiva: cosa cambia per il settore privato",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["USA", "cyber policy", "Trump", "offensive cyber", "governo", "strategia nazionale"],
+  "excerpt": "La nuova direttiva dell'amministrazione Trump ridefinisce la postura cyber degli Stati Uniti verso un approccio più offensivo, con ripercussioni sulle norme di condotta per aziende e alleati.",
+  "file": "posts/2026-03-15-trump-cyber-strategy-offensive-privati.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-unc6426-github-aws-supply-chain",
+  "title": "UNC6426: attore APT sfrutta GitHub Actions e AWS per attacchi supply chain",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["UNC6426", "APT", "GitHub Actions", "AWS", "supply chain", "CI/CD poisoning"],
+  "excerpt": "Mandiant traccia il nuovo cluster UNC6426, responsabile di attacchi supply chain che sfruttano workflow GitHub Actions compromessi per rubare credenziali AWS e muoversi lateralmente nel cloud.",
+  "file": "posts/2026-03-15-unc6426-github-aws-supply-chain.md",
+  "cover": ""
+},
+{
+  "id": "2026-03-15-zestix-iab-credenziali-aviazione-difesa",
+  "title": "Zestix: broker di accessi iniziali vende credenziali VPN di aziende aeronautiche e della difesa",
+  "date": "2026-03-15",
+  "category": "notizie",
+  "tags": ["IAB", "Zestix", "initial access broker", "aviazione", "difesa", "credential market", "dark web"],
+  "excerpt": "Un nuovo Initial Access Broker denominato Zestix sta commercializzando accessi VPN e RDP a organizzazioni del settore aeronautico e della difesa su forum underground, con prezzi fino a 50.000 USD.",
+  "file": "posts/2026-03-15-zestix-iab-credenziali-aviazione-difesa.md",
+  "cover": ""
+},
+{
+    "id": "2026-03-15-come-funziona-internet",
+    "title": "Come funziona internet: il viaggio di un pacchetto",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["TCP/IP", "DNS", "HTTP", "HTTPS", "rete", "pacchetti"],
+    "excerpt": "Dal three-way handshake TCP al TLS handshake: come viaggia un pacchetto da quando premi Invio su una URL al momento in cui la pagina appare sullo schermo.",
+    "file": "posts/2026-03-15-come-funziona-internet.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-crittografia-basi",
+    "title": "Crittografia: le basi che ogni professionista della sicurezza deve conoscere",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["crittografia", "AES", "RSA", "hash", "TLS", "Diffie-Hellman"],
+    "excerpt": "Simmetrica, asimmetrica, hash, HMAC, Diffie-Hellman e come si combinano in TLS. Le primitive crittografiche fondamentali spiegate con diagrammi.",
+    "file": "posts/2026-03-15-crittografia-basi.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-modello-cia",
+    "title": "Il Modello CIA: Confidenzialità, Integrità, Disponibilità",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["CIA", "confidenzialità", "integrità", "disponibilità", "risk assessment"],
+    "excerpt": "La triade CIA è il framework su cui si basa ogni analisi del rischio. Ogni attacco viola almeno uno dei tre pilastri — capire quale cambia tutto il modo di rispondere.",
+    "file": "posts/2026-03-15-modello-cia.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-come-funzionano-le-password",
+    "title": "Come funzionano le password: hashing, salting e perché sono il punto debole",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["password", "hashing", "bcrypt", "Argon2", "rainbow table", "MFA", "passkey"],
+    "excerpt": "Perché le password non si memorizzano mai in chiaro, come funzionano bcrypt e Argon2, gli attacchi di credential stuffing e brute force, e il futuro con le Passkey.",
+    "file": "posts/2026-03-15-come-funzionano-le-password.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-modello-osi",
+    "title": "Il Modello OSI: i 7 layer della rete e dove vengono attaccati",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["OSI", "layer", "rete", "ARP poisoning", "SYN flood", "SQL injection"],
+    "excerpt": "I 7 layer OSI spiegati con gli attacchi specifici per ciascuno: dal wiretapping fisico al layer 1 fino a SQL injection e XSS al layer 7. La mappa completa degli attacchi di rete.",
+    "file": "posts/2026-03-15-modello-osi.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-come-funziona-un-firewall",
+    "title": "Come funziona un firewall: stateless, stateful, WAF e i loro limiti",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["firewall", "stateful", "WAF", "NGFW", "DMZ", "deep packet inspection"],
+    "excerpt": "Differenza tra firewall stateless, stateful e NGFW, come funziona un WAF, architettura DMZ, regole con default deny e cosa un firewall non può fare.",
+    "file": "posts/2026-03-15-come-funziona-un-firewall.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-autenticazione-identita-digitale",
+    "title": "Autenticazione e identità digitale: MFA, OAuth, SSO, JWT e come si attaccano",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["autenticazione", "MFA", "OAuth", "JWT", "SSO", "FIDO2", "session hijacking"],
+    "excerpt": "I tre fattori di autenticazione, TOTP, FIDO2, JWT e le sue vulnerabilità, OAuth 2.0, OpenID Connect, SSO e gli attacchi MFA fatigue. Come funziona l'identità digitale moderna.",
+    "file": "posts/2026-03-15-autenticazione-identita-digitale.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-dns-il-telefono-di-internet",
+    "title": "DNS: il telefono di internet e come viene abusato",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["DNS", "DNSSEC", "DNS tunneling", "cache poisoning", "DoH", "ricognizione"],
+    "excerpt": "La gerarchia DNS, tutti i tipi di record, ricognizione tramite zone transfer, cache poisoning e l'attacco di Kaminsky, DNS tunneling per esfiltrazione e come usare il DNS come strumento difensivo.",
+    "file": "posts/2026-03-15-dns-il-telefono-di-internet.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-pki-certificati-digitali",
+    "title": "PKI e certificati digitali: CA, catena di fiducia e TLS handshake",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["PKI", "certificati", "TLS", "CA", "HTTPS", "HSTS", "Let's Encrypt"],
+    "excerpt": "Come funziona la catena di fiducia PKI, il TLS handshake passo per passo, la revoca dei certificati, gli attacchi (rogue CA, SSL stripping) e il ruolo di Let's Encrypt.",
+    "file": "posts/2026-03-15-pki-certificati-digitali.md",
+    "cover": ""
+  },
+  {
+    "id": "2026-03-15-ingegneria-sociale",
+    "title": "Ingegneria sociale: la psicologia degli attacchi",
+    "date": "2026-03-15",
+    "category": "fondamentali",
+    "tags": ["ingegneria sociale", "phishing", "vishing", "pretexting", "BEC", "OSINT"],
+    "excerpt": "I principi psicologici sfruttati dagli attaccanti, tutte le tecniche (phishing, vishing, baiting, BEC), il ciclo completo di un attacco e le difese tecniche e umane.",
+    "file": "posts/2026-03-15-ingegneria-sociale.md",
+    "cover": ""
+  },
   {
     "id": "2026-03-10-morris-worm",
     "title": "Il Morris Worm (1988): il primo grande attacco su Internet",
