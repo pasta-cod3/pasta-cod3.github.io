@@ -318,10 +318,12 @@ function initMobileNav(){
 
   drawer.querySelectorAll('.nav-drawer-link').forEach(link=>{
     link.addEventListener('click',e=>{
-      e.preventDefault();
       const cat=link.dataset.cat;
-      if(cat) setCat(activeCat===cat?null:cat);
-      closeDrawer();
+      if(cat){
+        e.preventDefault();      // solo i filtri (href="#") devono bloccare la navigazione
+        setCat(activeCat===cat?null:cat);
+      }
+      closeDrawer();             // per i link veri (Chi sono/Contatti) la navigazione procede normalmente
     });
   });
 }
