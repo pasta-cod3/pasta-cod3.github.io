@@ -204,27 +204,27 @@
 
   <div class="hero-right" aria-label="Statistiche articoli">
     <div class="stats-grid" id="statsGrid">
-      <div class="stat-box s1" data-cat="red" role="button" tabindex="0">
+      <div class="stat-box s1" data-cat="red" role="button" tabindex="0" aria-label="Filtra articoli Red Team">
         <div class="stat-corner" aria-hidden="true"></div>
         <div class="stat-num" id="cnt-red">—</div>
         <div class="stat-label">Red Team</div>
       </div>
-      <div class="stat-box s2" data-cat="blue" role="button" tabindex="0">
+      <div class="stat-box s2" data-cat="blue" role="button" tabindex="0" aria-label="Filtra articoli Blue Team">
         <div class="stat-corner" aria-hidden="true"></div>
         <div class="stat-num" id="cnt-blue">—</div>
         <div class="stat-label">Blue Team</div>
       </div>
-      <div class="stat-box s3" data-cat="storia" role="button" tabindex="0">
+      <div class="stat-box s3" data-cat="storia" role="button" tabindex="0" aria-label="Filtra articoli Storia">
         <div class="stat-corner" aria-hidden="true"></div>
         <div class="stat-num" id="cnt-storia">—</div>
         <div class="stat-label">Storia</div>
       </div>
-      <div class="stat-box s4" data-cat="fond" role="button" tabindex="0">
+      <div class="stat-box s4" data-cat="fond" role="button" tabindex="0" aria-label="Filtra articoli Fondamentali">
         <div class="stat-corner" aria-hidden="true"></div>
         <div class="stat-num" id="cnt-fond">—</div>
         <div class="stat-label">Fondamentali</div>
       </div>
-      <div class="stat-box s5" data-cat="news" role="button" tabindex="0">
+      <div class="stat-box s5" data-cat="news" role="button" tabindex="0" aria-label="Filtra articoli Notizie">
         <div class="stat-corner" aria-hidden="true"></div>
         <div class="stat-num" id="cnt-news">—</div>
         <div class="stat-label">Notizie</div>
@@ -246,8 +246,8 @@
     </div>
   </div>
 
-  <div class="cat-grid" role="list">
-    <div class="cat-card c-red" data-cat="red" role="listitem" tabindex="0">
+  <div class="cat-grid" role="group" aria-label="Categorie di articoli">
+    <div class="cat-card c-red" data-cat="red" role="button" tabindex="0" aria-label="Filtra per Red Team: offensive security e penetration test">
       <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 001</div>
       <div class="cat-name">Red Team</div>
@@ -258,7 +258,7 @@
       </div>
     </div>
 
-    <div class="cat-card c-blue" data-cat="blue" role="listitem" tabindex="0">
+    <div class="cat-card c-blue" data-cat="blue" role="button" tabindex="0" aria-label="Filtra per Blue Team: difesa e incident response">
       <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 002</div>
       <div class="cat-name">Blue Team</div>
@@ -269,7 +269,7 @@
       </div>
     </div>
 
-    <div class="cat-card c-storia" data-cat="storia" role="listitem" tabindex="0">
+    <div class="cat-card c-storia" data-cat="storia" role="button" tabindex="0" aria-label="Filtra per Storia: casi storici della cybersecurity">
       <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 003</div>
       <div class="cat-name">Storia</div>
@@ -280,7 +280,7 @@
       </div>
     </div>
 
-    <div class="cat-card c-fond" data-cat="fond" role="listitem" tabindex="0">
+    <div class="cat-card c-fond" data-cat="fond" role="button" tabindex="0" aria-label="Filtra per Fondamentali: basi tecniche di sicurezza">
       <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 004</div>
       <div class="cat-name">Fondamentali</div>
@@ -291,7 +291,7 @@
       </div>
     </div>
 
-    <div class="cat-card c-news" data-cat="news" role="listitem" tabindex="0">
+    <div class="cat-card c-news" data-cat="news" role="button" tabindex="0" aria-label="Filtra per Notizie: attualità cybersecurity">
       <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 005</div>
       <div class="cat-name">Notizie</div>
