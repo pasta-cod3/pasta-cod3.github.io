@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Come funziona Internet — approfondimento: BGP, Anycast e la resilienza della rete — pasta-cod3</title>
+  <meta name="description" content="Secondo capitolo sull'infrastruttura di Internet: come il routing BGP decide il percorso dei pacchetti, cos'è Anycast e perché Internet sopravvive ai guasti.">
+  <meta name="author" content="stewe — pasta-cod3">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pasta-cod3.github.io/posts/come-funziona-internet-v2.html">
+
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Come funziona Internet — BGP, Anycast e resilienza della rete">
+  <meta property="og:description" content="Come il routing BGP decide il percorso dei pacchetti, cos'è Anycast e perché Internet sopravvive ai guasti.">
+  <meta property="og:url"         content="https://pasta-cod3.github.io/posts/come-funziona-internet-v2.html">
+  <meta property="og:site_name"   content="pasta-cod3">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    .post-wrap {
+      max-width: 780px; margin: 0 auto;
+      padding: calc(var(--gap)*2) var(--gap) calc(var(--gap)*4);
+    }
+    .post-eyebrow {
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: .12em;
+      color: var(--c-fond); margin-bottom: .5rem; text-transform: uppercase;
+    }
+    .post-title {
+      font-family: var(--ff-d); font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem;
+    }
+    .post-meta {
+      display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--ff-m); font-size: 11px; color: var(--text-dim);
+    }
+    .post-cat-badge {
+      background: var(--c-fond)22; color: var(--c-fond);
+      border: 1px solid var(--c-fond)55;
+      padding: 2px 8px; border-radius: 3px;
+      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .post-body { color: var(--text); line-height: 1.85; font-size: 1rem; }
+    .post-body h2 {
+      font-family: var(--ff-d); font-size: 1.15rem; font-weight: 700;
+      color: var(--accent); margin: 2.5rem 0 .75rem;
+      padding-left: .75rem; border-left: 3px solid var(--c-fond);
+    }
+    .post-body h3 {
+      font-family: var(--ff-m); font-size: .95rem; font-weight: 500;
+      color: var(--text); margin: 1.75rem 0 .5rem;
+    }
+    .post-body p { margin-bottom: 1.25rem; }
+    .post-body ul, .post-body ol { margin: 0 0 1.25rem 1.5rem; line-height: 1.9; }
+    .post-body li::marker { color: var(--c-fond); }
+    .post-body strong { color: var(--accent); font-weight: 600; }
+    .post-body a { color: var(--accent); }
+    .post-body code {
+      font-family: var(--ff-m); font-size: .85em;
+      background: rgba(0,200,255,.08); color: var(--accent);
+      padding: .15em .4em; border-radius: 3px;
+    }
+    .post-body pre {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.5rem;
+    }
+    .post-body pre code {
+      background: none; padding: 0; font-size: .82rem;
+      color: var(--c-fond); display: block; line-height: 1.7;
+    }
+    .post-body blockquote {
+      border-left: 3px solid var(--c-fond); margin: 1.5rem 0;
+      padding: .75rem 1.25rem; background: rgba(0,221,136,.04);
+      border-radius: 0 6px 6px 0; color: var(--text-dim); font-style: italic;
+    }
+    .callout {
+      background: rgba(0,221,136,.05);
+      border: 1px solid var(--border); border-left: 3px solid var(--c-fond);
+      border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: .9rem;
+    }
+    .callout-label {
+      font-family: var(--ff-m); font-size: 10px; letter-spacing: .1em;
+      color: var(--c-fond); margin-bottom: .4rem;
+    }
+    .post-back {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: .08em;
+      color: var(--text-dim); text-decoration: none;
+      margin-bottom: 2rem; transition: color .18s;
+    }
+    .post-back:hover { color: var(--accent); }
+    .schema-table {
+      width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .88rem;
+    }
+    .schema-table th {
+      font-family: var(--ff-m); font-size: 10px; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--c-fond);
+      padding: .6rem .8rem; border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .schema-table td {
+      padding: .55rem .8rem; border-bottom: 1px solid rgba(255,255,255,.04);
+      vertical-align: top;
+    }
+    .schema-table tr:last-child td { border-bottom: none; }
+    .schema-table td:first-child { font-family: var(--ff-m); color: var(--accent); }
+  </style>
+
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+</head>
+<body>
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
+  <a href="../index.html" class="nav-drawer-link">Home</a>
+  <a href="../index.html" class="nav-drawer-link" data-cat="red">Red Team</a>
+  <a href="../index.html" class="nav-drawer-link" data-cat="blue">Blue Team</a>
+  <a href="../index.html" class="nav-drawer-link" data-cat="storia">Storia</a>
+  <a href="../index.html" class="nav-drawer-link" data-cat="fond">Fondamentali</a>
+  <a href="../index.html" class="nav-drawer-link" data-cat="news">News</a>
+  <a href="../about.html" class="nav-drawer-link">Chi sono</a>
+  <a href="../contatti.html" class="nav-drawer-link">Contatti</a>
+</nav>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">pasta<span>-</span>cod3</a>
+  <nav class="nav-center" aria-label="Navigazione principale">
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html" data-cat="red">Red Team</a></li>
+      <li><a href="../index.html" data-cat="blue">Blue Team</a></li>
+      <li><a href="../index.html" data-cat="storia">Storia</a></li>
+      <li><a href="../index.html" data-cat="fond">Fondamentali</a></li>
+      <li><a href="../index.html" data-cat="news">News</a></li>
+      <li><a href="../about.html">Chi sono</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <div class="post-wrap">
+    <a href="../index.html" class="post-back">← Torna agli articoli</a>
+    <p class="post-eyebrow">Fondamentali · 10 Aprile 2026</p>
+    <h1 class="post-title">Come funziona Internet — approfondimento:<br>BGP, Anycast e la resilienza della rete</h1>
+    <div class="post-meta">
+      <span class="post-cat-badge">FONDAMENTALI</span>
+      <span>stewe</span>
+      <span>2026-04-10</span>
+    </div>
+
+    <div class="post-body">
+
+      <p>Nel primo articolo su come funziona Internet abbiamo visto il percorso di un pacchetto dal tuo browser al server: DNS, TCP/IP, TLS, HTTP. Oggi entriamo più in profondità nell'infrastruttura stessa — quella parte invisibile che decide <em>quale strada</em> fanno i tuoi dati, come viene gestita la ridondanza e perché Internet non ha un singolo punto di failure.</p>
+
+      <h2>La struttura di Internet: una rete di reti</h2>
+
+      <p>Internet non è un'unica rete. È una <strong>federazione di migliaia di reti autonome</strong>, ognuna gestita da un'organizzazione diversa: ISP, aziende, università, governi, CDN. Ogni rete ha un identificatore unico chiamato <strong>ASN — Autonomous System Number</strong>.</p>
+
+      <p>Il tuo provider di casa (Telecom, Fastweb, Vodafone) è un AS. Google è un AS. Cloudflare è un AS. L'Università di Bologna è un AS. La connessione tra AS diversi avviene in punti fisici chiamati <strong>IXP — Internet Exchange Point</strong>: sale piene di rack dove i cavi di AS diversi si incrociano e i router si scambiano traffico.</p>
+
+      <p>In Italia il principale IXP è il <strong>MIX di Milano</strong>. A livello europeo i più grandi sono DE-CIX a Francoforte e AMS-IX ad Amsterdam. Ogni volta che accedi a un servizio italiano da una rete italiana, i tuoi pacchetti probabilmente non escono mai dall'Italia — passano per questi exchange point locali.</p>
+
+      <h2>BGP: il protocollo che instrada Internet</h2>
+
+      <p>All'interno di una singola rete (un AS), il routing funziona con protocolli come OSPF o IS-IS. Ma tra AS diversi esiste un solo protocollo di routing: <strong>BGP — Border Gateway Protocol</strong>.</p>
+
+      <p>BGP è il protocollo più critico e meno conosciuto di Internet. È lui che decide quale AS attraversano i tuoi pacchetti per arrivare a destinazione. Funziona su connessioni TCP ed è fondamentalmente basato sulla <strong>fiducia</strong>: ogni AS annuncia al mondo i prefissi IP che possiede e i vicini con cui è connesso. Gli altri AS aggiornano le proprie tabelle di routing in base a questi annunci.</p>
+
+      <h3>Come si legge una tabella BGP</h3>
+
+      <pre><code># Esempio semplificato di route BGP
+# AS_PATH: sequenza di AS attraversati per raggiungere il prefisso
+# NEXT_HOP: prossimo router da contattare
+
+Prefix          Next Hop       AS_PATH
+1.1.1.0/24      203.0.113.1    13335          # Cloudflare
+8.8.8.0/24      198.51.100.2   15169          # Google
+93.184.216.0/24 192.0.2.5      15133 2914     # Edgecast via NTT</code></pre>
+
+      <p>Quando un router BGP deve scegliere tra più percorsi per raggiungere un prefisso, applica una serie di regole — il <strong>BGP decision process</strong> — che considera attributi come lunghezza dell'AS_PATH, LOCAL_PREF, MED e altri. In pratica, la strada più corta in termini di hop tra AS tende a essere preferita, ma operatori diversi possono configurare policy diverse per motivi economici o tecnici.</p>
+
+      <div class="callout">
+        <div class="callout-label">⚠ BGP HIJACKING</div>
+        BGP si basa sulla fiducia: chiunque gestisca un AS può annunciare qualsiasi prefisso. Nel 2010 China Telecom annunciò per errore 37.000 prefissi IP redirigendo traffico globale attraverso la Cina per 18 minuti. Nel 2022 un attore malevolo reindirizzò traffico diretto a Coinbase e altri target. La mitigazione moderna si chiama <strong>RPKI — Resource Public Key Infrastructure</strong>: una PKI che certifica quale AS ha il diritto di annunciare ogni prefisso.
+      </div>
+
+      <h2>Anycast: un indirizzo, mille server</h2>
+
+      <p>Sai che quando digiti <code>1.1.1.1</code> stai raggiungendo Cloudflare? Ma sai <em>quale</em> server di Cloudflare? Probabilmente quello più vicino a te — geograficamente e in termini di latenza di rete. Questo è possibile grazie a <strong>Anycast</strong>.</p>
+
+      <p>Con Anycast, lo stesso indirizzo IP viene annunciato tramite BGP da decine o centinaia di server distribuiti nel mondo. Quando il tuo pacchetto arriva su Internet, il routing BGP lo dirige automaticamente verso il server che risulta più vicino secondo le tabelle di routing degli AS intermedi. Non c'è un DNS che decide, non c'è un load balancer centrale: è la struttura stessa di Internet che smista.</p>
+
+      <table class="schema-table">
+        <thead>
+          <tr>
+            <th>Tecnologia</th>
+            <th>Come funziona</th>
+            <th>Caso d'uso principale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unicast</td>
+            <td>Un indirizzo → un server</td>
+            <td>Server normali, comunicazione punto-punto</td>
+          </tr>
+          <tr>
+            <td>Anycast</td>
+            <td>Un indirizzo → il server più vicino</td>
+            <td>DNS, CDN, DDoS mitigation</td>
+          </tr>
+          <tr>
+            <td>Multicast</td>
+            <td>Un indirizzo → un gruppo di destinatari</td>
+            <td>Streaming video interno, IPTV</td>
+          </tr>
+          <tr>
+            <td>Broadcast</td>
+            <td>Un indirizzo → tutti nella rete locale</td>
+            <td>ARP, DHCP discovery</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Anycast è usato da tutti i resolver DNS pubblici: <code>1.1.1.1</code> (Cloudflare), <code>8.8.8.8</code> (Google), <code>9.9.9.9</code> (Quad9). È usato dai root server DNS — i 13 server che formano il vertice del sistema DNS globale sono in realtà centinaia di macchine distribuite nel mondo, raggiungibili tutte con gli stessi 13 indirizzi IP. È usato da Cloudflare per assorbire attacchi DDoS: il traffico malevolo viene distribuito automaticamente tra tutti i PoP della rete senza sovraccaricare nessun singolo nodo.</p>
+
+      <h2>Perché Internet non ha un singolo punto di failure</h2>
+
+      <p>Torniamo alla domanda fondamentale: perché Internet sopravvive ai guasti? La risposta ha tre componenti.</p>
+
+      <h3>1. Ridondanza fisica</h3>
+      <p>I cavi sottomarini, i PoP degli ISP, gli IXP — tutte le infrastrutture critiche sono replicate. Quando nel gennaio 2022 un cavo sottomarino si è rotto vicino a Tonga, l'isola ha perso il 94% della connettività per settimane — ma è rimasta connessa attraverso un percorso alternativo via satellite. Il cavo era un single point of failure che tutti conoscevano ma che non era stato mitigato.</p>
+
+      <h3>2. Routing dinamico con BGP</h3>
+      <p>Se un link BGP cade, i router che lo utilizzano rimuovono le route corrispondenti e le ricalcolano attraverso percorsi alternativi. Il processo di convergenza BGP può richiedere da secondi a minuti, durante i quali alcune destinazioni possono risultare temporaneamente irraggiungibili — ma poi il traffico trova un nuovo percorso automaticamente.</p>
+
+      <h3>3. Architettura decentralizzata</h3>
+      <p>Non esiste un "server centrale di Internet" da spegnere. I DNS root server sono distribuiti. I protocolli di routing sono distribuiti. La governance è distribuita tra IANA, RIR regionali, ICANN, IETF. Questa frammentazione è a volte frustrante dal punto di vista organizzativo, ma è il motivo per cui Internet ha resistito a disastri naturali, guasti tecnici e attacchi.</p>
+
+      <div class="callout">
+        <div class="callout-label">📊 I NUMERI DI BGP OGGI</div>
+        La tabella di routing globale BGP contiene circa <strong>950.000 prefissi IPv4</strong> e oltre 200.000 prefissi IPv6 (luglio 2026). Ogni router di core Internet mantiene questa tabella in memoria e aggiorna le sue route centinaia di volte al secondo. La crescita della tabella BGP è un problema noto: i router devono avere RAM sufficiente per tenerla, e i produttori di hardware di rete pianificano upgrade ogni pochi anni per stare al passo.
+      </div>
+
+      <h2>Implicazioni per la sicurezza</h2>
+
+      <p>Capire BGP e Anycast non è solo accademia — ha implicazioni dirette per chi lavora in sicurezza informatica.</p>
+
+      <ul>
+        <li><strong>BGP hijacking</strong> — un attaccante che controlla un AS può reindirizzare traffico verso di sé, intercettarlo (Man-in-the-Middle a scala Internet) o scartarlo (attacco di tipo blackhole). Senza RPKI, è difficile da rilevare in tempo reale.</li>
+        <li><strong>Prefix filtering</strong> — una misconfiguration BGP può causare un "route leak" che porta traffico su percorsi non previsti. È successo con Facebook nel 2021: i BGP update errati hanno rimosso i prefissi di Facebook dalla tabella globale, rendendola irraggiungibile per 6 ore.</li>
+        <li><strong>DDoS e Anycast</strong> — Cloudflare, Akamai e altri usano Anycast per distribuire il traffico DDoS su decine di PoP. Un attacco volumetrico che punterebbe a saturare un singolo server viene invece assorbito da una rete globale con capacità aggregata nell'ordine dei Tbps.</li>
+        <li><strong>Geofencing e censura</strong> — gli stati che vogliono filtrare traffico lo fanno spesso a livello BGP, facendo annunciare ai propri ISP prefissi che "attirano" il traffico verso sistemi di ispezione. Il Great Firewall cinese funziona in parte così.</li>
+      </ul>
+
+      <h2>Strumenti per esplorare BGP</h2>
+
+      <p>Se vuoi vedere BGP in azione, alcuni tool pubblici sono molto utili:</p>
+
+      <ul>
+        <li><strong><a href="https://bgp.he.net" target="_blank" rel="noopener">bgp.he.net</a></strong> — Hurricane Electric BGP Toolkit: visualizza le route di qualsiasi AS, i prefissi annunciati, i peer</li>
+        <li><strong><a href="https://bgpview.io" target="_blank" rel="noopener">bgpview.io</a></strong> — lookup per IP, ASN, prefissi; visualizza l'AS path completo</li>
+        <li><strong><a href="https://stat.ripe.net" target="_blank" rel="noopener">stat.ripe.net</a></strong> — RIPE NCC Statistics: dati in tempo reale su routing, visibilità dei prefissi, eventi BGP</li>
+        <li><strong><a href="https://www.routeviews.org" target="_blank" rel="noopener">routeviews.org</a></strong> — accesso telnet a router BGP reali per vedere le tabelle di routing globali</li>
+      </ul>
+
+      <p>Provate a cercare l'ASN di Cloudflare (<code>AS13335</code>) su bgpview.io — vedrete tutti i prefissi che annunciano e una mappa degli AS con cui si interconnettono. È un modo concreto per capire quanto è grande e distribuita l'infrastruttura di un singolo attore.</p>
+
+      <h2>Conclusione</h2>
+
+      <p>Internet è una macchina straordinariamente complessa che funziona in modo sorprendentemente robusto — non perché qualcuno l'abbia progettata per essere infallibile, ma perché i protocolli su cui si basa (TCP/IP, BGP, DNS) sono progettati per adattarsi ai guasti in modo automatico. BGP è al tempo stesso la colla che tiene unito il tutto e uno dei vettori di rischio più sottovalutati: un singolo errore di configurazione in un AS può causare interruzioni a scala globale.</p>
+
+      <p>Comprendere questa infrastruttura è fondamentale sia per chi lavora in networking sia per chi fa sicurezza offensiva o difensiva: sapere come i pacchetti vengono instradati, dove possono essere intercettati e come funziona la fiducia tra AS è il prerequisito per ragionare seriamente su attacchi e difese a livello di rete.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+  </div>
+  <nav class="f-nav" aria-label="Footer navigation">
+    <a href="../index.html">Home</a>
+    <a href="../about.html">Chi sono</a>
+    <a href="../contatti.html">Contatti</a>
+  </nav>
+  <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="../js/static-pages.js"></script>
+</body>
+</html>
