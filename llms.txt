@@ -1,0 +1,45 @@
+# pasta-cod3
+
+> Blog italiano di cybersecurity scritto da stewe (stewe_sec): penetration testing, red team, blue team, fondamentali di sicurezza informatica, storia dell'hacking e notizie dal settore. Contenuti tecnici e pratici, orientati a chi studia o lavora nell'offensive/defensive security.
+
+Il sito è organizzato in cinque categorie: Red Team (tecniche offensive e pentest), Blue Team (difesa, SOC, detection), Storia (eventi ed episodi storici della cybersecurity), Fondamentali (concetti di base: reti, crittografia, protocolli) e News (attualità cybersecurity, prevalentemente Italia ed Europa).
+
+## Pagine principali
+
+- [Home](https://pasta-cod3.github.io/): elenco di tutti gli articoli, filtrabili per categoria e ricercabili
+- [Chi sono](https://pasta-cod3.github.io/about.html): profilo dell'autore, certificazioni (eJPTv2, in corso eWPTv2), percorso professionale
+- [Contatti](https://pasta-cod3.github.io/contatti.html): email di contatto e canali social
+
+## Red Team — tecniche offensive
+
+- [Active Directory: Kerberoasting, AS-REP Roasting](https://pasta-cod3.github.io/posts/active-directory-attacchi-base.html): vettori di attacco fondamentali su AD
+- [Web Shell e Upload Bypass](https://pasta-cod3.github.io/posts/web-shells-upload-bypass.html): sfruttare vulnerabilità nei file upload
+- [Pivoting e Tunneling](https://pasta-cod3.github.io/posts/pivoting-tunneling-reti.html): chisel, ligolo-ng, sshuttle, proxychains
+- [Buffer Overflow: le basi](https://pasta-cod3.github.io/posts/buffer-overflow-basi.html): vulnerability research su binari
+- [Cos'è il Penetration Testing](https://pasta-cod3.github.io/posts/cose-il-penetration-testing.html): guida completa per chi inizia
+
+## Blue Team — difesa e detection
+
+- [Zero Trust](https://pasta-cod3.github.io/posts/zero-trust-architettura.html): l'architettura che non si fida di nessuno
+- [EDR: cos'è e come funziona](https://pasta-cod3.github.io/posts/edr-endpoint-detection-response.html): endpoint detection and response
+- [Forensica Digitale](https://pasta-cod3.github.io/posts/forensica-digitale-introduzione.html): principi, metodologia e strumenti DFIR
+- [Giornata tipo di un SOC Analyst](https://pasta-cod3.github.io/posts/soc-analyst-giornata-tipo.html): triage, alert fatigue, investigazione
+- [Cos'è il Blue Team](https://pasta-cod3.github.io/posts/cose-il-blue-team.html): ruoli, strumenti, differenza col Red Team
+
+## Storia della cybersecurity
+
+- [Operation Aurora 2009](https://pasta-cod3.github.io/posts/operation-aurora-google-cina-2009.html): quando la Cina hackerò Google
+- [Stuxnet](https://pasta-cod3.github.io/posts/stuxnet.html): l'arma digitale contro il nucleare iraniano
+- [Kevin Mitnick](https://pasta-cod3.github.io/posts/kevin-mitnick.html): il fuggitivo digitale
+- [Target Breach 2013](https://pasta-cod3.github.io/posts/target-breach-hvac-2013.html): 40 milioni di carte rubate via un fornitore HVAC
+
+## Fondamentali
+
+- [Come funziona Internet](https://pasta-cod3.github.io/posts/come-funziona-internet.html): dal cavo sottomarino al browser
+- [Crittografia: le basi](https://pasta-cod3.github.io/posts/crittografia-basi.html): simmetrica, asimmetrica, PKI, TLS
+- [Modello OSI](https://pasta-cod3.github.io/posts/modello-osi.html): i 7 livelli spiegati con attacchi reali
+
+## Optional
+
+- [Rapporto Clusit 2026](https://pasta-cod3.github.io/posts/clusit-report-2026-italia.html): statistiche cybersecurity Italia
+- [NIS2 in Italia](https://pasta-cod3.github.io/posts/nis2-recepimento-italia-dlgs-138.html): guida pratica al D.Lgs. 138/2024
