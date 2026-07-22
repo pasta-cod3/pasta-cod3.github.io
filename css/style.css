@@ -898,3 +898,11 @@ body {
 [data-theme="light"] .terminal-box .t-prompt { color: var(--c-fond); }
 [data-theme="light"] .terminal-box .t-cmd    { color: #dff2ff; }
 [data-theme="light"] .terminal-box .t-output { color: #7aadcc; }
+
+/* ── NASCONDI TAG CLOUD (sidebar e filter sheet) ── */
+#sidebarTags,
+#filterSheetTags,
+.sidebar-tags,
+.filter-sheet-tags {
+  display: none !important;
+}
