@@ -1,41 +1,96 @@
 <!DOCTYPE html>
 <html lang="it" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>pasta-cod3 — Cybersecurity Blog</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<script>
-  (function(){ const t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ── PRIMARY SEO ──────────────────────────────────────── -->
+  <title>pasta-cod3 — Cybersecurity Blog in Italiano | Red Team · Blue Team · OSINT</title>
+  <meta name="description" content="Blog di cybersecurity in italiano: penetration testing, red team, blue team, storia dell'hacking, fondamentali e notizie sulla sicurezza informatica. Tecnico, pratico, senza filtri.">
+  <meta name="keywords" content="cybersecurity italiano, penetration testing, red team, blue team, hacking etico, sicurezza informatica, OSINT, exploit, CTF, eJPT, TryHackMe, HackTheBox">
+  <meta name="author" content="stewe — pasta-cod3">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://pasta-cod3.github.io/">
+
+  <!-- ── OPEN GRAPH ───────────────────────────────────────── -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="pasta-cod3 — Cybersecurity Blog in Italiano">
+  <meta property="og:description" content="Red team, blue team, storia dell'hacking, fondamentali e notizie dal mondo della sicurezza informatica. In italiano. Senza filtri.">
+  <meta property="og:url"         content="https://pasta-cod3.github.io/">
+  <meta property="og:site_name"   content="pasta-cod3">
+  <meta property="og:locale"      content="it_IT">
+
+  <!-- ── TWITTER CARD ─────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="pasta-cod3 — Cybersecurity Blog">
+  <meta name="twitter:description" content="Blog di cybersecurity in italiano — offensive, defensive, storia, fondamentali.">
+  <meta name="twitter:site"        content="@stewe_sec">
+
+  <!-- ── PERFORMANCE ──────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- THEME FLASH PREVENTION -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme');
+      if(t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <!-- ── SCHEMA.ORG ───────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "pasta-cod3",
+    "description": "Blog di cybersecurity in italiano — penetration testing, red team, blue team, storia dell'hacking e fondamentali di sicurezza informatica.",
+    "url": "https://pasta-cod3.github.io/",
+    "inLanguage": "it-IT",
+    "author": {
+      "@type": "Person",
+      "name": "stewe",
+      "alternateName": "stewe_sec",
+      "sameAs": [
+        "https://github.com/pasta-cod3",
+        "https://www.instagram.com/stewe_sec"
+      ]
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Cybersecurity"
+    }
+  }
+  </script>
 </head>
 <body>
 
-<!-- FULL PAGE SPACE BACKGROUND -->
-<canvas id="spaceCanvas"></canvas>
+<!-- ── CYBERPUNK CANVAS BG ─────────────────────────────── -->
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
 
-<!-- NAV OVERLAY (mobile) -->
+<!-- ── NAV OVERLAY (mobile) ───────────────────────────── -->
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- NAV DRAWER (mobile) -->
-<nav class="nav-drawer" id="navDrawer">
+<!-- ── NAV DRAWER (mobile) ────────────────────────────── -->
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
   <a href="#" class="nav-drawer-link" data-cat="red-team">Red Team</a>
   <a href="#" class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
   <a href="#" class="nav-drawer-link" data-cat="storia">Storia</a>
   <a href="#" class="nav-drawer-link" data-cat="fondamentali">Fondamentali</a>
   <a href="#" class="nav-drawer-link" data-cat="notizie">Notizie</a>
-  <a href="about.html" class="nav-drawer-link">Chi sono</a>
+  <a href="about.html"    class="nav-drawer-link">Chi sono</a>
   <a href="contatti.html" class="nav-drawer-link">Contatti</a>
 </nav>
 
-<!-- FILTER SHEET OVERLAY (mobile) -->
+<!-- ── FILTER SHEET OVERLAY (mobile) ─────────────────── -->
 <div class="nav-overlay" id="filterOverlay"></div>
 
-<!-- FILTER SHEET (mobile) -->
-<div class="filter-sheet" id="filterSheet">
+<!-- ── FILTER SHEET (mobile) ─────────────────────────── -->
+<div class="filter-sheet" id="filterSheet" role="dialog" aria-label="Filtri articoli">
   <div class="filter-sheet-header">
-    <div class="filter-sheet-title">Filtri</div>
+    <div class="filter-sheet-title">⊞ Filtri</div>
     <button class="filter-sheet-close" id="filterSheetClose">✕ Chiudi</button>
   </div>
   <div class="filter-sheet-section">
@@ -55,11 +110,26 @@
   </div>
 </div>
 
-<!-- HEADER -->
-<header class="site-header">
-  <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+<!-- ── MOBILE SEARCH BAR ──────────────────────────────── -->
+<div class="search-mobile-bar" id="searchMobileBar">
+  <div class="search-wrap" style="min-width:0;max-width:100%;width:100%">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input class="search-input" id="searchInputMobile" type="search"
+           placeholder="Cerca articoli..." autocomplete="off"
+           aria-label="Cerca articoli">
+    <div class="search-dropdown" id="searchDropdownMobile"></div>
+  </div>
+</div>
 
-  <div class="nav-center">
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="pasta-cod3 home">
+    pasta<span>-</span>cod3
+  </a>
+
+  <nav class="nav-center" aria-label="Navigazione principale">
     <ul class="nav-links">
       <li><a href="#" data-cat="red-team">Red Team</a></li>
       <li><a href="#" data-cat="blue-team">Blue Team</a></li>
@@ -69,123 +139,182 @@
       <li><a href="about.html">Chi sono</a></li>
       <li><a href="contatti.html">Contatti</a></li>
     </ul>
-  </div>
+  </nav>
 
   <div class="nav-right">
     <!-- Search desktop -->
-    <div class="search-wrap" id="searchWrap">
-      <span class="search-icon">⌕</span>
-      <input class="search-input" id="searchInput" type="text" placeholder="Cerca articoli..." autocomplete="off">
-      <div class="search-dropdown" id="searchDropdown"></div>
+    <div class="search-wrap" id="searchWrap" role="search">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input class="search-input" id="searchInput" type="search"
+             placeholder="Cerca articoli..." autocomplete="off"
+             aria-label="Cerca articoli">
+      <span class="search-kbd" title="Premi K per cercare">⌘K</span>
+      <div class="search-dropdown" id="searchDropdown" role="listbox"></div>
     </div>
 
     <!-- Search toggle mobile -->
-    <button class="search-toggle-btn" id="searchToggleBtn" style="display:none" aria-label="Cerca">⌕</button>
+    <button class="search-toggle-btn" id="searchToggleBtn"
+            style="display:none" aria-label="Apri ricerca" aria-expanded="false">
+      ⌕
+    </button>
 
-    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">◐ LIGHT</button>
 
     <!-- Hamburger -->
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero page-hero">
-  <div class="hero-glow"></div>
+<!-- ══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section class="hero page-hero" aria-label="Hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+
   <div class="hero-left">
-    <div class="eyebrow">Cybersecurity Blog — ITA</div>
+    <p class="eyebrow">Cybersecurity Blog — ITA</p>
     <h1>
-      <div class="line1">HACK THE</div>
-      <div class="line2">SYSTEM</div>
-      <div class="line3">DEFEND IT.</div>
+      <span class="line1">HACK THE</span>
+      <span class="line2">SYSTEM.</span>
+      <span class="line3">DEFEND IT.</span>
     </h1>
-    <p class="subtitle">Red team, blue team, storia dell'hacking, fondamentali e notizie dal mondo della sicurezza informatica. In italiano. Senza filtri.</p>
+    <p class="subtitle">
+      Red team, blue team, storia dell'hacking, fondamentali e notizie dal mondo
+      della sicurezza informatica. In italiano. Senza filtri.
+    </p>
     <div class="hero-cta">
-      <a href="#articles" class="btn-primary">Inizia a leggere</a>
+      <a href="#articles" class="btn-primary">→ Inizia a leggere</a>
       <a href="#categories" class="btn-ghost">Categorie</a>
     </div>
   </div>
-  <div class="hero-right">
+
+  <div class="hero-right" aria-label="Statistiche articoli">
     <div class="stats-grid" id="statsGrid">
-      <div class="stat-box s1" data-cat="red-team"><div class="stat-num" id="cnt-red">—</div><div class="stat-label">Red Team</div></div>
-      <div class="stat-box s2" data-cat="blue-team"><div class="stat-num" id="cnt-blue">—</div><div class="stat-label">Blue Team</div></div>
-      <div class="stat-box s3" data-cat="storia"><div class="stat-num" id="cnt-storia">—</div><div class="stat-label">Storia</div></div>
-      <div class="stat-box s4" data-cat="fondamentali"><div class="stat-num" id="cnt-fond">—</div><div class="stat-label">Fondamentali</div></div>
-      <div class="stat-box s5" data-cat="notizie"><div class="stat-num" id="cnt-news">—</div><div class="stat-label">Notizie</div></div>
+      <div class="stat-box s1" data-cat="red-team" role="button" tabindex="0">
+        <div class="stat-num" id="cnt-red">—</div>
+        <div class="stat-label">Red Team</div>
+      </div>
+      <div class="stat-box s2" data-cat="blue-team" role="button" tabindex="0">
+        <div class="stat-num" id="cnt-blue">—</div>
+        <div class="stat-label">Blue Team</div>
+      </div>
+      <div class="stat-box s3" data-cat="storia" role="button" tabindex="0">
+        <div class="stat-num" id="cnt-storia">—</div>
+        <div class="stat-label">Storia</div>
+      </div>
+      <div class="stat-box s4" data-cat="fondamentali" role="button" tabindex="0">
+        <div class="stat-num" id="cnt-fond">—</div>
+        <div class="stat-label">Fondamentali</div>
+      </div>
+      <div class="stat-box s5" data-cat="notizie" role="button" tabindex="0">
+        <div class="stat-num" id="cnt-news">—</div>
+        <div class="stat-label">Notizie</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<hr class="divider">
 
-<!-- CATEGORIES -->
-<section class="section" id="categories">
+<!-- ══════════════════════════════════════════════════════
+     CATEGORIES
+══════════════════════════════════════════════════════ -->
+<section class="section" id="categories" aria-labelledby="cat-heading">
   <div class="section-hdr">
-    <div class="hdr-left"><span class="s-label">01 /</span><h2 class="s-title">Categorie</h2></div>
+    <div class="hdr-left">
+      <span class="s-label" aria-hidden="true">01 /</span>
+      <h2 class="s-title" id="cat-heading">Categorie</h2>
+    </div>
   </div>
-  <div class="cat-grid">
-    <div class="cat-card c-red" data-cat="red-team">
-      <div class="cat-bar"></div>
+
+  <div class="cat-grid" role="list">
+    <div class="cat-card c-red" data-cat="red-team" role="listitem" tabindex="0">
+      <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 001</div>
       <div class="cat-name">Red Team</div>
-      <div class="cat-desc">Offensive security, exploitation, privilege escalation, post-exploitation e metodologia del penetration test.</div>
-      <div class="cat-footer"><div class="cat-count" id="cc-red">— articoli</div><div class="cat-arrow">→</div></div>
+      <p class="cat-desc">Offensive security, exploitation, privilege escalation, post-exploitation e metodologia del penetration test.</p>
+      <div class="cat-footer">
+        <div class="cat-count" id="cc-red">— articoli</div>
+        <div class="cat-arrow" aria-hidden="true">→</div>
+      </div>
     </div>
-    <div class="cat-card c-blue" data-cat="blue-team">
-      <div class="cat-bar"></div>
+
+    <div class="cat-card c-blue" data-cat="blue-team" role="listitem" tabindex="0">
+      <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 002</div>
       <div class="cat-name">Blue Team</div>
-      <div class="cat-desc">Difesa, incident response, SIEM, threat hunting, hardening e vulnerability management.</div>
-      <div class="cat-footer"><div class="cat-count" id="cc-blue">— articoli</div><div class="cat-arrow">→</div></div>
+      <p class="cat-desc">Difesa, incident response, SIEM, threat hunting, hardening e vulnerability management.</p>
+      <div class="cat-footer">
+        <div class="cat-count" id="cc-blue">— articoli</div>
+        <div class="cat-arrow" aria-hidden="true">→</div>
+      </div>
     </div>
-    <div class="cat-card c-storia" data-cat="storia">
-      <div class="cat-bar"></div>
+
+    <div class="cat-card c-storia" data-cat="storia" role="listitem" tabindex="0">
+      <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 003</div>
       <div class="cat-name">Storia</div>
-      <div class="cat-desc">I casi che hanno cambiato la sicurezza informatica per sempre: da Morris Worm a Snowden.</div>
-      <div class="cat-footer"><div class="cat-count" id="cc-storia">— articoli</div><div class="cat-arrow">→</div></div>
+      <p class="cat-desc">I casi che hanno cambiato la sicurezza informatica per sempre: da Morris Worm a Snowden.</p>
+      <div class="cat-footer">
+        <div class="cat-count" id="cc-storia">— articoli</div>
+        <div class="cat-arrow" aria-hidden="true">→</div>
+      </div>
     </div>
-    <div class="cat-card c-fond" data-cat="fondamentali">
-      <div class="cat-bar"></div>
+
+    <div class="cat-card c-fond" data-cat="fondamentali" role="listitem" tabindex="0">
+      <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 004</div>
       <div class="cat-name">Fondamentali</div>
-      <div class="cat-desc">Le basi che ogni professionista della sicurezza informatica deve conoscere: TCP/IP, crittografia, DNS, firewall e molto altro.</div>
-      <div class="cat-footer"><div class="cat-count" id="cc-fond">— articoli</div><div class="cat-arrow">→</div></div>
+      <p class="cat-desc">TCP/IP, crittografia, DNS, firewall e le basi che ogni professionista di sicurezza deve conoscere.</p>
+      <div class="cat-footer">
+        <div class="cat-count" id="cc-fond">— articoli</div>
+        <div class="cat-arrow" aria-hidden="true">→</div>
+      </div>
     </div>
-    <div class="cat-card c-news" data-cat="notizie">
-      <div class="cat-bar"></div>
+
+    <div class="cat-card c-news" data-cat="notizie" role="listitem" tabindex="0">
+      <div class="cat-bar" aria-hidden="true"></div>
       <div class="cat-num">CAT — 005</div>
       <div class="cat-name">Notizie</div>
-      <div class="cat-desc">Notizie fresche dal mondo della cybersecurity: breach, vulnerabilità, ransomware, policy e scenari geopolitici.</div>
-      <div class="cat-footer"><div class="cat-count" id="cc-news">— articoli</div><div class="cat-arrow">→</div></div>
+      <p class="cat-desc">Breach, vulnerabilità, ransomware, policy e scenari geopolitici dal mondo della cybersecurity.</p>
+      <div class="cat-footer">
+        <div class="cat-count" id="cc-news">— articoli</div>
+        <div class="cat-arrow" aria-hidden="true">→</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<hr class="divider">
 
-<!-- ARTICLES + SIDEBAR -->
-<section class="section" id="articles">
+<!-- ══════════════════════════════════════════════════════
+     ARTICLES + SIDEBAR
+══════════════════════════════════════════════════════ -->
+<section class="section" id="articles" aria-labelledby="art-heading">
   <div class="section-hdr">
-    <div class="hdr-left"><span class="s-label">02 /</span><h2 class="s-title" id="articlesSectionTitle">Tutti gli articoli</h2></div>
-    <button class="s-link" id="resetFilter" style="display:none">× Reset filtro</button>
+    <div class="hdr-left">
+      <span class="s-label" aria-hidden="true">02 /</span>
+      <h2 class="s-title" id="articlesSectionTitle">Tutti gli articoli</h2>
+    </div>
+    <button class="s-link" id="resetFilter" style="display:none" aria-label="Reset filtro">
+      × Reset filtro
+    </button>
   </div>
 
   <!-- Filter drawer button (mobile only) -->
-  <button class="filter-drawer-btn" id="filterDrawerBtn">
+  <button class="filter-drawer-btn" id="filterDrawerBtn" aria-expanded="false">
     ⊞ Filtra articoli
     <span class="fdb-count" id="fdbCount">—</span>
   </button>
 
   <div class="articles-layout">
-
     <!-- SIDEBAR (desktop) -->
-    <aside class="filter-sidebar">
+    <aside class="filter-sidebar" aria-label="Filtri articoli">
       <div class="sidebar-section">
         <div class="sidebar-section-title">Categoria</div>
-        <div class="sidebar-cats" id="sidebarCats">
+        <div class="sidebar-cats" id="sidebarCats" role="group" aria-label="Filtra per categoria">
           <button class="sidebar-cat-btn active" data-cat="">Tutte</button>
           <button class="sidebar-cat-btn c-red"    data-cat="red-team">Red Team</button>
           <button class="sidebar-cat-btn c-blue"   data-cat="blue-team">Blue Team</button>
@@ -194,39 +323,53 @@
           <button class="sidebar-cat-btn c-news"   data-cat="notizie">Notizie</button>
         </div>
       </div>
+
       <div class="sidebar-section">
         <div class="sidebar-section-title">Tag</div>
-        <div class="sidebar-tags" id="sidebarTags"></div>
+        <div class="sidebar-tags" id="sidebarTags" role="group" aria-label="Filtra per tag"></div>
       </div>
-      <div class="sidebar-count" id="sidebarCount">— articoli</div>
+
+      <div class="sidebar-count" id="sidebarCount" aria-live="polite">— articoli</div>
     </aside>
 
     <!-- ARTICLES -->
     <div class="articles-main">
-      <div class="article-list" id="articleList"></div>
-      <div class="no-results" id="noResults">Nessun articolo trovato.</div>
+      <div class="article-list" id="articleList" role="list" aria-live="polite" aria-label="Lista articoli"></div>
+      <div class="no-results" id="noResults" role="status">
+        Nessun articolo trovato per questa ricerca.
+      </div>
     </div>
-
   </div>
 </section>
 
-<div class="divider"></div>
+<hr class="divider">
 
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
 <footer class="site-footer">
   <div class="f-left">
     <div class="f-logo">pasta<em>-</em>cod3</div>
     <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
   </div>
-  <div class="f-nav">
+
+  <nav class="f-nav" aria-label="Footer navigation">
     <a href="#" data-cat="red-team">Red Team</a>
     <a href="#" data-cat="blue-team">Blue Team</a>
     <a href="#" data-cat="storia">Storia</a>
     <a href="#" data-cat="fondamentali">Fondamentali</a>
     <a href="#" data-cat="notizie">Notizie</a>
+    <a href="about.html">Chi sono</a>
+    <a href="contatti.html">Contatti</a>
+  </nav>
+
+  <div class="f-status" aria-label="Stato sistema">
+    <div class="dot" aria-hidden="true"></div>
+    SISTEMA ONLINE
   </div>
-  <div class="f-status"><div class="dot"></div>SISTEMA ONLINE</div>
 </footer>
 
+<script src="js/main.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
