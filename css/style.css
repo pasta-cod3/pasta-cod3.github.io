@@ -222,15 +222,32 @@ body {
 
 /* mobile search bar overlay */
 .search-mobile-bar {
-  display: none;
+  /* opacity/visibility invece di display:none — così focus() funziona su iOS */
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   position: fixed; top: 62px; left: 0; right: 0; z-index: 201;
   padding: 0.75rem var(--gap);
   background: rgba(2,12,24,0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
+  transform: translateY(-6px);
+  transition:
+    opacity   0.22s ease,
+    transform 0.22s ease,
+    visibility 0s   linear 0.22s;
 }
-.search-mobile-bar.open { display: block; }
+.search-mobile-bar.open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition:
+    opacity   0.22s ease,
+    transform 0.22s ease,
+    visibility 0s   linear 0s;
+}
 .search-mobile-bar .search-wrap { min-width: 0; max-width: 100%; width: 100%; }
 
 /* THEME TOGGLE */
@@ -1055,4 +1072,117 @@ body {
 .sidebar-tags,
 .filter-sheet-tags {
   display: none !important;
+}
+
+/* ══ MOBILE DARK FORCE + ANIMAZIONI ════════════════════════ */
+
+@media (max-width: 920px) {
+
+  /* ── Forza dark mode sempre su mobile ─────────────────── */
+  .theme-toggle { display: none !important; }
+
+  [data-theme="light"] {
+    --bg:       #020c18;
+    --bg-card:  #040f1c;
+    --bg-glass: rgba(4,15,28,0.85);
+    --text:     #d8f0ff;
+    --text-dim: #6a8fa8;
+    --border:   rgba(0,200,255,0.08);
+    --accent:   #00c8ff;
+  }
+  [data-theme="light"] #spaceCanvas            { opacity: 0.45; }
+  [data-theme="light"] .site-header            { background: rgba(2,12,24,0.92); }
+  [data-theme="light"] .article-card,
+  [data-theme="light"] .cat-card,
+  [data-theme="light"] .stat-box,
+  [data-theme="light"] .search-wrap            { background: var(--bg-card); }
+  [data-theme="light"] .nav-drawer,
+  [data-theme="light"] .filter-sheet           { background: #040f1c; }
+
+  /* ── Keyframes mobile ─────────────────────────────────── */
+
+  @keyframes mob-slide-up {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes mob-slide-right {
+    from { opacity: 0; transform: translateX(-16px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes mob-scale-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes mob-glow-pulse {
+    0%,100% { box-shadow: 0 0 0 rgba(0,200,255,0); }
+    50%     { box-shadow: 0 0 18px rgba(0,200,255,0.22); }
+  }
+
+  /* ── Hero text stagger ────────────────────────────────── */
+  .hero-left .line1    { animation: mob-slide-right 0.5s ease 0.05s both; }
+  .hero-left .line2    { animation: mob-slide-right 0.5s ease 0.18s both; }
+  .hero-left .line3    { animation: mob-slide-right 0.5s ease 0.31s both; }
+  .hero-left .subtitle { animation: mob-slide-right 0.5s ease 0.44s both; }
+  .hero-cta            { animation: mob-slide-up   0.5s ease 0.55s both; }
+
+  /* ── Stat boxes stagger ───────────────────────────────── */
+  .stat-box:nth-child(1) { animation: mob-scale-in 0.4s ease 0.1s  both; }
+  .stat-box:nth-child(2) { animation: mob-scale-in 0.4s ease 0.18s both; }
+  .stat-box:nth-child(3) { animation: mob-scale-in 0.4s ease 0.26s both; }
+  .stat-box:nth-child(4) { animation: mob-scale-in 0.4s ease 0.34s both; }
+  .stat-box:nth-child(5) { animation: mob-scale-in 0.4s ease 0.42s both; }
+
+  /* Tap feedback stat box */
+  .stat-box:active {
+    transform: scale(0.93);
+    border-color: var(--c) !important;
+    box-shadow: 0 0 24px color-mix(in srgb,var(--c) 45%,transparent) !important;
+    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+  }
+
+  /* ── Category cards stagger ───────────────────────────── */
+  .cat-card:nth-child(1) { animation: mob-slide-up 0.4s ease 0.05s both; }
+  .cat-card:nth-child(2) { animation: mob-slide-up 0.4s ease 0.12s both; }
+  .cat-card:nth-child(3) { animation: mob-slide-up 0.4s ease 0.19s both; }
+  .cat-card:nth-child(4) { animation: mob-slide-up 0.4s ease 0.26s both; }
+  .cat-card:nth-child(5) { animation: mob-slide-up 0.4s ease 0.33s both; }
+
+  /* Tap feedback cat card */
+  .cat-card:active {
+    transform: scale(0.96);
+    transition: transform 0.1s ease !important;
+  }
+
+  /* ── Article cards slide-up con stagger ───────────────── */
+  .article-card                { animation: mob-slide-up 0.38s ease both; }
+  .article-card:nth-child(2)  { animation-delay: 0.06s; }
+  .article-card:nth-child(3)  { animation-delay: 0.12s; }
+  .article-card:nth-child(4)  { animation-delay: 0.17s; }
+  .article-card:nth-child(5)  { animation-delay: 0.22s; }
+  .article-card:nth-child(n+6){ animation-delay: 0.26s; }
+
+  /* Tap feedback article card */
+  .article-card:active {
+    transform: scale(0.985);
+    box-shadow: 0 0 20px rgba(0,200,255,0.12);
+    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+  }
+
+  /* ── Nav drawer slide-in ──────────────────────────────── */
+  .nav-drawer.open {
+    animation: mob-slide-right 0.28s cubic-bezier(0.4,0,0.2,1) both;
+  }
+
+  /* ── Header logo pulse su load ────────────────────────── */
+  .logo { animation: mob-glow-pulse 2.5s ease-in-out 0.8s 2; }
+
+}
+
+/* rispetta prefers-reduced-motion */
+@media (max-width: 920px) and (prefers-reduced-motion: reduce) {
+  .stat-box, .cat-card, .article-card,
+  .hero-left .line1, .hero-left .line2, .hero-left .line3,
+  .hero-left .subtitle, .hero-cta, .logo {
+    animation: none !important;
+  }
 }
