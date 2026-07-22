@@ -1001,11 +1001,9 @@ function setCategory(cat) {
   syncCatUI();
   syncTagUI();
   render();
-  // Scroll to articles on mobile
-  if (window.innerWidth < 920) {
-    const el = document.getElementById('articles');
-    if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
-  }
+  // Scorre sempre verso gli articoli — su desktop altrimenti sembra non succeda niente
+  const el = document.getElementById('articles');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 
