@@ -1,0 +1,36 @@
+title:       pasta-cod3
+description: Blog di cybersecurity in italiano — stewe
+baseurl:     ""
+url:         "https://pasta-cod3.github.io"
+author:      stewe
+
+# URL dei post → /posts/nome-del-post.html  (stessa struttura di prima)
+permalink:   /posts/:slug.html
+
+# Markdown
+markdown:    kramdown
+kramdown:
+  input:               GFM
+  syntax_highlighter:  rouge
+  hard_wrap:           false
+
+# Plugin attivi su GitHub Pages
+plugins:
+  - jekyll-seo-tag
+
+# File/cartelle da NON pubblicare
+exclude:
+  - "*.py"
+  - "post_template.py"
+  - "generate_posts.py"
+  - "ISTRUZIONI.md"
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - ".github"
+  - node_modules
+
+# Variabili globali accessibili nei template Liquid
+social:
+  github:    https://github.com/pasta-cod3
+  instagram: https://www.instagram.com/stewe_sec

