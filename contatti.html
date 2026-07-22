@@ -1,22 +1,59 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="it" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>pasta-cod3 — Contatti</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<script>
-  (function(){ const t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ── SEO ──────────────────────────────────────────────── -->
+  <title>Contatti — stewe | pasta-cod3 Cybersecurity Blog</title>
+  <meta name="description" content="Scrivimi per domande, segnalazioni di errori, collaborazioni o semplicemente per parlare di cybersecurity.">
+  <meta name="author" content="stewe — pasta-cod3">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pasta-cod3.github.io/contatti.html">
+
+  <!-- OG -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Contatti — stewe | pasta-cod3">
+  <meta property="og:description" content="Scrivimi per domande, segnalazioni, collaborazioni o semplicemente per parlare di sicurezza informatica.">
+  <meta property="og:url"         content="https://pasta-cod3.github.io/contatti.html">
+  <meta property="og:site_name"   content="pasta-cod3">
+
+  <!-- ── PERF ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Flash-prevention tema -->
+  <script>
+    (function(){ var t=localStorage.getItem('theme'); if(t==='light') document.documentElement.classList.add('light'); })();
+  </script>
 </head>
 <body>
 
-<canvas id="spaceCanvas"></canvas>
+<!-- ── CANVAS ─────────────────────────────────────────── -->
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
 
+<!-- ── NAV ───────────────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
+  <a href="index.html"    class="nav-drawer-link">Home</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="red-team">Red Team</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="storia">Storia</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="fondamentali">Fondamentali</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="notizie">Notizie</a>
+  <a href="about.html"    class="nav-drawer-link">Chi sono</a>
+  <a href="contatti.html" class="nav-drawer-link active">Contatti</a>
+</nav>
+
+<!-- ── HEADER ────────────────────────────────────────── -->
 <header class="site-header">
   <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
-  <div class="nav-center">
+  <nav class="nav-center" aria-label="Navigazione principale">
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="index.html" data-cat="red-team">Red Team</a></li>
@@ -27,102 +64,255 @@
       <li><a href="about.html">Chi sono</a></li>
       <li><a href="contatti.html" class="active">Contatti</a></li>
     </ul>
-  </div>
+  </nav>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<!-- Mobile nav drawer -->
-<div class="nav-overlay" id="navOverlay"></div>
-<nav class="nav-drawer" id="navDrawer">
-  <a href="index.html"    class="nav-drawer-link">Home</a>
-  <a href="index.html#articles" class="nav-drawer-link">Articoli</a>
-  <a href="about.html"    class="nav-drawer-link">Chi sono</a>
-  <a href="contatti.html" class="nav-drawer-link active">Contatti</a>
-</nav>
-
+<!-- ══════════════════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════════════════ -->
 <main class="static-main">
 
-  <div class="static-hero">
+  <!-- ── HERO ───────────────────────────────────────── -->
+  <div class="static-hero" style="position:relative;overflow:hidden;">
+    <div class="scan-line" aria-hidden="true"></div>
     <div class="static-hero-inner">
-      <div class="eyebrow">05 / Contatti</div>
-      <h1 class="static-page-title">Scrivimi</h1>
-      <p class="static-subtitle">Per segnalazioni, collaborazioni, domande o saluti — rispondo a tutto.</p>
+      <p class="eyebrow">05 / Contatti</p>
+
+      <!-- Terminal box -->
+      <div class="terminal-box" id="terminalBox" aria-label="Terminal output">
+        <div class="terminal-bar">
+          <span class="t-dot red"    aria-hidden="true"></span>
+          <span class="t-dot yellow" aria-hidden="true"></span>
+          <span class="t-dot green"  aria-hidden="true"></span>
+          <span class="terminal-title">bash — stewe@pasta-cod3:~</span>
+        </div>
+        <div class="terminal-body" id="terminalBody" aria-live="polite">
+          <div>
+            <span class="t-prompt">stewe@pasta-cod3:~$</span>
+            <span class="t-cmd"> cat contact.json</span>
+          </div>
+          <div class="t-output" id="tOut1" style="opacity:0">
+            {<br>
+            &nbsp;&nbsp;<span class="t-accent">"email"</span>: <span style="color:var(--c-fond)">"stefano.comida@protonmail.com"</span>,<br>
+            &nbsp;&nbsp;<span class="t-accent">"pgp"</span>: <span style="color:var(--c-blue)">"available on request"</span>,<br>
+            &nbsp;&nbsp;<span class="t-accent">"response_time"</span>: <span style="color:var(--c-storia)">"best effort"</span><br>
+            }
+          </div>
+          <div style="margin-top:0.5rem">
+            <span class="t-prompt">stewe@pasta-cod3:~$</span>
+            <span id="tCursorLine"><span class="t-cursor" aria-hidden="true"></span></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="static-subtitle">
+        Per domande, segnalazioni di errori, collaborazioni — o solo per parlare di sicurezza informatica.
+      </p>
     </div>
   </div>
 
-  <div class="static-content contact-content">
+  <div class="static-content">
 
-    <!-- EMAIL PRINCIPALE -->
-    <div class="contact-main-block">
-      <div class="contact-label-top">EMAIL</div>
-      <a href="mailto:stefano.comida@protonmail.com" class="contact-email-big">
-        stefano.comida@protonmail.com
-      </a>
-      <div class="contact-note">Rispondo entro 24-48 ore. In italiano o inglese.</div>
+    <!-- ── BLOCK 01: EMAIL ──────────────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">01 /</div>
+      <div class="about-block-body">
+        <h2>Email</h2>
+        <p>
+          Il modo più diretto per contattarmi. Uso ProtonMail — end-to-end encrypted by default.
+          Se hai bisogno di massima riservatezza puoi richiedere la mia chiave PGP.
+        </p>
+
+        <!-- Card email -->
+        <div class="terminal-box" style="margin-top:1.25rem">
+          <div class="terminal-bar">
+            <span class="t-dot red"    aria-hidden="true"></span>
+            <span class="t-dot yellow" aria-hidden="true"></span>
+            <span class="t-dot green"  aria-hidden="true"></span>
+            <span class="terminal-title">send_message</span>
+          </div>
+          <div class="terminal-body">
+            <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+              <span class="t-accent" style="font-size:1.15rem">✉</span>
+              <a href="mailto:stefano.comida@protonmail.com"
+                 style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:0.95rem;word-break:break-all;text-decoration:none;border-bottom:1px solid color-mix(in srgb, var(--accent) 35%, transparent)">
+                stefano.comida@protonmail.com
+              </a>
+            </div>
+            <div style="margin-top:0.75rem;font-size:0.78rem;color:var(--txt-muted)">
+              <span class="t-accent">#</span> ProtonMail — E2EE · PGP on request
+            </div>
+          </div>
+        </div>
+
+        <a href="mailto:stefano.comida@protonmail.com"
+           class="btn-primary"
+           style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.5rem">
+          ✉ Scrivi una mail
+        </a>
+      </div>
     </div>
 
-    <div class="about-divider"></div>
+    <hr class="about-divider">
 
-    <!-- MOTIVI PER SCRIVERE -->
-    <div class="contact-reasons">
-      <div class="about-block-num">Posso aiutarti con —</div>
-      <div class="contact-reason-grid">
-        <div class="contact-reason">
-          <div class="cr-icon t-accent">⊛</div>
-          <div class="cr-title">Segnalazioni</div>
-          <div class="cr-desc">Hai trovato un errore tecnico in un articolo, un link rotto, o un'imprecisione? Segnalalo — il blog migliora grazie alle correzioni.</div>
-        </div>
-        <div class="contact-reason">
-          <div class="cr-icon t-blue">⊛</div>
-          <div class="cr-title">Domande tecniche</div>
-          <div class="cr-desc">Stai studiando per una certificazione o hai dubbi su un argomento trattato nel blog? Scrivi, rispondo nei limiti del possibile.</div>
-        </div>
-        <div class="contact-reason">
-          <div class="cr-icon t-fond">⊛</div>
-          <div class="cr-title">Collaborazioni</div>
-          <div class="cr-desc">Vuoi contribuire con un articolo, proporre un argomento, o fare una review? Il blog è aperto a collaborazioni con chi condivide l'approccio.</div>
-        </div>
-        <div class="contact-reason">
-          <div class="cr-icon t-news">⊛</div>
-          <div class="cr-title">Notizie e CVE</div>
-          <div class="cr-desc">Sei un ricercatore di sicurezza con una scoperta interessante da condividere? O vuoi segnalare un'analisi di un breach recente? Scrivimi.</div>
+    <!-- ── BLOCK 02: CANALI SOCIAL ──────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">02 /</div>
+      <div class="about-block-body">
+        <h2>Canali pubblici</h2>
+        <p>
+          Puoi seguirmi su GitHub e Instagram per aggiornamenti sui post, tool e lab.
+          Niente spam, solo roba che vale la pena leggere.
+        </p>
+
+        <div class="about-stack" style="margin-top:1rem">
+          <div class="stack-item">
+            <span class="stack-label">GitHub</span>
+            <a href="https://github.com/pasta-cod3"
+               target="_blank" rel="noopener noreferrer"
+               style="color:var(--accent)">
+              github.com/pasta-cod3
+            </a>
+          </div>
+          <div class="stack-item">
+            <span class="stack-label">Instagram</span>
+            <a href="https://www.instagram.com/stewe_sec"
+               target="_blank" rel="noopener noreferrer"
+               style="color:var(--accent)">
+              @stewe_sec
+            </a>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+               TELEGRAM — DA AGGIUNGERE IN FUTURO
+               ══════════════════════════════════════════════
+               Quando hai un canale o username Telegram, togli
+               il commento e sostituisci YOUR_HANDLE con il tuo.
+
+          <div class="stack-item">
+            <span class="stack-label">Telegram</span>
+            <a href="https://t.me/YOUR_HANDLE"
+               target="_blank" rel="noopener noreferrer"
+               style="color:var(--accent)">
+              t.me/YOUR_HANDLE
+            </a>
+          </div>
+
+               Se vuoi aggiungere anche un badge:
+
+          <div class="cert-badge wip" role="listitem"
+               style="cursor:pointer" onclick="window.open('https://t.me/YOUR_HANDLE','_blank')">
+            <span class="cert-icon">✈</span>
+            <div>
+              <div>Telegram</div>
+              <div class="cert-status">@YOUR_HANDLE</div>
+            </div>
+          </div>
+          ══════════════════════════════════════════════ -->
         </div>
       </div>
     </div>
 
-    <div class="about-divider"></div>
+    <hr class="about-divider">
 
-    <!-- NOTA OPSEC -->
-    <div class="contact-opsec">
-      <div class="opsec-icon">🔒</div>
-      <div class="opsec-body">
-        <div class="opsec-title">Comunicazioni sensibili</div>
-        <div class="opsec-text">
-          Se devi inviare informazioni sensibili — vulnerability disclosure, dati personali, comunicazioni riservate — usa <strong>Proton Mail</strong> per la cifratura end-to-end automatica. L'indirizzo <code>stefano.comida@protonmail.com</code> supporta la cifratura nativa su Proton-to-Proton e PGP per tutti gli altri client.
+    <!-- ── BLOCK 03: COSA SCRIVERMI ─────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">03 /</div>
+      <div class="about-block-body">
+        <h2>Di cosa posso scrivere</h2>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon t-fond">▸</div>
+            <div>
+              <div class="about-feature-title">Errori e imprecisioni</div>
+              <div class="about-feature-desc">Se trovi qualcosa di sbagliato in un articolo, segnalalo. Preferisco essere corretto che sembrare sicuro.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-blue">▸</div>
+            <div>
+              <div class="about-feature-title">Domande tecniche</div>
+              <div class="about-feature-desc">Se un argomento non è chiaro o vuoi approfondire qualcosa non ancora coperto dal blog.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-red">▸</div>
+            <div>
+              <div class="about-feature-title">Proposte di articoli</div>
+              <div class="about-feature-desc">Hai un argomento che vorresti vedere trattato? Scrivimi — ogni suggerimento entra nella lista.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-news">▸</div>
+            <div>
+              <div class="about-feature-title">Altro</div>
+              <div class="about-feature-desc">Collaborazioni, feedback generici, o solo per dire ciao. Rispondo a tutto, anche se non subito.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manifesto compatto -->
+        <div class="terminal-box" style="margin-top:2rem">
+          <div class="terminal-bar">
+            <span class="t-dot red"    aria-hidden="true"></span>
+            <span class="t-dot yellow" aria-hidden="true"></span>
+            <span class="t-dot green"  aria-hidden="true"></span>
+            <span class="terminal-title">nota bene</span>
+          </div>
+          <div class="terminal-body" style="font-size:0.82rem;line-height:1.8">
+            <div><span class="t-accent">#</span> <span class="t-output">Non fornisco supporto per attività illegali.</span></div>
+            <div><span class="t-accent">#</span> <span class="t-output">Non rispondo a richieste di exploit per sistemi non autorizzati.</span></div>
+            <div style="margin-top:0.5rem"><span class="t-accent">#</span> <span class="t-output" style="color:var(--c-fond)">Ethical mindset only — sempre.</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
+    <!-- ── CTA ──────────────────────────────────────── -->
+    <div class="about-cta">
+      <p class="about-cta-text">Vuoi sapere chi c'è dietro il blog?</p>
+      <a href="about.html" class="btn-primary">Chi sono →</a>
+      &nbsp;
+      <a href="index.html" class="btn-ghost">← Torna agli articoli</a>
+    </div>
+
+  </div><!-- /static-content -->
 </main>
 
+<!-- ── FOOTER ─────────────────────────────────────── -->
 <footer class="site-footer">
   <div class="f-left">
     <div class="f-logo">pasta<em>-</em>cod3</div>
     <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
   </div>
-  <div class="f-nav">
+  <nav class="f-nav" aria-label="Footer navigation">
     <a href="index.html">Home</a>
     <a href="about.html">Chi sono</a>
     <a href="contatti.html">Contatti</a>
-  </div>
-  <div class="f-status"><div class="dot"></div>SISTEMA ONLINE</div>
+  </nav>
+  <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
 </footer>
+
+<!-- TERMINAL TYPING ANIMATION -->
+<script>
+(function(){
+  function delay(ms){ return new Promise(r => setTimeout(r, ms)); }
+  async function run(){
+    await delay(700);
+    var o1 = document.getElementById('tOut1');
+    if(o1){ o1.style.transition='opacity 0.5s'; o1.style.opacity='1'; }
+  }
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', run)
+    : run();
+})();
+</script>
 
 <script src="js/static-pages.js"></script>
 </body>
