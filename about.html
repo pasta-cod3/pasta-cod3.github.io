@@ -8,6 +8,428 @@
   <!-- ── SEO ──────────────────────────────────────────────── -->
   <title>Chi sono — stewe | pasta-cod3 Cybersecurity Blog</title>
   <meta name="description" content="Sono stewe, appassionato di cybersecurity. Penetration tester in formazione, eJPTv2 certificato, blogger su pasta-cod3.github.io.">
+  <meta name="keywords" content="pasta-cod3, blog cybersecurity, cybersecurity italia, sicurezza informatica, chi sono, stewe, eJPTv2, penetration tester">
+  <meta name="author" content="stewe — pasta-cod3">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pasta-cod3.github.io/about.html">
+
+  <!-- ── FAVICON ──────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico">
+
+  <!-- OG -->
+  <meta property="og:type"        content="profile">
+  <meta property="og:title"       content="Chi sono — stewe | pasta-cod3">
+  <meta property="og:description" content="Penetration tester in formazione, eJPTv2 certificato, blogger di cybersecurity in italiano.">
+  <meta property="og:url"         content="https://pasta-cod3.github.io/about.html">
+
+  <!-- ── PERF ─────────────────────────────────────────────── -->
+  <!-- Fonts: non-blocking load, varianti ridotte da 13 a 7 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="css/style.css" fetchpriority="high">
+
+  <script>
+    (function(){ var t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+  </script>
+
+  <!-- SCHEMA.ORG PERSON -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "stewe",
+    "alternateName": ["stewe.sec", "pasta-cod3"],
+    "description": "Appassionato di cybersecurity, penetration tester in formazione. Autore del blog pasta-cod3.github.io.",
+    "url": "https://pasta-cod3.github.io/about.html",
+    "sameAs": [
+      "https://github.com/pasta-cod3",
+      "https://www.instagram.com/stewe.sec"
+    ],
+    "knowsAbout": ["Cybersecurity","Penetration Testing","Red Team","Blue Team","OSINT","Ethical Hacking"]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ── CANVAS ─────────────────────────────────────────── -->
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+
+<!-- ── NAV ───────────────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
+  <a href="index.html"    class="nav-drawer-link">Home</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="red-team">Red Team</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="storia">Storia</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="fondamentali">Fondamentali</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="notizie">Notizie</a>
+  <a href="about.html"    class="nav-drawer-link active">Chi sono</a>
+  <a href="contatti.html" class="nav-drawer-link">Contatti</a>
+</nav>
+
+<!-- ── HEADER ────────────────────────────────────────── -->
+<header class="site-header">
+  <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+  <nav class="nav-center" aria-label="Navigazione principale">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html" data-cat="red-team">Red Team</a></li>
+      <li><a href="index.html" data-cat="blue-team">Blue Team</a></li>
+      <li><a href="index.html" data-cat="storia">Storia</a></li>
+      <li><a href="index.html" data-cat="fondamentali">Fondamentali</a></li>
+      <li><a href="index.html" data-cat="notizie">Notizie</a></li>
+      <li><a href="about.html" class="active">Chi sono</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════════════════ -->
+<main class="static-main">
+
+  <!-- ── HERO ───────────────────────────────────────── -->
+  <div class="static-hero" style="position:relative;overflow:hidden;">
+    <div class="scan-line" aria-hidden="true"></div>
+    <div class="static-hero-inner">
+      <p class="eyebrow">00 / Chi sono</p>
+
+      <!-- Terminal box -->
+      <div class="terminal-box" id="terminalBox" aria-label="Terminal output">
+        <div class="terminal-bar">
+          <span class="t-dot red"   aria-hidden="true"></span>
+          <span class="t-dot yellow" aria-hidden="true"></span>
+          <span class="t-dot green"  aria-hidden="true"></span>
+          <span class="terminal-title">bash — stewe@pasta-cod3:~</span>
+        </div>
+        <div class="terminal-body" id="terminalBody" aria-live="polite">
+          <div>
+            <span class="t-prompt">stewe@pasta-cod3:~$</span>
+            <span class="t-cmd"> whoami</span>
+          </div>
+          <div class="t-output" id="tOut1" style="opacity:0">stewe — cybersecurity enthusiast, autodidatta, blogger</div>
+          <div style="margin-top:0.5rem">
+            <span class="t-prompt">stewe@pasta-cod3:~$</span>
+            <span class="t-cmd"> cat /etc/certifications</span>
+          </div>
+          <div class="t-output" id="tOut2" style="opacity:0">
+            <span class="t-accent">[✓]</span> eJPTv2 — INE Security (certified)<br>
+            <span style="color:var(--c-storia)">[→]</span> eWPTv2 — in progress<br>
+            <span class="t-output">[◌]</span> OSCP  — target
+          </div>
+          <div style="margin-top:0.5rem">
+            <span class="t-prompt">stewe@pasta-cod3:~$</span>
+            <span class="t-cmd"> echo $MINDSET</span>
+          </div>
+          <div class="t-output" id="tOut3" style="opacity:0"><span class="t-accent">Ethical mindset only. Built for learning. Built for defense.</span></div>
+          <div style="margin-top:0.5rem">
+            <span class="t-prompt">stewe@pasta-cod3:~$</span>
+            <span id="tCursorLine"><span class="t-cursor" aria-hidden="true"></span></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="static-subtitle">
+        Blog di cybersecurity in italiano — offensive, defensive, storia, fondamentali.<br>
+        Scritto come vorresti che qualcuno te lo avesse spiegato quando hai iniziato.
+      </p>
+    </div>
+  </div>
+
+  <div class="static-content">
+
+    <!-- ── BLOCK 01: IL PROGETTO ────────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">01 /</div>
+      <div class="about-block-body">
+        <h2>Il progetto</h2>
+        <p>
+          <strong>pasta-cod3</strong> nasce da un'osservazione semplice: la maggior parte delle risorse
+          di qualità sulla cybersecurity è in inglese, e chi inizia in Italia fatica a trovare materiale
+          che sia allo stesso tempo <em>accurato</em>, <em>pratico</em> e <em>in italiano</em>.
+        </p>
+        <p>
+          Questo blog non è un tutorial per principianti assoluti, né un paper accademico.
+          È il posto dove trovi articoli lunghi e dettagliati, con contesto storico e tecnico —
+          scritti come vorresti che qualcuno te li avesse spiegati all'inizio.
+        </p>
+        <p>
+          Le categorie riflettono come penso al settore:
+          <strong class="t-red">Red Team</strong> per l'offensiva,
+          <strong class="t-blue">Blue Team</strong> per la difesa,
+          <strong class="t-storia">Storia</strong> per capire da dove veniamo,
+          <strong class="t-fond">Fondamentali</strong> per le basi che non si danno mai per scontate,
+          <strong class="t-news">Notizie</strong> per restare aggiornati.
+        </p>
+      </div>
+    </div>
+
+    <hr class="about-divider">
+
+    <!-- ── BLOCK 02: CHI SONO ───────────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">02 /</div>
+      <div class="about-block-body">
+        <h2>Chi c'è dietro</h2>
+        <p>
+          Ciao. Sono <strong style="color:var(--accent)">stewe</strong>,
+          appassionato di cybersecurity autodidatta.
+          Ho iniziato tra CTF, lab su TryHackMe e HackTheBox, e tanto studio.
+          Non scrivo per sembrare esperto — scrivo per capire meglio le cose che studio.
+        </p>
+
+        <!-- CERT BADGES -->
+        <div class="cert-grid" role="list" aria-label="Certificazioni">
+          <div class="cert-badge done" role="listitem">
+            <span class="cert-icon">🛡</span>
+            <div>
+              <div>eJPTv2</div>
+              <div class="cert-status">✓ CERTIFICATO</div>
+            </div>
+          </div>
+          <div class="cert-badge wip" role="listitem">
+            <span class="cert-icon">⚡</span>
+            <div>
+              <div>eWPTv2</div>
+              <div class="cert-status">→ IN CORSO</div>
+            </div>
+          </div>
+          <div class="cert-badge next" role="listitem">
+            <span class="cert-icon">🎯</span>
+            <div>
+              <div>OSCP</div>
+              <div class="cert-status">◌ TARGET</div>
+            </div>
+          </div>
+        </div>
+
+        <h2 style="margin-top:1.5rem">// background</h2>
+        <p>
+          Percorso autodidatta: INE Security (eJPTv2), TryHackMe, HackTheBox.
+          Handle pubblico <strong style="color:var(--accent)">stewe.sec</strong>
+          su Instagram e GitHub.
+        </p>
+
+        <h2>// disclaimer</h2>
+        <p>
+          Tutti i contenuti hanno scopo puramente educativo. Le tecniche descritte
+          sono per ambienti controllati, test autorizzati o studio accademico.
+          Non mi assumo responsabilità per usi impropri delle informazioni presenti nel blog.
+        </p>
+      </div>
+    </div>
+
+    <hr class="about-divider">
+
+    <!-- ── BLOCK 03: CONTENUTI ──────────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">03 /</div>
+      <div class="about-block-body">
+        <h2>Cosa trovi qui</h2>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon t-red">▸</div>
+            <div>
+              <div class="about-feature-title">Red Team</div>
+              <div class="about-feature-desc">Reconnaissance, exploitation, privilege escalation, post-exploitation. Metodologie pratiche di penetration testing con contesto reale e tool veri.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-blue">▸</div>
+            <div>
+              <div class="about-feature-title">Blue Team</div>
+              <div class="about-feature-desc">SIEM, incident response, threat hunting, hardening. Come difendere sistemi nel mondo reale — non nei laboratori ideali dei vendor.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-storia">▸</div>
+            <div>
+              <div class="about-feature-title">Storia</div>
+              <div class="about-feature-desc">Da Morris Worm a Snowden, da Stuxnet a Lapsus$. I casi che hanno cambiato il settore — raccontati con dettagli tecnici, non solo titoli.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-fond">▸</div>
+            <div>
+              <div class="about-feature-title">Fondamentali</div>
+              <div class="about-feature-desc">TCP/IP, crittografia, DNS, PKI, modello OSI, autenticazione. Le basi che stanno sotto tutto il resto — spiegate bene, con diagrammi.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon t-news">▸</div>
+            <div>
+              <div class="about-feature-title">Notizie</div>
+              <div class="about-feature-desc">Breach recenti, nuove CVE, campagne APT, ransomware, policy cyber. Il settore si muove veloce — qui per tenersi aggiornati in italiano.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="about-divider">
+
+    <!-- ── BLOCK 04: STACK ──────────────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">04 /</div>
+      <div class="about-block-body">
+        <h2>Strumenti</h2>
+        <div class="about-stack">
+          <div class="stack-item">
+            <span class="stack-label">Pentest</span>
+            Metasploit · Nmap · Burp Suite · Wireshark · Gobuster · dirsearch
+          </div>
+          <div class="stack-item">
+            <span class="stack-label">Post-expl</span>
+            Hashcat · John the Ripper · chisel · ligolo-ng · proxychains
+          </div>
+          <div class="stack-item">
+            <span class="stack-label">Training</span>
+            INE Security · TryHackMe · HackTheBox · PentesterLab
+          </div>
+        </div>
+
+        <h2 style="margin-top:1.75rem">// tool familiarity</h2>
+        <div class="tools-grid" role="list">
+          <span class="tool-badge hl" role="listitem">nmap</span>
+          <span class="tool-badge hl" role="listitem">metasploit</span>
+          <span class="tool-badge hl" role="listitem">burp suite</span>
+          <span class="tool-badge"   role="listitem">wireshark</span>
+          <span class="tool-badge"   role="listitem">john</span>
+          <span class="tool-badge"   role="listitem">hashcat</span>
+          <span class="tool-badge"   role="listitem">sqlmap</span>
+          <span class="tool-badge"   role="listitem">hydra</span>
+          <span class="tool-badge"   role="listitem">gobuster</span>
+          <span class="tool-badge"   role="listitem">enum4linux</span>
+          <span class="tool-badge"   role="listitem">netcat</span>
+          <span class="tool-badge"   role="listitem">chisel</span>
+          <span class="tool-badge"   role="listitem">ligolo-ng</span>
+          <span class="tool-badge"   role="listitem">ffuf</span>
+          <span class="tool-badge"   role="listitem">crackmapexec</span>
+          <span class="tool-badge"   role="listitem">evil-winrm</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="about-divider">
+
+    <!-- ── BLOCK 05: FILOSOFIA ──────────────────────── -->
+    <div class="about-block">
+      <div class="about-block-num">05 /</div>
+      <div class="about-block-body">
+        <h2>Filosofia</h2>
+        <p>
+          <em>Capire le vulnerabilità per proteggere, non per danneggiare.</em>
+          Ogni articolo è scritto per essere tecnico ma chiaro, diretto e pratico,
+          basato su esempi concreti e tool reali.
+        </p>
+        <p>
+          Il campo della sicurezza informatica cambia ogni giorno. L'unico modo
+          per restare rilevanti è studiare continuamente — e documentare quello
+          che si impara. È esattamente quello che fa questo blog.
+        </p>
+
+        <!-- MANIFESTO -->
+        <div class="terminal-box" style="margin-top:1.5rem">
+          <div class="terminal-bar">
+            <span class="t-dot red" aria-hidden="true"></span>
+            <span class="t-dot yellow" aria-hidden="true"></span>
+            <span class="t-dot green" aria-hidden="true"></span>
+            <span class="terminal-title">pasta-cod3 — manifesto</span>
+          </div>
+          <div class="terminal-body" style="line-height:1.9;font-size:12.5px">
+            <div><span class="t-accent">#</span> <span class="t-output">Hacking Based · Ethical Mindset · Defensive First</span></div>
+            <div style="margin-top:0.5rem">
+              <span class="t-prompt">$</span>
+              <span class="t-cmd"> cat manifesto.txt</span>
+            </div>
+            <div class="t-output" style="margin-top:0.25rem">
+              → Studia l'attacco per capire la difesa.<br>
+              → Condividi la conoscenza, non le exploit senza contesto.<br>
+              → L'etica non è un ostacolo — è il fondamento.<br>
+              → <span class="t-accent">Built for learning. Built for defense. Built for growth.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CTA ──────────────────────────────────────── -->
+    <div class="about-cta">
+      <p class="about-cta-text">Hai domande, vuoi segnalare un errore, o semplicemente vuoi scrivere?</p>
+      <a href="contatti.html" class="btn-primary">Scrivimi →</a>
+      &nbsp;
+      <a href="index.html" class="btn-ghost">← Torna agli articoli</a>
+    </div>
+
+  </div><!-- /static-content -->
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+  </div>
+  <nav class="f-nav" aria-label="Footer navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">Chi sono</a>
+    <a href="contatti.html">Contatti</a>
+  </nav>
+  <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
+</footer>
+
+<!-- TERMINAL TYPING ANIMATION -->
+<script>
+(function(){
+  function delay(ms){ return new Promise(r => setTimeout(r, ms)); }
+  async function run(){
+    await delay(600);
+    var o1 = document.getElementById('tOut1');
+    if(o1){ o1.style.opacity = '1'; o1.style.transition='opacity 0.4s'; }
+    await delay(700);
+    var o2 = document.getElementById('tOut2');
+    if(o2){ o2.style.opacity = '1'; o2.style.transition='opacity 0.4s'; }
+    await delay(700);
+    var o3 = document.getElementById('tOut3');
+    if(o3){ o3.style.opacity = '1'; o3.style.transition='opacity 0.4s'; }
+  }
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', run)
+    : run();
+})();
+</script>
+
+<script src="js/static-pages.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#020c18">
+
+  <!-- ── SEO ──────────────────────────────────────────────── -->
+  <title>Chi sono — stewe | pasta-cod3 Cybersecurity Blog</title>
+  <meta name="description" content="Sono stewe, appassionato di cybersecurity. Penetration tester in formazione, eJPTv2 certificato, blogger su pasta-cod3.github.io.">
   <meta name="author" content="stewe — pasta-cod3">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://pasta-cod3.github.io/about.html">
