@@ -13,6 +13,13 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://pasta-cod3.github.io/">
 
+  <!-- ── FAVICON ──────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico">
+
   <!-- ── OPEN GRAPH ───────────────────────────────────────── -->
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="pasta-cod3 — Cybersecurity Blog in Italiano">
@@ -56,24 +63,52 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "pasta-cod3",
-    "description": "Blog di cybersecurity in italiano — penetration testing, red team, blue team, storia dell'hacking e fondamentali di sicurezza informatica.",
-    "url": "https://pasta-cod3.github.io/",
-    "inLanguage": "it-IT",
-    "author": {
-      "@type": "Person",
-      "name": "stewe",
-      "alternateName": "stewe_sec",
-      "sameAs": [
-        "https://github.com/pasta-cod3",
-        "https://www.instagram.com/stewe_sec"
-      ]
-    },
-    "about": {
-      "@type": "Thing",
-      "name": "Cybersecurity"
-    }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://pasta-cod3.github.io/#website",
+        "name": "pasta-cod3",
+        "alternateName": ["pasta-cod3 blog", "pasta cod3 cybersecurity"],
+        "url": "https://pasta-cod3.github.io/",
+        "description": "Blog di cybersecurity in italiano — penetration testing, red team, blue team, storia dell'hacking e fondamentali di sicurezza informatica.",
+        "inLanguage": "it-IT",
+        "publisher": { "@id": "https://pasta-cod3.github.io/#person" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pasta-cod3.github.io/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Blog",
+        "@id": "https://pasta-cod3.github.io/#blog",
+        "name": "pasta-cod3",
+        "description": "Blog di cybersecurity in italiano — penetration testing, red team, blue team, storia dell'hacking e fondamentali di sicurezza informatica.",
+        "url": "https://pasta-cod3.github.io/",
+        "inLanguage": "it-IT",
+        "isPartOf": { "@id": "https://pasta-cod3.github.io/#website" },
+        "author": { "@id": "https://pasta-cod3.github.io/#person" },
+        "about": [
+          { "@type": "Thing", "name": "Cybersecurity" },
+          { "@type": "Thing", "name": "Sicurezza informatica" },
+          { "@type": "Thing", "name": "Penetration testing" }
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://pasta-cod3.github.io/#person",
+        "name": "stewe",
+        "alternateName": "stewe_sec",
+        "url": "https://pasta-cod3.github.io/about.html",
+        "sameAs": [
+          "https://github.com/pasta-cod3",
+          "https://www.instagram.com/stewe_sec"
+        ]
+      }
+    ]
   }
   </script>
 </head>
