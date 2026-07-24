@@ -2151,40 +2151,20 @@ function initCatHandlers() {
       }
     });
   });
-  // Brick stat boxes — click fa cadere il mattone poi filtra
-  document.querySelectorAll('.brick-slot[data-cat]').forEach(slot => {
-    const face = slot.querySelector('.brick-face');
-    if (!face) return;
-
-    const doFall = () => {
-      if (face._falling) return;
-      face._falling = true;
-      const cat = slot.dataset.cat;
-
-      // scroll verso articoli a metà caduta
-      setTimeout(() => {
-        document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 150);
-
-      // applica filtro categoria
-      setCategory(cat);
-
-      // anima il mattone
-      face.classList.add('falling');
-      face.addEventListener('animationend', () => {
-        slot.classList.add('fallen');
-        // reset dopo 2s: il mattone torna al suo posto
-        setTimeout(() => {
-          slot.classList.remove('fallen');
-          face.classList.remove('falling');
-          face._falling = false;
-        }, 2000);
-      }, { once: true });
-    };
-
-    face.addEventListener('click', doFall);
-    face.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doFall(); }
+  // Stat boxes — filtra e scrolla agli articoli
+  document.querySelectorAll('.stat-box[data-cat]').forEach(box => {
+    box.addEventListener('click', () => {
+      setCategory(box.dataset.cat);
+      const el = document.getElementById('articles');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    box.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setCategory(box.dataset.cat);
+        const el = document.getElementById('articles');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
   // Nav links
