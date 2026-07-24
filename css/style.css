@@ -304,7 +304,7 @@ body {
   pointer-events: none; filter: blur(30px);
 }
 .hero-left { flex: 1; min-width: 0; }
-.hero-right { flex: 0 0 300px; }
+.hero-right { flex: 0 0 300px; overflow: visible; padding-bottom: 40px; }
 
 .eyebrow {
   font-family: var(--ff-m); font-size: 10.5px;
@@ -380,22 +380,17 @@ body {
   display: flex;
   gap: 10px;
   height: 175px;
-  /* padding bottom per dare respiro alla proiezione diagonale */
-  padding: 6px 6px 42px 6px;
+  overflow: visible; /* permette ai mattoni di sforare con l'offset 3D */
 }
 
-/* ── SLOT: il buco nella parete sempre presente ─────────── */
+/* ── SLOT: invisibile a riposo, buco SOLO dopo .fallen ──── */
 .brick-slot {
   flex: 1;
   border-radius: 10px;
-  background: #01080f;
-  box-shadow:
-    inset 4px 4px 16px rgba(0,0,0,0.98),
-    inset 0 0 20px rgba(0,0,0,0.7),
-    inset 0 0 0 1px color-mix(in srgb,var(--c) 10%,transparent);
+  background: transparent; /* invisibile: il mattone copre tutto */
   position: relative;
   overflow: visible;
-  transition: box-shadow .5s ease;
+  transition: background .35s ease, box-shadow .5s ease;
 }
 
 /* ── BRICK FACE: il mattone che sporge ──────────────────── */
@@ -513,13 +508,15 @@ body {
     0 60px 60px color-mix(in srgb,var(--c) 15%,transparent) !important;
 }
 
-/* buco esposto dopo la caduta */
+/* buco esposto dopo la caduta — ora si vede il vuoto */
 .brick-slot.fallen .brick-face { display: none; }
 .brick-slot.fallen {
+  background: #010810;
   box-shadow:
     inset 4px 4px 16px rgba(0,0,0,0.98),
-    inset 0 0 20px rgba(0,0,0,0.7),
-    0 0 16px color-mix(in srgb,var(--c) 25%,transparent);
+    inset 0 0 24px rgba(0,0,0,0.85),
+    inset 0 0 0 1px color-mix(in srgb,var(--c) 15%,transparent),
+    0 0 16px color-mix(in srgb,var(--c) 20%,transparent);
 }
 
 /* ── TESTI BRICK ─────────────────────────────────────────── */
