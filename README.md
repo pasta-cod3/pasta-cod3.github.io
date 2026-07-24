@@ -140,8 +140,6 @@ storia dell'hacking e fondamentali di sicurezza informatica.
 
 - [About](#about)
 - [Contenuti](#contenuti)
-- [Struttura del progetto](#struttura-del-progetto)
-- [Stack tecnico](#stack-tecnico)
 - [Come contribuire / segnalare errori](#come-contribuire--segnalare-errori)
 - [Aggiungere un articolo](#aggiungere-un-articolo-solo-per-il-maintainer)
 - [Roadmap](#roadmap)
@@ -184,41 +182,6 @@ Ogni articolo è filtrabile per categoria e tag direttamente dal sito, con ricer
 
 ---
 
-## Struttura del progetto
-
-```
-pasta-cod3.github.io/
-├── _config.yml          # Configurazione Jekyll
-├── _layouts/
-│   └── post.html        # Template per gli articoli in Markdown
-├── _posts/               # Articoli recenti, in formato Jekyll (YYYY-MM-DD-slug.md)
-├── posts/                # Articoli storici, HTML statico
-├── css/
-│   └── style.css        # Tema cyberpunk azure, dark/light mode
-├── js/
-│   ├── main.js          # Rendering articoli, filtri, ricerca, canvas animato
-│   └── static-pages.js  # Logica per pagine statiche (about, contatti)
-├── index.html            # Homepage
-├── about.html             # Chi sono
-├── contatti.html          # Contatti
-├── llms.txt               # Sintesi del sito per agenti AI (llmstxt.org)
-├── robots.txt
-├── sitemap.xml
-└── favicon.*              # Set completo di icone (SVG, PNG, ICO)
-```
-
----
-
-## Stack tecnico
-
-- **Jekyll** — generazione statica dei nuovi articoli via GitHub Pages, front matter YAML + Markdown/Kramdown
-- **HTML/CSS/JS puro** — nessun framework frontend; canvas animato custom per lo sfondo cyberpunk, tema dark/light persistente
-- **GitHub Pages** — hosting e deploy automatico ad ogni push su `main`
-- **SEO/AEO** — Schema.org (`WebSite`, `Blog`, `Person`), sitemap XML, `llms.txt` per l'indicizzazione da parte di agenti AI
-- **Design system** — palette cyberpunk azure (`#00c8ff`), font Orbitron / Inter / JetBrains Mono, categorie colore-codificate
-
----
-
 ## Come contribuire / segnalare errori
 
 Il progetto non accetta PR di contenuto (gli articoli riflettono lo studio e la voce dell'autore), ma segnalazioni e correzioni sono benvenute:
@@ -229,31 +192,10 @@ Il progetto non accetta PR di contenuto (gli articoli riflettono lo studio e la 
 
 ---
 
-## Aggiungere un articolo (solo per il maintainer)
-
-Nuovo contenuto → file Markdown in `_posts/` con nome `YYYY-MM-DD-slug.md`:
-
-```yaml
----
-layout: post
-title: "Titolo dell'articolo"
-date: 2026-07-24
-cat: red        # red | blue | storia | fond | news
-tags: [tag1, tag2]
-excerpt: "Breve descrizione, max ~180 caratteri."
----
-
-Contenuto in Markdown...
-```
-
-Push su `main` → Jekyll builda automaticamente → l'articolo compare in homepage, filtri e ricerca senza altre modifiche.
-
----
 
 ## Roadmap
 
 - [ ] Migrazione completa degli articoli storici da HTML statico a Jekyll/Markdown
-- [ ] Automazione generazione `sitemap.xml` in CI
 - [ ] Dominio personalizzato
 - [ ] RSS feed
 - [ ] Sezione write-up CTF dedicata
