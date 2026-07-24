@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="iris" cx="50%" cy="50%" r="60%">
+      <stop offset="0%"  stop-color="#ff3333"/>
+      <stop offset="55%" stop-color="#e60000"/>
+      <stop offset="100%" stop-color="#900000"/>
+    </radialGradient>
+  </defs>
+
+  <!-- sfondo pieno cerchio: niente angoli tagliati dal crop circolare -->
+  <circle cx="32" cy="32" r="32" fill="#050505"/>
+
+  <!-- forma occhio: vesica a punte marcate, tratto spesso per leggibilità a 16px -->
+  <path d="M 3 32
+           Q 32 4, 61 32
+           Q 32 60, 3 32 Z"
+        fill="#0a0a0a" stroke="#ff1a1a" stroke-width="3.5"/>
+
+  <!-- iride -->
+  <circle cx="32" cy="32" r="16" fill="url(#iris)"/>
+
+  <!-- pupilla a fessura verticale: sguardo predatorio, larga per contrasto a bassa risoluzione -->
+  <rect x="28.5" y="18" width="7" height="28" rx="3.5" fill="#050505"/>
+
+  <!-- riflesso puntiforme -->
+  <circle cx="26.5" cy="23" r="2.6" fill="#ffffff" opacity="0.9"/>
+</svg>
