@@ -141,7 +141,6 @@ storia dell'hacking e fondamentali di sicurezza informatica.
 - [About](#about)
 - [Contenuti](#contenuti)
 - [Come contribuire / segnalare errori](#come-contribuire--segnalare-errori)
-- [Aggiungere un articolo](#aggiungere-un-articolo-solo-per-il-maintainer)
 - [Roadmap](#roadmap)
 - [Filosofia](#filosofia)
 - [Contatti](#contatti)
@@ -186,9 +185,8 @@ Ogni articolo è filtrabile per categoria e tag direttamente dal sito, con ricer
 
 Il progetto non accetta PR di contenuto (gli articoli riflettono lo studio e la voce dell'autore), ma segnalazioni e correzioni sono benvenute:
 
-1. **Errori tecnici o refusi**: apri una [Issue](https://github.com/pasta-cod3/pasta-cod3.github.io/issues) descrivendo l'articolo e il punto impreciso
-2. **Bug del sito** (rendering, filtri, ricerca): apri una Issue con browser/dispositivo usato
-3. **Proposte di argomenti**: scrivi via [email](#contatti) — ogni suggerimento entra nella lista
+1. **Bug del sito** (rendering, filtri, ricerca): invia per [email](#contatti)  con browser/dispositivo usato e info 
+2. **Proposte di argomenti**: scrivi via [email](#contatti) — ogni suggerimento entra nella lista
 
 ---
 
