@@ -43,7 +43,7 @@
 
   <!-- Flash-prevention tema -->
   <script>
-    (function(){ var t=localStorage.getItem('theme'); if(t==='light') document.documentElement.classList.add('light'); })();
+    (function(){ var t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
   </script>
 </head>
 <body>

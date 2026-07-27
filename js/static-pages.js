@@ -146,11 +146,11 @@ function initTheme() {
   const btn = document.getElementById('themeToggle');
   if (!btn) return;
 
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light') document.documentElement.classList.add('light');
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
 
   function updateBtn() {
-    const isLight = document.documentElement.classList.contains('light');
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     btn.textContent = isLight ? '◑ DARK' : '◐ LIGHT';
     btn.setAttribute('aria-label', isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro');
   }
@@ -158,9 +158,10 @@ function initTheme() {
   updateBtn();
 
   btn.addEventListener('click', () => {
-    document.documentElement.classList.toggle('light');
-    const isLight = document.documentElement.classList.contains('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    const cur  = document.documentElement.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
     updateBtn();
   });
 }

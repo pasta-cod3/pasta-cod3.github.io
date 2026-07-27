@@ -121,7 +121,7 @@
     .highlight .mi, .highlight .mf { color: #ffaa20; }
   </style>
 
-  <script>(function(){var t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.add('light');})()</script>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
 </head>
 <body>
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
