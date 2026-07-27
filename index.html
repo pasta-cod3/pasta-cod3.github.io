@@ -350,10 +350,28 @@
       <span class="s-label" aria-hidden="true">02 /</span>
       <h2 class="s-title" id="articlesSectionTitle">Tutti gli articoli</h2>
     </div>
-    <button class="s-link" id="resetFilter" style="display:none" aria-label="Reset filtro">
-      × Reset filtro
-    </button>
+    <div class="hdr-right">
+      <button class="tag-panel-trigger" id="tagPanelTrigger" aria-expanded="false" aria-controls="tagPanel">
+        <svg class="tpt-icon" viewBox="0 0 16 12" fill="none" aria-hidden="true">
+          <line x1="0" y1="6" x2="4" y2="6" stroke="currentColor" stroke-width="1"/>
+          <rect x="4" y="1.5" width="8" height="9" rx="1" stroke="currentColor" stroke-width="1"/>
+          <rect x="6.5" y="3.5" width="4" height="1" rx="0.3" fill="currentColor"/>
+          <rect x="6.5" y="5.5" width="3" height="1" rx="0.3" fill="currentColor"/>
+          <rect x="6.5" y="7.5" width="4.5" height="1" rx="0.3" fill="currentColor"/>
+          <line x1="12" y1="6" x2="16" y2="6" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <span class="tpt-label">Argomenti</span>
+        <span class="tpt-count" id="tagPanelCount"></span>
+        <svg class="tpt-chevron" viewBox="0 0 9 6" fill="none" aria-hidden="true">
+          <path d="M1 1L4.5 5L8 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="s-link" id="resetFilter" style="display:none" aria-label="Reset filtro">× Reset</button>
+    </div>
   </div>
+
+  <!-- Tag panel (full-width, opens below header) -->
+  <div class="tag-panel" id="tagPanel" hidden role="region" aria-label="Filtra per tag"></div>
 
   <!-- Filter drawer button (mobile only) -->
   <button class="filter-drawer-btn" id="filterDrawerBtn" aria-expanded="false">
@@ -376,8 +394,8 @@
         </div>
       </div>
 
-      <div class="sidebar-section">
-        <div class="sidebar-section-title">Tag</div>
+      <!-- Tag ora nella tendina "◈ Tag" sopra gli articoli -->
+      <div class="sidebar-section" style="display:none">
         <div class="sidebar-tags" id="sidebarTags" role="group" aria-label="Filtra per tag"></div>
       </div>
 
@@ -391,6 +409,23 @@
         Nessun articolo trovato per questa ricerca.
       </div>
     </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════════════
+     INFINITE CAROUSELS
+══════════════════════════════════════════════════════ -->
+<section class="section" id="carousels" aria-labelledby="car-heading">
+  <div class="section-hdr">
+    <div class="hdr-left">
+      <span class="s-label" aria-hidden="true">03 /</span>
+      <h2 class="s-title" id="car-heading">Esplora per Categoria</h2>
+    </div>
+  </div>
+  <div class="inf-cars-wrap" id="infCarsWrap" aria-label="Carousel articoli per categoria">
+    <!-- generato da JS -->
   </div>
 </section>
 
