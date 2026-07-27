@@ -1858,12 +1858,56 @@ function render() {
     });
     card.style.cursor = 'pointer';
   });
+
+  // Entry animation via IntersectionObserver (evita lag su molte card)
+  let _entryN = 0;
+  const _entryObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      const idx  = _entryN++;
+      card.style.opacity = '';                              // rimuove hidden
+      card.style.animationDelay = idx < 7 ? `${idx * 0.075}s` : '0s';
+      card.classList.add('is-visible');
+      card.addEventListener('animationend', () => {
+        card.classList.remove('is-visible');
+        card.style.animationDelay = '';
+      }, { once: true });
+      _entryObs.unobserve(card);
+    });
+  }, { threshold: 0.04 });
+
+  list.querySelectorAll('.article-card').forEach(card => {
+    card.style.opacity = '0';                              // nasconde prima di osservare
+    _entryObs.observe(card);
+
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `translateY(-5px) perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 6}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
 }
 
 
 /* ──────────────────────────────────────────────────────────
-   ▶ COUNTS (stats + categories)
+   ▶ COUNTS (stats + categories) — con contatore animato
    ────────────────────────────────────────────────────────── */
+function animateCounter(el, to, duration) {
+  if (!el) return;
+  const start = performance.now();
+  const update = (now) => {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(ease * to);
+    if (t < 1) requestAnimationFrame(update);
+    else el.textContent = to;
+  };
+  requestAnimationFrame(update);
+}
+
 function updateCounts() {
   const counts = {};
   POSTS.forEach(p => { counts[p.cat] = (counts[p.cat]||0) + 1; });
@@ -1877,8 +1921,10 @@ function updateCounts() {
   };
   Object.entries(map).forEach(([cat,[statId,catId]]) => {
     const n = counts[cat]||0;
-    const se = document.getElementById(statId); if(se) se.textContent = n;
-    const ce = document.getElementById(catId);  if(ce) ce.textContent = n + ' articol' + (n===1?'o':'i');
+    const se = document.getElementById(statId);
+    if (se) animateCounter(se, n, 1100 + Math.random() * 400);
+    const ce = document.getElementById(catId);
+    if (ce) ce.textContent = n + ' articol' + (n===1?'o':'i');
   });
 }
 
@@ -1886,21 +1932,161 @@ function updateCounts() {
 /* ──────────────────────────────────────────────────────────
    ▶ TAGS
    ────────────────────────────────────────────────────────── */
-function buildTagsUI() {
-  const allTags = [...new Set(POSTS.flatMap(p=>p.tags||[]))].sort();
-  ['sidebarTags','filterSheetTags'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.innerHTML = allTags.map(t=>
-      `<span class="tag-chip${t===activeTag?' active':''}" data-tag="${t}">${t}</span>`
-    ).join('');
-    el.querySelectorAll('.tag-chip').forEach(chip => {
+/* ──────────────────────────────────────────────────────────
+   ▶ TAG PANEL — tendina raggruppata
+   ────────────────────────────────────────────────────────── */
+/* Icone SVG geometriche per i gruppi — 10×10 viewBox */
+const _SVG = {
+  offensiva: `<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5 L7 5 M5 3 L7 5 L5 7"/><path d="M2.5 3.5 L3.5 5 L2.5 6.5" stroke-width="0.7" opacity="0.55"/></svg>`,
+  difesa:    `<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M5 1 L9 3 L9 6.5 Q9 9 5 9 Q1 9 1 6.5 L1 3 Z"/><path d="M5 3 L7.5 4.2 L7.5 6.2 Q7.5 7.8 5 7.8 Q2.5 7.8 2.5 6.2 L2.5 4.2 Z" stroke-width="0.7" opacity="0.5"/></svg>`,
+  malware:   `<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M3 1.5 L7 1.5 L8.5 3 L8.5 7 L7 8.5 L3 8.5 L1.5 7 L1.5 3 Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg>`,
+  reti:      `<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M5 1 L8.5 3 L8.5 7 L5 9 L1.5 7 L1.5 3 Z"/><circle cx="5" cy="5" r="1.2" fill="currentColor" stroke="none"/><line x1="5" y1="3.8" x2="5" y2="1" stroke-width="0.7"/><line x1="5" y1="6.2" x2="5" y2="9" stroke-width="0.7"/></svg>`,
+  intel:     `<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><circle cx="4.2" cy="4.2" r="3"/><line x1="6.6" y1="6.6" x2="9" y2="9"/><circle cx="4.2" cy="4.2" r="0.8" fill="currentColor" stroke="none"/></svg>`,
+  cloud:     `<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><polyline points="1,3.5 3,5 1,6.5"/><line x1="5" y1="7" x2="9" y2="7"/><line x1="5" y1="5" x2="9" y2="5"/><line x1="5" y1="3" x2="8" y2="3"/></svg>`,
+  scenario:  `<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M5 1 L9 5 L5 9 L1 5 Z"/><line x1="5" y1="3" x2="5" y2="7" stroke-width="0.7" opacity="0.6"/><line x1="3" y1="5" x2="7" y2="5" stroke-width="0.7" opacity="0.6"/></svg>`,
+};
+
+const TAG_GROUPS = [
+  { key:'offensiva', label:'Offensiva',      color:'var(--c-red)',     svg:_SVG.offensiva },
+  { key:'difesa',    label:'Difesa',          color:'var(--c-fond)',    svg:_SVG.difesa    },
+  { key:'malware',   label:'Malware',         color:'#cc3355',          svg:_SVG.malware   },
+  { key:'reti',      label:'Reti & Cripto',   color:'var(--accent)',    svg:_SVG.reti      },
+  { key:'intel',     label:'Intelligence',    color:'var(--c-blue)',    svg:_SVG.intel     },
+  { key:'cloud',     label:'Dev & Cloud',     color:'var(--c-news)',    svg:_SVG.cloud     },
+  { key:'scenario',  label:'Scenario',        color:'var(--c-storia)',  svg:_SVG.scenario  },
+];
+
+function classifyTag(tag) {
+  const t = tag.toLowerCase();
+
+  /* Dev & Cloud — OS, ambienti, AI, strumenti dev */
+  if (/\baws\b|\bs3\b|ci\/cd|github.action|docker|container|cspm|sicurezza.cloud|cloud.sec|\bnpm\b|crates\.io|devsec|automazione|automation|vs\.code|\brust\b|sviluppatori|secrets\b|supply.chain|bitlocker|\bintune\b|\bgpo\b|group.policy|active.directory|\bai\b|llm\b|ai.sec|ai.agent|deepfake|voice.clon|\bphp\b|powershell|sysadmin|selinux|\blinux\b|\bwindows\b|\bcron\b|systemd|sicurezza.endpoint|endpoint.sec|email.sec/.test(t)) return 'cloud';
+
+  /* Intelligence — OSINT, recon, CTI, standard CTI, data exposure */
+  if (/\bosint\b|passive.reco|active.reco|port.scan|theharv|google.dork|google.alert|\bwhois\b|brand.monit|have.i.been|dark.web|threat.intel|\bcti\b|\bmisp\b|censys|shodan|\brecon\b|header.analys|credential.leak|dati.esposti|stix\b|taxii\b|initial.access.broker|\biab\b|sector16|data.transf/.test(t)) return 'intel';
+
+  /* Malware — famiglie, gruppi ransomware, attori, campagne */
+  if (/ransomware|malware|worm\b|backdoor|\bapt\b|infostealer|wiper|\bddos\b|botnet|\bc2\b|command.and.control|raas\b|stuxnet|wannacry|cryptolock|aids.trojan|blackcat|alphv|killnet|noname|lazarus|lapsus|hacktivi|lulzsec|anonymous|state.sponsor/.test(t)) return 'malware';
+
+  /* Offensiva — tecniche attacco, exploitation, strumenti offensivi */
+  if (/\bxss\b|cross.site.scr|sql.inject|sqli\b|\brce\b|\blfi\b|\brfi\b|buffer.overflow|exploit|payload|bypass|path.travers|reverse.shell|bind.shell|web.shell|file.upload|privilege.escal|lateral.mov|\bpivot|post.exploit|persist|pass.the.hash|kerberoast|as.rep|token.impers|red.team|pentest|penetration|ethical.hack|meterpreter|msfconsole|password.crack|wordlist|rockyou|\bhydra\b|aircrack|hashcat|phish|vishing|social.engin|ingegneria.soc|pretexting|spoofing|seo.poison|\bsuid\b|\bamsi\b|scoping|reverse.engin|exploit.in|zero.day\b|misconfigur|\bgdb\b|pwndbg|checksec|metasploit|burp.suite|cobalt.strike|proxychains|chisel\b|ligolo|sshuttle|sqlmap|\bnetcat\b|wireshark|impacket|bloodhound|tunneling\b|scanning\b|\bnmap\b|\bpmkid\b/.test(t)) return 'offensiva';
+
+  /* Difesa — blue team, SOC, detection, compliance, standard */
+  if (/\bsiem\b|\bsoc\b|\bedr\b|\bids\b|\bips\b|\bwaf\b|ngfw|firewall|antivirus|defender|detection|incident.resp|\bdfir\b|forensi|memory.forensi|autopsy|volatility|triage|containment|remediat|threat.hunt|behavioral|ioc\b|ttps|mitre.att|suricata|\bsnort\b|elastic\b|honeypot|deception|sandbox|canary|blue.team|hardening|apparmor|auditd|\bufw\b|sentinelone|crowdstrike|alert.fatig|fortinet|fortigate|event.id|event.log|\bpatch\b|segment|microseg|zero.trust|beyondcorp|\bnessus\b|openvas|\bbdr\b|backup|business.cont|recovery\b|\brpo\b|\brto\b|owasp|\bcve\b|cvss|\bnist\b|nis2\b|\bgdpr\b|cis\b|compliance|direttiva|honeytok|\bnids\b|3.2.1|3-2-1|playbook|picerl|architettura.sic|fondamentali|vulnerab|privacy\b|regole\b|difensivo|\bdpc\b/.test(t)) return 'difesa';
+
+  /* Reti & Cripto — protocolli, crittografia, identità, packet analysis */
+  if (/\btcp\b|\budp\b|\bhttp\b|\bhttps\b|\btls\b|\bssl\b|\bdns\b|\bdhcp\b|\bsmb\b|\bssh\b|\bftp\b|\bsmtp\b|\bldap\b|kerberos\b|oauth|\bjwt\b|\bicmp\b|\bvpn\b|\bbgp\b|\bvlan\b|\bdmz\b|sd.wan|modello.osi|osi.model|\bpcap\b|network.analys|packet|routing|network.sec|sicurezza.di.rete|\bwifi\b|wpa2|wireless|handshake|crittograf|\baes\b|\brsa\b|\bpgp\b|\bpki\b|x\.509|hash\b|hashing|bcrypt|pbkdf2|firma.digit|simmetri|asimmetri|autent|identit|\bmfa\b|fido2|passkey|\biam\b|certificat|anycast|\bdoh\b|dkim|dmarc|\bspf\b|cia.triad|integrità|disponibil|confidenzial|\blayer\b|protocolli|\brete\b|tcp.ip|stateful|\bresolver\b|\bzone\b|\bproxy\b/.test(t)) return 'reti';
+
+  /* Scenario — paesi, persone, eventi storici, settori, incidenti reali */
+  return 'scenario';
+}
+
+function buildTagPanel() {
+  const panel = document.getElementById('tagPanel');
+  if (!panel) return;
+
+  /* frequency map for sorting within groups */
+  const freq = {};
+  POSTS.forEach(p => (p.tags || []).forEach(t => { freq[t] = (freq[t] || 0) + 1; }));
+
+  const allTags = [...new Set(POSTS.flatMap(p => p.tags || []))];
+  const groups  = {};
+  TAG_GROUPS.forEach(g => { groups[g.key] = []; });
+  allTags.forEach(tag => { groups[classifyTag(tag)].push(tag); });
+  Object.values(groups).forEach(arr => arr.sort((a, b) => (freq[b] || 0) - (freq[a] || 0)));
+
+  const MAX_VISIBLE = 28;
+  let delay = 0;
+
+  const makeChip = t => {
+    const d = delay; delay += 0.018;
+    return `<span class="tag-chip${t === activeTag ? ' active' : ''}" data-tag="${t}" style="animation-delay:${d.toFixed(3)}s">${t}</span>`;
+  };
+
+  panel.innerHTML = TAG_GROUPS
+    .filter(g => groups[g.key].length > 0)
+    .map(g => {
+      const tags    = groups[g.key];
+      const visible = tags.slice(0, MAX_VISIBLE);
+      const hidden  = tags.slice(MAX_VISIBLE);
+      const more    = hidden.length > 0
+        ? `<div class="tag-group-chips tag-chips-hidden" hidden>${hidden.map(makeChip).join('')}</div>
+           <button class="tag-show-more" type="button" data-gkey="${g.key}">+ ${hidden.length} altri</button>`
+        : '';
+      return `<div class="tag-group">
+        <div class="tag-group-hdr" style="color:${g.color}">${g.svg} ${g.label}</div>
+        <div class="tag-group-chips">${visible.map(makeChip).join('')}</div>
+        ${more}
+      </div>`;
+    }).join('');
+
+  const attachChipListeners = chips => {
+    chips.forEach(chip => {
       chip.addEventListener('click', () => {
         const t = chip.dataset.tag;
         activeTag = activeTag === t ? '' : t;
         syncTagUI();
         render();
+        document.getElementById('articles')?.scrollIntoView({ behavior:'smooth', block:'start' });
       });
+    });
+  };
+  attachChipListeners(panel.querySelectorAll('.tag-chip'));
+
+  panel.querySelectorAll('.tag-show-more').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const hiddenBlock = btn.previousElementSibling;
+      hiddenBlock.removeAttribute('hidden');
+      attachChipListeners(hiddenBlock.querySelectorAll('.tag-chip'));
+      btn.remove();
+    });
+  });
+}
+
+function initTagPanel() {
+  const trigger = document.getElementById('tagPanelTrigger');
+  const panel   = document.getElementById('tagPanel');
+  if (!trigger || !panel) return;
+
+  /* aggiorna badge count */
+  const allTags = [...new Set(POSTS.flatMap(p => p.tags || []))];
+  const countEl = document.getElementById('tagPanelCount');
+  if (countEl) countEl.textContent = allTags.length;
+
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = trigger.getAttribute('aria-expanded') === 'true';
+    if (open) {
+      trigger.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+    } else {
+      trigger.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+      buildTagPanel();
+    }
+  });
+
+  document.addEventListener('click', e => {
+    if (!trigger.contains(e.target) && !panel.contains(e.target)) {
+      trigger.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+    }
+  });
+}
+
+function buildTagsUI() {
+  /* Mantiene il filter-sheet mobile; sidebar tags ora gestita dal panel */
+  const allTags = [...new Set(POSTS.flatMap(p=>p.tags||[]))].sort();
+  const el = document.getElementById('filterSheetTags');
+  if (!el) return;
+  el.innerHTML = allTags.map(t=>
+    `<span class="tag-chip${t===activeTag?' active':''}" data-tag="${t}">${t}</span>`
+  ).join('');
+  el.querySelectorAll('.tag-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const t = chip.dataset.tag;
+      activeTag = activeTag === t ? '' : t;
+      syncTagUI(); render();
     });
   });
 }
@@ -1909,8 +2095,388 @@ function syncTagUI() {
   document.querySelectorAll('.tag-chip').forEach(c => {
     c.classList.toggle('active', c.dataset.tag === activeTag);
   });
+  /* ricostruisce il panel se aperto per aggiornare lo stato attivo */
+  const panel = document.getElementById('tagPanel');
+  const trigger = document.getElementById('tagPanelTrigger');
+  if (panel && !panel.hidden && trigger?.getAttribute('aria-expanded') === 'true') {
+    buildTagPanel();
+  }
 }
 
+
+/* ──────────────────────────────────────────────────────────
+   ▶ 3D TILT — mouse tracking su stat-box e cat-card
+   ────────────────────────────────────────────────────────── */
+function init3DTilt() {
+  /* 3D tilt su stat-box e cat-card */
+  document.querySelectorAll('.stat-box, .cat-card').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      const maxTilt = el.classList.contains('stat-box') ? 14 : 10;
+      el.style.transform =
+        `perspective(500px) rotateY(${x * maxTilt}deg) rotateX(${-y * maxTilt}deg) translateZ(6px) translateY(-3px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+
+  /* Entry animation cat-cards (IntersectionObserver, staggered) */
+  let _catN = 0;
+  const catObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      card.style.opacity = '';
+      card.style.animationDelay = `${_catN++ * 0.09}s`;
+      card.classList.add('cat-visible');
+      card.addEventListener('animationend', () => {
+        card.classList.remove('cat-visible');
+        card.style.animationDelay = '';
+      }, { once: true });
+      catObs.unobserve(card);
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.cat-card').forEach(c => {
+    c.style.opacity = '0';
+    catObs.observe(c);
+  });
+
+  /* Entry animation sidebar-cat-btn (stagger slide-in da sinistra) */
+  let _btnN = 0;
+  const btnObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const btn = entry.target;
+      btn.style.opacity = '';
+      btn.style.animationDelay = `${_btnN++ * 0.06}s`;
+      btn.classList.add('btn-visible');
+      btn.addEventListener('animationend', () => {
+        btn.classList.remove('btn-visible');
+        btn.style.animationDelay = '';
+      }, { once: true });
+      btnObs.unobserve(btn);
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.sidebar-cat-btn').forEach(b => {
+    b.style.opacity = '0';
+    btnObs.observe(b);
+  });
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▶ HERO CIRCUIT SVG — circuiti + fulmini generativi
+   ────────────────────────────────────────────────────────── */
+function buildHeroSVG(acc, glow) {
+  const NS  = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 100 60');
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+  svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;';
+
+  const DASH = 180;
+  const els  = [];
+
+  function pt(d, w, del, dur, bright) {
+    const el = document.createElementNS(NS, 'path');
+    el.setAttribute('d', d); el.setAttribute('fill', 'none');
+    el.setAttribute('stroke', acc); el.setAttribute('stroke-width', w);
+    el.setAttribute('stroke-linecap', 'round'); el.setAttribute('stroke-linejoin', 'round');
+    el.style.strokeDasharray = DASH; el.style.strokeDashoffset = DASH;
+    el.style.animation = `circuit-draw ${dur}s ease-out ${del}s forwards`;
+    el.style.filter = bright
+      ? `drop-shadow(0 0 1.5px ${glow}) drop-shadow(0 0 4px ${glow})`
+      : `drop-shadow(0 0 0.6px ${glow})`;
+    els.push(el); return el;
+  }
+
+  function nd(cx, cy, del) {
+    const el = document.createElementNS(NS, 'circle');
+    el.setAttribute('cx', cx); el.setAttribute('cy', cy); el.setAttribute('r', '0.6');
+    el.setAttribute('fill', acc);
+    el.style.animation       = `node-pop 0.3s cubic-bezier(.36,.07,.19,.97) ${del}s both`;
+    el.style.transformBox    = 'fill-box';   /* scala dal proprio centro, non dall'origine SVG */
+    el.style.transformOrigin = 'center';
+    el.style.filter          = `drop-shadow(0 0 1px ${glow})`;
+    els.push(el); return el;
+  }
+
+  /* ── BORDO SUPERIORE → verso centro ── */
+  pt('M7,0 L7,7 L13,7 L13,14 L20,14',            '0.22', 0.20, 0.90, false);
+  pt('M13,7 L9,7',                                '0.18', 0.65, 0.28, false);
+  pt('M18,0 L18,5 L24,5 L24,11 L30,11',          '0.22', 0.24, 0.85, false);
+  pt('M24,5 L21,5',                               '0.18', 0.68, 0.24, false);
+  pt('M30,0 L30,7 L36,7 L36,13',                 '0.22', 0.22, 0.82, false);
+  pt('M40,0 L40,6 L46,6 L46,13 L40,13',          '0.22', 0.26, 0.88, false);
+  pt('M46,6 L43,6',                               '0.18', 0.70, 0.24, false);
+  pt('M50,0 L50,5 L44,5 L44,11',                 '0.22', 0.28, 0.80, false);
+  pt('M58,0 L58,6 L64,6 L64,12 L58,12',          '0.22', 0.23, 0.88, false);
+  pt('M64,6 L67,6',                               '0.18', 0.67, 0.24, false);
+  pt('M68,0 L68,5 L62,5 L62,11',                 '0.22', 0.27, 0.80, false);
+  pt('M76,0 L76,7 L70,7 L70,13 L64,13',          '0.22', 0.25, 0.85, false);
+  pt('M84,0 L84,6 L78,6 L78,12 L72,12',          '0.22', 0.22, 0.88, false);
+  pt('M78,6 L81,6',                               '0.18', 0.66, 0.24, false);
+  pt('M92,0 L92,7 L86,7 L86,14 L80,14 L80,20',   '0.22', 0.20, 0.95, false);
+  pt('M86,7 L89,7',                               '0.18', 0.64, 0.26, false);
+
+  /* ── BORDO INFERIORE → verso centro ── */
+  pt('M7,60 L7,53 L13,53 L13,46 L20,46',         '0.22', 0.22, 0.90, false);
+  pt('M13,53 L9,53',                              '0.18', 0.67, 0.28, false);
+  pt('M20,60 L20,55 L26,55 L26,49',              '0.22', 0.26, 0.82, false);
+  pt('M32,60 L32,54 L38,54 L38,48 L44,48',       '0.22', 0.24, 0.88, false);
+  pt('M38,54 L35,54',                             '0.18', 0.70, 0.24, false);
+  pt('M48,60 L48,54 L54,54 L54,48',              '0.22', 0.28, 0.80, false);
+  pt('M58,60 L58,53 L52,53 L52,47',              '0.22', 0.25, 0.84, false);
+  pt('M66,60 L66,54 L60,54 L60,48 L54,48',       '0.22', 0.23, 0.88, false);
+  pt('M60,54 L63,54',                             '0.18', 0.68, 0.24, false);
+  pt('M76,60 L76,54 L70,54 L70,48 L64,48',       '0.22', 0.25, 0.86, false);
+  pt('M84,60 L84,54 L78,54 L78,48 L72,48',       '0.22', 0.22, 0.88, false);
+  pt('M78,54 L81,54',                             '0.18', 0.66, 0.24, false);
+  pt('M92,60 L92,53 L86,53 L86,46 L80,46 L80,40','0.22', 0.21, 0.95, false);
+  pt('M86,53 L89,53',                             '0.18', 0.65, 0.26, false);
+
+  /* ── BORDO SINISTRO → verso centro ── */
+  pt('M0,7 L7,7 L7,13 L14,13 L14,20',            '0.22', 0.23, 0.88, false);
+  pt('M7,13 L7,17',                               '0.18', 0.67, 0.25, false);
+  pt('M0,16 L5,16 L5,22 L11,22',                 '0.22', 0.27, 0.80, false);
+  pt('M0,26 L8,26 L8,20 L15,20 L15,26',          '0.22', 0.25, 0.85, false);
+  pt('M0,34 L7,34 L7,28 L14,28 L14,34',          '0.22', 0.26, 0.84, false);
+  pt('M0,42 L6,42 L6,36 L13,36',                 '0.22', 0.28, 0.80, false);
+  pt('M0,50 L5,50 L5,44 L11,44 L11,40',          '0.22', 0.24, 0.86, false);
+
+  /* ── BORDO DESTRO → verso centro ── */
+  pt('M100,7 L93,7 L93,13 L86,13 L86,20',        '0.22', 0.23, 0.88, false);
+  pt('M93,13 L93,17',                             '0.18', 0.67, 0.25, false);
+  pt('M100,16 L95,16 L95,22 L89,22',             '0.22', 0.27, 0.80, false);
+  pt('M100,26 L92,26 L92,20 L85,20 L85,26',      '0.22', 0.25, 0.85, false);
+  pt('M100,34 L93,34 L93,28 L86,28 L86,34',      '0.22', 0.26, 0.84, false);
+  pt('M100,42 L94,42 L94,36 L87,36',             '0.22', 0.28, 0.80, false);
+  pt('M100,50 L95,50 L95,44 L89,44 L89,40',      '0.22', 0.24, 0.86, false);
+
+  /* ── FULMINI ANGOLI (dall'angolo verso dentro, luminosi) ── */
+  pt('M2,2 L8,10 L4,14 L11,21',                  '0.48', 0.55, 0.36, true);
+  pt('M98,2 L92,10 L96,14 L89,21',               '0.48', 0.58, 0.36, true);
+  pt('M2,58 L8,50 L4,46 L11,39',                 '0.46', 0.60, 0.34, true);
+  pt('M98,58 L92,50 L96,46 L89,39',              '0.46', 0.62, 0.34, true);
+  /* fulmini medi */
+  pt('M14,1 L19,9 L15,13 L22,20',                '0.38', 0.70, 0.30, true);
+  pt('M86,1 L81,9 L85,13 L78,20',                '0.38', 0.72, 0.30, true);
+  pt('M14,59 L19,51 L15,47 L22,40',              '0.36', 0.74, 0.28, true);
+  pt('M86,59 L81,51 L85,47 L78,40',              '0.36', 0.76, 0.28, true);
+  /* fulmini laterali */
+  pt('M1,22 L7,27 L3,31 L9,36',                  '0.32', 0.80, 0.26, true);
+  pt('M99,22 L93,27 L97,31 L91,36',              '0.32', 0.82, 0.26, true);
+
+  /* ── NODI ai giunti principali ── */
+  [
+    [7,7,0.52],[13,7,0.56],[13,14,0.60],[20,14,0.64],
+    [18,5,0.54],[24,5,0.57],[24,11,0.61],[30,11,0.65],
+    [30,7,0.55],[36,7,0.59],[36,13,0.63],
+    [40,6,0.54],[46,6,0.58],[46,13,0.62],
+    [44,5,0.56],[44,11,0.60],
+    [58,6,0.54],[64,6,0.58],[64,12,0.62],[58,12,0.66],
+    [62,5,0.56],[62,11,0.60],
+    [76,7,0.55],[70,7,0.59],[70,13,0.63],
+    [84,6,0.54],[78,6,0.58],[78,12,0.62],[72,12,0.66],
+    [86,7,0.53],[80,14,0.60],[80,20,0.65],
+    [7,53,0.52],[13,53,0.56],[13,46,0.60],[20,46,0.64],
+    [20,55,0.55],[26,55,0.58],[26,49,0.62],
+    [32,54,0.54],[38,54,0.58],[38,48,0.62],[44,48,0.66],
+    [48,54,0.55],[54,54,0.58],[54,48,0.62],
+    [58,53,0.54],[52,53,0.58],[52,47,0.62],
+    [66,54,0.54],[60,54,0.58],[60,48,0.62],
+    [76,54,0.55],[70,54,0.58],[70,48,0.62],[64,48,0.66],
+    [84,54,0.54],[78,54,0.58],[78,48,0.62],[72,48,0.66],
+    [86,53,0.53],[80,46,0.60],[80,40,0.65],
+    [7,7,0.53],[7,13,0.57],[14,13,0.61],[14,20,0.65],
+    [5,16,0.55],[5,22,0.59],[11,22,0.63],
+    [8,26,0.55],[8,20,0.59],[15,20,0.63],[15,26,0.67],
+    [7,34,0.55],[7,28,0.59],[14,28,0.63],[14,34,0.67],
+    [6,42,0.55],[6,36,0.59],[13,36,0.63],
+    [5,50,0.55],[5,44,0.59],[11,44,0.63],[11,40,0.67],
+    [93,7,0.53],[93,13,0.57],[86,13,0.61],[86,20,0.65],
+    [95,16,0.55],[95,22,0.59],[89,22,0.63],
+    [92,26,0.55],[92,20,0.59],[85,20,0.63],[85,26,0.67],
+    [93,34,0.55],[93,28,0.59],[86,28,0.63],[86,34,0.67],
+    [94,42,0.55],[94,36,0.59],[87,36,0.63],
+    [95,50,0.55],[95,44,0.59],[89,44,0.63],[89,40,0.67],
+  ].forEach(([cx,cy,del]) => nd(cx, cy, del));
+
+  els.forEach(el => svg.appendChild(el));
+  return svg;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▶ HERO TRANSITION — espansione a schermo intero
+   ────────────────────────────────────────────────────────── */
+const HERO_COLORS = {
+  red:    { bg: 'rgba(255,48,96,0.13)',   acc: '#ff3060', glow: 'rgba(255,48,96,0.35)' },
+  blue:   { bg: 'rgba(32,144,255,0.13)',  acc: '#2090ff', glow: 'rgba(32,144,255,0.35)' },
+  storia: { bg: 'rgba(255,170,32,0.13)', acc: '#ffaa20', glow: 'rgba(255,170,32,0.35)' },
+  fond:   { bg: 'rgba(0,221,136,0.13)',  acc: '#00dd88', glow: 'rgba(0,221,136,0.35)' },
+  news:   { bg: 'rgba(153,85,255,0.13)', acc: '#9955ff', glow: 'rgba(153,85,255,0.35)' },
+};
+
+function heroTransition(sourceEl, catKey, onReveal) {
+  const col  = HERO_COLORS[catKey] || { bg: 'rgba(0,200,255,0.1)', acc: '#00c8ff', glow: 'rgba(0,200,255,0.35)' };
+  const rect = sourceEl.getBoundingClientRect();
+
+  /* ── overlay che si espande ── */
+  const ov = document.createElement('div');
+  ov.style.cssText = `
+    position:fixed; z-index:9998; pointer-events:none; overflow:hidden;
+    left:${rect.left}px; top:${rect.top}px;
+    width:${rect.width}px; height:${rect.height}px;
+    background:${col.bg}; border:1px solid ${col.acc};
+    border-radius:7px;
+    box-shadow:0 0 25px ${col.glow};
+    transition: left .55s cubic-bezier(.4,0,.2,1),
+                top  .55s cubic-bezier(.4,0,.2,1),
+                width .55s cubic-bezier(.4,0,.2,1),
+                height .55s cubic-bezier(.4,0,.2,1),
+                border-radius .55s ease, border .35s ease,
+                box-shadow .35s ease;
+  `;
+
+  /* scanlines */
+  const scan = document.createElement('div');
+  scan.style.cssText = `
+    position:absolute; inset:0; pointer-events:none; opacity:.6;
+    background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.06) 3px,rgba(0,0,0,.06) 4px);
+  `;
+  ov.appendChild(scan);
+
+  /* cyber grid */
+  const grid = document.createElement('div');
+  grid.style.cssText = `
+    position:absolute; inset:0; pointer-events:none;
+    opacity:0; transition:opacity .3s ease .18s;
+    background-image:linear-gradient(${col.acc}0a 1px,transparent 1px),
+                     linear-gradient(90deg,${col.acc}0a 1px,transparent 1px);
+    background-size:44px 44px;
+  `;
+  ov.appendChild(grid);
+
+  /* circuiti + fulmini SVG */
+  ov.appendChild(buildHeroSVG(col.acc, col.glow));
+
+  /* etichetta categoria */
+  const lbl = document.createElement('div');
+  lbl.className = 'hero-overlay-label';
+
+  const lblMain = document.createElement('span');
+  lblMain.className = 'hero-lbl-main';
+  lblMain.textContent = CAT_LABEL[catKey] || catKey;
+  lblMain.style.cssText = `color:${col.acc}; text-shadow:0 0 35px ${col.glow},0 0 80px ${col.glow};`;
+
+  const lblSub = document.createElement('span');
+  lblSub.className = 'hero-lbl-sub';
+  lblSub.textContent = '[ accesso categoria ]';
+  lblSub.style.cssText = `color:${col.acc};`;
+
+  lbl.appendChild(lblMain);
+  lbl.appendChild(lblSub);
+  ov.appendChild(lbl);
+
+  document.body.appendChild(ov);
+
+  /* forza reflow per far partire la transizione */
+  void ov.getBoundingClientRect();
+
+  /* espandi a tutto schermo */
+  ov.style.left         = '0';
+  ov.style.top          = '0';
+  ov.style.width        = '100vw';
+  ov.style.height       = '100vh';
+  ov.style.borderRadius = '0';
+  ov.style.border       = `1px solid ${col.acc}44`;
+  ov.style.boxShadow    = `0 0 120px ${col.glow} inset, 0 0 60px ${col.glow}`;
+
+  /* grid appare dopo espansione, label dopo i circuiti */
+  setTimeout(() => { grid.style.opacity = '1'; }, 400);
+  setTimeout(() => lbl.classList.add('visible'), 650);
+
+  /* callback + fade-out — lascia tempo ai circuiti di disegnarsi */
+  setTimeout(() => {
+    onReveal?.();
+    setTimeout(() => {
+      ov.style.transition = 'opacity .55s ease';
+      ov.style.opacity    = '0';
+      setTimeout(() => ov.remove(), 580);
+    }, 80);
+  }, 1250);
+}
+
+/* Variante per navigazione a pagina esterna */
+function heroPageTransition(sourceEl, catKey, href) {
+  const col  = HERO_COLORS[catKey] || { bg: 'rgba(0,200,255,0.1)', acc: '#00c8ff', glow: 'rgba(0,200,255,0.35)' };
+  const rect = sourceEl.getBoundingClientRect();
+  const postTitle = sourceEl.querySelector('.inf-front-title')?.textContent?.trim().slice(0, 38) || '';
+
+  const ov = document.createElement('div');
+  ov.style.cssText = `
+    position:fixed; z-index:9998; pointer-events:none; overflow:hidden;
+    left:${rect.left}px; top:${rect.top}px;
+    width:${rect.width}px; height:${rect.height}px;
+    background:${col.bg}; border:1px solid ${col.acc}; border-radius:7px;
+    box-shadow:0 0 25px ${col.glow};
+    transition: left .52s cubic-bezier(.4,0,.2,1),
+                top  .52s cubic-bezier(.4,0,.2,1),
+                width .52s cubic-bezier(.4,0,.2,1),
+                height .52s cubic-bezier(.4,0,.2,1),
+                border-radius .52s ease, box-shadow .3s ease;
+  `;
+
+  /* scanlines */
+  const scan = document.createElement('div');
+  scan.style.cssText = `position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.05) 3px,rgba(0,0,0,.05) 4px);`;
+  ov.appendChild(scan);
+
+  /* grid */
+  const grid = document.createElement('div');
+  grid.style.cssText = `position:absolute;inset:0;opacity:0;transition:opacity .3s ease .15s;
+    background-image:linear-gradient(${col.acc}0a 1px,transparent 1px),linear-gradient(90deg,${col.acc}0a 1px,transparent 1px);
+    background-size:44px 44px;`;
+  ov.appendChild(grid);
+
+  /* circuiti + fulmini */
+  ov.appendChild(buildHeroSVG(col.acc, col.glow));
+
+  /* etichetta */
+  const lbl = document.createElement('div');
+  lbl.className = 'hero-overlay-label';
+
+  const lblMain = document.createElement('span');
+  lblMain.className = 'hero-lbl-main';
+  lblMain.textContent = CAT_LABEL[catKey] || catKey;
+  lblMain.style.cssText = `color:${col.acc}; text-shadow:0 0 30px ${col.glow},0 0 70px ${col.glow};`;
+
+  const lblSub = document.createElement('span');
+  lblSub.className = 'hero-lbl-sub';
+  lblSub.textContent = postTitle ? `> ${postTitle}` : '[ caricamento articolo ]';
+  lblSub.style.cssText = `color:${col.acc};`;
+
+  lbl.appendChild(lblMain);
+  lbl.appendChild(lblSub);
+  ov.appendChild(lbl);
+
+  document.body.appendChild(ov);
+  void ov.getBoundingClientRect();
+
+  ov.style.left = '0'; ov.style.top = '0';
+  ov.style.width = '100vw'; ov.style.height = '100vh';
+  ov.style.borderRadius = '0';
+  ov.style.border = `1px solid ${col.acc}44`;
+  ov.style.boxShadow = `0 0 120px ${col.glow} inset, 0 0 60px ${col.glow}`;
+
+  setTimeout(() => { grid.style.opacity = '1'; }, 380);
+  setTimeout(() => lbl.classList.add('visible'), 580);
+
+  setTimeout(() => { window.location.href = href; }, 1000);
+}
 
 /* ──────────────────────────────────────────────────────────
    ▶ CAT FILTER
@@ -2133,40 +2699,38 @@ function initFilterSheet() {
    ▶ CATEGORY CLICK HANDLERS
    ────────────────────────────────────────────────────────── */
 function initCatHandlers() {
-  // Sidebar
+  const scrollToArticles = () =>
+    document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Sidebar (no animation, direct filter)
   document.querySelectorAll('#sidebarCats [data-cat]').forEach(btn => {
     btn.addEventListener('click', () => setCategory(btn.dataset.cat));
   });
-  // Category cards
+
+  // Category cards — hero expand transition
   document.querySelectorAll('.cat-card[data-cat]').forEach(card => {
-    card.addEventListener('click', () => {
-      setCategory(card.dataset.cat);
-      document.getElementById('articles')?.scrollIntoView({ behavior:'smooth' });
-    });
+    const trigger = () => {
+      const cat = card.dataset.cat;
+      heroTransition(card, cat, () => { setCategory(cat); scrollToArticles(); });
+    };
+    card.addEventListener('click', trigger);
     card.addEventListener('keydown', e => {
-      if (e.key==='Enter'||e.key===' ') {
-        e.preventDefault();
-        setCategory(card.dataset.cat);
-        document.getElementById('articles')?.scrollIntoView({ behavior:'smooth' });
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
     });
   });
-  // Stat boxes — filtra e scrolla agli articoli
+
+  // Stat boxes — hero expand transition
   document.querySelectorAll('.stat-box[data-cat]').forEach(box => {
-    box.addEventListener('click', () => {
-      setCategory(box.dataset.cat);
-      const el = document.getElementById('articles');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    const trigger = () => {
+      const cat = box.dataset.cat;
+      heroTransition(box, cat, () => { setCategory(cat); scrollToArticles(); });
+    };
+    box.addEventListener('click', trigger);
     box.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        setCategory(box.dataset.cat);
-        const el = document.getElementById('articles');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
     });
   });
+
   // Nav links
   document.querySelectorAll('.nav-links [data-cat], .f-nav [data-cat]').forEach(a => {
     a.addEventListener('click', e => {
@@ -2174,6 +2738,7 @@ function initCatHandlers() {
       setCategory(a.dataset.cat);
     });
   });
+
   // Reset
   document.getElementById('resetFilter')?.addEventListener('click', () => {
     activeCat = ''; activeTag = '';
@@ -2181,6 +2746,107 @@ function initCatHandlers() {
   });
 }
 
+
+/* ──────────────────────────────────────────────────────────
+   ▶ INFINITE CAROUSELS (Red Team, Blue Team, Storia)
+   ────────────────────────────────────────────────────────── */
+const CAR_CATS = [
+  { key: 'red',    label: 'Red Team',  dur: 38 },
+  { key: 'blue',   label: 'Blue Team', dur: 44 },
+  { key: 'storia', label: 'Storia',    dur: 41 },
+];
+
+function buildFlipCard(post, staggerIdx, isFirst) {
+  const tags   = (post.tags || []).slice(0, 4);
+  const delay  = isFirst ? `style="animation-delay:${staggerIdx * 0.1}s"` : '';
+  const hidden = isFirst ? 'style="opacity:0"' : '';
+  return `
+    <a class="inf-flip" href="posts/${post.id}.html" data-cat="${post.cat}"
+       aria-label="${post.title}" ${isFirst ? `data-stagger="${staggerIdx}"` : ''}>
+      <div class="inf-flip-inner">
+        <div class="inf-flip-front">
+          <span class="inf-front-badge">${CAT_LABEL[post.cat] || post.cat}</span>
+          <div class="inf-front-title">${post.title}</div>
+          <time class="inf-front-date" datetime="${post.date}">${fmtDate(post.date)}</time>
+        </div>
+        <div class="inf-flip-back">
+          <div class="inf-back-cat">${(CAT_LABEL[post.cat] || post.cat).toUpperCase()}</div>
+          <div class="inf-back-tags">${tags.map(t => `<span class="inf-back-tag">${t}</span>`).join('')}</div>
+          <div class="inf-back-cta"><span class="inf-back-link">Leggi articolo →</span></div>
+        </div>
+      </div>
+    </a>`;
+}
+
+function initInfCarousels() {
+  const wrap = document.getElementById('infCarsWrap');
+  if (!wrap) return;
+
+  CAR_CATS.forEach(({ key, label, dur }) => {
+    const posts = POSTS.filter(p => p.cat === key);
+    if (!posts.length) return;
+
+    /* build HTML — duplicate cards for seamless infinite loop */
+    const firstSet  = posts.map((p, i) => buildFlipCard(p, i, true)).join('');
+    const secondSet = posts.map(p      => buildFlipCard(p, 0, false)).join('');
+
+    const section = document.createElement('div');
+    section.className = 'inf-car';
+    section.dataset.cat = key;
+    section.innerHTML = `
+      <div class="inf-car-hdr">
+        <span class="inf-car-label">${label}</span>
+        <div class="inf-car-line"></div>
+        <span class="inf-car-count">${posts.length} articoli</span>
+      </div>
+      <div class="inf-car-viewport">
+        <div class="inf-car-track" style="--car-dur:${dur}s">
+          ${firstSet}${secondSet}
+        </div>
+      </div>`;
+    wrap.appendChild(section);
+
+    /* click handler → hero page transition */
+    section.querySelectorAll('.inf-flip').forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        const href = card.getAttribute('href');
+        if (!href) return;
+        heroPageTransition(card, key, href);
+      });
+    });
+  });
+
+  /* IntersectionObserver: entry stagger animation + start scrolling */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const track      = entry.target.querySelector('.inf-car-track');
+      const firstCards = [...track.querySelectorAll('.inf-flip[data-stagger]')];
+      const lastIdx    = firstCards.length - 1;
+
+      /* stagger each first-set card */
+      firstCards.forEach((card, i) => {
+        card.style.animationDelay = `${i * 0.1}s`;
+        card.classList.add('card-enter');
+        card.addEventListener('animationend', () => {
+          card.style.opacity = '';
+          card.style.animationDelay = '';
+          card.classList.remove('card-enter');
+          card.removeAttribute('data-stagger');
+        }, { once: true });
+      });
+
+      /* start infinite scroll after last card has entered */
+      const startScrollMs = lastIdx * 100 + 780;
+      setTimeout(() => track.classList.add('scroll-run'), startScrollMs);
+
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.inf-car').forEach(car => observer.observe(car));
+}
 
 /* ──────────────────────────────────────────────────────────
    ▶ THEME TOGGLE
@@ -2233,4 +2899,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initFilterSheet();
   initCatHandlers();
+  init3DTilt();
+  initInfCarousels();
+  initTagPanel();
 });
