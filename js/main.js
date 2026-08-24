@@ -2012,7 +2012,16 @@ function render() {
   const cards = [...list.querySelectorAll('.article-card')];
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  // Le card possono essere centinaia (nessuna paginazione): animare l'ingresso
+  // di tutte forza GSAP/ScrollTrigger a leggere la geometria di ognuna in un
+  // solo colpo al render, causando fino a 1s+ di forced reflow sul thread
+  // principale. Animiamo solo le prime (viewport + un paio di schermate sotto,
+  // le uniche visibili a breve), le altre compaiono già a piena opacità.
+  const ANIM_CARDS_MAX = 20;
+  const animCards = cards.slice(0, ANIM_CARDS_MAX);
+  cards.slice(ANIM_CARDS_MAX).forEach(card => { card.style.opacity = '1'; });
+
+  if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && animCards.length) {
     // render() ricrea il DOM ad ogni filtro: rimuove i trigger delle card precedenti
     ScrollTrigger.getAll().forEach(st => {
       if (st.trigger?.classList?.contains('article-card')) st.kill();
@@ -2022,11 +2031,11 @@ function render() {
     const dur = isMobile ? 0.5 : 0.7;
     const stg = isMobile ? 0.055 : 0.09;
 
-    gsap.set(cards, {
+    gsap.set(animCards, {
       opacity: 0, y: 38, rotateX: -9,
       transformPerspective: 800, transformOrigin: '50% 100%',
     });
-    cards.forEach(card => {
+    animCards.forEach(card => {
       const subEls = [
         card.querySelector('.article-cat-badge'),
         card.querySelector('.article-title'),
@@ -2037,7 +2046,7 @@ function render() {
       gsap.set(card.querySelectorAll('.tag-chip'), { opacity: 0, y: 6 });
     });
 
-    ScrollTrigger.batch(cards, {
+    ScrollTrigger.batch(animCards, {
       start: 'top 92%',
       once: true,
       batchMax: isMobile ? 3 : 6,          // meno elementi per frame su mobile
@@ -2071,7 +2080,7 @@ function render() {
       },
     });
   } else {
-    cards.forEach(card => { card.style.opacity = '1'; });
+    animCards.forEach(card => { card.style.opacity = '1'; });
   }
 
   cards.forEach(card => {
