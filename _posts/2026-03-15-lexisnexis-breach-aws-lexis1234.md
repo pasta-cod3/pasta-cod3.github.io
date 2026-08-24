@@ -1,3 +1,12 @@
+---
+layout: post
+title: "LexisNexis breach: database legali esposti con credenziale 'lexis1234'"
+date: 2026-03-15
+cat: news
+tags: ["LexisNexis", "breach", "database", "credenziali deboli", "legal", "AWS"]
+excerpt: "Un database LexisNexis contenente milioni di record legali era accessibile con la password 'lexis1234'. Il caso emblematico delle credenziali di default mai cambiate."
+---
+
 # LexisNexis violata: la password era "Lexis1234" e la chiave AWS era in chiaro
 
 ## Il fatto

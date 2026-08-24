@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Threat Hunting: smettila di aspettare che suoni l'allarme"
-description: "Introduzione al Threat Hunting: cos'è, perché è diverso dal monitoraggio passivo e come iniziare a cacciare minacce nella tua rete."
+title: "Threat Hunting: cercare l'attaccante nella rete prima che faccia danni"
 date: 2026-02-01
-categoria: Blue Team
-tags: [threat-hunting, soc, blue-team, dfir]
+cat: blue
+tags: ["threat hunting", "blue team", "IOC", "TTPs", "MITRE ATT&CK"]
+excerpt: "Il threat hunting non aspetta gli alert: va a cercare attivamente le minacce nascoste nella rete. Metodologia, ipotesi, fonti dati e integrazione con MITRE ATT&CK."
 ---
 
 # Threat Hunting: smettila di aspettare che suoni l'allarme

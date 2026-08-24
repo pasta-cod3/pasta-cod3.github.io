@@ -1236,6 +1236,70 @@ const POSTS = [
     "excerpt": "Cosa significa fare un penetration test, come si struttura un engagement, le fasi dalla ricognizione al report e la differenza tra pentest, red team e vulnerability assessment."
   },
   {
+    "id": "cyber-kill-chain-mitre-attack",
+    "title": "Cyber Kill Chain e MITRE ATT&CK: le fasi di un attacco informatico",
+    "date": "2026-08-15",
+    "cat": "fond",
+    "tags": ["cyber kill chain", "MITRE ATT&CK", "TTPs", "metodologia", "fondamentali"],
+    "excerpt": "Ogni attacco informatico segue delle fasi riconoscibili. Cyber Kill Chain e MITRE ATT&CK sono i due framework che le descrivono — e che ogni difensore usa per capire dove intervenire."
+  },
+  {
+    "id": "risk-management-analisi-rischio",
+    "title": "Risk Management: come si valuta il rischio in sicurezza informatica",
+    "date": "2026-08-16",
+    "cat": "fond",
+    "tags": ["risk management", "analisi del rischio", "asset", "risk matrix", "fondamentali"],
+    "excerpt": "Non tutte le vulnerabilità meritano la stessa attenzione, e non tutti gli asset hanno lo stesso valore. Il risk management è la disciplina che permette di decidere dove investire prima che sia troppo tardi."
+  },
+  {
+    "id": "iam-rbac-privilegio-minimo",
+    "title": "IAM: Identity and Access Management, RBAC e principio del privilegio minimo",
+    "date": "2026-08-17",
+    "cat": "fond",
+    "tags": ["IAM", "RBAC", "ABAC", "privilegio minimo", "governance", "fondamentali"],
+    "excerpt": "Autenticarsi non basta: bisogna anche decidere cosa un utente autenticato può fare. IAM, RBAC, ABAC e il principio del privilegio minimo sono le fondamenta della governance degli accessi."
+  },
+  {
+    "id": "active-directory-ldap-fondamenti",
+    "title": "Active Directory e LDAP: le fondamenta dell'identità aziendale",
+    "date": "2026-08-18",
+    "cat": "fond",
+    "tags": ["Active Directory", "LDAP", "Kerberos", "domain controller", "fondamentali"],
+    "excerpt": "Prima di capire come si attacca Active Directory, bisogna capire come funziona. Domini, Organizational Unit, Group Policy, LDAP e Kerberos: l'infrastruttura di identità del 90% delle aziende Windows."
+  },
+  {
+    "id": "biometria-autenticazione-fisica",
+    "title": "Biometria e fattori di autenticazione fisici",
+    "date": "2026-08-19",
+    "cat": "fond",
+    "tags": ["biometria", "impronta digitale", "Face ID", "FAR", "FRR", "fondamentali"],
+    "excerpt": "Impronte digitali, riconoscimento facciale, iride: la biometria promette di eliminare le password sostituendole con 'ciò che sei'. Come funziona davvero, quanto è affidabile, e perché non è infallibile."
+  },
+  {
+    "id": "owasp-top-10",
+    "title": "OWASP Top 10: le vulnerabilità web più critiche",
+    "date": "2026-08-20",
+    "cat": "fond",
+    "tags": ["OWASP", "Top 10", "web security", "vulnerabilità", "fondamentali"],
+    "excerpt": "SQL Injection, XSS, controlli di accesso rotti: la OWASP Top 10 è la classifica di riferimento delle vulnerabilità web più critiche e più diffuse. La mappa che ogni sviluppatore e pentester dovrebbe conoscere a memoria."
+  },
+  {
+    "id": "malware-tipologie-fondamentali",
+    "title": "Malware: tipologie e come funzionano",
+    "date": "2026-08-21",
+    "cat": "fond",
+    "tags": ["malware", "virus", "worm", "trojan", "ransomware", "fondamentali"],
+    "excerpt": "Virus, worm, trojan, ransomware, spyware, rootkit: parole usate spesso come sinonimi ma che descrivono comportamenti tecnicamente molto diversi. La tassonomia di base di cosa rende malevolo un software."
+  },
+  {
+    "id": "anatomia-attacco-ransomware",
+    "title": "Anatomia di un attacco ransomware: dalla compromissione all'estorsione",
+    "date": "2026-08-22",
+    "cat": "fond",
+    "tags": ["ransomware", "double extortion", "attacco", "kill chain", "fondamentali"],
+    "excerpt": "Un attacco ransomware moderno non è 'un virus che cifra i file' — è una campagna strutturata che dura giorni o settimane, con fasi precise prima che una singola cifratura venga eseguita. Ecco come funziona davvero."
+  },
+  {
     "id": "ricognizione-passiva-osint",
     "title": "Ricognizione passiva e OSINT: raccogliere informazioni senza toccare il target",
     "date": "2026-01-11",
@@ -1671,7 +1735,10 @@ class CodeFrag {
     const ctx = this.ctx;
     ctx.save();
     ctx.globalAlpha = Math.max(0, this.opacity);
-    ctx.fillStyle   = this.bright ? '#00c8ff' : '#004466';
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    ctx.fillStyle   = isLight
+      ? (this.bright ? '#000000' : '#33415c')
+      : (this.bright ? '#00c8ff' : '#004466');
     ctx.font        = `${this.fontSize}px 'JetBrains Mono',monospace`;
     ctx.fillText(this.displayed + (this.state === 'typing' ? '▋' : ''), this.x, this.y);
     ctx.restore();
@@ -1740,6 +1807,71 @@ function initCanvas() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => { resize(); init(); }, 250);
   });
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   ▶ SMOOTH SCROLL — Lenis + GSAP ScrollTrigger
+   ────────────────────────────────────────────────────────── */
+let lenis = null;
+
+function initSmoothScroll() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced || typeof Lenis === 'undefined') return;
+
+  lenis = new Lenis({
+    duration: 1.2,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo — morbido ma reattivo
+    smoothWheel: true,
+    // touch resta nativo di default: nessun lag sullo scroll mobile
+  });
+
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(time => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   ▶ HERO REVEAL — ingresso cinematografico al caricamento
+   Ogni attributo (eyebrow, righe del titolo, sottotitolo, CTA,
+   stat-box) entra in sequenza con un piccolo "focus pull"
+   (blur → nitido) oltre a fade/slide, invece del semplice
+   opacity/y usato altrove: sull'hero, sopra la piega, il costo
+   extra del filter è trascurabile anche su mobile.
+   ────────────────────────────────────────────────────────── */
+function initHeroReveal() {
+  const hero = document.querySelector('.hero.page-hero');
+  if (!hero) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || typeof gsap === 'undefined') return;
+
+  const eyebrow = hero.querySelector('.eyebrow');
+  const lines   = hero.querySelectorAll('.line1, .line2, .line3');
+  const sub     = hero.querySelector('.subtitle');
+  const ctas    = hero.querySelectorAll('.hero-cta > *');
+  const stats   = hero.querySelectorAll('.stat-box');
+  if (!eyebrow || !lines.length) return;
+
+  gsap.set([eyebrow, sub, ...ctas], { opacity: 0, y: 16, filter: 'blur(7px)' });
+  gsap.set(lines, { opacity: 0, y: 24, filter: 'blur(11px)' });
+  gsap.set(stats, {
+    opacity: 0, y: 22, rotateX: -22,
+    transformPerspective: 700, transformOrigin: '50% 100%',
+  });
+
+  gsap.timeline({ defaults: { ease: 'power3.out' } })
+    .to(eyebrow, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5 })
+    .to(lines, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.65, stagger: 0.12 }, '-=0.2')
+    .to(sub, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5 }, '-=0.35')
+    .to(ctas, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.45, stagger: 0.08, clearProps: 'transform,filter' }, '-=0.25')
+    .to(stats, {
+      opacity: 1, y: 0, rotateX: 0, duration: 0.6, stagger: 0.08,
+      clearProps: 'transform', overwrite: true,
+    }, '-=0.35');
 }
 
 
@@ -1859,28 +1991,77 @@ function render() {
     card.style.cursor = 'pointer';
   });
 
-  // Entry animation via IntersectionObserver (evita lag su molte card)
-  let _entryN = 0;
-  const _entryObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const card = entry.target;
-      const idx  = _entryN++;
-      card.style.opacity = '';                              // rimuove hidden
-      card.style.animationDelay = idx < 7 ? `${idx * 0.075}s` : '0s';
-      card.classList.add('is-visible');
-      card.addEventListener('animationend', () => {
-        card.classList.remove('is-visible');
-        card.style.animationDelay = '';
-      }, { once: true });
-      _entryObs.unobserve(card);
+  // Entry animation via GSAP ScrollTrigger — le card entrano con un lieve
+  // tilt 3D, poi ogni attributo interno (badge → titolo → excerpt/meta →
+  // tag) si "mette a fuoco" in sequenza (blur → nitido) invece di apparire
+  // tutto insieme: è la stessa idea del batch fade prima usata, ma composta
+  // attributo per attributo per un effetto più cinematografico.
+  const cards = [...list.querySelectorAll('.article-card')];
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    // render() ricrea il DOM ad ogni filtro: rimuove i trigger delle card precedenti
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.trigger?.classList?.contains('article-card')) st.kill();
     });
-  }, { threshold: 0.04 });
 
-  list.querySelectorAll('.article-card').forEach(card => {
-    card.style.opacity = '0';                              // nasconde prima di osservare
-    _entryObs.observe(card);
+    const isMobile = window.innerWidth < 768;
+    const dur = isMobile ? 0.5 : 0.7;
+    const stg = isMobile ? 0.055 : 0.09;
 
+    gsap.set(cards, {
+      opacity: 0, y: 38, rotateX: -9,
+      transformPerspective: 800, transformOrigin: '50% 100%',
+    });
+    cards.forEach(card => {
+      const subEls = [
+        card.querySelector('.article-cat-badge'),
+        card.querySelector('.article-title'),
+        card.querySelector('.article-excerpt'),
+        card.querySelector('.article-meta'),
+      ].filter(Boolean);
+      gsap.set(subEls, { opacity: 0, y: 12, filter: 'blur(5px)' });
+      gsap.set(card.querySelectorAll('.tag-chip'), { opacity: 0, y: 6 });
+    });
+
+    ScrollTrigger.batch(cards, {
+      start: 'top 92%',
+      once: true,
+      batchMax: isMobile ? 3 : 6,          // meno elementi per frame su mobile
+      onEnter: batch => {
+        const tl = gsap.timeline();
+        const clearTargets = [...batch];
+
+        tl.to(batch, {
+          opacity: 1, y: 0, rotateX: 0,
+          duration: dur, ease: 'power3.out', stagger: stg, overwrite: true,
+        }, 0);
+
+        batch.forEach((card, i) => {
+          const base = i * stg;
+          const badge   = card.querySelector('.article-cat-badge');
+          const title   = card.querySelector('.article-title');
+          const excerpt = card.querySelector('.article-excerpt');
+          const meta    = card.querySelector('.article-meta');
+          const tags    = [...card.querySelectorAll('.tag-chip')];
+          [badge, title, excerpt, meta].forEach(el => el && clearTargets.push(el));
+          clearTargets.push(...tags);
+
+          if (badge)   tl.to(badge,   { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.35, ease: 'power2.out' }, base + 0.1);
+          if (title)   tl.to(title,   { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.4,  ease: 'power2.out' }, base + 0.16);
+          const excMeta = [excerpt, meta].filter(Boolean);
+          if (excMeta.length) tl.to(excMeta, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.35, ease: 'power2.out', stagger: 0.04 }, base + 0.22);
+          if (tags.length) tl.to(tags, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out', stagger: 0.03 }, base + 0.3);
+        });
+
+        tl.eventCallback('onComplete', () => gsap.set(clearTargets, { clearProps: 'transform,filter' }));
+      },
+    });
+  } else {
+    cards.forEach(card => { card.style.opacity = '1'; });
+  }
+
+  cards.forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width  - 0.5;
@@ -2167,315 +2348,89 @@ function init3DTilt() {
 }
 
 /* ──────────────────────────────────────────────────────────
-   ▶ HERO CIRCUIT SVG — circuiti + fulmini generativi
-   ────────────────────────────────────────────────────────── */
-function buildHeroSVG(acc, glow) {
-  const NS  = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(NS, 'svg');
-  svg.setAttribute('viewBox', '0 0 100 60');
-  svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-  svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;';
-
-  const DASH = 180;
-  const els  = [];
-
-  function pt(d, w, del, dur, bright) {
-    const el = document.createElementNS(NS, 'path');
-    el.setAttribute('d', d); el.setAttribute('fill', 'none');
-    el.setAttribute('stroke', acc); el.setAttribute('stroke-width', w);
-    el.setAttribute('stroke-linecap', 'round'); el.setAttribute('stroke-linejoin', 'round');
-    el.style.strokeDasharray = DASH; el.style.strokeDashoffset = DASH;
-    el.style.animation = `circuit-draw ${dur}s ease-out ${del}s forwards`;
-    el.style.filter = bright
-      ? `drop-shadow(0 0 1.5px ${glow}) drop-shadow(0 0 4px ${glow})`
-      : `drop-shadow(0 0 0.6px ${glow})`;
-    els.push(el); return el;
-  }
-
-  function nd(cx, cy, del) {
-    const el = document.createElementNS(NS, 'circle');
-    el.setAttribute('cx', cx); el.setAttribute('cy', cy); el.setAttribute('r', '0.6');
-    el.setAttribute('fill', acc);
-    el.style.animation       = `node-pop 0.3s cubic-bezier(.36,.07,.19,.97) ${del}s both`;
-    el.style.transformBox    = 'fill-box';   /* scala dal proprio centro, non dall'origine SVG */
-    el.style.transformOrigin = 'center';
-    el.style.filter          = `drop-shadow(0 0 1px ${glow})`;
-    els.push(el); return el;
-  }
-
-  /* ── BORDO SUPERIORE → verso centro ── */
-  pt('M7,0 L7,7 L13,7 L13,14 L20,14',            '0.22', 0.20, 0.90, false);
-  pt('M13,7 L9,7',                                '0.18', 0.65, 0.28, false);
-  pt('M18,0 L18,5 L24,5 L24,11 L30,11',          '0.22', 0.24, 0.85, false);
-  pt('M24,5 L21,5',                               '0.18', 0.68, 0.24, false);
-  pt('M30,0 L30,7 L36,7 L36,13',                 '0.22', 0.22, 0.82, false);
-  pt('M40,0 L40,6 L46,6 L46,13 L40,13',          '0.22', 0.26, 0.88, false);
-  pt('M46,6 L43,6',                               '0.18', 0.70, 0.24, false);
-  pt('M50,0 L50,5 L44,5 L44,11',                 '0.22', 0.28, 0.80, false);
-  pt('M58,0 L58,6 L64,6 L64,12 L58,12',          '0.22', 0.23, 0.88, false);
-  pt('M64,6 L67,6',                               '0.18', 0.67, 0.24, false);
-  pt('M68,0 L68,5 L62,5 L62,11',                 '0.22', 0.27, 0.80, false);
-  pt('M76,0 L76,7 L70,7 L70,13 L64,13',          '0.22', 0.25, 0.85, false);
-  pt('M84,0 L84,6 L78,6 L78,12 L72,12',          '0.22', 0.22, 0.88, false);
-  pt('M78,6 L81,6',                               '0.18', 0.66, 0.24, false);
-  pt('M92,0 L92,7 L86,7 L86,14 L80,14 L80,20',   '0.22', 0.20, 0.95, false);
-  pt('M86,7 L89,7',                               '0.18', 0.64, 0.26, false);
-
-  /* ── BORDO INFERIORE → verso centro ── */
-  pt('M7,60 L7,53 L13,53 L13,46 L20,46',         '0.22', 0.22, 0.90, false);
-  pt('M13,53 L9,53',                              '0.18', 0.67, 0.28, false);
-  pt('M20,60 L20,55 L26,55 L26,49',              '0.22', 0.26, 0.82, false);
-  pt('M32,60 L32,54 L38,54 L38,48 L44,48',       '0.22', 0.24, 0.88, false);
-  pt('M38,54 L35,54',                             '0.18', 0.70, 0.24, false);
-  pt('M48,60 L48,54 L54,54 L54,48',              '0.22', 0.28, 0.80, false);
-  pt('M58,60 L58,53 L52,53 L52,47',              '0.22', 0.25, 0.84, false);
-  pt('M66,60 L66,54 L60,54 L60,48 L54,48',       '0.22', 0.23, 0.88, false);
-  pt('M60,54 L63,54',                             '0.18', 0.68, 0.24, false);
-  pt('M76,60 L76,54 L70,54 L70,48 L64,48',       '0.22', 0.25, 0.86, false);
-  pt('M84,60 L84,54 L78,54 L78,48 L72,48',       '0.22', 0.22, 0.88, false);
-  pt('M78,54 L81,54',                             '0.18', 0.66, 0.24, false);
-  pt('M92,60 L92,53 L86,53 L86,46 L80,46 L80,40','0.22', 0.21, 0.95, false);
-  pt('M86,53 L89,53',                             '0.18', 0.65, 0.26, false);
-
-  /* ── BORDO SINISTRO → verso centro ── */
-  pt('M0,7 L7,7 L7,13 L14,13 L14,20',            '0.22', 0.23, 0.88, false);
-  pt('M7,13 L7,17',                               '0.18', 0.67, 0.25, false);
-  pt('M0,16 L5,16 L5,22 L11,22',                 '0.22', 0.27, 0.80, false);
-  pt('M0,26 L8,26 L8,20 L15,20 L15,26',          '0.22', 0.25, 0.85, false);
-  pt('M0,34 L7,34 L7,28 L14,28 L14,34',          '0.22', 0.26, 0.84, false);
-  pt('M0,42 L6,42 L6,36 L13,36',                 '0.22', 0.28, 0.80, false);
-  pt('M0,50 L5,50 L5,44 L11,44 L11,40',          '0.22', 0.24, 0.86, false);
-
-  /* ── BORDO DESTRO → verso centro ── */
-  pt('M100,7 L93,7 L93,13 L86,13 L86,20',        '0.22', 0.23, 0.88, false);
-  pt('M93,13 L93,17',                             '0.18', 0.67, 0.25, false);
-  pt('M100,16 L95,16 L95,22 L89,22',             '0.22', 0.27, 0.80, false);
-  pt('M100,26 L92,26 L92,20 L85,20 L85,26',      '0.22', 0.25, 0.85, false);
-  pt('M100,34 L93,34 L93,28 L86,28 L86,34',      '0.22', 0.26, 0.84, false);
-  pt('M100,42 L94,42 L94,36 L87,36',             '0.22', 0.28, 0.80, false);
-  pt('M100,50 L95,50 L95,44 L89,44 L89,40',      '0.22', 0.24, 0.86, false);
-
-  /* ── FULMINI ANGOLI (dall'angolo verso dentro, luminosi) ── */
-  pt('M2,2 L8,10 L4,14 L11,21',                  '0.48', 0.55, 0.36, true);
-  pt('M98,2 L92,10 L96,14 L89,21',               '0.48', 0.58, 0.36, true);
-  pt('M2,58 L8,50 L4,46 L11,39',                 '0.46', 0.60, 0.34, true);
-  pt('M98,58 L92,50 L96,46 L89,39',              '0.46', 0.62, 0.34, true);
-  /* fulmini medi */
-  pt('M14,1 L19,9 L15,13 L22,20',                '0.38', 0.70, 0.30, true);
-  pt('M86,1 L81,9 L85,13 L78,20',                '0.38', 0.72, 0.30, true);
-  pt('M14,59 L19,51 L15,47 L22,40',              '0.36', 0.74, 0.28, true);
-  pt('M86,59 L81,51 L85,47 L78,40',              '0.36', 0.76, 0.28, true);
-  /* fulmini laterali */
-  pt('M1,22 L7,27 L3,31 L9,36',                  '0.32', 0.80, 0.26, true);
-  pt('M99,22 L93,27 L97,31 L91,36',              '0.32', 0.82, 0.26, true);
-
-  /* ── NODI ai giunti principali ── */
-  [
-    [7,7,0.52],[13,7,0.56],[13,14,0.60],[20,14,0.64],
-    [18,5,0.54],[24,5,0.57],[24,11,0.61],[30,11,0.65],
-    [30,7,0.55],[36,7,0.59],[36,13,0.63],
-    [40,6,0.54],[46,6,0.58],[46,13,0.62],
-    [44,5,0.56],[44,11,0.60],
-    [58,6,0.54],[64,6,0.58],[64,12,0.62],[58,12,0.66],
-    [62,5,0.56],[62,11,0.60],
-    [76,7,0.55],[70,7,0.59],[70,13,0.63],
-    [84,6,0.54],[78,6,0.58],[78,12,0.62],[72,12,0.66],
-    [86,7,0.53],[80,14,0.60],[80,20,0.65],
-    [7,53,0.52],[13,53,0.56],[13,46,0.60],[20,46,0.64],
-    [20,55,0.55],[26,55,0.58],[26,49,0.62],
-    [32,54,0.54],[38,54,0.58],[38,48,0.62],[44,48,0.66],
-    [48,54,0.55],[54,54,0.58],[54,48,0.62],
-    [58,53,0.54],[52,53,0.58],[52,47,0.62],
-    [66,54,0.54],[60,54,0.58],[60,48,0.62],
-    [76,54,0.55],[70,54,0.58],[70,48,0.62],[64,48,0.66],
-    [84,54,0.54],[78,54,0.58],[78,48,0.62],[72,48,0.66],
-    [86,53,0.53],[80,46,0.60],[80,40,0.65],
-    [7,7,0.53],[7,13,0.57],[14,13,0.61],[14,20,0.65],
-    [5,16,0.55],[5,22,0.59],[11,22,0.63],
-    [8,26,0.55],[8,20,0.59],[15,20,0.63],[15,26,0.67],
-    [7,34,0.55],[7,28,0.59],[14,28,0.63],[14,34,0.67],
-    [6,42,0.55],[6,36,0.59],[13,36,0.63],
-    [5,50,0.55],[5,44,0.59],[11,44,0.63],[11,40,0.67],
-    [93,7,0.53],[93,13,0.57],[86,13,0.61],[86,20,0.65],
-    [95,16,0.55],[95,22,0.59],[89,22,0.63],
-    [92,26,0.55],[92,20,0.59],[85,20,0.63],[85,26,0.67],
-    [93,34,0.55],[93,28,0.59],[86,28,0.63],[86,34,0.67],
-    [94,42,0.55],[94,36,0.59],[87,36,0.63],
-    [95,50,0.55],[95,44,0.59],[89,44,0.63],[89,40,0.67],
-  ].forEach(([cx,cy,del]) => nd(cx, cy, del));
-
-  els.forEach(el => svg.appendChild(el));
-  return svg;
-}
-
-/* ──────────────────────────────────────────────────────────
-   ▶ HERO TRANSITION — espansione a schermo intero
+   ▶ HERO TRANSITION — reveal radiale dal punto cliccato
+   Cerchio che si espande dal centro dell'elemento cliccato fino
+   a coprire tutto lo schermo (clip-path, no canvas), con un
+   anello energetico che lo precede e l'etichetta di categoria
+   che si mette a fuoco al centro. Ispirato alle transizioni
+   "circle reveal" (clip-path radiale dal punto di click / View
+   Transitions API) diffuse per i cambi tema/pagina.
    ────────────────────────────────────────────────────────── */
 const HERO_COLORS = {
-  red:    { bg: 'rgba(255,48,96,0.13)',   acc: '#ff3060', glow: 'rgba(255,48,96,0.35)' },
-  blue:   { bg: 'rgba(32,144,255,0.13)',  acc: '#2090ff', glow: 'rgba(32,144,255,0.35)' },
-  storia: { bg: 'rgba(255,170,32,0.13)', acc: '#ffaa20', glow: 'rgba(255,170,32,0.35)' },
-  fond:   { bg: 'rgba(0,221,136,0.13)',  acc: '#00dd88', glow: 'rgba(0,221,136,0.35)' },
-  news:   { bg: 'rgba(153,85,255,0.13)', acc: '#9955ff', glow: 'rgba(153,85,255,0.35)' },
+  red:    { bg: 'rgba(255,48,96,0.16)',  acc: '#ff3060', glow: 'rgba(255,48,96,0.55)' },
+  blue:   { bg: 'rgba(32,144,255,0.16)', acc: '#2090ff', glow: 'rgba(32,144,255,0.55)' },
+  storia: { bg: 'rgba(255,170,32,0.16)', acc: '#ffaa20', glow: 'rgba(255,170,32,0.55)' },
+  fond:   { bg: 'rgba(0,221,136,0.16)',  acc: '#00dd88', glow: 'rgba(0,221,136,0.55)' },
+  news:   { bg: 'rgba(153,85,255,0.16)', acc: '#9955ff', glow: 'rgba(153,85,255,0.55)' },
 };
 
-function heroTransition(sourceEl, catKey, onReveal) {
-  const col  = HERO_COLORS[catKey] || { bg: 'rgba(0,200,255,0.1)', acc: '#00c8ff', glow: 'rgba(0,200,255,0.35)' };
+function buildHeroReveal(sourceEl, catKey, subText) {
+  const col  = HERO_COLORS[catKey] || { bg: 'rgba(0,200,255,0.16)', acc: '#00c8ff', glow: 'rgba(0,200,255,0.55)' };
   const rect = sourceEl.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const R  = Math.hypot(
+    Math.max(cx, window.innerWidth  - cx),
+    Math.max(cy, window.innerHeight - cy)
+  );
 
-  /* ── overlay che si espande ── */
-  const ov = document.createElement('div');
-  ov.style.cssText = `
-    position:fixed; z-index:9998; pointer-events:none; overflow:hidden;
-    left:${rect.left}px; top:${rect.top}px;
-    width:${rect.width}px; height:${rect.height}px;
-    background:${col.bg}; border:1px solid ${col.acc};
-    border-radius:7px;
-    box-shadow:0 0 25px ${col.glow};
-    transition: left .55s cubic-bezier(.4,0,.2,1),
-                top  .55s cubic-bezier(.4,0,.2,1),
-                width .55s cubic-bezier(.4,0,.2,1),
-                height .55s cubic-bezier(.4,0,.2,1),
-                border-radius .55s ease, border .35s ease,
-                box-shadow .35s ease;
-  `;
+  const wrap = document.createElement('div');
+  wrap.className = 'hero-reveal';
+  wrap.style.setProperty('--cx', `${cx}px`);
+  wrap.style.setProperty('--cy', `${cy}px`);
+  wrap.style.setProperty('--r',  `${R}px`);
+  wrap.style.setProperty('--ring-scale', R / 5);
+  wrap.style.setProperty('--acc',  col.acc);
+  wrap.style.setProperty('--glow', col.glow);
+  wrap.style.setProperty('--fill', col.bg);
 
-  /* scanlines */
-  const scan = document.createElement('div');
-  scan.style.cssText = `
-    position:absolute; inset:0; pointer-events:none; opacity:.6;
-    background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.06) 3px,rgba(0,0,0,.06) 4px);
-  `;
-  ov.appendChild(scan);
+  wrap.appendChild(Object.assign(document.createElement('div'), { className: 'hero-reveal-fill' }));
+  wrap.appendChild(Object.assign(document.createElement('div'), { className: 'hero-reveal-ring' }));
 
-  /* cyber grid */
-  const grid = document.createElement('div');
-  grid.style.cssText = `
-    position:absolute; inset:0; pointer-events:none;
-    opacity:0; transition:opacity .3s ease .18s;
-    background-image:linear-gradient(${col.acc}0a 1px,transparent 1px),
-                     linear-gradient(90deg,${col.acc}0a 1px,transparent 1px);
-    background-size:44px 44px;
-  `;
-  ov.appendChild(grid);
-
-  /* circuiti + fulmini SVG */
-  ov.appendChild(buildHeroSVG(col.acc, col.glow));
-
-  /* etichetta categoria */
   const lbl = document.createElement('div');
   lbl.className = 'hero-overlay-label';
 
   const lblMain = document.createElement('span');
   lblMain.className = 'hero-lbl-main';
   lblMain.textContent = CAT_LABEL[catKey] || catKey;
-  lblMain.style.cssText = `color:${col.acc}; text-shadow:0 0 35px ${col.glow},0 0 80px ${col.glow};`;
+  lblMain.style.cssText = `color:${col.acc}; text-shadow:0 0 40px ${col.glow}, 0 0 90px ${col.glow};`;
 
   const lblSub = document.createElement('span');
   lblSub.className = 'hero-lbl-sub';
-  lblSub.textContent = '[ accesso categoria ]';
-  lblSub.style.cssText = `color:${col.acc};`;
+  lblSub.textContent = subText;
+  lblSub.style.color = col.acc;
 
   lbl.appendChild(lblMain);
   lbl.appendChild(lblSub);
-  ov.appendChild(lbl);
+  wrap.appendChild(lbl);
 
-  document.body.appendChild(ov);
+  document.body.appendChild(wrap);
+  void wrap.getBoundingClientRect(); // forza il reflow prima di animare
+  wrap.classList.add('expand');
 
-  /* forza reflow per far partire la transizione */
-  void ov.getBoundingClientRect();
+  setTimeout(() => { lbl.classList.add('visible', 'glitching'); }, 230);
+  setTimeout(() => { lbl.classList.remove('glitching'); }, 360);
 
-  /* espandi a tutto schermo */
-  ov.style.left         = '0';
-  ov.style.top          = '0';
-  ov.style.width        = '100vw';
-  ov.style.height       = '100vh';
-  ov.style.borderRadius = '0';
-  ov.style.border       = `1px solid ${col.acc}44`;
-  ov.style.boxShadow    = `0 0 120px ${col.glow} inset, 0 0 60px ${col.glow}`;
+  return wrap;
+}
 
-  /* grid appare dopo espansione, label dopo i circuiti */
-  setTimeout(() => { grid.style.opacity = '1'; }, 400);
-  setTimeout(() => lbl.classList.add('visible'), 650);
-
-  /* callback + fade-out — lascia tempo ai circuiti di disegnarsi */
+function heroTransition(sourceEl, catKey, onReveal) {
+  const wrap = buildHeroReveal(sourceEl, catKey, '[ accesso categoria ]');
   setTimeout(() => {
     onReveal?.();
     setTimeout(() => {
-      ov.style.transition = 'opacity .55s ease';
-      ov.style.opacity    = '0';
-      setTimeout(() => ov.remove(), 580);
-    }, 80);
-  }, 1250);
+      wrap.style.transition = 'opacity .45s ease';
+      wrap.style.opacity    = '0';
+      setTimeout(() => wrap.remove(), 470);
+    }, 60);
+  }, 720);
 }
 
 /* Variante per navigazione a pagina esterna */
 function heroPageTransition(sourceEl, catKey, href) {
-  const col  = HERO_COLORS[catKey] || { bg: 'rgba(0,200,255,0.1)', acc: '#00c8ff', glow: 'rgba(0,200,255,0.35)' };
-  const rect = sourceEl.getBoundingClientRect();
   const postTitle = sourceEl.querySelector('.inf-front-title')?.textContent?.trim().slice(0, 38) || '';
-
-  const ov = document.createElement('div');
-  ov.style.cssText = `
-    position:fixed; z-index:9998; pointer-events:none; overflow:hidden;
-    left:${rect.left}px; top:${rect.top}px;
-    width:${rect.width}px; height:${rect.height}px;
-    background:${col.bg}; border:1px solid ${col.acc}; border-radius:7px;
-    box-shadow:0 0 25px ${col.glow};
-    transition: left .52s cubic-bezier(.4,0,.2,1),
-                top  .52s cubic-bezier(.4,0,.2,1),
-                width .52s cubic-bezier(.4,0,.2,1),
-                height .52s cubic-bezier(.4,0,.2,1),
-                border-radius .52s ease, box-shadow .3s ease;
-  `;
-
-  /* scanlines */
-  const scan = document.createElement('div');
-  scan.style.cssText = `position:absolute;inset:0;pointer-events:none;opacity:.5;
-    background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.05) 3px,rgba(0,0,0,.05) 4px);`;
-  ov.appendChild(scan);
-
-  /* grid */
-  const grid = document.createElement('div');
-  grid.style.cssText = `position:absolute;inset:0;opacity:0;transition:opacity .3s ease .15s;
-    background-image:linear-gradient(${col.acc}0a 1px,transparent 1px),linear-gradient(90deg,${col.acc}0a 1px,transparent 1px);
-    background-size:44px 44px;`;
-  ov.appendChild(grid);
-
-  /* circuiti + fulmini */
-  ov.appendChild(buildHeroSVG(col.acc, col.glow));
-
-  /* etichetta */
-  const lbl = document.createElement('div');
-  lbl.className = 'hero-overlay-label';
-
-  const lblMain = document.createElement('span');
-  lblMain.className = 'hero-lbl-main';
-  lblMain.textContent = CAT_LABEL[catKey] || catKey;
-  lblMain.style.cssText = `color:${col.acc}; text-shadow:0 0 30px ${col.glow},0 0 70px ${col.glow};`;
-
-  const lblSub = document.createElement('span');
-  lblSub.className = 'hero-lbl-sub';
-  lblSub.textContent = postTitle ? `> ${postTitle}` : '[ caricamento articolo ]';
-  lblSub.style.cssText = `color:${col.acc};`;
-
-  lbl.appendChild(lblMain);
-  lbl.appendChild(lblSub);
-  ov.appendChild(lbl);
-
-  document.body.appendChild(ov);
-  void ov.getBoundingClientRect();
-
-  ov.style.left = '0'; ov.style.top = '0';
-  ov.style.width = '100vw'; ov.style.height = '100vh';
-  ov.style.borderRadius = '0';
-  ov.style.border = `1px solid ${col.acc}44`;
-  ov.style.boxShadow = `0 0 120px ${col.glow} inset, 0 0 60px ${col.glow}`;
-
-  setTimeout(() => { grid.style.opacity = '1'; }, 380);
-  setTimeout(() => lbl.classList.add('visible'), 580);
-
-  setTimeout(() => { window.location.href = href; }, 1000);
+  buildHeroReveal(sourceEl, catKey, postTitle ? `> ${postTitle}` : '[ caricamento articolo ]');
+  setTimeout(() => { window.location.href = href; }, 780);
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -2499,6 +2454,7 @@ function syncCatUI() {
 }
 
 function setCategory(cat) {
+  if (cat === 'fond') { window.location.href = 'fondamentali.html'; return; }
   activeCat = cat;
   activeTag = '';
   syncCatUI();
@@ -2656,6 +2612,7 @@ function initNav() {
       e.preventDefault();
       const cat = a.dataset.cat;
       closeNav();
+      if (cat === 'fond') { window.location.href = 'fondamentali.html'; return; }
       window.location.href = 'index.html';
       sessionStorage.setItem('filterCat', cat);
     });
@@ -2711,6 +2668,7 @@ function initCatHandlers() {
   document.querySelectorAll('.cat-card[data-cat]').forEach(card => {
     const trigger = () => {
       const cat = card.dataset.cat;
+      if (cat === 'fond') { window.location.href = 'fondamentali.html'; return; }
       heroTransition(card, cat, () => { setCategory(cat); scrollToArticles(); });
     };
     card.addEventListener('click', trigger);
@@ -2723,6 +2681,7 @@ function initCatHandlers() {
   document.querySelectorAll('.stat-box[data-cat]').forEach(box => {
     const trigger = () => {
       const cat = box.dataset.cat;
+      if (cat === 'fond') { window.location.href = 'fondamentali.html'; return; }
       heroTransition(box, cat, () => { setCategory(cat); scrollToArticles(); });
     };
     box.addEventListener('click', trigger);
@@ -2887,6 +2846,8 @@ function restoreFilter() {
    ▶ INIT
    ────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  initSmoothScroll();
+  initHeroReveal();
   initCanvas();
   initTheme();
   restoreFilter();

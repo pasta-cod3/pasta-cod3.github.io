@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Edward Snowden e la sorveglianza di massa: cosa ci ha insegnato il leak della NSA"
+date: 2026-03-02
+cat: storia
+tags: ["Snowden", "NSA", "PRISM", "sorveglianza", "whistleblower", "privacy"]
+excerpt: "Giugno 2013: un contractor NSA vola a Hong Kong con quattro laptop e cambia per sempre la nostra comprensione della sorveglianza digitale globale."
+---
+
 # Edward Snowden e la sorveglianza di massa: quando l'NSA spiava tutti
 
 ## Introduzione

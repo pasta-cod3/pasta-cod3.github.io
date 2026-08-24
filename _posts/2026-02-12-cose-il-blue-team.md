@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Cos'è il Blue Team: ruoli, strumenti e differenza con il Red Team"
+date: 2026-02-12
+cat: blue
+tags: ["blue team", "SOC", "incident response", "difesa", "detection", "SIEM"]
+excerpt: "Il Blue Team difende, rileva e risponde. Cosa fanno concretamente un analista SOC, un threat hunter e un incident responder, e quali strumenti usano ogni giorno."
+---
+
 # Cos'è il Blue Team: difendere i sistemi informatici
 
 ## Introduzione

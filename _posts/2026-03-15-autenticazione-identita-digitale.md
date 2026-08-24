@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Autenticazione e identità digitale: password, MFA, passkey e oltre"
+date: 2026-03-15
+cat: fond
+tags: ["autenticazione", "MFA", "passkey", "FIDO2", "identità digitale", "password"]
+excerpt: "Come funziona l'autenticazione moderna: dai limiti delle password all'MFA, dalle passkey FIDO2 alle sfide dell'identità digitale nel 2026."
+---
+
 # Autenticazione e identità digitale: MFA, OAuth, SSO, JWT e come si attaccano
 
 ## Introduzione

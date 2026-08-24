@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Zestix: broker di accessi iniziali vende credenziali di difesa e aviazione italiana"
+date: 2026-03-15
+cat: news
+tags: ["IAB", "initial access broker", "aviazione", "difesa", "credenziali", "dark web", "Italia"]
+excerpt: "L'Initial Access Broker noto come Zestix mette all'asta credenziali di accesso a sistemi di aziende italiane del settore aviazione e difesa su forum underground."
+---
+
 # Zestix e il broker silenzioso: credenziali rubate da aviazione, difesa e sanità in vendita
 
 ## Il fatto

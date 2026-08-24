@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Privilege Escalation su Linux: da user a root passo dopo passo"
+date: 2026-01-05
+cat: red
+tags: ["privilege escalation", "Linux", "red team", "SUID", "cron", "sudo"]
+excerpt: "SUID binari, cron job mal configurati, sudo misconfiguration, capabilities: le vie più comuni per scalare da utente a root su sistemi Linux."
+---
+
 # Privilege Escalation su Linux: da utente normale a root
 
 ## Introduzione

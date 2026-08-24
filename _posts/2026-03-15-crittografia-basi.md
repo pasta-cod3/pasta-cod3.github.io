@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Crittografia: le basi che ogni professionista della sicurezza deve conoscere"
+date: 2026-03-15
+cat: fond
+tags: ["crittografia", "AES", "RSA", "chiave simmetrica", "asimmetrica", "TLS"]
+excerpt: "Simmetrica vs asimmetrica, cifrari a blocchi e a flusso, firma digitale, PKI e TLS. Le fondamenta crittografiche su cui si regge tutta la sicurezza informatica moderna."
+---
+
 # Crittografia: le basi che ogni professionista della sicurezza deve conoscere
 
 ## Introduzione

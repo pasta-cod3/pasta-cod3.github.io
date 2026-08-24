@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Burp Suite: guida alle basi per il web application testing"
+date: 2026-01-02
+cat: red
+tags: ["Burp Suite", "web", "proxy", "intercept", "scanner", "OWASP"]
+excerpt: "Burp Suite è lo strumento standard per il web application penetration testing. Proxy, scanner, intruder, repeater: come usarli in un test reale."
+---
+
 # Burp Suite: il proxy essenziale per il web hacking
 
 ## Introduzione

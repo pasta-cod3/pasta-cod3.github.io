@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Come funziona Internet: dal cavo sottosmarino al tuo browser"
+date: 2026-03-15
+cat: fond
+tags: ["internet", "TCP/IP", "DNS", "BGP", "infrastruttura", "fondamentali"]
+excerpt: "Quando digiti un URL succedono decine di cose in millisecondi. Dal routing BGP alla risoluzione DNS, dai protocolli TCP/IP al TLS: come funziona davvero Internet."
+---
+
 # Come funziona internet: il viaggio di un pacchetto
 
 ## Introduzione

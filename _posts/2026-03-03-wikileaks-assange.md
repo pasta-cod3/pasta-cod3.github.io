@@ -1,3 +1,12 @@
+---
+layout: post
+title: "WikiLeaks e Julian Assange: trasparenza radicale e le sue conseguenze"
+date: 2026-03-03
+cat: storia
+tags: ["WikiLeaks", "Assange", "whistleblower", "diplomaticables", "Manning", "storia"]
+excerpt: "Dal 2006 WikiLeaks ha pubblicato milioni di documenti riservati. La storia di Julian Assange tra libertà di stampa, spionaggio e anni di reclusione nell'ambasciata ecuadoriana."
+---
+
 # WikiLeaks e Julian Assange: la guerra per la trasparenza
 
 ## Introduzione

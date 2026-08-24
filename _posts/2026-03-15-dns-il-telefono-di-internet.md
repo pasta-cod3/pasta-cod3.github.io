@@ -1,3 +1,12 @@
+---
+layout: post
+title: "DNS: il sistema di nomi che trasforma indirizzi in siti web"
+date: 2026-03-15
+cat: fond
+tags: ["DNS", "resolver", "zone", "record", "DoH", "DNS security", "fondamentali"]
+excerpt: "Il DNS è la rubrica di Internet. Come funziona la risoluzione ricorsiva, cosa sono i record A, MX, TXT, come difendersi da DNS hijacking e cosa cambia con DNS over HTTPS."
+---
+
 # DNS: il telefono di internet e come viene abusato
 
 ## Introduzione

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Cos'è il Penetration Testing: guida completa per chi inizia"
+date: 2026-01-12
+cat: fond
+tags: ["penetration testing", "pentest", "ethical hacking", "metodologia", "scoping"]
+excerpt: "Cosa significa fare un penetration test, come si struttura un engagement, le fasi dalla ricognizione al report e la differenza tra pentest, red team e vulnerability assessment."
+---
+
 # Cos'è il Penetration Testing
 
 ## Introduzione

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Introduzione a Metasploit: il framework essenziale del penetration tester"
+date: 2026-01-09
+cat: red
+tags: ["Metasploit", "msfconsole", "exploit", "payload", "meterpreter", "red team"]
+excerpt: "Metasploit è il framework più usato nel penetration testing. Architettura, moduli, payload, meterpreter: una guida per iniziare a usarlo con consapevolezza."
+---
+
 # Introduzione a Metasploit Framework
 
 ## Cos'è Metasploit

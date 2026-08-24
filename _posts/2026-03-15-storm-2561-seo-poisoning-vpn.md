@@ -1,3 +1,12 @@
+---
+layout: post
+title: "STORM-2561: campagna di SEO poisoning distribuisce falsi client VPN"
+date: 2026-03-15
+cat: news
+tags: ["SEO poisoning", "VPN", "malware", "STORM-2561", "download malevolo", "infostealer"]
+excerpt: "Il gruppo STORM-2561 avvelena i risultati di ricerca per parole chiave VPN popolari. I siti posizionati distribuiscono client VPN trojanizzati con infostealer integrato."
+---
+
 # Storm-2561: falsi client VPN rubano credenziali tramite SEO poisoning
 
 ## Il fatto

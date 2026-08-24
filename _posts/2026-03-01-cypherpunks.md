@@ -1,3 +1,12 @@
+---
+layout: post
+title: "I Cypherpunk: il manifesto che ha ispirato Bitcoin, Tor e la crittografia moderna"
+date: 2026-03-01
+cat: storia
+tags: ["cypherpunk", "crittografia", "privacy", "Eric Hughes", "PGP", "storia"]
+excerpt: "Nel 1993 Eric Hughes scrisse il Manifesto Cypherpunk. Un documento che ha dato forma a Tor, PGP, Bitcoin e all'idea che la privacy sia un diritto da difendere con il codice."
+---
+
 # I Cypherpunk: i rivoluzionari che hanno inventato la privacy digitale
 
 ## Introduzione

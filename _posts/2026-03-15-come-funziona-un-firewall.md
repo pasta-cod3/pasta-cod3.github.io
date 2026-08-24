@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Come funziona un firewall: stateless, stateful, NGFW e WAF a confronto"
+date: 2026-03-15
+cat: fond
+tags: ["firewall", "NGFW", "WAF", "stateful", "packet filtering", "sicurezza di rete"]
+excerpt: "Un firewall non è solo una lista di regole. Differenze tra stateless e stateful inspection, Next-Gen Firewall, WAF e dove collocarli nell'architettura di rete."
+---
+
 # Come funziona un firewall: stateless, stateful, WAF e i loro limiti
 
 ## Introduzione

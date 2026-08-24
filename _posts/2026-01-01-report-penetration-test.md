@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Come si legge un report di penetration test: struttura, flag e raccomandazioni"
+date: 2026-01-01
+cat: red
+tags: ["pentest", "report", "vulnerabilità", "CVSS", "remediation"]
+excerpt: "Un report di pentest non è solo un elenco di bug. È un documento strategico. Come interpretarlo, cosa guardare per primo e come prioritizzare le remediation."
+---
+
 # Come scrivere un Report di Penetration Test
 
 ## Introduzione

@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Threat Intelligence per principianti: capire il nemico prima che arrivi"
-description: "Introduzione alla Threat Intelligence: tipi di intelligence, fonti open source (OSINT), feed IoC, MISP, e come usare queste informazioni per difendersi."
+title: "Threat Intelligence per principianti: capire chi attacca e come"
 date: 2026-02-07
-categoria: Blue Team
-tags: [threat-intelligence, OSINT, IoC, MISP, CTI, STIX, TAXII]
+cat: blue
+tags: ["threat intelligence", "CTI", "IOC", "TTPs", "MISP", "OSINT"]
+excerpt: "La threat intelligence trasforma dati grezzi in conoscenza utile per la difesa. Tipi di intelligence, fonti OSINT, MISP e come integrare gli IOC nei sistemi di difesa."
 ---
 
 # Threat Intelligence per principianti: capire il nemico prima che arrivi

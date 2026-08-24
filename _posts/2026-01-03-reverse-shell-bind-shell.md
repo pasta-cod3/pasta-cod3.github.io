@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Reverse shell e bind shell: differenze, uso e detection"
+date: 2026-01-03
+cat: red
+tags: ["reverse shell", "bind shell", "netcat", "payload", "post-exploitation"]
+excerpt: "Differenza tra reverse shell e bind shell, quando usare l'una o l'altra, come configurarle e come i blue team le rilevano."
+---
+
 # Reverse Shell e Bind Shell: ottenere accesso remoto
 
 ## Introduzione

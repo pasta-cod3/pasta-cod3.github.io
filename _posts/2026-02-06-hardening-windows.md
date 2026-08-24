@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Hardening Windows: difendere il sistema operativo più attaccato al mondo"
-description: "Guida pratica all'hardening di Windows: Group Policy, PowerShell, Windows Defender, audit log, disabilitazione servizi inutili e checklist CIS."
+title: "Hardening Windows: configurazioni essenziali per ridurre la superficie d'attacco"
 date: 2026-02-06
-categoria: Blue Team
-tags: [hardening, windows, powershell, defender, group-policy, CIS]
+cat: blue
+tags: ["hardening", "Windows", "GPO", "Defender", "bitlocker", "event logging"]
+excerpt: "Hardening di un sistema Windows: Group Policy, Defender configurato, BitLocker, logging degli eventi, disabilitazione di LLMNR/NetBIOS e protocolli legacy."
 ---
 
 # Hardening Windows: difendere il sistema operativo più attaccato al mondo

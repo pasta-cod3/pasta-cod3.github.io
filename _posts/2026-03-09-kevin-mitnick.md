@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Kevin Mitnick: il fuggitivo digitale che ha cambiato la cybersecurity"
+date: 2026-03-09
+cat: storia
+tags: ["Kevin Mitnick", "social engineering", "phreaking", "FBI", "storia hacking"]
+excerpt: "Kevin Mitnick era il ricercato più famoso d'America — e non sapeva programmare exploit. Il suo strumento principale era il telefono. La storia del più grande ingegnere sociale della storia."
+---
+
 # Kevin Mitnick: l'hacker più ricercato d'America
 
 ## Introduzione

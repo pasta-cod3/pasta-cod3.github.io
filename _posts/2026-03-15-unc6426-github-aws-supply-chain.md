@@ -1,3 +1,12 @@
+---
+layout: post
+title: "UNC6426: attacco supply chain via GitHub Actions e credenziali AWS"
+date: 2026-03-15
+cat: news
+tags: ["UNC6426", "GitHub Actions", "AWS", "supply chain", "CI/CD", "secrets theft"]
+excerpt: "Il gruppo UNC6426 sfrutta workflow GitHub Actions mal configurati per estrarre credenziali AWS e muoversi lateralmente nell'infrastruttura cloud delle vittime."
+---
+
 # UNC6426: da un token GitHub rubato ad admin AWS in 72 ore
 
 ## Il fatto

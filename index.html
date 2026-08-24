@@ -9,7 +9,7 @@
   <title>pasta-cod3 — Cybersecurity Blog in Italiano | Red Team · Blue Team · OSINT</title>
   <meta name="description" content="Blog di cybersecurity in italiano: penetration testing, red team, blue team, storia dell'hacking, fondamentali e notizie sulla sicurezza informatica. Tecnico, pratico, senza filtri.">
   <meta name="keywords" content="cybersecurity italiano, penetration testing, red team, blue team, hacking etico, sicurezza informatica, OSINT, exploit, CTF, eJPT, TryHackMe, HackTheBox">
-  <meta name="author" content="stewe — pasta-cod3">
+  <meta name="author" content="Stefano Comida, pasta-cod3">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://pasta-cod3.github.io/">
 
@@ -41,12 +41,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   <link rel="stylesheet" media="print" onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   <noscript>
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   </noscript>
   <link rel="preload" href="css/style.css" as="style" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css" fetchpriority="high">
@@ -100,8 +100,8 @@
       {
         "@type": "Person",
         "@id": "https://pasta-cod3.github.io/#person",
-        "name": "stewe",
-        "alternateName": "stewe_sec",
+        "name": "Stefano Comida",
+        "alternateName": ["stewe", "stewe_sec"],
         "url": "https://pasta-cod3.github.io/about.html",
         "sameAs": [
           "https://github.com/pasta-cod3",
@@ -125,8 +125,11 @@
   <a href="#" class="nav-drawer-link" data-cat="red">Red Team</a>
   <a href="#" class="nav-drawer-link" data-cat="blue">Blue Team</a>
   <a href="#" class="nav-drawer-link" data-cat="storia">Storia</a>
-  <a href="#" class="nav-drawer-link" data-cat="fond">Fondamentali</a>
   <a href="#" class="nav-drawer-link" data-cat="news">Notizie</a>
+  <a href="#" class="nav-drawer-link nav-fond" data-cat="fond">
+    <span class="nav-fond-drawer-row">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></span>
+    <span class="nav-fond-drawer-desc">45 stanze interattive, quiz, TryHackMe — sempre gratis.</span>
+  </a>
   <a href="about.html"    class="nav-drawer-link">Chi sono</a>
   <a href="contatti.html" class="nav-drawer-link">Contatti</a>
 </nav>
@@ -135,7 +138,7 @@
 <div class="nav-overlay" id="filterOverlay"></div>
 
 <!-- ── FILTER SHEET (mobile) ─────────────────────────── -->
-<div class="filter-sheet" id="filterSheet" role="dialog" aria-label="Filtri articoli">
+<div class="filter-sheet" id="filterSheet" role="dialog" aria-label="Filtri articoli" data-lenis-prevent>
   <div class="filter-sheet-header">
     <div class="filter-sheet-title">⊞ Filtri</div>
     <button class="filter-sheet-close" id="filterSheetClose">✕ Chiudi</button>
@@ -147,8 +150,8 @@
       <button class="filter-sheet-cat-btn c-red"    data-cat="red">Red Team</button>
       <button class="filter-sheet-cat-btn c-blue"   data-cat="blue">Blue Team</button>
       <button class="filter-sheet-cat-btn c-storia" data-cat="storia">Storia</button>
-      <button class="filter-sheet-cat-btn c-fond"   data-cat="fond">Fondamentali</button>
       <button class="filter-sheet-cat-btn c-news"   data-cat="news">Notizie</button>
+      <button class="filter-sheet-cat-btn c-fond nav-fond-chip" data-cat="fond">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></button>
     </div>
   </div>
   <div class="filter-sheet-section">
@@ -181,8 +184,15 @@
       <li><a href="#" data-cat="red">Red Team</a></li>
       <li><a href="#" data-cat="blue">Blue Team</a></li>
       <li><a href="#" data-cat="storia">Storia</a></li>
-      <li><a href="#" data-cat="fond">Fondamentali</a></li>
       <li><a href="#" data-cat="news">Notizie</a></li>
+      <li class="nav-fond-wrap">
+        <a href="#" data-cat="fond" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
+        <span class="nav-fond-tip">
+          <span class="nav-fond-tip-head">Percorso Fondamentali</span>
+          45 stanze interattive, quiz e sfide pratiche con TryHackMe. Sempre gratis, nessun account a pagamento.
+          <a class="nav-fond-tip-cta" href="fondamentali.html">Apri il percorso →</a>
+        </span>
+      </li>
       <li><a href="about.html">Chi sono</a></li>
       <li><a href="contatti.html">Contatti</a></li>
     </ul>
@@ -254,15 +264,16 @@
         <div class="stat-num" id="cnt-storia">—</div>
         <div class="stat-label">Storia</div>
       </div>
-      <div class="stat-box s4" data-cat="fond" role="button" tabindex="0" aria-label="Filtra articoli Fondamentali">
-        <div class="stat-corner" aria-hidden="true"></div>
-        <div class="stat-num" id="cnt-fond">—</div>
-        <div class="stat-label">Fondamentali</div>
-      </div>
-      <div class="stat-box s5" data-cat="news" role="button" tabindex="0" aria-label="Filtra articoli Notizie">
+      <div class="stat-box s4" data-cat="news" role="button" tabindex="0" aria-label="Filtra articoli Notizie">
         <div class="stat-corner" aria-hidden="true"></div>
         <div class="stat-num" id="cnt-news">—</div>
         <div class="stat-label">Notizie</div>
+      </div>
+      <div class="stat-box s5 stat-box-fond" data-cat="fond" role="button" tabindex="0" aria-label="Filtra articoli Fondamentali — percorso interattivo gratuito">
+        <div class="stat-corner" aria-hidden="true"></div>
+        <span class="stat-box-fond-tag">GRATIS</span>
+        <div class="stat-num" id="cnt-fond">—</div>
+        <div class="stat-label">Fondamentali <em>— percorso gratuito, quiz &amp; TryHackMe</em></div>
       </div>
     </div>
   </div>
@@ -315,24 +326,25 @@
       </div>
     </div>
 
-    <div class="cat-card c-fond" data-cat="fond" role="button" tabindex="0" aria-label="Filtra per Fondamentali: basi tecniche di sicurezza">
-      <div class="cat-bar" aria-hidden="true"></div>
-      <div class="cat-num">CAT — 004</div>
-      <div class="cat-name">Fondamentali</div>
-      <p class="cat-desc">TCP/IP, crittografia, DNS, firewall e le basi che ogni professionista di sicurezza deve conoscere.</p>
-      <div class="cat-footer">
-        <div class="cat-count" id="cc-fond">— articoli</div>
-        <div class="cat-arrow" aria-hidden="true">→</div>
-      </div>
-    </div>
-
     <div class="cat-card c-news" data-cat="news" role="button" tabindex="0" aria-label="Filtra per Notizie: attualità cybersecurity">
       <div class="cat-bar" aria-hidden="true"></div>
-      <div class="cat-num">CAT — 005</div>
+      <div class="cat-num">CAT — 004</div>
       <div class="cat-name">Notizie</div>
       <p class="cat-desc">Breach, vulnerabilità, ransomware, policy e scenari geopolitici dal mondo della cybersecurity.</p>
       <div class="cat-footer">
         <div class="cat-count" id="cc-news">— articoli</div>
+        <div class="cat-arrow" aria-hidden="true">→</div>
+      </div>
+    </div>
+
+    <div class="cat-card c-fond cat-card-fond" data-cat="fond" role="button" tabindex="0" aria-label="Fondamentali: percorso interattivo gratuito con quiz e stanze pratiche">
+      <div class="cat-bar" aria-hidden="true"></div>
+      <span class="cat-card-fond-tag">100% GRATIS</span>
+      <div class="cat-num">CAT — 005</div>
+      <div class="cat-name">Fondamentali</div>
+      <p class="cat-desc">TCP/IP, crittografia, DNS, firewall — più un percorso interattivo con quiz e stanze pratiche su TryHackMe. Sempre gratuito.</p>
+      <div class="cat-footer">
+        <div class="cat-count" id="cc-fond">— articoli</div>
         <div class="cat-arrow" aria-hidden="true">→</div>
       </div>
     </div>
@@ -389,8 +401,8 @@
           <button class="sidebar-cat-btn c-red"    data-cat="red">Red Team</button>
           <button class="sidebar-cat-btn c-blue"   data-cat="blue">Blue Team</button>
           <button class="sidebar-cat-btn c-storia" data-cat="storia">Storia</button>
-          <button class="sidebar-cat-btn c-fond"   data-cat="fond">Fondamentali</button>
           <button class="sidebar-cat-btn c-news"   data-cat="news">Notizie</button>
+          <button class="sidebar-cat-btn c-fond nav-fond-chip" data-cat="fond">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></button>
         </div>
       </div>
 
@@ -444,8 +456,8 @@
     <a href="#" data-cat="red">Red Team</a>
     <a href="#" data-cat="blue">Blue Team</a>
     <a href="#" data-cat="storia">Storia</a>
-    <a href="#" data-cat="fond">Fondamentali</a>
     <a href="#" data-cat="news">Notizie</a>
+    <a href="#" data-cat="fond" class="f-nav-fond">Fondamentali ✦</a>
     <a href="about.html">Chi sono</a>
     <a href="contatti.html">Contatti</a>
   </nav>
@@ -456,6 +468,9 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

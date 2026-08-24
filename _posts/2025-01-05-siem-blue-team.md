@@ -1,3 +1,12 @@
+---
+layout: post
+title: "SIEM e Blue Team: come funziona il centro nevralgico della difesa informatica"
+date: 2025-01-05
+cat: blue
+tags: ["SIEM", "blue team", "SOC", "log", "correlazione"]
+excerpt: "Il SIEM raccoglie, normalizza e correla log da tutta l'infrastruttura in tempo reale. Guida pratica a come funziona e perché è il cuore di ogni Blue Team."
+---
+
 # SIEM e Blue Team: guida pratica all'analisi dei log
 
 ## Introduzione

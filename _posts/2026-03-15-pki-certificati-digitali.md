@@ -1,3 +1,12 @@
+---
+layout: post
+title: "PKI e certificati digitali: come funziona la fiducia su Internet"
+date: 2026-03-15
+cat: fond
+tags: ["PKI", "certificati", "CA", "TLS", "X.509", "firma digitale", "HTTPS"]
+excerpt: "Perché il lucchetto HTTPS non è garanzia assoluta. Come funziona la Public Key Infrastructure, il ruolo delle Certificate Authority e cosa succede quando la fiducia si rompe."
+---
+
 # PKI e certificati digitali: CA, catena di fiducia e TLS handshake
 
 ## Introduzione

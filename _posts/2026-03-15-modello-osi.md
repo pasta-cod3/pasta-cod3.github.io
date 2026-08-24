@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Il modello OSI: i 7 livelli della rete spiegati con attacchi reali"
+date: 2026-03-15
+cat: fond
+tags: ["modello OSI", "rete", "layer", "TCP/IP", "protocolli", "fondamentali"]
+excerpt: "Il modello OSI divide la comunicazione di rete in 7 livelli. Spiegato non con teoria pura, ma con gli attacchi informatici che operano a ciascun livello."
+---
+
 # Il Modello OSI: i 7 layer della rete e dove vengono attaccati
 
 ## Introduzione

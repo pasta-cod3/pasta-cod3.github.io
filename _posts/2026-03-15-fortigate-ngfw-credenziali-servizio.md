@@ -1,3 +1,12 @@
+---
+layout: post
+title: "FortiGate NGFW: credenziali di servizio esposte in migliaia di dispositivi"
+date: 2026-03-15
+cat: news
+tags: ["FortiGate", "Fortinet", "NGFW", "credenziali", "esposizione", "firewall"]
+excerpt: "Ricercatori trovano credenziali di servizio hardcoded in un sottoinsieme di FortiGate NGFW. Migliaia di dispositivi potenzialmente esposti prima della patch."
+---
+
 # FortiGate come porta d'ingresso: attaccanti rubano credenziali di servizio dalle reti aziendali
 
 ## Il fatto

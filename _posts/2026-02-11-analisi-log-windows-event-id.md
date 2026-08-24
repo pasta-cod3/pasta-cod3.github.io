@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Analisi dei log Windows: gli Event ID che ogni Blue Team deve conoscere"
+date: 2026-02-11
+cat: blue
+tags: ["Windows", "event log", "Event ID", "SIEM", "blue team", "threat hunting"]
+excerpt: "Gli Event ID di Windows raccontano tutto: login, escalation, lateral movement, persistence. Guida agli ID fondamentali e come usarli per rilevare attività sospette."
+---
+
 # Analisi dei Log Windows: gli Event ID che devi conoscere
 
 ## Introduzione

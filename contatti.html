@@ -32,12 +32,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   <link rel="stylesheet" media="print" onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   <noscript>
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   </noscript>
   <link rel="stylesheet" href="css/style.css" fetchpriority="high">
 
@@ -58,8 +58,11 @@
   <a href="index.html"    class="nav-drawer-link" data-cat="red-team">Red Team</a>
   <a href="index.html"    class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
   <a href="index.html"    class="nav-drawer-link" data-cat="storia">Storia</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="fondamentali">Fondamentali</a>
   <a href="index.html"    class="nav-drawer-link" data-cat="notizie">Notizie</a>
+  <a href="fondamentali.html" class="nav-drawer-link nav-fond">
+    <span class="nav-fond-drawer-row">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></span>
+    <span class="nav-fond-drawer-desc">45 stanze interattive, quiz, TryHackMe — sempre gratis.</span>
+  </a>
   <a href="about.html"    class="nav-drawer-link">Chi sono</a>
   <a href="contatti.html" class="nav-drawer-link active">Contatti</a>
 </nav>
@@ -73,8 +76,15 @@
       <li><a href="index.html" data-cat="red-team">Red Team</a></li>
       <li><a href="index.html" data-cat="blue-team">Blue Team</a></li>
       <li><a href="index.html" data-cat="storia">Storia</a></li>
-      <li><a href="index.html" data-cat="fondamentali">Fondamentali</a></li>
       <li><a href="index.html" data-cat="notizie">Notizie</a></li>
+      <li class="nav-fond-wrap">
+        <a href="fondamentali.html" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
+        <span class="nav-fond-tip">
+          <span class="nav-fond-tip-head">Percorso Fondamentali</span>
+          45 stanze interattive, quiz e sfide pratiche con TryHackMe. Sempre gratis, nessun account a pagamento.
+          <a class="nav-fond-tip-cta" href="fondamentali.html">Apri il percorso →</a>
+        </span>
+      </li>
       <li><a href="about.html">Chi sono</a></li>
       <li><a href="contatti.html" class="active">Contatti</a></li>
     </ul>
@@ -111,7 +121,7 @@
             <span class="t-prompt">stewe@pasta-cod3:~$</span>
             <span class="t-cmd"> cat contact.json</span>
           </div>
-          <div class="t-output" id="tOut1" style="opacity:0">
+          <div class="t-output" id="tOut1">
             {<br>
             &nbsp;&nbsp;<span class="t-accent">"email"</span>: <span style="color:var(--c-fond)">"stefano.comida@protonmail.com"</span>,<br>
             &nbsp;&nbsp;<span class="t-accent">"pgp"</span>: <span style="color:var(--c-blue)">"available on request"</span>,<br>
@@ -313,21 +323,10 @@
   <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
 </footer>
 
-<!-- TERMINAL TYPING ANIMATION -->
-<script>
-(function(){
-  function delay(ms){ return new Promise(r => setTimeout(r, ms)); }
-  async function run(){
-    await delay(700);
-    var o1 = document.getElementById('tOut1');
-    if(o1){ o1.style.transition='opacity 0.5s'; o1.style.opacity='1'; }
-  }
-  document.readyState === 'loading'
-    ? document.addEventListener('DOMContentLoaded', run)
-    : run();
-})();
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
 <script src="js/static-pages.js"></script>
+<script src="js/static-cinematic.js"></script>
 </body>
 </html>

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "CrackArmor: vulnerabilità nel profilo AppArmor di Linux espone sistemi enterprise"
+date: 2026-03-15
+cat: news
+tags: ["AppArmor", "Linux", "vulnerabilità", "privilege escalation", "kernel", "CVE"]
+excerpt: "Una debolezza nella configurazione dei profili AppArmor permette escape da container e privilege escalation su distribuzioni enterprise. Analisi tecnica e patch disponibili."
+---
+
 # CrackArmor: 9 vulnerabilità nel kernel Linux colpiscono 12,6 milioni di server
 
 ## Il fatto

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "SQL Injection: dalle basi all'exploitation pratica"
+date: 2026-01-07
+cat: red
+tags: ["SQL injection", "SQLi", "database", "sqlmap", "OWASP", "web"]
+excerpt: "La SQL injection è vecchia ma ancora pericolosissima. Basi teoriche, tipologie (blind, error-based, time-based), uso di sqlmap e come prevenirla con prepared statements."
+---
+
 # SQL Injection: capire e sfruttare la vulnerabilità più classica del web
 
 ## Introduzione

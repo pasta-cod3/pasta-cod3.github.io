@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Privilege Escalation su Windows: tecniche essenziali per il red team"
+date: 2026-01-04
+cat: red
+tags: ["privilege escalation", "Windows", "red team", "UAC", "token impersonation"]
+excerpt: "Da user a SYSTEM: le tecniche più comuni di privilege escalation su Windows, dall'abuso dei servizi ai token impersonation, con esempi pratici."
+---
+
 # Privilege Escalation su Windows: da utente a SYSTEM
 
 ## Introduzione

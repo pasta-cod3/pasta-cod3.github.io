@@ -1,3 +1,12 @@
+---
+layout: post
+title: "GlassWorm: attacco supply chain tramite estensioni VS Code malevole"
+date: 2026-03-15
+cat: news
+tags: ["supply chain", "VS Code", "estensioni", "malware", "sviluppatori", "npm"]
+excerpt: "La campagna GlassWorm distribuisce malware tramite estensioni VS Code apparentemente legittime. Oltre 50.000 sviluppatori potenzialmente compromessi prima della rimozione."
+---
+
 # GlassWorm: la supply chain attack che infetta gli sviluppatori tramite il registry VS Code
 
 ## Il fatto

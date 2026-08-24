@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Storia del ransomware: dal floppy disk di Popp ai miliardi di RaaS"
+date: 2026-03-04
+cat: storia
+tags: ["ransomware", "storia", "AIDS Trojan", "WannaCry", "RaaS", "CryptoLocker"]
+excerpt: "Il primo ransomware fu distribuito su floppy disk nel 1989 da un biologo. Trent'anni dopo è un mercato da miliardi. La storia completa di come siamo arrivati qui."
+---
+
 # Storia del Ransomware: dal floppy disk ai miliardi di dollari
 
 ## Introduzione

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Stryker Medical colpita da wiper via Microsoft Intune: Handala Group"
+date: 2026-03-15
+cat: news
+tags: ["Stryker", "Handala", "wiper", "Intune", "Microsoft", "medical", "APT"]
+excerpt: "Il gruppo Handala sfrutta Microsoft Intune per distribuire un wiper nei sistemi di Stryker Medical. L'attacco evidenzia i rischi del mobile device management compromesso."
+---
+
 # Stryker: Handala cancella 200.000 dispositivi con Microsoft Intune come arma
 
 ## Il fatto

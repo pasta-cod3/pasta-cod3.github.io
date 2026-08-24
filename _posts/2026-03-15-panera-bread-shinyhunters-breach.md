@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Panera Bread e ShinyHunters: dati di 28 milioni di clienti in vendita sul dark web"
+date: 2026-03-15
+cat: news
+tags: ["Panera Bread", "ShinyHunters", "breach", "dark web", "dati clienti", "food"]
+excerpt: "Il gruppo ShinyHunters rivendica l'esfiltrazione di dati di 28 milioni di clienti Panera Bread. Email, indirizzi, ultime 4 cifre carte: già in vendita su forum underground."
+---
+
 # Panera Bread: ShinyHunters pubblica 5,1 milioni di account dopo estorsione fallita
 
 ## Il fatto

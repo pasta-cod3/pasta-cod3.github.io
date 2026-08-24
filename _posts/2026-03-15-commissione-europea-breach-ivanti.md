@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Breach alla Commissione Europea via Ivanti: i dettagli dell'incidente"
+date: 2026-03-15
+cat: news
+tags: ["Commissione Europea", "Ivanti", "breach", "VPN", "exploit", "UE"]
+excerpt: "Sistemi della Commissione Europea compromessi tramite vulnerabilità nei gateway Ivanti. L'incidente riaccende il dibattito sulla sicurezza delle VPN istituzionali."
+---
+
 # La Commissione Europea violata tramite vulnerabilità Ivanti: nomi e telefoni del personale esposti
 
 ## Il fatto

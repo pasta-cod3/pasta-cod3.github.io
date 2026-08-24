@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Incident Response: cosa fare quando le cose vanno male davvero"
-description: "Il processo di incident response spiegato passo passo: le fasi PICERL, cosa fare nei primi minuti, come contenere senza distruggere le prove e cosa scrivere nel report."
+title: "Incident Response: il processo per rispondere a un attacco informatico"
 date: 2026-02-09
-categoria: Blue Team
-tags: [incident-response, blue-team, forensics, playbook, nist, picerl]
+cat: blue
+tags: ["incident response", "IR", "DFIR", "containment", "forensics", "NIST"]
+excerpt: "Cosa fare nelle prime ore dopo un incidente di sicurezza. Il processo IR in 6 fasi secondo NIST: preparazione, identificazione, contenimento, eradicazione, recovery, lessons learned."
 ---
 
 C'è un momento, nella vita di ogni persona che lavora nella sicurezza, in cui l'allarme non è un falso positivo. È reale. Qualcuno è dentro. Ricordo ancora il vuoto allo stomaco la prima volta: quella sensazione di "e adesso cosa faccio?" mentre il cursore lampeggiava e mezza azienda aspettava una risposta da me. La verità è che in quel momento non devi *pensare* — devi *seguire un processo*. Ed è esattamente per questo che l'incident response esiste: per trasformare il panico in procedura.

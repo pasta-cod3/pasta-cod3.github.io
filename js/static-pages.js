@@ -86,7 +86,8 @@ class CodeFrag {
     if (this.alpha <= 0) return;
     ctx.save();
     ctx.font         = `${this.fontSize}px 'JetBrains Mono', monospace`;
-    ctx.fillStyle    = this.color;
+    const isLight    = document.documentElement.getAttribute('data-theme') === 'light';
+    ctx.fillStyle    = isLight ? (this.bright ? '#000000' : '#33415c') : this.color;
     ctx.globalAlpha  = this.alpha;
     ctx.letterSpacing= '0.04em';
     const visible = this.text.slice(0, this.charIdx);

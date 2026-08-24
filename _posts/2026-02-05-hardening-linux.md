@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Hardening Linux: configurare un sistema che non ti tradisce"
-description: "Guida pratica all'hardening di sistemi Linux: SSH, firewall, SELinux/AppArmor, audit, aggiornamenti automatici e checklist finale."
+title: "Hardening Linux: rendere un sistema più sicuro passo dopo passo"
 date: 2026-02-05
-categoria: Blue Team
-tags: [hardening, linux, ssh, firewall, selinux, apparmor, sysadmin]
+cat: blue
+tags: ["hardening", "Linux", "CIS benchmark", "SSH", "sudo", "UFW", "auditd"]
+excerpt: "Checklist pratica per hardening di sistemi Linux: configurazione SSH sicura, firewall, permessi, logging, rimozione servizi inutili e CIS benchmark."
 ---
 
 # Hardening Linux: configurare un sistema che non ti tradisce

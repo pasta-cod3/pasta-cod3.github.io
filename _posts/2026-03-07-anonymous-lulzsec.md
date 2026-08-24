@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Anonymous e LulzSec: hacktivismo, chaos e la fine dell'anonimato online"
+date: 2026-03-07
+cat: storia
+tags: ["Anonymous", "LulzSec", "hacktivismo", "Operation Payback", "Sabu", "storia"]
+excerpt: "Dal 2008 al 2012 Anonymous e LulzSec hanno attaccato Scientology, PayPal, Sony, FBI e CIA. Come funzionavano, cosa li ha distrutti e cosa resta della loro eredità."
+---
+
 # Anonymous e LulzSec: hacking come atto politico
 
 ## Introduzione

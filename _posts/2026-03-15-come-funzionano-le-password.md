@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Come funzionano le password: hashing, salting e perché il testo in chiaro è un crimine"
+date: 2026-03-15
+cat: fond
+tags: ["password", "hashing", "salting", "bcrypt", "PBKDF2", "sicurezza"]
+excerpt: "Le password non vengono memorizzate in chiaro — o non dovrebbero. Come funziona l'hashing, cos'è il salting, perché MD5 è obsoleto e cosa usare nel 2026."
+---
+
 # Come funzionano le password: hashing, salting e perché le password sono il punto debole
 
 ## Introduzione

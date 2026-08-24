@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Ricognizione passiva e OSINT: raccogliere informazioni senza toccare il target"
+date: 2026-01-11
+cat: red
+tags: ["OSINT", "passive recon", "Shodan", "theHarvester", "Google dork", "whois"]
+excerpt: "Prima di toccare il target, un buon pentester raccoglie il più possibile da fonti aperte. OSINT toolkit: Shodan, theHarvester, Google dork, whois e molto altro."
+---
+
 # Ricognizione Passiva: raccogliere informazioni senza farsi notare
 
 ## Introduzione

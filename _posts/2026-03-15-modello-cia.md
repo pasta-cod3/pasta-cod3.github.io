@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Il modello CIA: Confidentiality, Integrity, Availability — le fondamenta della sicurezza"
+date: 2026-03-15
+cat: fond
+tags: ["CIA triad", "confidenzialità", "integrità", "disponibilità", "fondamentali", "sicurezza"]
+excerpt: "Confidenzialità, Integrità, Disponibilità: la triade CIA è il framework concettuale su cui si basa tutta la sicurezza informatica. Spiegata con esempi reali."
+---
+
 # Il Modello CIA: Confidenzialità, Integrità, Disponibilità
 
 ## Introduzione

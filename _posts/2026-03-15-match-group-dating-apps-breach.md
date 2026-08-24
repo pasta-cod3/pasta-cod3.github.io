@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Match Group: breach su Tinder, OkCupid e Hinge espone dati di milioni di utenti"
+date: 2026-03-15
+cat: news
+tags: ["Match Group", "Tinder", "OkCupid", "Hinge", "breach", "dati personali", "dating"]
+excerpt: "Un incidente di sicurezza colpisce l'infrastruttura condivisa di Match Group. Dati di profilo, preferenze e messaggi privati di milioni di utenti potenzialmente esposti."
+---
+
 # ShinyHunters attacca Match Group: milioni di account di app di dating esposti
 
 ## Il fatto

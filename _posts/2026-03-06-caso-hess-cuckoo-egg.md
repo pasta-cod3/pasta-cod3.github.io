@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Il caso Cuckoo's Egg: Clifford Stoll e la prima indagine di cyber spionaggio della storia"
+date: 2026-03-06
+cat: storia
+tags: ["Cuckoo's Egg", "Clifford Stoll", "KGB", "spionaggio", "storia", "1986"]
+excerpt: "1986: Clifford Stoll trova uno scompenso di 75 centesimi nei log di un mainframe universitario. Finirà per smascherare una rete di spie al servizio del KGB."
+---
+
 # Il Caso Hess: come 75 centesimi smascherarono una rete di spionaggio
 
 ## Introduzione

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "La strategia cyber USA: Trump apre alle offensive del settore privato"
+date: 2026-03-15
+cat: news
+tags: ["USA", "cyber strategy", "Trump", "offensiva", "settore privato", "geopolitica"]
+excerpt: "La nuova direttiva cybersecurity americana allenta i vincoli sulle operazioni offensive e apre alla partecipazione di soggetti privati. Le implicazioni per l'equilibrio cyber globale."
+---
+
 # La nuova strategia cyber Trump: aziende private nelle operazioni offensive contro ransomware
 
 ## Il fatto

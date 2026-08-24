@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Codewall e l'agente AI Lilli di McKinsey: quando l'automazione incontra il rischio"
+date: 2026-03-15
+cat: news
+tags: ["AI agent", "McKinsey", "Lilli", "automazione", "AI security", "rischio"]
+excerpt: "L'agente AI Lilli di McKinsey e sistemi simili aprono nuovi vettori di rischio. Come gli AI agent cambiano il panorama delle minacce aziendali."
+---
+
 # Un agente AI autonomo ha violato la piattaforma interna di McKinsey in 2 ore
 
 ## Il fatto

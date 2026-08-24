@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Il Morris Worm del 1988: il primo grande incidente informatico di internet"
+date: 2026-03-10
+cat: storia
+tags: ["Morris Worm", "1988", "internet", "worm", "Cornell", "Robert Morris", "storia"]
+excerpt: "Il 2 novembre 1988 un worm scritto da uno studente di Cornell mise in ginocchio il 10% di internet. Non era stato pensato per fare danni — eppure cambiò tutto."
+---
+
 # Il Morris Worm (1988): il primo grande attacco su internet
 
 ## Introduzione

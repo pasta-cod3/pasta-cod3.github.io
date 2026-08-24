@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Lateral Movement: come un attaccante si muove nella rete dopo il primo accesso"
+date: 2025-01-10
+cat: red
+tags: ["lateral movement", "red team", "post-exploitation", "pivoting", "pass-the-hash"]
+excerpt: "Ottenuto il primo foothold, l'attaccante si muove lateralmente verso target più preziosi. Tecniche, tool e contromisure del lateral movement."
+---
+
 # Lateral Movement: tecniche Red Team su Active Directory
 
 ## Introduzione

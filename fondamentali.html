@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#020c18">
+
+  <!-- ── SEO ──────────────────────────────────────────────── -->
+  <title>Percorso Fondamentali | pasta-cod3 Cybersecurity Blog</title>
+  <meta name="description" content="Percorso di apprendimento interattivo sui fondamentali di cybersecurity: stanze in sequenza, quiz e circuiti da sbloccare, stile TryHackMe.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pasta-cod3.github.io/fondamentali.html">
+
+  <!-- ── FAVICON ──────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico">
+
+  <!-- OG -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Percorso Fondamentali | pasta-cod3">
+  <meta property="og:description" content="Impara i fondamentali di cybersecurity stanza per stanza: leggi, rispondi, sblocca il prossimo step e guadagna circuiti.">
+  <meta property="og:url"         content="https://pasta-cod3.github.io/fondamentali.html">
+
+  <!-- ── PERF ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="css/style.css" fetchpriority="high">
+
+  <script>
+    (function(){ var t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+  </script>
+</head>
+<body>
+
+<!-- ── CANVAS ─────────────────────────────────────────── -->
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+
+<!-- ── NAV ───────────────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
+  <a href="index.html"    class="nav-drawer-link">Home</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="red-team">Red Team</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="storia">Storia</a>
+  <a href="fondamentali.html" class="nav-drawer-link active">Fondamentali</a>
+  <a href="index.html"    class="nav-drawer-link" data-cat="notizie">Notizie</a>
+  <a href="about.html"    class="nav-drawer-link">Chi sono</a>
+  <a href="contatti.html" class="nav-drawer-link">Contatti</a>
+</nav>
+
+<!-- ── HEADER ────────────────────────────────────────── -->
+<header class="site-header">
+  <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+  <nav class="nav-center" aria-label="Navigazione principale">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html" data-cat="red-team">Red Team</a></li>
+      <li><a href="index.html" data-cat="blue-team">Blue Team</a></li>
+      <li><a href="index.html" data-cat="storia">Storia</a></li>
+      <li><a href="fondamentali.html" class="active">Fondamentali</a></li>
+      <li><a href="index.html" data-cat="notizie">Notizie</a></li>
+      <li><a href="about.html">Chi sono</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════════════════ -->
+<main class="static-main">
+
+  <!-- ── HERO ───────────────────────────────────────── -->
+  <div class="static-hero fond-hero" style="position:relative;overflow:hidden;">
+    <div class="scan-line" aria-hidden="true"></div>
+    <div class="static-hero-inner">
+      <a href="index.html" class="btn-ghost fond-back-btn">← Torna a pasta-cod3 Blog</a>
+      <p class="eyebrow">00 / Percorso Fondamentali</p>
+      <h1 class="static-page-title">Impara i fondamentali.<br>Una stanza alla volta.</h1>
+      <p class="static-subtitle">
+        8 moduli, 45 stanze in totale — un articolo da leggere e un quiz da superare in ognuna.<br>
+        Supera un modulo con almeno il 90% dei circuiti per sbloccare il successivo. Le stanze hands-on del modulo
+        "Sfruttamento pratico" ti consigliano fino a 3 macchine gratuite su TryHackMe e richiedono le flag ottenute per essere completate.
+      </p>
+    </div>
+  </div>
+
+  <div class="static-content fond-content">
+    <div id="fondApp" aria-live="polite"></div>
+  </div>
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026, Tutti i diritti riservati</div>
+  </div>
+  <nav class="f-nav" aria-label="Footer navigation">
+    <a href="index.html">Home</a>
+    <a href="fondamentali.html">Fondamentali</a>
+    <a href="about.html">Chi sono</a>
+    <a href="contatti.html">Contatti</a>
+  </nav>
+  <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="js/static-pages.js"></script>
+<script src="js/fondamentali.js"></script>
+</body>
+</html>

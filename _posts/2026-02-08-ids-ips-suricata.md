@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "IDS e IPS con Suricata: metti gli occhi sulla tua rete"
-description: "Guida pratica a Suricata: installazione, configurazione come IDS/IPS, scrittura di regole personalizzate e integrazione con Elastic Stack per il monitoraggio."
+title: "IDS/IPS con Suricata: rilevare e bloccare gli attacchi in tempo reale"
 date: 2026-02-08
-categoria: Blue Team
-tags: [IDS, IPS, suricata, network-security, regole, elastic, snort]
+cat: blue
+tags: ["IDS", "IPS", "Suricata", "regole", "network security", "NIDS"]
+excerpt: "Suricata è uno degli IDS/IPS open source più potenti. Come installarlo, scrivere regole, interpretare gli alert e integrarlo in un SOC."
 ---
 
 # IDS e IPS con Suricata: metti gli occhi sulla tua rete

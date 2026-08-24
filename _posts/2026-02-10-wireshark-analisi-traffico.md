@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Wireshark: leggere cosa si dicono davvero i pacchetti"
-description: "Guida pratica a Wireshark: catturare traffico, usare i filtri di visualizzazione, seguire uno stream TCP e riconoscere pattern sospetti nel traffico di rete."
+title: "Wireshark: analisi del traffico di rete per il Blue Team"
 date: 2026-02-10
-categoria: Blue Team
-tags: [wireshark, network-analysis, pcap, tcp, dns, forensics, blue-team]
+cat: blue
+tags: ["Wireshark", "packet analysis", "network", "pcap", "TLS", "blue team"]
+excerpt: "Wireshark è lo strumento di riferimento per l'analisi del traffico di rete. Filtri essenziali, follow TCP stream, analisi di attacchi reali e cosa cercare in un pcap sospetto."
 ---
 
 Wireshark è stato il primo strumento che mi ha fatto sentire davvero un "hacker" — nel senso buono. Ricordo la sensazione quasi magica di aprire una cattura e vedere, riga dopo riga, tutto ciò che il mio computer stava dicendo alla rete senza chiedermi il permesso. È stato lì che ho capito una cosa fondamentale: **la rete non mente**. Un malware può nascondersi da un antivirus, offuscarsi, cancellare i suoi log — ma se deve comunicare con l'esterno, quei pacchetti passano. E se stai guardando, li vedi.

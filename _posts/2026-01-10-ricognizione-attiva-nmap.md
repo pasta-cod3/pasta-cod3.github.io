@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Ricognizione attiva con Nmap: tecniche e script essenziali"
+date: 2026-01-10
+cat: red
+tags: ["nmap", "recon", "port scanning", "NSE", "active reconnaissance"]
+excerpt: "Nmap è il punto di partenza di ogni pentest. Scansioni TCP/UDP, OS fingerprinting, script NSE, timing e tecniche per ridurre il rumore durante le attività."
+---
+
 # Ricognizione Attiva con Nmap: scansione di porte e servizi
 
 ## Introduzione

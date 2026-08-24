@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Crates.io compromessa: pacchetti Rust malevoli esfiltravano variabili CI/CD"
+date: 2026-03-15
+cat: news
+tags: ["Rust", "crates.io", "supply chain", "CI/CD", "variabili d'ambiente", "secrets"]
+excerpt: "Decine di crate Rust malevoli pubblicati su crates.io esfiltravano variabili d'ambiente dai pipeline CI/CD, inclusi token e credenziali cloud. Rimossi dopo segnalazione."
+---
+
 # Cinque crate Rust malevoli rubano .env dalle pipeline CI/CD
 
 ## Il fatto

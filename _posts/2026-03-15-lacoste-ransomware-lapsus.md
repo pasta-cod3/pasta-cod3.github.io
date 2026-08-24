@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Lacoste colpita da ransomware: rivendicazione del gruppo Lapsus successor"
+date: 2026-03-15
+cat: news
+tags: ["Lacoste", "ransomware", "Lapsus", "fashion", "data exfiltration", "brand"]
+excerpt: "Il brand francese Lacoste subisce un attacco ransomware rivendicato da un gruppo erede di Lapsus. Dati di dipendenti e fornitori potenzialmente esfiltrati."
+---
+
 # Lacoste colpita da Lapsus$: il gruppo torna dopo due anni di silenzio
 
 ## Il fatto

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Password cracking con Hashcat e Hydra: guida pratica"
+date: 2026-01-08
+cat: red
+tags: ["hashcat", "hydra", "password cracking", "hash", "wordlist", "rockyou"]
+excerpt: "Hashcat per gli hash offline, Hydra per gli attacchi online: come funzionano, quali modalità usare e come difendersi con policy robuste e hashing corretto."
+---
+
 # Password Cracking: hashcat e hydra per principianti
 
 ## Introduzione

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "La storia di Captain Crunch: il fischietto che bucò il sistema telefonico americano"
+date: 2024-12-20
+cat: storia
+tags: ["captain crunch", "phreaking", "storia hacking", "anni 70"]
+excerpt: "John Draper scoprì che il fischietto omaggio dei cereali Cap'n Crunch emetteva esattamente 2600 Hz — la frequenza per accedere alle linee trunk AT&T. Così nacque il phreaking."
+---
+
 # Captain Crunch e la nascita del Phone Phreaking
 
 ## Un fischietto, una scatola di cereali, e la rete telefonica AT&T

@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Illinois e Minnesota: dati governativi esposti per mesi su bucket S3 pubblico"
+date: 2026-03-15
+cat: news
+tags: ["data breach", "AWS S3", "governo USA", "misconfiguration", "cloud", "dati esposti"]
+excerpt: "Database contenenti dati sensibili di cittadini di Illinois e Minnesota rimasti pubblicamente accessibili su bucket S3 per mesi. Il caso della misconfiguration cloud nel settore pubblico."
+---
+
 # Illinois e Minnesota: dati di quasi un milione di cittadini esposti pubblicamente per anni
 
 ## Il fatto

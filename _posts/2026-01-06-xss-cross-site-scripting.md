@@ -1,3 +1,12 @@
+---
+layout: post
+title: "XSS — Cross-Site Scripting: capire, sfruttare e difendersi"
+date: 2026-01-06
+cat: red
+tags: ["XSS", "cross-site scripting", "web", "DOM", "CSP", "OWASP"]
+excerpt: "Reflected, stored, DOM-based: i tre tipi di XSS spiegati con payload reali, scenari d'attacco e le contromisure efficaci tra CSP e sanitizzazione dell'input."
+---
+
 # Cross-Site Scripting (XSS): iniettare codice nei browser altrui
 
 ## Introduzione

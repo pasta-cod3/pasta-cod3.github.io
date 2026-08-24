@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Ingegneria Sociale: come funziona e come difendersi"
+date: 2026-03-15
+cat: fond
+tags: ["ingegneria sociale", "social engineering", "phishing", "pretexting", "vishing", "manipolazione"]
+excerpt: "L'ingegneria sociale sfrutta la psicologia, non il codice. Pretexting, phishing, vishing, baiting: come funzionano le tecniche di manipolazione e come costruire una cultura di difesa."
+---
+
 # Ingegneria sociale: la psicologia degli attacchi
 
 ## Introduzione

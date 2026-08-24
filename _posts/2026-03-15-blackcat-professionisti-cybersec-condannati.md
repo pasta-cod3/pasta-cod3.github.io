@@ -1,3 +1,12 @@
+---
+layout: post
+title: "BlackCat/ALPHV: i professionisti della cybersecurity condannati per ransomware"
+date: 2026-03-15
+cat: news
+tags: ["BlackCat", "ALPHV", "ransomware", "RaaS", "condanna", "FBI"]
+excerpt: "Operatori del gruppo ransomware BlackCat/ALPHV, alcuni con background in cybersecurity legittima, ricevono condanne significative dopo operazione coordinata FBI e Europol."
+---
+
 # I difensori che attaccavano: due professionisti cybersecurity condannati per BlackCat ransomware
 
 ## Il fatto

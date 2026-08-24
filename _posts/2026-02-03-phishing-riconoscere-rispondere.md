@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Phishing: come riconoscerlo davvero (e cosa fare quando ci casca qualcuno)"
-description: "Guida pratica al riconoscimento del phishing e alla risposta agli incidenti: analisi delle email sospette, header, link e procedure di risposta."
+title: "Phishing: come riconoscerlo, analizzarlo e rispondere all'incidente"
 date: 2026-02-03
-categoria: Blue Team
-tags: [phishing, email-security, incident-response, social-engineering]
+cat: blue
+tags: ["phishing", "email", "social engineering", "blue team", "IR", "header analysis"]
+excerpt: "Il phishing è ancora il vettore d'attacco numero 1. Come analizzare un'email sospetta, estrarre gli indicatori di compromissione e gestire l'incidente."
 ---
 
 # Phishing: come riconoscerlo davvero (e cosa fare quando ci casca qualcuno)
