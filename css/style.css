@@ -193,13 +193,25 @@ body {
   font-family: var(--ff-m); font-size: 7px; font-weight: 700;
   letter-spacing: 0.03em; color: #04140f;
   background: var(--c-fond); padding: 2px 4.5px; border-radius: 20px;
-  box-shadow: 0 0 8px rgba(0,221,136,0.6);
+  box-shadow: 0 0 6px rgba(0,221,136,0.5);
   animation: nav-fond-pulse 2.6s ease-in-out infinite;
   pointer-events: none; white-space: nowrap;
 }
+.nav-fond-badge::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 14px rgba(0,221,136,0.95);
+  opacity: 0; pointer-events: none;
+  animation: nav-fond-glow 2.6s ease-in-out infinite;
+}
+/* Glow pulsante: box-shadow statico + opacity animata sul pseudo-elemento,
+   così il pulse gira sul compositor invece di ripetere il paint ad ogni frame */
 @keyframes nav-fond-pulse {
-  0%, 100% { box-shadow: 0 0 6px rgba(0,221,136,0.5); transform: scale(1); }
-  50%      { box-shadow: 0 0 14px rgba(0,221,136,0.95); transform: scale(1.1); }
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.1); }
+}
+@keyframes nav-fond-glow {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 
 /* Mini popover descrittivo al passaggio del mouse (desktop) */
@@ -395,9 +407,16 @@ body {
 .nav-drawer-link.nav-fond.active { color: var(--c-fond); background: rgba(0,221,136,0.1); }
 .nav-fond-drawer-row { display: flex; align-items: center; gap: 0.5rem; }
 .nav-fond-drawer-tag {
+  position: relative;
   font-family: var(--ff-m); font-size: 8.5px; font-weight: 700; letter-spacing: 0.05em;
   color: #04140f; background: var(--c-fond); padding: 1.5px 6px; border-radius: 20px;
   animation: nav-fond-pulse 2.6s ease-in-out infinite;
+}
+.nav-fond-drawer-tag::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 10px rgba(0,221,136,0.7);
+  opacity: 0; pointer-events: none;
+  animation: nav-fond-glow 2.6s ease-in-out infinite;
 }
 .nav-fond-drawer-desc {
   font-family: var(--ff-m); font-size: 10px; font-weight: 400;
@@ -406,6 +425,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .nav-fond-badge, .nav-fond-drawer-tag { animation: none !important; }
+  .nav-fond-badge::after, .nav-fond-drawer-tag::after { animation: none !important; opacity: 0; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -468,11 +488,6 @@ body {
 .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 /* BUTTONS */
-@keyframes btn-glow-pulse {
-  0%, 100% { box-shadow: 0 0 16px rgba(0,200,255,0.45), 0 4px 18px rgba(0,200,255,0.22), inset 0 1px 0 rgba(255,255,255,0.18); }
-  50%       { box-shadow: 0 0 28px rgba(0,200,255,0.70), 0 6px 26px rgba(0,200,255,0.38), inset 0 1px 0 rgba(255,255,255,0.18); }
-}
-
 .btn-primary {
   display: inline-flex; align-items: center; gap: 0.4rem;
   background: var(--accent); color: var(--bg);
@@ -482,7 +497,19 @@ body {
   border-radius: var(--r); border: 1px solid var(--accent);
   cursor: pointer; position: relative; overflow: hidden;
   transition: background var(--t), color var(--t), transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 16px rgba(0,200,255,0.45), 0 4px 18px rgba(0,200,255,0.22), inset 0 1px 0 rgba(255,255,255,0.18);
+}
+/* Glow pulsante: pseudo-elemento con box-shadow statico "alto", solo l'opacity
+   viene animata (compositor-only) invece di ripetere il box-shadow ad ogni frame */
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 28px rgba(0,200,255,0.70), 0 6px 26px rgba(0,200,255,0.38);
+  opacity: 0; pointer-events: none;
   animation: btn-glow-pulse 3s ease-in-out infinite;
+}
+@keyframes btn-glow-pulse {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 .btn-primary::after {
   content: ''; position: absolute; inset: 0;
@@ -576,13 +603,19 @@ body {
 /* Stat-box "Fondamentali": più invitante, con badge gratis */
 .stat-box-fond {
   border-color: rgba(0,221,136,0.4);
-  box-shadow: 0 0 16px rgba(0,221,136,0.12);
+  box-shadow: 0 0 14px rgba(0,221,136,0.12);
+}
+.stat-box-fond:hover::after { animation: none; opacity: 0; }
+/* Glow pulsante sul pseudo-elemento ::after già presente su .stat-box (overlay
+   radiale): si aggiunge solo box-shadow + opacity animata, compositor-only */
+.stat-box-fond::after {
+  box-shadow: 0 0 26px rgba(0,221,136,0.3);
+  opacity: 0;
   animation: stat-fond-glow 2.8s ease-in-out infinite;
 }
-.stat-box-fond:hover { animation: none; }
 @keyframes stat-fond-glow {
-  0%, 100% { box-shadow: 0 0 14px rgba(0,221,136,0.12); }
-  50%      { box-shadow: 0 0 26px rgba(0,221,136,0.3); }
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 .stat-box-fond-tag {
   position: absolute; top: 0.7rem; right: 0.75rem;
@@ -720,12 +753,20 @@ body {
 /* Card "Fondamentali": più invitante, sempre gratis */
 .cat-card-fond {
   border-color: rgba(0,221,136,0.35);
+  box-shadow: 0 0 16px rgba(0,221,136,0.12);
+}
+.cat-card-fond:hover::before { animation: none; opacity: 0; }
+/* Glow pulsante su un pseudo-elemento dedicato (::after è già usato dallo
+   shimmer di .cat-card): solo opacity animata, compositor-only */
+.cat-card-fond::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 30px rgba(0,221,136,0.32);
+  opacity: 0; pointer-events: none;
   animation: cat-fond-glow 2.8s ease-in-out infinite;
 }
-.cat-card-fond:hover { animation: none; }
 @keyframes cat-fond-glow {
-  0%, 100% { box-shadow: 0 0 16px rgba(0,221,136,0.12); }
-  50%      { box-shadow: 0 0 30px rgba(0,221,136,0.32); }
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 .cat-card-fond-tag {
   position: absolute; top: 0.85rem; right: 0.85rem; z-index: 2;
@@ -735,7 +776,7 @@ body {
   box-shadow: 0 0 10px rgba(0,221,136,0.6);
 }
 @media (prefers-reduced-motion: reduce) {
-  .cat-card-fond { animation: none !important; }
+  .cat-card-fond::before { animation: none !important; opacity: 0; }
 }
 .cat-bar {
   position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -1063,7 +1104,7 @@ body {
   padding: 1.2rem 1.4rem;
   text-decoration: none; color: var(--text);
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-  position: relative; overflow: hidden;
+  position: relative; overflow: hidden; cursor: pointer;
   --card-c-glow: rgba(0,200,255,0.25);
 }
 .article-card::before {
@@ -1428,6 +1469,7 @@ body {
   border: 1px solid var(--border); border-radius: 6px;
   padding: 0.6rem 1rem; font-family: var(--ff-m); font-size: 12px;
   transition: all var(--t);
+  position: relative;
 }
 .cert-badge.done { border-color: var(--c-fond); color: var(--c-fond); }
 .cert-badge.wip  { border-color: var(--c-storia); color: var(--c-storia); }
@@ -1495,11 +1537,17 @@ body {
 [data-theme="light"] .stack-item.tc-tilt:hover   { box-shadow: 0 10px 24px rgba(0,0,0,0.1), 0 0 16px rgba(0,150,255,0.2); }
 [data-theme="light"] .tool-badge.tc-tilt:hover   { box-shadow: 0 6px 16px rgba(0,0,0,0.1), 0 0 12px rgba(0,150,255,0.25); }
 
-/* Il badge "in corso" pulsa: è letteralmente l'unico stato "vivo" */
-.cert-badge.wip { animation: cert-pulse-wip 2.2s ease-in-out infinite; }
+/* Il badge "in corso" pulsa: è letteralmente l'unico stato "vivo".
+   Opacity animata su ::after (compositor-only) invece del box-shadow diretto. */
+.cert-badge.wip::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 16px rgba(255,170,32,0.4);
+  opacity: 0; pointer-events: none;
+  animation: cert-pulse-wip 2.2s ease-in-out infinite;
+}
 @keyframes cert-pulse-wip {
-  0%, 100% { box-shadow: 0 0 0 rgba(255,170,32,0); }
-  50%      { box-shadow: 0 0 16px rgba(255,170,32,0.4); }
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 .cert-badge.done { box-shadow: 0 0 10px rgba(0,221,136,0.15); }
 
@@ -1512,7 +1560,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .tc-tilt { transition: none !important; }
   .tc-tilt:hover .tc-shimmer-bar { animation: none !important; }
-  .cert-badge.wip { animation: none !important; }
+  .cert-badge.wip::after { animation: none !important; opacity: 0; }
 }
 
 /* ABOUT CTA */
@@ -1879,6 +1927,7 @@ body {
 .fond-node-led {
   width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
   background: var(--text-muted); transition: all var(--t);
+  position: relative;
 }
 .fond-node-title {
   font-size: 12.5px; line-height: 1.45; color: var(--text); font-weight: 500;
@@ -1900,7 +1949,13 @@ body {
 }
 .fond-node-unlocked .fond-node-led {
   background: var(--accent);
-  box-shadow: 0 0 8px 2px rgba(0,200,255,0.85);
+  box-shadow: 0 0 7px 2px rgba(0,200,255,0.8);
+}
+/* Opacity animata su ::after (compositor-only) invece del box-shadow diretto */
+.fond-node-unlocked .fond-node-led::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 14px 4px rgba(0,200,255,1);
+  opacity: 0; pointer-events: none;
   animation: fond-led-pulse 1.7s ease-in-out infinite;
 }
 .fond-node-unlocked:hover {
@@ -1918,8 +1973,8 @@ body {
 .fond-node-warn { color: var(--c-storia); }
 
 @keyframes fond-led-pulse {
-  0%, 100% { box-shadow: 0 0 7px 2px rgba(0,200,255,0.8); }
-  50%      { box-shadow: 0 0 14px 4px rgba(0,200,255,1); }
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 
 /* Card modulo (mappa principale): icona tematica + mini-terminale

@@ -1731,11 +1731,10 @@ class CodeFrag {
       if (this.opacity <= 0) this.reset(w, h);
     }
   }
-  draw() {
+  draw(isLight) {
     const ctx = this.ctx;
     ctx.save();
     ctx.globalAlpha = Math.max(0, this.opacity);
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     ctx.fillStyle   = isLight
       ? (this.bright ? '#000000' : '#33415c')
       : (this.bright ? '#00c8ff' : '#004466');
@@ -1756,6 +1755,13 @@ function initCanvas() {
   let W, H, frags = [], rafId;
   const isMobile = () => window.innerWidth < 768;
   const COUNT = () => isMobile() ? 8 : 22;
+
+  // Tema letto una volta e tenuto in cache: evita una lettura DOM per
+  // frammento ad ogni frame (fino a 22 letture/frame a 60fps).
+  let isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
+  new MutationObserver(() => {
+    isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   function resize() {
     W = window.innerWidth;
@@ -1785,7 +1791,7 @@ function initCanvas() {
 
   function loop() {
     ctx.clearRect(0, 0, W, H);
-    frags.forEach(f => { f.update(W, H); f.draw(); });
+    frags.forEach(f => { f.update(W, H); f.draw(isLightTheme); });
     rafId = requestAnimationFrame(loop);
   }
 
@@ -1941,6 +1947,30 @@ function getFiltered() {
   });
 }
 
+let listEventsBound = false;
+function bindListEvents(list) {
+  if (listEventsBound) return; // `list` non viene mai ricreato tra un render() e l'altro, solo il suo innerHTML
+  listEventsBound = true;
+
+  list.addEventListener('click', e => {
+    const chip = e.target.closest('.tag-chip');
+    if (chip) {
+      e.preventDefault(); e.stopPropagation();
+      const t = chip.dataset.tag;
+      activeTag = activeTag === t ? '' : t;
+      syncTagUI();
+      render();
+      return;
+    }
+    if (e.target.closest('a')) return;
+    const card = e.target.closest('.article-card');
+    if (card) {
+      const href = card.querySelector('a')?.href;
+      if (href) window.location.href = href;
+    }
+  });
+}
+
 function render() {
   const list = document.getElementById('articleList');
   const noR  = document.getElementById('noResults');
@@ -1970,26 +2000,9 @@ function render() {
   const fdb = document.getElementById('fdbCount');
   if (fdb) fdb.textContent = sorted.length;
 
-  // Tag click on cards
-  list.querySelectorAll('.tag-chip').forEach(chip => {
-    chip.addEventListener('click', e => {
-      e.preventDefault(); e.stopPropagation();
-      const t = chip.dataset.tag;
-      activeTag = activeTag === t ? '' : t;
-      syncTagUI();
-      render();
-    });
-  });
-
-  // Card click → navigate
-  list.querySelectorAll('.article-card').forEach(card => {
-    card.addEventListener('click', e => {
-      if (e.target.closest('a') || e.target.closest('.tag-chip')) return;
-      const href = card.querySelector('a')?.href;
-      if (href) window.location.href = href;
-    });
-    card.style.cursor = 'pointer';
-  });
+  // Tag click e card click → navigate: un solo listener delegato su `list`
+  // invece di un addEventListener per ogni tag-chip/card ad ogni render/filtro.
+  bindListEvents(list);
 
   // Entry animation via GSAP ScrollTrigger — le card entrano con un lieve
   // tilt 3D, poi ogni attributo interno (badge → titolo → excerpt/meta →
@@ -2062,13 +2075,22 @@ function render() {
   }
 
   cards.forEach(card => {
+    let tiltRaf = null, lastEvt = null;
     card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      card.style.transform = `translateY(-5px) perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 6}deg)`;
+      lastEvt = e;
+      if (tiltRaf) return; // un solo rAF in coda per frame: niente layout read/write ad ogni mousemove
+      tiltRaf = requestAnimationFrame(() => {
+        tiltRaf = null;
+        const r = card.getBoundingClientRect();
+        const x = (lastEvt.clientX - r.left) / r.width  - 0.5;
+        const y = (lastEvt.clientY - r.top)  / r.height - 0.5;
+        card.style.transform = `translateY(-5px) perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 6}deg)`;
+      });
     });
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    card.addEventListener('mouseleave', () => {
+      if (tiltRaf) { cancelAnimationFrame(tiltRaf); tiltRaf = null; }
+      card.style.transform = '';
+    });
   });
 }
 
@@ -2291,15 +2313,24 @@ function syncTagUI() {
 function init3DTilt() {
   /* 3D tilt su stat-box e cat-card */
   document.querySelectorAll('.stat-box, .cat-card').forEach(el => {
+    let tiltRaf = null, lastEvt = null;
+    const maxTilt = el.classList.contains('stat-box') ? 14 : 10;
     el.addEventListener('mousemove', e => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      const maxTilt = el.classList.contains('stat-box') ? 14 : 10;
-      el.style.transform =
-        `perspective(500px) rotateY(${x * maxTilt}deg) rotateX(${-y * maxTilt}deg) translateZ(6px) translateY(-3px)`;
+      lastEvt = e;
+      if (tiltRaf) return; // un solo rAF in coda per frame: niente layout read/write ad ogni mousemove
+      tiltRaf = requestAnimationFrame(() => {
+        tiltRaf = null;
+        const r = el.getBoundingClientRect();
+        const x = (lastEvt.clientX - r.left) / r.width  - 0.5;
+        const y = (lastEvt.clientY - r.top)  / r.height - 0.5;
+        el.style.transform =
+          `perspective(500px) rotateY(${x * maxTilt}deg) rotateX(${-y * maxTilt}deg) translateZ(6px) translateY(-3px)`;
+      });
     });
-    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    el.addEventListener('mouseleave', () => {
+      if (tiltRaf) { cancelAnimationFrame(tiltRaf); tiltRaf = null; }
+      el.style.transform = '';
+    });
   });
 
   /* Entry animation cat-cards (IntersectionObserver, staggered) */
@@ -2405,8 +2436,10 @@ function buildHeroReveal(sourceEl, catKey, subText) {
   wrap.appendChild(lbl);
 
   document.body.appendChild(wrap);
-  void wrap.getBoundingClientRect(); // forza il reflow prima di animare
-  wrap.classList.add('expand');
+  // Doppio rAF: aspetta che il browser abbia dipinto lo stato iniziale prima
+  // di aggiungere la classe che avvia la transizione (evita il forced reflow
+  // sincrono di un getBoundingClientRect() dedicato).
+  requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('expand')));
 
   setTimeout(() => { lbl.classList.add('visible', 'glitching'); }, 230);
   setTimeout(() => { lbl.classList.remove('glitching'); }, 360);
