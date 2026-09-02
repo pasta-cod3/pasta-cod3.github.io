@@ -11,9 +11,144 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://pasta-cod3.github.io/fondamentali.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://pasta-cod3.github.io/contatti.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/papercut-critical-rce-vulnerability.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/av-edr-evasion-tecniche.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/insecure-deserialization-rce.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/windows-persistence-registry-scheduled-task-wmi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/password-spraying-active-directory.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/golden-ticket-dcsync-active-directory.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/mimikatz-credential-dumping.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/ssrf-server-side-request-forgery.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/anatomia-attacco-ransomware.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/malware-tipologie-fondamentali.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/owasp-top-10.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/biometria-autenticazione-fisica.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/active-directory-ldap-fondamenti.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/iam-rbac-privilegio-minimo.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/risk-management-analisi-rischio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/cyber-kill-chain-mitre-attack.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/microsoft-patch-tuesday-421-cves.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/vmware-vcenter-apt-campaign.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/progress-loadmaster-rce-cve-2026-8037.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/mckesson-healthcare-breach-284-million.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/chaindrop-npm-supply-chain.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/dropbox-lenovo-email-verification-breach.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/ironworm-rust-ebpf-rootkit.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/qtfy-chinese-hacking-platform-disrupted.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/android-17-ech-privacy-browsing.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/medusa-ransomware-500-orgs.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/psn-breach-lulzsec-2011.html</loc>
@@ -96,6 +231,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasta-cod3.github.io/posts/gunra-ransomware-critical-infra.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasta-cod3.github.io/posts/antivirus-come-funziona-detection.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -141,12 +281,42 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasta-cod3.github.io/posts/hugging-face-700-rogue-ai-agents.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasta-cod3.github.io/posts/italia-sesta-ransomware-mondo-2025.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasta-cod3.github.io/posts/silent-ransom-unc3753-law-firms.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/medtronic-3-8-million-breach.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasta-cod3.github.io/posts/come-funziona-internet-v2.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/mississippi-medical-center-ransomware.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/manchester-airports-data-breach-travelers.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/signature-healthcare-ambulance-divert.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -176,12 +346,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/come-funzionano-le-password.html</loc>
+    <loc>https://pasta-cod3.github.io/posts/come-funziona-un-firewall.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/come-funziona-un-firewall.html</loc>
+    <loc>https://pasta-cod3.github.io/posts/come-funzionano-le-password.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -331,6 +501,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasta-cod3.github.io/posts/iran-apt-plc-attacks.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasta-cod3.github.io/posts/sony-hack-2014.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -356,12 +531,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pasta-cod3.github.io/posts/russian-critical-infra-routers.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasta-cod3.github.io/posts/cose-il-blue-team.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/analisi-log-windows-event-id.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/jfrog-artifactory-cve-authentication-bypass.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -412,6 +597,11 @@
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/threat-hunting-intro.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/carecloud-3-7-million-patients.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
