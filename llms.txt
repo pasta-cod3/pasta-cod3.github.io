@@ -1,6 +1,6 @@
 # pasta-cod3
 
-> Blog italiano di cybersecurity scritto da stewe (stewe_sec): penetration testing, red team, blue team, fondamentali di sicurezza informatica, storia dell'hacking e notizie dal settore. Contenuti tecnici e pratici, orientati a chi studia o lavora nell'offensive/defensive security.
+> Blog italiano di cybersecurity scritto da stewe (stewe.sec): penetration testing, red team, blue team, fondamentali di sicurezza informatica, storia dell'hacking e notizie dal settore. Contenuti tecnici e pratici, orientati a chi studia o lavora nell'offensive/defensive security.
 
 Il sito è organizzato in cinque categorie: Red Team (tecniche offensive e pentest), Blue Team (difesa, SOC, detection), Storia (eventi ed episodi storici della cybersecurity), Fondamentali (concetti di base: reti, crittografia, protocolli) e News (attualità cybersecurity, prevalentemente Italia ed Europa).
 

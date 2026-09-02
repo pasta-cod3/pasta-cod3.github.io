@@ -8,7 +8,7 @@
 
 <br>
 
-[![Site](https://img.shields.io/badge/🌐_pasta--cod3.github.io-020c18?style=for-the-badge&logoColor=00c8ff)](https://pasta-cod3.github.io)
+[![Sito](https://img.shields.io/badge/pasta--cod3.github.io-020c18?style=for-the-badge&logo=googlechrome&logoColor=00c8ff)](https://pasta-cod3.github.io)
 [![Instagram](https://img.shields.io/badge/stewe.sec-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/stewe.sec)
 [![GitHub](https://img.shields.io/badge/pasta--cod3-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pasta-cod3)
 
@@ -18,10 +18,11 @@
 ![eWPTv2](https://img.shields.io/badge/eWPTv2-In%20Progress-f5a623?style=flat-square)
 ![CPTS](https://img.shields.io/badge/CPTS-In%20Progress-f5a623?style=flat-square)
 ![OSCP](https://img.shields.io/badge/OSCP-Target-555?style=flat-square)
+![Jekyll](https://img.shields.io/badge/Jekyll-GitHub%20Pages-cc0000?style=flat-square&logo=jekyll&logoColor=white)
 
 </div>
 
----
+<br>
 
 ```
   ██████╗  █████╗ ███████╗████████╗ █████╗        ██████╗ ██████╗ ██████╗ ██████╗
@@ -38,35 +39,45 @@
 
 </div>
 
----
+<br>
 
-## `> whoami`
+## Indice
 
-Sono **Stefano**, noto online come **stewe** — penetration tester in formazione, eJPTv2 certificato. Studio offensiva per capire la difesa, scrivo in italiano per colmare un vuoto che in questa lingua esiste ancora troppo spesso.
+[Chi sono](#chi-sono) · [Contenuti](#contenuti) · [Strumenti](#strumenti) · [Come contribuire](#come-contribuire) · [Roadmap](#roadmap) · [Filosofia](#filosofia) · [Contatti](#contatti) · [Licenza](#licenza)
 
-> `Ethical mindset only. Built for learning. Built for defense.`
+<br>
 
----
+## Chi sono
 
-## `> ls -la contenuti/`
+Mi chiamo Stefano e online mi trovi come **stewe**. Sono un penetration tester in formazione, certificato eJPTv2 e attualmente al lavoro sulla eWPTv2. Studio l'offensiva per capire davvero la difesa, e scrivo tutto in italiano perché in questa lingua manca ancora troppo materiale tecnico serio e accessibile.
+
+Ogni articolo nasce da uno studio diretto: CTF, laboratori su TryHackMe e HackTheBox, preparazione alle certificazioni. L'obiettivo non è mai spiegare solo cosa fare, ma anche perché una tecnica funziona e come ci si difende davvero da essa.
+
+Il blog è pensato per chi sta muovendo i primi passi nella cybersecurity, per chi si sta preparando a diventare penetration tester, per chi lavora già in un SOC e vuole approfondire il lato blue team, e più in generale per chiunque sia curioso del mondo della sicurezza informatica, della sua storia e della sua attualità.
+
+> Ethical mindset only. Si studia per capire e per difendere, mai per danneggiare.
+
+<br>
+
+## Contenuti
+
+Il sito raccoglie oltre **140 articoli**, organizzati in cinque categorie e sempre filtrabili per tag e ricerca full-text direttamente dal sito.
 
 <div align="center">
 
-| | Categoria | Articoli | |
-|:---:|:---|:---:|:---|
-| 🔴 | **Red Team** | `25` | Offensive security, exploitation, privilege escalation, post-exploitation |
-| 🔵 | **Blue Team** | `25` | SOC, EDR, forensica, Zero Trust, incident response, cloud security |
-| 🟣 | **News** | `23` | Breach, ransomware, normative — focus Italia & Europa |
-| 🟠 | **Storia** | `18` | Stuxnet, Mitnick, Morris Worm, Aurora, PSN Breach e altri |
-| 🟢 | **Fondamentali** | `12` | OSI, crittografia, DNS, firewall, autenticazione |
-
-**`103 articoli totali`** · ricerca full-text · filtro per categoria · dark/light mode
+| Categoria | Articoli | Di cosa parla |
+|:---|:---:|:---|
+| ![Red Team](https://img.shields.io/badge/-Red%20Team-e63946?style=flat-square) | 39 | Tecniche offensive: attacchi ad Active Directory, exploitation web, pivoting, buffer overflow, C2, sicurezza wireless |
+| ![Blue Team](https://img.shields.io/badge/-Blue%20Team-1d7fd4?style=flat-square) | 27 | Difesa: SOC, EDR, forensica digitale, Zero Trust, email security, cloud security, incident response |
+| ![News](https://img.shields.io/badge/-News-8e44ad?style=flat-square) | 36 | Attualità cybersecurity con un occhio a Italia ed Europa: breach, ransomware, normative come NIS2 e GDPR |
+| ![Storia](https://img.shields.io/badge/-Storia-e67e22?style=flat-square) | 18 | Episodi che hanno fatto la storia dell'hacking, da Stuxnet a Mitnick, dal Morris Worm al PSN Breach |
+| ![Fondamentali](https://img.shields.io/badge/-Fondamentali-2ea44f?style=flat-square) | 20 | Le basi tecniche: modello OSI, crittografia, DNS, firewall, autenticazione |
 
 </div>
 
----
+<br>
 
-## `> cat tools.txt`
+## Strumenti
 
 <div align="center">
 
@@ -81,148 +92,51 @@ Sono **Stefano**, noto online come **stewe** — penetration tester in formazion
 
 </div>
 
----
+<br>
 
-## `> cat contacts.json`
+## Come contribuire
 
-```json
-{
-  "email":     "stefano.comida@protonmail.com",
-  "instagram": "@stewe.sec",
-  "github":    "pasta-cod3"
-}
-```
+Il progetto non accetta contributi diretti al contenuto degli articoli, che riflettono lo studio e la voce personale dell'autore. Sono invece sempre benvenute segnalazioni e proposte:
 
-> Segnalazioni di errori, proposte di argomenti, collaborazioni — tutto benvenuto.
-> Nessun supporto per attività non autorizzate.
+**Hai trovato un bug del sito?** Scrivi a [stefano.comida@protonmail.com](mailto:stefano.comida@protonmail.com) indicando browser, dispositivo e cosa non funziona come previsto.
 
----
+**Hai un argomento da proporre?** Scrivi allo stesso indirizzo: ogni idea finisce nella lista degli articoli futuri.
 
-<div align="center">
-
-*`> _`*
-
-</div><div align="center">
-
-# pasta-cod3
-
-### Hacking Based · Ethical Mindset · Defensive First
-
-Blog italiano di cybersecurity — penetration testing, red team, blue team,
-storia dell'hacking e fondamentali di sicurezza informatica.
-
-**[pasta-cod3.github.io](https://pasta-cod3.github.io)**
-
-</div>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Cybersecurity-Research-darkred?style=for-the-badge&logo=hackaday&logoColor=white" />
-  <img src="https://img.shields.io/badge/Penetration-Testing-black?style=for-the-badge&logo=kalilinux&logoColor=white" />
-  <img src="https://img.shields.io/badge/OSINT-Analysis-1f1f1f?style=for-the-badge&logo=torproject&logoColor=white" />
-  <img src="https://img.shields.io/badge/Blue%20Team-Defense-0077ff?style=for-the-badge&logo=elastic&logoColor=white" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/eJPTv2-Certified-success?style=flat-square" />
-  <img src="https://img.shields.io/badge/eWPTv2-In%20Progress-yellow?style=flat-square" />
-  <img src="https://img.shields.io/badge/Jekyll-GitHub%20Pages-red?style=flat-square&logo=jekyll&logoColor=white" />
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/TryHackMe-Labs-red?style=for-the-badge&logo=tryhackme&logoColor=white" />
-  <img src="https://img.shields.io/badge/HackTheBox-Training-9fef00?style=for-the-badge&logo=hackthebox&logoColor=black" />
-</p>
-
----
-
-## Indice
-
-- [About](#about)
-- [Contenuti](#contenuti)
-- [Come contribuire / segnalare errori](#come-contribuire--segnalare-errori)
-- [Roadmap](#roadmap)
-- [Filosofia](#filosofia)
-- [Contatti](#contatti)
-- [Licenza](#licenza)
-
----
-
-## About
-
-**pasta-cod3** è un blog di cybersecurity in lingua italiana, scritto e mantenuto da **stewe** ([@stewe_sec](https://www.instagram.com/stewe_sec)), penetration tester in formazione — **eJPTv2 certificato**, attualmente in preparazione per **eWPTv2**.
-
-L'approccio è tecnico, pratico e orientato alla comprensione reale delle vulnerabilità: non solo *cosa* fare, ma *perché* funziona e *come* ci si difende. Ogni contenuto nasce dallo studio diretto — CTF, lab su TryHackMe e HackTheBox, certificazioni — e viene riscritto in italiano per colmare un vuoto che in questa lingua esiste ancora troppo spesso.
-
-Il progetto è pensato per:
-
-| Chi | Perché |
-|---|---|
-| Studenti di cybersecurity | Materiale in italiano, spiegato dalle basi |
-| Aspiranti penetration tester | Metodologia, tool, esempi pratici da CTF reali |
-| Professionisti IT / SOC analyst | Approfondimenti blue team, detection, IR |
-| Appassionati di sicurezza informatica | Storia dell'hacking, casi reali, attualità |
-
----
-
-## Contenuti
-
-Il sito conta oltre **100 articoli** organizzati in 5 categorie:
-
-| Categoria | Articoli | Focus |
-|---|---|---|
-| 🔴 **Red Team** | 25 | Tecniche offensive: AD attacks, web exploitation, pivoting, buffer overflow, C2, wireless security |
-| 🔵 **Blue Team** | 25 | Difesa: SOC, EDR, forensica digitale, Zero Trust, email security, cloud security, incident response |
-| 🟣 **News** | 23 | Attualità cybersecurity, prevalentemente Italia ed Europa: breach, ransomware, normative (NIS2, GDPR) |
-| 🟠 **Storia** | 18 | Eventi ed episodi storici: Stuxnet, Mitnick, Morris Worm, Operation Aurora, PSN Breach |
-| 🟢 **Fondamentali** | 12 | Basi tecniche: modello OSI, crittografia, DNS, firewall, autenticazione |
-
-Ogni articolo è filtrabile per categoria e tag direttamente dal sito, con ricerca full-text integrata.
-
----
-
-## Come contribuire / segnalare errori
-
-Il progetto non accetta PR di contenuto (gli articoli riflettono lo studio e la voce dell'autore), ma segnalazioni e correzioni sono benvenute:
-
-1. **Bug del sito** (rendering, filtri, ricerca): invia per [email](#contatti)  con browser/dispositivo usato e info 
-2. **Proposte di argomenti**: scrivi via [email](#contatti) — ogni suggerimento entra nella lista
-
----
-
+<br>
 
 ## Roadmap
 
-- [ ] Migrazione completa degli articoli storici da HTML statico a Jekyll/Markdown
 - [ ] Dominio personalizzato
-- [ ] RSS feed
-- [ ] Sezione write-up CTF dedicata
+- [ ] Feed RSS
+- [ ] Sezione dedicata ai write up delle CTF
 
----
+<br>
 
 ## Filosofia
 
-Ogni articolo è scritto per essere:
+Ogni articolo punta a essere tecnico ma chiaro, senza supponenza e senza semplificazioni che ne tradiscano la realtà. È diretto e pratico, con comandi, payload ed esempi concreti al posto della sola teoria. Ed è onesto sui propri limiti: quando qualcosa non è verificato, o è solo un'ipotesi plausibile, viene detto apertamente.
 
-- **Tecnico ma chiaro** — niente supponenza, niente semplificazioni che tradiscono la realtà
-- **Diretto e pratico** — comandi, payload, esempi concreti, non solo teoria
-- **Onesto sui limiti** — se qualcosa non è verificato o è un'ipotesi, viene detto
+> Nessun supporto per attività illegali o per exploit contro sistemi non autorizzati.
 
-> Ethical mindset only. Nessun supporto per attività illegali o exploit contro sistemi non autorizzati. Si studia per capire e difendere, non per danneggiare.
-
----
+<br>
 
 ## Contatti
 
-- **Email**: [stefano.comida@protonmail.com](mailto:stefano.comida@protonmail.com)
-- **GitHub**: [@pasta-cod3](https://github.com/pasta-cod3)
-- **Instagram**: [@stewe_sec](https://www.instagram.com/stewe_sec)
+<div align="center">
 
----
+[![Email](https://img.shields.io/badge/Email-stefano.comida%40protonmail.com-8B89CC?style=flat-square&logo=protonmail&logoColor=white)](mailto:stefano.comida@protonmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-pasta--cod3-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/pasta-cod3)
+[![Instagram](https://img.shields.io/badge/Instagram-stewe.sec-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/stewe.sec)
+
+</div>
+
+<br>
 
 ## Licenza
 
-Distribuito con licenza [MIT](LICENSE). Il codice del sito è liberamente riutilizzabile; i contenuti degli articoli restano proprietà dell'autore salvo diversa indicazione.
+Il codice sorgente del sito è liberamente consultabile e riutilizzabile per scopi didattici. I contenuti degli articoli restano di proprietà dell'autore, salvo diversa indicazione.
+
+<br>
 
 <p align="center">
   <sub>Built for learning. Built for defense. Built for growth.</sub>
