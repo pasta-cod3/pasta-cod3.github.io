@@ -1,0 +1,647 @@
+---
+layout: null
+permalink: /roadmap-studio.html
+---
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#020c18">
+
+  <!-- ── SEO ──────────────────────────────────────────────── -->
+  <title>Roadmap di Studio | pasta-cod3 Cybersecurity</title>
+  <meta name="description" content="Percorso di studio completo per imparare cybersecurity da zero: roadmap Beginner→Intermediate→Advanced con articoli, cheatsheet, risorse verificate.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pasta-cod3.github.io/roadmap-studio.html">
+
+  <!-- ── FAVICON ──────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico">
+
+  <!-- OG -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Roadmap di Studio | pasta-cod3">
+  <meta property="og:description" content="La bibbia della cybersecurity italiana: roadmap da zero, cheatsheet, risorse, glossario.">
+  <meta property="og:url"         content="https://pasta-cod3.github.io/roadmap-studio.html">
+
+  <!-- ── PERF ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="css/style.css" fetchpriority="high">
+
+  <style>
+    /* ── ROADMAP PAGE STYLES ──────────────────────────────── */
+    .roadmap-hero { background: linear-gradient(135deg, rgba(0,221,136,.08) 0%, rgba(0,200,255,.04) 100%); }
+    .roadmap-hero h1 { color: #00dd88; font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+
+    .roadmap-section {
+      max-width: 1000px; margin: 4rem auto; padding: 0 var(--gap);
+    }
+
+    .roadmap-level {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 2rem; margin-bottom: 3rem; position: relative; overflow: hidden;
+    }
+
+    .roadmap-level::before {
+      content: '';  position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, #00dd88, transparent);
+    }
+
+    .roadmap-level-badge {
+      display: inline-block; font-family: 'JetBrains Mono', monospace;
+      padding: 6px 12px; border-radius: 4px; font-size: 11px; letter-spacing: .1em;
+      margin-bottom: 1rem;
+      background: #00dd8822; color: #00dd88; border: 1px solid #00dd8855;
+    }
+
+    .roadmap-level h2 { font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: .5rem; }
+    .roadmap-level p { color: var(--text-dim); margin-bottom: 1.5rem; line-height: 1.7; }
+
+    .roadmap-topics {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .roadmap-topic-card {
+      background: var(--bg-surf); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1.25rem; transition: all .3s ease;
+    }
+
+    .roadmap-topic-card:hover {
+      border-color: #00dd88; box-shadow: 0 0 20px rgba(0,221,136,.15);
+    }
+
+    .roadmap-topic-card h3 {
+      font-size: .95rem; color: #00dd88; margin-bottom: .5rem; font-weight: 600;
+    }
+
+    .roadmap-topic-card .topic-link {
+      color: var(--accent); text-decoration: none; font-size: .85rem;
+      display: inline-flex; align-items: center; gap: .3rem; margin-top: .5rem;
+    }
+
+    .roadmap-topic-card .topic-link:hover { text-decoration: underline; }
+
+    .cheatsheet-section {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .cheatsheet-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.5rem; text-align: center;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .cheatsheet-card:hover {
+      transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,221,136,.2);
+      border-color: #00dd88;
+    }
+
+    .cheatsheet-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .cheatsheet-card h3 { color: #00dd88; margin-bottom: .5rem; }
+    .cheatsheet-card p { color: var(--text-dim); font-size: .9rem; margin-bottom: 1rem; }
+
+    .cheatsheet-btn {
+      display: inline-block; padding: 8px 16px; border: 1px solid #00dd88;
+      color: #00dd88; text-decoration: none; border-radius: 4px;
+      font-size: .85rem; font-family: 'JetBrains Mono', monospace;
+      transition: all .3s ease;
+    }
+
+    .cheatsheet-btn:hover {
+      background: #00dd8822; cursor: pointer;
+    }
+
+    .resources-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .resource-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 6px; padding: 1.5rem;
+    }
+
+    .resource-card h3 { color: var(--accent); margin-bottom: .5rem; }
+    .resource-card .resource-type {
+      display: inline-block; font-size: 10px; padding: 4px 8px;
+      background: #00dd8822; color: #00dd88; border-radius: 3px;
+      margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;
+    }
+
+    .resource-card p { color: var(--text-dim); font-size: .9rem; margin-bottom: 1rem; line-height: 1.6; }
+
+    .resource-link {
+      color: var(--accent); text-decoration: none; font-size: .85rem;
+      display: inline-flex; align-items: center; gap: .4rem;
+    }
+
+    .resource-link:hover { text-decoration: underline; }
+
+    .glossary-container {
+      max-width: 900px; margin: 2rem auto;
+    }
+
+    .glossary-item {
+      margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+    }
+
+    .glossary-item:last-child { border-bottom: none; }
+
+    .glossary-term {
+      font-family: 'Orbitron', sans-serif; color: #00dd88;
+      font-size: 1.1rem; margin-bottom: .5rem;
+    }
+
+    .glossary-def {
+      color: var(--text); line-height: 1.8; font-size: .95rem;
+    }
+
+    .timeline-section {
+      background: linear-gradient(135deg, rgba(0,221,136,.05) 0%, rgba(0,200,255,.02) 100%);
+      border: 1px solid var(--border); border-radius: 8px; padding: 2rem;
+      margin: 2rem auto; max-width: 900px;
+    }
+
+    .timeline-item {
+      display: grid; grid-template-columns: 120px 1fr; gap: 2rem; margin-bottom: 2rem;
+    }
+
+    .timeline-time {
+      font-family: 'JetBrains Mono', monospace; color: #00dd88;
+      font-size: .9rem; font-weight: 600;
+    }
+
+    .timeline-content h4 { color: var(--accent); margin-bottom: .5rem; }
+    .timeline-content p { color: var(--text-dim); line-height: 1.6; }
+
+    .btn-primary-fond {
+      display: inline-block; padding: 10px 20px; background: #00dd88;
+      color: var(--bg); text-decoration: none; border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-weight: 600;
+      transition: all .3s ease;
+    }
+
+    .btn-primary-fond:hover { box-shadow: 0 0 20px rgba(0,221,136,.4); }
+  </style>
+
+  <script>
+    (function(){ var t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+  </script>
+</head>
+<body>
+
+<!-- ── CANVAS ─────────────────────────────────────────── -->
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+
+<!-- ── NAV ───────────────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
+  <a href="index.html"           class="nav-drawer-link">Home</a>
+  <a href="index.html"           class="nav-drawer-link" data-cat="red-team">Red Team</a>
+  <a href="index.html"           class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
+  <a href="index.html"           class="nav-drawer-link" data-cat="storia">Storia</a>
+  <a href="fondamentali.html"    class="nav-drawer-link">Fondamentali</a>
+  <a href="roadmap-studio.html"  class="nav-drawer-link active">Roadmap Studio</a>
+  <a href="about.html"           class="nav-drawer-link">Chi sono</a>
+  <a href="contatti.html"        class="nav-drawer-link">Contatti</a>
+</nav>
+
+<!-- ── HEADER ────────────────────────────────────────── -->
+<header class="site-header">
+  <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+  <nav class="nav-center" aria-label="Navigazione principale">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html" data-cat="red-team">Red Team</a></li>
+      <li><a href="index.html" data-cat="blue-team">Blue Team</a></li>
+      <li><a href="index.html" data-cat="storia">Storia</a></li>
+      <li><a href="fondamentali.html">Fondamentali</a></li>
+      <li><a href="roadmap-studio.html" class="active">Roadmap</a></li>
+      <li><a href="about.html">Chi sono</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN — ROADMAP DI STUDIO
+══════════════════════════════════════════════════════ -->
+<main class="static-main">
+
+  <!-- ── HERO ────────────────────────────────────────── -->
+  <div class="static-hero roadmap-hero">
+    <div class="scan-line" aria-hidden="true"></div>
+    <div class="static-hero-inner">
+      <p class="eyebrow">📚 / Percorso Completo</p>
+      <h1>La bibbia della cybersecurity italiana.</h1>
+      <p class="static-subtitle">
+        Da zero a professionista: roadmap strutturata in 3 livelli, articoli verificati, cheatsheet scaricabili, risorse gratuite, glossario. Tutto quello che serve per iniziare (e continuare) il tuo percorso di apprendimento.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── CONTENT ────────────────────────────────────── -->
+  <div class="static-content">
+
+    <!-- ════════════════════════════════════════════════════
+         LIVELLO 1: BEGINNER (0-3 mesi)
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section">
+      <div class="roadmap-level">
+        <span class="roadmap-level-badge">LIVELLO 1</span>
+        <h2>🎯 Beginner: I Primi Passi (0-3 mesi)</h2>
+        <p>
+          Parti dalle fondamenta: come funzionano i computer, internet, le reti, la crittografia base.
+          Impara il linguaggio della cybersecurity e capici chi sono gli attaccanti. Tempo consigliato: 2-3 ore/settimana.
+        </p>
+
+        <div class="roadmap-topics">
+          <div class="roadmap-topic-card">
+            <h3>🌐 Reti e Internet</h3>
+            <p>Modello OSI, TCP/IP, DNS, HTTP/HTTPS, come funziona internet realmente.</p>
+            <a href="/posts/modello-osi.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🔐 Crittografia Base</h3>
+            <p>Simmetrica, asimmetrica, hashing. Capire come la matematica protegge i dati.</p>
+            <a href="/posts/crittografia-basi.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🔑 Autenticazione e Password</h3>
+            <p>Come funzionano le password, perché 2FA è importante, biometria.</p>
+            <a href="/posts/come-funzionano-le-password.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🚨 Minacce Base</h3>
+            <p>Malware, phishing, ingegneria sociale. Come gli attaccanti operano davvero.</p>
+            <a href="/posts/ingegneria-sociale.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🛡️ Firewall e Access Control</h3>
+            <p>Come proteggere un network, regole firewall, principio del privilegio minimo.</p>
+            <a href="/posts/come-funziona-un-firewall.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🎯 Modello CIA</h3>
+            <p>Confidentiality, Integrity, Availability. I fondamenti della sicurezza informatica.</p>
+            <a href="/posts/modello-cia.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+        </div>
+
+        <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-dim);">
+          <strong style="color: var(--text);">⏱️ Timeline consigliata:</strong> 2-3 settimane per argomento. Fai il percorso "Fondamentali" (45 stanze) in parallelo.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         LIVELLO 2: INTERMEDIATE (3-6 mesi)
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section">
+      <div class="roadmap-level">
+        <span class="roadmap-level-badge">LIVELLO 2</span>
+        <h2>⚙️ Intermediate: Specializzazione (3-6 mesi)</h2>
+        <p>
+          Scegli una specializzazione: diventa Blue Team (difesa) oppure Red Team (attacco).
+          Impara gli strumenti reali e inizia con lab hands-on su TryHackMe.
+        </p>
+
+        <div class="roadmap-topics">
+          <div class="roadmap-topic-card">
+            <h3>🔴 Red Team: Attacco</h3>
+            <p><strong>Cosa imparare:</strong> Reconnaissance, scansione, exploit, social engineering.</p>
+            <ul style="text-align: left; margin: 1rem 0; color: var(--text-dim); font-size: .85rem;">
+              <li><a href="/posts/penetration-testing.html" style="color: var(--accent);">→ Cos'è il Pentesting</a></li>
+              <li><a href="/posts/cyber-kill-chain.html" style="color: var(--accent);">→ Cyber Kill Chain</a></li>
+              <li>Tool: Nmap, Burp Suite, Metasploit (gratuiti/trial)</li>
+              <li>Lab: TryHackMe "Jr Penetration Tester" path</li>
+            </ul>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🔵 Blue Team: Difesa</h3>
+            <p><strong>Cosa imparare:</strong> Risk management, detection, incident response.</p>
+            <ul style="text-align: left; margin: 1rem 0; color: var(--text-dim); font-size: .85rem;">
+              <li><a href="/posts/risk-management.html" style="color: var(--accent);">→ Risk Management</a></li>
+              <li><a href="/posts/iam-rbac.html" style="color: var(--accent);">→ IAM e RBAC</a></li>
+              <li>Tool: Splunk (free tier), YARA</li>
+              <li>Lab: TryHackMe "SOC Analyst" path</li>
+            </ul>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🎯 Active Directory</h3>
+            <p>LDAP, Kerberos, GPO. Infrastruttura enterprise e come viene attaccata.</p>
+            <a href="/posts/active-directory.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>📋 OWASP Top 10</h3>
+            <p>Le vulnerabilità web più comuni. Injection, XSS, autenticazione debole.</p>
+            <a href="/posts/owasp-top-10.html" class="topic-link">→ Leggi l'articolo</a>
+          </div>
+        </div>
+
+        <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-dim);">
+          <strong style="color: var(--text);">⏱️ Timeline:</strong> Scegli 1 percorso (red o blue) e approfondisci. 10-15 ore/settimana di lab hands-on.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         LIVELLO 3: ADVANCED (6+ mesi)
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section">
+      <div class="roadmap-level">
+        <span class="roadmap-level-badge">LIVELLO 3</span>
+        <h2>🚀 Advanced: Professionista (6+ mesi)</h2>
+        <p>
+          Specializzazione profonda. Diventa esperto in una disciplina specifica: pentesting, forensica, malware analysis, threat intelligence, architecture.
+          Tempo: 15-20 ore/settimana per mantenere competenza.
+        </p>
+
+        <div class="roadmap-topics">
+          <div class="roadmap-topic-card">
+            <h3>🔍 Malware Analysis</h3>
+            <p>Reverse engineering, detonazione controllata, comportamento dinamico.</p>
+            <p style="font-size: .8rem; color: #ffaa20; margin-top: .5rem;">Richiede: Intermediate pentesting + assembler base</p>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🕵️ Forensica Digitale</h3>
+            <p>Analisi disco, memory dump, timeline reconstruction, evidence preservation.</p>
+            <p style="font-size: .8rem; color: #ffaa20; margin-top: .5rem;">Richiede: Blue team + nozioni OS Windows/Linux</p>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🤖 Threat Intelligence</h3>
+            <p>OSINT, APT hunting, threat modeling, vulnerability intelligence.</p>
+            <p style="font-size: .8rem; color: #ffaa20; margin-top: .5rem;">Richiede: Intermediate (red o blue) + ricerca</p>
+          </div>
+
+          <div class="roadmap-topic-card">
+            <h3>🏗️ Architecture & Cloud Security</h3>
+            <p>AWS/Azure security, Kubernetes, zero trust, supply chain.</p>
+            <p style="font-size: .8rem; color: #ffaa20; margin-top: .5rem;">Richiede: Network + blue team + linux admin</p>
+          </div>
+        </div>
+
+        <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-dim);">
+          <strong style="color: var(--text);">🎓 Certificazioni consigliate:</strong> OSCP, CEH, GIAC (GCIH, GCIA), CISSP (dopo esperienza). Non sono obbligatorie ma riconosciute dal mercato.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         CHEATSHEET SCARICABILI
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section">
+      <h2 style="color: #00dd88; font-family: 'Orbitron', sans-serif; margin-bottom: 2rem;">📋 Cheatsheet Scaricabili</h2>
+
+      <div class="cheatsheet-section">
+        <div class="cheatsheet-card">
+          <div class="cheatsheet-icon">🖥️</div>
+          <h3>Linux Commands</h3>
+          <p>I comandi Linux essenziali per pentesting: file, rete, processi, permessi.</p>
+          <a href="#" class="cheatsheet-btn">📥 Scarica PDF</a>
+        </div>
+
+        <div class="cheatsheet-card">
+          <div class="cheatsheet-icon">🔧</div>
+          <h3>Nmap Reference</h3>
+          <p>Flag di Nmap, tipi di scan, opzioni di output, esempi pratici.</p>
+          <a href="#" class="cheatsheet-btn">📥 Scarica PDF</a>
+        </div>
+
+        <div class="cheatsheet-card">
+          <div class="cheatsheet-icon">💻</div>
+          <h3>SQL Injection</h3>
+          <p>Payload SQL injection comuni, detection, bypass, exfiltrazione dati.</p>
+          <a href="#" class="cheatsheet-btn">📥 Scarica PDF</a>
+        </div>
+
+        <div class="cheatsheet-card">
+          <div class="cheatsheet-icon">🔐</div>
+          <h3>Password Cracking</h3>
+          <p>Hashcat, JtR, wordlist, rainbow table, tecniche di cracking.</p>
+          <a href="#" class="cheatsheet-btn">📥 Scarica PDF</a>
+        </div>
+
+        <div class="cheatsheet-card">
+          <div class="cheatsheet-icon">🌐</div>
+          <h3>HTTP Methods & Headers</h3>
+          <p>Metodi HTTP, header comuni, status code, troubleshooting.</p>
+          <a href="#" class="cheatsheet-btn">📥 Scarica PDF</a>
+        </div>
+
+        <div class="cheatsheet-card">
+          <div class="cheatsheet-icon">🛡️</div>
+          <h3>OWASP Cheatsheet</h3>
+          <p>Top 10, mitigazione, remediation checklist, deployment.</p>
+          <a href="#" class="cheatsheet-btn">📥 Scarica PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         RISORSE ESTERNE VERIFICATE
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section">
+      <h2 style="color: #00dd88; font-family: 'Orbitron', sans-serif; margin-bottom: 2rem;">🌍 Risorse Esterne Verificate</h2>
+
+      <div class="resources-grid">
+        <div class="resource-card">
+          <span class="resource-type">HANDS-ON LAB</span>
+          <h3><a href="https://tryhackme.com" style="color: var(--accent); text-decoration: none;">TryHackMe</a></h3>
+          <p>Lab pratico: 100+ room gratuite (alcuni paid). Beginner→Advanced. Migliore per iniziare con hands-on realistica.</p>
+          <a href="https://tryhackme.com/path/outline/presecurity" class="resource-link" target="_blank">→ Pre Security Path</a>
+        </div>
+
+        <div class="resource-card">
+          <span class="resource-type">HANDS-ON LAB</span>
+          <h3><a href="https://www.hackthebox.com" style="color: var(--accent); text-decoration: none;">HackTheBox</a></h3>
+          <p>Lab realistico: macchine CTF (Capture The Flag). Intermediate→Advanced. Comunità attiva.</p>
+          <a href="https://www.hackthebox.com" class="resource-link" target="_blank">→ Inizia con "Starting Point"</a>
+        </div>
+
+        <div class="resource-card">
+          <span class="resource-type">CORSI GRATUITI</span>
+          <h3><a href="https://www.cybrary.it" style="color: var(--accent); text-decoration: none;">Cybrary</a></h3>
+          <p>Corsi video gratuiti (con opzione premium). Italiano, inglese. Certificazioni GIAC prep.</p>
+          <a href="https://www.cybrary.it" class="resource-link" target="_blank">→ Sfoglia i corsi</a>
+        </div>
+
+        <div class="resource-card">
+          <span class="resource-type">DOCUMENTAZIONE</span>
+          <h3><a href="https://owasp.org" style="color: var(--accent); text-decoration: none;">OWASP</a></h3>
+          <p>Risorse ufficiali: Top 10, Testing Guide, Cheatsheet. Standard de facto per web security.</p>
+          <a href="https://owasp.org/www-project-web-security-testing-guide/" class="resource-link" target="_blank">→ WSTG (Web Security Testing)</a>
+        </div>
+
+        <div class="resource-card">
+          <span class="resource-type">DOCUMENTAZIONE</span>
+          <h3><a href="https://www.mitre.org/news-insights/publication/mitre-attck" style="color: var(--accent); text-decoration: none;">MITRE ATT&CK</a></h3>
+          <p>Database di tecniche di attacco reali. Fondamentale per capire come opera un attaccante.</p>
+          <a href="https://attack.mitre.org" class="resource-link" target="_blank">→ Framework ATT&CK</a>
+        </div>
+
+        <div class="resource-card">
+          <span class="resource-type">COMUNITÀ & NEWS</span>
+          <h3><a href="https://www.bleepingcomputer.com" style="color: var(--accent); text-decoration: none;">Bleeping Computer</a></h3>
+          <p>Notizie di cybersecurity quotidiane, CVE tracking, incident reporting. Inglese.</p>
+          <a href="https://www.bleepingcomputer.com" class="resource-link" target="_blank">→ News</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         TIMELINE CONSIGLIATA
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section">
+      <h2 style="color: #00dd88; font-family: 'Orbitron', sans-serif; margin-bottom: 2rem;">⏱️ Timeline Realistica</h2>
+
+      <div class="timeline-section">
+        <div class="timeline-item">
+          <div class="timeline-time">Mese 1-2</div>
+          <div class="timeline-content">
+            <h4>Fondamenta (Beginner)</h4>
+            <p>Leggi articoli fondamentali, completa moduli 1-3 del percorso interattivo. 3-4 ore/settimana.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">Mese 3-4</div>
+          <div class="timeline-content">
+            <h4>Apprendimento medio (Intermediate)</h4>
+            <p>Scegli red o blue. Inizia TryHackMe path dedicato. Lab hands-on. 8-10 ore/settimana.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">Mese 5-6</div>
+          <div class="timeline-content">
+            <h4>Approfondimento specializzato (Advanced)</h4>
+            <p>HackTheBox machines, OSINT projects, costruisci un mini-lab. 12-15 ore/settimana.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">Mese 7+</div>
+          <div class="timeline-content">
+            <h4>Professionalizzazione</h4>
+            <p>Certificazione (OSCP, CEH, GIAC), contribuisci a progetti open-source, prova per posizioni junior.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         GLOSSARIO
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section">
+      <h2 style="color: #00dd88; font-family: 'Orbitron', sans-serif; margin-bottom: 2rem;">📖 Glossario Rapido</h2>
+
+      <div class="glossary-container">
+        <div class="glossary-item">
+          <div class="glossary-term">APT (Advanced Persistent Threat)</div>
+          <div class="glossary-def">Attaccante sofisticato (solitamente state-sponsored) che mira a rimanere nascosto per lungo tempo dentro un network. Differisce dal script kiddie per metodologia, pazienza e risorse.</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">Exploit</div>
+          <div class="glossary-def">Codice o tecnica che sfrutta una vulnerabilità specifica per ottenere accesso non autorizzato o eseguire azioni non consentite.</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">Payload</div>
+          <div class="glossary-def">Parte dell'exploit che esegue l'azione vera (es. reverse shell, file drop, credential dump). Il vettore è come arriva il payload, il payload è cosa fa.</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">Zero-Day</div>
+          <div class="glossary-def">Vulnerabilità sconosciuta al fornitore (day-zero), non ancora patchata. Di massimo valore per attaccanti perché non esiste difesa nota.</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">Supply Chain Attack</div>
+          <div class="glossary-def">Attacco non al target diretto, ma ai suoi fornitori/dipendenze. Es: hackerare la libreria che usa, il software update che distribuisce, la catena logistica.</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">OSINT (Open Source Intelligence)</div>
+          <div class="glossary-def">Raccolta di informazioni da fonti pubbliche (internet, social, documenti). Fase 0 di qualunque attacco serio.</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">Privilege Escalation</div>
+          <div class="glossary-def">Salire di privilegi da user verso admin/root. Fondamentale in pentesting: prima entri (magari come user), poi escalate per controllo totale.</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">Lateral Movement</div>
+          <div class="glossary-def">Muoversi da un host compromesso ad altri host nella stessa rete. Tipico di attacchi mirati (APT).</div>
+        </div>
+
+        <div class="glossary-item">
+          <div class="glossary-term">Incident Response</div>
+          <div class="glossary-def">Procedura organizzata per rispondere a un attacco: detect → contain → eradicate → recover → lessons learned.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         CALL TO ACTION
+    ════════════════════════════════════════════════════ -->
+    <section class="roadmap-section" style="text-align: center; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border);">
+      <h2 style="color: #00dd88; font-family: 'Orbitron', sans-serif; margin-bottom: 1rem;">Pronto a iniziare?</h2>
+      <p style="color: var(--text-dim); margin-bottom: 2rem; font-size: 1.05rem;">Scegli il tuo livello e completa il primo modulo del percorso Fondamentali. Poi torna qui per la roadmap successiva.</p>
+      <a href="fondamentali.html" class="btn-primary-fond">→ ACCEDI AI FONDAMENTALI</a>
+    </section>
+
+  </div>
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026, Tutti i diritti riservati</div>
+  </div>
+  <nav class="f-nav" aria-label="Footer navigation">
+    <a href="index.html">Home</a>
+    <a href="fondamentali.html">Fondamentali</a>
+    <a href="roadmap-studio.html">Roadmap</a>
+    <a href="about.html">Chi sono</a>
+  </nav>
+  <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="js/static-pages.js"></script>
+</body>
+</html>
