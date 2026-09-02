@@ -1615,6 +1615,440 @@ const POSTS = [
       "anni 70"
     ],
     "excerpt": "John Draper scoprì che il fischietto omaggio dei cereali Cap'n Crunch emetteva esattamente 2600 Hz — la frequenza per accedere alle linee trunk AT&T. Così nacque il phreaking."
+  },
+  {
+    "id": "carecloud-3-7-million-patients",
+    "title": "CareCloud Healthcare Breach: 3.7 milioni di pazienti esposti",
+    "date": "2026-01-15",
+    "cat": "news",
+    "tags": [
+      "CareCloud",
+      "healthcare",
+      "data breach",
+      "patient data",
+      "AWS",
+      "unauthorized access"
+    ],
+    "excerpt": "CareCloud, fornitore di soluzioni IT per healthcare, ha confermato una violazione di dati che ha compromesso 3.7 milioni di cartelle cliniche di pazienti. Un'entità non autorizzata ha ottenuto accesso all'ambiente AWS dell'azienda."
+  },
+  {
+    "id": "jfrog-artifactory-cve-authentication-bypass",
+    "title": "JFrog Artifactory CVE-2026-82329: Authentication bypass in the wild",
+    "date": "2026-02-10",
+    "cat": "red",
+    "tags": [
+      "CVE-2026-82329",
+      "JFrog Artifactory",
+      "authentication bypass",
+      "exploit",
+      "privilege escalation"
+    ],
+    "excerpt": "A critical authentication bypass vulnerability (CVE-2026-82329) in JFrog Artifactory is being actively exploited in the wild. Attackers are using it to forge admin tokens and gain unrestricted access to artifact repositories."
+  },
+  {
+    "id": "russian-critical-infra-routers",
+    "title": "Russia: APT state-sponsored scansiona routers di critical infrastructure globale",
+    "date": "2026-02-28",
+    "cat": "news",
+    "tags": [
+      "Russia",
+      "APT",
+      "routers",
+      "critical infrastructure",
+      "scanning",
+      "network"
+    ],
+    "excerpt": "USA e alleati hanno avvertito che APT state-sponsored russi scansionano attivamente routers di critical infrastructure a livello globale, cercando configurazioni vulnerabili. L'obiettivo: ottenere accesso persistente prima di qualsiasi conflitto."
+  },
+  {
+    "id": "iran-apt-plc-attacks",
+    "title": "Iran-linked APT: PLC attacks su critical infrastructure water/energy USA",
+    "date": "2026-03-05",
+    "cat": "news",
+    "tags": [
+      "Iran",
+      "APT",
+      "PLC",
+      "SCADA",
+      "water",
+      "energy",
+      "operational technology"
+    ],
+    "excerpt": "Un'APT legata all'Iran ha lanciato una campagna di attacchi contro operational technology (PLC/SCADA) negli USA, colpendo sistemi di acqua, energia, e servizi. È il primo attacco documentato che compromette direttamente i controllori industriali."
+  },
+  {
+    "id": "signature-healthcare-ambulance-divert",
+    "title": "Signature Healthcare Massachusetts: cyberattack causa dirottamento ambulanze",
+    "date": "2026-03-18",
+    "cat": "news",
+    "tags": [
+      "hospital",
+      "ambulance",
+      "cyberattack",
+      "disruption",
+      "emergency",
+      "operational"
+    ],
+    "excerpt": "Signature Healthcare di Brockton, Massachusetts è stato colpito da un cyberattack che ha forzato il dirottamento di ambulanze, cancellazione di servizi, e impossibilità di riempire prescizioni farmaceutiche. Primo caso documentato di dirottamento ambulanze causato da cyber attack."
+  },
+  {
+    "id": "manchester-airports-data-breach-travelers",
+    "title": "Manchester Airports Group: dati di 9 milioni di passeggeri compromessi",
+    "date": "2026-03-20",
+    "cat": "news",
+    "tags": [
+      "data breach",
+      "Manchester Airports",
+      "UK",
+      "personali data",
+      "travel",
+      "ransomware"
+    ],
+    "excerpt": "Manchester Airports Group, che gestisce gli aeroporti di Manchester, Stansted e East Midlands nel Regno Unito, ha confermato il furto di dati personali di milioni di passeggeri in un attacco ransomware. I dettagli includono nomi, indirizzi, numeri di documenti e dati di pagamento."
+  },
+  {
+    "id": "mississippi-medical-center-ransomware",
+    "title": "University of Mississippi Medical Center: ospedale chiuso per 2+ settimane da ransomware",
+    "date": "2026-04-10",
+    "cat": "news",
+    "tags": [
+      "Mississippi",
+      "hospital",
+      "ransomware",
+      "disruption",
+      "patient safety",
+      "operational impact"
+    ],
+    "excerpt": "L'Università del Mississippi Medical Center è stato forzato a chiudere tutte le cliniche statewide per più di 2 settimane dopo un attacco ransomware. 7 ospedali, 35 cliniche, e 200+ telehealth sites interrotte."
+  },
+  {
+    "id": "medtronic-3-8-million-breach",
+    "title": "Medtronic Medical Devices: 3.8 milioni di pazienti esposti in data breach",
+    "date": "2026-04-22",
+    "cat": "news",
+    "tags": [
+      "Medtronic",
+      "medical devices",
+      "healthcare",
+      "data breach",
+      "ShinyHunters",
+      "patient data"
+    ],
+    "excerpt": "Medtronic, fornitore globale di dispositivi medici impiantabili, ha confermato che un attacco ransomware ha compromesso i dati medici e personali di 3.8 milioni di pazienti. Il gruppo ShinyHunters ha rivendicato l'attacco."
+  },
+  {
+    "id": "silent-ransom-unc3753-law-firms",
+    "title": "Silent Ransom (UNC3753): attacco a law firms, da compromissione a estorsione in meno di 1 ora",
+    "date": "2026-05-05",
+    "cat": "news",
+    "tags": [
+      "Silent Ransom",
+      "UNC3753",
+      "law firms",
+      "voice phishing",
+      "extortion",
+      "speed"
+    ],
+    "excerpt": "Google Mandiant ha scoperto che UNC3753 (Silent Ransom) compromette law firms tramite voice phishing, e in alcuni casi progredisce da accesso iniziale a estorsione in meno di 60 minuti. Nel 2026 il gruppo ha dimostrato velocità di attacco senza precedenti."
+  },
+  {
+    "id": "hugging-face-700-rogue-ai-agents",
+    "title": "Hugging Face attack: 700 rogue AI agents coordinated to exfiltrate models",
+    "date": "2026-05-15",
+    "cat": "red",
+    "tags": [
+      "Hugging Face",
+      "AI",
+      "model theft",
+      "supply chain",
+      "API abuse",
+      "coordinated attack"
+    ],
+    "excerpt": "Researchers discovered a coordinated attack on Hugging Face involving nearly 700 compromised AI agents that systematically stole fine-tuned models and training data. The attack exploited the platform's model-sharing trust model to conduct large-scale supply chain exfiltration."
+  },
+  {
+    "id": "gunra-ransomware-critical-infra",
+    "title": "Gunra Ransomware: MFA bypass, critical infrastructure, basato su codice Conti",
+    "date": "2026-06-10",
+    "cat": "news",
+    "tags": [
+      "Gunra",
+      "ransomware",
+      "critical infrastructure",
+      "MFA bypass",
+      "Fortinet",
+      "RaaS"
+    ],
+    "excerpt": "Gunra è un nuovo ransomware gang che ha colpito infrastrutture critiche (healthcare, finanza, energia, manufacturing) con sofisticati MFA bypass e sfruttamento di vulnerabilità Fortinet. Il codice è basato su leaked Conti ransomware."
+  },
+  {
+    "id": "medusa-ransomware-500-orgs",
+    "title": "Medusa Ransomware: 500+ critical infrastructure organizations compromised",
+    "date": "2026-06-25",
+    "cat": "news",
+    "tags": [
+      "Medusa",
+      "ransomware",
+      "critical infrastructure",
+      "CISA",
+      "500 organizations"
+    ],
+    "excerpt": "CISA ha confermato che il ransomware Medusa ha compromesso più di 500 organizzazioni di critical infrastructure dal 2021. Nel 2026 la campagna continua a colpire healthcare, finanza, governo, energia."
+  },
+  {
+    "id": "android-17-ech-privacy-browsing",
+    "title": "Android 17: ECH (Encrypted Client Hello) rende il tracking del browser molto più difficile",
+    "date": "2026-06-30",
+    "cat": "blue",
+    "tags": [
+      "Android 17",
+      "privacy",
+      "ECH",
+      "TLS",
+      "encryption",
+      "tracking prevention"
+    ],
+    "excerpt": "Android 17 introduces native support for ECH (Encrypted Client Hello), a TLS extension that encrypts the SNI (Server Name Indication) field. This makes it much harder for network observers, ISPs, and middleboxes to profile user browsing behavior."
+  },
+  {
+    "id": "qtfy-chinese-hacking-platform-disrupted",
+    "title": "US disrupts QTFY: Chinese hacking platform used against military and critical infrastructure",
+    "date": "2026-07-08",
+    "cat": "news",
+    "tags": [
+      "China",
+      "QTFY",
+      "hacking platform",
+      "military",
+      "critical infrastructure",
+      "APT"
+    ],
+    "excerpt": "Il governo USA ha disabilitato QTFY, una piattaforma di hacking cinese utilizzata dal governo cinese per attaccare infrastruttura militare e critica degli USA dal 2018. La piattaforma offrira servizi di hacking a clienti state-sponsored."
+  },
+  {
+    "id": "ironworm-rust-ebpf-rootkit",
+    "title": "IronWorm: Rust malware with eBPF rootkit infects 36 NPM packages",
+    "date": "2026-07-15",
+    "cat": "red",
+    "tags": [
+      "IronWorm",
+      "Rust",
+      "eBPF",
+      "rootkit",
+      "npm",
+      "infostealer",
+      "Tor"
+    ],
+    "excerpt": "IronWorm è un nuovo malware scritto in Rust che nasconde un kernel rootkit eBPF per evitare detection. Infetta 36 package npm e si propaga usando stolen credentials. Comunica via Tor per evitare tracciamento."
+  },
+  {
+    "id": "dropbox-lenovo-email-verification-breach",
+    "title": "Dropbox breach: attaccanti sfruttano vulnerabilità di Lenovo per bypassare 2FA",
+    "date": "2026-07-28",
+    "cat": "news",
+    "tags": [
+      "Dropbox",
+      "Lenovo",
+      "2FA bypass",
+      "email verification",
+      "account takeover",
+      "supply chain"
+    ],
+    "excerpt": "Migliaia di account Dropbox sono stati compromessi tramite una falla nel processo di email verification di Lenovo. Attaccanti hanno sfruttato la falla per reimpostare password e bypassare l'autenticazione a due fattori, dimostrando come le integrazioni SSO possono diventare vettori di attacco."
+  },
+  {
+    "id": "chaindrop-npm-supply-chain",
+    "title": "ChainDrop NPM Attack: self-propagating malware infects 1,300+ packages",
+    "date": "2026-07-30",
+    "cat": "red",
+    "tags": [
+      "npm",
+      "ChainDrop",
+      "supply chain",
+      "malware",
+      "self-propagating",
+      "2 billion downloads"
+    ],
+    "excerpt": "Malware 'ChainDrop' si auto-propaga attraverso npm compromettendo 1,300+ package con 2 miliardi di download mensili. Una singola infezióne può convertirsi in migliaia di package compromessi attraverso stolen credentials e automated reinfection."
+  },
+  {
+    "id": "mckesson-healthcare-breach-284-million",
+    "title": "McKesson Data Breach: 284 milioni di record rubati, richiesta di $55 milioni",
+    "date": "2026-08-05",
+    "cat": "news",
+    "tags": [
+      "McKesson",
+      "healthcare",
+      "data breach",
+      "ransomware",
+      "ShinyHunters",
+      "extortion"
+    ],
+    "excerpt": "McKesson Corporation, gigante della distribuzione farmaceutica e IT healthcare, ha confermato che attaccanti hanno exfiltrato 284 milioni di record. Il gruppo ShinyHunters rivendica il furto e richiede $55 milioni di riscatto con deadline al 1 settembre."
+  },
+  {
+    "id": "progress-loadmaster-rce-cve-2026-8037",
+    "title": "Progress LoadMaster CVE-2026-8037: Unauthenticated RCE via API command injection",
+    "date": "2026-08-08",
+    "cat": "red",
+    "tags": [
+      "Progress",
+      "LoadMaster",
+      "CVE-2026-8037",
+      "command injection",
+      "RCE",
+      "API"
+    ],
+    "excerpt": "Progress LoadMaster (load balancer usato in migliaia di aziende) contiene un difetto critico di command injection nell'API di administration. Un attaccante non autenticato può eseguire codice arbitrario come root con semplice richiesta HTTP."
+  },
+  {
+    "id": "vmware-vcenter-apt-campaign",
+    "title": "VMware vCenter CVE-2026-59310: APT campaign targets 360+ organizations globally",
+    "date": "2026-08-10",
+    "cat": "red",
+    "tags": [
+      "VMware",
+      "vCenter",
+      "CVE-2026-59310",
+      "APT",
+      "directory traversal",
+      "reverse SSH"
+    ],
+    "excerpt": "Un'APT avanzata sfrutta la vulnerabilità CVE-2026-59310 di VMware vCenter per instalare reverse_ssh e mantenere accesso persistente. Oltre 360 vittime identificate in 47 paesi; Germania, USA, Turchia, Iran, Francia concentrano metà degli attacchi."
+  },
+  {
+    "id": "microsoft-patch-tuesday-421-cves",
+    "title": "Microsoft Patch Tuesday Agosto 2026: 421 CVE, 1 zero-day exploited in the wild",
+    "date": "2026-08-15",
+    "cat": "blue",
+    "tags": [
+      "Microsoft",
+      "Patch Tuesday",
+      "CVE-2026-68820",
+      "zero-day",
+      "kernel",
+      "Windows"
+    ],
+    "excerpt": "Microsoft ha rilasciato patch per 421 vulnerabilità a agosto 2026, incluso un zero-day su afd.sys (CVE-2026-68820) già sotto attacco attivo. La falla consente escalazione ai privilegi SYSTEM e affligge Windows in modo critico."
+  },
+  {
+    "id": "ssrf-server-side-request-forgery",
+    "title": "SSRF — Server-Side Request Forgery: dalla richiesta al cloud metadata",
+    "date": "2026-08-23",
+    "cat": "red",
+    "tags": [
+      "SSRF",
+      "web",
+      "cloud metadata",
+      "exploitation",
+      "red team"
+    ],
+    "excerpt": "Una SSRF costringe il server a compiere richieste che l'attaccante non potrebbe fare direttamente — spesso la strada più diretta verso credenziali cloud, servizi interni e reti che dovrebbero essere irraggiungibili dall'esterno."
+  },
+  {
+    "id": "mimikatz-credential-dumping",
+    "title": "Mimikatz e Credential Dumping: estrarre credenziali dalla memoria di Windows",
+    "date": "2026-08-24",
+    "cat": "red",
+    "tags": [
+      "Mimikatz",
+      "credential dumping",
+      "LSASS",
+      "Windows",
+      "post-exploitation",
+      "red team"
+    ],
+    "excerpt": "Windows tiene credenziali e hash in memoria per rendere fluido il Single Sign-On. Mimikatz e gli strumenti di credential dumping sfruttano esattamente questo — con conseguenze che vanno ben oltre un singolo host."
+  },
+  {
+    "id": "golden-ticket-dcsync-active-directory",
+    "title": "Golden Ticket e Silver Ticket: persistenza avanzata in Active Directory",
+    "date": "2026-08-25",
+    "cat": "red",
+    "tags": [
+      "Golden Ticket",
+      "Silver Ticket",
+      "Kerberos",
+      "Active Directory",
+      "DCSync",
+      "red team"
+    ],
+    "excerpt": "Chi possiede l'hash del krbtgt possiede il dominio, anche mesi dopo che l'accesso iniziale è stato chiuso. Golden e Silver Ticket sono la forma di persistenza più potente — e più difficile da estirpare — in Active Directory."
+  },
+  {
+    "id": "password-spraying-active-directory",
+    "title": "Password Spraying: l'attacco silenzioso contro Active Directory",
+    "date": "2026-08-26",
+    "cat": "red",
+    "tags": [
+      "password spraying",
+      "Active Directory",
+      "brute force",
+      "red team",
+      "lockout policy"
+    ],
+    "excerpt": "Invece di provare mille password su un account, il password spraying prova una manciata di password ovvie su migliaia di account — restando sotto la soglia di lockout e sotto il radar di chi guarda i log nel modo sbagliato."
+  },
+  {
+    "id": "windows-persistence-registry-scheduled-task-wmi",
+    "title": "Windows Persistence: registry run key, scheduled task e WMI event subscription",
+    "date": "2026-08-27",
+    "cat": "red",
+    "tags": [
+      "Windows",
+      "persistence",
+      "registry",
+      "scheduled task",
+      "WMI",
+      "post-exploitation",
+      "red team"
+    ],
+    "excerpt": "Ottenere accesso è solo metà del lavoro: senza un meccanismo di persistenza, un reboot o un logout riportano tutto a zero. Ecco le tecniche più comuni — e più difficili da individuare — per restare dentro un host Windows."
+  },
+  {
+    "id": "insecure-deserialization-rce",
+    "title": "Insecure Deserialization: da oggetto serializzato a RCE",
+    "date": "2026-08-28",
+    "cat": "red",
+    "tags": [
+      "deserialization",
+      "RCE",
+      "gadget chain",
+      "Java",
+      "PHP",
+      "Python",
+      "red team"
+    ],
+    "excerpt": "Deserializzare un oggetto non dovrebbe mai equivalere a eseguire codice — eppure in molti linguaggi è esattamente quello che succede se l'input non è affidabile. Una delle classi di vulnerabilità più devastanti e meno intuitive dell'OWASP Top 10."
+  },
+  {
+    "id": "av-edr-evasion-tecniche",
+    "title": "AV/EDR Evasion: tecniche di offuscamento per il red team",
+    "date": "2026-08-29",
+    "cat": "red",
+    "tags": [
+      "EDR evasion",
+      "AV bypass",
+      "red team",
+      "offuscamento",
+      "AMSI"
+    ],
+    "excerpt": "Un antivirus moderno riconosce le firme note. Un EDR osserva il comportamento in tempo reale tramite hook a livello di kernel e userland. Aggirarli non significa 'nascondersi' — significa capire esattamente dove guardano, ed evitare di apparire lì."
+  },
+  {
+    "id": "papercut-critical-rce-vulnerability",
+    "title": "PaperCut Emergency Patch: vulnerabilità critica RCE sotto attacco attivo",
+    "date": "2026-09-02",
+    "cat": "red",
+    "tags": [
+      "PaperCut",
+      "RCE",
+      "CVE",
+      "print server",
+      "exploit",
+      "vulnerability"
+    ],
+    "excerpt": "PaperCut, il software di gestione di stampa usato da università, aziende e enti pubblici, ha rilasciato una seconda patch d'emergenza per una vulnerabilità RCE (Remote Code Execution) scoperta essere sotto attacco attivo. L'exploit è banale — bastano poche righe di codice."
   }
 ];
 // [POSTS:END]
