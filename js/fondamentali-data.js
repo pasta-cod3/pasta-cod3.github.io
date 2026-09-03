@@ -389,6 +389,7 @@ const ROOMS = [
     title: 'Cyber Kill Chain e MITRE ATT&CK',
     excerpt: "Ogni attacco informatico segue delle fasi riconoscibili. Cyber Kill Chain e MITRE ATT&CK sono i due framework che le descrivono — e che ogni difensore usa per capire dove intervenire.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/mitre-attack.png', iconGlow: '#c0392b',
     thm: [
       { name: 'Cyber Kill Chain', difficulty: 'media', note: "Applica le fasi della Kill Chain a uno scenario di attacco reale, passo dopo passo." },
       { name: 'Unified Kill Chain', difficulty: 'media', note: "Combina Kill Chain e MITRE ATT&CK in un unico framework, con un caso pratico da seguire fase per fase." }
@@ -2535,6 +2536,7 @@ const ROOMS = [
     title: 'Network Forensics: ricostruire un attacco da un file pcap',
     excerpt: "Un IDS ha generato un alert tre settimane fa e nessuno l'ha guardato. Ora bisogna capire cosa è successo esaminando il traffico catturato allora. La network forensics è l'analisi del traffico quando l'attacco è già finito.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/zeek.png', iconGlow: '#00b4d8',
     thm: [],
     quiz: [
       {
@@ -2978,6 +2980,7 @@ const ROOMS = [
     title: 'Dagli IOC alla Threat Intelligence: condividere quello che si è scoperto',
     excerpt: "Ogni indagine produce indicatori di compromissione. Lasciarli in un report archiviato significa sprecare l'unica cosa che potrebbe aiutare un altro team a bloccare lo stesso attaccante.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/misp.png', iconGlow: '#00b4d8',
     thm: [
       { name: 'Intro to Cyber Threat Intel', difficulty: 'facile', note: "Introduce concretamente framework e standard di threat intelligence descritti nell'articolo." }
     ],
