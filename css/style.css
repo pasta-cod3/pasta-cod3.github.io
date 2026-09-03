@@ -1902,7 +1902,7 @@ body {
   border: 1px solid var(--border);
   border-top: 3px solid var(--branch-accent, var(--border));
   border-radius: 8px;
-  background: rgba(255,255,255,0.015);
+  background: var(--bg-surf);
   padding: 1.1rem 1rem 1.6rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -2271,6 +2271,28 @@ body {
 .fond-via-mid    { opacity: 0.55; }
 .fond-via-preview{ fill: var(--c-news); opacity: 0.35; }
 .fond-via-hole   { fill: var(--bg-card); }
+
+/* Tratti che appartengono a un ramo (bivio + catena interna):
+   stesso ritmo di animazione dello stato, ma colore del ramo
+   invece del verde/ciano generico del tronco. */
+.fond-trace-b-red.fond-trace-done, .fond-trace-b-red.fond-trace-active, .fond-trace-b-red.fond-trace-preview {
+  stroke: var(--c-red); filter: drop-shadow(0 0 6px rgba(255,48,96,0.6));
+}
+.fond-trace-b-blue.fond-trace-done, .fond-trace-b-blue.fond-trace-active, .fond-trace-b-blue.fond-trace-preview {
+  stroke: var(--c-blue); filter: drop-shadow(0 0 6px rgba(32,144,255,0.6));
+}
+.fond-trace-b-dfir.fond-trace-done, .fond-trace-b-dfir.fond-trace-active, .fond-trace-b-dfir.fond-trace-preview {
+  stroke: var(--c-news); filter: drop-shadow(0 0 6px rgba(153,85,255,0.6));
+}
+.fond-via-b-red.fond-via-done,  .fond-via-b-red.fond-via-active  { fill: var(--c-red); }
+.fond-via-b-blue.fond-via-done, .fond-via-b-blue.fond-via-active { fill: var(--c-blue); }
+.fond-via-b-dfir.fond-via-done, .fond-via-b-dfir.fond-via-active { fill: var(--c-news); }
+.fond-via-b-red.fond-via-active  { filter: drop-shadow(0 0 4px rgba(255,48,96,0.85)); }
+.fond-via-b-blue.fond-via-active { filter: drop-shadow(0 0 4px rgba(32,144,255,0.85)); }
+.fond-via-b-dfir.fond-via-active { filter: drop-shadow(0 0 4px rgba(153,85,255,0.85)); }
+.fond-flow-dot-b-red  { fill: var(--c-red); filter: drop-shadow(0 0 7px rgba(255,48,96,0.95)); }
+.fond-flow-dot-b-blue { fill: var(--c-blue); filter: drop-shadow(0 0 7px rgba(32,144,255,0.95)); }
+.fond-flow-dot-b-dfir { fill: var(--c-news); filter: drop-shadow(0 0 7px rgba(153,85,255,0.95)); }
 
 /* Vista stanza */
 .fond-back-map {

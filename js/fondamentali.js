@@ -3322,16 +3322,20 @@ function renderModules() {
     edges.push({ a: trunkIdxs[k], b: trunkIdxs[k + 1], state: edgeState(trunkIdxs[k], trunkIdxs[k + 1]) });
   }
   const lastTrunk = trunkIdxs[trunkIdxs.length - 1];
-  BRANCHES.forEach(branch => {
+  BRANCHES.forEach((branch, bi) => {
+    // Su layout a colonna singola (mobile) i tre rami condividono la
+    // stessa x: senza un piccolo offset di partenza le tre tracce del
+    // bivio si sovrapporrebbero esattamente, nascondendosi a vicenda.
+    const startOffsetX = (bi - (BRANCHES.length - 1) / 2) * 10;
     const idxs = branchIndices(branch.id);
     if (!idxs.length) {
-      edges.push({ a: lastTrunk, b: `placeholder-${branch.id}`, state: 'preview', elbowBefore: '.fond-branches' });
+      edges.push({ a: lastTrunk, b: `placeholder-${branch.id}`, state: 'preview', elbowBefore: '.fond-branches', branch: branch.id, startOffsetX });
       return;
     }
     const forkState = !trunkComplete() ? 'idle' : (moduleStats(idxs[0]).passed ? 'done' : 'active');
-    edges.push({ a: lastTrunk, b: idxs[0], state: forkState, elbowBefore: '.fond-branches' });
+    edges.push({ a: lastTrunk, b: idxs[0], state: forkState, elbowBefore: '.fond-branches', branch: branch.id, startOffsetX });
     for (let k = 0; k < idxs.length - 1; k++) {
-      edges.push({ a: idxs[k], b: idxs[k + 1], state: edgeState(idxs[k], idxs[k + 1]) });
+      edges.push({ a: idxs[k], b: idxs[k + 1], state: edgeState(idxs[k], idxs[k + 1]), branch: branch.id });
     }
   });
 
@@ -3508,11 +3512,12 @@ function layoutCircuit(edges) {
     };
 
     const segPaths = [];
-    currentEdges.forEach(({ a, b, state, elbowBefore }) => {
+    currentEdges.forEach(({ a, b, state, elbowBefore, branch, startOffsetX }) => {
       const c1 = centerByKey.get(String(a)), c2 = centerByKey.get(String(b));
       if (!c1 || !c2) return;
-      const [x1, y1] = c1;
+      const [x1raw, y1] = c1;
       const [x2, y2] = c2;
+      const x1 = x1raw + (startOffsetX || 0);
       const forcedElbowY = elbowBefore ? resolveElbowY(elbowBefore) : null;
       let d;
       if (forcedElbowY != null && Math.abs(x2 - x1) > 1) {
@@ -3529,17 +3534,18 @@ function layoutCircuit(edges) {
         d = `M ${x1} ${y1} C ${x1} ${ymid}, ${x2} ${ymid}, ${x2} ${y2}`;
       }
 
-      const path = svgEl('path', { d, class: `fond-trace fond-trace-${state}` });
+      const branchCls = branch ? ` fond-trace-b-${branch}` : '';
+      const path = svgEl('path', { d, class: `fond-trace fond-trace-${state}${branchCls}` });
       svg.appendChild(path);
       segPaths.push({ path, state });
 
       [[x1, y1], [x2, y2]].forEach(([cx, cy]) => {
-        svg.appendChild(svgEl('circle', { cx, cy, r: 4, class: `fond-via fond-via-${state}` }));
+        svg.appendChild(svgEl('circle', { cx, cy, r: 4, class: `fond-via fond-via-${state}${branch ? ` fond-via-b-${branch}` : ''}` }));
         svg.appendChild(svgEl('circle', { cx, cy, r: 1.6, class: 'fond-via-hole' }));
       });
 
       if (state === 'active' && !reduced) {
-        const dot = svgEl('circle', { r: 4.5, class: 'fond-flow-dot' });
+        const dot = svgEl('circle', { r: 4.5, class: `fond-flow-dot${branch ? ` fond-flow-dot-b-${branch}` : ''}` });
         dot.style.offsetPath = `path('${d}')`;
         svg.appendChild(dot);
       }
