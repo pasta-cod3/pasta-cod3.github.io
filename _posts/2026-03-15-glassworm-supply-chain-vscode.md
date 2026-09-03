@@ -11,7 +11,7 @@ excerpt: "La campagna GlassWorm distribuisce malware tramite estensioni VS Code 
 
 ## Il fatto
 
-I ricercatori di **Socket** — una società specializzata nella sicurezza della supply chain del software — hanno pubblicato a marzo 2026 un report che documenta una nuova iterazione della campagna **GlassWorm**, definita come una "significativa escalation" rispetto alle versioni precedenti.
+I ricercatori di **Socket** (una società specializzata nella sicurezza della supply chain del software), hanno pubblicato a marzo 2026 un report che documenta una nuova iterazione della campagna **GlassWorm**, definita come una "significativa escalation" rispetto alle versioni precedenti.
 
 Dall'analisi di Socket sono emerse almeno **72 estensioni malevole** nell'**Open VSX Registry** (il marketplace alternativo di estensioni per VS Code usato principalmente da sviluppatori che usano VSCodium e altri fork open source) pubblicate a partire dal 31 gennaio 2026. Il bersaglio: sviluppatori di software, con particolare attenzione a chi usa strumenti di AI coding come Claude Code e Gemini.
 
@@ -45,9 +45,9 @@ Le estensioni GlassWorm mimano strumenti comuni nello stack dei developer modern
 
 - Linter e formatter (ESLint, Prettier alternativi)
 - Code runner e task automation
-- **Strumenti per AI coding assistant** — simulando integrazioni con Claude Code e Google Gemini
+- **Strumenti per AI coding assistant**: simulando integrazioni con Claude Code e Google Gemini
 
-Quest'ultimo punto è particolarmente preoccupante: gli sviluppatori che usano AI coding assistant tendono ad avere accesso a codebase sensibili, API key, e variabili di ambiente con credenziali. Un'estensione malevola che opera nel contesto di VS Code ha accesso a tutto ciò che l'editor stesso può leggere — inclusi i file `.env`, le chiavi SSH, e i token di autenticazione nei workspace.
+Quest'ultimo punto è particolarmente preoccupante: gli sviluppatori che usano AI coding assistant tendono ad avere accesso a codebase sensibili, API key, e variabili di ambiente con credenziali. Un'estensione malevola che opera nel contesto di VS Code ha accesso a tutto ciò che l'editor stesso può leggere, inclusi i file `.env`, le chiavi SSH, e i token di autenticazione nei workspace.
 
 ---
 
@@ -61,13 +61,13 @@ Quest'ultimo punto è particolarmente preoccupante: gli sviluppatori che usano A
 - GitHub Codespaces (in parte)
 - Molte distribuzioni Linux che includono editor VS Code-compatibili
 
-Microsoft ha processi di vetting più robusti per il suo marketplace. Open VSX, essendo un progetto open source con risorse più limitate, ha una revisione meno sistematica — il che lo rende un vettore più accessibile per campagne di questo tipo.
+Microsoft ha processi di vetting più robusti per il suo marketplace. Open VSX, essendo un progetto open source con risorse più limitate, ha una revisione meno sistematica, il che lo rende un vettore più accessibile per campagne di questo tipo.
 
 ---
 
 ## La supply chain degli sviluppatori: perché è un target critico
 
-Un attacco che compromette gli strumenti degli sviluppatori è un attacco con effetto moltiplicatore. Uno sviluppatore compromesso non è solo una vittima — è potenzialmente:
+Un attacco che compromette gli strumenti degli sviluppatori è un attacco con effetto moltiplicatore. Uno sviluppatore compromesso non è solo una vittima, è potenzialmente:
 
 - Un vettore per introdurre backdoor nel codice che sviluppa
 - Un punto di accesso alle pipeline CI/CD
@@ -96,4 +96,4 @@ La supply chain del software è diventata il bersaglio più ambito per gli attor
 
 ## Conclusione
 
-GlassWorm è l'ennesimo promemoria che la supply chain del software è un battleground attivo. L'evoluzione della tecnica — dall'embedding diretto del loader all'abuso delle relazioni di dependenza per "infettare dopo" — mostra una maturità crescente degli attori. Gli sviluppatori sono bersagli di alto valore. I loro strumenti devono essere trattati con lo stesso rigore dei sistemi che gestiscono.
+GlassWorm è l'ennesimo promemoria che la supply chain del software è un battleground attivo. L'evoluzione della tecnica (dall'embedding diretto del loader all'abuso delle relazioni di dependenza per "infettare dopo"), mostra una maturità crescente degli attori. Gli sviluppatori sono bersagli di alto valore. I loro strumenti devono essere trattati con lo stesso rigore dei sistemi che gestiscono.

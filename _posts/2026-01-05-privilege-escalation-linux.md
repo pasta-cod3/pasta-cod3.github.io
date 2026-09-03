@@ -13,7 +13,7 @@ excerpt: "SUID binari, cron job mal configurati, sudo misconfiguration, capabili
 
 Hai ottenuto una shell su un sistema Linux. L'utente è `www-data` o qualche altro utente con privilegi minimi. L'obiettivo finale è quasi sempre diventare **root**.
 
-La **privilege escalation** (privesc) è il processo di elevare i propri privilegi da utente normale a superutente. È una fase critica in ogni penetration test — e una delle più creative.
+La **privilege escalation** (privesc) è il processo di elevare i propri privilegi da utente normale a superutente. È una fase critica in ogni penetration test, e una delle più creative.
 
 Non esiste una lista magica di comandi che funziona sempre. Bisogna **enumerare**, capire il sistema, e trovare la debolezza specifica di quella configurazione.
 
@@ -210,10 +210,10 @@ L'output è colorato: **rosso/giallo** indica i vettori più probabili.
 
 ## Conclusione
 
-La privilege escalation su Linux è un campo enorme. Ogni sistema è diverso — la stessa tecnica non funziona sempre. La differenza tra un penetration tester mediocre e uno bravo sta nella capacità di **enumerare sistematicamente** e **capire perché** qualcosa è sfruttabile.
+La privilege escalation su Linux è un campo enorme. Ogni sistema è diverso, la stessa tecnica non funziona sempre. La differenza tra un penetration tester mediocre e uno bravo sta nella capacità di **enumerare sistematicamente** e **capire perché** qualcosa è sfruttabile.
 
 Risorse per esercitarsi:
-- **TryHackMe** — room "Linux PrivEsc"
-- **HackTheBox** — macchine Linux di difficoltà Easy/Medium
-- **GTFOBins** — `gtfobins.github.io` — bibbia per SUID/sudo abuse
-- **PayloadsAllTheThings** — repository GitHub con cheat sheet completi
+- **TryHackMe**: room "Linux PrivEsc"
+- **HackTheBox**: macchine Linux di difficoltà Easy/Medium
+- **GTFOBins** (`gtfobins.github.io`), bibbia per SUID/sudo abuse
+- **PayloadsAllTheThings**: repository GitHub con cheat sheet completi

@@ -13,7 +13,7 @@ excerpt: "Il Blue Team difende, rileva e risponde. Cosa fanno concretamente un a
 
 Se il Red Team simula gli attaccanti, il **Blue Team** è chi difende. È il team responsabile di proteggere l'infrastruttura, rilevare le intrusioni e rispondere agli incidenti.
 
-Mentre il Red Team lavora su ingaggi temporanei, il Blue Team opera **continuativamente** — 24 ore su 24, 7 giorni su 7 nei contesti più seri. È il lavoro quotidiano della sicurezza informatica operativa.
+Mentre il Red Team lavora su ingaggi temporanei, il Blue Team opera **continuativamente**: 24 ore su 24, 7 giorni su 7 nei contesti più seri. È il lavoro quotidiano della sicurezza informatica operativa.
 
 ---
 
@@ -21,13 +21,13 @@ Mentre il Red Team lavora su ingaggi temporanei, il Blue Team opera **continuati
 
 Le responsabilità principali:
 
-- **Monitoraggio** — analizzare log, alert e traffico di rete in cerca di attività sospette
-- **Detection** — identificare attacchi in corso o già avvenuti
-- **Incident Response** — rispondere agli incidenti, contenerli e risolverli
-- **Hardening** — rafforzare i sistemi per ridurre la superficie d'attacco
-- **Threat Hunting** — cercare proattivamente minacce nascoste nella rete
-- **Vulnerability Management** — identificare e tracciare le vulnerabilità dei sistemi
-- **Threat Intelligence** — raccogliere e applicare informazioni sulle minacce attuali
+- **Monitoraggio**: analizzare log, alert e traffico di rete in cerca di attività sospette
+- **Detection**: identificare attacchi in corso o già avvenuti
+- **Incident Response**: rispondere agli incidenti, contenerli e risolverli
+- **Hardening**: rafforzare i sistemi per ridurre la superficie d'attacco
+- **Threat Hunting**: cercare proattivamente minacce nascoste nella rete
+- **Vulnerability Management**: identificare e tracciare le vulnerabilità dei sistemi
+- **Threat Intelligence**: raccogliere e applicare informazioni sulle minacce attuali
 
 ---
 
@@ -37,9 +37,9 @@ Le responsabilità principali:
 
 Il **Security Operations Center** è il cuore operativo del Blue Team. Gli analisti monitorano alert, fanno triage e investigano incidenti.
 
-- **L1** — triage iniziale degli alert, escalation
-- **L2** — investigazione più approfondita, correlazione eventi
-- **L3** — incident response avanzata, threat hunting, forensics
+- **L1**: triage iniziale degli alert, escalation
+- **L2**: investigazione più approfondita, correlazione eventi
+- **L3**: incident response avanzata, threat hunting, forensics
 
 ### Incident Responder
 
@@ -87,7 +87,7 @@ Il **Purple Team** fa lavorare Red e Blue insieme: le tecniche offensive vengono
 
 - Mappa le proprie detection coverage
 - Aiuta a prioritizzare cosa monitorare
-- Dà contesto agli alert ("questa tecnica corrisponde a T1078 — Valid Accounts")
+- Dà contesto agli alert ("questa tecnica corrisponde a T1078, Valid Accounts")
 
 Disponibile gratuitamente su `attack.mitre.org`.
 

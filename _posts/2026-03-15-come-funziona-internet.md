@@ -11,7 +11,7 @@ excerpt: "Quando digiti un URL succedono decine di cose in millisecondi. Dal rou
 
 ## Introduzione
 
-Ogni volta che apri un sito web, mandi un'email o guardi un video in streaming, miliardi di operazioni avvengono in frazioni di secondo. Per chi lavora in sicurezza informatica, capire come funziona internet non è un dettaglio opzionale — è il prerequisito per capire quasi tutti gli attacchi e le difese. Non puoi analizzare traffico di rete senza capire TCP/IP. Non puoi capire il DNS poisoning senza capire come funziona il DNS. Non puoi scrivere regole firewall senza capire come viaggiano i pacchetti.
+Ogni volta che apri un sito web, mandi un'email o guardi un video in streaming, miliardi di operazioni avvengono in frazioni di secondo. Per chi lavora in sicurezza informatica, capire come funziona internet non è un dettaglio opzionale, è il prerequisito per capire quasi tutti gli attacchi e le difese. Non puoi analizzare traffico di rete senza capire TCP/IP. Non puoi capire il DNS poisoning senza capire come funziona il DNS. Non puoi scrivere regole firewall senza capire come viaggiano i pacchetti.
 
 Questo articolo segue un pacchetto dal momento in cui premi Invio su una URL al momento in cui la pagina appare sul tuo schermo.
 
@@ -31,7 +31,7 @@ graph LR
     D --> F
 ```
 
-Ogni pacchetto può seguire percorsi diversi e arrivare fuori ordine — il protocollo di trasporto si occupa di riordinarli.
+Ogni pacchetto può seguire percorsi diversi e arrivare fuori ordine, il protocollo di trasporto si occupa di riordinarli.
 
 Perché questo importa per la sicurezza:
 - Un attaccante può intercettare singoli pacchetti (**packet sniffing**)
@@ -43,9 +43,9 @@ Perché questo importa per la sicurezza:
 
 ## Gli indirizzi IP
 
-Ogni dispositivo connesso a internet ha un **indirizzo IP** — un numero che lo identifica sulla rete.
+Ogni dispositivo connesso a internet ha un **indirizzo IP**: un numero che lo identifica sulla rete.
 
-**IPv4:** 32 bit, scritti come quattro numeri da 0 a 255 separati da punti. Circa 4 miliardi di indirizzi possibili — ormai esauriti.
+**IPv4:** 32 bit, scritti come quattro numeri da 0 a 255 separati da punti. Circa 4 miliardi di indirizzi possibili, ormai esauriti.
 
 **IPv6:** 128 bit in esadecimale. Introdotto per risolvere l'esaurimento degli indirizzi IPv4. Esempio: `2001:0db8:85a3::8a2e:0370:7334`
 
@@ -69,7 +69,7 @@ graph LR
     R --> I[Internet]
 ```
 
-**Implicazione di sicurezza:** un attaccante esterno non può raggiungere direttamente un dispositivo privato dietro NAT — a meno che non ci sia port forwarding, o che il dispositivo abbia già stabilito una connessione verso l'esterno.
+**Implicazione di sicurezza:** un attaccante esterno non può raggiungere direttamente un dispositivo privato dietro NAT, a meno che non ci sia port forwarding, o che il dispositivo abbia già stabilito una connessione verso l'esterno.
 
 ---
 
@@ -83,7 +83,7 @@ Le porte vanno da 0 a 65535. Le più importanti da conoscere:
 |---|---|---|
 | 21 | FTP | Trasferimento file, non cifrato |
 | 22 | SSH | Shell remota cifrata |
-| 23 | Telnet | Shell remota NON cifrata — mai usare |
+| 23 | Telnet | Shell remota NON cifrata, mai usare |
 | 25 | SMTP | Email in uscita |
 | 53 | DNS | Risoluzione nomi |
 | 80 | HTTP | Web non cifrato |
@@ -97,7 +97,7 @@ Quando Nmap scansiona una rete, sta cercando esattamente questo: quali porte son
 
 ## TCP vs UDP
 
-### TCP — Transmission Control Protocol
+### TCP: Transmission Control Protocol
 
 TCP garantisce che i dati arrivino completi, nell'ordine giusto, senza errori. Stabilisce la connessione con il **three-way handshake**:
 
@@ -113,17 +113,17 @@ sequenceDiagram
     S->>C: ACK
 ```
 
-Usato per HTTP/HTTPS, SSH, SMTP — tutto dove l'integrità è critica.
+Usato per HTTP/HTTPS, SSH, SMTP, tutto dove l'integrità è critica.
 
 **Attacco SYN Flood:** l'attaccante manda migliaia di SYN senza mai completare l'handshake. Il server alloca risorse per ogni connessione pendente e si esaurisce. È una forma di DoS.
 
-### UDP — User Datagram Protocol
+### UDP: User Datagram Protocol
 
 UDP è fire and forget: manda i pacchetti senza conferma, senza ordine garantito, senza ritrasmissioni. Più veloce ma meno affidabile.
 
-Usato per DNS, streaming video, gaming online, VoIP — dove la velocità è più importante dell'integrità assoluta.
+Usato per DNS, streaming video, gaming online, VoIP, dove la velocità è più importante dell'integrità assoluta.
 
-**Amplification DDoS:** alcuni servizi UDP rispondono con risposte molto più grandi delle richieste (DNS, NTP, memcached). L'attaccante manda richieste con IP sorgente falsificato della vittima — la vittima riceve traffico amplificato fino a 100x.
+**Amplification DDoS:** alcuni servizi UDP rispondono con risposte molto più grandi delle richieste (DNS, NTP, memcached). L'attaccante manda richieste con IP sorgente falsificato della vittima, la vittima riceve traffico amplificato fino a 100x.
 
 ---
 
@@ -201,7 +201,7 @@ Codici di stato importanti:
 | 200 | OK | — |
 | 301/302 | Redirect | Redirect HTTP da HTTPS = downgrade attack |
 | 401 | Autenticazione richiesta | — |
-| 403 | Accesso negato | La risorsa esiste — info utile all'attaccante |
+| 403 | Accesso negato | La risorsa esiste, info utile all'attaccante |
 | 404 | Non trovato | — |
 | 500 | Errore server | Può rivelare stack trace |
 
@@ -244,9 +244,9 @@ graph TD
 
 ## Le implicazioni di sicurezza fondamentali
 
-**Tutto il traffico non cifrato è leggibile.** Qualsiasi dispositivo in mezzo — router, switch, access point WiFi — può vedere il contenuto di HTTP, DNS, SMTP non cifrato. Include il tuo ISP e il gestore del WiFi pubblico.
+**Tutto il traffico non cifrato è leggibile.** Qualsiasi dispositivo in mezzo (router, switch, access point WiFi), può vedere il contenuto di HTTP, DNS, SMTP non cifrato. Include il tuo ISP e il gestore del WiFi pubblico.
 
-**Gli indirizzi IP si falsificano.** Il campo IP sorgente di un pacchetto può contenere qualsiasi valore. Questo è alla base degli amplification attack. TCP è più difficile da falsificare perché richiede il completamento dell'handshake — UDP no.
+**Gli indirizzi IP si falsificano.** Il campo IP sorgente di un pacchetto può contenere qualsiasi valore. Questo è alla base degli amplification attack. TCP è più difficile da falsificare perché richiede il completamento dell'handshake, UDP no.
 
 **Il DNS è il punto di controllo.** Chi controlla il DNS controlla dove va il traffico. Un attaccante che modifica i record DNS di un dominio può reindirizzare tutto il traffico senza toccare né il server originale né i client.
 
@@ -256,6 +256,6 @@ graph TD
 
 ## Conclusione
 
-Internet è una pila di protocolli stratificati — ciascuno risolve un problema specifico e si appoggia a quello sotto. IP instrada i pacchetti. TCP garantisce l'affidabilità. DNS traduce i nomi. HTTP trasporta il contenuto. TLS cifra tutto.
+Internet è una pila di protocolli stratificati, ciascuno risolve un problema specifico e si appoggia a quello sotto. IP instrada i pacchetti. TCP garantisce l'affidabilità. DNS traduce i nomi. HTTP trasporta il contenuto. TLS cifra tutto.
 
-Ogni layer ha le proprie vulnerabilità. Un DNS hijacking colpisce il layer applicativo. Un SYN flood colpisce il layer di trasporto. Un ARP poisoning colpisce il layer di collegamento dati. Capire come questi layer interagiscono è la base per capire dove gli attaccanti cercano di inserirsi — e dove i difensori devono posizionarsi.
+Ogni layer ha le proprie vulnerabilità. Un DNS hijacking colpisce il layer applicativo. Un SYN flood colpisce il layer di trasporto. Un ARP poisoning colpisce il layer di collegamento dati. Capire come questi layer interagiscono è la base per capire dove gli attaccanti cercano di inserirsi, e dove i difensori devono posizionarsi.

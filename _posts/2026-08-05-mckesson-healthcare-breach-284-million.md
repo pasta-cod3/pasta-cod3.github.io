@@ -11,7 +11,7 @@ excerpt: "McKesson Corporation, gigante della distribuzione farmaceutica e IT he
 
 ## Il fatto
 
-A agosto 2026, **McKesson Corporation** — uno dei più grandi distributori di farmaci e fornitore di soluzioni IT per il settore healthcare negli USA — ha **confermato pubblicamente** una massiccia violazione di dati.
+A agosto 2026, **McKesson Corporation** (uno dei più grandi distributori di farmaci e fornitore di soluzioni IT per il settore healthcare negli USA), ha **confermato pubblicamente** una massiccia violazione di dati.
 
 Gli attaccanti hanno exfiltrato **284 milioni di record** contenenti informazioni sensibili di pazienti, fornitori di healthcare, e dati aziendali critici. Il gruppo di cybercriminali **ShinyHunters** ha rivendicato l'attacco e ha pubblicato un ultimatum: **pagare $55 milioni entro settembre 1**, o i dati saranno pubblicamente leakati.
 
@@ -45,7 +45,7 @@ I dati exfiltrati includono informazioni di:
 | **Dati aziendali** | Contratti, informazioni finanziarie, sorgenti di codice |
 | **Sistema interno** | Credenziali di servizio, configurazioni, accessi di amministrazione |
 
-Il numero **284 milioni** è massivo — è come se ogni cittadino USA avesse i propri record healthcare di McKesson exfiltrati (USA ~330 milioni).
+Il numero **284 milioni** è massivo, è come se ogni cittadino USA avesse i propri record healthcare di McKesson exfiltrati (USA ~330 milioni).
 
 ---
 
@@ -70,7 +70,7 @@ ShinyHunters è un **ransomware-as-a-service (RaaS) affiliate group** noto per:
 - Spesso un **front group** per attori state-sponsored (sospetti legami con Russia)
 - Storicamente riescono a riscuotere pagamenti in **crypto** senza traccia
 
-ShinyHunters ha una **history di follow-through** — se non paghi, **pubblicano davvero i dati** (a differenza di molti gruppi che minacciano solo).
+ShinyHunters ha una **history di follow-through**: se non paghi, **pubblicano davvero i dati** (a differenza di molti gruppi che minacciano solo).
 
 ---
 
@@ -113,12 +113,12 @@ Per i 284 milioni di persone i cui record sono stati compromessi:
 
 Non sappiamo ancora esattamente come gli attaccanti hanno ottenuto l'accesso iniziale. Possibilità:
 
-1. **Credenziali RDP esposte** — McKesson ha probabile migliaia di dipendenti con accesso RDP
-2. **Vulnerabilità zero-day** — exploit su VPN / Firewall
-3. **Insider threat** — dipendente compromesso
-4. **Phishing** — attacco di social engineering che ha compromesso account privilegiato
+1. **Credenziali RDP esposte**: McKesson ha probabile migliaia di dipendenti con accesso RDP
+2. **Vulnerabilità zero-day**: exploit su VPN / Firewall
+3. **Insider threat**: dipendente compromesso
+4. **Phishing**: attacco di social engineering che ha compromesso account privilegiato
 
-Qualunque sia il vettore, la lezione è: **le infrastrutture critiche rimangono vulnerabili all'accesso iniziale** — non importa quanto grande tu sia, il primo step dell'attacco è spesso il più facile.
+Qualunque sia il vettore, la lezione è: **le infrastrutture critiche rimangono vulnerabili all'accesso iniziale**: non importa quanto grande tu sia, il primo step dell'attacco è spesso il più facile.
 
 ---
 

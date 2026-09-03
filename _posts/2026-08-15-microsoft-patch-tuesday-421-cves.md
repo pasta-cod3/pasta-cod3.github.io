@@ -13,7 +13,7 @@ excerpt: "Microsoft ha rilasciato patch per 421 vulnerabilità a agosto 2026, in
 
 A agosto 2026, **Microsoft ha annunciato un Patch Tuesday massiccio**: patch per **421 vulnerabilità totali**, il secondo mese consecutivo con più di 400 CVE in un singolo rilascio.
 
-Più preoccupante: **almeno uno** di questi CVE — **CVE-2026-68820** — è **già sotto attacco attivo** prima che gli utenti avessero tempo di patchare.
+Più preoccupante: **almeno uno** di questi CVE (**CVE-2026-68820**), è **già sotto attacco attivo** prima che gli utenti avessero tempo di patchare.
 
 ---
 
@@ -101,12 +101,12 @@ La **finestra di esposizione** è stata almeno 5-7 giorni. Per organizzazioni co
 3. **Verifica**: dopo il patch, riconfirma che afd.sys è stato aggiornato
 
 **Lungo termine:**
-1. **Ridurre privilegi di utente** — utenti normali non dovrebbero poter accedere a risorse kernel-level
-2. **Applicare Kernel Patch Protection (KPP)** — mitiga alcuni difetti use-after-free
+1. **Ridurre privilegi di utente**: utenti normali non dovrebbero poter accedere a risorse kernel-level
+2. **Applicare Kernel Patch Protection (KPP)**: mitiga alcuni difetti use-after-free
 3. **EDR sensitivity**: configura EDR per catturare anomalie di accesso kernel da processi user-mode
 
 ---
 
 ## Conclusione
 
-421 CVE in un singolo mese sono indicatore di una realtà sgradevole: la complessità di Windows, specialmente driver legacy come afd.sys, continua a generare difetti. Il fatto che CVE-2026-68820 sia già sotto attacco prima che gli utenti lo sapessero è un reminder che **patch Tuesday non significa sicurezza immediata** — significa iniziare una corsa contro il tempo per patchare prima che gli attaccanti li raggiungano.
+421 CVE in un singolo mese sono indicatore di una realtà sgradevole: la complessità di Windows, specialmente driver legacy come afd.sys, continua a generare difetti. Il fatto che CVE-2026-68820 sia già sotto attacco prima che gli utenti lo sapessero è un reminder che **patch Tuesday non significa sicurezza immediata**: significa iniziare una corsa contro il tempo per patchare prima che gli attaccanti li raggiungano.

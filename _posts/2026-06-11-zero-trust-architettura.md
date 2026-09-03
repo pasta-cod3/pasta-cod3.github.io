@@ -7,7 +7,7 @@ tags: [Zero Trust, architettura sicurezza, identity, microsegmentazione, BeyondC
 excerpt: "Il modello Zero Trust ribalta il paradigma tradizionale: non esiste più una rete 'interna' sicura. Ogni accesso va verificato, ogni identità autenticata, ogni segmento isolato."
 ---
 
-Il vecchio modello di sicurezza era basato sul perimetro: dentro la rete aziendale sei fidato, fuori no. Zero Trust lo ribalta completamente: **non fidarsi mai, verificare sempre** — indipendentemente da dove si trova l'utente o il dispositivo.
+Il vecchio modello di sicurezza era basato sul perimetro: dentro la rete aziendale sei fidato, fuori no. Zero Trust lo ribalta completamente: **non fidarsi mai, verificare sempre**: indipendentemente da dove si trova l'utente o il dispositivo.
 
 ## Perché il modello perimetrale è fallito
 
@@ -20,11 +20,11 @@ Quando un attaccante compromette un endpoint interno, il modello perimetrale non
 
 ## I tre principi fondamentali
 
-**1. Verifica esplicita** — autentica e autorizza sempre, basandoti su tutti i dati disponibili: identità, posizione, dispositivo, servizio, data/ora.
+**1. Verifica esplicita**: autentica e autorizza sempre, basandoti su tutti i dati disponibili: identità, posizione, dispositivo, servizio, data/ora.
 
-**2. Least Privilege** — ogni utente e servizio ha solo i permessi minimi necessari, per il tempo minimo necessario (Just-In-Time access).
+**2. Least Privilege**: ogni utente e servizio ha solo i permessi minimi necessari, per il tempo minimo necessario (Just-In-Time access).
 
-**3. Assume Breach** — progetta come se la rete fosse già compromessa. Minimizza il raggio di esplosione con microsegmentazione e visibilità end-to-end.
+**3. Assume Breach**: progetta come se la rete fosse già compromessa. Minimizza il raggio di esplosione con microsegmentazione e visibilità end-to-end.
 
 ## I pilastri architetturali
 
@@ -36,7 +36,7 @@ Applicazione → [App proxy / mTLS] →
 Dati → [DLP / Classificazione] →
 ```
 
-**Identity Provider (IdP)**: Azure AD, Okta, Google Workspace — ogni accesso parte dall'autenticazione forte (MFA, FIDO2).
+**Identity Provider (IdP)**: Azure AD, Okta, Google Workspace, ogni accesso parte dall'autenticazione forte (MFA, FIDO2).
 
 **Policy Engine**: decide "questo utente, con questo dispositivo, in questo contesto, può accedere a questa risorsa?" Considera rischio in tempo reale.
 

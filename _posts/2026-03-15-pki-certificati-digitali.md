@@ -11,9 +11,9 @@ excerpt: "Perché il lucchetto HTTPS non è garanzia assoluta. Come funziona la 
 
 ## Introduzione
 
-Ogni volta che il tuo browser mostra il lucchetto verde su un sito HTTPS, sta avvenendo qualcosa di straordinario: due computer che non si sono mai incontrati si fidano l'uno dell'altro in modo verificabile, su un canale intrinsecamente insicuro come internet. Questo miracolo è reso possibile dalla **Public Key Infrastructure** (PKI) — un sistema di fiducia gerarchica basato sulla crittografia asimmetrica.
+Ogni volta che il tuo browser mostra il lucchetto verde su un sito HTTPS, sta avvenendo qualcosa di straordinario: due computer che non si sono mai incontrati si fidano l'uno dell'altro in modo verificabile, su un canale intrinsecamente insicuro come internet. Questo miracolo è reso possibile dalla **Public Key Infrastructure** (PKI), un sistema di fiducia gerarchica basato sulla crittografia asimmetrica.
 
-Capire la PKI significa capire il fondamento su cui poggia la sicurezza di tutto il web moderno — e capire perché certi attacchi sono possibili nonostante HTTPS.
+Capire la PKI significa capire il fondamento su cui poggia la sicurezza di tutto il web moderno, e capire perché certi attacchi sono possibili nonostante HTTPS.
 
 ---
 
@@ -21,7 +21,7 @@ Capire la PKI significa capire il fondamento su cui poggia la sicurezza di tutto
 
 Immagina di voler comunicare in modo sicuro con la tua banca online. Sai che il suo indirizzo è `banca.it`. Ma come fai a sapere che il server con cui stai comunicando è davvero quello della banca, e non un impostore?
 
-La crittografia asimmetrica risolve il problema della riservatezza — ma non dell'identità. Chiunque può generare una coppia di chiavi pubblica/privata e dichiarare di essere chiunque. Senza un sistema per verificare l'identità, la crittografia da sola non basta.
+La crittografia asimmetrica risolve il problema della riservatezza, ma non dell'identità. Chiunque può generare una coppia di chiavi pubblica/privata e dichiarare di essere chiunque. Senza un sistema per verificare l'identità, la crittografia da sola non basta.
 
 ```mermaid
 graph LR
@@ -89,17 +89,17 @@ graph TD
 
 Le CA verificano l'identità a diversi livelli:
 
-**Domain Validation (DV):** la CA verifica solo che il richiedente controlli il dominio — mettendo un file specifico su `/.well-known/acme-challenge/`, rispondendo a un'email inviata all'indirizzo registrato del dominio, o aggiungendo un record TXT al DNS. Automatizzabile in secondi. Usato da Let's Encrypt.
+**Domain Validation (DV):** la CA verifica solo che il richiedente controlli il dominio, mettendo un file specifico su `/.well-known/acme-challenge/`, rispondendo a un'email inviata all'indirizzo registrato del dominio, o aggiungendo un record TXT al DNS. Automatizzabile in secondi. Usato da Let's Encrypt.
 
-**Organization Validation (OV):** la CA verifica anche l'identità legale dell'organizzazione — documenti aziendali, registrazione commerciale, numero di telefono. Richiede giorni. Il certificato contiene il nome dell'organizzazione.
+**Organization Validation (OV):** la CA verifica anche l'identità legale dell'organizzazione, documenti aziendali, registrazione commerciale, numero di telefono. Richiede giorni. Il certificato contiene il nome dell'organizzazione.
 
-**Extended Validation (EV):** verifica approfondita dell'identità legale, fisica e operativa dell'organizzazione. Richiedeva settimane. I browser moderni non mostrano più la barra verde EV in modo prominente — la distinzione visiva è stata rimossa perché confondeva gli utenti.
+**Extended Validation (EV):** verifica approfondita dell'identità legale, fisica e operativa dell'organizzazione. Richiedeva settimane. I browser moderni non mostrano più la barra verde EV in modo prominente, la distinzione visiva è stata rimossa perché confondeva gli utenti.
 
 ---
 
 ## La catena di fiducia
 
-Le CA sono organizzate gerarchicamente. In cima ci sono le **Root CA** — organizzazioni con chiavi private custodite in vault fisici con sicurezza estrema (cerimonie formali, HSM, testimoni multipli, cage di Faraday).
+Le CA sono organizzate gerarchicamente. In cima ci sono le **Root CA**: organizzazioni con chiavi private custodite in vault fisici con sicurezza estrema (cerimonie formali, HSM, testimoni multipli, cage di Faraday).
 
 ```mermaid
 graph TD
@@ -110,11 +110,11 @@ graph TD
     INT -->|"Verifica"| LEAF
 ```
 
-Le Root CA non emettono certificati finali direttamente — usano **Intermediate CA** come buffer. Se una Intermediate CA venisse compromessa, può essere revocata senza toccare la Root CA. Una Root CA compromessa sarebbe catastrofica — richiederebbe di aggiornare la trust store di tutti i browser e sistemi operativi del mondo.
+Le Root CA non emettono certificati finali direttamente, usano **Intermediate CA** come buffer. Se una Intermediate CA venisse compromessa, può essere revocata senza toccare la Root CA. Una Root CA compromessa sarebbe catastrofica, richiederebbe di aggiornare la trust store di tutti i browser e sistemi operativi del mondo.
 
 ### Il trust store
 
-Il browser (e il sistema operativo) ha preinstallato un elenco di Root CA fidate — il **trust store**. Su Chrome/Firefox sono circa 130-150. Su Windows, macOS, iOS, Android ce ne sono altrettante.
+Il browser (e il sistema operativo) ha preinstallato un elenco di Root CA fidate, il **trust store**. Su Chrome/Firefox sono circa 130-150. Su Windows, macOS, iOS, Android ce ne sono altrettante.
 
 ```bash
 # Su Linux, vedere le Root CA fidate
@@ -156,7 +156,7 @@ sequenceDiagram
     Note over C,S: Handshake completato. Tutto il traffico\nsuccessivo è cifrato con AES-GCM.
 ```
 
-In TLS 1.3 l'handshake è ridotto a **1 RTT** (round trip) contro i 2 RTT di TLS 1.2 — più veloce e più sicuro.
+In TLS 1.3 l'handshake è ridotto a **1 RTT** (round trip) contro i 2 RTT di TLS 1.2, più veloce e più sicuro.
 
 ### Cosa verifica il browser
 
@@ -174,15 +174,15 @@ In TLS 1.3 l'handshake è ridotto a **1 RTT** (round trip) contro i 2 RTT di TLS
 
 ## Revoca dei certificati
 
-Cosa succede se la chiave privata di un certificato viene compromessa prima della sua scadenza? Il certificato deve essere **revocato** — invalidato prima della scadenza naturale.
+Cosa succede se la chiave privata di un certificato viene compromessa prima della sua scadenza? Il certificato deve essere **revocato**: invalidato prima della scadenza naturale.
 
-### CRL — Certificate Revocation List
+### CRL: Certificate Revocation List
 
 La CA pubblica periodicamente una lista di certificati revocati. Il browser scarica la lista e verifica se il certificato è presente.
 
 Problemi: le CRL possono diventare enormi, vengono aggiornate con ritardo, e richiedono download periodici.
 
-### OCSP — Online Certificate Status Protocol
+### OCSP: Online Certificate Status Protocol
 
 ```mermaid
 sequenceDiagram
@@ -253,7 +253,7 @@ graph LR
     B -->|No| D["ERRORE\nConnessione rifiutata\n(anche se CA valida)"]
 ```
 
-Questo protegge anche se una CA viene compromessa — ma rende difficile l'ispezione del traffico per il debugging e rompe le connessioni quando il certificato viene rinnovato se il pin non viene aggiornato.
+Questo protegge anche se una CA viene compromessa, ma rende difficile l'ispezione del traffico per il debugging e rompe le connessioni quando il certificato viene rinnovato se il pin non viene aggiornato.
 
 ---
 
@@ -293,8 +293,8 @@ Il browser mostrerà un avviso di sicurezza perché non c'è una CA fidata che g
 
 ## Conclusione
 
-La PKI è l'infrastruttura invisibile che permette a miliardi di persone di fare operazioni bancarie, acquisti, e comunicazioni private online senza doversi mai incontrare di persona per stabilire la fiducia. È un sistema elegante — ma non infallibile.
+La PKI è l'infrastruttura invisibile che permette a miliardi di persone di fare operazioni bancarie, acquisti, e comunicazioni private online senza doversi mai incontrare di persona per stabilire la fiducia. È un sistema elegante, ma non infallibile.
 
-I punti di debolezza sono noti: CA compromesse, revoca inefficace, SSL stripping. Le soluzioni — Certificate Transparency, HSTS preloading, OCSP Stapling, CAA records — migliorano progressivamente il sistema senza richiedere una sostituzione completa.
+I punti di debolezza sono noti: CA compromesse, revoca inefficace, SSL stripping. Le soluzioni (Certificate Transparency, HSTS preloading, OCSP Stapling, CAA records), migliorano progressivamente il sistema senza richiedere una sostituzione completa.
 
 Per chi lavora in sicurezza, capire la PKI significa capire perché il lucchetto HTTPS non è una garanzia assoluta, come configurare correttamente TLS su un server, e come riconoscere un certificato sospetto o mal configurato.

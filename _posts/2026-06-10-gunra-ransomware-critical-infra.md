@@ -23,12 +23,12 @@ Caratteristiche:
 
 ## Metodo di attacco
 
-1. **Accesso iniziale** — sfruttamento di vulnerabilità Fortinet (firewall) o credenziali compromesse
-2. **MFA bypass** — tecniche non divulgate per bypassare 2FA/MFA
-3. **Movimento laterale** — verso sistemi critici
-4. **Esfiltrazione** — copia di dati sensibili
-5. **Cifratura** — ransomware distribuito su larga scala
-6. **Estorsione** — doppia minaccia (cifri + data leak)
+1. **Accesso iniziale**: sfruttamento di vulnerabilità Fortinet (firewall) o credenziali compromesse
+2. **MFA bypass**: tecniche non divulgate per bypassare 2FA/MFA
+3. **Movimento laterale**: verso sistemi critici
+4. **Esfiltrazione**: copia di dati sensibili
+5. **Cifratura**: ransomware distribuito su larga scala
+6. **Estorsione**: doppia minaccia (cifri + data leak)
 
 ---
 
@@ -36,10 +36,10 @@ Caratteristiche:
 
 Il report governativo non specifica esattamente come Gunra bypassa MFA, ma possibili tecniche includono:
 
-- **Reverse proxy** — intercetta il flusso di autenticazione
-- **SIM swapping** — per OTP SMS-based
-- **Compromissione del provider MFA** — accesso agli account del provider (Okta, Duo, etc.)
-- **Phishing di token** — convincere l'utente a condividere il token 2FA attivo
+- **Reverse proxy**: intercetta il flusso di autenticazione
+- **SIM swapping**: per OTP SMS-based
+- **Compromissione del provider MFA**: accesso agli account del provider (Okta, Duo, etc.)
+- **Phishing di token**: convincere l'utente a condividere il token 2FA attivo
 
 Il fatto che **possiede un metodo efficace e replicabile di MFA bypass** è preoccupante, perché MFA è l'ultima linea di difesa post-compromissione iniziale.
 
@@ -80,6 +80,6 @@ US e South Korea hanno:
 
 ## Conclusione
 
-Gunra è una evoluzione di Conti — piattaforma RaaS sofisticata con MFA bypass e targeting di critical infrastructure.
+Gunra è una evoluzione di Conti, piattaforma RaaS sofisticata con MFA bypass e targeting di critical infrastructure.
 
 La minaccia non è solo tecnica, è **geopolitica**: se Gunra ha sponsor statale (sospettato: Russia/Korea del Nord), gli attacchi potrebbero escalare da financial ransom a disruption puro durante tensions geopolitiche.

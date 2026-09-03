@@ -11,7 +11,7 @@ excerpt: "Il SIEM raccoglie, normalizza e correla log da tutta l'infrastruttura 
 
 ## Introduzione
 
-Un **SIEM** (Security Information and Event Management) è il cuore operativo di qualsiasi SOC. Raccoglie log da ogni fonte disponibile — firewall, endpoint, Active Directory, applicazioni web — li normalizza, li correla e genera alert.
+Un **SIEM** (Security Information and Event Management) è il cuore operativo di qualsiasi SOC. Raccoglie log da ogni fonte disponibile (firewall, endpoint, Active Directory, applicazioni web), li normalizza, li correla e genera alert.
 
 Ma avere un SIEM non basta. Il vero lavoro è **saperlo interrogare**, capire quali alert vale la pena investigare e come ridurre il rumore di fondo senza perdere i segnali reali.
 
@@ -31,10 +31,10 @@ Questa guida è orientata a chi inizia a lavorare in un SOC o vuole capire come 
 
 Le soluzioni più diffuse sono:
 
-- **Elastic SIEM** (Elasticsearch + Kibana) — open source, molto flessibile
-- **Splunk** — potente ma costoso, molto diffuso in enterprise
-- **Microsoft Sentinel** — nativo su Azure, ottimo in ambienti Microsoft
-- **Wazuh** — open source, ottimo per chi inizia
+- **Elastic SIEM** (Elasticsearch + Kibana): open source, molto flessibile
+- **Splunk**: potente ma costoso, molto diffuso in enterprise
+- **Microsoft Sentinel**: nativo su Azure, ottimo in ambienti Microsoft
+- **Wazuh**: open source, ottimo per chi inizia
 
 ---
 
@@ -111,7 +111,7 @@ Il problema più comune nei SOC è il **alert fatigue**: troppi alert, quasi tut
 ### Strategia a livelli
 
 1. **Triage automatico**: regole semplici che scartano automaticamente eventi noti-buoni (es. antivirus aggiornato, backup notturno)
-2. **Enrichment**: arricchisci ogni alert con contesto — IP su threat feed, utente in AD, asset criticality
+2. **Enrichment**: arricchisci ogni alert con contesto, IP su threat feed, utente in AD, asset criticality
 3. **Priorità per rischio**: un logon fallito su una workstation è diverso da un logon fallito sul Domain Controller
 4. **Tuning continuo**: ogni falso positivo è un'opportunità per affinare la regola
 
@@ -165,8 +165,8 @@ Un buon SOC ha **playbook** documentati per i tipi di incident più comuni. Un e
 
 ## Conclusione
 
-Un SIEM è potente quanto le query che ci scrivi e i processi che ci costruisci intorno. Il vero valore non è nell'aggregazione dei log — quella è la parte facile — ma nella capacità di estrarre **segnali significativi dal rumore**.
+Un SIEM è potente quanto le query che ci scrivi e i processi che ci costruisci intorno. Il vero valore non è nell'aggregazione dei log (quella è la parte facile), ma nella capacità di estrarre **segnali significativi dal rumore**.
 
 Inizia con poche correlation rule ben fatte, fai tuning costante, e costruisci playbook chiari. Poi espandi gradualmente.
 
-Nel prossimo articolo parlerò di **threat hunting proattivo** — come cercare attività malevole nei log anche in assenza di alert.
+Nel prossimo articolo parlerò di **threat hunting proattivo**: come cercare attività malevole nei log anche in assenza di alert.

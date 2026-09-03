@@ -64,10 +64,10 @@ Il sector healthcare ha subito il maggior numero di attacchi Medusa:
 
 Come evoluzione di LockBit, Medusa possiede:
 
-1. **Polimorfismo** — il codice cambia ad ogni infezione (difficile da firmare)
-2. **Anti-analysis** — si comporta diversamente in ambienti sandbox
-3. **Multi-stage delivery** — primo stage è legittimo, secondo stage è il ransomware
-4. **Persistence mechanisms** — rimane dopo il riboot
+1. **Polimorfismo**: il codice cambia ad ogni infezione (difficile da firmare)
+2. **Anti-analysis**: si comporta diversamente in ambienti sandbox
+3. **Multi-stage delivery**: primo stage è legittimo, secondo stage è il ransomware
+4. **Persistence mechanisms**: rimane dopo il riboot
 
 ---
 

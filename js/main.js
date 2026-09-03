@@ -15,7 +15,7 @@ const POSTS = [
       "Anonymous",
       "gaming"
     ],
-    "excerpt": "Aprile 2011: Sony disattiva il PlayStation Network per 23 giorni dopo che 77 milioni di account sono stati compromessi. Il più grande breach ai consumatori fino a quel momento — e un caso studio su come non gestire un incidente."
+    "excerpt": "Aprile 2011: Sony disattiva il PlayStation Network per 23 giorni dopo aver scoperto che 77 milioni di account sono stati compromessi. Il più grande breach di dati ai consumatori fino a quel momento. La risposta di Sony (ritardata e opaca), diventa il caso di studio di come non gestire un incidente."
   },
   {
     "id": "samy-worm-xss-myspace-2005",
@@ -509,7 +509,7 @@ const POSTS = [
       "PBKDF2",
       "sicurezza"
     ],
-    "excerpt": "Le password non vengono memorizzate in chiaro — o non dovrebbero. Come funziona l'hashing, cos'è il salting, perché MD5 è obsoleto e cosa usare nel 2026."
+    "excerpt": "Le password non vengono memorizzate in chiaro, o non dovrebbero. Come funziona l'hashing, cos'è il salting, perché MD5 è obsoleto e cosa usare nel 2026."
   },
   {
     "id": "come-funziona-un-firewall",
@@ -905,7 +905,7 @@ const POSTS = [
       "Robert Morris",
       "storia"
     ],
-    "excerpt": "Il 2 novembre 1988 un worm scritto da uno studente di Cornell mise in ginocchio il 10% di internet. Non era stato pensato per fare danni — eppure cambiò tutto."
+    "excerpt": "Il 2 novembre 1988 un worm scritto da uno studente di Cornell mise in ginocchio il 10% di internet. Non era stato pensato per fare danni, eppure cambiò tutto."
   },
   {
     "id": "kevin-mitnick",
@@ -919,7 +919,7 @@ const POSTS = [
       "FBI",
       "storia hacking"
     ],
-    "excerpt": "Kevin Mitnick era il ricercato più famoso d'America — e non sapeva programmare exploit. Il suo strumento principale era il telefono. La storia del più grande ingegnere sociale della storia."
+    "excerpt": "Kevin Mitnick era il ricercato più famoso d'America, e non sapeva programmare exploit. Il suo strumento principale era il telefono. La storia del più grande ingegnere sociale della storia."
   },
   {
     "id": "stuxnet",
@@ -1241,7 +1241,7 @@ const POSTS = [
     "date": "2026-08-15",
     "cat": "fond",
     "tags": ["cyber kill chain", "MITRE ATT&CK", "TTPs", "metodologia", "fondamentali"],
-    "excerpt": "Ogni attacco informatico segue delle fasi riconoscibili. Cyber Kill Chain e MITRE ATT&CK sono i due framework che le descrivono — e che ogni difensore usa per capire dove intervenire."
+    "excerpt": "Ogni attacco informatico segue delle fasi riconoscibili. Cyber Kill Chain e MITRE ATT&CK sono i due framework che le descrivono, e che ogni difensore usa per capire dove intervenire."
   },
   {
     "id": "risk-management-analisi-rischio",
@@ -1297,7 +1297,7 @@ const POSTS = [
     "date": "2026-08-22",
     "cat": "fond",
     "tags": ["ransomware", "double extortion", "attacco", "kill chain", "fondamentali"],
-    "excerpt": "Un attacco ransomware moderno non è 'un virus che cifra i file' — è una campagna strutturata che dura giorni o settimane, con fasi precise prima che una singola cifratura venga eseguita. Ecco come funziona davvero."
+    "excerpt": "Un attacco ransomware moderno non è 'un virus che cifra i file', è una campagna strutturata che dura giorni o settimane, con fasi precise prima che una singola cifratura venga eseguita. Ecco come funziona davvero."
   },
   {
     "id": "ricognizione-passiva-osint",
@@ -1614,7 +1614,7 @@ const POSTS = [
       "storia hacking",
       "anni 70"
     ],
-    "excerpt": "John Draper scoprì che il fischietto omaggio dei cereali Cap'n Crunch emetteva esattamente 2600 Hz — la frequenza per accedere alle linee trunk AT&T. Così nacque il phreaking."
+    "excerpt": "John Draper scoprì che il fischietto omaggio dei cereali Cap'n Crunch emetteva esattamente 2600 Hz, la frequenza per accedere alle linee trunk AT&T. Così nacque il phreaking."
   },
   {
     "id": "carecloud-3-7-million-patients",
@@ -1943,7 +1943,7 @@ const POSTS = [
       "exploitation",
       "red team"
     ],
-    "excerpt": "Una SSRF costringe il server a compiere richieste che l'attaccante non potrebbe fare direttamente — spesso la strada più diretta verso credenziali cloud, servizi interni e reti che dovrebbero essere irraggiungibili dall'esterno."
+    "excerpt": "Una SSRF costringe il server a compiere richieste che l'attaccante non potrebbe fare direttamente, spesso la strada più diretta verso credenziali cloud, servizi interni e reti che dovrebbero essere irraggiungibili dall'esterno."
   },
   {
     "id": "mimikatz-credential-dumping",
@@ -1958,7 +1958,7 @@ const POSTS = [
       "post-exploitation",
       "red team"
     ],
-    "excerpt": "Windows tiene credenziali e hash in memoria per rendere fluido il Single Sign-On. Mimikatz e gli strumenti di credential dumping sfruttano esattamente questo — con conseguenze che vanno ben oltre un singolo host."
+    "excerpt": "Windows tiene credenziali e hash in memoria per rendere fluido il Single Sign-On. Mimikatz e gli strumenti di credential dumping sfruttano esattamente questo, con conseguenze che vanno ben oltre un singolo host."
   },
   {
     "id": "golden-ticket-dcsync-active-directory",
@@ -1973,7 +1973,7 @@ const POSTS = [
       "DCSync",
       "red team"
     ],
-    "excerpt": "Chi possiede l'hash del krbtgt possiede il dominio, anche mesi dopo che l'accesso iniziale è stato chiuso. Golden e Silver Ticket sono la forma di persistenza più potente — e più difficile da estirpare — in Active Directory."
+    "excerpt": "Chi possiede l'hash del krbtgt possiede il dominio, anche mesi dopo che l'accesso iniziale è stato chiuso. Golden e Silver Ticket sono la forma di persistenza più potente (e più difficile da estirpare), in Active Directory."
   },
   {
     "id": "password-spraying-active-directory",
@@ -1987,7 +1987,7 @@ const POSTS = [
       "red team",
       "lockout policy"
     ],
-    "excerpt": "Invece di provare mille password su un account, il password spraying prova una manciata di password ovvie su migliaia di account — restando sotto la soglia di lockout e sotto il radar di chi guarda i log nel modo sbagliato."
+    "excerpt": "Invece di provare mille password su un account, il password spraying prova una manciata di password ovvie su migliaia di account, restando sotto la soglia di lockout e sotto il radar di chi guarda i log nel modo sbagliato."
   },
   {
     "id": "windows-persistence-registry-scheduled-task-wmi",
@@ -2003,7 +2003,7 @@ const POSTS = [
       "post-exploitation",
       "red team"
     ],
-    "excerpt": "Ottenere accesso è solo metà del lavoro: senza un meccanismo di persistenza, un reboot o un logout riportano tutto a zero. Ecco le tecniche più comuni — e più difficili da individuare — per restare dentro un host Windows."
+    "excerpt": "Ottenere accesso è solo metà del lavoro: senza un meccanismo di persistenza, un reboot o un logout riportano tutto a zero. Ecco le tecniche più comuni (e più difficili da individuare), per restare dentro un host Windows."
   },
   {
     "id": "insecure-deserialization-rce",
@@ -2019,7 +2019,7 @@ const POSTS = [
       "Python",
       "red team"
     ],
-    "excerpt": "Deserializzare un oggetto non dovrebbe mai equivalere a eseguire codice — eppure in molti linguaggi è esattamente quello che succede se l'input non è affidabile. Una delle classi di vulnerabilità più devastanti e meno intuitive dell'OWASP Top 10."
+    "excerpt": "Deserializzare un oggetto non dovrebbe mai equivalere a eseguire codice, eppure in molti linguaggi è esattamente quello che succede se l'input non è affidabile. Una delle classi di vulnerabilità più devastanti e meno intuitive dell'OWASP Top 10."
   },
   {
     "id": "av-edr-evasion-tecniche",
@@ -2033,7 +2033,7 @@ const POSTS = [
       "offuscamento",
       "AMSI"
     ],
-    "excerpt": "Un antivirus moderno riconosce le firme note. Un EDR osserva il comportamento in tempo reale tramite hook a livello di kernel e userland. Aggirarli non significa 'nascondersi' — significa capire esattamente dove guardano, ed evitare di apparire lì."
+    "excerpt": "Un antivirus moderno riconosce le firme note. Un EDR osserva il comportamento in tempo reale tramite hook a livello di kernel e userland. Aggirarli non significa 'nascondersi', significa capire esattamente dove guardano, ed evitare di apparire lì."
   },
   {
     "id": "papercut-critical-rce-vulnerability",
@@ -2048,7 +2048,7 @@ const POSTS = [
       "exploit",
       "vulnerability"
     ],
-    "excerpt": "PaperCut, il software di gestione di stampa usato da università, aziende e enti pubblici, ha rilasciato una seconda patch d'emergenza per una vulnerabilità RCE (Remote Code Execution) scoperta essere sotto attacco attivo. L'exploit è banale — bastano poche righe di codice."
+    "excerpt": "PaperCut, il software di gestione di stampa usato da università, aziende e enti pubblici, ha rilasciato una seconda patch d'emergenza per una vulnerabilità RCE (Remote Code Execution) scoperta essere sotto attacco attivo. L'exploit è banale, bastano poche righe di codice."
   }
 ];
 // [POSTS:END]

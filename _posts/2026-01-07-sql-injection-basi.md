@@ -11,7 +11,7 @@ excerpt: "La SQL injection è vecchia ma ancora pericolosissima. Basi teoriche, 
 
 ## Introduzione
 
-La **SQL Injection** (SQLi) è una delle vulnerabilità web più vecchie, più studiate e — incredibilmente — ancora tra le più diffuse. È al primo posto della OWASP Top 10 da decenni.
+La **SQL Injection** (SQLi) è una delle vulnerabilità web più vecchie, più studiate e (incredibilmente), ancora tra le più diffuse. È al primo posto della OWASP Top 10 da decenni.
 
 L'idea di base è semplice: un'applicazione web costruisce query SQL concatenando input dell'utente senza validarlo. L'attaccante inietta codice SQL nell'input per modificare la logica della query.
 
@@ -54,7 +54,7 @@ Il `--` è un commento in SQL. Tutto quello che viene dopo viene ignorato. La pa
 
 La risposta del database arriva direttamente nella risposta HTTP. Più facile da sfruttare.
 
-**Error-based:** l'applicazione mostra gli errori SQL — rivelano struttura del database.
+**Error-based:** l'applicazione mostra gli errori SQL, rivelano struttura del database.
 
 **UNION-based:** usi `UNION SELECT` per recuperare dati da altre tabelle.
 
@@ -173,7 +173,7 @@ $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->execute([$_POST['user']]);
 ```
 
-Con i prepared statement, l'input dell'utente non viene mai interpretato come codice SQL — viene trattato sempre e solo come dato.
+Con i prepared statement, l'input dell'utente non viene mai interpretato come codice SQL, viene trattato sempre e solo come dato.
 
 ### Altre misure
 
@@ -186,11 +186,11 @@ Con i prepared statement, l'input dell'utente non viene mai interpretato come co
 
 ## Dove esercitarsi
 
-- **DVWA** — Damn Vulnerable Web Application (installabile in locale)
-- **WebGoat** — di OWASP, ottimo per principianti
-- **TryHackMe** — room "SQL Injection" e "SQLMap"
-- **HackTheBox** — macchine con vulnerabilità web realistiche
-- **PortSwigger Web Security Academy** — il miglior corso gratuito su SQLi e web hacking
+- **DVWA**: Damn Vulnerable Web Application (installabile in locale)
+- **WebGoat**: di OWASP, ottimo per principianti
+- **TryHackMe**: room "SQL Injection" e "SQLMap"
+- **HackTheBox**: macchine con vulnerabilità web realistiche
+- **PortSwigger Web Security Academy**: il miglior corso gratuito su SQLi e web hacking
 
 ---
 

@@ -22,7 +22,7 @@ Un framework C2 ha tre componenti:
 - **Agente / Implant**: software eseguito sui sistemi compromessi, si connette al server
 - **Client**: interfaccia per l'operatore
 
-Il **callback** avviene tipicamente tramite HTTP/S, DNS, o SMB — protocolli che attraversano quasi tutti i firewall.
+Il **callback** avviene tipicamente tramite HTTP/S, DNS, o SMB, protocolli che attraversano quasi tutti i firewall.
 
 ## Framework usati nei pentest autorizzati
 
@@ -54,13 +54,13 @@ Gli operatori red team nascondono il traffico C2:
 - **DNS C2**: i comandi vengono codificati in query DNS, difficili da bloccare
 - **Sleeping / Jitter**: interval variabile (60s ± 30s) per rompere il pattern regolare
 
-## Come i difensori lo rilevano — MITRE ATT&CK
+## Come i difensori lo rilevano: MITRE ATT&CK
 
 Le tecniche C2 nel framework MITRE ATT&CK (TA0011):
-- **T1071** Application Layer Protocol — traffico C2 su HTTP/DNS
-- **T1573** Encrypted Channel — uso di TLS per cifrare i beacon
-- **T1008** Fallback Channels — canali di fallback se il primario viene bloccato
-- **T1568** Dynamic Resolution — uso di DGA o Fast Flux per i domini C2
+- **T1071** Application Layer Protocol: traffico C2 su HTTP/DNS
+- **T1573** Encrypted Channel: uso di TLS per cifrare i beacon
+- **T1008** Fallback Channels: canali di fallback se il primario viene bloccato
+- **T1568** Dynamic Resolution: uso di DGA o Fast Flux per i domini C2
 
 **Indicatori di rilevamento**:
 - Beaconing regolare verso IP/domini insoliti

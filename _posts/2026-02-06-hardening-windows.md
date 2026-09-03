@@ -11,7 +11,7 @@ excerpt: "Hardening di un sistema Windows: Group Policy, Defender configurato, B
 
 Windows è il sistema operativo più diffuso nei contesti aziendali. È anche quello con la superficie di attacco più ampia, la storia di vulnerabilità più lunga e il numero maggiore di strumenti offensivi costruiti appositamente per attaccarlo.
 
-La buona notizia è che Windows, nelle versioni moderne, ha strumenti di difesa potentissimi — spesso non configurati correttamente o direttamente disabilitati per "comodità". L'hardening di Windows non significa comprare niente: significa **configurare bene ciò che hai già**.
+La buona notizia è che Windows, nelle versioni moderne, ha strumenti di difesa potentissimi, spesso non configurati correttamente o direttamente disabilitati per "comodità". L'hardening di Windows non significa comprare niente: significa **configurare bene ciò che hai già**.
 
 ---
 
@@ -101,7 +101,7 @@ Get-MpComputerStatus | Select-Object AMRunningMode, RealTimeProtectionEnabled, I
 
 ## 4. Hardening PowerShell
 
-PowerShell è uno strumento fantastico per l'amministrazione, ma è anche uno degli strumenti più usati negli attacchi (LOLBins). Non disabilitarlo — configuralo bene.
+PowerShell è uno strumento fantastico per l'amministrazione, ma è anche uno degli strumenti più usati negli attacchi (LOLBins). Non disabilitarlo, configuralo bene.
 
 ```powershell
 # Imposta execution policy restrittiva
@@ -274,6 +274,6 @@ Il CIS (Center for Internet Security) pubblica benchmark dettagliati per ogni ve
 
 ## Conclusione
 
-L'hardening di Windows sembra intimidatorio, ma la maggior parte di queste configurazioni si applica in pochi minuti con PowerShell o Group Policy. Molte di esse prevengono le tecniche di attacco più comuni — pass-the-hash, lateral movement, credential dumping — semplicemente configurando correttamente ciò che Windows già offre.
+L'hardening di Windows sembra intimidatorio, ma la maggior parte di queste configurazioni si applica in pochi minuti con PowerShell o Group Policy. Molte di esse prevengono le tecniche di attacco più comuni (pass-the-hash, lateral movement, credential dumping), semplicemente configurando correttamente ciò che Windows già offre.
 
 Uno strumento utile per fare un check veloce dello stato di hardening è **Microsoft Security Compliance Toolkit**, gratuito e scaricabile direttamente da Microsoft. 🪟

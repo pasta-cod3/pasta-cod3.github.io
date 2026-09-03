@@ -13,23 +13,23 @@ Il **Rapporto Clusit 2026** è il termometro annuale della cybersecurity italian
 
 Nel 2025 l'Italia ha registrato **507 incidenti gravi**, contro i 357 del 2024. Un aumento del **42%** in un solo anno.
 
-- **+145% di hacktivismo** rispetto al 2024 — l'Italia è il primo paese europeo per incidenti attivisti
+- **+145% di hacktivismo** rispetto al 2024: l'Italia è il primo paese europeo per incidenti attivisti
 - **166 casi ransomware** (+14% su 2024), con oltre il 30% in Lombardia
 - **28% degli incidenti** nel settore governativo-militare-forze dell'ordine (+290% in valore assoluto)
 - PA, servizi professionali, telecomunicazioni e trasporti: i quattro settori più colpiti
 
 ## Il contesto globale
 
-A livello mondiale: +48,7% nella frequenza degli incidenti — il più elevato mai rilevato dall'associazione. L'Europa raccoglie il 16% degli incidenti ransomware globali, seconda solo agli USA (quasi 50%).
+A livello mondiale: +48,7% nella frequenza degli incidenti, il più elevato mai rilevato dall'associazione. L'Europa raccoglie il 16% degli incidenti ransomware globali, seconda solo agli USA (quasi 50%).
 
-L'Italia rappresenta il **9,6% degli incidenti informatici mondiali** — sproporzionato rispetto al PIL e alla popolazione.
+L'Italia rappresenta il **9,6% degli incidenti informatici mondiali**: sproporzionato rispetto al PIL e alla popolazione.
 
 ## Perché l'Italia è un bersaglio privilegiato
 
-- **Posizione geopolitica** — paese NATO e UE con esposizione mediatica su Ucraina e Medio Oriente
-- **Digitalizzazione rapida con maturità cyber bassa** — punteggio medio italiano 55/100, sotto la soglia di sufficienza (60)
-- **PMI poco protette** — il 95% del tessuto produttivo italiano è composto da PMI senza team di sicurezza dedicati
-- **PA strutturalmente vulnerabile** — sistemi legacy, budget contenuti, personale non formato
+- **Posizione geopolitica**: paese NATO e UE con esposizione mediatica su Ucraina e Medio Oriente
+- **Digitalizzazione rapida con maturità cyber bassa**: punteggio medio italiano 55/100, sotto la soglia di sufficienza (60)
+- **PMI poco protette**: il 95% del tessuto produttivo italiano è composto da PMI senza team di sicurezza dedicati
+- **PA strutturalmente vulnerabile**: sistemi legacy, budget contenuti, personale non formato
 
 > Oltre il **50% dell'exploitation del 2025** è attribuibile ad attori state-sponsored. L'AI ha ridotto il tempo dalla pubblicazione di una CVE critica alla disponibilità di un exploit a poche ore.
 

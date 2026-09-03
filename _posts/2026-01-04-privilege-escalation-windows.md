@@ -13,7 +13,7 @@ excerpt: "Da user a SYSTEM: le tecniche più comuni di privilege escalation su W
 
 Hai una shell su una macchina Windows. L'utente corrente è `IIS APPPOOL\DefaultAppPool` oppure un utente di dominio a basso privilegio. Come sali a **SYSTEM** o **Administrator**?
 
-La privilege escalation su Windows segue una logica simile a Linux — enumerazione sistematica, identificazione di debolezze di configurazione, sfruttamento — ma i meccanismi sono diversi.
+La privilege escalation su Windows segue una logica simile a Linux (enumerazione sistematica, identificazione di debolezze di configurazione, sfruttamento), ma i meccanismi sono diversi.
 
 ---
 
@@ -65,9 +65,9 @@ whoami /priv
 
 Se vedi `SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege` abilitati, puoi usare **Potato exploits**:
 
-- **JuicyPotato** — Windows Server 2008-2019 (no 2019 aggiornato)
-- **PrintSpoofer** — Windows 10/2019
-- **RoguePotato** — alternativa moderna
+- **JuicyPotato**: Windows Server 2008-2019 (no 2019 aggiornato)
+- **PrintSpoofer**: Windows 10/2019
+- **RoguePotato**: alternativa moderna
 
 ```cmd
 :: PrintSpoofer
@@ -216,10 +216,10 @@ Prova automaticamente diverse tecniche di privesc (named pipe, token duplication
 
 ## Conclusione
 
-La privesc su Windows richiede familiarità con il sistema: come funzionano i servizi, i token, il registro, le policy. Non puoi memorizzare tutti i vettori — devi capire la logica di ogni categoria.
+La privesc su Windows richiede familiarità con il sistema: come funzionano i servizi, i token, il registro, le policy. Non puoi memorizzare tutti i vettori, devi capire la logica di ogni categoria.
 
 Risorse fondamentali:
-- **LOLBAS** — `lolbas-project.github.io` — binari Windows abusabili
-- **PayloadsAllTheThings** — cheat sheet completo su privesc Windows
-- **TryHackMe** — room "Windows PrivEsc"
-- **HackTheBox** — macchine Windows di difficoltà Easy/Medium
+- **LOLBAS** (`lolbas-project.github.io`), binari Windows abusabili
+- **PayloadsAllTheThings**: cheat sheet completo su privesc Windows
+- **TryHackMe**: room "Windows PrivEsc"
+- **HackTheBox**: macchine Windows di difficoltà Easy/Medium

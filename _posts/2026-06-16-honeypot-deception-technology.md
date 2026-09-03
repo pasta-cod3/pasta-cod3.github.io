@@ -19,7 +19,7 @@ Un honeypot è un sistema (server, workstation, database, file) che simula un ta
 - **Research honeypot**: raccolgono dati sulle tecniche degli attaccanti (usati da SANS, Symantec)
 - **Production honeypot**: difendono reti reali rilevando intrusioni
 
-## OpenCanary — honeypot leggero e facile
+## OpenCanary: honeypot leggero e facile
 
 ```bash
 pip install opencanary
@@ -32,12 +32,12 @@ opencanaryd --start
 # configurabile via syslog, email, Slack, webhook
 ```
 
-## Canary Tokens — trappole ovunque
+## Canary Tokens: trappole ovunque
 
 I Canary Token (da canarytokens.org) sono oggetti digitali che "chiamano casa" quando qualcuno li apre:
 
 - **File Word/PDF**: se un attaccante apre `CREDENZIALI_BANCA.docx`, ricevi un alert con IP, browser, geolocalizzazione
-- **Link URL**: invia un link "confidenziale" — se viene visitato, alert
+- **Link URL**: invia un link "confidenziale", se viene visitato, alert
 - **AWS Access Key**: se qualcuno testa questa chiave, alert immediato da AWS
 - **DNS token**: se qualcuno risolve questo hostname, alert
 - **Immagine**: se viene caricata su un server esterno, alert
@@ -63,7 +63,7 @@ New-ADUser -Name "admin-backup" -AccountPassword (ConvertTo-SecureString "Passwo
 # con alert SIEM su Event ID 4625 (failed login) e 4624 (successful login)
 ```
 
-Ogni tentativo di login su `admin-backup` è automaticamente sospetto — nessun utente legittimo conosce questo account.
+Ogni tentativo di login su `admin-backup` è automaticamente sospetto, nessun utente legittimo conosce questo account.
 
 ## HoneyPot in rete: rilevamento del lateral movement
 

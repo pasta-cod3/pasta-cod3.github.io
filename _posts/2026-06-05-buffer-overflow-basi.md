@@ -90,9 +90,9 @@ ROPgadget --binary ./binary | grep "pop rdi"
 
 ## Risorse per imparare
 
-- **pwn.college** — corso universitario gratuito, dal BOF base alle tecniche avanzate
-- **CTFtime.org** — competizioni CTF con writeup
-- **OverTheWire: Protostar** — lab dedicati al BOF
-- **LiveOverflow** — video spiegati molto bene
+- **pwn.college**: corso universitario gratuito, dal BOF base alle tecniche avanzate
+- **CTFtime.org**: competizioni CTF con writeup
+- **OverTheWire: Protostar**: lab dedicati al BOF
+- **LiveOverflow**: video spiegati molto bene
 
 Il BOF è il punto di ingresso nel mondo del vulnerability research. Non serve diventare un exploit developer per un pentest standard, ma capire la meccanica cambia radicalmente la profondità di comprensione delle CVE che si trovano.

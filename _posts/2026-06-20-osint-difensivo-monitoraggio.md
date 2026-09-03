@@ -7,7 +7,7 @@ tags: [OSINT, difensivo, brand monitoring, Google Alerts, Shodan, Have I Been Pw
 excerpt: "Prima di attaccarti, gli avversari raccolgono informazioni su di te da fonti pubbliche. L'OSINT difensivo consiste nell'eseguire questa ricognizione su se stessi per scoprire e correggere le esposizioni prima degli altri."
 ---
 
-L'OSINT difensivo è il processo di raccogliere informazioni su se stessi o sulla propria organizzazione usando le stesse tecniche che userebbe un attaccante — Google Dork, Shodan, breach database, social media — per identificare esposizioni prima che vengano sfruttate.
+L'OSINT difensivo è il processo di raccogliere informazioni su se stessi o sulla propria organizzazione usando le stesse tecniche che userebbe un attaccante (Google Dork, Shodan, breach database, social media), per identificare esposizioni prima che vengano sfruttate.
 
 ## Cosa troverebbe un attaccante su di te?
 
@@ -34,10 +34,10 @@ Quello che trovi, lo troverebbe anche un attaccante.
 
 Imposta alert gratuiti per ricevere notifiche quando certi termini appaiono online:
 
-- `"tuaazienda.it" password` — se qualcuno pubblica credenziali
-- `"tuaazienda" breach` — menzioni di violazioni
-- `"tuaazienda.it" site:pastebin.com` — dati su Pastebin
-- `"CEO Name" CEO "tuaazienda"` — impersonazione del CEO
+- `"tuaazienda.it" password`: se qualcuno pubblica credenziali
+- `"tuaazienda" breach`: menzioni di violazioni
+- `"tuaazienda.it" site:pastebin.com`: dati su Pastebin
+- `"CEO Name" CEO "tuaazienda"`: impersonazione del CEO
 
 → alerts.google.com
 

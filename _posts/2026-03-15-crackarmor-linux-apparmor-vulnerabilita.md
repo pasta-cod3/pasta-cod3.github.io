@@ -13,13 +13,13 @@ excerpt: "Una debolezza nella configurazione dei profili AppArmor permette escap
 
 Il 12-13 marzo 2026, il Qualys Threat Research Unit (TRU) ha pubblicato una delle advisory di sicurezza più significative degli ultimi anni per il mondo Linux: **CrackArmor**, una serie di nove vulnerabilità nel modulo AppArmor del kernel Linux che permettono a utenti senza privilegi di scalare i propri permessi fino a root, aggirare le protezioni dei container, e causare crash del kernel.
 
-La cosa più inquietante: i bug esistono dal 2017 — dalla versione 4.11 del kernel — e sono rimasti nascosti per quasi **nove anni** in produzione.
+La cosa più inquietante: i bug esistono dal 2017 (dalla versione 4.11 del kernel), e sono rimasti nascosti per quasi **nove anni** in produzione.
 
 ---
 
 ## Cos'è AppArmor
 
-AppArmor è un **Linux Security Module (LSM)** che implementa il **Mandatory Access Control (MAC)**: un sistema che limita quello che ogni applicazione può fare sul sistema, indipendentemente dai permessi dell'utente che la esegue. È il meccanismo di sicurezza di default su **Ubuntu, Debian e SUSE** — tre delle distribuzioni Linux più diffuse al mondo.
+AppArmor è un **Linux Security Module (LSM)** che implementa il **Mandatory Access Control (MAC)**: un sistema che limita quello che ogni applicazione può fare sul sistema, indipendentemente dai permessi dell'utente che la esegue. È il meccanismo di sicurezza di default su **Ubuntu, Debian e SUSE**: tre delle distribuzioni Linux più diffuse al mondo.
 
 AppArmor è installato e attivo per default su:
 - Tutti i sistemi Ubuntu dalla versione 7.10 (2007)
@@ -28,13 +28,13 @@ AppArmor è installato e attivo per default su:
 - La maggior parte degli ambienti Kubernetes cloud
 - Infrastrutture IoT e edge computing
 
-Qualys stima che **12,6 milioni di istanze Linux enterprise** nel mondo abbiano AppArmor abilitato per default — tutte potenzialmente vulnerabili fino alla patch.
+Qualys stima che **12,6 milioni di istanze Linux enterprise** nel mondo abbiano AppArmor abilitato per default, tutte potenzialmente vulnerabili fino alla patch.
 
 ---
 
 ## La classe di vulnerabilità: Confused Deputy
 
-Il cuore di CrackArmor è un **confused deputy attack** — una classe di vulnerabilità dove un processo non privilegiato convince un processo privilegiato a fare qualcosa per suo conto.
+Il cuore di CrackArmor è un **confused deputy attack**: una classe di vulnerabilità dove un processo non privilegiato convince un processo privilegiato a fare qualcosa per suo conto.
 
 AppArmor espone file di controllo speciali sotto `/sys/kernel/security/apparmor/`:
 
@@ -46,7 +46,7 @@ AppArmor espone file di controllo speciali sotto `/sys/kernel/security/apparmor/
 
 Questi file permettono di caricare, sostituire e rimuovere i profili di sicurezza AppArmor. Il problema: **le permissions vengono verificate solo al momento della scrittura dei dati, non all'apertura del file descriptor**.
 
-Un utente non privilegiato può aprire questi file per la scrittura. Se poi riesce a convincere un'applicazione privilegiata (come `sudo` o `su`) a scrivere il formato corretto in quel file descriptor già aperto, l'operazione viene eseguita con i privilegi dell'applicazione privilegiata — aggirando completamente le restrizioni.
+Un utente non privilegiato può aprire questi file per la scrittura. Se poi riesce a convincere un'applicazione privilegiata (come `sudo` o `su`) a scrivere il formato corretto in quel file descriptor già aperto, l'operazione viene eseguita con i privilegi dell'applicazione privilegiata, aggirando completamente le restrizioni.
 
 ```
 Attaccante (no root) → apre .load per scrittura
@@ -73,7 +73,7 @@ Le nove flaw identificate da Qualys coprono diverse categorie di impatto:
 
 **Information Disclosure:**
 - Out-of-bounds read che bypassa KASLR (Kernel Address Space Layout Randomization)
-- KASLR è una delle difese fondamentali contro gli exploit del kernel — conoscerne il layout rende gli attacchi successivi molto più facili
+- KASLR è una delle difese fondamentali contro gli exploit del kernel, conoscerne il layout rende gli attacchi successivi molto più facili
 
 **Container Isolation Bypass:**
 - In ambienti con container (Docker, Kubernetes) con immagini potenzialmente malevole, lo sfruttamento non richiede nemmeno l'applicazione cooperante privilegiata
@@ -86,7 +86,7 @@ Qualys ha identificato anche un problema separato in `sudo` che può essere conc
 
 Il feature di email notification di sudo, quando abilitato, può essere triggerato da un utente non privilegiato e usato come vettore per innescare il confused deputy. Questo crea una catena di exploit: AppArmor vulnerability + sudo notification feature = privilege escalation completa anche senza interazione di altri processi privilegiati.
 
-`sudo-rs` — la riscrittura in Rust di sudo disponibile su Ubuntu 25.10+ — **non è affetto** perché non implementa la funzionalità di email notification per scelta di design.
+`sudo-rs` (la riscrittura in Rust di sudo disponibile su Ubuntu 25.10+) **non è affetto** perché non implementa la funzionalità di email notification per scelta di design.
 
 ---
 
@@ -125,9 +125,9 @@ Questo crea un paradosso: l'assenza di un numero CVE può far sembrare la vulner
 
 Qualys e Canonical raccomandano un approccio a doppio livello:
 
-**1. Patch del kernel Linux** — la soluzione definitiva. Aggiornare il kernel all'ultima versione disponibile dal vendor.
+**1. Patch del kernel Linux**: la soluzione definitiva. Aggiornare il kernel all'ultima versione disponibile dal vendor.
 
-**2. Mitigazioni userspace** — Canonical ha rilasciato patch per `su` (nel pacchetto `util-linux`) e `sudo` che rimuovono i principali vettori di exploitation senza dover aggiornare il kernel.
+**2. Mitigazioni userspace**: Canonical ha rilasciato patch per `su` (nel pacchetto `util-linux`) e `sudo` che rimuovono i principali vettori di exploitation senza dover aggiornare il kernel.
 
 ```bash
 # Ubuntu — aggiornamento completo

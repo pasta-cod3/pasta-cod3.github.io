@@ -11,7 +11,7 @@ excerpt: "Medtronic, fornitore globale di dispositivi medici impiantabili, ha co
 
 ## Il fatto
 
-A aprile 2026, **Medtronic** — uno dei maggiori produttori di dispositivi medici impiantabili (pacemaker, defibrillatori, pompe insuliniche) — ha **confermato pubblicamente** una massiccia violazione di dati.
+A aprile 2026, **Medtronic**: uno dei maggiori produttori di dispositivi medici impiantabili (pacemaker, defibrillatori, pompe insuliniche), ha **confermato pubblicamente** una massiccia violazione di dati.
 
 Un attacco ransomware ha exfiltrato i dati personali e medici di **3.8 milioni di pazienti**. Il gruppo **ShinyHunters** ha rivendicato l'attacco e ha minacciato di pubblicare i dati se Medtronic non pagasse un riscatto.
 
@@ -56,4 +56,4 @@ Per un paziente con pacemaker impiantato, sapere il tipo di dispositivo e la dat
 
 ## Conclusione
 
-Medtronic è un reminder che **critical medical infrastructure è bersaglio di ransomware** — e non per sofisticazione tecnica, ma semplicemente perché **i pazienti pagheranno pur di salvare una vita**.
+Medtronic è un reminder che **critical medical infrastructure è bersaglio di ransomware**: e non per sofisticazione tecnica, ma semplicemente perché **i pazienti pagheranno pur di salvare una vita**.

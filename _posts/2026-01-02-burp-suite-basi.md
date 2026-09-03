@@ -174,15 +174,15 @@ Genera URL/DNS temporanei per rilevare vulnerabilità out-of-band (SSRF, Blind X
 
 Burp ha un marketplace di estensioni. Le più utili gratuite:
 
-- **Autorize** — testa automaticamente IDOR e problemi di autorizzazione
-- **JWT Editor** — analizza e modifica JSON Web Token
-- **HackBar** — payload rapidi per SQLi/XSS
-- **Retire.js** — identifica librerie JavaScript vulnerabili
+- **Autorize**: testa automaticamente IDOR e problemi di autorizzazione
+- **JWT Editor**: analizza e modifica JSON Web Token
+- **HackBar**: payload rapidi per SQLi/XSS
+- **Retire.js**: identifica librerie JavaScript vulnerabili
 
 ---
 
 ## Conclusione
 
-Burp Suite non è solo uno strumento — è un **modo di pensare**. Ti abitua a guardare ogni interazione web come una sequenza di richieste HTTP modificabili. Una volta che inizi a usarlo, non torni al browser "nudo".
+Burp Suite non è solo uno strumento, è un **modo di pensare**. Ti abitua a guardare ogni interazione web come una sequenza di richieste HTTP modificabili. Una volta che inizi a usarlo, non torni al browser "nudo".
 
 Il modo migliore per impararlo è la **PortSwigger Web Security Academy**: lab gratuiti pensati esattamente per essere risolti con Burp. Ogni concetto ha la sua lab pratica.

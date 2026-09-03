@@ -7,7 +7,7 @@ tags: [EDR, endpoint security, CrowdStrike, Microsoft Defender, SentinelOne, MIT
 excerpt: "L'EDR è la risposta moderna all'antivirus tradizionale. Monitora il comportamento degli endpoint in tempo reale, correla eventi con MITRE ATT&CK e permette la risposta agli incidenti remota."
 ---
 
-L'antivirus tradizionale controlla i file. L'EDR controlla i **comportamenti**. Questa differenza fondamentale lo rende lo strumento più efficace contro le minacce moderne — ransomware, APT, living-off-the-land attacks — che spesso non usano malware tradizionale.
+L'antivirus tradizionale controlla i file. L'EDR controlla i **comportamenti**. Questa differenza fondamentale lo rende lo strumento più efficace contro le minacce moderne (ransomware, APT, living-off-the-land attacks), che spesso non usano malware tradizionale.
 
 ## Cosa monitora un EDR
 
@@ -56,7 +56,7 @@ Gli EDR moderni permettono di rispondere agli incidenti direttamente dall'agent:
 - **Live investigation**: shell remota sicura per indagare il sistema
 - **Timeline**: ricostruzione cronologica di tutto ciò che è avvenuto
 
-## MDR — Managed Detection and Response
+## MDR: Managed Detection and Response
 
 Molte organizzazioni non hanno un SOC interno. I servizi MDR forniscono personale specializzato che monitora gli alert EDR 24/7 e risponde agli incidenti. È l'opzione più pratica per le PMI.
 

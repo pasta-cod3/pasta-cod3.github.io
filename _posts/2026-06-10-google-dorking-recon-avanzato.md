@@ -7,7 +7,7 @@ tags: [Google Dork, OSINT, recon, Shodan, Censys, passive reconnaissance, pentes
 excerpt: "I motori di ricerca indicizzano molto più di quanto pensiamo. Google Dork, Shodan e Censys permettono di trovare informazioni critiche su target senza mai toccarli direttamente."
 ---
 
-Prima di inviare un singolo pacchetto al target, un buon pentester raccoglie il più possibile da fonti pubbliche. I motori di ricerca sono tra le fonti più potenti — e più sottovalutate. Il Google Dorking (o Google Hacking) consiste nell'usare operatori avanzati per trovare informazioni che non dovrebbero essere accessibili.
+Prima di inviare un singolo pacchetto al target, un buon pentester raccoglie il più possibile da fonti pubbliche. I motori di ricerca sono tra le fonti più potenti, e più sottovalutate. Il Google Dorking (o Google Hacking) consiste nell'usare operatori avanzati per trovare informazioni che non dovrebbero essere accessibili.
 
 ## Operatori Google fondamentali
 
@@ -49,7 +49,7 @@ Il GHDB di Exploit-DB raccoglie migliaia di dork categorizzati per tipo (vulnera
 
 **exploit-db.com/google-hacking-database**
 
-## Shodan — il motore di ricerca per dispositivi IoT
+## Shodan: il motore di ricerca per dispositivi IoT
 
 Shodan indicizza tutto ciò che è connesso a Internet e risponde a una probe: server, router, webcam, PLC industriali, stampanti. Cerca per banner, protocollo, versione.
 
@@ -62,7 +62,7 @@ port:3389 country:IT          → RDP esposti in Italia
 product:"Apache httpd" version:"2.4.49"  → versione vulnerabile
 ```
 
-## Censys — più orientato ai certificati
+## Censys: più orientato ai certificati
 
 Censys è simile a Shodan ma con focus sui certificati TLS. Permette di trovare:
 
@@ -70,7 +70,7 @@ Censys è simile a Shodan ma con focus sui certificati TLS. Permette di trovare:
 - Asset "nascosti" non linkati pubblicamente ma con un certificato valido
 - Infrastruttura cloud non mappata
 
-## theHarvester — automatizza la raccolta
+## theHarvester: automatizza la raccolta
 
 ```bash
 theHarvester -d target.com -b google,bing,yahoo,shodan

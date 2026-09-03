@@ -13,7 +13,7 @@ excerpt: "Gli Event ID di Windows raccontano tutto: login, escalation, lateral m
 
 I **Windows Event Log** sono la fonte di informazioni più importante per un analista Blue Team in ambienti Microsoft. Ogni azione significativa sul sistema viene registrata: login, creazione processi, modifiche al registro, errori di autenticazione.
 
-Il problema non è la mancanza di dati — è che Windows genera migliaia di eventi al giorno. Bisogna sapere **quali Event ID guardare** e **come interpretarli**.
+Il problema non è la mancanza di dati, è che Windows genera migliaia di eventi al giorno. Bisogna sapere **quali Event ID guardare** e **come interpretarli**.
 
 ---
 
@@ -41,7 +41,7 @@ Per la security, il canale **Security** è il più importante.
 
 ## Event ID fondamentali: Autenticazione
 
-### 4624 — Logon riuscito
+### 4624: Logon riuscito
 
 Ogni volta che un utente si autentica con successo.
 
@@ -55,11 +55,11 @@ Il campo più importante è **Logon Type**:
 | 5 | Service | Avvio di un servizio |
 | 7 | Unlock | Sblocco schermo |
 | 10 | RemoteInteractive | RDP |
-| **11** | **CachedInteractive** | **Login con credenziali cached — sospetto** |
+| **11** | **CachedInteractive** | **Login con credenziali cached: sospetto** |
 
 **Cosa cercare:** logon type 3 o 10 da IP esterni, logon in orari insoliti, logon su macchine a cui l'utente normalmente non accede.
 
-### 4625 — Logon fallito
+### 4625: Logon fallito
 
 Tentativo di autenticazione fallito. Fondamentale per rilevare brute force e password spray.
 
@@ -72,11 +72,11 @@ Campi chiave:
 
 **Cosa cercare:** molti 4625 consecutivi dallo stesso IP (brute force) oppure un 4625 su tanti account diversi dallo stesso IP (password spray).
 
-### 4648 — Logon con credenziali esplicite
+### 4648: Logon con credenziali esplicite
 
 Qualcuno ha usato `runas` o ha specificato credenziali diverse da quelle correnti. Comune nel lateral movement.
 
-### 4768 / 4769 — Ticket Kerberos (TGT / TGS)
+### 4768 / 4769: Ticket Kerberos (TGT / TGS)
 
 ```
 4768 → richiesta TGT (Authentication Service Request)
@@ -85,7 +85,7 @@ Qualcuno ha usato `runas` o ha specificato credenziali diverse da quelle corrent
 
 **Cosa cercare in 4769:** molte richieste TGS per account con SPN in poco tempo = probabile **Kerberoasting**.
 
-### 4771 — Pre-autenticazione Kerberos fallita
+### 4771: Pre-autenticazione Kerberos fallita
 
 Equivalente Kerberos del 4625. Indica password errata per un account di dominio.
 
@@ -93,13 +93,13 @@ Equivalente Kerberos del 4625. Indica password errata per un account di dominio.
 
 ## Event ID fondamentali: Gestione account
 
-### 4720 — Account utente creato
+### 4720: Account utente creato
 
-Un nuovo account è stato creato. In ambienti stabili è raro — ogni occorrenza va verificata.
+Un nuovo account è stato creato. In ambienti stabili è raro, ogni occorrenza va verificata.
 
-### 4722 — Account utente abilitato
-### 4725 — Account utente disabilitato
-### 4728 / 4732 / 4756 — Utente aggiunto a gruppo privilegiato
+### 4722: Account utente abilitato
+### 4725: Account utente disabilitato
+### 4728 / 4732 / 4756: Utente aggiunto a gruppo privilegiato
 
 ```
 4728 → aggiunto a gruppo Security-Enabled Global Group
@@ -113,7 +113,7 @@ Un nuovo account è stato creato. In ambienti stabili è raro — ogni occorrenz
 
 ## Event ID fondamentali: Processi e Esecuzione
 
-### 4688 — Nuovo processo creato
+### 4688: Nuovo processo creato
 
 Ogni volta che viene avviato un processo. Richiede di abilitare "Process Creation Auditing" nelle policy.
 
@@ -123,11 +123,11 @@ Ogni volta che viene avviato un processo. Richiede di abilitare "Process Creatio
 - Tool di hacking noti: `mimikatz.exe`, `psexec.exe`, `nc.exe`
 - Esecuzione da cartelle insolite: `%TEMP%`, `%AppData%`, `C:\Users\Public\`
 
-### 4698 — Task schedulato creato
+### 4698: Task schedulato creato
 
 Meccanismo comune di **persistence**: l'attaccante crea un task che ri-esegue il malware periodicamente.
 
-### 7045 — Nuovo servizio installato
+### 7045: Nuovo servizio installato
 
 Un nuovo servizio Windows è stato installato. Come i task schedulati, è un meccanismo di persistence frequente.
 
@@ -135,15 +135,15 @@ Un nuovo servizio Windows è stato installato. Come i task schedulati, è un mec
 
 ## Event ID: Policy e Sistema
 
-### 4719 — Audit policy cambiata
+### 4719: Audit policy cambiata
 
 Qualcuno ha modificato le policy di auditing. Un attaccante potrebbe disabilitare il logging per nascondere le proprie tracce.
 
-### 1102 — Log di Security cancellato
+### 1102: Log di Security cancellato
 
 **Critico.** Il Security Event Log è stato svuotato. Quasi sempre indica un attaccante che cerca di coprire le proprie tracce.
 
-### 4657 — Registro di sistema modificato
+### 4657: Registro di sistema modificato
 
 Modifica a chiavi del registro. Molti malware usano il registro per la persistence (`HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`).
 
@@ -188,6 +188,6 @@ Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4732} |
 
 ## Conclusione
 
-Conoscere gli Event ID Windows è la base per qualsiasi analista SOC in ambienti Microsoft. Non devi memorizzarli tutti — ma i principali (4624, 4625, 4688, 4698, 1102) devono essere automatici.
+Conoscere gli Event ID Windows è la base per qualsiasi analista SOC in ambienti Microsoft. Non devi memorizzarli tutti, ma i principali (4624, 4625, 4688, 4698, 1102) devono essere automatici.
 
 Il passo successivo è raccoglierli tutti in un **SIEM** e costruire correlation rule che generino alert automatici quando si verificano pattern sospetti. Questo è l'argomento del prossimo articolo.

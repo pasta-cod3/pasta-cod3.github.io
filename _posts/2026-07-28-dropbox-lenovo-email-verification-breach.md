@@ -13,7 +13,7 @@ excerpt: "Migliaia di account Dropbox sono stati compromessi tramite una falla n
 
 A luglio 2026, è stato scoperto che **migliaia di account Dropbox** sono stati compromessi attraverso una catena di vulnerabilità che coinvolgeva **Lenovo** e il sistema di **email verification di Dropbox**.
 
-L'attacco è particolare perché non ha colpito Dropbox direttamente, ma ha sfruttato un'integrazione di autenticazione con un servizio esterno (Lenovo Identity Services) per ottenere accesso a Dropbox. È un **supply chain attack su larga scala**, ma non della varietà "software compromesso" — piuttosto una vulnerabilità logica in un flusso di Single Sign-On.
+L'attacco è particolare perché non ha colpito Dropbox direttamente, ma ha sfruttato un'integrazione di autenticazione con un servizio esterno (Lenovo Identity Services) per ottenere accesso a Dropbox. È un **supply chain attack su larga scala**, ma non della varietà "software compromesso", piuttosto una vulnerabilità logica in un flusso di Single Sign-On.
 
 ---
 
@@ -61,9 +61,9 @@ Con le credenziali Lenovo resettate, l'attaccante accede tramite SSO:
 
 Questo è un dettaglio critico: **quando usi SSO per login, molte piattaforme disabilitano la 2FA** perché assumono che il provider SSO ha già fatto verificazione. Se il provider SSO è stato compromesso, la 2FA è inutile.
 
-Dropbox, nella configurazione di default per login via Lenovo SSO, **non impone una seconda autenticazione** — la fiducia è delegata completamente a Lenovo.
+Dropbox, nella configurazione di default per login via Lenovo SSO, **non impone una seconda autenticazione**: la fiducia è delegata completamente a Lenovo.
 
-Questo è noto come **"SSO as single point of failure"** — una volta che il provider SSO è compromesso, tutti i servizi che lo usano sono compromessi, indipendentemente dalla loro sicurezza interna.
+Questo è noto come **"SSO as single point of failure"**: una volta che il provider SSO è compromesso, tutti i servizi che lo usano sono compromessi, indipendentemente dalla loro sicurezza interna.
 
 ---
 
@@ -71,8 +71,8 @@ Questo è noto come **"SSO as single point of failure"** — una volta che il pr
 
 Gli account compromessi erano principalmente:
 
-- **Aziende che usano Lenovo come provider SSO** — tipicamente medie/grandi aziende con infrastructure IT standardizzata
-- **Account aziendali di Dropbox Business** — accesso potenziale ai dati condivisi di interi team
+- **Aziende che usano Lenovo come provider SSO**: tipicamente medie/grandi aziende con infrastructure IT standardizzata
+- **Account aziendali di Dropbox Business**: accesso potenziale ai dati condivisi di interi team
 - **Individui con account Dropbox personali linkati a identità Lenovo** (raro, ma osservato)
 
 Dall'accesso a Dropbox, gli attaccanti hanno avuto visibilità su:
@@ -93,7 +93,7 @@ Dall'accesso a Dropbox, gli attaccanti hanno avuto visibilità su:
 | **20 luglio** | Patch rilasciata da Lenovo |
 | **28 luglio** | Dropbox comunica pubblicamente il breach; notifica 50k+ utenti interessati |
 
-La **finestra di compromissione totale** è stata circa 3-4 settimane — attaccanti hanno avuto accesso prima che il flusso fosse patchato.
+La **finestra di compromissione totale** è stata circa 3-4 settimane, attaccanti hanno avuto accesso prima che il flusso fosse patchato.
 
 ---
 
@@ -101,21 +101,21 @@ La **finestra di compromissione totale** è stata circa 3-4 settimane — attacc
 
 **Per aziende che usano SSO:**
 
-1. **Non disabilitare 2FA per SSO login** — anche se il flusso SSO è verificato, implementa una seconda fattore per i servizi critici
-2. **Audit del provider SSO** — il tuo provider SSO è il vostro perimetro di sicurezza; la compromissione del provider = compromissione di tutto
-3. **Rate limiting su password reset** — i servizi di password reset dovrebbero essere difesi dall'abuso (multiple attempts, timing anomali)
-4. **Monitoring anomalo** — login SSO dalla stessa email da multipli IP geograficamente distanti dovrebbe attivare allarmi
+1. **Non disabilitare 2FA per SSO login**: anche se il flusso SSO è verificato, implementa una seconda fattore per i servizi critici
+2. **Audit del provider SSO**: il tuo provider SSO è il vostro perimetro di sicurezza; la compromissione del provider = compromissione di tutto
+3. **Rate limiting su password reset**: i servizi di password reset dovrebbero essere difesi dall'abuso (multiple attempts, timing anomali)
+4. **Monitoring anomalo**: login SSO dalla stessa email da multipli IP geograficamente distanti dovrebbe attivare allarmi
 
 **Per provider di identity (come Lenovo):**
 
-1. **Device fingerprinting** su link di reset — verifica non solo che il link è stato cliccato, ma che è stato cliccato dal device / browser originale
-2. **Time-to-expiration aggressivo** — i link di reset dovrebbero scadere in minuti, non ore
-3. **Notifiche di reset** — invia una notifica (SMS, push) all'utente quando il reset avviene, con opzione di "revoke questo reset"
+1. **Device fingerprinting** su link di reset, verifica non solo che il link è stato cliccato, ma che è stato cliccato dal device / browser originale
+2. **Time-to-expiration aggressivo**: i link di reset dovrebbero scadere in minuti, non ore
+3. **Notifiche di reset**: invia una notifica (SMS, push) all'utente quando il reset avviene, con opzione di "revoke questo reset"
 
 ---
 
 ## Conclusione
 
-Dropbox-via-Lenovo è un reminder che **la sicurezza di un servizio è limitata dalla sicurezza dei suoi provider**. Se deleghi l'autenticazione a qualcuno, loro diventano il vostro punto di fallimento — non importa quanto secure sia il resto della vostra infrastructure.
+Dropbox-via-Lenovo è un reminder che **la sicurezza di un servizio è limitata dalla sicurezza dei suoi provider**. Se deleghi l'autenticazione a qualcuno, loro diventano il vostro punto di fallimento, non importa quanto secure sia il resto della vostra infrastructure.
 
-La soluzione non è "non usare SSO" (SSO è genuinamente conveniente e utile), ma **capire che SSO ridistribuisce il trust** — e quindi richiedere protezioni layer aggiuntivi (2FA, device verification, monitoring) quando la posta è alta.
+La soluzione non è "non usare SSO" (SSO è genuinamente conveniente e utile), ma **capire che SSO ridistribuisce il trust**: e quindi richiedere protezioni layer aggiuntivi (2FA, device verification, monitoring) quando la posta è alta.

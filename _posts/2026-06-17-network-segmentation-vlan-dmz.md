@@ -18,7 +18,7 @@ In una rete non segmentata:
 
 Il **blast radius** di una compromissione è l'intera rete.
 
-## VLAN — Virtual LAN
+## VLAN: Virtual LAN
 
 Le VLAN creano reti logiche separate sulla stessa infrastruttura fisica. Un switch gestito assegna ogni porta a una VLAN; il traffico tra VLAN passa solo attraverso un router/firewall.
 
@@ -33,9 +33,9 @@ VLAN 50 — Management (10.0.50.0/24)  ← solo amministratori
 VLAN 99 — Guest WiFi (192.168.99.0/24) ← solo internet, no LAN
 ```
 
-Il traffico da VLAN 10 (Utenti) a VLAN 20 (Server) passa attraverso il firewall — che può filtrare, loggare e applicare regole granulari.
+Il traffico da VLAN 10 (Utenti) a VLAN 20 (Server) passa attraverso il firewall, che può filtrare, loggare e applicare regole granulari.
 
-## DMZ — Demilitarized Zone
+## DMZ: Demilitarized Zone
 
 La DMZ è un segmento dedicato ai servizi esposti su Internet (web server, mail server, reverse proxy). È separata sia da Internet che dalla rete interna:
 

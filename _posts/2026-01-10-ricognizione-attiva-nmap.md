@@ -11,9 +11,9 @@ excerpt: "Nmap è il punto di partenza di ogni pentest. Scansioni TCP/UDP, OS fi
 
 ## Introduzione
 
-Dopo aver raccolto informazioni in modo passivo, è il momento di interagire direttamente con il target. La **ricognizione attiva** comporta l'invio di pacchetti verso i sistemi del target — e questo lascia tracce nei log.
+Dopo aver raccolto informazioni in modo passivo, è il momento di interagire direttamente con il target. La **ricognizione attiva** comporta l'invio di pacchetti verso i sistemi del target, e questo lascia tracce nei log.
 
-Lo strumento più importante per questa fase è **Nmap** (Network Mapper): uno scanner di rete open source, usato da penetration tester, sysadmin e — purtroppo — anche da attaccanti reali.
+Lo strumento più importante per questa fase è **Nmap** (Network Mapper): uno scanner di rete open source, usato da penetration tester, sysadmin e (purtroppo) anche da attaccanti reali.
 
 Imparare Nmap bene è fondamentale. Non come lista di comandi da copiare, ma capendo *cosa fa* ogni tipo di scansione.
 
@@ -25,9 +25,9 @@ Ogni computer ha **65.535 porte TCP** e altrettante UDP. Le porte sono come port
 
 Nmap invia pacchetti verso queste porte e in base alla risposta determina se la porta è:
 
-- **Open** — c'è un servizio in ascolto, ha risposto
-- **Closed** — la porta è raggiungibile ma non c'è nessun servizio
-- **Filtered** — nessuna risposta (firewall sta bloccando)
+- **Open**: c'è un servizio in ascolto, ha risposto
+- **Closed**: la porta è raggiungibile ma non c'è nessun servizio
+- **Filtered**: nessuna risposta (firewall sta bloccando)
 
 ---
 
@@ -92,13 +92,13 @@ Combina: rilevamento OS (`-O`), versioni servizi (`-sV`), script di default (`-s
 
 ## Tipi di scansione TCP
 
-### SYN Scan (Half-open) — il default
+### SYN Scan (Half-open): il default
 
 ```bash
 sudo nmap -sS 192.168.1.1
 ```
 
-Invia un pacchetto SYN (inizio handshake TCP). Se riceve SYN-ACK, la porta è aperta — ma Nmap non completa il handshake (manda RST). Più veloce e meno rumorosa del full connect.
+Invia un pacchetto SYN (inizio handshake TCP). Se riceve SYN-ACK, la porta è aperta, ma Nmap non completa il handshake (manda RST). Più veloce e meno rumorosa del full connect.
 
 Richiede privilegi root.
 
@@ -116,7 +116,7 @@ Completa il three-way handshake. Non richiede root ma è più lenta e più facil
 sudo nmap -sU 192.168.1.1
 ```
 
-Scansiona porte UDP. Molto lenta — UDP non ha handshake, Nmap deve aspettare timeout. Ma i servizi UDP (DNS :53, SNMP :161, TFTP :69) sono spesso dimenticati dagli amministratori e vulnerabili.
+Scansiona porte UDP. Molto lenta, UDP non ha handshake, Nmap deve aspettare timeout. Ma i servizi UDP (DNS :53, SNMP :161, TFTP :69) sono spesso dimenticati dagli amministratori e vulnerabili.
 
 ---
 
@@ -195,6 +195,6 @@ nmap --script=http-enum,http-headers -p 80,443 192.168.1.100
 
 ## Conclusione
 
-Nmap è il coltellino svizzero del penetration tester. Impararlo in profondità — capire la differenza tra i tipi di scansione, quando usare NSE, come interpretare i risultati — fa la differenza tra un pentest superficiale e uno professionale.
+Nmap è il coltellino svizzero del penetration tester. Impararlo in profondità (capire la differenza tra i tipi di scansione, quando usare NSE, come interpretare i risultati), fa la differenza tra un pentest superficiale e uno professionale.
 
 Nel prossimo articolo vedremo come usare i risultati di Nmap per identificare vulnerabilità concrete con i vulnerability scanner.

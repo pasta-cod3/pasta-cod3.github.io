@@ -38,17 +38,17 @@ Inizio di conflitto:
 - Disabilita avversario mentre conflitto avanza
 ```
 
-Gli attori russi stanno apparentemente in **Fase 1** — mettono in posizione gli access point prima di usarli.
+Gli attori russi stanno apparentemente in **Fase 1**: mettono in posizione gli access point prima di usarli.
 
 ---
 
 ## Vulnerabilità prese di mira
 
 Target principali:
-- **Configurazioni default non cambiate** — username/password standard
-- **Patch mancati** — router non aggiornati
-- **Weak authentication** — credenziali facili da bruteforcing
-- **Exposed management interfaces** — console di amministrazione accessibili da internet
+- **Configurazioni default non cambiate**: username/password standard
+- **Patch mancati**: router non aggiornati
+- **Weak authentication**: credenziali facili da bruteforcing
+- **Exposed management interfaces**: console di amministrazione accessibili da internet
 
 ---
 
@@ -77,20 +77,20 @@ Raccomandazioni CISA:
 1. **Change default credentials** su tutti i routers
 2. **Applicare patch** immediatamente
 3. **Disabilitare remote management** se non necessario
-4. **Segmentazione di rete** — isolars critical systems dietro firewall
-5. **Monitoring** — rilevare accessi anomali ai routers
+4. **Segmentazione di rete**: isolars critical systems dietro firewall
+5. **Monitoring**: rilevare accessi anomali ai routers
 
 ---
 
 ## Implicazioni geopolitiche
 
 L'attività di scanning pubblica suggerisce:
-- **Confidence** — gli attori russi non hanno paura di essere rilevati
-- **Pre-planning** — preparazione per un possibile conflitto
-- **Prevalenza** — anche l'Italia e l'Europa sono probabilmente scansionate
+- **Confidence**: gli attori russi non hanno paura di essere rilevati
+- **Pre-planning**: preparazione per un possibile conflitto
+- **Prevalenza**: anche l'Italia e l'Europa sono probabilmente scansionate
 
 ---
 
 ## Conclusione
 
-CISA e gli alleati non hanno divulgato specifiche di vulnerabilità — per non aiutare attori malevoli. Però il messaggio è chiaro: **critical infrastructure routers rimangono un vettore di attacco prioritario**, e gli attori state-sponsored russi stanno attivamente pre-positioning.
+CISA e gli alleati non hanno divulgato specifiche di vulnerabilità, per non aiutare attori malevoli. Però il messaggio è chiaro: **critical infrastructure routers rimangono un vettore di attacco prioritario**, e gli attori state-sponsored russi stanno attivamente pre-positioning.

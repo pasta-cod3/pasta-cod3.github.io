@@ -11,7 +11,7 @@ excerpt: "Confidenzialità, Integrità, Disponibilità: la triade CIA è il fram
 
 ## Introduzione
 
-In sicurezza informatica esiste un framework concettuale che sta alla base di qualsiasi analisi del rischio, qualsiasi policy aziendale, qualsiasi decisione di architettura: la **triade CIA**. Non è un'organizzazione segreta — è l'acronimo di **Confidentiality, Integrity, Availability** (Confidenzialità, Integrità, Disponibilità).
+In sicurezza informatica esiste un framework concettuale che sta alla base di qualsiasi analisi del rischio, qualsiasi policy aziendale, qualsiasi decisione di architettura: la **triade CIA**. Non è un'organizzazione segreta: è l'acronimo di **Confidentiality, Integrity, Availability** (Confidenzialità, Integrità, Disponibilità).
 
 Ogni attacco informatico viola almeno uno di questi tre pilastri. Ogni controllo di sicurezza ne protegge almeno uno. Capire la triade significa capire il linguaggio con cui i professionisti della sicurezza descrivono minacce, rischi e soluzioni.
 
@@ -35,7 +35,7 @@ I tre pilastri sono spesso in tensione tra loro. Aumentare la confidenzialità (
 
 ## Confidenzialità
 
-La confidenzialità garantisce che le informazioni siano accessibili **solo a chi è autorizzato** a vederle. Non si tratta solo di cifratura — include tutto il ciclo di vita dell'informazione: chi può accedervi, come viene trasmessa, dove viene memorizzata, come viene eliminata.
+La confidenzialità garantisce che le informazioni siano accessibili **solo a chi è autorizzato** a vederle. Non si tratta solo di cifratura, include tutto il ciclo di vita dell'informazione: chi può accedervi, come viene trasmessa, dove viene memorizzata, come viene eliminata.
 
 ### Minacce alla confidenzialità
 
@@ -43,7 +43,7 @@ La confidenzialità garantisce che le informazioni siano accessibili **solo a ch
 
 **Data breach:** accesso non autorizzato a database, file server, cloud storage. Può avvenire per exploit tecnico, credenziali rubate, insider malintenzionato.
 
-**Social engineering:** la persona autorizzata viene manipolata a rivelare informazioni riservate — phishing, pretexting, vishing.
+**Social engineering:** la persona autorizzata viene manipolata a rivelare informazioni riservate, phishing, pretexting, vishing.
 
 **Shoulder surfing:** semplicemente guardare lo schermo di qualcuno in un luogo pubblico. Banale ma reale.
 
@@ -55,9 +55,9 @@ La confidenzialità garantisce che le informazioni siano accessibili **solo a ch
 
 **Cifratura in transito:** TLS per le comunicazioni web, SSH per le shell remote, SFTP per i trasferimenti di file. Nessun dato sensibile viaggia in chiaro.
 
-**Controllo degli accessi:** principio del minimo privilegio — ogni utente e ogni sistema accede solo alle risorse strettamente necessarie per il suo compito. Un dipendente del marketing non ha bisogno di accedere al database dei clienti della divisione legale.
+**Controllo degli accessi:** principio del minimo privilegio, ogni utente e ogni sistema accede solo alle risorse strettamente necessarie per il suo compito. Un dipendente del marketing non ha bisogno di accedere al database dei clienti della divisione legale.
 
-**DLP (Data Loss Prevention):** strumenti che monitorano e bloccano l'esfiltrazione di dati sensibili — allegati email con numeri di carte di credito, upload di file riservati su servizi cloud non autorizzati.
+**DLP (Data Loss Prevention):** strumenti che monitorano e bloccano l'esfiltrazione di dati sensibili, allegati email con numeri di carte di credito, upload di file riservati su servizi cloud non autorizzati.
 
 **Classificazione dei dati:** non tutti i dati hanno lo stesso livello di sensibilità. Una policy di classificazione (pubblico, interno, confidenziale, segreto) permette di applicare controlli proporzionati al rischio.
 
@@ -65,7 +65,7 @@ La confidenzialità garantisce che le informazioni siano accessibili **solo a ch
 
 ## Integrità
 
-L'integrità garantisce che le informazioni siano **accurate, complete e non modificate** senza autorizzazione. Non riguarda solo gli attacchi — include anche la corruzione accidentale dei dati.
+L'integrità garantisce che le informazioni siano **accurate, complete e non modificate** senza autorizzazione. Non riguarda solo gli attacchi, include anche la corruzione accidentale dei dati.
 
 ```mermaid
 graph LR
@@ -82,17 +82,17 @@ graph LR
 
 **Man-in-the-Middle (MitM):** l'attaccante si interpone tra client e server, modificando i dati in transito. Senza TLS (o con TLS mal configurato), può modificare un aggiornamento software scaricato, iniettare codice in una pagina web, alterare una transazione finanziaria.
 
-**Ransomware:** cifra i file rendendoli inaccessibili — una violazione dell'integrità (i file non sono più utilizzabili nella loro forma originale) oltre che della disponibilità.
+**Ransomware:** cifra i file rendendoli inaccessibili, una violazione dell'integrità (i file non sono più utilizzabili nella loro forma originale) oltre che della disponibilità.
 
-**Insider threat:** un dipendente malintenzionato modifica dati aziendali — record contabili, log di sistema, configurazioni. Particolarmente insidioso perché l'accesso è legittimo.
+**Insider threat:** un dipendente malintenzionato modifica dati aziendali, record contabili, log di sistema, configurazioni. Particolarmente insidioso perché l'accesso è legittimo.
 
 **Corruzione accidentale:** hardware difettoso, bug software, errori umani. Non tutti i problemi di integrità sono attacchi.
 
 ### Controlli per l'integrità
 
-**Hash crittografici:** SHA-256 o SHA-512 calcolati sui dati critici. Se un singolo bit cambia, l'hash cambia completamente — la modifica è immediatamente rilevabile.
+**Hash crittografici:** SHA-256 o SHA-512 calcolati sui dati critici. Se un singolo bit cambia, l'hash cambia completamente, la modifica è immediatamente rilevabile.
 
-**Firme digitali:** combinano hash e crittografia asimmetrica. Garantiscono sia l'integrità del dato sia l'autenticità del mittente — il dato non è stato modificato e proviene davvero da chi dice.
+**Firme digitali:** combinano hash e crittografia asimmetrica. Garantiscono sia l'integrità del dato sia l'autenticità del mittente, il dato non è stato modificato e proviene davvero da chi dice.
 
 **Controllo delle versioni:** git e sistemi simili mantengono la storia completa di ogni modifica, permettendo di rilevare e revertire modifiche non autorizzate.
 
@@ -112,7 +112,7 @@ La disponibilità garantisce che i sistemi e le informazioni siano **accessibili
 
 **DDoS (Distributed Denial of Service):** migliaia di macchine compromesse (botnet) sommergono un server con traffico fino a renderlo irraggiungibile. Può colpire il layer di rete (flood di pacchetti), il layer di trasporto (SYN flood), o il layer applicativo (HTTP flood che esaurisce le connessioni del web server).
 
-**Ransomware:** cifra i file critici rendendoli inaccessibili finché non viene pagato il riscatto. Ospedali, infrastrutture critiche, aziende manifatturiere — la perdita di disponibilità può avere conseguenze fisiche dirette.
+**Ransomware:** cifra i file critici rendendoli inaccessibili finché non viene pagato il riscatto. Ospedali, infrastrutture critiche, aziende manifatturiere, la perdita di disponibilità può avere conseguenze fisiche dirette.
 
 **Errori di configurazione:** un firewall mal configurato che blocca traffico legittimo, un aggiornamento che rompe un servizio critico, una migrazione cloud che non considera le dipendenze. Non tutti i problemi di disponibilità sono attacchi.
 
@@ -186,7 +186,7 @@ La triade CIA è il punto di partenza, ma il settore usa altri concetti correlat
 | Authorization | Cosa puoi fare? | Ruoli e permessi |
 | Accounting | Cosa hai fatto? | Audit log |
 
-**Non ripudio:** la garanzia che chi ha compiuto un'azione non possa negarlo. Le firme digitali forniscono non ripudio — se hai firmato un documento con la tua chiave privata, non puoi negare di averlo fatto.
+**Non ripudio:** la garanzia che chi ha compiuto un'azione non possa negarlo. Le firme digitali forniscono non ripudio, se hai firmato un documento con la tua chiave privata, non puoi negare di averlo fatto.
 
 **Privacy:** spesso aggiunta come quarto pilastro nella versione moderna del framework. Si distingue dalla confidenzialità perché riguarda specificamente la protezione dei dati personali nel contesto normativo (GDPR, CCPA).
 
@@ -215,6 +215,6 @@ La triade CIA è uno strumento di analisi, non solo un concetto teorico. Quando 
 
 ## Conclusione
 
-La triade CIA è semplice nella formulazione ma profonda nelle implicazioni. Ogni decisione di sicurezza — quale algoritmo di cifratura usare, quante copie di backup mantenere, come strutturare i permessi degli utenti — può essere ricondotta a uno o più dei tre pilastri.
+La triade CIA è semplice nella formulazione ma profonda nelle implicazioni. Ogni decisione di sicurezza (quale algoritmo di cifratura usare, quante copie di backup mantenere, come strutturare i permessi degli utenti), può essere ricondotta a uno o più dei tre pilastri.
 
 Quando senti parlare di un attacco o di una violazione, chiediti sempre: confidenzialità, integrità o disponibilità? Spesso la risposta è più di uno. E quella risposta definisce le priorità della risposta.

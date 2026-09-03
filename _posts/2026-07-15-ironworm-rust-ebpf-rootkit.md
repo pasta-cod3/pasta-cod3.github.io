@@ -15,10 +15,10 @@ A luglio 2026, ricercatori hanno identificato **IronWorm**, un nuovo malware sof
 
 Quello che rende IronWorm diverso da altri malware npm:
 
-1. **Scritto in Rust** — difficile da disassemblare, più stealthy di JavaScript
-2. **eBPF kernel rootkit** — nasconde il malware a livello kernel, evitando detection da userland tools
-3. **Self-propagating** — utilizza stolen npm credentials per infettare ulteriori package
-4. **Tor C2** — comunicazione con il server di comando tramite Tor network
+1. **Scritto in Rust**: difficile da disassemblare, più stealthy di JavaScript
+2. **eBPF kernel rootkit**: nasconde il malware a livello kernel, evitando detection da userland tools
+3. **Self-propagating**: utilizza stolen npm credentials per infettare ulteriori package
+4. **Tor C2**: comunicazione con il server di comando tramite Tor network
 
 ---
 

@@ -13,15 +13,15 @@ excerpt: "Hashcat per gli hash offline, Hydra per gli attacchi online: come funz
 
 Le password sono ancora la principale linea di difesa della maggior parte dei sistemi. E la maggior parte delle password fa schifo.
 
-Il **password cracking** è l'arte di recuperare password da hash o di trovare credenziali valide per l'accesso a un sistema. È una delle tecniche più usate nei penetration test — e una delle più efficaci.
+Il **password cracking** è l'arte di recuperare password da hash o di trovare credenziali valide per l'accesso a un sistema. È una delle tecniche più usate nei penetration test, e una delle più efficaci.
 
 Due strumenti dominano questo campo:
-- **Hashcat** — cracking offline di hash
-- **Hydra** — brute force online su servizi di rete
+- **Hashcat**: cracking offline di hash
+- **Hydra**: brute force online su servizi di rete
 
 ---
 
-## Parte 1: Hashcat — cracking offline
+## Parte 1: Hashcat, cracking offline
 
 ### Cos'è un hash
 
@@ -117,7 +117,7 @@ hashcat -a 0 -m 1000 ntlm.txt rockyou.txt
 
 ---
 
-## Parte 2: Hydra — brute force online
+## Parte 2: Hydra, brute force online
 
 Hydra testa credenziali direttamente su servizi di rete: SSH, FTP, HTTP, RDP, SMB, database e altro.
 
@@ -186,13 +186,13 @@ Come blue teamer, cosa fare:
 - **Password policy forte:** minimo 12 caratteri, maiuscole, numeri, simboli
 - **Multi-factor authentication (MFA):** rende il cracking online inutile
 - **Account lockout:** blocca l'account dopo N tentativi falliti (mitiga Hydra)
-- **Hashing forte:** bcrypt, Argon2, scrypt — rallentano enormemente Hashcat
+- **Hashing forte:** bcrypt, Argon2, scrypt, rallentano enormemente Hashcat
 - **Password manager:** gli utenti non riusano password se non devono ricordarle
 
 ---
 
 ## Conclusione
 
-Il password cracking dimostra perché le password deboli sono un problema reale — non teorico. "password123" viene craccata in millisecondi. "Tr0ub4dor&3" resiste ore. "xK#9mLq$2vNp" non verrà mai craccata con un dizionario.
+Il password cracking dimostra perché le password deboli sono un problema reale, non teorico. "password123" viene craccata in millisecondi. "Tr0ub4dor&3" resiste ore. "xK#9mLq$2vNp" non verrà mai craccata con un dizionario.
 
 Come penetration tester, il cracking delle password è spesso il modo più veloce per muoversi lateralmente dopo un primo accesso. Impara a usare questi strumenti bene, e soprattutto impara cosa ti dicono sulla sicurezza dei sistemi che stai testando.

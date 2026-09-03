@@ -21,7 +21,7 @@ Client          Access Point
   |  ——— EAPOL-Key (ACK) ——→  |
 ```
 
-Dal handshake è possibile derivare un valore (**MIC** - Message Integrity Code) che dipende dalla PSK. Se si cattura il handshake, è possibile tentare offline: "con questa password, il MIC corrisponderebbe?" — senza bisogno di interagire con l'AP.
+Dal handshake è possibile derivare un valore (**MIC** - Message Integrity Code) che dipende dalla PSK. Se si cattura il handshake, è possibile tentare offline: "con questa password, il MIC corrisponderebbe?", senza bisogno di interagire con l'AP.
 
 ## Cattura del handshake (solo su reti autorizzate)
 
@@ -39,7 +39,7 @@ airodump-ng -c 6 --bssid AA:BB:CC:DD:EE:FF -w capture wlan0mon
 # Il handshake viene visualizzato in alto a destra nell'output
 ```
 
-## PMKID Attack — senza aspettare il handshake
+## PMKID Attack: senza aspettare il handshake
 
 Più moderno: il PMKID è un valore nel primo pacchetto EAPOL, derivato dalla PSK. Non serve aspettare un client:
 
@@ -70,7 +70,7 @@ hashcat -m 2500 capture.hccapx rockyou.txt
 hashcat -m 2500 capture.hccapx -a 3 ?d?d?d?d?d?d?d?d
 ```
 
-## WPA2 Enterprise — molto più sicuro
+## WPA2 Enterprise: molto più sicuro
 
 WPA2-Enterprise usa RADIUS e certificati invece di PSK. Ogni utente ha credenziali proprie. Molto più robusto per ambienti aziendali.
 

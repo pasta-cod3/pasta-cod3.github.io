@@ -13,13 +13,13 @@ excerpt: "Un firewall non è solo una lista di regole. Differenze tra stateless 
 
 Il firewall è il primo nome che chiunque associa alla sicurezza informatica. Eppure è anche uno degli strumenti più fraintesi: molte organizzazioni credono che avere un firewall significhi essere al sicuro, mentre in realtà un firewall mal configurato o usato da solo offre una protezione parziale.
 
-Capire come funziona un firewall — i diversi tipi, cosa possono e non possono fare, come si configurano le regole — è fondamentale sia per difendere una rete sia per capire perché certi attacchi lo aggirano senza problemi.
+Capire come funziona un firewall (i diversi tipi, cosa possono e non possono fare, come si configurano le regole), è fondamentale sia per difendere una rete sia per capire perché certi attacchi lo aggirano senza problemi.
 
 ---
 
 ## Cos'è un firewall
 
-Un firewall è un sistema (hardware, software, o entrambi) che **monitora e controlla il traffico di rete** in base a un insieme di regole. Sta tra due reti — tipicamente internet e la rete interna — e decide cosa lasciare passare e cosa bloccare.
+Un firewall è un sistema (hardware, software, o entrambi) che **monitora e controlla il traffico di rete** in base a un insieme di regole. Sta tra due reti (tipicamente internet e la rete interna), e decide cosa lasciare passare e cosa bloccare.
 
 ```mermaid
 graph LR
@@ -74,9 +74,9 @@ DENY * * * * INGRESS
 
 Il problema fondamentale: **non sa se un pacchetto fa parte di una connessione legittima o è un pacchetto isolato malevolo**.
 
-Un pacchetto ACK in ingresso — è la risposta a una connessione che il server ha aperto, o è un tentativo di TCP ACK scan? Il firewall stateless non lo sa. Deve permettere tutti i pacchetti ACK o bloccarli tutti.
+Un pacchetto ACK in ingresso, è la risposta a una connessione che il server ha aperto, o è un tentativo di TCP ACK scan? Il firewall stateless non lo sa. Deve permettere tutti i pacchetti ACK o bloccarli tutti.
 
-Un pacchetto di risposta DNS in ingresso (UDP porta 53 sorgente) — è la risposta a una query che l'utente ha fatto, o è un tentativo di DNS spoofing? Il firewall stateless non lo sa.
+Un pacchetto di risposta DNS in ingresso (UDP porta 53 sorgente), è la risposta a una query che l'utente ha fatto, o è un tentativo di DNS spoofing? Il firewall stateless non lo sa.
 
 ---
 
@@ -104,11 +104,11 @@ SRC IP          SRC PORT   DST IP          DST PORT  PROTO  STATO
 192.168.1.15    61084      185.23.44.10    80        TCP    ESTABLISHED
 ```
 
-Quando il server 142.250.184.46 risponde al client 192.168.1.10 sulla porta 54231, il firewall stateful vede che esiste già una connessione stabilita corrispondente e lascia passare la risposta — senza bisogno di una regola esplicita per il traffico di risposta.
+Quando il server 142.250.184.46 risponde al client 192.168.1.10 sulla porta 54231, il firewall stateful vede che esiste già una connessione stabilita corrispondente e lascia passare la risposta, senza bisogno di una regola esplicita per il traffico di risposta.
 
 ### Vantaggi rispetto allo stateless
 
-**Traffico di risposta automatico:** non serve una regola per permettere le risposte — il firewall sa che sono parte di connessioni legittime.
+**Traffico di risposta automatico:** non serve una regola per permettere le risposte, il firewall sa che sono parte di connessioni legittime.
 
 **Protezione da pacchetti anomali:** un pacchetto ACK senza un SYN precedente viene scartato perché non esiste nella state table.
 
@@ -116,7 +116,7 @@ Quando il server 142.250.184.46 risponde al client 192.168.1.10 sulla porta 5423
 
 ### Limiti del firewall stateful
 
-Anche il firewall stateful non ispeziona il **contenuto** dei pacchetti. Se la connessione TCP è valida e la porta è permessa, il traffico passa — anche se il payload contiene una SQL injection, un malware, o dati esfiltrati.
+Anche il firewall stateful non ispeziona il **contenuto** dei pacchetti. Se la connessione TCP è valida e la porta è permessa, il traffico passa, anche se il payload contiene una SQL injection, un malware, o dati esfiltrati.
 
 Un attaccante che ottiene accesso tramite una porta permessa (es. HTTPS/443) può fare qualsiasi cosa all'interno di quella connessione legittima.
 
@@ -124,7 +124,7 @@ Un attaccante che ottiene accesso tramite una porta permessa (es. HTTPS/443) pu�
 
 ## Deep Packet Inspection (DPI)
 
-La DPI va oltre le intestazioni e analizza il **contenuto** dei pacchetti — il payload. Può identificare:
+La DPI va oltre le intestazioni e analizza il **contenuto** dei pacchetti, il payload. Può identificare:
 
 - Protocolli applicativi (anche se usano porte non standard)
 - Pattern di malware nelle sequenze di byte
@@ -146,7 +146,7 @@ Il problema con la DPI moderna: il traffico è cifrato. Per ispezionarlo, il fir
 
 Dal punto di vista del client, la connessione TLS termina al firewall, non al server reale. Il browser mostrerà il certificato del firewall, non quello del sito.
 
-Questo crea implicazioni di privacy significative — l'azienda può vedere tutto il traffico HTTPS dei dipendenti, incluso accessi a banche e email personali.
+Questo crea implicazioni di privacy significative, l'azienda può vedere tutto il traffico HTTPS dei dipendenti, incluso accessi a banche e email personali.
 
 ---
 
@@ -165,7 +165,7 @@ graph TD
     NGFW --> THREAT[Threat Intelligence\nfeed di IOC in tempo reale]
 ```
 
-**Application Awareness:** un NGFW può permettere LinkedIn ma bloccare Facebook, o permettere Skype ma bloccare il file sharing di Skype — indipendentemente dalle porte usate.
+**Application Awareness:** un NGFW può permettere LinkedIn ma bloccare Facebook, o permettere Skype ma bloccare il file sharing di Skype, indipendentemente dalle porte usate.
 
 **User Identity:** integrato con Active Directory, può applicare regole per utente o gruppo. "I dipendenti del reparto vendite possono accedere a Salesforce, gli altri no."
 
@@ -173,7 +173,7 @@ graph TD
 
 ---
 
-## WAF — Web Application Firewall
+## WAF: Web Application Firewall
 
 Il WAF è specializzato nella protezione delle **applicazioni web**. Opera al layer 7 e comprende il protocollo HTTP/HTTPS nel dettaglio.
 
@@ -237,7 +237,7 @@ graph LR
     FW2 --> LAN["Rete interna\nDatabase\nFile server\nWorkstation"]
 ```
 
-Se un attaccante compromette un server in DMZ, non ha accesso diretto alla rete interna — deve superare anche il firewall interno. Il firewall interno è configurato in modo molto più restrittivo: la DMZ può connettersi al database interno solo su porte specifiche, con protocolli specifici, e solo in lettura/scrittura limitate.
+Se un attaccante compromette un server in DMZ, non ha accesso diretto alla rete interna, deve superare anche il firewall interno. Il firewall interno è configurato in modo molto più restrittivo: la DMZ può connettersi al database interno solo su porte specifiche, con protocolli specifici, e solo in lettura/scrittura limitate.
 
 ---
 
@@ -262,7 +262,7 @@ DENY * * * * * INGRESS     # blocca tutto il resto
 
 ### Ordine delle regole
 
-Le regole vengono valutate in ordine. La prima regola che corrisponde viene applicata — le successive vengono ignorate.
+Le regole vengono valutate in ordine. La prima regola che corrisponde viene applicata, le successive vengono ignorate.
 
 ```
 Regola 1: ALLOW TCP 192.168.1.10 * 22   → permette SSH da IP specifico
@@ -294,6 +294,6 @@ Questa è forse la parte più importante: capire i limiti.
 
 ## Conclusione
 
-Il firewall è uno strato fondamentale della difesa in profondità — non l'unico. La sua efficacia dipende dalla qualità della configurazione, dalla regolarità della revisione delle regole, e dalla comprensione di ciò che può e non può fare.
+Il firewall è uno strato fondamentale della difesa in profondità, non l'unico. La sua efficacia dipende dalla qualità della configurazione, dalla regolarità della revisione delle regole, e dalla comprensione di ciò che può e non può fare.
 
-Un NGFW con DPI e IPS integrati su una rete ben segmentata con DMZ rappresenta un'architettura solida. Ma rimane uno strato di difesa tra molti — non una soluzione completa. La sicurezza informatica moderna richiede difesa in profondità: firewall, EDR, SIEM, patching, formazione degli utenti, e incident response coordinati insieme.
+Un NGFW con DPI e IPS integrati su una rete ben segmentata con DMZ rappresenta un'architettura solida. Ma rimane uno strato di difesa tra molti, non una soluzione completa. La sicurezza informatica moderna richiede difesa in profondità: firewall, EDR, SIEM, patching, formazione degli utenti, e incident response coordinati insieme.

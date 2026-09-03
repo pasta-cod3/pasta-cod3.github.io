@@ -7,7 +7,7 @@ tags: [AWS, cloud security, S3, IAM, misconfigurazioni, CSPM, sicurezza cloud]
 excerpt: "Il 99% delle violazioni cloud è causato da errori di configurazione, non da vulnerabilità del provider. Bucket S3 pubblici, IAM permissivo, istanze EC2 esposte: le misconfigurazioni AWS più comuni e come correggerle."
 ---
 
-"Il cloud è sicuro" — il provider sì, ma la responsabilità della configurazione è tua. Il modello **Shared Responsibility** di AWS chiarisce: Amazon protegge l'infrastruttura, tu proteggi ciò che ci metti sopra. La maggior parte delle violazioni cloud non è colpa di AWS.
+"Il cloud è sicuro", il provider sì, ma la responsabilità della configurazione è tua. Il modello **Shared Responsibility** di AWS chiarisce: Amazon protegge l'infrastruttura, tu proteggi ciò che ci metti sopra. La maggior parte delle violazioni cloud non è colpa di AWS.
 
 ## Il modello Shared Responsibility
 
@@ -20,7 +20,7 @@ AWS responsabile di:          Tu responsabile di:
 └─ Rete fisica                └─ Patch del SO nelle EC2
 ```
 
-## S3: bucket pubblici — la misconfiguration più comune
+## S3: bucket pubblici, la misconfiguration più comune
 
 Ogni breach da "database esposto su S3" è evitabile. Le cause principali:
 

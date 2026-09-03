@@ -11,9 +11,9 @@ excerpt: "Database contenenti dati sensibili di cittadini di Illinois e Minnesot
 
 ## Il fatto
 
-A gennaio 2026 è emerso che due stati americani — **Illinois** e **Minnesota** — hanno subito esposizioni di dati personali di cittadini su scala massiccia, colpendo quasi un milione di persone.
+A gennaio 2026 è emerso che due stati americani (**Illinois** e **Minnesota**), hanno subito esposizioni di dati personali di cittadini su scala massiccia, colpendo quasi un milione di persone.
 
-Il caso dell'Illinois è particolarmente grave: dati personali sensibili erano **visibili pubblicamente su internet per quattro anni** senza che nessuno se ne accorgesse. Non si tratta di un attacco sofisticato — ma di una misconfiguration di sistema rimasta invisibile per un periodo di tempo imbarazzante.
+Il caso dell'Illinois è particolarmente grave: dati personali sensibili erano **visibili pubblicamente su internet per quattro anni** senza che nessuno se ne accorgesse. Non si tratta di un attacco sofisticato, ma di una misconfiguration di sistema rimasta invisibile per un periodo di tempo imbarazzante.
 
 ---
 
@@ -21,7 +21,7 @@ Il caso dell'Illinois è particolarmente grave: dati personali sensibili erano *
 
 Il **Department of Human Services dell'Illinois** ha confermato che informazioni personali dei propri utenti erano accessibili pubblicamente online. La causa: un sistema configurato in modo errato che esponeva dati senza autenticazione o accesso controllato.
 
-Quello che rende questo incidente particolarmente grave non è la sofisticazione dell'attacco — non c'è stato nessun attacco. È la combinazione di:
+Quello che rende questo incidente particolarmente grave non è la sofisticazione dell'attacco, non c'è stato nessun attacco. È la combinazione di:
 
 **Dati altamente sensibili:** il Department of Human Services gestisce programmi di assistenza sociale, sussidi per la disabilità, supporto alimentare (SNAP), programmi per l'infanzia e la famiglia. I dati esposti includono informazioni di persone in condizioni di vulnerabilità economica e sociale.
 
@@ -61,7 +61,7 @@ I dati esposti da sistemi di assistenza sociale sono particolarmente utili per:
 
 **Frode sui sussidi:** conoscendo i programmi di cui beneficia qualcuno, un attore malevolo può tentare di reindirizzare i pagamenti o effettuare richieste fraudolente.
 
-**Targeting di persone vulnerabili:** le persone che ricevono assistenza sociale sono spesso in condizioni di vulnerabilità economica — il che le rende target ideali per truffe e phishing.
+**Targeting di persone vulnerabili:** le persone che ricevono assistenza sociale sono spesso in condizioni di vulnerabilità economica, il che le rende target ideali per truffe e phishing.
 
 ---
 
@@ -79,4 +79,4 @@ La notifica via posta fisica è costosa e lenta. La notifica via media raggiunge
 
 ## Conclusione
 
-L'Illinois e il Minnesota ci ricordano che la maggior parte dei breach non sono operazioni hacker sofisticate — sono misconfigurations, configurazioni di default non cambiate, sistemi legacy esposti su internet senza adeguate protezioni. La security by obscurity non è sicurezza. Un sistema esposto pubblicamente per quattro anni non è mai stato sicuro — semplicemente non era stato ancora trovato da qualcuno che pubblicizzasse la scoperta.
+L'Illinois e il Minnesota ci ricordano che la maggior parte dei breach non sono operazioni hacker sofisticate, sono misconfigurations, configurazioni di default non cambiate, sistemi legacy esposti su internet senza adeguate protezioni. La security by obscurity non è sicurezza. Un sistema esposto pubblicamente per quattro anni non è mai stato sicuro, semplicemente non era stato ancora trovato da qualcuno che pubblicizzasse la scoperta.

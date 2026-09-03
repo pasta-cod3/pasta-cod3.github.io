@@ -29,7 +29,7 @@ La definizione che preferisco è questa:
 
 ## Perché i sistemi automatici non bastano
 
-SIEM, IDS, EDR, antivirus — tutti strumenti fondamentali, intendiamoci. Ma hanno un limite strutturale: **conoscono solo ciò che è già stato visto**.
+SIEM, IDS, EDR, antivirus, tutti strumenti fondamentali, intendiamoci. Ma hanno un limite strutturale: **conoscono solo ciò che è già stato visto**.
 
 Un attaccante che usa tecniche nuove, varianti custom di malware, o semplici strumenti legittimi di Windows (LOLBins) passa sotto al radar con una facilità imbarazzante.
 
@@ -49,7 +49,7 @@ Un buon processo di hunting si articola in tre fasi:
 
 ### 1. Ipotesi (Hypothesis)
 
-Tutto parte da una domanda. Non si caccia "a caso" — si parte da un'idea su cosa potrebbe stare succedendo.
+Tutto parte da una domanda. Non si caccia "a caso", si parte da un'idea su cosa potrebbe stare succedendo.
 
 Le ipotesi possono nascere da:
 - **Intelligence esterna**: nuove TTP pubblicate da threat actor noti (es. gruppi APT)
@@ -81,7 +81,7 @@ index=windows EventCode=4688 Process_Name="*wmic.exe"
 
 ### 3. Risposta (Response)
 
-Trovato qualcosa? Documentalo, isola il sistema se necessario, passa al team di Incident Response. Non trovato nulla? Ottimo — hai comunque migliorato la tua visibilità e raffinato il processo.
+Trovato qualcosa? Documentalo, isola il sistema se necessario, passa al team di Incident Response. Non trovato nulla? Ottimo, hai comunque migliorato la tua visibilità e raffinato il processo.
 
 ---
 
@@ -104,10 +104,10 @@ Una risorsa meno nota ma preziosa: [threathunting.net](https://www.threathunting
 
 Non serve una piattaforma enterprise da milioni di euro. Puoi iniziare con:
 
-1. **Windows Event Logs** — abilita audit avanzato (Process Creation, Network Connections, PowerShell logging)
-2. **Sysmon** — gratuito, potentissimo, ti dà visibilità su processi, connessioni, file
-3. **Elastic Stack** — per indicizzare e cercare i log
-4. **Sigma** — regole di detection in formato portabile
+1. **Windows Event Logs**: abilita audit avanzato (Process Creation, Network Connections, PowerShell logging)
+2. **Sysmon**: gratuito, potentissimo, ti dà visibilità su processi, connessioni, file
+3. **Elastic Stack**: per indicizzare e cercare i log
+4. **Sigma**: regole di detection in formato portabile
 
 Configurazione base di Sysmon con il config di SwiftOnSecurity:
 
@@ -125,7 +125,7 @@ sysmon64.exe -accepteula -i sysmonconfig.xml
 
 Quando ho iniziato a fare hunting sul serio, la cosa che mi ha colpito di più non è stata trovare malware. È stata la quantità di **roba legittima ma strana** che si trovava in giro: script PowerShell dimenticati, task schedulati di dubbia provenienza, connessioni verso IP di cloud pubblici non documentati.
 
-La tua rete probabilmente ha più segreti di quanti pensi. Il Threat Hunting è il modo migliore per scoprirli — prima che lo faccia qualcun altro.
+La tua rete probabilmente ha più segreti di quanti pensi. Il Threat Hunting è il modo migliore per scoprirli, prima che lo faccia qualcun altro.
 
 ---
 
@@ -133,6 +133,6 @@ La tua rete probabilmente ha più segreti di quanti pensi. Il Threat Hunting è 
 
 Il Threat Hunting non è per tutti. Richiede curiosità, pazienza, conoscenza tecnica e una buona dose di paranoia sana. Ma è una delle discipline più potenti nel Blue Team, perché porta la sicurezza da posizione reattiva a posizione proattiva.
 
-Nel prossimo articolo parleremo di **analisi malware base** — perché una volta che trovi qualcosa durante una caccia, devi sapere cosa ti trovi davanti.
+Nel prossimo articolo parleremo di **analisi malware base**: perché una volta che trovi qualcosa durante una caccia, devi sapere cosa ti trovi davanti.
 
 Stay paranoid. 🔍

@@ -11,9 +11,9 @@ excerpt: "Il DNS è la rubrica di Internet. Come funziona la risoluzione ricorsi
 
 ## Introduzione
 
-Il DNS è uno dei protocolli più fondamentali di internet — e uno dei più trascurati dal punto di vista della sicurezza. Quasi tutto ciò che fai online passa per il DNS: ogni sito che visiti, ogni email che mandi, ogni API che chiami inizia con una query DNS. Eppure il protocollo originale del 1983 non aveva nessun meccanismo di autenticazione o cifratura.
+Il DNS è uno dei protocolli più fondamentali di internet, e uno dei più trascurati dal punto di vista della sicurezza. Quasi tutto ciò che fai online passa per il DNS: ogni sito che visiti, ogni email che mandi, ogni API che chiami inizia con una query DNS. Eppure il protocollo originale del 1983 non aveva nessun meccanismo di autenticazione o cifratura.
 
-Questa combinazione — onnipresenza e assenza di sicurezza — rende il DNS uno dei bersagli preferiti degli attaccanti per ricognizione, reindirizzamento del traffico, esfiltrazione dati, e disruption dei servizi.
+Questa combinazione (onnipresenza e assenza di sicurezza), rende il DNS uno dei bersagli preferiti degli attaccanti per ricognizione, reindirizzamento del traffico, esfiltrazione dati, e disruption dei servizi.
 
 ---
 
@@ -76,18 +76,18 @@ www.example.com.    300    IN    A       93.184.216.34
 www.example.com.    300    IN    AAAA    2606:2800:220:1:248:1893:25c8:1946
 ```
 
-Un dominio può avere più record A — il resolver li restituisce in ordine diverso ad ogni query (round-robin DNS), distribuendo il carico tra più server.
+Un dominio può avere più record A, il resolver li restituisce in ordine diverso ad ogni query (round-robin DNS), distribuendo il carico tra più server.
 
-### Record MX — Mail Exchange
+### Record MX: Mail Exchange
 
 ```
 example.com.    300    IN    MX    10    mail1.example.com.
 example.com.    300    IN    MX    20    mail2.example.com.
 ```
 
-Il numero è la priorità — il server con valore più basso viene provato per primo. Il valore più alto è il fallback. Usato per capire quale server riceve le email per un dominio.
+Il numero è la priorità, il server con valore più basso viene provato per primo. Il valore più alto è il fallback. Usato per capire quale server riceve le email per un dominio.
 
-### Record TXT — Testo libero
+### Record TXT: Testo libero
 
 ```
 example.com.    300    IN    TXT    "v=spf1 include:_spf.google.com ~all"
@@ -97,7 +97,7 @@ _dkim._domainkey.example.com.    300    IN    TXT    "v=DKIM1; k=rsa; p=MIGfMA0G
 
 I record TXT hanno infiniti usi: SPF e DMARC per l'email authentication, verifica del dominio per Google/Azure, configurazione DKIM, e molti altri.
 
-### Record CNAME — Alias
+### Record CNAME: Alias
 
 ```
 www.example.com.    300    IN    CNAME    example.com.
@@ -106,7 +106,7 @@ blog.example.com.   300    IN    CNAME    myblog.wordpress.com.
 
 Un CNAME punta a un altro nome, non a un indirizzo IP. Utile per alias e per delegare sottodomini a servizi esterni.
 
-### Record NS — Name Server
+### Record NS: Name Server
 
 ```
 example.com.    86400    IN    NS    ns1.example.com.
@@ -115,7 +115,7 @@ example.com.    86400    IN    NS    ns2.example.com.
 
 Indicano quali server sono autoritativi per quel dominio. Cambiarli è il modo di trasferire il controllo del DNS a un altro provider.
 
-### Record SOA — Start of Authority
+### Record SOA: Start of Authority
 
 ```
 example.com.    3600    IN    SOA    ns1.example.com. hostmaster.example.com. (
@@ -132,7 +132,7 @@ Il SOA contiene informazioni amministrative sulla zona: chi la gestisce, quando 
 
 ## Ricognizione tramite DNS
 
-Prima ancora di attaccare un target, un attaccante raccoglie informazioni tramite DNS. Il DNS è pubblico per design — chiunque può interrogarlo.
+Prima ancora di attaccare un target, un attaccante raccoglie informazioni tramite DNS. Il DNS è pubblico per design, chiunque può interrogarlo.
 
 ### Enumerazione di sottodomini
 
@@ -154,7 +154,7 @@ Un sottodominio come `dev.target.com` o `staging-api.target.com` può puntare a 
 
 ### Zone Transfer
 
-Il **Zone Transfer** (AXFR) è una funzionalità legittima per sincronizzare i server DNS secondari con il primario. Se non è limitato agli IP dei server secondari, un attaccante può scaricare l'intera zona DNS del dominio — tutti i record, tutti i sottodomini.
+Il **Zone Transfer** (AXFR) è una funzionalità legittima per sincronizzare i server DNS secondari con il primario. Se non è limitato agli IP dei server secondari, un attaccante può scaricare l'intera zona DNS del dominio, tutti i record, tutti i sottodomini.
 
 ```bash
 dig axfr target.com @ns1.target.com
@@ -203,11 +203,11 @@ sequenceDiagram
 
 Nel 2008, Dan Kaminsky scoprì una variante molto più efficace del cache poisoning classico. Invece di indovinare il TxID di una query specifica (difficile), induceva il resolver a fare query per sottodomini casuali (`random1234.bank.com`, `random5678.bank.com`) e iniettava risposte con record NS modificati che puntavano ai server dell'attaccante.
 
-La patch di emergenza coordinata per questa vulnerabilità fu uno degli eventi di sicurezza più significativi della storia del DNS. La soluzione principale: **source port randomization** — usare porte sorgente casuali per le query DNS, aumentando da 65.536 a oltre 1 miliardo le combinazioni da indovinare.
+La patch di emergenza coordinata per questa vulnerabilità fu uno degli eventi di sicurezza più significativi della storia del DNS. La soluzione principale: **source port randomization**: usare porte sorgente casuali per le query DNS, aumentando da 65.536 a oltre 1 miliardo le combinazioni da indovinare.
 
 ---
 
-## DNSSEC — DNS Security Extensions
+## DNSSEC: DNS Security Extensions
 
 DNSSEC aggiunge **firme digitali** ai record DNS, permettendo ai resolver di verificare l'autenticità delle risposte.
 
@@ -235,7 +235,7 @@ Ogni livello firma il record **DS (Delegation Signer)** del livello inferiore, c
 
 ### Limitazioni di DNSSEC
 
-DNSSEC protegge dall'autenticità ma **non dalla confidenzialità** — le query e le risposte DNS rimangono visibili a chi è in ascolto sulla rete. E l'adozione è ancora parziale — molti domini non hanno DNSSEC configurato.
+DNSSEC protegge dall'autenticità ma **non dalla confidenzialità**: le query e le risposte DNS rimangono visibili a chi è in ascolto sulla rete. E l'adozione è ancora parziale, molti domini non hanno DNSSEC configurato.
 
 ---
 
@@ -243,9 +243,9 @@ DNSSEC protegge dall'autenticità ma **non dalla confidenzialità** — le query
 
 Per risolvere il problema della privacy nelle query DNS:
 
-**DNS over TLS (DoT)** — cifra le query DNS usando TLS sulla porta 853.
+**DNS over TLS (DoT)**: cifra le query DNS usando TLS sulla porta 853.
 
-**DNS over HTTPS (DoH)** — cifra le query DNS come traffico HTTPS sulla porta 443. Indistinguibile dal normale traffico web.
+**DNS over HTTPS (DoH)**: cifra le query DNS come traffico HTTPS sulla porta 443. Indistinguibile dal normale traffico web.
 
 ```mermaid
 graph LR
@@ -261,7 +261,7 @@ graph LR
 
 ## DNS Hijacking
 
-Il DNS Hijacking modifica i record DNS autoritativi del dominio stesso — non la cache del resolver. Chi controlla il dominio controlla il DNS.
+Il DNS Hijacking modifica i record DNS autoritativi del dominio stesso, non la cache del resolver. Chi controlla il dominio controlla il DNS.
 
 ### Vettori di DNS Hijacking
 
@@ -279,7 +279,7 @@ Il gruppo APT noto come "Sea Turtle" condusse una campagna sistematica di DNS hi
 
 ## DNS Tunneling
 
-Il DNS è quasi mai bloccato dai firewall — anche le reti più restrittive permettono le query DNS verso il resolver aziendale. Questa caratteristica può essere sfruttata per creare un canale di comunicazione nascosto codificando dati nei nomi dei sottodomini.
+Il DNS è quasi mai bloccato dai firewall, anche le reti più restrittive permettono le query DNS verso il resolver aziendale. Questa caratteristica può essere sfruttata per creare un canale di comunicazione nascosto codificando dati nei nomi dei sottodomini.
 
 ```mermaid
 graph LR
@@ -298,7 +298,7 @@ aGVsbG8gd29ybGQ.c2VjcmV0LmRhdGE.attacker.com
 
 **C2 (Command & Control):** il malware interroga periodicamente il DNS per ricevere comandi. Le risposte DNS (record TXT, CNAME) contengono istruzioni codificate.
 
-Il canale è lento — DNS non è progettato per questo — ma persistente e difficile da rilevare con controlli standard.
+Il canale è lento (DNS non è progettato per questo), ma persistente e difficile da rilevare con controlli standard.
 
 ### Rilevamento del DNS Tunneling
 
@@ -319,9 +319,9 @@ Strumenti di rilevamento: Zeek (analisi del traffico DNS), regole Sigma per il S
 
 ## DNS come strumento difensivo
 
-Il DNS non è solo un bersaglio — può essere usato attivamente come strumento di difesa.
+Il DNS non è solo un bersaglio, può essere usato attivamente come strumento di difesa.
 
-**DNS Sinkholing:** i server DNS aziendali risolvono i domini C2 noti verso un IP controllato (il sinkhole). Il malware che tenta di comunicare con il suo C2 viene silenziosamente reindirizzato, isolato, e rilevato. Usato dai ricercatori di sicurezza per "smontare" botnet — come Marcus Hutchins con WannaCry.
+**DNS Sinkholing:** i server DNS aziendali risolvono i domini C2 noti verso un IP controllato (il sinkhole). Il malware che tenta di comunicare con il suo C2 viene silenziosamente reindirizzato, isolato, e rilevato. Usato dai ricercatori di sicurezza per "smontare" botnet, come Marcus Hutchins con WannaCry.
 
 **DNS Filtering (RPZ - Response Policy Zone):** blocca la risoluzione di domini malevoli noti. Feed di IOC (Emerging Threats, Cisco Umbrella, Quad9) vengono integrati nel resolver aziendale.
 
@@ -331,8 +331,8 @@ Il DNS non è solo un bersaglio — può essere usato attivamente come strumento
 
 ## Conclusione
 
-Il DNS è l'infrastruttura invisibile su cui poggia tutto internet — e la sua sicurezza è spesso sottovalutata. Un attaccante che controlla il DNS controlla dove va il traffico, anche senza toccare i server di destinazione.
+Il DNS è l'infrastruttura invisibile su cui poggia tutto internet, e la sua sicurezza è spesso sottovalutata. Un attaccante che controlla il DNS controlla dove va il traffico, anche senza toccare i server di destinazione.
 
 Le difese fondamentali: DNSSEC per l'integrità dei record, DoH/DoT per la privacy delle query, monitoraggio delle anomalie DNS per rilevare tunneling e exfiltration, DNS filtering per bloccare comunicazioni verso C2 noti, e protezione robusta degli account registrar con MFA.
 
-Il DNS è silenzioso finché non diventa il problema — e quando diventa il problema, tutto smette di funzionare.
+Il DNS è silenzioso finché non diventa il problema, e quando diventa il problema, tutto smette di funzionare.

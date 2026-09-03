@@ -14,8 +14,8 @@ excerpt: "Signature Healthcare di Brockton, Massachusetts è stato colpito da un
 A marzo 2026, **Signature Healthcare** nel Massachusetts è stato colpito da un cyberattack che ha causato:
 
 - 🚑 **Dirottamento di ambulanze** verso altri ospedali
-- 💊 **Farmacie non funzionanti** — impossibile riempire prescizioni
-- 🏥 **Cancellazione di servizi** — procedure rinviate
+- 💊 **Farmacie non funzionanti**: impossibile riempire prescizioni
+- 🏥 **Cancellazione di servizi**: procedure rinviate
 - ⏱️ **Disruption per ore** fino a ripristino parziale
 
 Questo rappresenta il **primo caso documentato** di dirottamento di ambulanze causato da cyberattack negli USA.
@@ -24,7 +24,7 @@ Questo rappresenta il **primo caso documentato** di dirottamento di ambulanze ca
 
 ## Perché il dirottamento è necessario
 
-Quando un ospedale è offline (sistemi down, farmacia non accessibile, etc.), le ambulanze **non possono portare pazienti lì** — il rischio medico è troppo alto.
+Quando un ospedale è offline (sistemi down, farmacia non accessibile, etc.), le ambulanze **non possono portare pazienti lì**: il rischio medico è troppo alto.
 
 Se l'ospedale non sa quali letti sono liberi (sistema dei letti è down), non può accettare pazienti.
 
@@ -57,7 +57,7 @@ Risultato: ambulanze devono dirottare i pazienti verso ospedali funzionanti nell
 
 ## Lezione: cyber-physical safety
 
-Questo incidente dimostra che **cyberattack non è solo "dati rubati"** — può causare danno fisico immediato quando colpisce operational technology.
+Questo incidente dimostra che **cyberattack non è solo "dati rubati"**: può causare danno fisico immediato quando colpisce operational technology.
 
 Ospedali che permettono system down senza failover sono **criminalmente negligenti** dal punto di vista medico.
 
@@ -68,7 +68,7 @@ Ospedali che permettono system down senza failover sono **criminalmente negligen
 1. **Failover systems** per pharmacy, bed management, etc.
 2. **Manual protocols** se sistemi digitali falliscono
 3. **Backup electricity** per continuare operazioni
-4. **Rapid recovery** — tempo di downtime < 1 ora
+4. **Rapid recovery**: tempo di downtime < 1 ora
 
 ---
 

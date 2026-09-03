@@ -11,7 +11,7 @@ excerpt: "Ottenuto il primo foothold, l'attaccante si muove lateralmente verso t
 
 ## Introduzione
 
-Il **lateral movement** è una delle fasi più critiche di un red team engagement. Una volta ottenuto un primo accesso (*initial foothold*) all'interno di una rete, l'obiettivo diventa spostarsi verso sistemi più interessanti — controller di dominio, server di backup, workstation di amministratori.
+Il **lateral movement** è una delle fasi più critiche di un red team engagement. Una volta ottenuto un primo accesso (*initial foothold*) all'interno di una rete, l'obiettivo diventa spostarsi verso sistemi più interessanti, controller di dominio, server di backup, workstation di amministratori.
 
 In questo articolo vediamo le tecniche più usate in ambienti **Windows Active Directory**, gli strumenti associati e alcune note di detection per chi è dalla parte del Blue Team.
 
@@ -100,7 +100,7 @@ Una volta importato il ticket, puoi accedere alle risorse di rete come se fossi 
 
 ### Come funziona
 
-Gli account di servizio in AD hanno un attributo `servicePrincipalName` (SPN). Qualsiasi utente autenticato può richiedere un TGS per questi account — il ticket è cifrato con l'hash della password del service account.
+Gli account di servizio in AD hanno un attributo `servicePrincipalName` (SPN). Qualsiasi utente autenticato può richiedere un TGS per questi account, il ticket è cifrato con l'hash della password del service account.
 
 ```powershell
 # Enumerazione degli SPN con PowerView
@@ -150,8 +150,8 @@ Rubeus.exe asktgt /user:administrator /rc4:HASH /ptt
 
 ## Conclusione
 
-Il lateral movement in AD è un'area vastissima. Queste sono solo le tecniche più note — esistono anche DCSync, Golden/Silver Ticket, ACL abuse e molto altro.
+Il lateral movement in AD è un'area vastissima. Queste sono solo le tecniche più note, esistono anche DCSync, Golden/Silver Ticket, ACL abuse e molto altro.
 
-L'importante, sia lato offensivo che difensivo, è capire il funzionamento di Kerberos e NTLM in profondità. La maggior parte degli attacchi sfrutta comportamenti legittimi del protocollo — non vere vulnerabilità.
+L'importante, sia lato offensivo che difensivo, è capire il funzionamento di Kerberos e NTLM in profondità. La maggior parte degli attacchi sfrutta comportamenti legittimi del protocollo, non vere vulnerabilità.
 
 Nel prossimo articolo entrerò nel dettaglio di **DCSync** e privilege escalation verso Domain Admin.

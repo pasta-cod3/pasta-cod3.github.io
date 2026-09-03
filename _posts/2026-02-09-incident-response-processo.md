@@ -7,7 +7,7 @@ tags: ["incident response", "IR", "DFIR", "containment", "forensics", "NIST"]
 excerpt: "Cosa fare nelle prime ore dopo un incidente di sicurezza. Il processo IR in 6 fasi secondo NIST: preparazione, identificazione, contenimento, eradicazione, recovery, lessons learned."
 ---
 
-C'è un momento, nella vita di ogni persona che lavora nella sicurezza, in cui l'allarme non è un falso positivo. È reale. Qualcuno è dentro. Ricordo ancora il vuoto allo stomaco la prima volta: quella sensazione di "e adesso cosa faccio?" mentre il cursore lampeggiava e mezza azienda aspettava una risposta da me. La verità è che in quel momento non devi *pensare* — devi *seguire un processo*. Ed è esattamente per questo che l'incident response esiste: per trasformare il panico in procedura.
+C'è un momento, nella vita di ogni persona che lavora nella sicurezza, in cui l'allarme non è un falso positivo. È reale. Qualcuno è dentro. Ricordo ancora il vuoto allo stomaco la prima volta: quella sensazione di "e adesso cosa faccio?" mentre il cursore lampeggiava e mezza azienda aspettava una risposta da me. La verità è che in quel momento non devi *pensare*, devi *seguire un processo*. Ed è esattamente per questo che l'incident response esiste: per trasformare il panico in procedura.
 
 ## Perché serve un processo
 
@@ -21,18 +21,18 @@ Sotto stress, il cervello umano prende decisioni pessime. Sotto stress *e* con u
 
 Il modello più usato (derivato dalle linee guida NIST e SANS) si riassume nell'acronimo **PICERL**:
 
-1. **Preparation** — Preparazione
-2. **Identification** — Identificazione
-3. **Containment** — Contenimento
-4. **Eradication** — Eradicazione
-5. **Recovery** — Ripristino
-6. **Lessons Learned** — Lezioni apprese
+1. **Preparation**: Preparazione
+2. **Identification**: Identificazione
+3. **Containment**: Contenimento
+4. **Eradication**: Eradicazione
+5. **Recovery**: Ripristino
+6. **Lessons Learned**: Lezioni apprese
 
 Vediamole una per una, con l'onestà di chi le ha vissute.
 
 ### 1. Preparation
 
-Questa fase avviene **prima** che accada qualcosa, ed è la più trascurata. Preparazione significa avere: un piano scritto, una lista di contatti (chi chiami alle 3 di notte?), gli strumenti pronti, e — soprattutto — i **log giusti già attivi**. Non puoi indagare su ciò che non hai registrato.
+Questa fase avviene **prima** che accada qualcosa, ed è la più trascurata. Preparazione significa avere: un piano scritto, una lista di contatti (chi chiami alle 3 di notte?), gli strumenti pronti, e (soprattutto) i **log giusti già attivi**. Non puoi indagare su ciò che non hai registrato.
 
 Una checklist minima di preparazione:
 
@@ -95,7 +95,7 @@ Questa è la fase che separa i team che migliorano da quelli che ripetono gli st
 - Cosa no?
 - Cosa dobbiamo cambiare?
 
-E — regola d'oro — **niente colpevolizzazioni**. Se la cultura punisce chi ha cliccato sul link o chi ha configurato male il firewall, la prossima volta le persone nasconderanno gli incidenti invece di segnalarli. Ed è così che un problema piccolo diventa una catastrofe.
+E (regola d'oro) **niente colpevolizzazioni**. Se la cultura punisce chi ha cliccato sul link o chi ha configurato male il firewall, la prossima volta le persone nasconderanno gli incidenti invece di segnalarli. Ed è così che un problema piccolo diventa una catastrofe.
 
 ## Un mini-playbook di partenza
 
@@ -117,7 +117,7 @@ INCIDENTE RILEVATO
 
 ## Documentare tutto, sempre
 
-Durante l'incidente, ogni azione va registrata con timestamp: cosa hai fatto, quando, perché. Non è burocrazia — è ciò che ti salva quando, tre mesi dopo, il legale o un'autorità ti chiederà una ricostruzione dei fatti. Un semplice log testuale tenuto in tempo reale vale oro.
+Durante l'incidente, ogni azione va registrata con timestamp: cosa hai fatto, quando, perché. Non è burocrazia, è ciò che ti salva quando, tre mesi dopo, il legale o un'autorità ti chiederà una ricostruzione dei fatti. Un semplice log testuale tenuto in tempo reale vale oro.
 
 ---
 

@@ -4,12 +4,12 @@ title: "Windows Persistence: registry run key, scheduled task e WMI event subscr
 date: 2026-08-27
 cat: red
 tags: [Windows, persistence, registry, scheduled task, WMI, post-exploitation, red team]
-excerpt: "Ottenere accesso è solo metà del lavoro: senza un meccanismo di persistenza, un reboot o un logout riportano tutto a zero. Ecco le tecniche più comuni — e più difficili da individuare — per restare dentro un host Windows."
+excerpt: "Ottenere accesso è solo metà del lavoro: senza un meccanismo di persistenza, un reboot o un logout riportano tutto a zero. Ecco le tecniche più comuni (e più difficili da individuare), per restare dentro un host Windows."
 ---
 
 Un accesso ottenuto tramite un exploit o credenziali rubate è, per definizione, temporaneo: un reboot, un logout, una rotazione password possono chiuderlo. La **persistenza** è il meccanismo che garantisce l'esecuzione automatica del payload ad ogni riavvio o evento di sistema, senza dover ripetere l'accesso iniziale.
 
-## Registry Run Key — la tecnica più vecchia, ancora efficace
+## Registry Run Key: la tecnica più vecchia, ancora efficace
 
 ```powershell
 # Esecuzione automatica all'avvio, per l'utente corrente
@@ -21,7 +21,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v Update /t REG_SZ
 
 Semplice, ma anche la più cercata dai difensori: qualsiasi EDR e la maggior parte degli antivirus monitora le chiavi `Run`/`RunOnce` come indicatore primario.
 
-## Scheduled Task — più flessibile, meno monitorato di default
+## Scheduled Task: più flessibile, meno monitorato di default
 
 ```powershell
 # Esecuzione ricorrente ogni 5 minuti, mascherata da nome plausibile
@@ -33,7 +33,7 @@ schtasks /create /tn "OneDriveSync" /tr "C:\Users\Public\update.exe" /sc onlogon
 
 Il vantaggio: molte organizzazioni hanno centinaia di task legittimi programmati da software di terze parti, il che rende più facile mimetizzarsi con un nome plausibile (`Microsoft\Windows\...`) e più difficile per un analista distinguere il legittimo dal malevolo a colpo d'occhio.
 
-## WMI Event Subscription — persistenza fileless
+## WMI Event Subscription: persistenza fileless
 
 Windows Management Instrumentation permette di registrare un trigger che esegue codice in risposta a un evento di sistema (avvio, logon, orario specifico), interamente tramite classi WMI, senza toccare il filesystem in modo tradizionale:
 
@@ -73,12 +73,12 @@ Non esiste un file eseguito da un percorso "Run" tracciabile in modo ovvio, non 
 
 ## Come si difende un blue team
 
-- **Sysmon con configurazione estesa** — Event ID 12/13/14 (registry) e Event ID 19/20/21 (WMI) sono i log chiave per rilevare queste tecniche, non presenti nei log Windows standard
+- **Sysmon con configurazione estesa**: Event ID 12/13/14 (registry) e Event ID 19/20/21 (WMI) sono i log chiave per rilevare queste tecniche, non presenti nei log Windows standard
 - **Baseline dei task pianificati** e alert su nuove creazioni con nomi che imitano percorsi Microsoft ma con hash/percorso file anomalo
-- **Auditing del repository WMI** (`Get-WmiObject -Namespace root\subscription -Class __EventFilter`) — pochi ambienti lo controllano di routine, il che lo rende un blind spot reale
-- **Application whitelisting (AppLocker/WDAC)** — impedisce l'esecuzione di binari non firmati indipendentemente dal meccanismo di persistenza usato per lanciarli
+- **Auditing del repository WMI** (`Get-WmiObject -Namespace root\subscription -Class __EventFilter`), pochi ambienti lo controllano di routine, il che lo rende un blind spot reale
+- **Application whitelisting (AppLocker/WDAC)**: impedisce l'esecuzione di binari non firmati indipendentemente dal meccanismo di persistenza usato per lanciarli
 - **EDR con telemetria su ETW** (Event Tracing for Windows), che intercetta la creazione di consumer WMI e modifiche registry in tempo reale, non solo a scansione periodica
 
 ## Conclusione
 
-La persistenza non è un singolo trucco da bloccare, è una superficie ampia quanto i meccanismi legittimi di automazione di Windows stesso. Un blue team maturo non cerca "il malware" — costruisce una baseline di cosa è normale in registry, task scheduler e repository WMI, e allerta sulle deviazioni.
+La persistenza non è un singolo trucco da bloccare, è una superficie ampia quanto i meccanismi legittimi di automazione di Windows stesso. Un blue team maturo non cerca "il malware", costruisce una baseline di cosa è normale in registry, task scheduler e repository WMI, e allerta sulle deviazioni.

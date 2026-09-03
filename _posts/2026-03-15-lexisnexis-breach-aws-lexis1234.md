@@ -11,15 +11,15 @@ excerpt: "Un database LexisNexis contenente milioni di record legali era accessi
 
 ## Il fatto
 
-Il 24 febbraio 2026, un threat actor noto come **FulcrumSec** ha compromesso l'infrastruttura cloud di **LexisNexis Legal & Professional** — una delle più grandi società di dati legali e di risk management al mondo, fornitrice di informazioni a studi legali, procure, agenzie governative e aziende finanziarie di tutto il globo.
+Il 24 febbraio 2026, un threat actor noto come **FulcrumSec** ha compromesso l'infrastruttura cloud di **LexisNexis Legal & Professional**: una delle più grandi società di dati legali e di risk management al mondo, fornitrice di informazioni a studi legali, procure, agenzie governative e aziende finanziarie di tutto il globo.
 
-FulcrumSec ha esfiltrato **2,04 GB di dati** contenenti circa **3,9 milioni di record** da 536 tabelle Redshift e 430 tabelle di database VPC, più le credenziali di produzione presenti in 53 entry di AWS Secrets Manager — incluse alcune apparentemente in chiaro. Il 3 marzo 2026, i dati sono stati pubblicati su un forum del cybercrimine. LexisNexis ha confermato la breach quello stesso giorno.
+FulcrumSec ha esfiltrato **2,04 GB di dati** contenenti circa **3,9 milioni di record** da 536 tabelle Redshift e 430 tabelle di database VPC, più le credenziali di produzione presenti in 53 entry di AWS Secrets Manager, incluse alcune apparentemente in chiaro. Il 3 marzo 2026, i dati sono stati pubblicati su un forum del cybercrimine. LexisNexis ha confermato la breach quello stesso giorno.
 
 ---
 
 ## Il vettore: React2Shell su un'app non patchata
 
-Il punto d'ingresso è stato una vulnerabilità nota chiamata **React2Shell** — un bug in un'applicazione React frontend nell'infrastruttura AWS di LexisNexis. La flaw era nota da mesi. FulcrumSec la ha trovata su un sistema non aggiornato.
+Il punto d'ingresso è stato una vulnerabilità nota chiamata **React2Shell**: un bug in un'applicazione React frontend nell'infrastruttura AWS di LexisNexis. La flaw era nota da mesi. FulcrumSec la ha trovata su un sistema non aggiornato.
 
 Da lì, l'attaccante ha compromesso un container **AWS Elastic Container Service (ECS)** con un task role chiamato "LawfirmsStoreECSTaskRole". Questo ruolo aveva permessi di lettura eccessivamente ampi sull'intero account AWS.
 
@@ -41,7 +41,7 @@ FulcrumSec ha pubblicamente deriso il livello di sicurezza di LexisNexis, rivela
 
 > `Lexis1234`
 
-Una password che non supererebbe un test di sicurezza base di qualsiasi organizzazione. Nel contesto di un'azienda che gestisce dati di milioni di profili legali e governativi — inclusi giudici, procuratori DOJ e staff della SEC — è un fallimento difficile da spiegare.
+Una password che non supererebbe un test di sicurezza base di qualsiasi organizzazione. Nel contesto di un'azienda che gestisce dati di milioni di profili legali e governativi (inclusi giudici, procuratori DOJ e staff della SEC), è un fallimento difficile da spiegare.
 
 ---
 
@@ -50,7 +50,7 @@ Una password che non supererebbe un test di sicurezza base di qualsiasi organizz
 L'archivio esfiltrato include:
 
 - **400.000 profili utente** con nome, email, numero di telefono e ruolo
-- **118 profili con indirizzi .gov** — personale governativo USA, giudici federali, law clerk, procuratori del DOJ, funzionari della SEC
+- **118 profili con indirizzi .gov**: personale governativo USA, giudici federali, law clerk, procuratori del DOJ, funzionari della SEC
 - **21.042 account clienti** aziendali
 - Record di database da 536 tabelle Redshift
 - Potenziali credenziali di produzione da AWS Secrets Manager
@@ -69,7 +69,7 @@ Questa risposta ha generato scetticismo tra i ricercatori: FulcrumSec ha dimostr
 
 ## Il problema sistemico: IAM troppo permissivo su AWS
 
-Il cuore tecnico di questa breach non è la vulnerabilità React2Shell — quella è solo la porta d'ingresso. Il problema reale è l'**IAM misconfiguration**: un task role ECS con permessi di lettura su praticamente tutto l'account AWS.
+Il cuore tecnico di questa breach non è la vulnerabilità React2Shell, quella è solo la porta d'ingresso. Il problema reale è l'**IAM misconfiguration**: un task role ECS con permessi di lettura su praticamente tutto l'account AWS.
 
 Il principio del minimo privilegio dice che ogni componente dovrebbe avere accesso solo alle risorse strettamente necessarie per la sua funzione. Un container che serve una frontend web per studi legali non ha motivo di poter leggere credenziali di produzione del database, tabelle Redshift di tutto l'account, e entry di Secrets Manager.
 

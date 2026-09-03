@@ -47,9 +47,9 @@ Esegue codice arbitrario con privilegi di vCenter (root/SYSTEM)
 |---|---|
 | **29 Luglio** | CVE-2026-59310 divulgato pubblicamente da VMware |
 | **29 Luglio** | PoC (Proof of Concept) pubblicato online |
-| **3 Agosto** | Primi attacchi rilevati — APT inizia sfruttamento massivo |
+| **3 Agosto** | Primi attacchi rilevati, APT inizia sfruttamento massivo |
 | **3-5 Agosto** | 340+ indirizzi IP vittime vengono compromessi |
-| **5 Agosto** | Infezioni ancora in corso — attaccanti mantengono accesso persistente |
+| **5 Agosto** | Infezioni ancora in corso, attaccanti mantengono accesso persistente |
 
 La **finestra tra disclosure e exploitation** è stata solo 4 giorni. Per organizzazioni con processi di patch lenti, questo era tempo insufficiente.
 
@@ -104,26 +104,26 @@ VMware vCenter è il **controller centralizzato** di un'infrastruttura di virtua
 - **Accesso ai dati** di tutte le VM, indipendentemente dal loro stato di patching
 - **Movimento laterale** verso la rete fisica (ESXi hosts, storage, networking)
 
-È il "golden ticket" per una rete di virtualizzazione enterprise — una compromissione di vCenter = compromissione di intera infrastruttura.
+È il "golden ticket" per una rete di virtualizzazione enterprise, una compromissione di vCenter = compromissione di intera infrastruttura.
 
 ---
 
 ## Difesa e mitigazione
 
 **Immediato:**
-1. **Patcha vCenter urgentemente** — non è "quando puoi", è "ora"
-2. **Scansiona per reverse SSH** — controlla processi di rete anomali (`netstat -tulpn | grep ssh` su Linux, `netstat -ano` su Windows)
-3. **Monitora il traffico outbound** — reverse SSH crea connessioni outbound verso server controllati dall'attaccante
+1. **Patcha vCenter urgentemente**: non è "quando puoi", è "ora"
+2. **Scansiona per reverse SSH**: controlla processi di rete anomali (`netstat -tulpn | grep ssh` su Linux, `netstat -ano` su Windows)
+3. **Monitora il traffico outbound**: reverse SSH crea connessioni outbound verso server controllati dall'attaccante
 
 **Breve termine:**
-1. **Rivedi i log di vCenter** — controlla access log per attività amministrative anomale (creazione di account, modifiche di VM)
+1. **Rivedi i log di vCenter**: controlla access log per attività amministrative anomale (creazione di account, modifiche di VM)
 2. **Reimposta le credenziali** di vCenter (utenti, API tokens)
 3. **Ispeziona tutte le VM** per segni di compromise
 
 **Lungo termine:**
-1. **Segmentazione di rete** — vCenter non dovrebbe avere accesso diretto a VM critiche; usa micro-segmentation
-2. **MFA su vCenter** — autenticazione a due fattori limita l'accesso anche se credenziali sono compromesse
-3. **Zero-trust architecture** — non assumere che una connessione interna a vCenter è legittima
+1. **Segmentazione di rete**: vCenter non dovrebbe avere accesso diretto a VM critiche; usa micro-segmentation
+2. **MFA su vCenter**: autenticazione a due fattori limita l'accesso anche se credenziali sono compromesse
+3. **Zero-trust architecture**: non assumere che una connessione interna a vCenter è legittima
 
 ---
 
@@ -131,4 +131,4 @@ VMware vCenter è il **controller centralizzato** di un'infrastruttura di virtua
 
 La campagna APT su vCenter CVE-2026-59310 è un reminder di una realtà sgradevole: le infrastrutture di virtualizzazione sono **punti di convergenza per l'attacco**. Una singola vulnerabilità su vCenter = potenziale compromissione di decine, centinaia, talvolta migliaia di sistemi.
 
-Il fatto che 360+ organizzazioni siano state compromesse in meno di una settimana dimostra che **l'automation massiva è il nuovo standard** per le APT — non più attacchi mirati, ma campagne di scanning e exploit coordinati su larga scala.
+Il fatto che 360+ organizzazioni siano state compromesse in meno di una settimana dimostra che **l'automation massiva è il nuovo standard** per le APT, non più attacchi mirati, ma campagne di scanning e exploit coordinati su larga scala.

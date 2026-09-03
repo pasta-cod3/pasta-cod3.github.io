@@ -15,7 +15,7 @@ Quando un incidente di sicurezza si verifica, la forensica digitale risponde a u
 
 **Catena di custodia**: ogni persona che tocca la prova viene documentata con data, ora e scopo. In caso di procedimento penale, una catena di custodia rotta rende la prova inutilizzabile.
 
-**Order of Volatility**: si raccolgono le prove nell'ordine di volatilità — prima ciò che scompare più velocemente:
+**Order of Volatility**: si raccolgono le prove nell'ordine di volatilità, prima ciò che scompare più velocemente:
 1. Registri CPU e cache
 2. **RAM** (contenuto perso allo spegnimento)
 3. Swap/pagefile

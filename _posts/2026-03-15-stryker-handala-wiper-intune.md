@@ -11,17 +11,17 @@ excerpt: "Il gruppo Handala sfrutta Microsoft Intune per distribuire un wiper ne
 
 ## Il fatto
 
-L'11 marzo 2026, poco dopo la mezzanotte, i dipendenti di Stryker Corporation in tutto il mondo — Stati Uniti, Irlanda, Australia, India e altri paesi — hanno cominciato a perdere l'accesso a reti aziendali, sistemi interni e comunicazioni. Dispositivi connessi alla rete sono stati cancellati o resi inutilizzabili, e alcune pagine di login hanno iniziato a mostrare il logo di un gruppo hacker.
+L'11 marzo 2026, poco dopo la mezzanotte, i dipendenti di Stryker Corporation in tutto il mondo (Stati Uniti, Irlanda, Australia, India e altri paesi), hanno cominciato a perdere l'accesso a reti aziendali, sistemi interni e comunicazioni. Dispositivi connessi alla rete sono stati cancellati o resi inutilizzabili, e alcune pagine di login hanno iniziato a mostrare il logo di un gruppo hacker.
 
-Il gruppo responsabile si chiama **Handala** — un collettivo hacktivista legato all'Iran. In poche ore, Handala ha rivendicato un "colpo senza precedenti" contro Stryker, sostenendo di aver cancellato oltre 200.000 sistemi, server e dispositivi mobile in 79 paesi, e di aver esfiltrato 50 terabyte di dati critici prima di eseguire il wipe.
+Il gruppo responsabile si chiama **Handala**: un collettivo hacktivista legato all'Iran. In poche ore, Handala ha rivendicato un "colpo senza precedenti" contro Stryker, sostenendo di aver cancellato oltre 200.000 sistemi, server e dispositivi mobile in 79 paesi, e di aver esfiltrato 50 terabyte di dati critici prima di eseguire il wipe.
 
-Stryker è una delle più grandi aziende di tecnologia medica al mondo. Fortune 500, 56.000 dipendenti, oltre 25 miliardi di dollari di fatturato nel 2025 — e produttrice di dispositivi chirurgici, impianti ortopedici e neurotecnologie usati in ospedali di tutto il mondo.
+Stryker è una delle più grandi aziende di tecnologia medica al mondo. Fortune 500, 56.000 dipendenti, oltre 25 miliardi di dollari di fatturato nel 2025, e produttrice di dispositivi chirurgici, impianti ortopedici e neurotecnologie usati in ospedali di tutto il mondo.
 
 ---
 
 ## L'arma: Microsoft Intune usato contro se stesso
 
-Il dettaglio più inquietante dell'attacco non è il malware — perché malware, tecnicamente, non c'era. Secondo una fonte con conoscenza diretta dell'attacco che ha parlato con KrebsOnSecurity, i responsabili sembrano aver usato Microsoft Intune — un servizio Microsoft per la gestione dei dispositivi aziendali — per emettere un comando di "remote wipe" contro tutti i dispositivi connessi.
+Il dettaglio più inquietante dell'attacco non è il malware, perché malware, tecnicamente, non c'era. Secondo una fonte con conoscenza diretta dell'attacco che ha parlato con KrebsOnSecurity, i responsabili sembrano aver usato Microsoft Intune (un servizio Microsoft per la gestione dei dispositivi aziendali), per emettere un comando di "remote wipe" contro tutti i dispositivi connessi.
 
 Intune è uno strumento legittimo, usato dai team IT per gestire e proteggere i dispositivi aziendali da un'unica console web. Include una funzionalità di cancellazione remota progettata per i dispositivi smarriti o rubati. Questo vettore d'attacco è importante perché significa che i tool tradizionali di endpoint detection potrebbero non aver rilevato la fase iniziale: il wipe è stato eseguito tramite canali amministrativi legittimi.
 
@@ -34,7 +34,7 @@ graph TD
     E --> F["Paralisi globale:\n79 paesi, 5.500 dipendenti\nsolo in Irlanda"]
 ```
 
-Dipendenti Stryker su Reddit hanno confermato di aver ricevuto istruzioni urgenti di disinstallare Intune Company Portal, Teams e il client VPN dai propri dispositivi personali — nel tentativo di fermare la propagazione del wipe ai device privati enrollati per accesso aziendale.
+Dipendenti Stryker su Reddit hanno confermato di aver ricevuto istruzioni urgenti di disinstallare Intune Company Portal, Teams e il client VPN dai propri dispositivi personali, nel tentativo di fermare la propagazione del wipe ai device privati enrollati per accesso aziendale.
 
 ---
 
@@ -42,7 +42,7 @@ Dipendenti Stryker su Reddit hanno confermato di aver ricevuto istruzioni urgent
 
 Handala ha pubblicato un messaggio sostenendo di aver attaccato Stryker "in ritorsione per il brutale attacco alla scuola di Minab e in risposta ai continui attacchi informatici contro le infrastrutture" dell'Iran e dei suoi alleati. Il gruppo si riferiva alla scuola femminile di Minab a Teheran, che l'esercito americano avrebbe bombardato nei suoi recenti attacchi contro l'Iran, uccidendo più di 175 persone, la maggior parte bambini.
 
-Il manifesto di Handala si riferisce a Stryker come una "corporazione di radici sioniste" — un riferimento alla acquisizione nel 2019 dell'azienda israeliana OrthoSpace da parte di Stryker.
+Il manifesto di Handala si riferisce a Stryker come una "corporazione di radici sioniste", un riferimento alla acquisizione nel 2019 dell'azienda israeliana OrthoSpace da parte di Stryker.
 
 ---
 
@@ -68,7 +68,7 @@ Stryker produce dispositivi implantabili, strumenti chirurgici e attrezzature pe
 
 Un portavoce di Stryker ha dichiarato a TechCrunch: "Stryker sta vivendo un'interruzione globale della rete nel nostro ambiente Microsoft a causa di un attacco informatico. Non abbiamo indicazioni di ransomware o malware e riteniamo che l'incidente sia contenuto."
 
-L'azienda ha presentato un Form 8-K alla SEC — il documento obbligatorio per eventi materiali che possono influenzare il valore azionario. La CISA ha dichiarato di star lavorando "spalla a spalla con i partner del settore pubblico e privato mentre continuiamo a scoprire informazioni rilevanti e forniamo assistenza tecnica per l'attacco mirato a Stryker."
+L'azienda ha presentato un Form 8-K alla SEC, il documento obbligatorio per eventi materiali che possono influenzare il valore azionario. La CISA ha dichiarato di star lavorando "spalla a spalla con i partner del settore pubblico e privato mentre continuiamo a scoprire informazioni rilevanti e forniamo assistenza tecnica per l'attacco mirato a Stryker."
 
 ---
 

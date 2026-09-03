@@ -15,13 +15,13 @@ Se stai muovendo i primi passi nel mondo della cybersecurity offensiva, la prima
 
 In breve: un **penetration test** (o **pentest**) è un attacco informatico simulato, condotto con il permesso del proprietario del sistema, con l'obiettivo di trovare vulnerabilità prima che lo faccia qualcun altro di malintenzionato.
 
-Non è hacking illegale. Non è un audit di conformità. È un tentativo reale di bucare un sistema — in modo controllato e documentato.
+Non è hacking illegale. Non è un audit di conformità. È un tentativo reale di bucare un sistema, in modo controllato e documentato.
 
 ---
 
 ## Perché esiste il Penetration Testing
 
-Le aziende costruiscono sistemi informatici complessi: applicazioni web, reti interne, server, endpoint. Ogni componente può avere vulnerabilità — configurazioni errate, software non aggiornato, logiche applicative difettose, credenziali deboli.
+Le aziende costruiscono sistemi informatici complessi: applicazioni web, reti interne, server, endpoint. Ogni componente può avere vulnerabilità, configurazioni errate, software non aggiornato, logiche applicative difettose, credenziali deboli.
 
 Un **vulnerability scanner** automatico trova molte di queste cose, ma ha un limite: segue regole predefinite. Un essere umano che pensa come un attaccante riesce a trovare vulnerabilità logiche, concatenare più debolezze minori in un attacco critico, capire il contesto aziendale.
 
@@ -83,11 +83,11 @@ Un pentest ti dice "ho sfruttato quella porta, sono entrato nel server, ho letto
 
 Non esiste un percorso unico, ma questi sono i pilastri fondamentali:
 
-1. **Reti e protocolli** — TCP/IP, DNS, HTTP, Active Directory
-2. **Sistemi operativi** — Linux (essenziale) e Windows (importante)
-3. **Programmazione/scripting** — Python e Bash come minimo
-4. **Strumenti offensivi** — Nmap, Metasploit, Burp Suite, etc.
-5. **Metodologie** — OWASP, PTES, OSSTMM
+1. **Reti e protocolli**: TCP/IP, DNS, HTTP, Active Directory
+2. **Sistemi operativi**: Linux (essenziale) e Windows (importante)
+3. **Programmazione/scripting**: Python e Bash come minimo
+4. **Strumenti offensivi**: Nmap, Metasploit, Burp Suite, etc.
+5. **Metodologie**: OWASP, PTES, OSSTMM
 
 Il percorso pratico più efficace è: **CTF** (Capture The Flag) → **TryHackMe** (per principianti) → **HackTheBox** (intermedio) → certificazioni come **eJPT**, poi **OSCP**.
 
@@ -95,6 +95,6 @@ Il percorso pratico più efficace è: **CTF** (Capture The Flag) → **TryHackMe
 
 ## Conclusione
 
-Il penetration testing è una disciplina tecnica, creativa e metodica allo stesso tempo. Non è sufficiente conoscere gli strumenti — bisogna capire come pensano gli attaccanti e come funzionano i sistemi nel profondo.
+Il penetration testing è una disciplina tecnica, creativa e metodica allo stesso tempo. Non è sufficiente conoscere gli strumenti, bisogna capire come pensano gli attaccanti e come funzionano i sistemi nel profondo.
 
-Nei prossimi articoli esploreremo ogni fase del processo, partendo dalla ricognizione e arrivando fino al reporting. Inizia a familiarizzare con Linux se non l'hai già fatto — sarà il tuo ambiente principale.
+Nei prossimi articoli esploreremo ogni fase del processo, partendo dalla ricognizione e arrivando fino al reporting. Inizia a familiarizzare con Linux se non l'hai già fatto, sarà il tuo ambiente principale.

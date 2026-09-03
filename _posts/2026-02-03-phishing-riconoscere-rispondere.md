@@ -9,7 +9,7 @@ excerpt: "Il phishing è ancora il vettore d'attacco numero 1. Come analizzare u
 
 # Phishing: come riconoscerlo davvero (e cosa fare quando ci casca qualcuno)
 
-Il phishing è il vettore di attacco numero uno. Non perché sia sofisticato — spesso non lo è — ma perché **funziona**. E funziona perché prende di mira l'elemento più difficile da patchare in assoluto: le persone.
+Il phishing è il vettore di attacco numero uno. Non perché sia sofisticato (spesso non lo è), ma perché **funziona**. E funziona perché prende di mira l'elemento più difficile da patchare in assoluto: le persone.
 
 Ho smesso di giudicare chi ci casca dopo aver visto alcuni campioni di spear phishing davvero ben costruiti. Email scritte perfettamente in italiano, con logo aziendale corretto, mittente apparentemente legittimo, contesto personalizzato. Se non sai cosa guardare, è difficile distinguerle dal reale.
 
@@ -99,7 +99,7 @@ curl "https://www.virustotal.com/api/v3/domains/evil-domain.com" \
 
 ## Parte 2: Rispondere quando qualcuno ci è cascato
 
-Questo è il momento in cui molti si bloccano. Qualcuno ha cliccato il link o aperto l'allegato — e adesso?
+Questo è il momento in cui molti si bloccano. Qualcuno ha cliccato il link o aperto l'allegato, e adesso?
 
 **Regola numero zero: non farti prendere dal panico e non perdere tempo a rimproverare chi ha cliccato.** Hai una finestra di tempo limitata per contenere il danno.
 
@@ -125,7 +125,7 @@ sudo ip link set wlan0 down
 Disable-NetAdapter -Name "*" -Confirm:$false
 ```
 
-Non spegnere il sistema — potresti perdere evidenze in memoria (RAM). Disconnetti dalla rete, ma lascialo acceso.
+Non spegnere il sistema, potresti perdere evidenze in memoria (RAM). Disconnetti dalla rete, ma lascialo acceso.
 
 ### Step 2: Preserva le evidenze
 
@@ -220,4 +220,4 @@ Per segnalazioni: security@tua-azienda.it
 
 Il phishing non si sconfigge solo con la tecnologia. Si sconfigge con **consapevolezza + processi chiari + risposta rapida**. Gli strumenti aiutano, ma la differenza la fanno le persone che sanno cosa guardare e cosa fare.
 
-Se lavori in un contesto aziendale, considera di introdurre campagne di phishing simulato — non per punire chi clicca, ma per misurare la consapevolezza reale e costruire memoria muscolare nella risposta. 🎣
+Se lavori in un contesto aziendale, considera di introdurre campagne di phishing simulato, non per punire chi clicca, ma per misurare la consapevolezza reale e costruire memoria muscolare nella risposta. 🎣

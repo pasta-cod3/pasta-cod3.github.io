@@ -86,9 +86,9 @@ L'indagine ha coinvolto:
 
 QTFY era un **government-sponsored hacking platform**, il che significa:
 
-1. **Attribution certa** — il governo USA ha prove che il governo cinese era dietro
-2. **Escalation di tensione** — cyberwarfare state-sponsored non è nuovi, ma il sequestro è un atto di **active defense** inusuale
-3. **Precedente** — altri governi potrebbero seguire simili disabilitazioni
+1. **Attribution certa**: il governo USA ha prove che il governo cinese era dietro
+2. **Escalation di tensione**: cyberwarfare state-sponsored non è nuovi, ma il sequestro è un atto di **active defense** inusuale
+3. **Precedente**: altri governi potrebbero seguire simili disabilitazioni
 
 ---
 

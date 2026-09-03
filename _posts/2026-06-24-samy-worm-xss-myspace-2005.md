@@ -7,15 +7,15 @@ tags: [Samy Worm, XSS, MySpace, 2005, Samy Kamkar, worm, storia web]
 excerpt: "20 ottobre 2005: Samy Kamkar rilascia su MySpace un codice JavaScript che si diffonde da profilo a profilo. In meno di 24 ore infetta un milione di account. È il primo worm virale mai visto su una piattaforma social."
 ---
 
-Il 20 ottobre 2005, alle ore 13:00, Samy Kamkar aggiunse al proprio profilo MySpace un innocuo pezzo di JavaScript. In 20 ore aveva infettato oltre un milione di profili. MySpace dovette andare offline per contenerlo. Era il Samy Worm — il primo e, per molti versi, il più elegante worm social della storia.
+Il 20 ottobre 2005, alle ore 13:00, Samy Kamkar aggiunse al proprio profilo MySpace un innocuo pezzo di JavaScript. In 20 ore aveva infettato oltre un milione di profili. MySpace dovette andare offline per contenerlo. Era il Samy Worm, il primo e, per molti versi, il più elegante worm social della storia.
 
 ## Chi era Samy Kamkar
 
-Samy Kamkar aveva 19 anni, viveva in California e, a suo dire, non voleva fare niente di malevolo. Voleva un po' di popolarità su MySpace — era il 2005, MySpace era il social network dominante con 60 milioni di utenti — e trovare nuovi amici. Quello che creò, però, era un'opera di ingegneria JavaScript che i ricercatori di sicurezza studiano ancora oggi.
+Samy Kamkar aveva 19 anni, viveva in California e, a suo dire, non voleva fare niente di malevolo. Voleva un po' di popolarità su MySpace (era il 2005, MySpace era il social network dominante con 60 milioni di utenti), e trovare nuovi amici. Quello che creò, però, era un'opera di ingegneria JavaScript che i ricercatori di sicurezza studiano ancora oggi.
 
 ## MySpace e i "filtri" per la sicurezza
 
-MySpace permetteva agli utenti di personalizzare i propri profili con HTML e CSS. Ovviamente vietava i tag `<script>` per prevenire attacchi XSS — Cross-Site Scripting. Ma il filtraggio era implementato male: controllava la presenza letterale di certi tag e attributi, ma non gestiva tutti i casi edge del linguaggio.
+MySpace permetteva agli utenti di personalizzare i propri profili con HTML e CSS. Ovviamente vietava i tag `<script>` per prevenire attacchi XSS, Cross-Site Scripting. Ma il filtraggio era implementato male: controllava la presenza letterale di certi tag e attributi, ma non gestiva tutti i casi edge del linguaggio.
 
 Kamkar scoprì che:
 - `<div style="background:url('javascript:...')">` funzionava
@@ -58,7 +58,7 @@ Nonostante l'assenza di intento malevolo e il fatto che il worm non rubasse dati
 
 ## L'eredità tecnica
 
-Il Samy Worm fu il punto di svolta che spinse MySpace — e l'intera industria — a prendere sul serio la sicurezza delle applicazioni web. Prima di Samy, XSS era considerato un problema secondario. Dopo, divenne una vulnerabilità critica in ogni framework di sviluppo.
+Il Samy Worm fu il punto di svolta che spinse MySpace (e l'intera industria), a prendere sul serio la sicurezza delle applicazioni web. Prima di Samy, XSS era considerato un problema secondario. Dopo, divenne una vulnerabilità critica in ogni framework di sviluppo.
 
 Kamkar, oggi, è un ricercatore di sicurezza rispettato. Ha scoperto vulnerabilità in Airbnb, Google, PayPal, Tesla. Il suo lavoro sul Rolljam (un dispositivo per aprire auto con telecomando) e sul Combo Breaker (clonazione di lucchetti) è ampiamente citato nei circoli della sicurezza.
 

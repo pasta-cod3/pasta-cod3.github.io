@@ -69,9 +69,9 @@ Law firms sono bersaglio perché:
 ## Difesa
 
 1. **MFA su tutti gli account** (non solo VPN)
-2. **Backup offline** — anche se i file sono cifrati, il backup non è raggiungibile
-3. **Awareness training su voice phishing** — insegna ai dipendenti a verificare gli caller
-4. **Ristretti gli accessi di remote** — non tutti dovrebbero poter usare TeamViewer
+2. **Backup offline**: anche se i file sono cifrati, il backup non è raggiungibile
+3. **Awareness training su voice phishing**: insegna ai dipendenti a verificare gli caller
+4. **Ristretti gli accessi di remote**: non tutti dovrebbero poter usare TeamViewer
 
 ---
 

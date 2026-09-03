@@ -11,7 +11,7 @@ excerpt: "Simmetrica vs asimmetrica, cifrari a blocchi e a flusso, firma digital
 
 ## Introduzione
 
-La crittografia è il fondamento matematico su cui poggia quasi tutta la sicurezza informatica moderna. HTTPS, VPN, autenticazione a due fattori, firme digitali, blockchain — tutto dipende da principi crittografici. Non serve essere matematici per lavorare in cybersecurity. Ma capire le primitive crittografiche fondamentali — e soprattutto i loro limiti — è indispensabile.
+La crittografia è il fondamento matematico su cui poggia quasi tutta la sicurezza informatica moderna. HTTPS, VPN, autenticazione a due fattori, firme digitali, blockchain, tutto dipende da principi crittografici. Non serve essere matematici per lavorare in cybersecurity. Ma capire le primitive crittografiche fondamentali, e soprattutto i loro limiti, è indispensabile.
 
 Molte delle vulnerabilità più gravi nella storia della sicurezza sono state causate non da bug tecnici, ma da un uso scorretto della crittografia: algoritmi deprecati in produzione, chiavi troppo corte, nonce riutilizzati, cifrari a blocchi in modalità ECB, implementazioni home-made. "Don't roll your own crypto" è uno degli assiomi fondamentali del settore.
 
@@ -27,7 +27,7 @@ graph LR
     A --> C["Autenticità e Integrità\nIl messaggio viene davvero\nda chi dice e non è\nstato modificato"]
 ```
 
-Sono problemi diversi che richiedono strumenti diversi. Un messaggio può essere cifrato ma non autenticato — chiunque potrebbe averlo alterato senza che il destinatario se ne accorga. Un messaggio può essere autenticato ma non cifrato — leggibile da tutti, ma con garanzia di provenienza.
+Sono problemi diversi che richiedono strumenti diversi. Un messaggio può essere cifrato ma non autenticato, chiunque potrebbe averlo alterato senza che il destinatario se ne accorga. Un messaggio può essere autenticato ma non cifrato, leggibile da tutti, ma con garanzia di provenienza.
 
 Nella pratica, spesso servono entrambe le proprietà insieme.
 
@@ -45,9 +45,9 @@ graph LR
     D --> E[Testo in chiaro]
 ```
 
-Veloce ed efficiente — ideale per cifrare grandi quantità di dati.
+Veloce ed efficiente, ideale per cifrare grandi quantità di dati.
 
-### AES — Advanced Encryption Standard
+### AES: Advanced Encryption Standard
 
 AES è lo standard di riferimento per la crittografia simmetrica moderna. Adottato dal NIST nel 2001 dopo una competizione pubblica internazionale. Lavora su blocchi di 128 bit con chiavi di 128, 192 o 256 bit.
 
@@ -57,11 +57,11 @@ AES-256 è considerato sicuro contro computer classici e probabilmente anche con
 
 AES da solo cifra un singolo blocco di 128 bit. Per messaggi più lunghi serve una **modalità operativa**.
 
-**ECB (Electronic Codebook)** — la più semplice e la più pericolosa: ogni blocco viene cifrato indipendentemente con la stessa chiave. Il problema: blocchi di testo in chiaro identici producono blocchi cifrati identici. Su dati strutturati (come immagini) il pattern del testo in chiaro rimane visibile nel cifrato. Non usare mai ECB.
+**ECB (Electronic Codebook)**: la più semplice e la più pericolosa: ogni blocco viene cifrato indipendentemente con la stessa chiave. Il problema: blocchi di testo in chiaro identici producono blocchi cifrati identici. Su dati strutturati (come immagini) il pattern del testo in chiaro rimane visibile nel cifrato. Non usare mai ECB.
 
-**CBC (Cipher Block Chaining)** — ogni blocco viene combinato (XOR) con il blocco cifrato precedente prima della cifratura. Rompe i pattern. Richiede un IV (Initialization Vector) casuale e unico per ogni messaggio.
+**CBC (Cipher Block Chaining)**: ogni blocco viene combinato (XOR) con il blocco cifrato precedente prima della cifratura. Rompe i pattern. Richiede un IV (Initialization Vector) casuale e unico per ogni messaggio.
 
-**GCM (Galois/Counter Mode)** — la modalità consigliata oggi. Combina cifratura con autenticazione del messaggio (AEAD). Garantisce sia confidenzialità che integrità in una sola operazione. Usato in TLS 1.3.
+**GCM (Galois/Counter Mode)**: la modalità consigliata oggi. Combina cifratura con autenticazione del messaggio (AEAD). Garantisce sia confidenzialità che integrità in una sola operazione. Usato in TLS 1.3.
 
 | Modalità | Pattern nascosti | Autenticazione | Consigliata |
 |---|---|---|---|
@@ -79,11 +79,11 @@ Se Alice vuole comunicare con Bob usando AES, deve prima condividere la chiave c
 
 ## Crittografia asimmetrica
 
-Nel 1976, Whitfield Diffie e Martin Hellman pubblicarono "New Directions in Cryptography" — un paper che rivoluzionò la crittografia moderna. Proposero la **crittografia a chiave pubblica**.
+Nel 1976, Whitfield Diffie e Martin Hellman pubblicarono "New Directions in Cryptography", un paper che rivoluzionò la crittografia moderna. Proposero la **crittografia a chiave pubblica**.
 
 Ogni entità ha una **coppia di chiavi**:
-- **Chiave pubblica** — distribuita liberamente a chiunque
-- **Chiave privata** — tenuta segreta dal proprietario
+- **Chiave pubblica**: distribuita liberamente a chiunque
+- **Chiave privata**: tenuta segreta dal proprietario
 
 ```mermaid
 graph TD
@@ -142,8 +142,8 @@ graph LR
 
 | Algoritmo | Output | Stato |
 |---|---|---|
-| MD5 | 128 bit | Compromesso — non usare |
-| SHA-1 | 160 bit | Deprecato — non usare |
+| MD5 | 128 bit | Compromesso, non usare |
+| SHA-1 | 160 bit | Deprecato, non usare |
 | SHA-256 | 256 bit | Sicuro |
 | SHA-512 | 512 bit | Sicuro |
 | SHA-3 | variabile | Sicuro, architettura diversa |
@@ -151,13 +151,13 @@ graph LR
 
 ### Usi pratici degli hash
 
-**Integrità dei file:** scarichi un file e verifichi che il suo SHA-256 corrisponda a quello pubblicato dal sito ufficiale — nessun byte è stato modificato o corrotto.
+**Integrità dei file:** scarichi un file e verifichi che il suo SHA-256 corrisponda a quello pubblicato dal sito ufficiale, nessun byte è stato modificato o corrotto.
 
-**Password storage:** non si memorizzano mai le password in chiaro — si memorizza il loro hash. Quando l'utente effettua il login, si calcola l'hash della password inserita e si confronta con quello memorizzato.
+**Password storage:** non si memorizzano mai le password in chiaro, si memorizza il loro hash. Quando l'utente effettua il login, si calcola l'hash della password inserita e si confronta con quello memorizzato.
 
-**Firme digitali:** si firma l'hash del documento, non il documento intero — molto più efficiente.
+**Firme digitali:** si firma l'hash del documento, non il documento intero, molto più efficiente.
 
-**Chain of trust:** in blockchain ogni blocco contiene l'hash del blocco precedente — modificare un blocco invalida tutta la catena successiva.
+**Chain of trust:** in blockchain ogni blocco contiene l'hash del blocco precedente, modificare un blocco invalida tutta la catena successiva.
 
 ---
 
@@ -172,7 +172,7 @@ graph LR
     C --> D["Tag di autenticazione\n(il messaggio non è stato\nmodificato e viene da\nchi ha la chiave)"]
 ```
 
-Un HMAC garantisce che il messaggio non sia stato alterato e che provenga da qualcuno che conosce la chiave. Non cifra il contenuto — lo autentica.
+Un HMAC garantisce che il messaggio non sia stato alterato e che provenga da qualcuno che conosce la chiave. Non cifra il contenuto, lo autentica.
 
 ---
 
@@ -193,7 +193,7 @@ sequenceDiagram
     Note over E: Vede 8 e 19 ma non può calcolare 2 senza risolvere il logaritmo discreto
 ```
 
-Questo meccanismo è alla base dello scambio di chiavi in TLS. Con DH effimero (ECDHE), viene generata una nuova coppia di chiavi per ogni sessione — garantendo la **Perfect Forward Secrecy**: anche se un giorno la chiave privata del server venisse compromessa, le sessioni passate non sarebbero decifrabili.
+Questo meccanismo è alla base dello scambio di chiavi in TLS. Con DH effimero (ECDHE), viene generata una nuova coppia di chiavi per ogni sessione, garantendo la **Perfect Forward Secrecy**: anche se un giorno la chiave privata del server venisse compromessa, le sessioni passate non sarebbero decifrabili.
 
 ---
 
@@ -216,13 +216,13 @@ La combinazione è precisa: l'asimmetrica per lo scambio sicuro della chiave di 
 
 ## Attacchi crittografici comuni
 
-**Brute force:** prova tutte le possibili chiavi. Impraticabile con chiavi moderne — AES-256 richiederebbe più energia dell'intero universo osservabile per essere forzata.
+**Brute force:** prova tutte le possibili chiavi. Impraticabile con chiavi moderne, AES-256 richiederebbe più energia dell'intero universo osservabile per essere forzata.
 
 **Dictionary attack:** prova le parole di un dizionario come chiavi o password. Efficace contro password deboli o hash non salati.
 
 **Birthday attack:** sfrutta la probabilità statistica di trovare collisioni in una funzione di hash. Ragione per cui MD5 e SHA-1 sono considerati insicuri.
 
-**Padding oracle attack:** sfrutta le risposte di errore di un sistema per dedurre informazioni sul testo in chiaro — reso possibile dalla modalità CBC senza autenticazione adeguata.
+**Padding oracle attack:** sfrutta le risposte di errore di un sistema per dedurre informazioni sul testo in chiaro, reso possibile dalla modalità CBC senza autenticazione adeguata.
 
 **Downgrade attack:** forza il client e il server a usare una versione precedente e meno sicura del protocollo. POODLE (2014) e DROWN (2016) sono esempi famosi contro SSL/TLS.
 
@@ -230,6 +230,6 @@ La combinazione è precisa: l'asimmetrica per lo scambio sicuro della chiave di 
 
 ## Conclusione
 
-La crittografia è lo strumento che trasforma internet — una rete intrinsecamente insicura — in un mezzo su cui è possibile fare operazioni bancarie, comunicare privatamente, firmare contratti. Capire le primitive (simmetrica, asimmetrica, hash, HMAC, DH) e come si combinano è il prerequisito per capire perché certi protocolli sono sicuri, e perché altri non lo sono.
+La crittografia è lo strumento che trasforma internet (una rete intrinsecamente insicura), in un mezzo su cui è possibile fare operazioni bancarie, comunicare privatamente, firmare contratti. Capire le primitive (simmetrica, asimmetrica, hash, HMAC, DH) e come si combinano è il prerequisito per capire perché certi protocolli sono sicuri, e perché altri non lo sono.
 
 La regola d'oro rimane: non inventare i tuoi algoritmi crittografici. Usa primitive consolidate, implementazioni auditate, e protocolli standard. La crittografia non è un campo in cui il "sembra sicuro" è sufficiente.

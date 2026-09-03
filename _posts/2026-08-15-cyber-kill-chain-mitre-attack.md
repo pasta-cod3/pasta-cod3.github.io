@@ -4,16 +4,16 @@ title: "Cyber Kill Chain e MITRE ATT&CK: le fasi di un attacco informatico"
 date: 2026-08-15
 cat: fond
 tags: ["cyber kill chain", "MITRE ATT&CK", "TTPs", "metodologia", "fondamentali"]
-excerpt: "Ogni attacco informatico segue delle fasi riconoscibili. Cyber Kill Chain e MITRE ATT&CK sono i due framework che le descrivono — e che ogni difensore usa per capire dove intervenire."
+excerpt: "Ogni attacco informatico segue delle fasi riconoscibili. Cyber Kill Chain e MITRE ATT&CK sono i due framework che le descrivono, e che ogni difensore usa per capire dove intervenire."
 ---
 
 # Cyber Kill Chain e MITRE ATT&CK: le fasi di un attacco informatico
 
 ## Introduzione
 
-Quando leggi il report di una breach, o segui un corso di penetration testing, torna sempre lo stesso schema: ricognizione, accesso iniziale, movimento laterale, esfiltrazione. Non è un caso — gli attacchi informatici, per quanto diversi nei dettagli tecnici, seguono fasi ricorrenti. Capire queste fasi è ciò che permette a un difensore di ragionare in anticipo: non "cosa sta facendo l'attaccante ora" ma "cosa farà dopo, e dove posso fermarlo prima che arrivi lì".
+Quando leggi il report di una breach, o segui un corso di penetration testing, torna sempre lo stesso schema: ricognizione, accesso iniziale, movimento laterale, esfiltrazione. Non è un caso, gli attacchi informatici, per quanto diversi nei dettagli tecnici, seguono fasi ricorrenti. Capire queste fasi è ciò che permette a un difensore di ragionare in anticipo: non "cosa sta facendo l'attaccante ora" ma "cosa farà dopo, e dove posso fermarlo prima che arrivi lì".
 
-Due framework dominano questo modo di pensare: la **Cyber Kill Chain** di Lockheed Martin (2011) e **MITRE ATT&CK** (dal 2013 in poi). Non sono in competizione — rispondono a domande diverse, e i team di sicurezza maturi li usano insieme.
+Due framework dominano questo modo di pensare: la **Cyber Kill Chain** di Lockheed Martin (2011) e **MITRE ATT&CK** (dal 2013 in poi). Non sono in competizione, rispondono a domande diverse, e i team di sicurezza maturi li usano insieme.
 
 ---
 
@@ -31,19 +31,19 @@ graph LR
     F --> G[7. Actions on Objectives]
 ```
 
-**1. Reconnaissance** — l'attaccante raccoglie informazioni sul target: dipendenti su LinkedIn, tecnologie usate, indirizzi email, infrastruttura esposta. Spesso passa per OSINT puro, senza toccare mai il target.
+**1. Reconnaissance**: l'attaccante raccoglie informazioni sul target: dipendenti su LinkedIn, tecnologie usate, indirizzi email, infrastruttura esposta. Spesso passa per OSINT puro, senza toccare mai il target.
 
-**2. Weaponization** — l'attaccante prepara l'arma: un documento Office con macro malevola, un exploit per una vulnerabilità nota, un eseguibile confezionato per bypassare l'antivirus.
+**2. Weaponization**: l'attaccante prepara l'arma: un documento Office con macro malevola, un exploit per una vulnerabilità nota, un eseguibile confezionato per bypassare l'antivirus.
 
-**3. Delivery** — l'arma raggiunge il target: email di phishing, chiavetta USB abbandonata, exploit su un servizio esposto a internet.
+**3. Delivery**: l'arma raggiunge il target: email di phishing, chiavetta USB abbandonata, exploit su un servizio esposto a internet.
 
-**4. Exploitation** — il codice malevolo viene eseguito: l'utente apre l'allegato e abilita le macro, oppure l'exploit sfrutta una vulnerabilità senza interazione umana.
+**4. Exploitation**: il codice malevolo viene eseguito: l'utente apre l'allegato e abilita le macro, oppure l'exploit sfrutta una vulnerabilità senza interazione umana.
 
-**5. Installation** — l'attaccante stabilisce persistenza: una backdoor, un servizio che parte al boot, un task pianificato — per non dover ripetere l'exploitation ad ogni riavvio.
+**5. Installation** (l'attaccante stabilisce persistenza: una backdoor, un servizio che parte al boot, un task pianificato), per non dover ripetere l'exploitation ad ogni riavvio.
 
-**6. Command & Control (C2)** — il malware stabilisce un canale di comunicazione con l'infrastruttura dell'attaccante, per ricevere comandi ed esfiltrare dati.
+**6. Command & Control (C2)**: il malware stabilisce un canale di comunicazione con l'infrastruttura dell'attaccante, per ricevere comandi ed esfiltrare dati.
 
-**7. Actions on Objectives** — l'obiettivo finale: furto di dati, cifratura per ransomware, sabotaggio, movimento laterale verso altri sistemi.
+**7. Actions on Objectives**: l'obiettivo finale: furto di dati, cifratura per ransomware, sabotaggio, movimento laterale verso altri sistemi.
 
 ### Il principio difensivo: rompere la catena
 
@@ -58,7 +58,7 @@ graph TD
     B -->|Actions on Objectives| H["Difesa: DLP, backup,\nsegmentazione — ultima linea"]
 ```
 
-Più a monte riesci a fermare l'attacco, meno danno subisci. Fermarlo in fase di reconnaissance è ideale ma raro da rilevare; fermarlo in "actions on objectives" significa che hai già perso — nella migliore delle ipotesi limiti il danno con backup e segmentazione.
+Più a monte riesci a fermare l'attacco, meno danno subisci. Fermarlo in fase di reconnaissance è ideale ma raro da rilevare; fermarlo in "actions on objectives" significa che hai già perso, nella migliore delle ipotesi limiti il danno con backup e segmentazione.
 
 ### Limiti della Kill Chain
 
@@ -68,7 +68,7 @@ Il modello, per quanto influente, ha dei limiti noti: è stato pensato per il ma
 
 ## MITRE ATT&CK
 
-ATT&CK sta per **Adversarial Tactics, Techniques, and Common Knowledge**. Non è un modello lineare a 7 fasi come la Kill Chain — è una **matrice**, una base di conoscenza pubblica e in continuo aggiornamento delle tecniche reali osservate usate dagli attaccanti.
+ATT&CK sta per **Adversarial Tactics, Techniques, and Common Knowledge**. Non è un modello lineare a 7 fasi come la Kill Chain: è una **matrice**, una base di conoscenza pubblica e in continuo aggiornamento delle tecniche reali osservate usate dagli attaccanti.
 
 ```mermaid
 graph TD
@@ -101,7 +101,7 @@ A differenza della Kill Chain, ATT&CK non impone un ordine rigido: un attaccante
 
 ### Un esempio concreto: T1566 Phishing
 
-Ogni tecnica in ATT&CK ha un ID univoco. **T1566 (Phishing)** appartiene alla tattica *Initial Access* e ha sotto-tecniche specifiche: T1566.001 (allegato malevolo), T1566.002 (link malevolo), T1566.003 (phishing via servizi terzi). Ogni sotto-tecnica documenta esempi reali di gruppi APT che l'hanno usata, e le mitigazioni/rilevamenti associati — rendendo ATT&CK non solo un modello teorico ma un catalogo operativo.
+Ogni tecnica in ATT&CK ha un ID univoco. **T1566 (Phishing)** appartiene alla tattica *Initial Access* e ha sotto-tecniche specifiche: T1566.001 (allegato malevolo), T1566.002 (link malevolo), T1566.003 (phishing via servizi terzi). Ogni sotto-tecnica documenta esempi reali di gruppi APT che l'hanno usata, e le mitigazioni/rilevamenti associati, rendendo ATT&CK non solo un modello teorico ma un catalogo operativo.
 
 ```mermaid
 sequenceDiagram
@@ -121,7 +121,7 @@ sequenceDiagram
 
 **Detection engineering:** i SOC costruiscono regole SIEM/EDR mappate esplicitamente su tecniche ATT&CK, per sapere con certezza quale copertura difensiva hanno e dove sono i buchi.
 
-**Red team / purple team:** un red team può pianificare un'esercitazione emulando le tecniche di un gruppo APT specifico (es. "emuliamo APT29"), e il blue team verifica quali tecniche ha rilevato — un esercizio *purple team* per definizione.
+**Red team / purple team:** un red team può pianificare un'esercitazione emulando le tecniche di un gruppo APT specifico (es. "emuliamo APT29"), e il blue team verifica quali tecniche ha rilevato, un esercizio *purple team* per definizione.
 
 **ATT&CK Navigator:** uno strumento visuale gratuito che permette di colorare la matrice in base alla copertura difensiva, alle tecniche osservate in un incidente, o alle tecniche usate da un attore specifico.
 
@@ -143,6 +143,6 @@ Nella pratica, i due si integrano bene: la Kill Chain dà la narrativa di alto l
 
 ## Conclusione
 
-Capire le fasi di un attacco non è un esercizio accademico — è ciò che trasforma la sicurezza da reattiva a proattiva. Un difensore che pensa in termini di Kill Chain si chiede sempre "in quale fase posso intercettare questo?" invece di aspettare l'ultima fase (il danno) per accorgersene. E un difensore che conosce ATT&CK non deve inventare da zero le proprie regole di detection: può partire dal catalogo di migliaia di tecniche reali già documentate, osservate, e mappate a mitigazioni concrete.
+Capire le fasi di un attacco non è un esercizio accademico, è ciò che trasforma la sicurezza da reattiva a proattiva. Un difensore che pensa in termini di Kill Chain si chiede sempre "in quale fase posso intercettare questo?" invece di aspettare l'ultima fase (il danno) per accorgersene. E un difensore che conosce ATT&CK non deve inventare da zero le proprie regole di detection: può partire dal catalogo di migliaia di tecniche reali già documentate, osservate, e mappate a mitigazioni concrete.
 
 Che tu stia costruendo un SOC, pianificando un red team, o semplicemente cercando di capire un report di incident response, questi due framework sono il vocabolario comune con cui l'intero settore descrive gli attacchi.

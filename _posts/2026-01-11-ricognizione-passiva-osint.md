@@ -11,14 +11,14 @@ excerpt: "Prima di toccare il target, un buon pentester raccoglie il più possib
 
 ## Introduzione
 
-Prima di toccare qualsiasi sistema, un buon penetration tester passa ore — a volte giorni — a **raccogliere informazioni sul target**. Questa fase si chiama **ricognizione** ed è il fondamento di ogni attacco efficace.
+Prima di toccare qualsiasi sistema, un buon penetration tester passa ore (a volte giorni) a **raccogliere informazioni sul target**. Questa fase si chiama **ricognizione** ed è il fondamento di ogni attacco efficace.
 
 La ricognizione si divide in due tipi:
 
 - **Passiva:** raccogli informazioni senza interagire direttamente con il target. Il target non può accorgersi di te.
 - **Attiva:** interagisci direttamente (scansioni di porte, ping, ecc.). Lasci tracce nei log.
 
-In questo articolo ci occupiamo della **ricognizione passiva**, che si basa principalmente su **OSINT** — Open Source Intelligence: informazioni pubblicamente disponibili.
+In questo articolo ci occupiamo della **ricognizione passiva**, che si basa principalmente su **OSINT**: Open Source Intelligence: informazioni pubblicamente disponibili.
 
 ---
 
@@ -68,12 +68,12 @@ dig AXFR @ns1.target.com target.com
 
 Senza mai toccare i server del target, puoi trovare sottodomini usando:
 
-- **crt.sh** — cerca nei certificati SSL pubblici
+- **crt.sh**: cerca nei certificati SSL pubblici
   ```
   https://crt.sh/?q=%.target.com
   ```
-- **DNSDumpster** — `https://dnsdumpster.com`
-- **Shodan** — motore di ricerca per dispositivi connessi a internet
+- **DNSDumpster**: `https://dnsdumpster.com`
+- **Shodan**: motore di ricerca per dispositivi connessi a internet
   ```
   hostname:target.com
   ```
@@ -100,7 +100,7 @@ site:target.com "warning:" OR "error:" OR "exception:"
 
 ### 5. Shodan
 
-Shodan indicizza dispositivi e servizi esposti su internet. Puoi trovare server, router, telecamere, sistemi SCADA — tutto quello che ha una porta aperta visibile da internet.
+Shodan indicizza dispositivi e servizi esposti su internet. Puoi trovare server, router, telecamere, sistemi SCADA, tutto quello che ha una porta aperta visibile da internet.
 
 ```
 # Cerca per organizzazione
@@ -118,9 +118,9 @@ port:22 org:"Target Company"
 Le email dei dipendenti sono preziose per attacchi di phishing o per tentare accessi su servizi esposti.
 
 Strumenti utili:
-- **Hunter.io** — trova pattern email di un'azienda
-- **LinkedIn** — nomi, ruoli, struttura organizzativa
-- **theHarvester** — tool da terminale che aggrega più fonti
+- **Hunter.io**: trova pattern email di un'azienda
+- **LinkedIn**: nomi, ruoli, struttura organizzativa
+- **theHarvester**: tool da terminale che aggrega più fonti
 
 ```bash
 theHarvester -d target.com -b google,linkedin,bing -l 200
@@ -181,6 +181,6 @@ CMS: WordPress 6.4.2
 
 ## Conclusione
 
-La ricognizione passiva è la fase più sottovalutata dai principianti. Tutti vogliono subito aprire Metasploit — ma un professionista sa che il 60% del lavoro è capire il target prima di attaccarlo.
+La ricognizione passiva è la fase più sottovalutata dai principianti. Tutti vogliono subito aprire Metasploit, ma un professionista sa che il 60% del lavoro è capire il target prima di attaccarlo.
 
 Più informazioni hai, più precisi e silenziosi saranno i tuoi attacchi successivi. Nel prossimo articolo passiamo alla **ricognizione attiva** con Nmap.

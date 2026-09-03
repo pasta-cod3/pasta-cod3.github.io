@@ -4,14 +4,14 @@ title: "Come funzionano le password: hashing, salting e perché il testo in chia
 date: 2026-03-15
 cat: fond
 tags: ["password", "hashing", "salting", "bcrypt", "PBKDF2", "sicurezza"]
-excerpt: "Le password non vengono memorizzate in chiaro — o non dovrebbero. Come funziona l'hashing, cos'è il salting, perché MD5 è obsoleto e cosa usare nel 2026."
+excerpt: "Le password non vengono memorizzate in chiaro, o non dovrebbero. Come funziona l'hashing, cos'è il salting, perché MD5 è obsoleto e cosa usare nel 2026."
 ---
 
 # Come funzionano le password: hashing, salting e perché le password sono il punto debole
 
 ## Introduzione
 
-Le password sono il meccanismo di autenticazione più usato al mondo — e uno dei più vulnerabili. Non perché l'idea sia sbagliata, ma perché la loro implementazione è spesso difettosa, e perché il comportamento umano è prevedibile. Capire come le password vengono memorizzate, attaccate e difese è fondamentale sia per chi costruisce sistemi sicuri sia per chi li attacca.
+Le password sono il meccanismo di autenticazione più usato al mondo, e uno dei più vulnerabili. Non perché l'idea sia sbagliata, ma perché la loro implementazione è spesso difettosa, e perché il comportamento umano è prevedibile. Capire come le password vengono memorizzate, attaccate e difese è fondamentale sia per chi costruisce sistemi sicuri sia per chi li attacca.
 
 ---
 
@@ -29,13 +29,13 @@ utente: mario.rossi
 password: Calcio2024!
 ```
 
-Se il database viene compromesso — e prima o poi accade — l'attaccante ha immediatamente accesso a tutte le password di tutti gli utenti. E poiché le persone riutilizzano le password su più siti, un singolo breach può compromettere account bancari, email, social.
+Se il database viene compromesso (e prima o poi accade), l'attaccante ha immediatamente accesso a tutte le password di tutti gli utenti. E poiché le persone riutilizzano le password su più siti, un singolo breach può compromettere account bancari, email, social.
 
 Sony nel 2011 memorizzava le password dei propri utenti in chiaro. LulzSec pubblicò il database e lo annunciò con un comunicato sarcastico.
 
 ### Cifrate (encryption)
 
-Un miglioramento: cifrare le password con AES prima di memorizzarle. Sembra sicuro — ma ha un problema fondamentale: **se l'attaccante ruba il database, probabilmente ruba anche la chiave di cifratura**. E con la chiave, può decifrare tutte le password.
+Un miglioramento: cifrare le password con AES prima di memorizzarle. Sembra sicuro, ma ha un problema fondamentale: **se l'attaccante ruba il database, probabilmente ruba anche la chiave di cifratura**. E con la chiave, può decifrare tutte le password.
 
 La cifratura è reversibile per design. Per le password, non vogliamo reversibilità.
 
@@ -43,7 +43,7 @@ La cifratura è reversibile per design. Per le password, non vogliamo reversibil
 
 ## Hashing delle password
 
-La soluzione corretta: usare una **funzione di hash crittografica**. L'hash è irreversibile — dato l'hash, non si può risalire alla password originale.
+La soluzione corretta: usare una **funzione di hash crittografica**. L'hash è irreversibile, dato l'hash, non si può risalire alla password originale.
 
 ```mermaid
 graph LR
@@ -57,13 +57,13 @@ graph LR
     H -->|Diverso| J["Login NEGATO"]
 ```
 
-Il server non sa mai la password originale — conosce solo il suo hash. Quando l'utente effettua il login, calcola l'hash della password inserita e confronta con quello memorizzato.
+Il server non sa mai la password originale, conosce solo il suo hash. Quando l'utente effettua il login, calcola l'hash della password inserita e confronta con quello memorizzato.
 
 ---
 
 ## Il problema degli hash senza sale: Rainbow Tables
 
-Se tutti gli utenti con la password "password123" hanno lo stesso hash, un attaccante può costruire una **rainbow table** — una tabella precalcolata che mappa hash comuni alle password originali.
+Se tutti gli utenti con la password "password123" hanno lo stesso hash, un attaccante può costruire una **rainbow table**: una tabella precalcolata che mappa hash comuni alle password originali.
 
 ```mermaid
 graph LR
@@ -75,7 +75,7 @@ graph LR
     G --> H["Trovato!\nPassword: Calcio2024!"]
 ```
 
-Con hardware moderno e tabelle da terabyte, è possibile craccare milioni di hash MD5 o SHA-1 in pochi secondi. Il problema non è l'algoritmo in sé — è che due utenti con la stessa password hanno lo stesso hash.
+Con hardware moderno e tabelle da terabyte, è possibile craccare milioni di hash MD5 o SHA-1 in pochi secondi. Il problema non è l'algoritmo in sé, è che due utenti con la stessa password hanno lo stesso hash.
 
 ---
 
@@ -92,18 +92,18 @@ graph TD
     D --> F
 ```
 
-Il salt viene memorizzato in chiaro nel database — non è un segreto. Il suo scopo non è nascondersi, ma rendere ogni hash unico anche se due utenti hanno la stessa password.
+Il salt viene memorizzato in chiaro nel database, non è un segreto. Il suo scopo non è nascondersi, ma rendere ogni hash unico anche se due utenti hanno la stessa password.
 
 Con il salting:
 - Due utenti con la stessa password hanno hash completamente diversi
-- Le rainbow table diventano inutili — bisognerebbe precalcolare una tabella separata per ogni possibile salt
+- Le rainbow table diventano inutili: bisognerebbe precalcolare una tabella separata per ogni possibile salt
 - Un attaccante che ruba il database deve craccare ogni hash individualmente
 
 ---
 
 ## Algoritmi moderni per le password
 
-Gli hash generici (MD5, SHA-256) sono progettati per essere **veloci** — ottimi per verificare l'integrità di un file, pessimi per le password. La velocità è il nemico: una GPU moderna può calcolare miliardi di hash SHA-256 al secondo, rendendo il brute force praticabile.
+Gli hash generici (MD5, SHA-256) sono progettati per essere **veloci**: ottimi per verificare l'integrità di un file, pessimi per le password. La velocità è il nemico: una GPU moderna può calcolare miliardi di hash SHA-256 al secondo, rendendo il brute force praticabile.
 
 Gli algoritmi dedicati alle password sono progettati per essere **deliberatamente lenti** e per richiedere molta memoria.
 
@@ -118,7 +118,7 @@ $2b$12$salt_22_caratteri_hash_31_caratteri
  versione algoritmo
 ```
 
-Con work factor 12, bcrypt impiega circa 300ms per hash su hardware moderno — abbastanza lento per rendere il brute force impraticabile, abbastanza veloce per non disturbare gli utenti legittimi.
+Con work factor 12, bcrypt impiega circa 300ms per hash su hardware moderno, abbastanza lento per rendere il brute force impraticabile, abbastanza veloce per non disturbare gli utenti legittimi.
 
 Aumentando il work factor di 1, raddoppia il tempo di calcolo. Il parametro può essere aumentato nel tempo man mano che l'hardware diventa più veloce.
 
@@ -130,9 +130,9 @@ Vincitore del Password Hashing Competition nel 2015, Argon2 è l'algoritmo racco
 |---|---|
 | Argon2d | Resistenza a GPU, per applicazioni non a rischio side-channel |
 | Argon2i | Resistenza a side-channel attack |
-| Argon2id | Combinazione delle due — raccomandato per password |
+| Argon2id | Combinazione delle due, raccomandato per password |
 
-Argon2 ha tre parametri configurabili: tempo (iterazioni), memoria (quanto RAM occupare), parallelismo (quanti thread usare). Occupare molta memoria è la chiave per resistere agli attacchi con GPU e ASIC — che hanno molti core ma memoria limitata per core.
+Argon2 ha tre parametri configurabili: tempo (iterazioni), memoria (quanto RAM occupare), parallelismo (quanti thread usare). Occupare molta memoria è la chiave per resistere agli attacchi con GPU e ASIC, che hanno molti core ma memoria limitata per core.
 
 ### scrypt e PBKDF2
 
@@ -142,11 +142,11 @@ Argon2 ha tre parametri configurabili: tempo (iterazioni), memoria (quanto RAM o
 
 | Algoritmo | Velocità | Memory-hard | Raccomandato |
 |---|---|---|---|
-| MD5 | Velocissimo | No | No — mai |
+| MD5 | Velocissimo | No | No, mai |
 | SHA-256 | Veloce | No | No per password |
-| bcrypt | Lento (configurabile) | No | Sì — buona scelta |
+| bcrypt | Lento (configurabile) | No | Sì, buona scelta |
 | scrypt | Lento | Sì | Sì |
-| Argon2id | Lento | Sì | Sì — prima scelta |
+| Argon2id | Lento | Sì | Sì, prima scelta |
 | PBKDF2 | Lento (configurabile) | No | Solo se obbligatorio da normativa |
 
 ---
@@ -161,7 +161,7 @@ Prova sistematicamente tutte le possibili combinazioni. Con password brevi e sen
 a, b, c, ..., z, aa, ab, ..., password123, ...
 ```
 
-La lunghezza è la difesa principale contro il brute force. Una password di 8 caratteri alfanumerici ha ~218 miliardi di combinazioni — crackata in ore con hardware moderno. Una di 16 caratteri ha ~47 milioni di miliardi di miliardi di combinazioni.
+La lunghezza è la difesa principale contro il brute force. Una password di 8 caratteri alfanumerici ha ~218 miliardi di combinazioni, crackata in ore con hardware moderno. Una di 16 caratteri ha ~47 milioni di miliardi di miliardi di combinazioni.
 
 ### Dictionary attack
 
@@ -193,7 +193,7 @@ Prova "Password123!" su 10.000 account diversi
 
 ### Phishing
 
-Tecnicamente non è un attacco alle password — è un attacco alle persone. Una pagina di login falsa, convincente, convince l'utente a inserire le proprie credenziali. Bypassa completamente qualsiasi hashing.
+Tecnicamente non è un attacco alle password, è un attacco alle persone. Una pagina di login falsa, convincente, convince l'utente a inserire le proprie credenziali. Bypassa completamente qualsiasi hashing.
 
 ---
 
@@ -216,9 +216,9 @@ Strumenti raccomandati: Bitwarden (open source, gratuito), 1Password, KeePassXC 
 Anche se la password viene compromessa, l'attaccante non può accedere senza il secondo fattore. MFA riduce del 99,9% il rischio di account compromise secondo i dati Microsoft.
 
 Fattori in ordine di sicurezza crescente:
-1. SMS OTP — meglio di niente, vulnerabile a SIM swapping
-2. App authenticator (TOTP) — Authy, Google Authenticator
-3. Passkey/FIDO2 — resistente al phishing, il futuro dell'autenticazione
+1. SMS OTP, meglio di niente, vulnerabile a SIM swapping
+2. App authenticator (TOTP), Authy, Google Authenticator
+3. Passkey/FIDO2, resistente al phishing, il futuro dell'autenticazione
 
 ---
 
@@ -240,7 +240,7 @@ graph TD
 
 **Rate limiting e account lockout:** limita i tentativi di login per IP e per account. Dopo N tentativi falliti, introduce un delay esponenziale o blocca temporaneamente l'account.
 
-**Have I Been Pwned API:** al momento della registrazione o del cambio password, verifica se la password scelta compare in database di breach noti. HIBP offre una API gratuita che usa k-anonymity — non invia la password al server, solo i primi 5 caratteri dell'hash SHA-1.
+**Have I Been Pwned API:** al momento della registrazione o del cambio password, verifica se la password scelta compare in database di breach noti. HIBP offre una API gratuita che usa k-anonymity, non invia la password al server, solo i primi 5 caratteri dell'hash SHA-1.
 
 **Rehashing progressivo:** se un sistema usa bcrypt con work factor 10 e vuoi aggiornare a 12, non puoi ricalcolare tutti gli hash senza conoscere le password originali. La soluzione: al prossimo login di ogni utente, ricalcola l'hash con il nuovo parametro e aggiorna il database.
 
@@ -269,7 +269,7 @@ sequenceDiagram
 
 Vantaggi delle Passkey:
 - La chiave privata non lascia mai il dispositivo
-- Resistenti al phishing — la firma è vincolata al dominio
+- Resistenti al phishing: la firma è vincolata al dominio
 - Nessuna password da ricordare, rubare o violare
 - Nessun database di password da proteggere
 
@@ -281,4 +281,4 @@ Google, Apple, Microsoft e la maggior parte dei servizi principali supportano gi
 
 Le password sono deboli non per un difetto concettuale, ma per come vengono usate (riutilizzate, brevi, prevedibili) e come vengono memorizzate (in chiaro, con MD5, senza salt). La combinazione di algoritmi appropriati (Argon2id, bcrypt), salt casuali, MFA e password manager risolve la maggior parte dei problemi pratici.
 
-Il futuro è senza password — le Passkey offrono sicurezza superiore con usabilità migliore. Ma nel breve termine, comprendere il meccanismo dell'hashing è essenziale sia per difendere i sistemi che si costruisce, sia per capire perché i breach di password continuano a succedere nonostante decenni di consapevolezza del problema.
+Il futuro è senza password, le Passkey offrono sicurezza superiore con usabilità migliore. Ma nel breve termine, comprendere il meccanismo dell'hashing è essenziale sia per difendere i sistemi che si costruisce, sia per capire perché i breach di password continuano a succedere nonostante decenni di consapevolezza del problema.

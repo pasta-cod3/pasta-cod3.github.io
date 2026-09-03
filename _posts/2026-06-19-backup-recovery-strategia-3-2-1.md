@@ -25,7 +25,7 @@ Il ransomware moderno (Conti, LockBit, Black Basta) cifra non solo i file locali
 
 **Soluzioni:**
 - **Backup offline** (air-gapped): disco scollegato fisicamente quando non in uso
-- **Backup immutabile cloud**: S3 Object Lock, Azure Immutable Storage — i file non possono essere modificati o eliminati per un periodo definito
+- **Backup immutabile cloud**: S3 Object Lock, Azure Immutable Storage, i file non possono essere modificati o eliminati per un periodo definito
 - **Regola 3-2-1 con offsite**: anche se l'intera sede viene cifrata, il backup offsite è intatto
 
 ## RPO e RTO: le metriche del recovery

@@ -13,7 +13,7 @@ excerpt: "Un report di pentest non è solo un elenco di bug. È un documento str
 
 Hai completato il pentest: hai trovato vulnerabilità, le hai sfruttate, sei arrivato dove volevi arrivare. Ora arriva la parte che molti principianti sottovalutano ma che è **il vero prodotto finale** del tuo lavoro: il **report**.
 
-Un pentest senza un buon report vale poco. Il cliente non era presente durante il tuo lavoro. Tutto quello che ha trovato valore, tutto quello che devi raccomandare, tutto quello che deve essere corretto — vive nel documento che consegni.
+Un pentest senza un buon report vale poco. Il cliente non era presente durante il tuo lavoro. Tutto quello che ha trovato valore, tutto quello che devi raccomandare, tutto quello che deve essere corretto, vive nel documento che consegni.
 
 ---
 
@@ -82,7 +82,7 @@ Esempio di paragrafo executive summary:
 
 ---
 
-## Sezione 3: Vulnerabilità — il cuore del report
+## Sezione 3: Vulnerabilità, il cuore del report
 
 Ogni vulnerabilità trovata ha la sua scheda. Struttura standard:
 
@@ -176,7 +176,7 @@ Rinomina le immagini in modo descrittivo: `sqli-admin-bypass.png`, non `screensh
 
 - Scrivi in modo **chiaro e diretto**
 - Evita gergo tecnico nell'Executive Summary
-- Non essere condescendente — il tuo lavoro è aiutare, non far sentire il cliente in colpa
+- Non essere condescendente: il tuo lavoro è aiutare, non far sentire il cliente in colpa
 - Sii specifico: "l'endpoint `/api/user?id=X` è vulnerabile a IDOR" è meglio di "ci sono problemi di autenticazione"
 - Ogni finding deve avere una remediation **concreta e attuabile**
 
@@ -184,11 +184,11 @@ Rinomina le immagini in modo descrittivo: `sqli-admin-bypass.png`, non `screensh
 
 ## Template e strumenti
 
-- **Dradis** — piattaforma open source per report di pentest collaborativi
-- **PlexTrac** — piattaforma commerciale
-- **Ghostwriter** — open source, molto usato
-- **LaTeX / Pandoc** — per chi vuole controllo totale sul formato
-- **Word/Google Docs** — semplice, efficace per iniziare
+- **Dradis**: piattaforma open source per report di pentest collaborativi
+- **PlexTrac**: piattaforma commerciale
+- **Ghostwriter**: open source, molto usato
+- **LaTeX / Pandoc**: per chi vuole controllo totale sul formato
+- **Word/Google Docs**: semplice, efficace per iniziare
 
 ---
 
@@ -196,4 +196,4 @@ Rinomina le immagini in modo descrittivo: `sqli-admin-bypass.png`, non `screensh
 
 Il report è il tuo biglietto da visita professionale. Un pentest da 10.000€ con un report mediocre è un pentest mediocre agli occhi del cliente. Un pentest con report eccellente costruisce reputazione e fiducia.
 
-Comincia a costruire **template riutilizzabili** fin dal primo report. Ogni engagement aggiunge vulnerabilità alla tua libreria personale — con il tempo avrai descrizioni, impatti e remediation pronte per le tipologie più comuni.
+Comincia a costruire **template riutilizzabili** fin dal primo report. Ogni engagement aggiunge vulnerabilità alla tua libreria personale, con il tempo avrai descrizioni, impatti e remediation pronte per le tipologie più comuni.

@@ -7,7 +7,7 @@ tags: ["Wireshark", "packet analysis", "network", "pcap", "TLS", "blue team"]
 excerpt: "Wireshark è lo strumento di riferimento per l'analisi del traffico di rete. Filtri essenziali, follow TCP stream, analisi di attacchi reali e cosa cercare in un pcap sospetto."
 ---
 
-Wireshark è stato il primo strumento che mi ha fatto sentire davvero un "hacker" — nel senso buono. Ricordo la sensazione quasi magica di aprire una cattura e vedere, riga dopo riga, tutto ciò che il mio computer stava dicendo alla rete senza chiedermi il permesso. È stato lì che ho capito una cosa fondamentale: **la rete non mente**. Un malware può nascondersi da un antivirus, offuscarsi, cancellare i suoi log — ma se deve comunicare con l'esterno, quei pacchetti passano. E se stai guardando, li vedi.
+Wireshark è stato il primo strumento che mi ha fatto sentire davvero un "hacker", nel senso buono. Ricordo la sensazione quasi magica di aprire una cattura e vedere, riga dopo riga, tutto ciò che il mio computer stava dicendo alla rete senza chiedermi il permesso. È stato lì che ho capito una cosa fondamentale: **la rete non mente**. Un malware può nascondersi da un antivirus, offuscarsi, cancellare i suoi log, ma se deve comunicare con l'esterno, quei pacchetti passano. E se stai guardando, li vedi.
 
 ## Cos'è Wireshark
 
@@ -19,7 +19,7 @@ Una precisazione importante: catturare traffico di rete che non è tuo, o su ret
 
 Apri Wireshark, scegli l'interfaccia (di solito quella con il grafico che "si muove" indica traffico attivo) e clicca sull'icona della pinna per iniziare a catturare. Vedrai le righe scorrere. Clicca sul quadrato rosso per fermare.
 
-Se preferisci la riga di comando — utilissima su server senza interfaccia grafica — c'è `tshark`, il fratello CLI di Wireshark:
+Se preferisci la riga di comando (utilissima su server senza interfaccia grafica), c'è `tshark`, il fratello CLI di Wireshark:
 
 ```bash
 # Cattura 100 pacchetti sull'interfaccia eth0 e salvali in un file
@@ -64,7 +64,7 @@ Combinandoli con gli operatori logici (`&&`, `||`, `!`) puoi passare da migliaia
 
 Il singolo pacchetto racconta poco. La conversazione completa racconta tutto. Cliccando con il tasto destro su un pacchetto TCP e scegliendo **Follow → TCP Stream**, Wireshark ricostruisce l'intero dialogo tra i due host in un'unica finestra leggibile.
 
-È qui che il traffico non cifrato mostra tutti i suoi segreti: richieste HTTP complete, credenziali inviate in chiaro, comandi impartiti a un server. È anche il momento in cui capisci *davvero* perché HTTPS è così importante — perché senza cifratura, chiunque sulla tratta legge tutto.
+È qui che il traffico non cifrato mostra tutti i suoi segreti: richieste HTTP complete, credenziali inviate in chiaro, comandi impartiti a un server. È anche il momento in cui capisci *davvero* perché HTTPS è così importante, perché senza cifratura, chiunque sulla tratta legge tutto.
 
 ## Riconoscere pattern sospetti
 
@@ -89,9 +89,9 @@ Se un IP esterno che non riconosci è in cima alla lista con connessioni ritmich
 
 Prima di tuffarti nei singoli pacchetti, il menu **Statistics** di Wireshark ti dà una fotografia d'insieme preziosissima:
 
-- **Protocol Hierarchy** — quali protocolli compongono il traffico e in che percentuale.
-- **Conversations** — chi parla con chi, e quanto.
-- **Endpoints** — tutti gli host coinvolti.
+- **Protocol Hierarchy**: quali protocolli compongono il traffico e in che percentuale.
+- **Conversations**: chi parla con chi, e quanto.
+- **Endpoints**: tutti gli host coinvolti.
 
 Io parto quasi sempre da qui: prima capisco la forma generale del traffico, poi scendo nel dettaglio dove qualcosa stona.
 

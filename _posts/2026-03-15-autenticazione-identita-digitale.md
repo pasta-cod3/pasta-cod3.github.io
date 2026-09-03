@@ -11,9 +11,9 @@ excerpt: "Come funziona l'autenticazione moderna: dai limiti delle password all'
 
 ## Introduzione
 
-L'autenticazione è il processo con cui un sistema verifica che tu sia chi dici di essere. Sembra semplice — eppure è uno dei campi più complessi e più attaccati della sicurezza informatica. La maggior parte delle breach aziendali inizia con credenziali compromesse: password rubate, token intercettati, sessioni dirottate.
+L'autenticazione è il processo con cui un sistema verifica che tu sia chi dici di essere. Sembra semplice, eppure è uno dei campi più complessi e più attaccati della sicurezza informatica. La maggior parte delle breach aziendali inizia con credenziali compromesse: password rubate, token intercettati, sessioni dirottate.
 
-Capire come funzionano i meccanismi di autenticazione moderni — e dove sono vulnerabili — è essenziale sia per chi costruisce sistemi che per chi li difende o li attacca.
+Capire come funzionano i meccanismi di autenticazione moderni (e dove sono vulnerabili), è essenziale sia per chi costruisce sistemi che per chi li difende o li attacca.
 
 ---
 
@@ -40,7 +40,7 @@ Ognuno ha punti di forza e debolezze:
 
 ## Multi-Factor Authentication (MFA)
 
-L'MFA richiede **due o più fattori distinti** per autenticarsi. Se un attaccante ruba la password, non basta — ha bisogno anche del secondo fattore.
+L'MFA richiede **due o più fattori distinti** per autenticarsi. Se un attaccante ruba la password, non basta, ha bisogno anche del secondo fattore.
 
 ```mermaid
 sequenceDiagram
@@ -55,7 +55,7 @@ sequenceDiagram
 
 Secondo Microsoft, l'MFA blocca il **99,9%** degli attacchi automatizzati di account takeover.
 
-### TOTP — Time-based One-Time Password
+### TOTP: Time-based One-Time Password
 
 Il meccanismo più diffuso per il secondo fattore. L'app authenticator (Google Authenticator, Authy, Aegis) genera un codice a 6 cifre che cambia ogni 30 secondi, basandosi su:
 
@@ -63,7 +63,7 @@ Il meccanismo più diffuso per il secondo fattore. L'app authenticator (Google A
 TOTP = HMAC(chiave_segreta, timestamp_corrente / 30)
 ```
 
-La chiave segreta viene condivisa una volta sola al momento della configurazione (il QR code che scansioni). Né il server né il client trasmettono mai la chiave — solo il codice derivato da essa, che è valido solo per 30 secondi.
+La chiave segreta viene condivisa una volta sola al momento della configurazione (il QR code che scansioni). Né il server né il client trasmettono mai la chiave, solo il codice derivato da essa, che è valido solo per 30 secondi.
 
 ### SMS OTP vs App Authenticator
 
@@ -73,9 +73,9 @@ L'OTP via SMS è meglio di niente, ma è vulnerabile:
 
 **SS7 Vulnerabilities:** il protocollo SS7 usato dalle reti telefoniche ha vulnerabilità note che permettono a chi vi ha accesso (governi, servizi di intelligence, criminali con accesso a carrier compiacenti) di intercettare SMS da qualsiasi numero.
 
-L'app authenticator non ha questi problemi perché non usa la rete telefonica — usa solo l'orologio del dispositivo e la chiave segreta condivisa.
+L'app authenticator non ha questi problemi perché non usa la rete telefonica, usa solo l'orologio del dispositivo e la chiave segreta condivisa.
 
-### FIDO2 / WebAuthn — il futuro dell'MFA
+### FIDO2 / WebAuthn: il futuro dell'MFA
 
 FIDO2 è lo standard più sicuro disponibile oggi. Usa crittografia a chiave pubblica invece di codici condivisi:
 
@@ -104,15 +104,15 @@ sequenceDiagram
 
 Vantaggi chiave di FIDO2:
 - La chiave privata non lascia mai il dispositivo
-- La firma è vincolata al dominio — resistente al phishing (un sito fake non ottiene mai la firma corretta)
+- La firma è vincolata al dominio: resistente al phishing (un sito fake non ottiene mai la firma corretta)
 - Non ci sono segreti condivisi da rubare dal server
-- Nessun codice da digitare — esperienza utente migliore
+- Nessun codice da digitare: esperienza utente migliore
 
 ---
 
 ## Sessioni e cookie
 
-Dopo l'autenticazione, il server deve ricordare che l'utente è autenticato. HTTP è stateless — ogni richiesta è indipendente. La soluzione sono le **sessioni**.
+Dopo l'autenticazione, il server deve ricordare che l'utente è autenticato. HTTP è stateless, ogni richiesta è indipendente. La soluzione sono le **sessioni**.
 
 ```mermaid
 sequenceDiagram
@@ -134,7 +134,7 @@ sequenceDiagram
 **Secure:** il cookie viene trasmesso solo su connessioni HTTPS. Protegge dall'intercettazione su canali non cifrati.
 
 **SameSite:** controlla quando il cookie viene inviato nelle richieste cross-site.
-- `Strict`: mai inviato nelle richieste cross-site — protegge da CSRF
+- `Strict`: mai inviato nelle richieste cross-site, protegge da CSRF
 - `Lax`: inviato solo per navigazione top-level (click su link)
 - `None`: inviato sempre (richiede Secure)
 
@@ -150,9 +150,9 @@ Vettori di furto del cookie:
 
 ---
 
-## JWT — JSON Web Token
+## JWT: JSON Web Token
 
-I JWT sono un meccanismo di autenticazione **stateless** — invece di memorizzare la sessione sul server, il server emette un token che il client porta con sé in ogni richiesta.
+I JWT sono un meccanismo di autenticazione **stateless**: invece di memorizzare la sessione sul server, il server emette un token che il client porta con sé in ogni richiesta.
 
 ### Struttura del JWT
 
@@ -171,7 +171,7 @@ SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 { "alg": "HS256", "typ": "JWT" }
 ```
 
-**Payload:** i claim — dati sull'utente e sulla sessione
+**Payload:** i claim, dati sull'utente e sulla sessione
 ```json
 { "sub": "user123", "role": "admin", "exp": 1680000000 }
 ```
@@ -198,17 +198,17 @@ sequenceDiagram
     S->>U: Dati richiesti
 ```
 
-Il server non memorizza nulla — può verificare qualsiasi JWT con la sua chiave segreta. Scalabile orizzontalmente.
+Il server non memorizza nulla, può verificare qualsiasi JWT con la sua chiave segreta. Scalabile orizzontalmente.
 
 ### Vulnerabilità dei JWT
 
-**Algorithm confusion (alg: none):** alcune implementazioni difettose accettano JWT con algoritmo "none" — nessuna firma. Un attaccante può modificare il payload (es. `"role": "admin"`) e firmare con "none". Il server accetta il token modificato.
+**Algorithm confusion (alg: none):** alcune implementazioni difettose accettano JWT con algoritmo "none", nessuna firma. Un attaccante può modificare il payload (es. `"role": "admin"`) e firmare con "none". Il server accetta il token modificato.
 
 **RS256 to HS256 confusion:** se il server supporta sia RSA che HMAC, un attaccante può prendere la chiave pubblica del server (pubblica per definizione), modificare il token payload, e firmarlo con HMAC usando quella chiave pubblica come segreto. Se il server non valida l'algoritmo correttamente, accetta il token falsificato.
 
 **Weak secret:** JWT firmati con HMAC-SHA256 con un segreto debole possono essere craccati offline. Un attaccante che ha un token valido può fare brute force del segreto.
 
-**Missing expiration:** JWT senza campo `exp` o con scadenza molto lunga rimangono validi anche dopo il logout o il cambio password — non c'è modo di invalidarli senza mantenere una blacklist (che vanifica il vantaggio stateless).
+**Missing expiration:** JWT senza campo `exp` o con scadenza molto lunga rimangono validi anche dopo il logout o il cambio password, non c'è modo di invalidarli senza mantenere una blacklist (che vanifica il vantaggio stateless).
 
 ---
 
@@ -311,16 +311,16 @@ graph TD
 
 Un attacco moderno sempre più comune: l'attaccante ha già la password (rubata o crackata). Il sistema invia una notifica push MFA all'utente. L'attaccante invia decine di richieste push in rapida successione, a qualsiasi ora, finché l'utente non accetta per sbaglio, per frustrazione, o per fermare le notifiche.
 
-Microsoft, Cisco, Uber — tutti hanno subito breach iniziati con MFA fatigue.
+Microsoft, Cisco, Uber, tutti hanno subito breach iniziati con MFA fatigue.
 
-Difesa: passare a metodi MFA che richiedono un'azione deliberata con context matching (es. FIDO2, o push MFA con number matching — l'utente deve inserire un numero mostrato sul computer, non solo premere "approva").
+Difesa: passare a metodi MFA che richiedono un'azione deliberata con context matching (es. FIDO2, o push MFA con number matching, l'utente deve inserire un numero mostrato sul computer, non solo premere "approva").
 
 ---
 
 ## Best practice per l'autenticazione sicura
 
 **Per gli sviluppatori:**
-- Non implementare mai da zero — usa librerie e framework consolidati (Passport.js, Spring Security, Django auth)
+- Non implementare mai da zero: usa librerie e framework consolidati (Passport.js, Spring Security, Django auth)
 - Argon2id per hashing delle password
 - JWT con scadenza breve + refresh token rotation
 - Validazione rigorosa dei redirect URI in OAuth
@@ -338,6 +338,6 @@ Difesa: passare a metodi MFA che richiedono un'azione deliberata con context mat
 
 ## Conclusione
 
-L'autenticazione è il confine tra chi è autorizzato e chi non lo è — e gli attaccanti investono enormi risorse nel attraversarlo. I meccanismi moderni (FIDO2, JWT con rotazione, OAuth ben implementato) sono significativamente più sicuri della semplice password — ma ogni meccanismo ha le proprie vulnerabilità specifiche.
+L'autenticazione è il confine tra chi è autorizzato e chi non lo è, e gli attaccanti investono enormi risorse nel attraversarlo. I meccanismi moderni (FIDO2, JWT con rotazione, OAuth ben implementato) sono significativamente più sicuri della semplice password, ma ogni meccanismo ha le proprie vulnerabilità specifiche.
 
 La tendenza del settore è chiara: verso l'autenticazione senza password con Passkey/FIDO2. Nel frattempo, MFA robusto + password manager + sessioni brevi è la combinazione che riduce drasticamente la superficie di attacco.

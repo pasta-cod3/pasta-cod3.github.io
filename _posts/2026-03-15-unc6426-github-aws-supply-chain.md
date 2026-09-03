@@ -17,9 +17,9 @@ L'11 marzo 2026, Google Threat Intelligence ha pubblicato il **Cloud Threat Hori
 
 ## Il punto di partenza: l'attacco alla supply chain nx
 
-Nel 2025, il pacchetto npm **nx** — usato da centinaia di migliaia di sviluppatori per gestire monorepo JavaScript e TypeScript — fu vittima di un supply chain attack. L'attacco iniettò codice malevolo che, durante l'installazione in ambienti CI/CD, rubava i token GitHub e le variabili d'ambiente presenti nel sistema.
+Nel 2025, il pacchetto npm **nx** (usato da centinaia di migliaia di sviluppatori per gestire monorepo JavaScript e TypeScript), fu vittima di un supply chain attack. L'attacco iniettò codice malevolo che, durante l'installazione in ambienti CI/CD, rubava i token GitHub e le variabili d'ambiente presenti nel sistema.
 
-nx è uno strumento core nell'ecosistema Angular, React e Node.js enterprise. La compromissione ha distribuito token rubati a migliaia di pipeline di sviluppo prima che il problema venisse identificato e risolto. Molte organizzazioni hanno ruotato le credenziali — ma non tutte.
+nx è uno strumento core nell'ecosistema Angular, React e Node.js enterprise. La compromissione ha distribuito token rubati a migliaia di pipeline di sviluppo prima che il problema venisse identificato e risolto. Molte organizzazioni hanno ruotato le credenziali, ma non tutte.
 
 ---
 
@@ -36,7 +36,7 @@ graph TD
     E --> F["Esfiltrazione dati\nEventuale distruzione\ndell'ambiente cloud"]
 ```
 
-Il passaggio critico è l'abuso del **GitHub-to-AWS OIDC (OpenID Connect) trust**. Questa è una feature legittima che permette alle pipeline GitHub Actions di autenticarsi ad AWS senza credenziali statiche, usando token OIDC temporanei. È una buona pratica di sicurezza — ma solo se il repository GitHub è sicuro. Quando UNC6426 controllava il repository, poteva assumere i ruoli AWS configurati per quella pipeline.
+Il passaggio critico è l'abuso del **GitHub-to-AWS OIDC (OpenID Connect) trust**. Questa è una feature legittima che permette alle pipeline GitHub Actions di autenticarsi ad AWS senza credenziali statiche, usando token OIDC temporanei. È una buona pratica di sicurezza, ma solo se il repository GitHub è sicuro. Quando UNC6426 controllava il repository, poteva assumere i ruoli AWS configurati per quella pipeline.
 
 ---
 
@@ -73,7 +73,7 @@ La configurazione corretta dovrebbe specificare branch protetti o ambienti speci
 
 ## Le implicazioni per la supply chain
 
-Il caso UNC6426 dimostra una proprietà pericolosa degli attacchi supply chain: le chiavi rubate non hanno una data di scadenza immediata. Un token rubato mesi prima, in un attacco che sembrava risolto, può essere tenuto in riserva e usato quando l'opportunità si presenta — o venduto ad altri actor.
+Il caso UNC6426 dimostra una proprietà pericolosa degli attacchi supply chain: le chiavi rubate non hanno una data di scadenza immediata. Un token rubato mesi prima, in un attacco che sembrava risolto, può essere tenuto in riserva e usato quando l'opportunità si presenta, o venduto ad altri actor.
 
 ---
 

@@ -13,7 +13,7 @@ excerpt: "Malware 'ChainDrop' si auto-propaga attraverso npm compromettendo 1,30
 
 A luglio 2026, ricercatori di sicurezza hanno scoperto una **campagna massiva di malware auto-propagante** su npm (Node Package Manager), il repository di pacchetti JavaScript più grande al mondo.
 
-Il malware, chiamato **ChainDrop**, è particolare perché non è un attacco "one-shot" — è un **worm**: quando un package è compromesso e viene eseguito, il malware automaticamente:
+Il malware, chiamato **ChainDrop**, è particolare perché non è un attacco "one-shot": è un **worm**: quando un package è compromesso e viene eseguito, il malware automaticamente:
 
 1. Ruba credenziali npm dell'utente
 2. Accede all'account dell'utente su npm
@@ -50,7 +50,7 @@ graph TD
 | **Disclosure** | 30 luglio | npm e community notificati; advisory pubblico |
 | **Remediation** | 31 luglio+ | npm revoca token compromessi; package rimossi/ripristinati |
 
-La **finestra di esposizione** è stata circa 10 giorni — durante i quali ChainDrop ha infettato migliaia di developer machines.
+La **finestra di esposizione** è stata circa 10 giorni, durante i quali ChainDrop ha infettato migliaia di developer machines.
 
 ---
 
@@ -65,7 +65,7 @@ Con 2 miliardi di download mensili, ChainDrop ha potenzialmente raggiunto:
 - Startup e aziende enterprise che usano npm
 
 **Paesi colpiti:**
-Globale — npm ha utenti in 195+ paesi
+Globale, npm ha utenti in 195+ paesi
 
 **Livello di criticità:**
 Se ChainDrop è stato installato in una CI/CD pipeline, potrebbe aver compromesso:
@@ -109,8 +109,8 @@ Oltre al furto di credenziali, ChainDrop:
 5. ✅ Aumentato il monitoraggio per rilevare simili attacchi in futuro
 
 **Limiti della response:**
-- ❌ Il malware era stato installato su milioni di dev machines — il ripristino su npm non li pulisce
-- ❌ Qualsiasi credenziale / secret esfiltrata è **permanentemente compromessa** — sviluppatori devono ruotarle tutti
+- ❌ Il malware era stato installato su milioni di dev machines, il ripristino su npm non li pulisce
+- ❌ Qualsiasi credenziale / secret esfiltrata è **permanentemente compromessa**: sviluppatori devono ruotarle tutti
 - ❌ Qualsiasi artifact di build generato durante l'infezione potrebbe contenere malware
 
 ---
@@ -144,9 +144,9 @@ Oltre al furto di credenziali, ChainDrop:
 
 ## Lezione: npm supply chain è vulnerabile
 
-ChainDrop dimostra che il modello di npm — chiunque può pubblicare package, e milioni li scaricano di default — **è un perfetto vettore per supply chain attack**.
+ChainDrop dimostra che il modello di npm (chiunque può pubblicare package, e milioni li scaricano di default) **è un perfetto vettore per supply chain attack**.
 
-Il problema non è npm specificamente — è l'intera ecosistema dei package manager (pip per Python, RubyGems, NuGet, etc.):
+Il problema non è npm specificamente, è l'intera ecosistema dei package manager (pip per Python, RubyGems, NuGet, etc.):
 
 - **Fiducia implícita:** quando installi un package, assumi che è safe
 - **Esecuzione automatica:** `npm install` esegue script automaticamente (package.json "install" script)

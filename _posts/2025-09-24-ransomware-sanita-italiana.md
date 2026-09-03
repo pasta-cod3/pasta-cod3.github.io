@@ -17,22 +17,22 @@ Nei primi nove mesi del 2025, le minacce principali rilevate sono state: scansio
 
 ## Il caso SECTOR16 (maggio 2025)
 
-Il gruppo hacktivista **SECTOR16** — attivo da inizio 2025, noto per attacchi a sistemi SCADA nel settore energetico USA — ha rivendicato su Telegram un data breach contro un ospedale italiano non identificato. Probabile vettore di accesso: un servizio **RDP esposto su internet**, non protetto da MFA, che ha permesso accesso diretto alla macchina.
+Il gruppo hacktivista **SECTOR16** (attivo da inizio 2025, noto per attacchi a sistemi SCADA nel settore energetico USA), ha rivendicato su Telegram un data breach contro un ospedale italiano non identificato. Probabile vettore di accesso: un servizio **RDP esposto su internet**, non protetto da MFA, che ha permesso accesso diretto alla macchina.
 
 > Il settore sanitario detiene il record di costi per violazione dei dati per il quattordicesimo anno consecutivo. Media 2025: **7,42 milioni di dollari per breach**.
 
 ## Perché gli ospedali sono vulnerabili
 
-**Sistemi HIS obsoleti** — molti Information Systems ospedalieri girano su Windows non supportati, non aggiornabili per ragioni di certificazione del software medico.
+**Sistemi HIS obsoleti**: molti Information Systems ospedalieri girano su Windows non supportati, non aggiornabili per ragioni di certificazione del software medico.
 
-**Dispositivi IoMT non gestiti** — apparecchiature di imaging, monitor cardiaci, pompe per infusione: firmware non aggiornabile, comunicazione in rete senza autenticazione.
+**Dispositivi IoMT non gestiti**: apparecchiature di imaging, monitor cardiaci, pompe per infusione: firmware non aggiornabile, comunicazione in rete senza autenticazione.
 
-**Supply chain** — nel 2024 un singolo attacco supply chain ha causato 31 incidenti in altrettante strutture italiane.
+**Supply chain**: nel 2024 un singolo attacco supply chain ha causato 31 incidenti in altrettante strutture italiane.
 
 ## Difesa pratica
 
-- **Segmentazione di rete** — isolare i dispositivi IoMT dalla rete amministrativa
-- **MFA su RDP e VPN** — eliminare accessi remoti con sola password
-- **Backup offline testato** — il backup online non protegge dal ransomware
-- **Piano di Business Continuity** — protocolli cartacei per il pronto soccorso in caso di downtime digitale
-- **Formazione del personale** — il phishing email è il vettore n.1
+- **Segmentazione di rete**: isolare i dispositivi IoMT dalla rete amministrativa
+- **MFA su RDP e VPN**: eliminare accessi remoti con sola password
+- **Backup offline testato**: il backup online non protegge dal ransomware
+- **Piano di Business Continuity**: protocolli cartacei per il pronto soccorso in caso di downtime digitale
+- **Formazione del personale**: il phishing email è il vettore n.1

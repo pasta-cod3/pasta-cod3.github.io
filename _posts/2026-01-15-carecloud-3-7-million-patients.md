@@ -11,7 +11,7 @@ excerpt: "CareCloud, fornitore di soluzioni IT per healthcare, ha confermato una
 
 ## Il fatto
 
-A gennaio 2026, **CareCloud** — una healthcare IT company che fornisce soluzioni di gestione clinica e amministrativa — ha **confermato una violazione massiccia di dati**.
+A gennaio 2026, **CareCloud** (una healthcare IT company che fornisce soluzioni di gestione clinica e amministrativa), ha **confermato una violazione massiccia di dati**.
 
 Un attaccante ha ottenuto accesso non autorizzato all'ambiente AWS dell'azienda e ha exfiltrato i dati di **3.7 milioni di pazienti**.
 
@@ -27,7 +27,7 @@ Un attaccante ha ottenuto accesso non autorizzato all'ambiente AWS dell'azienda 
 | **18 Marzo** | Investigazione avviata |
 | **15 Gennaio 2026** | CareCloud notifica pubblicamente i pazienti |
 
-(Nota: Il rilascio pubblico è avvenuto con ritardo di mesi — procedura standard di HIPAA compliance notification)
+(Nota: Il rilascio pubblico è avvenuto con ritardo di mesi, procedura standard di HIPAA compliance notification)
 
 ---
 
@@ -45,7 +45,7 @@ Un attaccante ha ottenuto accesso non autorizzato all'ambiente AWS dell'azienda 
 ## Come è successo
 
 **Fase 1: Misconfiguration AWS**
-CareCloud ha configurato un bucket S3 (storage cloud) in modo che fosse **pubblicamente accessibile** — con pochi click, chiunque poteva leggere i file.
+CareCloud ha configurato un bucket S3 (storage cloud) in modo che fosse **pubblicamente accessibile**: con pochi click, chiunque poteva leggere i file.
 
 Alternativamente, credenziali AWS furono compromesse (trovate su GitHub, acquistate da broker di accesso iniziale).
 
@@ -110,6 +110,6 @@ Per healthcare IT companies:
 
 ## Conclusione
 
-CareCloud è un caso classico di **misconfiguration cloud** — non è una sofisticata vulnerabilità zero-day, è una semplice configurazione sbagliata che espone milioni di record.
+CareCloud è un caso classico di **misconfiguration cloud**: non è una sofisticata vulnerabilità zero-day, è una semplice configurazione sbagliata che espone milioni di record.
 
-La lezione: **cloud security non è automatico** — provider cloud (AWS) fornisce gli strumenti (encryption, access control), ma è responsabilità dell'organizzazione implementarli correttamente.
+La lezione: **cloud security non è automatico**: provider cloud (AWS) fornisce gli strumenti (encryption, access control), ma è responsabilità dell'organizzazione implementarli correttamente.

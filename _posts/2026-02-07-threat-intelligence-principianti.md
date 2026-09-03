@@ -9,9 +9,9 @@ excerpt: "La threat intelligence trasforma dati grezzi in conoscenza utile per l
 
 # Threat Intelligence per principianti: capire il nemico prima che arrivi
 
-C'è un concetto militare che mi ha sempre affascinato: **"se conosci il nemico e conosci te stesso, in cento battaglie non sarai mai in pericolo"** — Sun Tzu, L'Arte della Guerra.
+C'è un concetto militare che mi ha sempre affascinato: **"se conosci il nemico e conosci te stesso, in cento battaglie non sarai mai in pericolo"**: Sun Tzu, L'Arte della Guerra.
 
-La Threat Intelligence è esattamente questo applicato alla cybersecurity: raccogliere, analizzare e condividere informazioni sugli attori di minaccia per prendere decisioni di difesa migliori. Non si tratta solo di sapere che esiste un gruppo chiamato APT28 — si tratta di capire **come attacca, cosa usa, chi prende di mira e quando**.
+La Threat Intelligence è esattamente questo applicato alla cybersecurity: raccogliere, analizzare e condividere informazioni sugli attori di minaccia per prendere decisioni di difesa migliori. Non si tratta solo di sapere che esiste un gruppo chiamato APT28, si tratta di capire **come attacca, cosa usa, chi prende di mira e quando**.
 
 ---
 
@@ -24,7 +24,7 @@ L'intelligence di alto livello, destinata ai decision maker. Risponde a domande 
 - *Quali attori di stato sono attivi nella nostra regione?*
 - *Come sta evolvendo il panorama delle minacce ransomware?*
 
-Non ha dati tecnici — ha contesto, tendenze, impatto sul business.
+Non ha dati tecnici, ha contesto, tendenze, impatto sul business.
 
 ### Operational Intelligence
 
@@ -72,7 +72,7 @@ curl https://feodotracker.abuse.ch/downloads/ipblocklist.csv
 
 ### Threat Actor Tracking
 
-- **MITRE ATT&CK Groups**: [attack.mitre.org/groups](https://attack.mitre.org/groups) — profili completi di oltre 100 gruppi
+- **MITRE ATT&CK Groups**: [attack.mitre.org/groups](https://attack.mitre.org/groups), profili completi di oltre 100 gruppi
 - **Malpedia**: database di famiglie malware con campioni e rapporti
 - **Mandiant Threat Intelligence** (free tier): report su campagne attive
 - **Recorded Future Community**: indicatori gratuiti
@@ -249,4 +249,4 @@ tags:
 
 La Threat Intelligence non è solo per le grandi organizzazioni con team dedicati. Anche con risorse limitate, consumare feed gratuiti e integrare gli indicatori nel proprio SIEM o firewall fa una differenza concreta.
 
-L'obiettivo non è sapere tutto su tutti gli attaccanti — è sapere **abbastanza** per prendere decisioni migliori sulla difesa. E quella conoscenza, oggi, è spesso gratuita e accessibile a chiunque voglia andarla a cercare. 🕵️
+L'obiettivo non è sapere tutto su tutti gli attaccanti, è sapere **abbastanza** per prendere decisioni migliori sulla difesa. E quella conoscenza, oggi, è spesso gratuita e accessibile a chiunque voglia andarla a cercare. 🕵️

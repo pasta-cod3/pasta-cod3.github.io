@@ -19,7 +19,7 @@ Per la prima volta, su larga scala, gli utenti hanno una **difesa nativa contro 
 
 ## Il problema: SNI in chiaro
 
-Quando ti connetti a un sito web tramite HTTPS, il tuo browser e il server negoziano una connessione criptata. Ma c'è un dettaglio: il browser deve comunicare **quale sito vuole visitare** al server — il nome del dominio — anche prima che la connessione sia criptata.
+Quando ti connetti a un sito web tramite HTTPS, il tuo browser e il server negoziano una connessione criptata. Ma c'è un dettaglio: il browser deve comunicare **quale sito vuole visitare** al server (il nome del dominio), anche prima che la connessione sia criptata.
 
 Questo dato è chiamato **SNI (Server Name Indication)**, ed è mandato **in chiaro**, non criptato:
 
@@ -37,7 +37,7 @@ Questo significa che:
 - **Middleboxes** (proxy, firewalls) possono profilare il tuo browsing behavior
 - **Correlazione passiva**: anche se la connessione HTTPS è sicura, osservare che visitaste `example.com/products` alle 14:35 rivela informazioni
 
-ECH risolve questo — criptando il SNI stesso.
+ECH risolve questo, criptando il SNI stesso.
 
 ---
 
@@ -55,10 +55,10 @@ Client + Server: [HTTPS criptato completo]
 1. Il client genera una **chiave pubblica temporanea** specifica per il server che vuole visitare
 2. Cripta il ClientHello (la prima fase del TLS handshake) usando quella chiave pubblica
 3. Invia il ClientHello criptato al server
-4. Il server — che ha la chiave privata corrispondente — decripta il ClientHello
+4. Il server (che ha la chiave privata corrispondente), decripta il ClientHello
 5. Procede con il TLS handshake normale
 
-Da questo punto in poi, nessun observer intermedio sa quale SNI è stata richiesta — sanno solo che è avvenuta una connessione HTTPS al server.
+Da questo punto in poi, nessun observer intermedio sa quale SNI è stata richiesta, sanno solo che è avvenuta una connessione HTTPS al server.
 
 ---
 
@@ -88,7 +88,7 @@ Per l'utente finale:
 
 ## I limiti
 
-ECH non è una panacea — anche con ECH criptato:
+ECH non è una panacea, anche con ECH criptato:
 
 - **Timing e volume di traffico** rimane visibile (se visiti un sito per 2 ore, l'observer sa che qualcosa di voluminoso sta accadendo)
 - **Indirizzi IP** rimangono visibili (se vuoi privacy dalla rete, devi usare una VPN o Tor)
@@ -130,6 +130,6 @@ La privacy era storicamente un'area dove Google era indietro rispetto ai competi
 
 ECH è una vittoria silenziosa per la privacy su Android 17. Non è drammatico come VPN o Tor, ma è **passive defense** che protegge milioni di utenti da ISP tracking senza richiedere azione conscia.
 
-Per gli utenti tech-savvy: ECH insieme a **DNS-over-HTTPS** (DoH) forma un doppio strato di protezione — il tuo ISP non sa ne quale sito stai visitando (SNI criptato) ne quale IP lookup hai fatto (DNS criptato).
+Per gli utenti tech-savvy: ECH insieme a **DNS-over-HTTPS** (DoH) forma un doppio strato di protezione, il tuo ISP non sa ne quale sito stai visitando (SNI criptato) ne quale IP lookup hai fatto (DNS criptato).
 
-Non è privacy totale — ma è un progresso significativo verso un internet dove il default non è sorveglianza passiva della rete.
+Non è privacy totale, ma è un progresso significativo verso un internet dove il default non è sorveglianza passiva della rete.

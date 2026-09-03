@@ -9,7 +9,7 @@ excerpt: "Suricata è uno degli IDS/IPS open source più potenti. Come installar
 
 # IDS e IPS con Suricata: metti gli occhi sulla tua rete
 
-Hai un firewall. Ottimo. Ma il firewall guarda solo le porte e i protocolli — non guarda **dentro** il traffico. Potrebbe passarci un C2 in HTTPS, una sessione di esfiltrazione dati via DNS, un exploit su una porta lecita. Il firewall non direbbe niente.
+Hai un firewall. Ottimo. Ma il firewall guarda solo le porte e i protocolli, non guarda **dentro** il traffico. Potrebbe passarci un C2 in HTTPS, una sessione di esfiltrazione dati via DNS, un exploit su una porta lecita. Il firewall non direbbe niente.
 
 Ecco dove entra in gioco un **IDS (Intrusion Detection System)** o un **IPS (Intrusion Prevention System)**: strumenti che analizzano il traffico di rete in profondità, cercando pattern di attacco noti e comportamenti anomali.
 
@@ -295,7 +295,7 @@ In Kibana avrai dashboard pronti con: top alert, paesi di origine degli attacchi
 
 ## Tuning: ridurre i falsi positivi
 
-Il nemico del Blue Team non è solo l'attaccante — sono i **falsi positivi** che ti fanno ignorare gli alert reali.
+Il nemico del Blue Team non è solo l'attaccante, sono i **falsi positivi** che ti fanno ignorare gli alert reali.
 
 ```bash
 # Sopprime alert per IP interni fidati
@@ -311,6 +311,6 @@ threshold gen_id 1, sig_id 9000005, type threshold, track by_src, count 1, secon
 
 ## Conclusione
 
-Suricata è uno strumento potente che può trasformare la tua visibilità sulla rete da zero a quasi completa in poche ore. L'investimento iniziale è nella configurazione e nel tuning — ma una volta rodato, ti fornisce un livello di alerting che nessun firewall classico può darti.
+Suricata è uno strumento potente che può trasformare la tua visibilità sulla rete da zero a quasi completa in poche ore. L'investimento iniziale è nella configurazione e nel tuning, ma una volta rodato, ti fornisce un livello di alerting che nessun firewall classico può darti.
 
 Inizia in modalità IDS, studia i tuoi log, scrivi regole basate sulla tua realtà specifica, e passa a IPS solo quando hai fiducia nelle tue regole. Il traffico di rete non mente. 📡

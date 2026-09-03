@@ -18,7 +18,7 @@ Alla fine del 2009, i rapporti tra Google e il governo cinese erano già tesi. I
 Gli analisti di McAfee (che denominarono l'operazione "Aurora") e successivamente Mandiant ricostruirono la catena d'attacco:
 
 **1. Spear phishing mirato**  
-I dipendenti Google ricevevano messaggi personalizzati — email, messaggi su IRC — con link a siti web malevoli. Il messaggio era calibrato sulla persona: conosceva il nome del destinatario, i suoi interessi, i suoi colleghi.
+I dipendenti Google ricevevano messaggi personalizzati (email, messaggi su IRC), con link a siti web malevoli. Il messaggio era calibrato sulla persona: conosceva il nome del destinatario, i suoi interessi, i suoi colleghi.
 
 **2. Zero-day in Internet Explorer (CVE-2010-0249)**  
 I link portavano a pagine che sfruttavano una vulnerabilità zero-day nel motore JavaScript di Internet Explorer 6. Visitare la pagina con IE era sufficiente per compromettere il sistema, senza nessun'altra interazione dell'utente. Questo tipo di attacco viene chiamato **drive-by download**.
@@ -32,7 +32,7 @@ Google non era sola. Mandiant identificò oltre 30 aziende colpite: Adobe, Junip
 
 ## L'attribuzione
 
-Il governo USA attribuì formalmente l'attacco all'**APT1** — Advanced Persistent Threat Group 1 — successivamente identificato come l'Unità 61398 dell'Esercito Popolare di Liberazione cinese, con sede a Shanghai. Il rapport Mandiant del 2013 documentò anni di attività di questo gruppo con prove fotografiche, includendo le finestre degli uffici da cui operavano.
+Il governo USA attribuì formalmente l'attacco all'**APT1** (Advanced Persistent Threat Group 1), successivamente identificato come l'Unità 61398 dell'Esercito Popolare di Liberazione cinese, con sede a Shanghai. Il rapport Mandiant del 2013 documentò anni di attività di questo gruppo con prove fotografiche, includendo le finestre degli uffici da cui operavano.
 
 La Cina negò qualsiasi coinvolgimento.
 

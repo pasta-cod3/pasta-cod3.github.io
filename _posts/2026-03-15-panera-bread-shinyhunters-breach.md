@@ -11,9 +11,9 @@ excerpt: "Il gruppo ShinyHunters rivendica l'esfiltrazione di dati di 28 milioni
 
 ## Il fatto
 
-A fine gennaio 2026, il gruppo criminale **ShinyHunters** ha rivendicato il furto di dati da Panera Bread, la catena americana di panetterie e caffetterie con oltre 2.000 locali negli Stati Uniti. Dopo che l'estorsione è fallita — Panera non ha pagato il riscatto — gli attaccanti hanno pubblicato un archivio da circa **760 MB** su siti di data leak.
+A fine gennaio 2026, il gruppo criminale **ShinyHunters** ha rivendicato il furto di dati da Panera Bread, la catena americana di panetterie e caffetterie con oltre 2.000 locali negli Stati Uniti. Dopo che l'estorsione è fallita (Panera non ha pagato il riscatto), gli attaccanti hanno pubblicato un archivio da circa **760 MB** su siti di data leak.
 
-L'analisi condotta da **Have I Been Pwned** di Troy Hunt ha rilevato che l'archivio contiene circa **5,1 milioni di account unici** — significativamente meno dei 14 milioni rivendicati da ShinyHunters, ma comunque un numero sufficiente a colpire milioni di clienti reali.
+L'analisi condotta da **Have I Been Pwned** di Troy Hunt ha rilevato che l'archivio contiene circa **5,1 milioni di account unici**: significativamente meno dei 14 milioni rivendicati da ShinyHunters, ma comunque un numero sufficiente a colpire milioni di clienti reali.
 
 ---
 
@@ -47,7 +47,7 @@ L'archivio pubblicato contiene:
 
 ## Il vettore: AppsFlyer come punto d'ingresso
 
-Secondo quanto riportato da ShinyHunters stessi, il punto di ingresso sarebbe stato **AppsFlyer** — una piattaforma di marketing analytics per app mobile usata da Panera. Questo segue lo stesso schema di altre breach recenti dove non è l'azienda principale ad essere compromessa direttamente, ma un fornitore terzo con accesso ai suoi dati.
+Secondo quanto riportato da ShinyHunters stessi, il punto di ingresso sarebbe stato **AppsFlyer**: una piattaforma di marketing analytics per app mobile usata da Panera. Questo segue lo stesso schema di altre breach recenti dove non è l'azienda principale ad essere compromessa direttamente, ma un fornitore terzo con accesso ai suoi dati.
 
 Il pattern "compromissione della supply chain" è diventato il vettore dominante per le breach aziendali: anziché attaccare il perimetro ben difeso di una grande azienda, gli attaccanti prendono di mira i fornitori con misure di sicurezza più deboli che hanno però accesso ai dati del target primario.
 
@@ -55,7 +55,7 @@ Il pattern "compromissione della supply chain" è diventato il vettore dominante
 
 ## Non è la prima volta per Panera
 
-Questa non è la prima breach di Panera. Nel 2018, un ricercatore di sicurezza aveva scoperto che il sito web di Panera esponeva in chiaro i dati di milioni di clienti attraverso un'API non autenticata — e la vulnerabilità era stata ignorata per mesi dopo la prima segnalazione.
+Questa non è la prima breach di Panera. Nel 2018, un ricercatore di sicurezza aveva scoperto che il sito web di Panera esponeva in chiaro i dati di milioni di clienti attraverso un'API non autenticata, e la vulnerabilità era stata ignorata per mesi dopo la prima segnalazione.
 
 ---
 
@@ -70,4 +70,4 @@ Questa non è la prima breach di Panera. Nel 2018, un ricercatore di sicurezza a
 
 ## Conclusione
 
-Il caso Panera è un caso di studio sulla doppia estorsione e sul rischio dei fornitori terzi. Anche se Panera non ha ceduto al ricatto, i suoi clienti pagano il prezzo della compromissione. La sicurezza di un'azienda è tanto forte quanto il suo anello più debole — e quel anello è sempre più spesso un fornitore di servizi di terze parti.
+Il caso Panera è un caso di studio sulla doppia estorsione e sul rischio dei fornitori terzi. Anche se Panera non ha ceduto al ricatto, i suoi clienti pagano il prezzo della compromissione. La sicurezza di un'azienda è tanto forte quanto il suo anello più debole, e quel anello è sempre più spesso un fornitore di servizi di terze parti.

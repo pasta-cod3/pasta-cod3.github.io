@@ -11,9 +11,9 @@ excerpt: "Reflected, stored, DOM-based: i tre tipi di XSS spiegati con payload r
 
 ## Introduzione
 
-**XSS** — Cross-Site Scripting — è una vulnerabilità web che permette a un attaccante di iniettare codice JavaScript malevolo in pagine web visualizzate da altri utenti.
+**XSS** (Cross-Site Scripting), è una vulnerabilità web che permette a un attaccante di iniettare codice JavaScript malevolo in pagine web visualizzate da altri utenti.
 
-A differenza della SQL Injection, che attacca il server, l'XSS attacca **il browser della vittima**. Il tuo codice viene eseguito nel contesto del sito legittimo — con tutti i permessi che quel sito ha.
+A differenza della SQL Injection, che attacca il server, l'XSS attacca **il browser della vittima**. Il tuo codice viene eseguito nel contesto del sito legittimo, con tutti i permessi che quel sito ha.
 
 ---
 
@@ -59,7 +59,7 @@ Il payload viene salvato nel database e viene servito a tutti gli utenti che vis
 
 ### DOM-based XSS
 
-Il payload non passa dal server — viene processato direttamente dal JavaScript della pagina nel browser.
+Il payload non passa dal server, viene processato direttamente dal JavaScript della pagina nel browser.
 
 ```javascript
 // Codice vulnerabile nella pagina:
@@ -212,15 +212,15 @@ Non fidarti mai dell'input. Accetta solo ciò che ti aspetti, rifiuta il resto.
 
 ## Dove esercitarsi
 
-- **XSS Game di Google** — `xss-game.appspot.com` — progressivo, ottimo per iniziare
-- **PortSwigger Web Security Academy** — lab gratuiti su XSS, i migliori in assoluto
-- **DVWA** — livelli low/medium/high per XSS reflected e stored
-- **HackTheBox** — macchine web con XSS realistici
+- **XSS Game di Google** (`xss-game.appspot.com`), progressivo, ottimo per iniziare
+- **PortSwigger Web Security Academy**: lab gratuiti su XSS, i migliori in assoluto
+- **DVWA**: livelli low/medium/high per XSS reflected e stored
+- **HackTheBox**: macchine web con XSS realistici
 
 ---
 
 ## Conclusione
 
-XSS è spesso sottovalutato dai principianti — "è solo un alert()". Ma nella realtà, XSS stored su un'applicazione usata da migliaia di persone permette di compromettere tutti i loro account in un colpo solo.
+XSS è spesso sottovalutato dai principianti, "è solo un alert()". Ma nella realtà, XSS stored su un'applicazione usata da migliaia di persone permette di compromettere tutti i loro account in un colpo solo.
 
 La chiave per capirlo davvero è esercitarsi: trova dove finisce l'input utente nella pagina, capisce come viene processato, e trova il modo per farlo eseguire.

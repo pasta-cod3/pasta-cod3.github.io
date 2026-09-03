@@ -35,9 +35,9 @@ Il principio fondamentale: quando invii dati, ogni layer aggiunge le proprie inf
 
 ---
 
-## Layer 1 — Physical (Fisico)
+## Layer 1: Physical (Fisico)
 
-Il layer fisico si occupa della trasmissione grezza dei **bit** attraverso un mezzo fisico: cavi in rame, fibra ottica, onde radio WiFi, segnali infrarossi. Non conosce il significato dei dati — trasmette solo sequenze di 0 e 1.
+Il layer fisico si occupa della trasmissione grezza dei **bit** attraverso un mezzo fisico: cavi in rame, fibra ottica, onde radio WiFi, segnali infrarossi. Non conosce il significato dei dati, trasmette solo sequenze di 0 e 1.
 
 **Componenti:** cavi Ethernet (Cat5e, Cat6, Cat7), fibra ottica, antenne WiFi, hub, ripetitori, connettori fisici.
 
@@ -57,9 +57,9 @@ Sicurezza fisica dei locali, controllo degli accessi alle sale server, blocco de
 
 ---
 
-## Layer 2 — Data Link (Collegamento dati)
+## Layer 2: Data Link (Collegamento dati)
 
-Il layer Data Link si occupa della comunicazione tra dispositivi **sulla stessa rete locale**. Introduce il concetto di **indirizzo MAC** (Media Access Control) — un identificatore fisico a 48 bit assegnato a ogni interfaccia di rete.
+Il layer Data Link si occupa della comunicazione tra dispositivi **sulla stessa rete locale**. Introduce il concetto di **indirizzo MAC** (Media Access Control), un identificatore fisico a 48 bit assegnato a ogni interfaccia di rete.
 
 **Componenti:** switch, bridge, schede di rete, frame Ethernet.
 
@@ -82,7 +82,7 @@ sequenceDiagram
 
 ### Attacchi al Layer 2
 
-**ARP Poisoning / ARP Spoofing:** ARP non ha autenticazione — chiunque può rispondere a una ARP Request con un MAC falso. Un attaccante può mandare risposte ARP gratuite (non richieste) per associare il proprio MAC all'IP del router o di un altro host, diventando il punto di transito per tutto il traffico — un **Man-in-the-Middle classico**.
+**ARP Poisoning / ARP Spoofing:** ARP non ha autenticazione, chiunque può rispondere a una ARP Request con un MAC falso. Un attaccante può mandare risposte ARP gratuite (non richieste) per associare il proprio MAC all'IP del router o di un altro host, diventando il punto di transito per tutto il traffico, un **Man-in-the-Middle classico**.
 
 ```mermaid
 sequenceDiagram
@@ -96,7 +96,7 @@ sequenceDiagram
     M->>R: Dati inoltrati (dopo eventuale ispezione/modifica)
 ```
 
-**MAC Flooding:** inonda uno switch con frame con MAC address sempre diversi, saturando la tabella MAC dello switch (CAM table). Lo switch non riesce più a instradare i frame correttamente e inizia a fare broadcast su tutte le porte — trasformandosi di fatto in un hub. Tutto il traffico diventa visibile a tutti gli host connessi.
+**MAC Flooding:** inonda uno switch con frame con MAC address sempre diversi, saturando la tabella MAC dello switch (CAM table). Lo switch non riesce più a instradare i frame correttamente e inizia a fare broadcast su tutte le porte, trasformandosi di fatto in un hub. Tutto il traffico diventa visibile a tutti gli host connessi.
 
 **VLAN Hopping:** sfrutta configurazioni errate degli switch per saltare da una VLAN a un'altra, aggirando la segmentazione della rete.
 
@@ -110,7 +110,7 @@ sequenceDiagram
 
 ---
 
-## Layer 3 — Network (Rete)
+## Layer 3: Network (Rete)
 
 Il layer Network si occupa dell'**instradamento dei pacchetti** attraverso reti diverse usando indirizzi IP logici. Mentre il layer 2 conosce solo la rete locale, il layer 3 sa come raggiungere qualsiasi destinazione su internet.
 
@@ -128,7 +128,7 @@ graph LR
     R3 --> G["8.8.8.8\nGoogle DNS"]
 ```
 
-Ogni router consulta la propria **routing table** per decidere dove mandare il pacchetto. Il percorso non è predefinito — può cambiare in base alla disponibilità della rete.
+Ogni router consulta la propria **routing table** per decidere dove mandare il pacchetto. Il percorso non è predefinito, può cambiare in base alla disponibilità della rete.
 
 ### Attacchi al Layer 3
 
@@ -150,7 +150,7 @@ Ogni router consulta la propria **routing table** per decidere dove mandare il p
 
 ---
 
-## Layer 4 — Transport (Trasporto)
+## Layer 4: Transport (Trasporto)
 
 Il layer Transport si occupa della comunicazione end-to-end tra applicazioni, usando le **porte** per identificare i servizi. Gestisce l'affidabilità (TCP) o la velocità senza overhead (UDP).
 
@@ -179,13 +179,13 @@ Nessuna risposta (porta FILTRATA da firewall)
 
 **SYN Cookies:** il server non alloca risorse fino al completamento dell'handshake, usando cookie crittografici nell'ISN (Initial Sequence Number).
 
-**Firewall stateful:** traccia lo stato delle connessioni TCP — blocca pacchetti che non appartengono a una connessione stabilita.
+**Firewall stateful:** traccia lo stato delle connessioni TCP, blocca pacchetti che non appartengono a una connessione stabilita.
 
 **Rate limiting per porta/IP:** limita il numero di nuove connessioni per secondo da un singolo IP.
 
 ---
 
-## Layer 5 — Session (Sessione)
+## Layer 5: Session (Sessione)
 
 Il layer Session gestisce la creazione, il mantenimento e la chiusura delle **sessioni di comunicazione** tra applicazioni. Nella pratica moderna, le responsabilità del layer 5 sono spesso incorporate nei protocolli di layer superiori.
 
@@ -199,7 +199,7 @@ Il layer Session gestisce la creazione, il mantenimento e la chiusura delle **se
 
 ---
 
-## Layer 6 — Presentation (Presentazione)
+## Layer 6: Presentation (Presentazione)
 
 Il layer Presentation si occupa del **formato dei dati**: cifratura, decifratura, compressione, encoding (ASCII, Unicode), conversione tra formati. Garantisce che i dati inviati da un sistema siano comprensibili a un altro.
 
@@ -209,21 +209,21 @@ Il layer Presentation si occupa del **formato dei dati**: cifratura, decifratura
 
 **SSL Stripping:** l'attaccante intercetta la connessione e fa credere al server che il client non supporti HTTPS, facendo degradare la connessione a HTTP non cifrato. L'utente vede la pagina normalmente (magari senza il lucchetto) ma il traffico è in chiaro.
 
-**Cryptographic downgrade attacks:** POODLE, BEAST, DROWN — vulnerabilità che forzano l'uso di versioni obsolete di SSL/TLS con cipher suite deboli.
+**Cryptographic downgrade attacks:** POODLE, BEAST, DROWN, vulnerabilità che forzano l'uso di versioni obsolete di SSL/TLS con cipher suite deboli.
 
-**Malformed data attacks:** dati in formato inaspettato o malformato per sfruttare bug nei parser — buffer overflow in librerie di decompressione, exploit in parser XML/JSON.
+**Malformed data attacks:** dati in formato inaspettato o malformato per sfruttare bug nei parser, buffer overflow in librerie di decompressione, exploit in parser XML/JSON.
 
 ---
 
-## Layer 7 — Application (Applicazione)
+## Layer 7: Application (Applicazione)
 
-Il layer Application è quello più vicino all'utente finale — gestisce i **protocolli applicativi** con cui le applicazioni comunicano. È il layer più attaccato perché è il più esposto e il più complesso.
+Il layer Application è quello più vicino all'utente finale, gestisce i **protocolli applicativi** con cui le applicazioni comunicano. È il layer più attaccato perché è il più esposto e il più complesso.
 
 **Protocolli:** HTTP/HTTPS, FTP, SMTP, DNS, SSH, DHCP, SNMP.
 
 ### Attacchi al Layer 7
 
-**SQL Injection:** input malevolo in un form web inietta comandi SQL nel database. Opera completamente al layer applicativo — il traffico è HTTP valido, la connessione TCP è regolare.
+**SQL Injection:** input malevolo in un form web inietta comandi SQL nel database. Opera completamente al layer applicativo, il traffico è HTTP valido, la connessione TCP è regolare.
 
 **Cross-Site Scripting (XSS):** iniezione di JavaScript malevolo in una pagina web che viene eseguito nel browser della vittima.
 
@@ -279,13 +279,13 @@ Nella pratica, si usa spesso il **modello TCP/IP** (o Internet model) invece del
 | Internet | Layer 3 |
 | Network Access | Layer 1, 2 |
 
-Il modello OSI è più preciso concettualmente — il modello TCP/IP è più aderente a come internet funziona davvero. In sicurezza si usa spesso il riferimento OSI per la precisione, ma entrambi i modelli sono validi.
+Il modello OSI è più preciso concettualmente, il modello TCP/IP è più aderente a come internet funziona davvero. In sicurezza si usa spesso il riferimento OSI per la precisione, ma entrambi i modelli sono validi.
 
 ---
 
 ## Perché i layer sono importanti in sicurezza
 
-Un firewall che opera al layer 3 filtra in base agli IP — non può vedere il contenuto delle richieste HTTP (layer 7). Un WAF che opera al layer 7 può rilevare una SQL injection — non può bloccare un SYN flood (layer 4). Un sistema di cifratura al layer 6 protegge il contenuto — non protegge l'identità degli interlocutori se il DNS è compromesso (layer 7).
+Un firewall che opera al layer 3 filtra in base agli IP, non può vedere il contenuto delle richieste HTTP (layer 7). Un WAF che opera al layer 7 può rilevare una SQL injection, non può bloccare un SYN flood (layer 4). Un sistema di cifratura al layer 6 protegge il contenuto, non protegge l'identità degli interlocutori se il DNS è compromesso (layer 7).
 
 **Difesa in profondità** significa avere controlli di sicurezza a più layer simultaneamente. Nessun singolo controllo è sufficiente perché nessun singolo layer è sufficiente.
 
@@ -293,6 +293,6 @@ Un firewall che opera al layer 3 filtra in base agli IP — non può vedere il c
 
 ## Conclusione
 
-Il modello OSI non è solo un esercizio teorico — è la griglia mentale che permette di analizzare qualsiasi problema di rete con precisione. Quando analizzi un attacco, identificare il layer colpito ti dice immediatamente quali strumenti di difesa sono pertinenti e quali sono inutili.
+Il modello OSI non è solo un esercizio teorico, è la griglia mentale che permette di analizzare qualsiasi problema di rete con precisione. Quando analizzi un attacco, identificare il layer colpito ti dice immediatamente quali strumenti di difesa sono pertinenti e quali sono inutili.
 
 Un penetration tester che conosce i layer OSI sa esattamente dove cercare le vulnerabilità. Un blue teamer che conosce i layer OSI sa dove posizionare i controlli e come interpretare gli alert. È uno degli investimenti concettuali con il miglior ritorno nella sicurezza informatica.

@@ -13,11 +13,11 @@ Il Security Operations Center (SOC) è il centro nevralgico della difesa di un'o
 
 I SOC sono tipicamente organizzati in livelli (tier):
 
-**Tier 1 — SOC Analyst**: triage degli alert, prima analisi, escalation ai tier superiori. Spesso lavora su turni 24/7.
+**Tier 1: SOC Analyst**: triage degli alert, prima analisi, escalation ai tier superiori. Spesso lavora su turni 24/7.
 
-**Tier 2 — Senior Analyst / Incident Responder**: investigazione approfondita degli incidenti escalati dal Tier 1, threat hunting, analisi malware.
+**Tier 2: Senior Analyst / Incident Responder**: investigazione approfondita degli incidenti escalati dal Tier 1, threat hunting, analisi malware.
 
-**Tier 3 — Threat Hunter / Expert**: ricerca proattiva di minacce nascoste nella rete, sviluppo di nuove regole di detection, malware reverse engineering.
+**Tier 3: Threat Hunter / Expert**: ricerca proattiva di minacce nascoste nella rete, sviluppo di nuove regole di detection, malware reverse engineering.
 
 ## Mattina: gestione degli alert overnight
 
@@ -44,7 +44,7 @@ Quando un analyst riceve troppi alert, inizia a chiuderli meccanicamente senza v
 
 *Scenario: alert "Possible PowerShell Encoded Command" su workstation HR-PC-042*
 
-**Step 1 — Triage**
+**Step 1: Triage**
 ```
 Alert: Encoded PowerShell execution
 User: laura.rossi
@@ -53,12 +53,12 @@ Time: 14:32:17
 Severity: HIGH
 ```
 
-**Step 2 — Contestualizzazione**
+**Step 2: Contestualizzazione**
 - Laura Rossi è una normale impiegata HR, non un amministratore
 - PowerShell encoded è insolito per HR
 - Controlla nel SIEM gli eventi precedenti su questo host
 
-**Step 3 — Pivot nell'EDR**
+**Step 3: Pivot nell'EDR**
 ```
 14:30:12 — outlook.exe (email aperta)
 14:30:45 — winword.exe (allegato aperto)
@@ -68,12 +68,12 @@ Severity: HIGH
 
 Catena di processo sospetta: email → Word → PowerShell → connessione esterna. Probabile macro malevola.
 
-**Step 4 — Contenimento**
+**Step 4: Contenimento**
 - Isola immediatamente HR-PC-042 dalla rete (via EDR)
 - Blocca il dominio 185.x.x.x sul firewall
 - Notifica il responsabile IT e il team IR
 
-**Step 5 — Escalation**
+**Step 5: Escalation**
 Apri ticket incidente, escalation a Tier 2 per analisi approfondita dell'allegato email e ricerca di altri host che hanno comunicato con lo stesso IP.
 
 ## Strumenti del SOC analyst
@@ -91,7 +91,7 @@ Apri ticket incidente, escalation a Tier 2 per analisi approfondita dell'allegat
 Lavorare in SOC significa:
 - Turni (anche notturni e festivi)
 - Pressione costante
-- Apprendimento continuo — il panorama delle minacce cambia ogni giorno
+- Apprendimento continuo: il panorama delle minacce cambia ogni giorno
 - Grande soddisfazione quando si rileva un incidente reale
 
 È il punto di ingresso ideale nel blue team per chi inizia la carriera in cybersecurity.

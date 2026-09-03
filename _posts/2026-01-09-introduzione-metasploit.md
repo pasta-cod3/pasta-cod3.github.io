@@ -196,6 +196,6 @@ vulns                      → mostra vulnerabilità identificate
 
 ## Conclusione
 
-Metasploit è potente, ma ricorda: trovare un exploit che funziona è solo il 20% del lavoro. Il resto è **capire cosa fare dopo** — privilege escalation, lateral movement, persistence, covering tracks. Nei prossimi articoli esploreremo queste fasi.
+Metasploit è potente, ma ricorda: trovare un exploit che funziona è solo il 20% del lavoro. Il resto è **capire cosa fare dopo**: privilege escalation, lateral movement, persistence, covering tracks. Nei prossimi articoli esploreremo queste fasi.
 
-Inizia con lab controllati: **Metasploitable2**, **VulnHub**, o le macchine su **TryHackMe** e **HackTheBox** — sono progettate per essere exploitate.
+Inizia con lab controllati: **Metasploitable2**, **VulnHub**, o le macchine su **TryHackMe** e **HackTheBox**: sono progettate per essere exploitate.
