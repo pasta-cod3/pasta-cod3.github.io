@@ -3251,16 +3251,22 @@ function renderModules() {
   const trunkIdxs = trunkIndices();
   const trunkNodeHtml = trunkIdxs.map(renderModuleNodeHtml).join('');
 
+  const maxBranchModules = Math.max(...BRANCHES.map(b => branchIndices(b.id).length));
   const branchesHtml = BRANCHES.map(branch => {
     const idxs = branchIndices(branch.id);
     const nodesHtml = idxs.length ? idxs.map(renderModuleNodeHtml).join('') : renderBranchPlaceholderHtml(branch);
     const focused = fondState.focusBranch === branch.id;
+    // Se questo ramo ha meno moduli del più profondo, riempie lo spazio
+    // rimasto con una nota invece di lasciare un riquadro vuoto senza senso.
+    const moreComing = idxs.length && idxs.length < maxBranchModules
+      ? `<p class="fond-branch-more-soon">+ altri moduli in arrivo per questo ramo</p>` : '';
     return `
       <div class="fond-branch${focused ? ' fond-branch-focused' : ''}${idxs.length ? '' : ' fond-branch-empty'}" data-branch="${branch.id}">
         ${renderBranchHeadHtml(branch, idxs)}
         <div class="fond-path fond-path-branch" role="list" aria-label="Moduli del ramo ${esc(branch.title)}">
           ${nodesHtml}
         </div>
+        ${moreComing}
       </div>
     `;
   }).join('');

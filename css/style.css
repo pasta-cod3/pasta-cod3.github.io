@@ -1889,8 +1889,9 @@ body {
   position: relative; z-index: 2;
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: clamp(1.25rem, 2.5vw, 2rem);
-  align-items: start;
+  align-items: stretch;
 }
+.fond-branch { display: flex; flex-direction: column; }
 
 .fond-branch {
   border: 1px solid var(--border);
@@ -1952,6 +1953,15 @@ body {
 
 .fond-node-preview { opacity: 0.5; border-style: dashed; }
 .fond-node-preview .fond-node-title { color: var(--text-dim); }
+
+.fond-branch-more-soon {
+  margin: auto 0 0.25rem;
+  padding-top: 1.5rem;
+  text-align: center;
+  font-family: var(--ff-m); font-size: 10.5px; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--text-muted);
+  border-top: 1px dashed var(--border);
+}
 
 @media (max-width: 920px) {
   .fond-branches { grid-template-columns: 1fr; }
