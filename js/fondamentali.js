@@ -3317,9 +3317,9 @@ const MODULES = [
    loro. Un ramo senza moduli (dfir, per ora) è "in arrivo": ha
    comunque una sua card nel bivio, ma senza stanze da aprire. ── */
 const BRANCHES = [
-  { id: 'red',  title: 'Red Team',  subtitle: 'Offensiva: exploitation, post-exploitation, movimento laterale.', icon: 'radar',    accent: 'var(--c-red)' },
-  { id: 'blue', title: 'Blue Team', subtitle: 'Difesa: monitoraggio, detection, threat hunting, incident response.', icon: 'terminal', accent: 'var(--c-blue)' },
-  { id: 'dfir', title: 'DFIR', subtitle: 'Digital Forensics & Incident Response: acquisizione, analisi, catena di custodia.', icon: 'fingerprint', accent: 'var(--c-news)' }
+  { id: 'red',  title: 'Red Team',  subtitle: 'Offensiva: exploitation, post-exploitation, movimento laterale.', icon: 'radar',    accent: 'var(--c-red)',  glowRgb: '255,48,96' },
+  { id: 'blue', title: 'Blue Team', subtitle: 'Difesa: monitoraggio, detection, threat hunting, incident response.', icon: 'terminal', accent: 'var(--c-blue)', glowRgb: '32,144,255' },
+  { id: 'dfir', title: 'DFIR', subtitle: 'Digital Forensics & Incident Response: acquisizione, analisi, catena di custodia.', icon: 'fingerprint', accent: 'var(--c-news)', glowRgb: '153,85,255' }
 ];
 
 const BRANCH_ICON_FN = { radar: radarIcon, terminal: terminalIcon, recon: reconIcon, fingerprint: fingerprintIcon };
@@ -3697,7 +3697,7 @@ function renderBranchHeadHtml(branch, idxs) {
        </button>`
     : '';
   return `
-    <div class="fond-branch-head" style="--branch-accent:${branch.accent}">
+    <div class="fond-branch-head">
       <span class="fond-branch-icon" aria-hidden="true">${(BRANCH_ICON_FN[branch.icon] || reconIcon)()}</span>
       <div class="fond-branch-head-text">
         <h3 class="fond-branch-title">${esc(branch.title)}</h3>
@@ -3727,7 +3727,7 @@ function renderModules() {
     const moreComing = idxs.length && idxs.length < maxBranchModules
       ? `<p class="fond-branch-more-soon">+ altri moduli in arrivo per questo ramo</p>` : '';
     return `
-      <div class="fond-branch${focused ? ' fond-branch-focused' : ''}${idxs.length ? '' : ' fond-branch-empty'}" data-branch="${branch.id}">
+      <div class="fond-branch${focused ? ' fond-branch-focused' : ''}${idxs.length ? '' : ' fond-branch-empty'}" data-branch="${branch.id}" style="--branch-accent:${branch.accent};--branch-glow:${branch.glowRgb}">
         ${renderBranchHeadHtml(branch, idxs)}
         <div class="fond-path fond-path-branch" role="list" aria-label="Moduli del ramo ${esc(branch.title)}">
           ${nodesHtml}
