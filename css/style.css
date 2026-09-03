@@ -108,7 +108,8 @@ body {
 ══════════════════════════════════════════════════════════ */
 .site-header {
   position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center;
+  display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  align-items: center;
   padding: 0 var(--gap);
   height: 62px;
   background: rgba(2,12,24,0.88);
@@ -117,6 +118,8 @@ body {
   border-bottom: 1px solid var(--border);
   gap: 0.6rem;
 }
+.site-header .logo { justify-self: start; }
+.site-header .nav-right { justify-self: end; }
 [data-theme="light"] .site-header { background: rgba(240,246,255,0.92); }
 
 /* LOGO */

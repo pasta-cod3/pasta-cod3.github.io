@@ -3325,11 +3325,11 @@ function renderModules() {
   BRANCHES.forEach(branch => {
     const idxs = branchIndices(branch.id);
     if (!idxs.length) {
-      edges.push({ a: lastTrunk, b: `placeholder-${branch.id}`, state: 'preview' });
+      edges.push({ a: lastTrunk, b: `placeholder-${branch.id}`, state: 'preview', elbowBefore: '.fond-branches' });
       return;
     }
     const forkState = !trunkComplete() ? 'idle' : (moduleStats(idxs[0]).passed ? 'done' : 'active');
-    edges.push({ a: lastTrunk, b: idxs[0], state: forkState });
+    edges.push({ a: lastTrunk, b: idxs[0], state: forkState, elbowBefore: '.fond-branches' });
     for (let k = 0; k < idxs.length - 1; k++) {
       edges.push({ a: idxs[k], b: idxs[k + 1], state: edgeState(idxs[k], idxs[k + 1]) });
     }
@@ -3494,13 +3494,27 @@ function layoutCircuit(edges) {
       return [el.dataset.nodeKey, [r.left - wrapRect.left + r.width / 2, r.top - wrapRect.top + r.height / 2]];
     }));
 
+    // Alcuni edge (il bivio) indicano un elemento PRIMA del quale la
+    // svolta orizzontale deve avvenire, cosi' la curva resta sopra tutte
+    // le card invece di tagliare in diagonale sopra quelle di altri rami
+    // mentre scende verso la propria colonna.
+    const elbowBeforeCache = new Map();
+    const resolveElbowY = selector => {
+      if (elbowBeforeCache.has(selector)) return elbowBeforeCache.get(selector);
+      const el = wrap.querySelector(selector);
+      const y = el ? (el.getBoundingClientRect().top - wrapRect.top - 14) : null;
+      elbowBeforeCache.set(selector, y);
+      return y;
+    };
+
     const segPaths = [];
-    currentEdges.forEach(({ a, b, state }) => {
+    currentEdges.forEach(({ a, b, state, elbowBefore }) => {
       const c1 = centerByKey.get(String(a)), c2 = centerByKey.get(String(b));
       if (!c1 || !c2) return;
       const [x1, y1] = c1;
       const [x2, y2] = c2;
-      const ymid = (y1 + y2) / 2;
+      const forcedElbowY = elbowBefore ? resolveElbowY(elbowBefore) : null;
+      const ymid = (forcedElbowY != null) ? forcedElbowY : (y1 + y2) / 2;
       const d = `M ${x1} ${y1} C ${x1} ${ymid}, ${x2} ${ymid}, ${x2} ${y2}`;
 
       const path = svgEl('path', { d, class: `fond-trace fond-trace-${state}` });
