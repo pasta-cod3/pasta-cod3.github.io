@@ -153,6 +153,17 @@ function reconIcon() {
   </svg>`;
 }
 
+function fingerprintIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3a8 8 0 0 0-8 8v2.5"/>
+    <path d="M12 3a8 8 0 0 1 8 8v2.5"/>
+    <path d="M8 21c1-2 1.3-4.3 1.3-6.5V11a2.7 2.7 0 0 1 5.4 0v1"/>
+    <path d="M15.5 21c.6-1.8.9-3.6.9-5.5"/>
+    <path d="M5.3 17c.5-1.6.8-3.3.8-5V11a5.9 5.9 0 0 1 11.8 0v2"/>
+    <circle cx="12" cy="12" r="0.4" fill="currentColor" stroke="none"/>
+  </svg>`;
+}
+
 function terminalIcon() {
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <rect x="2.6" y="4" width="18.8" height="16" rx="2.2"/>
@@ -2037,10 +2048,10 @@ const MODULES = [
 const BRANCHES = [
   { id: 'red',  title: 'Red Team',  subtitle: 'Offensiva: exploitation, post-exploitation, movimento laterale.', icon: 'radar',    accent: 'var(--c-red)' },
   { id: 'blue', title: 'Blue Team', subtitle: 'Difesa: monitoraggio, detection, threat hunting, incident response.', icon: 'terminal', accent: 'var(--c-blue)' },
-  { id: 'dfir', title: 'DFIR', subtitle: 'Digital Forensics & Incident Response: acquisizione, analisi, catena di custodia.', icon: 'recon', accent: 'var(--c-news)' }
+  { id: 'dfir', title: 'DFIR', subtitle: 'Digital Forensics & Incident Response: acquisizione, analisi, catena di custodia.', icon: 'fingerprint', accent: 'var(--c-news)' }
 ];
 
-const BRANCH_ICON_FN = { radar: radarIcon, terminal: terminalIcon, recon: reconIcon };
+const BRANCH_ICON_FN = { radar: radarIcon, terminal: terminalIcon, recon: reconIcon, fingerprint: fingerprintIcon };
 
 function trunkIndices() {
   return MODULES.map((_, i) => i).filter(i => !MODULES[i].branch);
