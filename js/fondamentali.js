@@ -103,12 +103,29 @@ function renderRoomIconBadge(room) {
     // Antu), quindi niente disco scuro sotto o farebbe "cerchio nel
     // cerchio": lo si mostra un po' più grande, senza wrapper opaco.
     const rawCls = room.iconRaw ? ' fond-room-icon-badge-raw' : '';
+    const { initials, color } = thmMonogramData(room.title);
+    // Il fallback passa per una funzione globale (non per una stringa
+    // HTML inline nell'attributo onerror): un tentativo precedente
+    // interpolava lì dentro l'HTML del monogramma, ma quell'HTML usa a
+    // sua volta virgolette doppie per i suoi attributi, che chiudono in
+    // anticipo l'attributo onerror (anch'esso tra doppi apici) — il
+    // parser tronca onerror e inietta il resto come markup letterale,
+    // mostrando monogramma e icona reale sovrapposti sempre, non solo
+    // in caso di errore di caricamento.
     return `<span class="fond-room-icon-badge${rawCls}" style="--room-icon-glow:${glow}" aria-hidden="true">
       <img class="fond-room-icon-img" src="${room.icon}" alt="" loading="lazy" width="20" height="20"
-        onerror="this.parentElement.outerHTML='${renderRoomIconMono(room).replace(/'/g, "\\'")}'">
+        onerror="fondRoomIconFallback(this,'${esc(initials)}','${color}')">
     </span>`;
   }
   return renderRoomIconMono(room);
+}
+
+function fondRoomIconFallback(img, initials, color) {
+  const badge = img.parentElement;
+  if (!badge) return;
+  badge.className = 'fond-room-icon-badge';
+  badge.style.setProperty('--room-icon-glow', hexToRgba(color, 0.5));
+  badge.innerHTML = `<span class="fond-room-icon-mono" style="--mono-c:${color}">${esc(initials)}</span>`;
 }
 
 function renderRoomIconMono(room) {

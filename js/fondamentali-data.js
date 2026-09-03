@@ -351,6 +351,7 @@ const ROOMS = [
     title: 'PKI e certificati digitali',
     excerpt: "Perché il lucchetto HTTPS non è garanzia assoluta. Come funziona la Public Key Infrastructure, il ruolo delle Certificate Authority e cosa succede quando la fiducia si rompe.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/letsencrypt.svg', iconGlow: '#003a70',
     thm: [
       { name: 'Encryption - Crypto 101', difficulty: 'facile', note: "Buona base prima di affrontare certificati e catene di fiducia in dettaglio." }
     ],
@@ -505,6 +506,7 @@ const ROOMS = [
     title: 'Come funzionano le password',
     excerpt: "Le password non vengono memorizzate in chiaro — o non dovrebbero. Come funziona l'hashing, cos'è il salting, perché MD5 è obsoleto e cosa usare nel 2026.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fidoalliance.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Crack the Hash', difficulty: 'facile', note: "Esercitati a identificare e craccare hash reali, il modo migliore per capire perché salting e algoritmi lenti contano." },
       { name: 'Crack The Hash Level 2', difficulty: 'media', note: "Il seguito più avanzato, con hash più ostici e generazione di wordlist mirate." }
@@ -582,6 +584,7 @@ const ROOMS = [
     title: 'Active Directory e LDAP',
     excerpt: "Prima di capire come si attacca Active Directory, bisogna capire come funziona. Domini, Organizational Unit, Group Policy, LDAP e Kerberos: l'infrastruttura di identità del 90% delle aziende Windows.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/windows.svg', iconGlow: '#0078d4',
     thm: [
       { name: 'Attacktive Directory', difficulty: 'media', note: "Primo contatto pratico con un dominio Active Directory: OU, autenticazione Kerberos e LDAP in azione." }
     ],
@@ -1156,6 +1159,7 @@ const ROOMS = [
     title: 'Google Dorking e OSINT avanzato',
     excerpt: "I motori di ricerca indicizzano più di quanto pensiamo. Operatori Google, GHDB, Shodan e Censys per trovare quello che non dovrebbe essere pubblico — senza toccare il target.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/shodan.png', iconGlow: '#e6394a',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Buona base di ricognizione open source prima di affinare le tecniche di dorking avanzato." }
     ],
@@ -1272,6 +1276,7 @@ const ROOMS = [
     title: 'SQL Injection: le basi',
     excerpt: "Al primo posto della OWASP Top 10 da decenni. Come una query costruita concatenando input utente diventa un varco per leggere l\'intero database — e come i prepared statement lo chiudono.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/sqlmap.png', iconGlow: '#e67e22',
     thm: [
       { name: 'OWASP Top 10', difficulty: 'media', note: "La SQL Injection è una delle vulnerabilità principali coperte dalla room, con esempi pratici da sfruttare." }
     ],
@@ -1770,6 +1775,7 @@ const ROOMS = [
     title: 'Vulnerability Management',
     excerpt: "Non puoi proteggere ciò che non conosci. Le 4 fasi del VM: inventario, scanning, prioritizzazione con CVSS/SSVC, remediation — un processo continuo, non un\'attività una tantum.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/greenbone.png', iconGlow: '#1e7a3d',
     thm: [
       { name: 'Security Principles', difficulty: 'facile', note: "Inquadra il vulnerability management nel contesto più ampio dei principi di sicurezza." },
       { name: 'Nmap', difficulty: 'facile', note: "Nmap è uno degli strumenti citati nell\'articolo per l\'inventario e lo scanning iniziale." }
@@ -2153,6 +2159,7 @@ const ROOMS = [
     title: 'Threat Intelligence per principianti: capire chi attacca e come',
     excerpt: "La threat intelligence trasforma dati grezzi in conoscenza utile per la difesa. Tipi di intelligence, fonti OSINT, MISP e come integrare gli IOC nei sistemi di difesa.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/misp.png', iconGlow: '#00b4d8',
     thm: [
       { name: 'Threat Intelligence Tools', difficulty: 'facile', note: "Gli stessi strumenti OSINT descritti nell'articolo, messi in pratica direttamente in questa stanza." }
     ],
@@ -2344,6 +2351,7 @@ const ROOMS = [
     title: 'Backup e Recovery: la regola 3-2-1 e come costruire una strategia anti-ransomware',
     excerpt: "Il backup è l'ultima linea di difesa contro il ransomware. La regola 3-2-1, i backup immutabili, i test di restore e tutto ciò che devi sapere per costruire una strategia di backup che funzioni davvero.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/veeam.svg', iconGlow: '#00b336',
     thm: [
       { name: 'Security Principles', difficulty: 'facile', note: "La resilienza, di cui il backup è un pilastro, è uno dei principi di sicurezza fondamentali trattati in questa stanza." }
     ],
@@ -2980,7 +2988,6 @@ const ROOMS = [
     title: 'Dagli IOC alla Threat Intelligence: condividere quello che si è scoperto',
     excerpt: "Ogni indagine produce indicatori di compromissione. Lasciarli in un report archiviato significa sprecare l'unica cosa che potrebbe aiutare un altro team a bloccare lo stesso attaccante.",
     difficulty: 'facile',
-    icon: 'assets/icons/rooms/misp.png', iconGlow: '#00b4d8',
     thm: [
       { name: 'Intro to Cyber Threat Intel', difficulty: 'facile', note: "Introduce concretamente framework e standard di threat intelligence descritti nell'articolo." }
     ],
