@@ -3758,6 +3758,7 @@ function renderModules() {
   app.querySelectorAll('.fond-node-module:not(.fond-node-locked)').forEach(node => {
     const trigger = () => {
       const idx = parseInt(node.dataset.moduleIndex, 10);
+      pushHistoryView({ view: 'moduleMap', moduleIndex: idx });
       renderModuleMap(idx);
       document.getElementById('fondApp').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
@@ -3891,11 +3892,12 @@ function renderModuleMap(moduleIndex) {
 
   bindResetBtn();
   initNodeTilt();
-  document.getElementById('fondBackModules').addEventListener('click', renderModules);
+  document.getElementById('fondBackModules').addEventListener('click', () => history.back());
 
   app.querySelectorAll('.fond-node:not(.fond-node-locked)').forEach(node => {
     const trigger = () => {
       const ri = mod.roomIds.indexOf(node.dataset.roomId);
+      pushHistoryView({ view: 'room', moduleIndex, roomIndexInModule: ri });
       renderRoom(moduleIndex, ri);
       document.getElementById('fondApp').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
@@ -4104,7 +4106,7 @@ function renderRoom(moduleIndex, roomIndexInModule) {
       </div>
     `;
     bindResetBtn();
-    document.getElementById('fondBackMap').addEventListener('click', () => renderModuleMap(moduleIndex));
+    document.getElementById('fondBackMap').addEventListener('click', () => history.back());
     document.getElementById('fondRetryQuiz').addEventListener('click', () => renderQuiz(moduleIndex, roomIndexInModule, true));
     return;
   }
@@ -4154,7 +4156,7 @@ function renderQuiz(moduleIndex, roomIndexInModule, isRetry) {
   `;
 
   bindResetBtn();
-  document.getElementById('fondBackMap').addEventListener('click', () => renderModuleMap(moduleIndex));
+  document.getElementById('fondBackMap').addEventListener('click', () => history.back());
 
   document.getElementById('fondSubmitQuiz').addEventListener('click', () => {
     let allSolved = true;
@@ -4318,17 +4320,40 @@ function completeRoom(moduleIndex, roomIndexInModule, circuitsEarned, isRetry, p
   `;
 
   bindResetBtn();
-  document.getElementById('fondGoModule').addEventListener('click', () => renderModuleMap(moduleIndex));
+  document.getElementById('fondGoModule').addEventListener('click', () => history.back());
   const nextBtn = document.getElementById('fondGoNext');
-  if (nextBtn) nextBtn.addEventListener('click', () => renderRoom(moduleIndex, roomIndexInModule + 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => {
+    pushHistoryView({ view: 'room', moduleIndex, roomIndexInModule: roomIndexInModule + 1 });
+    renderRoom(moduleIndex, roomIndexInModule + 1);
+  });
 }
 
 /* ─── INIT ───────────────────────────────────────────────── */
 
+/* Cronologia in-app: ogni "drill down" (mappa → modulo → stanza) fa
+   un pushState così il tasto indietro del browser torna di un passo
+   invece di uscire dalla pagina. I bottoni "← Torna..." richiamano
+   semplicemente history.back(), condividendo lo stesso meccanismo. */
+function pushHistoryView(state) {
+  history.pushState(state, '');
+}
+function replaceHistoryView(state) {
+  history.replaceState(state, '');
+}
+window.addEventListener('popstate', e => {
+  const s = e.state;
+  if (!fondState || !s || s.view === 'gate') { renderGate(); return; }
+  if (s.view === 'moduleMap') { renderModuleMap(s.moduleIndex); return; }
+  if (s.view === 'room') { renderRoom(s.moduleIndex, s.roomIndexInModule); return; }
+  renderModules();
+});
+
 function renderApp() {
   if (!fondState) {
+    replaceHistoryView({ view: 'gate' });
     renderGate();
   } else {
+    replaceHistoryView({ view: 'map' });
     renderModules();
   }
 }
