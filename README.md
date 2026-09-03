@@ -61,19 +61,21 @@ Il blog è pensato per chi sta muovendo i primi passi nella cybersecurity, per c
 
 ## Contenuti
 
-Il sito raccoglie oltre **140 articoli**, organizzati in cinque categorie e sempre filtrabili per tag e ricerca full-text direttamente dal sito.
+Il sito raccoglie oltre **155 articoli**, organizzati in cinque categorie e sempre filtrabili per tag e ricerca full-text direttamente dal sito.
 
 <div align="center">
 
 | Categoria | Articoli | Di cosa parla |
 |:---|:---:|:---|
 | ![Red Team](https://img.shields.io/badge/-Red%20Team-e63946?style=flat-square) | 39 | Tecniche offensive: attacchi ad Active Directory, exploitation web, pivoting, buffer overflow, C2, sicurezza wireless |
-| ![Blue Team](https://img.shields.io/badge/-Blue%20Team-1d7fd4?style=flat-square) | 27 | Difesa: SOC, EDR, forensica digitale, Zero Trust, email security, cloud security, incident response |
+| ![Blue Team](https://img.shields.io/badge/-Blue%20Team-1d7fd4?style=flat-square) | 44 | Difesa: SOC, EDR, forensica digitale, Zero Trust, email security, cloud security, incident response |
 | ![News](https://img.shields.io/badge/-News-8e44ad?style=flat-square) | 36 | Attualità cybersecurity con un occhio a Italia ed Europa: breach, ransomware, normative come NIS2 e GDPR |
 | ![Storia](https://img.shields.io/badge/-Storia-e67e22?style=flat-square) | 18 | Episodi che hanno fatto la storia dell'hacking, da Stuxnet a Mitnick, dal Morris Worm al PSN Breach |
 | ![Fondamentali](https://img.shields.io/badge/-Fondamentali-2ea44f?style=flat-square) | 20 | Le basi tecniche: modello OSI, crittografia, DNS, firewall, autenticazione |
 
 </div>
+
+Il percorso interattivo **Fondamentali** (`fondamentali.html`) va oltre queste 20 basi: raccoglie **77 stanze** in 13 moduli, un tronco comune più tre rami scelti liberamente (Red Team, Blue Team, DFIR), ciascuno con articoli dedicati, quiz e stanze TryHackMe verificate a mano.
 
 <br>
 
