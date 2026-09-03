@@ -1876,6 +1876,87 @@ body {
   color: var(--text-muted); opacity: 0.6; text-transform: uppercase; pointer-events: none;
 }
 
+/* ─── BIVIO: tronco comune + 3 rami affiancati ────────────── */
+
+.fond-fork-label {
+  position: relative; z-index: 2;
+  text-align: center; margin: 0.25rem 0 1.75rem;
+  font-family: var(--ff-m); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-dim);
+}
+
+.fond-branches {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: start;
+}
+
+.fond-branch {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--branch-accent, var(--border));
+  border-radius: 8px;
+  background: rgba(255,255,255,0.015);
+  padding: 1.1rem 1rem 1.6rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.fond-branch-focused {
+  border-color: var(--branch-accent, var(--border));
+  box-shadow: 0 0 0 1px var(--branch-accent, transparent), 0 18px 40px rgba(0,0,0,0.3);
+}
+.fond-branch-empty { opacity: 0.85; }
+
+.fond-branch-head {
+  display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.fond-branch-icon {
+  flex: 0 0 auto; width: 30px; height: 30px; color: var(--branch-accent, var(--text-dim));
+}
+.fond-branch-icon svg { width: 100%; height: 100%; }
+.fond-branch-head-text { flex: 1 1 160px; min-width: 0; }
+.fond-branch-title {
+  font-family: var(--ff-d); font-size: 1.05rem; margin: 0 0 0.2rem; color: var(--text);
+}
+.fond-branch-subtitle {
+  font-size: 0.8rem; line-height: 1.4; color: var(--text-dim); margin: 0;
+}
+.fond-branch-head-meta {
+  flex: 1 1 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 0.6rem; margin-top: 0.4rem;
+}
+.fond-branch-progress {
+  font-family: var(--ff-m); font-size: 10.5px; letter-spacing: 0.03em; color: var(--text-dim);
+}
+.fond-branch-progress-soon { color: var(--c-news); text-transform: uppercase; letter-spacing: 0.08em; }
+
+.fond-branch-focus-btn {
+  font-family: var(--ff-m); font-size: 10px; letter-spacing: 0.03em;
+  background: transparent; border: 1px solid var(--border); border-radius: 20px;
+  color: var(--text-dim); padding: 0.3rem 0.7rem; cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.fond-branch-focus-btn:hover { border-color: var(--branch-accent, var(--accent)); color: var(--text); }
+.fond-branch-focus-btn-active {
+  border-color: var(--branch-accent, var(--accent)); color: var(--branch-accent, var(--accent));
+  background: rgba(255,255,255,0.04);
+}
+
+.fond-path-branch { gap: 1.75rem; }
+.fond-path-branch .fond-path-item,
+.fond-path-branch .fond-path-item:nth-child(odd),
+.fond-path-branch .fond-path-item:nth-child(even) {
+  width: 100%; align-self: center; margin: 0;
+}
+.fond-path-branch .fond-node { min-height: 96px; }
+
+.fond-node-preview { opacity: 0.5; border-style: dashed; }
+.fond-node-preview .fond-node-title { color: var(--text-dim); }
+
+@media (max-width: 920px) {
+  .fond-branches { grid-template-columns: 1fr; }
+}
+
 /* Chip / nodo */
 .fond-node {
   position: relative;
@@ -2157,6 +2238,9 @@ body {
   animation: fond-flow 0.9s linear infinite;
 }
 @keyframes fond-flow { to { stroke-dashoffset: -13; } }
+.fond-trace-preview {
+  stroke: var(--c-news); stroke-width: 1.5; stroke-dasharray: 1 6; opacity: 0.35;
+}
 
 .fond-flow-dot {
   fill: var(--accent); filter: drop-shadow(0 0 7px rgba(0,200,255,0.95));
@@ -2170,6 +2254,7 @@ body {
 .fond-via-done   { fill: var(--c-fond); }
 .fond-via-active { fill: var(--accent); filter: drop-shadow(0 0 4px rgba(0,200,255,0.85)); }
 .fond-via-mid    { opacity: 0.55; }
+.fond-via-preview{ fill: var(--c-news); opacity: 0.35; }
 .fond-via-hole   { fill: var(--bg-card); }
 
 /* Vista stanza */

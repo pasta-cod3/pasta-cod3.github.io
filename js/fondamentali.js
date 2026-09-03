@@ -1999,27 +1999,72 @@ const MODULES = [
     id: 'ricognizione-web-hacking',
     title: 'Ricognizione e Web Hacking',
     subtitle: 'Dalla ricerca di informazioni pubbliche alle vulnerabilità web più diffuse: OSINT, Nmap, Burp, XSS e SQL Injection.',
+    branch: 'red',
     roomIds: ['ricognizione-passiva-osint', 'ricognizione-attiva-nmap', 'google-dorking-recon-avanzato', 'burp-suite-basi', 'xss-cross-site-scripting', 'sql-injection-basi']
   },
   {
     id: 'sfruttamento-pratico',
     title: 'Sfruttamento pratico',
     subtitle: "Dalla teoria alla macchina reale: privesc, web, Active Directory e buffer overflow — con flag da TryHackMe per confermare il completamento.",
+    branch: 'red',
     roomIds: ['privilege-escalation-linux', 'privilege-escalation-windows', 'web-shells-upload-bypass', 'active-directory-attacchi-base', 'buffer-overflow-basi']
   },
   {
     id: 'post-exploitation-red-team',
     title: 'Post-Exploitation e Red Team',
     subtitle: 'Cosa succede dopo il primo accesso: shell, cracking delle password, pivoting, persistenza e movimento laterale in Active Directory.',
+    branch: 'red',
     roomIds: ['introduzione-metasploit', 'reverse-shell-bind-shell', 'password-cracking-hashcat-hydra', 'pivoting-tunneling-reti', 'post-exploitation-persistence-linux', 'lateral-movement-red-team']
   },
   {
     id: 'blue-team-monitoraggio-difesa',
     title: 'Blue Team: Monitoraggio e Difesa',
     subtitle: "Dall'altra parte della barricata: leggere il traffico, rilevare intrusioni, cacciare le minacce e rispondere quando l'incidente è reale.",
+    branch: 'blue',
     roomIds: ['wireshark-analisi-traffico', 'ids-ips-suricata', 'siem-blue-team', 'threat-hunting-intro', 'incident-response-processo', 'analisi-malware-base']
   }
 ];
+
+/* ─── RAMI ───────────────────────────────────────────────────
+   Dal modulo 4 (tronco comune) in poi il percorso si biforca.
+   Un modulo senza campo "branch" appartiene al tronco: sblocco
+   lineare come sempre. Un modulo con "branch" appartiene invece
+   a uno dei rami sotto: tutti i rami si sbloccano insieme al
+   completamento del tronco (nessun ramo è più "principale" di
+   un altro), e dentro ogni ramo i moduli restano lineari tra
+   loro. Un ramo senza moduli (dfir, per ora) è "in arrivo": ha
+   comunque una sua card nel bivio, ma senza stanze da aprire. ── */
+const BRANCHES = [
+  { id: 'red',  title: 'Red Team',  subtitle: 'Offensiva: exploitation, post-exploitation, movimento laterale.', icon: 'radar',    accent: 'var(--c-red)' },
+  { id: 'blue', title: 'Blue Team', subtitle: 'Difesa: monitoraggio, detection, threat hunting, incident response.', icon: 'terminal', accent: 'var(--c-blue)' },
+  { id: 'dfir', title: 'DFIR', subtitle: 'Digital Forensics & Incident Response: acquisizione, analisi, catena di custodia.', icon: 'recon', accent: 'var(--c-news)' }
+];
+
+const BRANCH_ICON_FN = { radar: radarIcon, terminal: terminalIcon, recon: reconIcon };
+
+function trunkIndices() {
+  return MODULES.map((_, i) => i).filter(i => !MODULES[i].branch);
+}
+function branchIndices(branchId) {
+  return MODULES.map((_, i) => i).filter(i => MODULES[i].branch === branchId);
+}
+function trunkComplete() {
+  return trunkIndices().every(i => moduleStats(i).passed);
+}
+/* Numerazione "locale": posizione del modulo dentro il tronco o
+   dentro il proprio ramo, invece del semplice indice globale
+   (che con i rami in parallelo non avrebbe più senso da solo). */
+function moduleBranchInfo(moduleIndex) {
+  const branch = MODULES[moduleIndex].branch || null;
+  const idxs = branch ? branchIndices(branch) : trunkIndices();
+  const meta = branch ? BRANCHES.find(b => b.id === branch) : null;
+  return {
+    branch,
+    pos: idxs.indexOf(moduleIndex) + 1,
+    total: idxs.length,
+    label: meta ? `Ramo ${meta.title}` : 'Tronco comune'
+  };
+}
 
 const CIRCUITS_FIRST_TRY = 20;
 const CIRCUITS_RETRY = 10;
@@ -2035,8 +2080,14 @@ function defaultState(nickname) {
   return {
     nickname: nickname,
     completed: {},
+    focusBranch: null,
     createdAt: new Date().toISOString()
   };
+}
+
+function setFocusBranch(branchId) {
+  fondState.focusBranch = (fondState.focusBranch === branchId) ? null : branchId;
+  saveState(fondState);
 }
 
 function loadState() {
@@ -2087,8 +2138,25 @@ function moduleStats(moduleIndex) {
   return { mod, max, earned, done, total, allDone, ratio, passed: allDone && ratio >= MODULE_PASS_RATIO };
 }
 
+function modulePrerequisiteMet(moduleIndex) {
+  const branch = MODULES[moduleIndex].branch;
+  if (!branch) {
+    // Modulo del tronco: sblocco lineare rispetto al tronco soltanto.
+    const idxs = trunkIndices();
+    const pos = idxs.indexOf(moduleIndex);
+    return pos === 0 || moduleStats(idxs[pos - 1]).passed;
+  }
+  // Modulo di un ramo: il primo di ogni ramo richiede il tronco completo
+  // (tutti i rami si sbloccano insieme, nessuno prima degli altri); i
+  // successivi restano lineari rispetto al proprio ramo soltanto.
+  const idxs = branchIndices(branch);
+  const pos = idxs.indexOf(moduleIndex);
+  if (pos === 0) return trunkComplete();
+  return moduleStats(idxs[pos - 1]).passed;
+}
+
 function moduleStatus(moduleIndex) {
-  if (moduleIndex > 0 && !moduleStats(moduleIndex - 1).passed) return 'locked';
+  if (!modulePrerequisiteMet(moduleIndex)) return 'locked';
   const s = moduleStats(moduleIndex);
   if (!s.allDone) return 'unlocked';
   return s.passed ? 'passed' : 'below-threshold';
@@ -2249,52 +2317,133 @@ function initNodeTilt() {
   });
 }
 
+function moduleDesignator(i) {
+  const info = moduleBranchInfo(i);
+  const prefix = info.branch ? info.branch[0].toUpperCase() : 'T';
+  return `${prefix}${String(info.pos).padStart(2, '0')}`;
+}
+
+/* Markup di un singolo nodo-modulo, usato sia per il tronco sia per i
+   moduli dentro un ramo: il node-key è l'indice globale in MODULES, così
+   layoutCircuit può collegarli tra loro indipendentemente dal contenitore
+   DOM in cui finiscono (tronco vs. colonna di un ramo). */
+function renderModuleNodeHtml(i) {
+  const mod = MODULES[i];
+  const status = moduleStatus(i);
+  const stats = moduleStats(i);
+  const statusLabel = { locked: 'bloccato', unlocked: 'in corso', passed: 'superato', 'below-threshold': 'sotto soglia' }[status];
+  let footer;
+  if (status === 'locked') {
+    footer = `<span class="fond-node-locked-label">bloccato</span>`;
+  } else if (status === 'passed') {
+    footer = `<span class="fond-node-circuits">${circuitBadge(20)} ${stats.earned}/${stats.max}</span>`;
+  } else if (status === 'below-threshold') {
+    footer = `<span class="fond-node-warn">sotto soglia · ${stats.done}/${stats.total} stanze</span>`;
+  } else {
+    footer = `<span class="fond-node-cta">${stats.done}/${stats.total} stanze · apri →</span>`;
+  }
+  const visual = MODULE_VISUAL[i] || MODULE_VISUAL[0];
+  const iconHtml = visual.img
+    ? `<img class="fond-mod-icon-img" src="${visual.img}" alt="" loading="lazy" width="56" height="56">`
+    : `<span class="fond-mod-icon-svg">${visual.icon()}</span>`;
+  const info = moduleBranchInfo(i);
+  return `
+    <div class="fond-path-item" data-idx="${i}" data-node-key="${i}">
+      <div class="fond-node fond-node-module ${moduleNodeClass(status)}" data-module-index="${i}"
+           role="button" tabindex="${status === 'locked' ? '-1' : '0'}"
+           aria-disabled="${status === 'locked'}"
+           aria-label="${esc(info.label)}, modulo ${info.pos} di ${info.total}: ${esc(mod.title)} — ${statusLabel}">
+        <span class="fond-node-head">
+          <span class="fond-node-designator">${moduleDesignator(i)}</span>
+          <span class="fond-node-led" aria-hidden="true"></span>
+        </span>
+        <div class="fond-mod-icon" aria-hidden="true">
+          <span class="fond-mod-icon-glow"></span>
+          ${iconHtml}
+        </div>
+        <span class="fond-node-title">${esc(mod.title)}</span>
+        <div class="fond-mod-term" aria-hidden="true">
+          <span class="fond-mod-term-dots"><i></i><i></i><i></i></span>
+          <span class="fond-mod-term-path">root@kali</span>
+        </div>
+        <p class="fond-mod-cmdline">
+          <span class="fond-mod-prompt">$</span>
+          <span class="fond-mod-type" data-cmd="${esc(visual.cmd)}"></span><span class="fond-mod-cursor">▋</span>
+        </p>
+        <span class="fond-node-foot">${footer}</span>
+        <span class="fond-node-shimmer" aria-hidden="true"></span>
+      </div>
+    </div>
+  `;
+}
+
+/* Card segnaposto per un ramo che non ha ancora moduli (oggi: DFIR):
+   compare comunque nel bivio, per far vedere che il ramo esiste ed è
+   in arrivo, ma non è cliccabile e non tiene traccia di progressi. */
+function renderBranchPlaceholderHtml(branch) {
+  return `
+    <div class="fond-path-item" data-node-key="placeholder-${branch.id}">
+      <div class="fond-node fond-node-module fond-node-locked fond-node-preview" aria-hidden="true">
+        <span class="fond-node-head">
+          <span class="fond-node-designator">${branch.id[0].toUpperCase()}01</span>
+          <span class="fond-node-led" aria-hidden="true"></span>
+        </span>
+        <div class="fond-mod-icon" aria-hidden="true">
+          <span class="fond-mod-icon-glow"></span>
+          <span class="fond-mod-icon-svg">${(BRANCH_ICON_FN[branch.icon] || reconIcon)()}</span>
+        </div>
+        <span class="fond-node-title">In arrivo</span>
+        <p class="fond-mod-cmdline"><span class="fond-mod-prompt">$</span> <span class="fond-node-locked-label">stanze in preparazione</span></p>
+        <span class="fond-node-foot"><span class="fond-node-locked-label">prossimamente</span></span>
+      </div>
+    </div>
+  `;
+}
+
+function renderBranchHeadHtml(branch, idxs) {
+  const focused = fondState.focusBranch === branch.id;
+  const hasModules = idxs.length > 0;
+  const passedCount = idxs.reduce((n, i) => n + (moduleStats(i).passed ? 1 : 0), 0);
+  const progress = hasModules
+    ? `<span class="fond-branch-progress">${passedCount}/${idxs.length} moduli superati</span>`
+    : `<span class="fond-branch-progress fond-branch-progress-soon">in arrivo</span>`;
+  const focusBtn = hasModules
+    ? `<button type="button" class="fond-branch-focus-btn${focused ? ' fond-branch-focus-btn-active' : ''}"
+         data-branch="${branch.id}" aria-pressed="${focused}"
+         aria-label="${focused ? 'Togli' : 'Segna'} ${esc(branch.title)} come ramo su cui concentrarti">
+         ${focused ? '★ il tuo ramo' : '☆ concentrati qui'}
+       </button>`
+    : '';
+  return `
+    <div class="fond-branch-head" style="--branch-accent:${branch.accent}">
+      <span class="fond-branch-icon" aria-hidden="true">${(BRANCH_ICON_FN[branch.icon] || reconIcon)()}</span>
+      <div class="fond-branch-head-text">
+        <h3 class="fond-branch-title">${esc(branch.title)}</h3>
+        <p class="fond-branch-subtitle">${esc(branch.subtitle)}</p>
+      </div>
+      <div class="fond-branch-head-meta">
+        ${progress}
+        ${focusBtn}
+      </div>
+    </div>
+  `;
+}
+
 function renderModules() {
   const app = document.getElementById('fondApp');
 
-  const nodeHtml = MODULES.map((mod, i) => {
-    const status = moduleStatus(i);
-    const stats = moduleStats(i);
-    const statusLabel = { locked: 'bloccato', unlocked: 'in corso', passed: 'superato', 'below-threshold': 'sotto soglia' }[status];
-    let footer;
-    if (status === 'locked') {
-      footer = `<span class="fond-node-locked-label">bloccato</span>`;
-    } else if (status === 'passed') {
-      footer = `<span class="fond-node-circuits">${circuitBadge(20)} ${stats.earned}/${stats.max}</span>`;
-    } else if (status === 'below-threshold') {
-      footer = `<span class="fond-node-warn">sotto soglia · ${stats.done}/${stats.total} stanze</span>`;
-    } else {
-      footer = `<span class="fond-node-cta">${stats.done}/${stats.total} stanze · apri →</span>`;
-    }
-    const visual = MODULE_VISUAL[i] || MODULE_VISUAL[0];
-    const iconHtml = visual.img
-      ? `<img class="fond-mod-icon-img" src="${visual.img}" alt="" loading="lazy" width="56" height="56">`
-      : `<span class="fond-mod-icon-svg">${visual.icon()}</span>`;
+  const trunkIdxs = trunkIndices();
+  const trunkNodeHtml = trunkIdxs.map(renderModuleNodeHtml).join('');
+
+  const branchesHtml = BRANCHES.map(branch => {
+    const idxs = branchIndices(branch.id);
+    const nodesHtml = idxs.length ? idxs.map(renderModuleNodeHtml).join('') : renderBranchPlaceholderHtml(branch);
+    const focused = fondState.focusBranch === branch.id;
     return `
-      <div class="fond-path-item" data-idx="${i}">
-        <div class="fond-node fond-node-module ${moduleNodeClass(status)}" data-module-index="${i}"
-             role="button" tabindex="${status === 'locked' ? '-1' : '0'}"
-             aria-disabled="${status === 'locked'}"
-             aria-label="Modulo ${i + 1} di ${MODULES.length}: ${esc(mod.title)} — ${statusLabel}">
-          <span class="fond-node-head">
-            <span class="fond-node-designator">M${String(i + 1).padStart(2, '0')}</span>
-            <span class="fond-node-led" aria-hidden="true"></span>
-          </span>
-          <div class="fond-mod-icon" aria-hidden="true">
-            <span class="fond-mod-icon-glow"></span>
-            ${iconHtml}
-          </div>
-          <span class="fond-node-title">${esc(mod.title)}</span>
-          <div class="fond-mod-term" aria-hidden="true">
-            <span class="fond-mod-term-dots"><i></i><i></i><i></i></span>
-            <span class="fond-mod-term-path">root@kali</span>
-          </div>
-          <p class="fond-mod-cmdline">
-            <span class="fond-mod-prompt">$</span>
-            <span class="fond-mod-type" data-cmd="${esc(visual.cmd)}"></span><span class="fond-mod-cursor">▋</span>
-          </p>
-          <span class="fond-node-foot">${footer}</span>
-          <span class="fond-node-shimmer" aria-hidden="true"></span>
+      <div class="fond-branch${focused ? ' fond-branch-focused' : ''}${idxs.length ? '' : ' fond-branch-empty'}" data-branch="${branch.id}">
+        ${renderBranchHeadHtml(branch, idxs)}
+        <div class="fond-path fond-path-branch" role="list" aria-label="Moduli del ramo ${esc(branch.title)}">
+          ${nodesHtml}
         </div>
       </div>
     `;
@@ -2302,10 +2451,14 @@ function renderModules() {
 
   app.innerHTML = `
     ${renderStatusBar()}
-    <div class="fond-path-wrap" id="fondMapWrap">
+    <div class="fond-path-wrap fond-path-wrap-tree" id="fondMapWrap">
       <svg class="fond-path-svg" id="fondMapSvg" aria-hidden="true"></svg>
-      <div class="fond-path" id="fondMapGrid" role="list" aria-label="Moduli del percorso, in sequenza">
-        ${nodeHtml}
+      <div class="fond-path" id="fondMapGrid" role="list" aria-label="Tronco comune, in sequenza">
+        ${trunkNodeHtml}
+      </div>
+      <p class="fond-fork-label">${trunkComplete() ? '▾ scegli il tuo ramo, o esplorali tutti ▾' : '▾ il bivio si sblocca a tronco completato ▾'}</p>
+      <div class="fond-branches">
+        ${branchesHtml}
       </div>
       <span class="fond-board-label" aria-hidden="true">pasta-cod3 · fond-board rev.2026</span>
     </div>
@@ -2314,7 +2467,7 @@ function renderModules() {
   bindResetBtn();
   initNodeTilt();
 
-  app.querySelectorAll('.fond-node:not(.fond-node-locked)').forEach(node => {
+  app.querySelectorAll('.fond-node-module:not(.fond-node-locked)').forEach(node => {
     const trigger = () => {
       const idx = parseInt(node.dataset.moduleIndex, 10);
       renderModuleMap(idx);
@@ -2324,12 +2477,43 @@ function renderModules() {
     node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); } });
   });
 
-  layoutCircuit(i => {
-    const a = moduleStatus(i), b = moduleStatus(i + 1);
-    if (a === 'passed' && b === 'passed') return 'done';
-    if (a === 'passed' && (b === 'unlocked' || b === 'below-threshold')) return 'active';
-    return 'idle';
+  app.querySelectorAll('.fond-branch-focus-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setFocusBranch(btn.dataset.branch);
+      renderModules();
+      document.getElementById('fondApp').scrollIntoView({ behavior: 'instant', block: 'start' });
+    });
   });
+
+  /* Collegamenti: catena del tronco, poi il bivio (ultimo nodo del
+     tronco verso il primo nodo di ognuno dei 3 rami), poi la catena
+     interna di ciascun ramo. */
+  const edgeState = (a, b) => {
+    const sa = moduleStatus(a), sb = moduleStatus(b);
+    if (sa === 'passed' && sb === 'passed') return 'done';
+    if (sa === 'passed' && (sb === 'unlocked' || sb === 'below-threshold')) return 'active';
+    return 'idle';
+  };
+
+  const edges = [];
+  for (let k = 0; k < trunkIdxs.length - 1; k++) {
+    edges.push({ a: trunkIdxs[k], b: trunkIdxs[k + 1], state: edgeState(trunkIdxs[k], trunkIdxs[k + 1]) });
+  }
+  const lastTrunk = trunkIdxs[trunkIdxs.length - 1];
+  BRANCHES.forEach(branch => {
+    const idxs = branchIndices(branch.id);
+    if (!idxs.length) {
+      edges.push({ a: lastTrunk, b: `placeholder-${branch.id}`, state: 'preview' });
+      return;
+    }
+    const forkState = !trunkComplete() ? 'idle' : (moduleStats(idxs[0]).passed ? 'done' : 'active');
+    edges.push({ a: lastTrunk, b: idxs[0], state: forkState });
+    for (let k = 0; k < idxs.length - 1; k++) {
+      edges.push({ a: idxs[k], b: idxs[k + 1], state: edgeState(idxs[k], idxs[k + 1]) });
+    }
+  });
+
+  layoutCircuit(edges);
 }
 
 /* ─── RENDER: MAPPA DI UN MODULO (le sue stanze) ─────────── */
@@ -2360,7 +2544,7 @@ function renderModuleMap(moduleIndex) {
         : 'bloccata';
 
     return `
-      <div class="fond-path-item" data-idx="${ri}">
+      <div class="fond-path-item" data-idx="${ri}" data-node-key="${ri}">
         <div class="fond-node fond-node-room-term fond-node-${status}" data-room-id="${roomId}"
              role="button" tabindex="${status === 'locked' ? '-1' : '0'}"
              aria-disabled="${status === 'locked'}"
@@ -2391,12 +2575,14 @@ function renderModuleMap(moduleIndex) {
       }
     </div>` : '';
 
+  const branchInfo = moduleBranchInfo(moduleIndex);
+
   app.innerHTML = `
-    ${renderStatusBar({ label: 'Modulo', value: `${moduleIndex + 1}/${MODULES.length} · ${stats.done}/${stats.total} stanze` })}
+    ${renderStatusBar({ label: 'Modulo', value: `${branchInfo.pos}/${branchInfo.total} · ${stats.done}/${stats.total} stanze` })}
     <div class="fond-room">
       <button class="fond-back-map" id="fondBackModules" type="button">← Torna ai moduli</button>
       <div class="fond-room-head">
-        <span class="fond-room-eyebrow">Modulo ${moduleIndex + 1} / ${MODULES.length}</span>
+        <span class="fond-room-eyebrow">${esc(branchInfo.label)} · Modulo ${branchInfo.pos} / ${branchInfo.total}</span>
         <h2 class="fond-room-title">${esc(mod.title)}</h2>
         <p class="fond-room-excerpt">${esc(mod.subtitle)}</p>
       </div>
@@ -2425,12 +2611,13 @@ function renderModuleMap(moduleIndex) {
     node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); } });
   });
 
-  layoutCircuit(i => {
+  layoutCircuit(mod.roomIds.slice(0, -1).map((_, i) => {
     const a = roomStatus(moduleIndex, i), b = roomStatus(moduleIndex, i + 1);
-    if (a === 'completed' && b === 'completed') return 'done';
-    if (a === 'completed' && b === 'unlocked') return 'active';
-    return 'idle';
-  });
+    let state = 'idle';
+    if (a === 'completed' && b === 'completed') state = 'done';
+    else if (a === 'completed' && b === 'unlocked') state = 'active';
+    return { a: i, b: i + 1, state };
+  }));
 }
 
 /* ─── PERCORSO: linea verticale animata stile "circuito vivo" ─
@@ -2449,20 +2636,24 @@ function svgEl(tag, attrs) {
   return el;
 }
 
-let activeTraceStateFn = () => 'idle';
+let activeEdges = [];
 let fondPathObserver = null;
 let circuitRelayoutQueued = false;
 
-function layoutCircuit(traceStateFn) {
-  if (traceStateFn) activeTraceStateFn = traceStateFn;
-  const traceState = activeTraceStateFn;
+/* edges: [{ a: <node-key>, b: <node-key>, state: 'done'|'active'|'idle'|'preview' }]
+   Il node-key è quello messo in data-node-key su ciascun .fond-path-item:
+   così i collegamenti si possono disegnare tra nodi che vivono in
+   contenitori DOM diversi (es. tronco + rami affiancati), non solo tra
+   fratelli consecutivi come nel vecchio percorso lineare. */
+function layoutCircuit(edges) {
+  if (edges) activeEdges = edges;
+  const currentEdges = activeEdges;
 
   const wrap = document.getElementById('fondMapWrap');
-  const grid = document.getElementById('fondMapGrid');
   const svg = document.getElementById('fondMapSvg');
-  if (!wrap || !grid || !svg) return;
+  if (!wrap || !svg) return;
 
-  const items = [...grid.querySelectorAll('.fond-path-item')];
+  const items = [...wrap.querySelectorAll('.fond-path-item')];
   if (!items.length) return;
 
   requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -2476,22 +2667,23 @@ function layoutCircuit(traceStateFn) {
 
     const reduced = prefersReducedMotion();
 
-    const centers = items.map(el => {
+    const centerByKey = new Map(items.map(el => {
       const r = el.querySelector('.fond-node').getBoundingClientRect();
-      return [r.left - wrapRect.left + r.width / 2, r.top - wrapRect.top + r.height / 2];
-    });
+      return [el.dataset.nodeKey, [r.left - wrapRect.left + r.width / 2, r.top - wrapRect.top + r.height / 2]];
+    }));
 
     const segPaths = [];
-    for (let i = 0; i < items.length - 1; i++) {
-      const state = traceState(i);
-      const [x1, y1] = centers[i];
-      const [x2, y2] = centers[i + 1];
+    currentEdges.forEach(({ a, b, state }) => {
+      const c1 = centerByKey.get(String(a)), c2 = centerByKey.get(String(b));
+      if (!c1 || !c2) return;
+      const [x1, y1] = c1;
+      const [x2, y2] = c2;
       const ymid = (y1 + y2) / 2;
       const d = `M ${x1} ${y1} C ${x1} ${ymid}, ${x2} ${ymid}, ${x2} ${y2}`;
 
       const path = svgEl('path', { d, class: `fond-trace fond-trace-${state}` });
       svg.appendChild(path);
-      segPaths.push(path);
+      segPaths.push({ path, state });
 
       [[x1, y1], [x2, y2]].forEach(([cx, cy]) => {
         svg.appendChild(svgEl('circle', { cx, cy, r: 4, class: `fond-via fond-via-${state}` }));
@@ -2503,7 +2695,7 @@ function layoutCircuit(traceStateFn) {
         dot.style.offsetPath = `path('${d}')`;
         svg.appendChild(dot);
       }
-    }
+    });
 
     if (fondPathObserver) fondPathObserver.disconnect();
 
@@ -2518,9 +2710,8 @@ function layoutCircuit(traceStateFn) {
 
     // Ingresso animato una tantum dei tratti già "vivi" (done/active),
     // così il percorso si "accende" quando la mappa appare la prima volta.
-    segPaths.forEach((path, i) => {
-      const state = traceState(i);
-      if (state === 'idle') return;
+    segPaths.forEach(({ path, state }, i) => {
+      if (state === 'idle' || state === 'preview') return;
       const len = path.getTotalLength();
       path.style.strokeDasharray = String(len);
       path.style.strokeDashoffset = String(len);
