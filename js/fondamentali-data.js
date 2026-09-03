@@ -1581,6 +1581,7 @@ const ROOMS = [
     title: 'IDS/IPS con Suricata',
     excerpt: "Il firewall guarda porte e protocolli, non dentro il traffico. Suricata analizza in profondità: differenza IDS/IPS, regole custom, e come integrarlo in un SOC.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/suricata.png', iconGlow: '#e8393a',
     thm: [
       { name: 'Snort', difficulty: 'media', note: "Le regole Suricata sono compatibili con quelle di Snort: qui le scrivi e le testi contro traffico reale." }
     ],
@@ -2380,6 +2381,7 @@ const ROOMS = [
     title: 'Forensica Digitale: principi, metodologia e strumenti per il DFIR',
     excerpt: "La forensica digitale è la scienza di raccogliere e analizzare prove digitali mantenendo la loro integrità. Principi fondamentali, catena di custodia, analisi della memoria e del disco.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/autopsy.png', iconGlow: '#3366cc',
     thm: [
       { name: 'Autopsy', difficulty: 'facile', note: "Il tool descritto nell'articolo per l'analisi del disco, messo in pratica direttamente in questa stanza." }
     ],
@@ -2456,6 +2458,7 @@ const ROOMS = [
     title: 'Memory Forensics con Volatility: cosa vive nella RAM',
     excerpt: "Un malware fileless non tocca quasi mai il disco. Le sue tracce vivono solo in RAM, e spariscono al primo riavvio. La memory forensics, e Volatility in particolare, è come si cattura quella prova prima che svanisca.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/volatility.png', iconGlow: '#ff4000',
     thm: [
       { name: 'Memory Forensics', difficulty: 'media', note: "Il tool e la metodologia descritti nell'articolo, applicati direttamente su un dump di memoria reale in questa stanza." }
     ],
@@ -2824,6 +2827,7 @@ const ROOMS = [
     title: 'Malware Analysis Statica: capire un binario senza eseguirlo',
     excerpt: "Prima di eseguire un file sospetto, si può imparare moltissimo senza mai lanciarlo: hash, stringhe leggibili, struttura dell'eseguibile e regole YARA.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/yara.png', iconGlow: '#cc0000',
     thm: [
       { name: 'MAL: Malware Introductory', difficulty: 'facile', note: "Il primo passo pratico nell'analisi malware, applicando gli stessi principi di base descritti nell'articolo." }
     ],
