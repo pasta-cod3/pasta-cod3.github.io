@@ -82,7 +82,8 @@ function thmMonogramHtml(name, extraClass) {
 
 /* URL e icona reali, verificati manualmente navigando tryhackme.com
    (slug corretto, stanza gratuita, icona ufficiale dalla loro CDN) il
-   23/08/2026 (voci aggiunte il 24/08/2026 verificate lo stesso giorno).
+   23/08/2026 (voci aggiunte il 24/08/2026 verificate lo stesso giorno;
+   altre aggiunte e verificate il 03/09/2026 per i rami Blue Team e DFIR).
    TryHackMe cambia periodicamente i tier gratuiti e a pagamento: se un
    link smette di funzionare, cercalo direttamente su tryhackme.com. */
 const THM_DATA = {
@@ -116,7 +117,14 @@ const THM_DATA = {
   'Introduction to SIEM': { url: 'https://tryhackme.com/room/introtosiem', icon: 'https://cdn-images.tryhackme.com/room-icons/introtosiem-1785241446199.png' },
   'Malware Analysis - Malhare.exe': { url: 'https://tryhackme.com/room/htapowershell-aoc2025-p2l5k8j1h4', icon: 'https://cdn-images.tryhackme.com/room-icons/6093e17fa004d20049b6933e-1763893187327' },
   'Phishing Analysis Fundamentals': { url: 'https://tryhackme.com/room/phishingemails1tryoe', icon: 'https://cdn-images.tryhackme.com/room-icons/66704dd0e54a1f39bff7b1a1-1735575404083' },
-  'Phishing Emails in Action': { url: 'https://tryhackme.com/room/phishingemails2rytmuv', icon: 'https://cdn-images.tryhackme.com/room-icons/dcee6ebae40a07669dbec48b3c7f0a61.png' }
+  'Phishing Emails in Action': { url: 'https://tryhackme.com/room/phishingemails2rytmuv', icon: 'https://cdn-images.tryhackme.com/room-icons/dcee6ebae40a07669dbec48b3c7f0a61.png' },
+  'Windows Fundamentals 1': { url: 'https://tryhackme.com/room/windowsfundamentals1xbx', icon: 'https://cdn-images.tryhackme.com/room-icons/windowsfundamentals1xbx-1785241454665.png' },
+  'Linux Fundamentals Part 1': { url: 'https://tryhackme.com/room/linuxfundamentalspart1', icon: 'https://cdn-images.tryhackme.com/room-icons/linuxfundamentalspart1-1785241447142.png' },
+  'Memory Forensics': { url: 'https://tryhackme.com/room/memoryforensics', icon: 'https://cdn-images.tryhackme.com/room-icons/2f9dce95cf880c6d070d4a7ac92d4cfb.png' },
+  'Autopsy': { url: 'https://tryhackme.com/room/btautopsye0', icon: 'https://cdn-images.tryhackme.com/room-icons/3a5bffa10dcb6fec1e4ae8b63fedddd2.png' },
+  'Windows Forensics 1': { url: 'https://tryhackme.com/room/windowsforensics1', icon: 'https://cdn-images.tryhackme.com/room-icons/4f3a37633c01bc4453668af0f2d3e7ef.png' },
+  'Threat Intelligence Tools': { url: 'https://tryhackme.com/room/threatinteltools', icon: 'https://cdn-images.tryhackme.com/room-icons/66704dd0e54a1f39bff7b1a1-1735575413195' },
+  'Introduction to AWS Security Tools': { url: 'https://tryhackme.com/room/introductiontoawssecuritytools', icon: 'https://cdn-images.tryhackme.com/room-icons/68baea2454c82afe90fd7020-1782374116372' }
 };
 
 function thmUrl(name) {
@@ -164,6 +172,22 @@ function fingerprintIcon() {
   </svg>`;
 }
 
+function shieldIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3.5 19 6.3v5.4c0 4.6-2.9 8-7 9.3-4.1-1.3-7-4.7-7-9.3V6.3Z"/>
+    <path d="M9.2 12.2 11.2 14.2 15 10"/>
+  </svg>`;
+}
+
+function signalIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="6" cy="18" r="1.6" fill="currentColor" stroke="none"/>
+    <path d="M6 13.5a7 7 0 0 1 7 7"/>
+    <path d="M6 9a11.5 11.5 0 0 1 11.5 11.5"/>
+    <path d="M6 4.5A16 16 0 0 1 22 20.5"/>
+  </svg>`;
+}
+
 function terminalIcon() {
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <rect x="2.6" y="4" width="18.8" height="16" rx="2.2"/>
@@ -188,6 +212,9 @@ const MODULE_VISUAL = [
   { img: 'assets/icons/exploit.png',        cmd: 'exploit --type HANDS_ON_PWN' },
   { icon: terminalIcon,                     cmd: 'post --type LATERAL_MOVEMENT' },
   { icon: radarIcon,                        cmd: 'tail -f --type SOC_MONITOR' },
+  { icon: shieldIcon,                       cmd: 'lynis audit --type HARDENING' },
+  { icon: signalIcon,                       cmd: 'misp-feed --type THREAT_INTEL' },
+  { icon: fingerprintIcon,                  cmd: 'vol -f dump.raw --type DFIR' },
 ];
 
 /* Effetto macchina da scrivere per il mini-terminale dei moduli:
@@ -1970,6 +1997,763 @@ const ROOMS = [
         ], correct: 1
       }
     ]
+  },
+  {
+    id: 'cose-il-blue-team',
+    title: 'Cos\'è il Blue Team: ruoli, strumenti e differenza con il Red Team',
+    excerpt: "Il Blue Team difende, rileva e risponde. Cosa fanno concretamente un analista SOC, un threat hunter e un incident responder, e quali strumenti usano ogni giorno.",
+    difficulty: 'facile',
+    thm: [
+      { name: 'Pre Security', difficulty: 'facile', note: "Prima di entrare nel Blue Team conviene avere i fondamentali di reti e sicurezza ben saldi." },
+      { name: 'Security Principles', difficulty: 'facile', note: "I principi di sicurezza che stanno alla base di ogni scelta difensiva descritta in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Qual è la differenza principale tra il lavoro del Red Team e quello del Blue Team?",
+        options: [
+          "Il Red Team lavora solo di notte, il Blue Team solo di giorno",
+          "Il Red Team simula attacchi in ingaggi periodici, il Blue Team difende in modo operativo e continuo",
+          "Non c'è differenza, sono lo stesso ruolo con nomi diversi",
+          "Il Blue Team si occupa solo di firewall, il Red Team di tutto il resto"
+        ], correct: 1
+      },
+      {
+        q: "In un SOC organizzato a livelli (tier), cosa fa tipicamente un analista Tier 1?",
+        options: [
+          "Reverse engineering avanzato del malware",
+          "Sviluppo di nuove regole di detection da zero",
+          "Triage iniziale degli alert e escalation ai livelli superiori",
+          "Gestione esclusiva delle relazioni con i clienti"
+        ], correct: 2
+      },
+      {
+        q: "A cosa serve principalmente il framework MITRE ATT&CK per un Blue Team?",
+        options: [
+          "A generare automaticamente exploit per il Red Team",
+          "A mappare la propria copertura di detection sulle tattiche e tecniche realmente usate dagli attaccanti",
+          "A sostituire completamente il SIEM",
+          "È uno strumento solo per la gestione delle password"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'hardening-linux',
+    title: 'Hardening Linux: rendere un sistema più sicuro passo dopo passo',
+    excerpt: "Checklist pratica per hardening di sistemi Linux: configurazione SSH sicura, firewall, permessi, logging, rimozione servizi inutili e CIS benchmark.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Linux Fundamentals Part 1', difficulty: 'facile', note: "Prima di irrobustire un sistema Linux è utile essere a proprio agio con i comandi base da terminale." }
+    ],
+    quiz: [
+      {
+        q: "Quale impostazione SSH riduce di più il rischio di un attacco brute force riuscito?",
+        options: [
+          "Cambiare solo la porta di default, lasciando la password abilitata",
+          "Disabilitare PasswordAuthentication e consentire solo l'accesso con chiave SSH",
+          "Aumentare il numero massimo di tentativi di autenticazione",
+          "Abilitare PermitEmptyPasswords per semplificare l'accesso"
+        ], correct: 1
+      },
+      {
+        q: "A cosa serve fail2ban in un hardening Linux?",
+        options: [
+          "A cifrare automaticamente il disco",
+          "A bannare temporaneamente un IP dopo troppi tentativi di autenticazione falliti",
+          "A sostituire completamente il firewall",
+          "A gestire gli aggiornamenti automatici del sistema"
+        ], correct: 1
+      },
+      {
+        q: "Cosa fanno SELinux e AppArmor quando sono in modalità enforce?",
+        options: [
+          "Registrano soltanto le violazioni senza bloccarle",
+          "Applicano un controllo di accesso obbligatorio (MAC) che blocca le azioni non consentite dal profilo di un'applicazione",
+          "Aggiornano automaticamente i pacchetti di sistema",
+          "Gestiscono esclusivamente le regole del firewall"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'hardening-windows',
+    title: 'Hardening Windows: configurazioni essenziali per ridurre la superficie d\'attacco',
+    excerpt: "Hardening di un sistema Windows: Group Policy, Defender configurato, BitLocker, logging degli eventi, disabilitazione di LLMNR/NetBIOS e protocolli legacy.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Windows Fundamentals 1', difficulty: 'facile', note: "I fondamentali di Windows utili per capire dove intervenire prima di affrontare l'hardening vero e proprio." }
+    ],
+    quiz: [
+      {
+        q: "Perché è consigliato disabilitare SMBv1 durante l'hardening di Windows?",
+        options: [
+          "Perché rallenta la rete più delle versioni successive",
+          "Perché è il protocollo sfruttato da attacchi noti come WannaCry ed EternalBlue",
+          "Perché non è più supportato da nessuna versione di Windows",
+          "Perché impedisce l'uso di Windows Defender"
+        ], correct: 1
+      },
+      {
+        q: "Cosa permettono di fare le regole ASR (Attack Surface Reduction) di Windows Defender?",
+        options: [
+          "Bloccare comportamenti specifici e rischiosi, come l'esecuzione di script offuscati o il process injection da Office",
+          "Aumentare la velocità di avvio del sistema",
+          "Sostituire completamente il firewall di Windows",
+          "Gestire gli aggiornamenti automatici del sistema operativo"
+        ], correct: 0
+      },
+      {
+        q: "Perché abilitare lo Script Block Logging di PowerShell è importante per un Blue Team?",
+        options: [
+          "Perché velocizza l'esecuzione degli script",
+          "Perché registra il contenuto reale di ogni script eseguito, anche se offuscato, utile per il threat hunting",
+          "Perché disabilita automaticamente PowerShell se rileva codice sospetto",
+          "Perché è richiesto per installare Windows Update"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'network-segmentation-vlan-dmz',
+    title: 'Segmentazione di rete: VLAN, DMZ e microsegmentazione per ridurre il blast radius',
+    excerpt: "Una rete piatta è un sogno per gli attaccanti: compromesso un host, si muovono liberamente. La segmentazione limita il blast radius contenendo le compromissioni ai singoli segmenti.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Networking Concepts', difficulty: 'facile', note: "I concetti di rete di base che servono per capire come e perché si segmenta un'infrastruttura." }
+    ],
+    quiz: [
+      {
+        q: "Cosa si intende per \"blast radius\" in una rete non segmentata?",
+        options: [
+          "La velocità massima della rete",
+          "L'estensione dei sistemi che un attaccante può raggiungere dopo aver compromesso un singolo host",
+          "Il numero di VLAN configurate",
+          "La distanza fisica tra gli switch"
+        ], correct: 1
+      },
+      {
+        q: "Qual è lo scopo principale di una DMZ?",
+        options: [
+          "Ospitare i backup aziendali",
+          "Isolare i servizi esposti su Internet sia dalla rete interna sia da Internet stesso",
+          "Sostituire la necessità di un firewall",
+          "Fornire una VLAN dedicata solo agli amministratori"
+        ], correct: 1
+      },
+      {
+        q: "Come rende la segmentazione più visibile il lateral movement di un attaccante?",
+        options: [
+          "Lo rende impossibile in ogni caso",
+          "Ogni tentativo di attraversare i segmenti passa dal firewall, che può loggare e bloccare la connessione",
+          "Riduce automaticamente la velocità di ogni connessione sospetta",
+          "Cifra automaticamente tutto il traffico interno"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'zero-trust-architettura',
+    title: 'Zero Trust: l\'architettura di sicurezza che non si fida di nessuno',
+    excerpt: "Il modello Zero Trust ribalta il paradigma tradizionale: non esiste più una rete 'interna' sicura. Ogni accesso va verificato, ogni identità autenticata, ogni segmento isolato.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Security Principles', difficulty: 'facile', note: "I principi di sicurezza su cui si fonda anche il ragionamento Zero Trust." }
+    ],
+    quiz: [
+      {
+        q: "Quale dei seguenti NON è uno dei tre principi fondamentali dello Zero Trust descritti nell'articolo?",
+        options: [
+          "Verifica esplicita di ogni accesso",
+          "Least privilege e accesso Just-In-Time",
+          "Fiducia implicita per chi è già dentro la rete aziendale",
+          "Assume Breach, progettare come se la rete fosse già compromessa"
+        ], correct: 2
+      },
+      {
+        q: "Cos'è BeyondCorp, citato come esempio pratico di Zero Trust?",
+        options: [
+          "Un firewall hardware di nuova generazione",
+          "L'implementazione Zero Trust di Google, senza VPN né rete interna considerata automaticamente fidata",
+          "Uno standard NIST obbligatorio per legge",
+          "Un antivirus per endpoint aziendali"
+        ], correct: 1
+      },
+      {
+        q: "Nel modello Zero Trust, cosa decide il \"Policy Engine\"?",
+        options: [
+          "Solo la velocità della connessione di rete",
+          "Se un determinato utente, con un determinato dispositivo, in un determinato contesto, può accedere a una determinata risorsa",
+          "Quali VLAN esistono nella rete",
+          "Il colore del logo aziendale"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'edr-endpoint-detection-response',
+    title: 'EDR: cos\'è, come funziona e come sceglierlo per la tua organizzazione',
+    excerpt: "L'EDR è la risposta moderna all'antivirus tradizionale. Monitora il comportamento degli endpoint in tempo reale, correla eventi con MITRE ATT&CK e permette la risposta agli incidenti remota.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Introduction to SIEM', difficulty: 'facile', note: "Un EDR spesso alimenta un SIEM: capire come funziona l'aggregazione degli eventi aiuta a capire il valore di un EDR." }
+    ],
+    quiz: [
+      {
+        q: "Qual è la differenza fondamentale tra un antivirus tradizionale e un EDR?",
+        options: [
+          "L'EDR controlla solo i file in arrivo via email",
+          "L'antivirus controlla i file, l'EDR controlla i comportamenti nel tempo",
+          "Non c'è alcuna differenza pratica",
+          "L'EDR funziona solo su server, mai su workstation"
+        ], correct: 1
+      },
+      {
+        q: "Perché una catena di processi come word.exe che genera powershell.exe che genera rundll32.exe è più significativa dei singoli eventi presi da soli?",
+        options: [
+          "Perché ogni singolo evento è già di per sé innocuo, ma la sequenza correlata rivela un comportamento malevolo",
+          "Perché Word non può mai generare processi figli",
+          "Perché indica solo un problema di prestazioni del sistema",
+          "Perché è sempre un falso positivo"
+        ], correct: 0
+      },
+      {
+        q: "Cosa offre un servizio MDR (Managed Detection and Response)?",
+        options: [
+          "Sostituisce completamente la necessità di un EDR",
+          "Personale specializzato che monitora gli alert EDR 24/7 per le organizzazioni senza un SOC interno",
+          "Solo la vendita di licenze antivirus",
+          "Un servizio di backup cloud"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'soc-analyst-giornata-tipo',
+    title: 'Giornata tipo di un SOC Analyst: triage, alert fatigue e investigazione',
+    excerpt: "Come si passa una giornata in un Security Operations Center? Dalla gestione degli alert mattutini all'investigazione di un incidente reale. Il ruolo del SOC analyst, gli strumenti e le sfide quotidiane.",
+    difficulty: 'facile',
+    thm: [
+      { name: 'Introduction to SIEM', difficulty: 'facile', note: "Il SIEM è lo strumento con cui un SOC analyst passa gran parte della giornata." }
+    ],
+    quiz: [
+      {
+        q: "Cosa si intende per \"alert fatigue\" in un SOC?",
+        options: [
+          "La stanchezza fisica dovuta ai turni notturni",
+          "Il fenomeno per cui un analyst, sommerso da troppi alert, inizia a chiuderli meccanicamente senza vera analisi",
+          "Un tipo di attacco informatico",
+          "Un malfunzionamento del SIEM"
+        ], correct: 1
+      },
+      {
+        q: "Nell'esempio di investigazione descritto nell'articolo, qual è la catena di processi che fa scattare i sospetti?",
+        options: [
+          "explorer.exe che apre una cartella di rete",
+          "email aperta, poi Word, poi PowerShell, poi una connessione esterna",
+          "un semplice riavvio del sistema",
+          "l'apertura di un browser web"
+        ], correct: 1
+      },
+      {
+        q: "Quale tra queste NON è indicata nell'articolo come soluzione all'alert fatigue?",
+        options: [
+          "Tuning delle regole SIEM per ridurre i falsi positivi",
+          "Automazione SOAR per gli alert semplici e ripetitivi",
+          "Ignorare sistematicamente tutti gli alert di severità Critical",
+          "Prioritizzazione risk-based degli alert"
+        ], correct: 2
+      }
+    ]
+  },
+  {
+    id: 'analisi-log-windows-event-id',
+    title: 'Analisi dei log Windows: gli Event ID che ogni Blue Team deve conoscere',
+    excerpt: "Gli Event ID di Windows raccontano tutto: login, escalation, lateral movement, persistence. Guida agli ID fondamentali e come usarli per rilevare attività sospette.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Windows Forensics 1', difficulty: 'media', note: "Gli stessi Event ID visti in questa stanza sono tra gli artefatti più usati anche in un'analisi forense successiva." }
+    ],
+    quiz: [
+      {
+        q: "Cosa indica tipicamente un elevato numero di Event ID 4625 provenienti dallo stesso IP in poco tempo?",
+        options: [
+          "Un normale utilizzo quotidiano del sistema",
+          "Un probabile tentativo di brute force",
+          "Un aggiornamento di Windows in corso",
+          "Un problema di connettività di rete"
+        ], correct: 1
+      },
+      {
+        q: "Perché l'Event ID 1102 (log di Security cancellato) è considerato critico?",
+        options: [
+          "Perché avviene automaticamente ogni notte",
+          "Perché quasi sempre indica un attaccante che cerca di coprire le proprie tracce",
+          "Perché indica solo un riavvio programmato",
+          "Perché è generato dagli aggiornamenti di sistema"
+        ], correct: 1
+      },
+      {
+        q: "Un numero elevato di richieste TGS (Event ID 4769) per account con SPN in poco tempo è sintomo di quale tecnica?",
+        options: [
+          "Un normale login giornaliero",
+          "Probabile Kerberoasting",
+          "Un problema di rete DNS",
+          "Un aggiornamento delle policy di gruppo"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'threat-intelligence-principianti',
+    title: 'Threat Intelligence per principianti: capire chi attacca e come',
+    excerpt: "La threat intelligence trasforma dati grezzi in conoscenza utile per la difesa. Tipi di intelligence, fonti OSINT, MISP e come integrare gli IOC nei sistemi di difesa.",
+    difficulty: 'facile',
+    thm: [
+      { name: 'Threat Intelligence Tools', difficulty: 'facile', note: "Gli stessi strumenti OSINT descritti nell'articolo, messi in pratica direttamente in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Quale livello di Threat Intelligence descrive le TTP (Tattiche, Tecniche e Procedure) degli attaccanti mappate su MITRE ATT&CK?",
+        options: [
+          "Strategic Intelligence",
+          "Tactical Intelligence",
+          "Solo la Technical Intelligence",
+          "Nessuno dei livelli descritti"
+        ], correct: 1
+      },
+      {
+        q: "A cosa serve MISP?",
+        options: [
+          "A cifrare le comunicazioni email aziendali",
+          "A gestire e condividere threat intelligence tra organizzazioni, correlando automaticamente gli indicatori",
+          "A sostituire completamente il SIEM",
+          "A generare automaticamente exploit"
+        ], correct: 1
+      },
+      {
+        q: "Cosa sono STIX e TAXII?",
+        options: [
+          "Due tool di penetration testing",
+          "Uno standard per rappresentare l'intelligence (STIX) e un protocollo per distribuirla (TAXII)",
+          "Due tipi di malware",
+          "Due certificazioni di sicurezza informatica"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'osint-difensivo-monitoraggio',
+    title: 'OSINT Difensivo: monitorare la propria esposizione online come fanno gli attaccanti',
+    excerpt: "Prima di attaccarti, gli avversari raccolgono informazioni su di te da fonti pubbliche. L'OSINT difensivo consiste nell'eseguire questa ricognizione su se stessi per scoprire e correggere le esposizioni prima degli altri.",
+    difficulty: 'facile',
+    thm: [
+      { name: 'Threat Intelligence Tools', difficulty: 'facile', note: "Molti degli strumenti OSINT usati per la difesa in questo articolo sono gli stessi esplorati in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Qual è l'idea centrale dell'OSINT difensivo?",
+        options: [
+          "Attaccare per primi i concorrenti",
+          "Usare le stesse tecniche di ricognizione di un attaccante contro se stessi, per trovare esposizioni prima che vengano sfruttate",
+          "Comprare software costoso di threat intelligence",
+          "Disattivare completamente la presenza online dell'azienda"
+        ], correct: 1
+      },
+      {
+        q: "A cosa serve Shodan Monitor nel contesto dell'OSINT difensivo?",
+        options: [
+          "A cifrare i dati aziendali",
+          "Ad avvisare quando nuovi servizi del proprio range IP diventano visibili pubblicamente su Internet",
+          "A generare password sicure",
+          "A gestire i backup aziendali"
+        ], correct: 1
+      },
+      {
+        q: "Perché monitorare i certificati SSL pubblici (es. tramite crt.sh) è utile in ottica difensiva?",
+        options: [
+          "Perché rivela automaticamente le password degli utenti",
+          "Perché permette di scoprire sottodomini, anche dimenticati, che un attaccante troverebbe allo stesso modo",
+          "Perché blocca automaticamente gli attacchi DDoS",
+          "Perché è richiesto per legge in tutti i paesi"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'honeypot-deception-technology',
+    title: 'Honeypot e Deception Technology: intrappolare gli attaccanti con trappole digitali',
+    excerpt: "Un honeypot è un sistema intenzionalmente vulnerabile progettato per attirare gli attaccanti. Le moderne deception technology vanno oltre: distribuiscono trappole ovunque nella rete per rilevare le intrusioni con quasi zero falsi positivi.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Snort', difficulty: 'media', note: "Un IDS come Snort e un honeypot sono spesso complementari nella strategia di detection di un blue team." }
+    ],
+    quiz: [
+      {
+        q: "Perché un alert generato da un honeypot ha, secondo l'articolo, una percentuale di falsi positivi vicina allo zero?",
+        options: [
+          "Perché usa un'intelligenza artificiale avanzata",
+          "Perché nessun utente legittimo ha motivo di interagire con un sistema che non ha funzioni produttive reali",
+          "Perché gli honeypot bloccano automaticamente ogni connessione",
+          "Perché sono collegati direttamente al SIEM aziendale"
+        ], correct: 1
+      },
+      {
+        q: "Cosa fa un Canary Token quando un attaccante apre il file collegato?",
+        options: [
+          "Cancella automaticamente il file",
+          "Invia un alert con informazioni come IP, browser e geolocalizzazione, senza che l'attaccante se ne accorga",
+          "Blocca immediatamente la rete dell'attaccante",
+          "Cifra il contenuto del computer dell'attaccante"
+        ], correct: 1
+      },
+      {
+        q: "Perché un account honeytoken come \"admin-backup\" in Active Directory è utile per la detection?",
+        options: [
+          "Perché velocizza il login degli amministratori reali",
+          "Perché nessun utente legittimo dovrebbe mai usarlo: qualsiasi tentativo di login su quell'account è automaticamente sospetto",
+          "Perché sostituisce la necessità di password complesse",
+          "Perché riduce il carico del controller di dominio"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'cloud-security-aws-misconfigurazioni',
+    title: 'Cloud Security: le misconfigurazioni AWS più comuni e come evitarle',
+    excerpt: "Il 99% delle violazioni cloud è causato da errori di configurazione, non da vulnerabilità del provider. Bucket S3 pubblici, IAM permissivo, istanze EC2 esposte: le misconfigurazioni AWS più comuni e come correggerle.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Introduction to AWS Security Tools', difficulty: 'facile', note: "I principali strumenti di sicurezza AWS descritti nell'articolo, esplorati in pratica in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Secondo il modello Shared Responsibility di AWS, di chi è la responsabilità di configurare correttamente i permessi IAM?",
+        options: [
+          "Sempre e solo di AWS",
+          "Del cliente che usa i servizi cloud",
+          "Di nessuno, è automatico",
+          "Solo del provider di connettività Internet"
+        ], correct: 1
+      },
+      {
+        q: "Perché una policy IAM con \"Action\": \"*\" e \"Resource\": \"*\" è considerata pericolosa?",
+        options: [
+          "Perché rallenta le chiamate API",
+          "Perché concede permessi illimitati su ogni risorsa, violando il principio del minimo privilegio",
+          "Perché è più costosa delle policy granulari",
+          "Perché blocca automaticamente l'accesso di root"
+        ], correct: 1
+      },
+      {
+        q: "A cosa serve AWS CloudTrail?",
+        options: [
+          "A cifrare automaticamente tutti i bucket S3",
+          "A registrare ogni chiamata API effettuata nell'account, fungendo da log di audit fondamentale",
+          "A sostituire i Security Group",
+          "A gestire esclusivamente il billing dell'account"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'email-security-spf-dkim-dmarc',
+    title: 'Email Security: SPF, DKIM e DMARC, come funzionano e come configurarli',
+    excerpt: "Il 91% degli attacchi informatici inizia con una email. SPF, DKIM e DMARC sono i tre standard che proteggono il tuo dominio dall'essere usato per phishing e spoofing. Come funzionano e come si configurano.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Phishing Analysis Fundamentals', difficulty: 'facile', note: "Capire come si falsificano le email aiuta a capire perché SPF, DKIM e DMARC servono davvero." }
+    ],
+    quiz: [
+      {
+        q: "Qual è la differenza pratica tra un record SPF con -all e uno con ~all?",
+        options: [
+          "Non c'è alcuna differenza",
+          "-all rifiuta le email non autorizzate (hard fail), ~all le accetta comunque marcandole (soft fail)",
+          "-all funziona solo con Gmail, ~all solo con Outlook",
+          "~all è più restrittivo di -all"
+        ], correct: 1
+      },
+      {
+        q: "Cosa dimostra una firma DKIM valida su un'email ricevuta?",
+        options: [
+          "Che il mittente ha pagato per un servizio premium",
+          "Che il contenuto non è stato modificato in transito e proviene da server autorizzati dal dominio",
+          "Che l'email non contiene allegati",
+          "Che l'email è stata cifrata end-to-end"
+        ], correct: 1
+      },
+      {
+        q: "Perché l'articolo consiglia di NON passare subito a p=reject su DMARC?",
+        options: [
+          "Perché p=reject non è supportato da nessun provider email",
+          "Perché senza aver prima raccolto report con p=none si rischia di bloccare anche email legittime",
+          "Perché p=reject è illegale in alcuni paesi",
+          "Perché richiede sempre un canone aggiuntivo"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'backup-recovery-strategia-3-2-1',
+    title: 'Backup e Recovery: la regola 3-2-1 e come costruire una strategia anti-ransomware',
+    excerpt: "Il backup è l'ultima linea di difesa contro il ransomware. La regola 3-2-1, i backup immutabili, i test di restore e tutto ciò che devi sapere per costruire una strategia di backup che funzioni davvero.",
+    difficulty: 'facile',
+    thm: [
+      { name: 'Security Principles', difficulty: 'facile', note: "La resilienza, di cui il backup è un pilastro, è uno dei principi di sicurezza fondamentali trattati in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Cosa prevede esattamente la regola 3-2-1 per il backup?",
+        options: [
+          "3 backup al giorno, 2 amministratori, 1 password condivisa",
+          "3 copie dei dati, su 2 tipi di media diversi, con 1 copia offsite",
+          "3 ore di RTO massimo, 2 data center, 1 fornitore cloud",
+          "3 anni di conservazione, 2 formati di file, 1 responsabile"
+        ], correct: 1
+      },
+      {
+        q: "Perché un backup collegato online (es. su una share di rete mappata) può non salvare da un ransomware moderno?",
+        options: [
+          "Perché i backup online sono sempre più lenti",
+          "Perché il ransomware cerca attivamente share di rete e backup collegati, cifrandoli insieme al resto",
+          "Perché i backup online costano di più",
+          "Perché non sono compatibili con Windows"
+        ], correct: 1
+      },
+      {
+        q: "Qual è la differenza tra RPO e RTO?",
+        options: [
+          "Sono sinonimi dello stesso concetto",
+          "RPO indica quanti dati puoi perdere (quanto indietro puoi tornare), RTO indica quanto tempo serve per tornare operativo",
+          "RPO riguarda solo i backup cloud, RTO solo quelli locali",
+          "RTO è un tipo di malware, RPO un tipo di backup"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'forensica-digitale-introduzione',
+    title: 'Forensica Digitale: principi, metodologia e strumenti per il DFIR',
+    excerpt: "La forensica digitale è la scienza di raccogliere e analizzare prove digitali mantenendo la loro integrità. Principi fondamentali, catena di custodia, analisi della memoria e del disco.",
+    difficulty: 'facile',
+    thm: [
+      { name: 'Autopsy', difficulty: 'facile', note: "Il tool descritto nell'articolo per l'analisi del disco, messo in pratica direttamente in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Cosa si intende per \"Order of Volatility\" in digital forensics?",
+        options: [
+          "L'ordine alfabetico in cui elencare le prove nel report",
+          "Il principio di raccogliere prima le prove che scompaiono più velocemente, come la RAM, prima del disco",
+          "L'ordine con cui i giudici esaminano le prove in tribunale",
+          "Un algoritmo di compressione dei file immagine"
+        ], correct: 1
+      },
+      {
+        q: "Perché si lavora sempre su una copia forense e mai sull'originale?",
+        options: [
+          "Per fare prima, le copie sono più veloci da analizzare",
+          "Per preservare l'integrità della prova originale, verificabile tramite hash",
+          "Perché la legge lo richiede solo in alcuni paesi",
+          "Perché gli strumenti forensi funzionano solo su copie"
+        ], correct: 1
+      },
+      {
+        q: "Cosa permette di fare Autopsy su un'immagine disco?",
+        options: [
+          "Solo cifrare il disco",
+          "Navigare il filesystem inclusi i file cancellati, costruire una timeline e cercare parole chiave o hash noti",
+          "Acquisire la memoria RAM del sistema",
+          "Inviare automaticamente notifiche email"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'acquisizione-forense-catena-di-custodia',
+    title: 'Acquisizione forense: imaging del disco e catena di custodia',
+    excerpt: "Prima ancora di analizzare qualsiasi prova digitale bisogna acquisirla senza alterarla, e poter dimostrare che non è stata alterata. Ecco come si fa un'acquisizione forense difendibile, dal write blocker al primo hash.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Autopsy', difficulty: 'facile', note: "Una volta acquisita correttamente un'immagine disco, è con strumenti come Autopsy che inizia l'analisi vera e propria." }
+    ],
+    quiz: [
+      {
+        q: "A cosa serve un write blocker durante l'acquisizione di un disco?",
+        options: [
+          "A velocizzare la copia dei dati",
+          "A consentire la lettura del disco originale impedendo fisicamente ogni scrittura verso di esso",
+          "A cifrare automaticamente l'immagine acquisita",
+          "A comprimere l'immagine per risparmiare spazio"
+        ], correct: 1
+      },
+      {
+        q: "Perché si calcola l'hash sia dell'originale sia dell'immagine acquisita?",
+        options: [
+          "Per generare automaticamente il report finale",
+          "Per dimostrare matematicamente che l'immagine è una copia esatta, bit a bit, dell'originale",
+          "Perché è richiesto solo per i dischi SSD",
+          "Per velocizzare l'analisi successiva"
+        ], correct: 1
+      },
+      {
+        q: "Cosa succede alla catena di custodia se manca la documentazione di un passaggio di mano della prova, anche di una sola ora?",
+        options: [
+          "Non ha alcuna conseguenza pratica",
+          "Può bastare a far dubitare dell'integrità dell'intera prova",
+          "Viene automaticamente corretta dal sistema",
+          "Riguarda solo la parte penale, mai quella civile"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'memory-forensics-volatility',
+    title: 'Memory Forensics con Volatility: cosa vive nella RAM',
+    excerpt: "Un malware fileless non tocca quasi mai il disco. Le sue tracce vivono solo in RAM, e spariscono al primo riavvio. La memory forensics, e Volatility in particolare, è come si cattura quella prova prima che svanisca.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Memory Forensics', difficulty: 'media', note: "Il tool e la metodologia descritti nell'articolo, applicati direttamente su un dump di memoria reale in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Perché un malware fileless è particolarmente difficile da trovare analizzando solo il disco?",
+        options: [
+          "Perché non esiste davvero, è solo una leggenda",
+          "Perché esiste solo come codice eseguibile in memoria, senza mai scrivere un file sul disco",
+          "Perché cifra sempre l'intero disco",
+          "Perché richiede sempre privilegi di amministratore"
+        ], correct: 1
+      },
+      {
+        q: "A cosa serve principalmente il plugin windows.malfind di Volatility?",
+        options: [
+          "A elencare tutti i file presenti sul disco",
+          "A cercare regioni di memoria eseguibile sospette, tipiche di codice iniettato in un processo legittimo",
+          "A calcolare l'hash dell'intero dump di memoria",
+          "A modificare le impostazioni di rete del sistema analizzato"
+        ], correct: 1
+      },
+      {
+        q: "Perché windows.pstree è spesso più utile di windows.pslist in un'analisi di memory forensics?",
+        options: [
+          "Perché è più veloce da eseguire",
+          "Perché mostra la gerarchia padre-figlio dei processi, rendendo più visibili catene sospette come Word che genera PowerShell",
+          "Perché pslist non funziona più nella versione 3 di Volatility",
+          "Perché pstree recupera anche le password in chiaro"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'timeline-analysis-artefatti-windows',
+    title: 'Timeline Analysis: ricostruire cosa è successo su un sistema Windows',
+    excerpt: "Windows registra molto più di quanto sembri: quando un file è stato eseguito, quali cartelle sono state aperte, quali dispositivi USB sono stati collegati. La timeline analysis mette tutti questi frammenti in ordine cronologico.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Windows Forensics 1', difficulty: 'media', note: "Molti degli artefatti Windows descritti nell'articolo, come Registro ed Event Log, si analizzano in pratica in questa stanza." }
+    ],
+    quiz: [
+      {
+        q: "Cosa registra tipicamente un file Prefetch in Windows?",
+        options: [
+          "Solo i file scaricati da internet",
+          "Quale eseguibile è stato lanciato, il percorso completo, il numero di esecuzioni e i timestamp dell'ultima esecuzione",
+          "Le password digitate dall'utente",
+          "Solo gli errori di sistema"
+        ], correct: 1
+      },
+      {
+        q: "Cosa rappresentano i timestamp MACB associati a un file nel $MFT?",
+        options: [
+          "Quattro utenti diversi che hanno effettuato il login",
+          "Modifica, Accesso, Creazione e modifica dei Metadati (change) di un file",
+          "Quattro versioni diverse dello stesso file",
+          "Un codice di errore del filesystem"
+        ], correct: 1
+      },
+      {
+        q: "A cosa serve uno strumento come Plaso/log2timeline?",
+        options: [
+          "A cifrare l'intero disco acquisito",
+          "A unire decine di artefatti diversi (MFT, registro, Event Log e altri) in un'unica timeline ordinata cronologicamente",
+          "A sostituire completamente il Registro di Windows",
+          "A cancellare in modo sicuro le tracce di un'indagine"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'network-forensics-pcap',
+    title: 'Network Forensics: ricostruire un attacco da un file pcap',
+    excerpt: "Un IDS ha generato un alert tre settimane fa e nessuno l'ha guardato. Ora bisogna capire cosa è successo esaminando il traffico catturato allora. La network forensics è l'analisi del traffico quando l'attacco è già finito.",
+    difficulty: 'media',
+    thm: [],
+    quiz: [
+      {
+        q: "Qual è la differenza principale tra Full Packet Capture (FPC) e NetFlow?",
+        options: [
+          "Sono esattamente la stessa cosa con nomi diversi",
+          "FPC registra ogni pacchetto incluso il payload, NetFlow registra solo metadati delle connessioni",
+          "NetFlow funziona solo su reti wireless",
+          "FPC è gratuito, NetFlow è sempre a pagamento"
+        ], correct: 1
+      },
+      {
+        q: "In Wireshark, a cosa serve la funzione \"Follow TCP Stream\"?",
+        options: [
+          "A bloccare automaticamente la connessione sospetta",
+          "A ricostruire l'intera conversazione tra client e server come un unico documento leggibile",
+          "A cifrare il traffico catturato",
+          "A eliminare i pacchetti duplicati dalla cattura"
+        ], correct: 1
+      },
+      {
+        q: "Quale pattern, descritto nell'articolo, è tipico di un'esfiltrazione di dati riuscita?",
+        options: [
+          "Traffico equilibrato tra entrata e uscita durante l'orario lavorativo",
+          "Un grande volume di dati in uscita verso una singola destinazione, spesso in orari anomali",
+          "Molte piccole richieste DNS distribuite durante il giorno",
+          "Connessioni brevi e frequenti verso siti di aggiornamento software noti"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'report-forense-difendibile',
+    title: 'Scrivere un report forense che regga in tribunale',
+    excerpt: "L'analisi più rigorosa del mondo non serve a niente se il report che la racconta è ambiguo, pieno di gergo o costruisce conclusioni che i dati non sostengono davvero. Il report è il prodotto finale: è quello su cui verrai giudicato.",
+    difficulty: 'facile',
+    thm: [],
+    quiz: [
+      {
+        q: "Perché l'executive summary di un report forense va scritto per ultimo ma va letto per primo?",
+        options: [
+          "È solo una convenzione senza motivo pratico",
+          "Perché va scritto quando l'analisi è chiara, ma è la parte che la maggior parte dei destinatari leggerà per prima",
+          "Perché deve contenere tutto l'output tecnico degli strumenti usati",
+          "Perché è l'unica parte che un giudice può leggere per legge"
+        ], correct: 1
+      },
+      {
+        q: "Qual è la differenza tra scrivere \"l'attaccante ha rubato il database\" e \"la connessione mostra un trasferimento di 2,3 GB coerente con esfiltrazione, ma il contenuto non è recuperabile\"?",
+        options: [
+          "Nessuna, dicono la stessa cosa in modo diverso",
+          "La seconda distingue chiaramente cosa i dati dimostrano da cosa non possono dimostrare, la prima presenta un'ipotesi come fatto certo",
+          "La prima è più tecnica e quindi più corretta",
+          "La seconda è troppo lunga per un report professionale"
+        ], correct: 1
+      },
+      {
+        q: "Cosa rischia un analista che testimonia in aula dicendo qualcosa di diverso da quanto scritto nel proprio report?",
+        options: [
+          "Nessuna conseguenza, il report e la testimonianza sono considerati separati",
+          "Di minare la credibilità sia del report sia della propria testimonianza come expert witness",
+          "Solo una sanzione amministrativa automatica",
+          "Di dover ripetere gratuitamente l'intera analisi"
+        ], correct: 1
+      }
+    ]
   }
 ];
 
@@ -2033,6 +2817,27 @@ const MODULES = [
     subtitle: "Dall'altra parte della barricata: leggere il traffico, rilevare intrusioni, cacciare le minacce e rispondere quando l'incidente è reale.",
     branch: 'blue',
     roomIds: ['wireshark-analisi-traffico', 'ids-ips-suricata', 'siem-blue-team', 'threat-hunting-intro', 'incident-response-processo', 'analisi-malware-base']
+  },
+  {
+    id: 'blue-hardening-architettura',
+    title: 'Blue Team: Hardening e Architettura difensiva',
+    subtitle: "Irrobustire Linux e Windows, segmentare la rete e ripensare l'architettura di sicurezza da zero con Zero Trust ed EDR.",
+    branch: 'blue',
+    roomIds: ['cose-il-blue-team', 'hardening-linux', 'hardening-windows', 'network-segmentation-vlan-dmz', 'zero-trust-architettura', 'edr-endpoint-detection-response']
+  },
+  {
+    id: 'blue-intelligence-risposta',
+    title: 'Blue Team: Intelligence e Risposta',
+    subtitle: 'Dalla giornata di un SOC analyst alla threat intelligence, fino a cloud, email e backup: gli altri fronti della difesa quotidiana.',
+    branch: 'blue',
+    roomIds: ['soc-analyst-giornata-tipo', 'analisi-log-windows-event-id', 'threat-intelligence-principianti', 'osint-difensivo-monitoraggio', 'honeypot-deception-technology', 'cloud-security-aws-misconfigurazioni', 'email-security-spf-dkim-dmarc', 'backup-recovery-strategia-3-2-1']
+  },
+  {
+    id: 'dfir-fondamenti',
+    title: 'DFIR: Fondamenti di Digital Forensics',
+    subtitle: "Dall'acquisizione della prova al report finale: come si raccoglie, analizza e racconta un'evidenza digitale in modo che regga.",
+    branch: 'dfir',
+    roomIds: ['forensica-digitale-introduzione', 'acquisizione-forense-catena-di-custodia', 'memory-forensics-volatility', 'timeline-analysis-artefatti-windows', 'network-forensics-pcap', 'report-forense-difendibile']
   }
 ];
 

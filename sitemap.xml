@@ -21,7 +21,32 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://pasta-cod3.github.io/posts/acquisizione-forense-catena-di-custodia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pasta-cod3.github.io/posts/papercut-critical-rce-vulnerability.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/report-forense-difendibile.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/network-forensics-pcap.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/timeline-analysis-artefatti-windows.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/memory-forensics-volatility.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

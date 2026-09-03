@@ -2049,6 +2049,82 @@ const POSTS = [
       "vulnerability"
     ],
     "excerpt": "PaperCut, il software di gestione di stampa usato da università, aziende e enti pubblici, ha rilasciato una seconda patch d'emergenza per una vulnerabilità RCE (Remote Code Execution) scoperta essere sotto attacco attivo. L'exploit è banale, bastano poche righe di codice."
+  },
+  {
+    "id": "acquisizione-forense-catena-di-custodia",
+    "title": "Acquisizione forense: imaging del disco e catena di custodia",
+    "date": "2026-09-03",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "acquisizione forense",
+      "disk imaging",
+      "catena di custodia",
+      "write blocker",
+      "hashing"
+    ],
+    "excerpt": "Prima ancora di analizzare qualsiasi prova digitale bisogna acquisirla senza alterarla, e poter dimostrare che non è stata alterata. Ecco come si fa un'acquisizione forense difendibile, dal write blocker al primo hash."
+  },
+  {
+    "id": "memory-forensics-volatility",
+    "title": "Memory Forensics con Volatility: cosa vive nella RAM",
+    "date": "2026-08-30",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "memory forensics",
+      "Volatility",
+      "RAM",
+      "malware analysis",
+      "LSASS"
+    ],
+    "excerpt": "Un malware fileless non tocca quasi mai il disco. Le sue tracce vivono solo in RAM, e spariscono al primo riavvio. La memory forensics, e Volatility in particolare, è come si cattura quella prova prima che svanisca."
+  },
+  {
+    "id": "timeline-analysis-artefatti-windows",
+    "title": "Timeline Analysis: ricostruire cosa è successo su un sistema Windows",
+    "date": "2026-08-31",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "timeline analysis",
+      "Windows artifacts",
+      "registro",
+      "prefetch",
+      "event log",
+      "MFT"
+    ],
+    "excerpt": "Windows registra molto più di quanto sembri: quando un file è stato eseguito, quali cartelle sono state aperte, quali dispositivi USB sono stati collegati. La timeline analysis mette tutti questi frammenti in ordine cronologico."
+  },
+  {
+    "id": "network-forensics-pcap",
+    "title": "Network Forensics: ricostruire un attacco da un file pcap",
+    "date": "2026-09-01",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "network forensics",
+      "pcap",
+      "Wireshark",
+      "NetworkMiner",
+      "Zeek",
+      "exfiltrazione"
+    ],
+    "excerpt": "Un IDS ha generato un alert tre settimane fa e nessuno l'ha guardato. Ora bisogna capire cosa è successo esaminando il traffico catturato allora. La network forensics è l'analisi del traffico quando l'attacco è già finito."
+  },
+  {
+    "id": "report-forense-difendibile",
+    "title": "Scrivere un report forense che regga in tribunale",
+    "date": "2026-09-02",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "report forense",
+      "expert witness",
+      "catena di custodia",
+      "comunicazione tecnica"
+    ],
+    "excerpt": "L'analisi più rigorosa del mondo non serve a niente se il report che la racconta è ambiguo, pieno di gergo o costruisce conclusioni che i dati non sostengono davvero. Il report è il prodotto finale: è quello su cui verrai giudicato."
   }
 ];
 // [POSTS:END]
