@@ -734,6 +734,7 @@ const ROOMS = [
     title: 'OWASP Top 10',
     excerpt: "SQL Injection, XSS, controlli di accesso rotti: la OWASP Top 10 è la classifica di riferimento delle vulnerabilità web più critiche e più diffuse. La mappa che ogni sviluppatore e pentester dovrebbe conoscere a memoria.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/owasp.svg', iconGlow: '#e2231a',
     thm: [
       { name: 'OWASP Top 10', difficulty: 'media', note: "Stanza dedicata esattamente alla Top 10: la metti in pratica una vulnerabilità alla volta." },
       { name: 'Vulnversity', difficulty: 'facile', note: "Buon warm-up pratico prima di affrontare la Top 10 in dettaglio." }
@@ -1114,6 +1115,7 @@ const ROOMS = [
     title: 'Ricognizione attiva con Nmap',
     excerpt: "Nmap è il punto di partenza di ogni pentest attivo. Tipi di scansione, script NSE, timing: capire cosa fa davvero ogni comando, non solo copiarlo.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/nmap.svg', iconGlow: '#b92ff5', iconRaw: true,
     thm: [
       { name: 'Nmap', difficulty: 'facile', note: "La room ufficiale per esercitarsi con Nmap dalla scansione base agli script NSE." },
       { name: 'Networking Concepts', difficulty: 'facile', note: "Utile per capire a fondo TCP/UDP prima di interpretare i risultati di una scansione." }
@@ -1191,6 +1193,7 @@ const ROOMS = [
     title: 'Burp Suite: le basi',
     excerpt: "Il proxy standard per il web application testing. Intercept, Repeater, Intruder: come intercettare, modificare e ripetere le richieste HTTP durante un test reale.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/burpsuite.svg', iconGlow: '#ff6633',
     thm: [
       { name: 'OWASP Top 10', difficulty: 'media', note: "Le vulnerabilità della Top 10 si testano quasi sempre passando per Burp: ottimo terreno di allenamento." },
       { name: 'Vulnversity', difficulty: 'media', note: "Buona palestra per esercitarsi con l\'enumerazione web prima di usare Burp sul serio." }
@@ -1306,6 +1309,7 @@ const ROOMS = [
     title: 'Introduzione a Metasploit',
     excerpt: "Il framework di exploitation più usato al mondo. Struttura dei moduli, msfconsole, payload e meterpreter: da 'exploit trovato' a sessione attiva sul target.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/metasploit.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Blue', difficulty: 'facile', note: "La room classica per sfruttare EternalBlue proprio con Metasploit, dalla scansione alla sessione Meterpreter." },
       { name: 'Vulnversity', difficulty: 'media', note: "Buon esercizio di enumerazione ed exploitation prima di affrontare moduli più complessi." }
@@ -1384,6 +1388,7 @@ const ROOMS = [
     title: 'Password cracking: Hashcat e Hydra',
     excerpt: "Hashcat per il cracking offline degli hash, Hydra per il brute force online sui servizi di rete. Come funzionano, quando usarli, e come le password deboli cadono in millisecondi.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/hashcat.svg', iconGlow: '#92c83e',
     thm: [
       { name: 'Crack the Hash', difficulty: 'facile', note: "Esercizio diretto di identificazione e cracking di hash con Hashcat." },
       { name: 'Hydra', difficulty: 'facile', note: "Room dedicata proprio a Hydra per il brute force di servizi di rete." }
@@ -1537,6 +1542,7 @@ const ROOMS = [
     title: 'Wireshark: analisi del traffico',
     excerpt: "La rete non mente. Filtri essenziali, follow TCP stream, pattern sospetti come beaconing e DNS tunneling: come leggere un pcap come un blue teamer.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/wireshark.svg', iconGlow: '#1679a7',
     thm: [
       { name: 'Networking Concepts', difficulty: 'facile', note: "Capire bene TCP/UDP e lo stack di rete rende molto più facile interpretare una cattura in Wireshark." }
     ],
@@ -2259,6 +2265,7 @@ const ROOMS = [
     title: 'Cloud Security: le misconfigurazioni AWS più comuni e come evitarle',
     excerpt: "Il 99% delle violazioni cloud è causato da errori di configurazione, non da vulnerabilità del provider. Bucket S3 pubblici, IAM permissivo, istanze EC2 esposte: le misconfigurazioni AWS più comuni e come correggerle.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/amazonaws.svg', iconGlow: '#ff9900',
     thm: [
       { name: 'Introduction to AWS Security Tools', difficulty: 'facile', note: "I principali strumenti di sicurezza AWS descritti nell'articolo, esplorati in pratica in questa stanza." }
     ],

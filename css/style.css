@@ -2207,8 +2207,22 @@ body {
    comando ($ / [*] / [!] / >>). Sfondo sempre scuro (come i
    terminal-box) così resta leggibile anche in light mode. */
 .fond-node.fond-node-room-term {
+  /* Sempre scuro come un vero terminale, indipendentemente dal tema
+     del sito: senza questi override i token --text/--border ecc.
+     seguirebbero il tema chiaro (testo scuro su sfondo chiaro),
+     perdendo l'estetica da terminale e la leggibilità del logo. */
+  --bg-card: #040f1c;
+  --text: #d8f0ff;
+  --text-dim: #4a7a9b;
+  --text-muted: #1e3d52;
+  --border: rgba(0,200,255,0.10);
+  --border-h: rgba(0,200,255,0.38);
+  --accent: #00c8ff;
   padding: 0; min-height: auto; gap: 0;
-  background: var(--bg-card); overflow: hidden;
+  background: var(--bg-card);
+  /* niente overflow:hidden qui: il badge dell'argomento (sotto) sporge
+     apposta dall'angolo in alto a destra. Lo shimmer hover ha già il
+     proprio overflow:hidden locale, quindi resta contenuto lo stesso. */
 }
 .fond-node-room-term::before, .fond-node-room-term::after { display: none; }
 .fond-term-bar {
@@ -2254,6 +2268,56 @@ body {
 .fond-node-room-term.fond-node-locked .fond-term-warn,
 .fond-node-room-term.fond-node-locked .fond-term-result { color: var(--c-red); opacity: 0.85; }
 .fond-node-room-term.fond-node-locked .fond-term-cursor { color: var(--c-red); }
+
+/* Badge dell'argomento sulla card stanza (logo reale se disponibile,
+   altrimenti un monogramma colorato): un "sigillo" tondo in alto a
+   destra, leggermente sovrapposto al bordo, per capire di cosa parla
+   la stanza a colpo d'occhio. Colori e sfondo fissi (non legati al
+   tema chiaro/scuro) perché la card stessa è sempre scura. */
+.fond-room-icon-badge {
+  position: absolute; top: -10px; right: -10px; z-index: 4;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #061626;
+  border: 1px solid rgba(0,200,255,0.28);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+  animation: fond-room-icon-float 4.2s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
+}
+.fond-room-icon-badge::before {
+  content: ''; position: absolute; inset: -7px; z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--room-icon-glow, rgba(0,200,255,0.5)) 0%, transparent 72%);
+  filter: blur(5px);
+  animation: fond-icon-glow-pulse 3.6s ease-in-out infinite;
+}
+.fond-room-icon-img {
+  position: relative; width: 18px; height: 18px; object-fit: contain;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.7));
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+/* Loghi già "finiti" a sé stanti (sfondo/colore propri, es. icone
+   Antu): niente disco scuro sotto, solo il bagliore, un po' più
+   grandi per restare leggibili senza il contrasto del disco. */
+.fond-room-icon-badge-raw { background: transparent; border: none; box-shadow: none; }
+.fond-room-icon-badge-raw .fond-room-icon-img {
+  width: 30px; height: 30px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));
+}
+.fond-room-icon-mono {
+  width: 100%; height: 100%; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-m); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.02em; color: #04101f; background: var(--mono-c, #00c8ff);
+}
+.fond-node:not(.fond-node-locked):hover .fond-room-icon-badge {
+  transform: scale(1.16) rotate(-6deg);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+}
+.fond-node:not(.fond-node-locked):hover .fond-room-icon-img { transform: scale(1.12); }
+@keyframes fond-room-icon-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-3px) rotate(3deg); }
+}
 
 /* Tracce e via del circuito (SVG, coordinate calcolate via JS) */
 .fond-trace { stroke-linecap: round; fill: none; }
@@ -2393,5 +2457,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .fond-trace-done, .fond-trace-active, .fond-flow-dot, .fond-trophy-award::after,
   .fond-trophy-icon, .fond-trophy-award::before,
-  .fond-mod-icon-glow, .fond-node-unlocked .fond-mod-icon, .fond-term-cursor { animation: none; transform: none; }
+  .fond-mod-icon-glow, .fond-node-unlocked .fond-mod-icon, .fond-term-cursor,
+  .fond-room-icon-badge, .fond-room-icon-badge::before { animation: none; transform: none; }
 }

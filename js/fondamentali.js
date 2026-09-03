@@ -80,6 +80,44 @@ function thmMonogramHtml(name, extraClass) {
   return `<span class="fond-thm-mono${extraClass ? ' ' + extraClass : ''}" style="--mono-c:${color}" aria-hidden="true">${esc(initials)}</span>`;
 }
 
+/* ─── ICONA DELLA STANZA (badge in alto a destra sulla card U01...) ─
+   Se room.icon è impostato (assets/icons/rooms/*.svg, un logo reale
+   dello strumento trattato) lo mostra su un badge circolare animato;
+   altrimenti ripiega su un monogramma colorato deterministico (stesso
+   principio del fallback THM sopra), così nessuna stanza resta senza
+   un indizio visivo del proprio argomento. Il badge vive dentro una
+   card sempre scura (vedi .fond-node-room-term in style.css), quindi
+   resta leggibile e uguale sia in dark sia in light mode. */
+function hexToRgba(hex, alpha) {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+function renderRoomIconBadge(room) {
+  if (room.icon) {
+    const glow = hexToRgba(room.iconGlow || '#00c8ff', 0.55);
+    // iconRaw: il logo ha già un proprio sfondo/colore (es. le icone
+    // Antu), quindi niente disco scuro sotto o farebbe "cerchio nel
+    // cerchio": lo si mostra un po' più grande, senza wrapper opaco.
+    const rawCls = room.iconRaw ? ' fond-room-icon-badge-raw' : '';
+    return `<span class="fond-room-icon-badge${rawCls}" style="--room-icon-glow:${glow}" aria-hidden="true">
+      <img class="fond-room-icon-img" src="${room.icon}" alt="" loading="lazy" width="20" height="20"
+        onerror="this.parentElement.outerHTML='${renderRoomIconMono(room).replace(/'/g, "\\'")}'">
+    </span>`;
+  }
+  return renderRoomIconMono(room);
+}
+
+function renderRoomIconMono(room) {
+  const { initials, color } = thmMonogramData(room.title);
+  return `<span class="fond-room-icon-badge" style="--room-icon-glow:${hexToRgba(color, 0.5)}" aria-hidden="true">
+    <span class="fond-room-icon-mono" style="--mono-c:${color}">${esc(initials)}</span>
+  </span>`;
+}
+
 /* THM_DATA -> vedi js/fondamentali-data.js */
 
 function thmUrl(name) {
@@ -774,6 +812,7 @@ function renderModuleMap(moduleIndex) {
              role="button" tabindex="${status === 'locked' ? '-1' : '0'}"
              aria-disabled="${status === 'locked'}"
              aria-label="Stanza ${ri + 1} di ${mod.roomIds.length}: ${esc(room.title)} — ${statusLabel}, difficoltà ${DIFF_META[room.difficulty].label}">
+          ${renderRoomIconBadge(room)}
           <div class="fond-term-bar" aria-hidden="true">
             <span class="fond-term-dot red"></span>
             <span class="fond-term-dot yellow"></span>
