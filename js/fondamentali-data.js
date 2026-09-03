@@ -83,6 +83,7 @@ const ROOMS = [
     title: 'Come funziona Internet',
     excerpt: "Quando digiti un URL succedono decine di cose in millisecondi. Dal routing BGP alla risoluzione DNS, dai protocolli TCP/IP al TLS: come funziona davvero Internet.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-globe.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Introductory Networking', difficulty: 'facile', note: "Introduzione pratica alla teoria di rete e agli strumenti base, esattamente i fondamentali visti in questa stanza." },
       { name: 'Nmap', difficulty: 'facile', note: "Metti in pratica cosa succede davvero quando i pacchetti viaggiano in rete, scansionando host e porte reali." }
@@ -122,6 +123,7 @@ const ROOMS = [
     title: 'Come funziona Internet — BGP e Anycast',
     excerpt: "Secondo capitolo sull'infrastruttura di Internet: come il routing BGP decide il percorso dei pacchetti, cos'è Anycast e perché Internet sopravvive ai guasti.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-route.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Buona base prima di affrontare BGP e Anycast, se non hai già fatto networking di base." },
       { name: 'Jr Penetration Tester', difficulty: 'media', note: "Il percorso ufficiale che approfondisce networking e infrastruttura in un contesto più da pentest." }
@@ -161,6 +163,7 @@ const ROOMS = [
     title: 'Il modello OSI',
     excerpt: "Il modello OSI divide la comunicazione di rete in 7 livelli. Spiegato non con teoria pura, ma con gli attacchi informatici che operano a ciascun livello.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-layer-group.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Networking Concepts', difficulty: 'facile', note: "Copre proprio il modello ISO OSI e lo stack TCP/IP, con esempi pratici livello per livello." },
       { name: 'Nmap', difficulty: 'facile', note: "Vedi quali livelli OSI 'tocchi' realmente lanciando una scansione." }
@@ -196,6 +199,7 @@ const ROOMS = [
     title: 'DNS: il telefono di Internet',
     excerpt: "Il DNS è la rubrica di Internet. Come funziona la risoluzione ricorsiva, cosa sono i record A, MX, TXT, come difendersi da DNS hijacking e cosa cambia con DNS over HTTPS.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-phone-volume.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'DNS in Detail', difficulty: 'facile', note: "Approfondisce risoluzione ricorsiva, record e zone transfer con esempi pratici." },
       { name: 'Nmap', difficulty: 'facile', note: "L'enumerazione di un target parte spesso proprio da una ricognizione DNS." }
@@ -235,6 +239,7 @@ const ROOMS = [
     title: 'Come funziona un firewall',
     excerpt: "Un firewall non è solo una lista di regole. Differenze tra stateless e stateful inspection, Next-Gen Firewall, WAF e dove collocarli nell'architettura di rete.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-fire.svg', iconGlow: '#ff6633',
     thm: [
       { name: 'WAF: Introduction', difficulty: 'facile', note: "Cosa distingue un Web Application Firewall da un firewall di rete tradizionale, con esempi pratici." },
       { name: 'Nmap', difficulty: 'facile', note: "Capisci cosa un firewall lascia passare o blocca osservando i risultati di una scansione reale." }
@@ -274,6 +279,7 @@ const ROOMS = [
     title: 'Il modello CIA',
     excerpt: "Confidenzialità, Integrità, Disponibilità: la triade CIA è il framework concettuale su cui si basa tutta la sicurezza informatica. Spiegata con esempi reali.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-user-shield.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Security Principles', difficulty: 'facile', note: "Copre proprio la triade CIA e i modelli di sicurezza fondamentali visti in questa stanza." }
     ],
@@ -312,6 +318,7 @@ const ROOMS = [
     title: 'Crittografia: le basi',
     excerpt: "Simmetrica vs asimmetrica, cifrari a blocchi e a flusso, firma digitale, PKI e TLS. Le fondamenta crittografiche su cui si regge tutta la sicurezza informatica moderna.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-lock.svg', iconGlow: '#ffd700',
     thm: [
       { name: 'Encryption - Crypto 101', difficulty: 'facile', note: "Copre simmetrica vs asimmetrica, hashing e le basi pratiche di crittografia viste in questa stanza." },
       { name: 'Crack the Hash', difficulty: 'facile', note: "Applica la teoria della crittografia debole craccando hash reali di vario tipo." }
@@ -430,6 +437,7 @@ const ROOMS = [
     title: 'Risk Management',
     excerpt: "Non tutte le vulnerabilità meritano la stessa attenzione, e non tutti gli asset hanno lo stesso valore. Il risk management è la disciplina che permette di decidere dove investire prima che sia troppo tardi.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-triangle-exclamation.svg', iconGlow: '#ffb020',
     thm: [
       { name: 'Jr Penetration Tester', difficulty: 'media', note: "Il percorso ufficiale mostra come reporting e prioritizzazione del rischio si inseriscono in un vero engagement." }
     ],
@@ -468,6 +476,7 @@ const ROOMS = [
     title: 'Autenticazione e identità digitale',
     excerpt: "Come funziona l'autenticazione moderna: dai limiti delle password all'MFA, dalle passkey FIDO2 alle sfide dell'identità digitale nel 2026.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-id-card.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Introduce i concetti di autenticazione e identità digitale con taglio pratico da zero." }
     ],
@@ -546,6 +555,7 @@ const ROOMS = [
     title: 'IAM, RBAC e privilegio minimo',
     excerpt: "Autenticarsi non basta: bisogna anche decidere cosa un utente autenticato può fare. IAM, RBAC, ABAC e il principio del privilegio minimo sono le fondamenta della governance degli accessi.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-users-gear.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Jr Penetration Tester', difficulty: 'media', note: "Il percorso ufficiale mostra come privilegi mal configurati diventino vettori di attacco reali." }
     ],
@@ -623,6 +633,7 @@ const ROOMS = [
     title: 'Biometria e autenticazione fisica',
     excerpt: "Impronte digitali, riconoscimento facciale, iride: la biometria promette di eliminare le password sostituendole con 'ciò che sei'. Come funziona davvero, quanto è affidabile, e perché non è infallibile.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-fingerprint.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Copre i fondamentali di autenticazione, propedeutico prima di approfondire la biometria." }
     ],
@@ -661,6 +672,7 @@ const ROOMS = [
     title: 'Ingegneria sociale',
     excerpt: "L'ingegneria sociale sfrutta la psicologia, non il codice. Pretexting, phishing, vishing, baiting: come funzionano le tecniche di manipolazione e come costruire una cultura di difesa.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-user-secret.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Introduce anche il lato umano della sicurezza tra i fondamentali del percorso." }
     ],
@@ -699,6 +711,7 @@ const ROOMS = [
     title: "Cos'è il Penetration Testing",
     excerpt: "Cosa significa fare un penetration test, come si struttura un engagement, le fasi dalla ricognizione al report e la differenza tra pentest, red team e vulnerability assessment.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-magnifying-glass.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Jr Penetration Tester', difficulty: 'facile', note: "Il percorso ufficiale pensato esattamente per chi vuole iniziare con il penetration testing da zero." },
       { name: 'Vulnversity', difficulty: 'facile', note: "Il primo vero assaggio pratico di un engagement: enumerazione, foothold e privesc di base." }
@@ -778,6 +791,7 @@ const ROOMS = [
     title: 'Malware: tipologie e funzionamento',
     excerpt: "Virus, worm, trojan, ransomware, spyware, rootkit: parole usate spesso come sinonimi ma che descrivono comportamenti tecnicamente molto diversi. La tassonomia di base di cosa rende malevolo un software.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-virus.svg', iconGlow: '#cc0000',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Introduce i concetti base di malware e minacce prima di un approfondimento pratico." }
     ],
@@ -816,6 +830,7 @@ const ROOMS = [
     title: 'Anatomia di un attacco ransomware',
     excerpt: "Un attacco ransomware moderno non è 'un virus che cifra i file' — è una campagna strutturata che dura giorni o settimane, con fasi precise prima che una singola cifratura venga eseguita. Ecco come funziona davvero.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-skull-crossbones.svg', iconGlow: '#cc0000',
     thm: [
       { name: 'Cyber Kill Chain', difficulty: 'media', note: "Ripercorre le fasi di un attacco reale, utile per collegare la teoria del ransomware a un caso pratico." }
     ],
@@ -856,6 +871,7 @@ const ROOMS = [
     title: 'Privilege Escalation su Linux',
     excerpt: "SUID binari, cron job mal configurati, sudo misconfiguration, capabilities: le vie più comuni per scalare da utente a root su Linux. Stanza hands-on: dopo il quiz vai su una macchina reale e conferma le flag ottenute.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/linux.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Linux PrivEsc', difficulty: 'media', note: "La stanza di riferimento per esercitarsi su SUID, sudo, cron e capabilities in un ambiente controllato." },
       { name: 'Kenobi', difficulty: 'facile', note: "Box completo Linux: enumerazione di servizi, foothold e privesc finale, un buon primo bersaglio realistico." },
@@ -902,6 +918,7 @@ const ROOMS = [
     title: 'Privilege Escalation su Windows',
     excerpt: "Da user a SYSTEM: token impersonation, unquoted service path, AlwaysInstallElevated. Stanza hands-on: dopo il quiz vai su una macchina reale e conferma le flag ottenute.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/windows.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Windows PrivEsc', difficulty: 'media', note: "Copre nel dettaglio i vettori visti nell'articolo: servizi, token, registro, AlwaysInstallElevated." },
       { name: 'Blue', difficulty: 'facile', note: "Box Windows guidato, ottimo primo bersaglio per prendere confidenza con l'ambiente prima di stanze più libere." },
@@ -948,6 +965,7 @@ const ROOMS = [
     title: 'Web Shell e Upload Bypass',
     excerpt: "Bypass di blacklist, content-type e file polyglot per caricare una web shell su un server vulnerabile. Stanza hands-on: dopo il quiz vai su una macchina reale e conferma le flag ottenute.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-file-code.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Vulnversity', difficulty: 'facile', note: "Il classico primo approccio a un upload di file vulnerabile per ottenere una shell su un server web." },
       { name: 'Pickle Rick', difficulty: 'facile', note: "CTF a tema web: enumerazione, foothold applicativo e privesc, buon ripasso pratico dei concetti visti." }
@@ -993,6 +1011,7 @@ const ROOMS = [
     title: 'Active Directory: Kerberoasting e AS-REP Roasting',
     excerpt: "Kerberoasting, AS-REP Roasting, Pass-the-Hash e DCSync: i vettori di attacco fondamentali contro un dominio Active Directory. Stanza hands-on: dopo il quiz vai su un lab AD reale e conferma le flag ottenute.",
     difficulty: 'difficile',
+    icon: 'assets/icons/rooms/fa-key.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Attacktive Directory', difficulty: 'media', note: "Il primo vero lab AD: enumerazione, AS-REP Roasting e Kerberoasting su un dominio giocattolo, esattamente i vettori trattati nell'articolo." }
     ],
@@ -1037,6 +1056,7 @@ const ROOMS = [
     title: 'Buffer Overflow: le basi',
     excerpt: "Stack layout, return address, offset e protezioni moderne come NX e ASLR. Stanza hands-on: dopo il quiz vai su un binario reale e conferma le flag ottenute.",
     difficulty: 'difficile',
+    icon: 'assets/icons/rooms/fa-memory.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Sudo Buffer Overflow', difficulty: 'media', note: "Tutorial guidato su CVE-2019-18634 nel programma sudo: un buffer overflow reale da sfruttare passo dopo passo." }
     ],
@@ -1081,6 +1101,7 @@ const ROOMS = [
     title: 'Ricognizione passiva e OSINT',
     excerpt: "Prima di toccare il target, un buon pentester raccoglie il più possibile da fonti aperte: WHOIS, DNS, sottodomini, metadata. La fase più sottovalutata — e più utile — di ogni test.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-eye.svg', iconGlow: '#b92ff5',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Il percorso include i fondamenti di ricognizione e OSINT prima di passare alle tecniche attive." }
     ],
@@ -1238,6 +1259,7 @@ const ROOMS = [
     title: 'XSS — Cross-Site Scripting',
     excerpt: "Reflected, stored, DOM-based: i tre tipi di XSS spiegati con payload reali. A differenza della SQLi, l\'XSS non attacca il server: attacca il browser della vittima.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-code.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'OWASP Top 10', difficulty: 'media', note: "Copre XSS insieme alle altre vulnerabilità web più comuni, con esempi pratici da risolvere." }
     ],
@@ -1355,6 +1377,7 @@ const ROOMS = [
     title: 'Reverse shell e bind shell',
     excerpt: "Hai una RCE. E adesso? Come trasformarla in una sessione interattiva: differenza tra bind e reverse shell, payload pronti e perché la reverse è quasi sempre la scelta giusta.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-terminal.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Vulnversity', difficulty: 'media', note: "Porta a ottenere una reverse shell su un target reale sfruttando un upload vulnerabile." },
       { name: 'Kenobi', difficulty: 'media', note: "Altro scenario pratico per esercitarsi a ottenere ed elevare una shell su Linux." }
@@ -1434,6 +1457,7 @@ const ROOMS = [
     title: 'Pivoting e tunneling',
     excerpt: "Il primo host compromesso raramente è il target finale. Come usare SSH, Chisel, Ligolo-ng e sshuttle per instradare traffico attraverso host già compromessi verso reti interne.",
     difficulty: 'difficile',
+    icon: 'assets/icons/rooms/fa-network-wired.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Kenobi', difficulty: 'media', note: "Buona palestra di enumerazione di servizi multipli su un host, propedeutica ai concetti di pivoting." }
     ],
@@ -1472,6 +1496,7 @@ const ROOMS = [
     title: 'Post-Exploitation: persistenza su Linux',
     excerpt: "Una volta dentro, come un attaccante si assicura di poter rientrare: cron job, SSH authorized_keys, systemd service, SUID binary — e come i blue team li scovano.",
     difficulty: 'difficile',
+    icon: 'assets/icons/rooms/fa-anchor.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Linux PrivEsc', difficulty: 'media', note: "Copre molte delle tecniche di enumerazione ed escalation legate alla persistenza su Linux." }
     ],
@@ -1510,6 +1535,7 @@ const ROOMS = [
     title: 'Lateral Movement in Active Directory',
     excerpt: "Dal primo foothold ai sistemi più preziosi della rete. Pass-the-Hash, Pass-the-Ticket, Kerberoasting: le tecniche Red Team più usate in ambienti Windows AD, e come rilevarle.",
     difficulty: 'difficile',
+    icon: 'assets/icons/rooms/fa-shuffle.svg', iconGlow: '#ff3060',
     thm: [
       { name: 'Attacktive Directory', difficulty: 'difficile', note: "Room dedicata proprio agli attacchi Active Directory come il Kerberoasting: il match più diretto per questo argomento." }
     ],
@@ -1626,6 +1652,7 @@ const ROOMS = [
     title: 'SIEM e Blue Team',
     excerpt: "Il cuore operativo di ogni SOC: come un SIEM raccoglie, normalizza e correla i log da tutta l\'infrastruttura — e perché saperlo interrogare conta più di possederlo.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-magnifying-glass-chart.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Introduction to SIEM', difficulty: 'facile', note: "Room dedicata proprio ai fondamentali di un SIEM: il match più diretto per questo argomento." }
     ],
@@ -1660,6 +1687,7 @@ const ROOMS = [
     title: 'Threat Hunting: introduzione',
     excerpt: "Gli attaccanti bravi non fanno rumore. Il threat hunting non aspetta l\'alert: parte da un\'ipotesi e cerca attivamente ciò che gli strumenti automatici non hanno trovato.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-crosshairs.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Cyber Kill Chain', difficulty: 'media', note: "Capire le fasi di un attacco aiuta a costruire ipotesi di hunting mirate su ogni fase." },
       { name: 'Unified Kill Chain', difficulty: 'media', note: "Framework di riferimento simile a MITRE ATT&CK, utile per strutturare le ipotesi di caccia." }
@@ -1699,6 +1727,7 @@ const ROOMS = [
     title: 'Incident Response: il processo',
     excerpt: "Cosa fare nelle prime ore dopo un attacco confermato. Le sei fasi PICERL secondo NIST/SANS: preparazione, identificazione, contenimento, eradicazione, ripristino, lezioni apprese.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-bell.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Cyber Kill Chain', difficulty: 'media', note: "Capire le fasi di un attacco aiuta a identificare correttamente la portata durante un incidente reale." }
     ],
@@ -1737,6 +1766,7 @@ const ROOMS = [
     title: 'Analisi malware: le basi',
     excerpt: "Hai trovato un file sospetto. Come analizzarlo senza eseguirlo (analisi statica) e cosa osservare quando lo esegui in un ambiente isolato (analisi dinamica).",
     difficulty: 'difficile',
+    icon: 'assets/icons/rooms/fa-microscope.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Malware Analysis - Malhare.exe', difficulty: 'facile', note: "Applica proprio i passi dell\'articolo — analisi statica e dinamica — su un campione reale in ambiente controllato." }
     ],
@@ -1815,6 +1845,7 @@ const ROOMS = [
     title: 'Phishing: riconoscerlo e rispondere',
     excerpt: "Il vettore d\'attacco numero uno funziona perché prende di mira le persone. Come analizzare header, link e allegati sospetti — e cosa fare nella prima ora se qualcuno ci è già cascato.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-fish.svg', iconGlow: '#ffb020',
     thm: [
       { name: 'Phishing Analysis Fundamentals', difficulty: 'facile', note: "Analizza gli stessi elementi dell\'articolo — header, mittente, componenti dell\'email — su campioni reali." },
       { name: 'Phishing Emails in Action', difficulty: 'facile', note: "Il seguito naturale: riconosci gli indicatori di phishing su email reali usate dagli attaccanti." }
@@ -1854,6 +1885,7 @@ const ROOMS = [
     title: 'Cos\'è il Blue Team: ruoli, strumenti e differenza con il Red Team',
     excerpt: "Il Blue Team difende, rileva e risponde. Cosa fanno concretamente un analista SOC, un threat hunter e un incident responder, e quali strumenti usano ogni giorno.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-shield.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Prima di entrare nel Blue Team conviene avere i fondamentali di reti e sicurezza ben saldi." },
       { name: 'Security Principles', difficulty: 'facile', note: "I principi di sicurezza che stanno alla base di ogni scelta difensiva descritta in questa stanza." }
@@ -1893,6 +1925,7 @@ const ROOMS = [
     title: 'Hardening Linux: rendere un sistema più sicuro passo dopo passo',
     excerpt: "Checklist pratica per hardening di sistemi Linux: configurazione SSH sicura, firewall, permessi, logging, rimozione servizi inutili e CIS benchmark.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/linux.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Linux Fundamentals Part 1', difficulty: 'facile', note: "Prima di irrobustire un sistema Linux è utile essere a proprio agio con i comandi base da terminale." }
     ],
@@ -1931,6 +1964,7 @@ const ROOMS = [
     title: 'Hardening Windows: configurazioni essenziali per ridurre la superficie d\'attacco',
     excerpt: "Hardening di un sistema Windows: Group Policy, Defender configurato, BitLocker, logging degli eventi, disabilitazione di LLMNR/NetBIOS e protocolli legacy.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/windows.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Windows Fundamentals 1', difficulty: 'facile', note: "I fondamentali di Windows utili per capire dove intervenire prima di affrontare l'hardening vero e proprio." }
     ],
@@ -1969,6 +2003,7 @@ const ROOMS = [
     title: 'Segmentazione di rete: VLAN, DMZ e microsegmentazione per ridurre il blast radius',
     excerpt: "Una rete piatta è un sogno per gli attaccanti: compromesso un host, si muovono liberamente. La segmentazione limita il blast radius contenendo le compromissioni ai singoli segmenti.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-sitemap.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Networking Concepts', difficulty: 'facile', note: "I concetti di rete di base che servono per capire come e perché si segmenta un'infrastruttura." }
     ],
@@ -2007,6 +2042,7 @@ const ROOMS = [
     title: 'Zero Trust: l\'architettura di sicurezza che non si fida di nessuno',
     excerpt: "Il modello Zero Trust ribalta il paradigma tradizionale: non esiste più una rete 'interna' sicura. Ogni accesso va verificato, ogni identità autenticata, ogni segmento isolato.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-user-lock.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Security Principles', difficulty: 'facile', note: "I principi di sicurezza su cui si fonda anche il ragionamento Zero Trust." }
     ],
@@ -2045,6 +2081,7 @@ const ROOMS = [
     title: 'EDR: cos\'è, come funziona e come sceglierlo per la tua organizzazione',
     excerpt: "L'EDR è la risposta moderna all'antivirus tradizionale. Monitora il comportamento degli endpoint in tempo reale, correla eventi con MITRE ATT&CK e permette la risposta agli incidenti remota.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-laptop-medical.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Introduction to SIEM', difficulty: 'facile', note: "Un EDR spesso alimenta un SIEM: capire come funziona l'aggregazione degli eventi aiuta a capire il valore di un EDR." }
     ],
@@ -2083,6 +2120,7 @@ const ROOMS = [
     title: 'Giornata tipo di un SOC Analyst: triage, alert fatigue e investigazione',
     excerpt: "Come si passa una giornata in un Security Operations Center? Dalla gestione degli alert mattutini all'investigazione di un incidente reale. Il ruolo del SOC analyst, gli strumenti e le sfide quotidiane.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-headset.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Introduction to SIEM', difficulty: 'facile', note: "Il SIEM è lo strumento con cui un SOC analyst passa gran parte della giornata." }
     ],
@@ -2121,6 +2159,7 @@ const ROOMS = [
     title: 'Analisi dei log Windows: gli Event ID che ogni Blue Team deve conoscere',
     excerpt: "Gli Event ID di Windows raccontano tutto: login, escalation, lateral movement, persistence. Guida agli ID fondamentali e come usarli per rilevare attività sospette.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-list.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Windows Forensics 1', difficulty: 'media', note: "Gli stessi Event ID visti in questa stanza sono tra gli artefatti più usati anche in un'analisi forense successiva." }
     ],
@@ -2198,6 +2237,7 @@ const ROOMS = [
     title: 'OSINT Difensivo: monitorare la propria esposizione online come fanno gli attaccanti',
     excerpt: "Prima di attaccarti, gli avversari raccolgono informazioni su di te da fonti pubbliche. L'OSINT difensivo consiste nell'eseguire questa ricognizione su se stessi per scoprire e correggere le esposizioni prima degli altri.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-binoculars.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Threat Intelligence Tools', difficulty: 'facile', note: "Molti degli strumenti OSINT usati per la difesa in questo articolo sono gli stessi esplorati in questa stanza." }
     ],
@@ -2236,6 +2276,7 @@ const ROOMS = [
     title: 'Honeypot e Deception Technology: intrappolare gli attaccanti con trappole digitali',
     excerpt: "Un honeypot è un sistema intenzionalmente vulnerabile progettato per attirare gli attaccanti. Le moderne deception technology vanno oltre: distribuiscono trappole ovunque nella rete per rilevare le intrusioni con quasi zero falsi positivi.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-spider.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Snort', difficulty: 'media', note: "Un IDS come Snort e un honeypot sono spesso complementari nella strategia di detection di un blue team." }
     ],
@@ -2313,6 +2354,7 @@ const ROOMS = [
     title: 'Email Security: SPF, DKIM e DMARC, come funzionano e come configurarli',
     excerpt: "Il 91% degli attacchi informatici inizia con una email. SPF, DKIM e DMARC sono i tre standard che proteggono il tuo dominio dall'essere usato per phishing e spoofing. Come funzionano e come si configurano.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-envelope-circle-check.svg', iconGlow: '#00c8ff',
     thm: [
       { name: 'Phishing Analysis Fundamentals', difficulty: 'facile', note: "Capire come si falsificano le email aiuta a capire perché SPF, DKIM e DMARC servono davvero." }
     ],
@@ -2429,6 +2471,7 @@ const ROOMS = [
     title: 'Acquisizione forense: imaging del disco e catena di custodia',
     excerpt: "Prima ancora di analizzare qualsiasi prova digitale bisogna acquisirla senza alterarla, e poter dimostrare che non è stata alterata. Ecco come si fa un'acquisizione forense difendibile, dal write blocker al primo hash.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-hard-drive.svg', iconGlow: '#3366cc',
     thm: [
       { name: 'Autopsy', difficulty: 'facile', note: "Una volta acquisita correttamente un'immagine disco, è con strumenti come Autopsy che inizia l'analisi vera e propria." }
     ],
@@ -2506,6 +2549,7 @@ const ROOMS = [
     title: 'Timeline Analysis: ricostruire cosa è successo su un sistema Windows',
     excerpt: "Windows registra molto più di quanto sembri: quando un file è stato eseguito, quali cartelle sono state aperte, quali dispositivi USB sono stati collegati. La timeline analysis mette tutti questi frammenti in ordine cronologico.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-timeline.svg', iconGlow: '#3366cc',
     thm: [
       { name: 'Windows Forensics 1', difficulty: 'media', note: "Molti degli artefatti Windows descritti nell'articolo, come Registro ed Event Log, si analizzano in pratica in questa stanza." }
     ],
@@ -2581,6 +2625,7 @@ const ROOMS = [
     title: 'Scrivere un report forense che regga in tribunale',
     excerpt: "L'analisi più rigorosa del mondo non serve a niente se il report che la racconta è ambiguo, pieno di gergo o costruisce conclusioni che i dati non sostengono davvero. Il report è il prodotto finale: è quello su cui verrai giudicato.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-gavel.svg', iconGlow: '#3366cc',
     thm: [],
     quiz: [
       {
@@ -2617,6 +2662,7 @@ const ROOMS = [
     title: 'Registry Forensics: cosa nasconde il Registro di Windows',
     excerpt: "Il Registro di Windows non è solo un posto dove vivono le impostazioni di sistema. È un diario che registra quali programmi sono stati eseguiti, quali dispositivi USB sono stati collegati e quali cartelle sono state aperte.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-database.svg', iconGlow: '#3366cc',
     thm: [
       { name: 'Forensics - Registry Furensics', difficulty: 'media', note: "Investiga il Registro di Windows dal vivo, applicando le stesse chiavi descritte nell'articolo." }
     ],
@@ -2655,6 +2701,7 @@ const ROOMS = [
     title: 'Browser Forensics: cronologia, cache e download come prova digitale',
     excerpt: "Ogni sito visitato e ogni file scaricato lasciano una traccia nei database SQLite del browser. Cancellare la cronologia manualmente non basta a farla sparire davvero.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-clock-rotate-left.svg', iconGlow: '#3366cc',
     thm: [],
     quiz: [
       {
@@ -2691,6 +2738,7 @@ const ROOMS = [
     title: 'Linux Forensics: gli artefatti che restano su un server compromesso',
     excerpt: "Un attaccante che ottiene una shell su un server Linux lascia tracce in decine di posti diversi: log di autenticazione, bash history, cron job, unit systemd.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/linux.svg', iconGlow: '#3366cc',
     thm: [
       { name: 'Linux Server Forensics', difficulty: 'media', note: "Analizza un server Linux compromesso applicando gli stessi artefatti (auth.log, cron, processi) descritti nell'articolo." }
     ],
@@ -2729,6 +2777,7 @@ const ROOMS = [
     title: "Email Forensics: leggere un header per scoprire una falsificazione",
     excerpt: "Il body di un'email si falsifica in due minuti. L'header no: ogni server che ha gestito il messaggio lascia una riga Received difficile da falsificare senza incongruenze.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-envelope-open-text.svg', iconGlow: '#3366cc',
     thm: [],
     quiz: [
       {
@@ -2765,6 +2814,7 @@ const ROOMS = [
     title: 'USB Forensics: ricostruire una timeline di esfiltrazione completa',
     excerpt: "Sapere che una chiavetta è stata collegata non basta. Incrociando il log di installazione del dispositivo con i file LNK e le Jump List si ricostruisce l'intera timeline.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-usb.svg', iconGlow: '#3366cc',
     thm: [],
     quiz: [
       {
@@ -2801,6 +2851,7 @@ const ROOMS = [
     title: 'Anti-Forensics: come un attaccante prova a sparire, e come lo si scopre',
     excerpt: "Ogni tecnica per cancellare le tracce lascia a sua volta una traccia: il tentativo stesso. Timestomping, log wiping e cifratura non rendono un attaccante invisibile.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-eraser.svg', iconGlow: '#3366cc',
     thm: [],
     quiz: [
       {
@@ -2876,6 +2927,7 @@ const ROOMS = [
     title: 'Malware Analysis Dinamica: osservare un campione in una sandbox',
     excerpt: "Quando l'analisi statica non basta, resta un'unica strada: eseguire il campione in un ambiente isolato e strumentato che registra ogni sua mossa.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-flask.svg', iconGlow: '#3366cc',
     thm: [
       { name: 'Malware Analysis - Egg-xecutable', difficulty: 'media', note: "Applica gli strumenti di analisi dinamica in sandbox descritti nell'articolo su un campione reale." }
     ],
@@ -2914,6 +2966,7 @@ const ROOMS = [
     title: 'Mobile Forensics: acquisire uno smartphone senza comprometterlo',
     excerpt: "Uno smartphone contiene spesso più prove digitali di un intero laptop. Acquisirlo correttamente richiede di isolarlo dalla rete prima di ogni altra operazione.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-mobile-screen.svg', iconGlow: '#3366cc',
     thm: [
       { name: 'Mobile Acquisition', difficulty: 'facile', note: "Mette in pratica proprio le sfide e i metodi di acquisizione mobile descritti nell'articolo." }
     ],
@@ -2952,6 +3005,7 @@ const ROOMS = [
     title: 'Cloud Forensics: indagare quando il disco non esiste più',
     excerpt: "Non si può collegare un write blocker a un bucket S3. In cloud, l'unica prova disponibile è spesso il log delle API, e quel log ha una scadenza.",
     difficulty: 'media',
+    icon: 'assets/icons/rooms/fa-cloud.svg', iconGlow: '#3366cc',
     thm: [],
     quiz: [
       {
@@ -2988,6 +3042,7 @@ const ROOMS = [
     title: 'Dagli IOC alla Threat Intelligence: condividere quello che si è scoperto',
     excerpt: "Ogni indagine produce indicatori di compromissione. Lasciarli in un report archiviato significa sprecare l'unica cosa che potrebbe aiutare un altro team a bloccare lo stesso attaccante.",
     difficulty: 'facile',
+    icon: 'assets/icons/rooms/fa-share-nodes.svg', iconGlow: '#00b4d8',
     thm: [
       { name: 'Intro to Cyber Threat Intel', difficulty: 'facile', note: "Introduce concretamente framework e standard di threat intelligence descritti nell'articolo." }
     ],
@@ -3026,6 +3081,7 @@ const ROOMS = [
     title: "Caso di studio: un incidente ransomware dall'allerta al report finale",
     excerpt: "Un caso di studio completo che mette insieme tutto il percorso DFIR: acquisizione, memoria, registro, rete, malware e report, nell'ordine reale con cui un analista affronta un incidente.",
     difficulty: 'difficile',
+    icon: 'assets/icons/rooms/fa-briefcase.svg', iconGlow: '#3366cc',
     thm: [],
     quiz: [
       {
