@@ -2204,25 +2204,20 @@ body {
 
 /* Card stanza (U01, U02...): mini finestra terminale — barra col
    semaforo macOS + nome file, corpo con righe stile output di
-   comando ($ / [*] / [!] / >>). Sfondo sempre scuro (come i
-   terminal-box) così resta leggibile anche in light mode. */
+   comando ($ / [*] / [!] / >>). Segue il tema del sito (chiara in
+   light mode, scura in dark mode) tramite i token --bg-card/--text
+   standard; solo --text-muted viene rialzato in light mode più sotto
+   perché il valore di default è troppo tenue su sfondo bianco. */
 .fond-node.fond-node-room-term {
-  /* Sempre scuro come un vero terminale, indipendentemente dal tema
-     del sito: senza questi override i token --text/--border ecc.
-     seguirebbero il tema chiaro (testo scuro su sfondo chiaro),
-     perdendo l'estetica da terminale e la leggibilità del logo. */
-  --bg-card: #040f1c;
-  --text: #d8f0ff;
-  --text-dim: #4a7a9b;
-  --text-muted: #1e3d52;
-  --border: rgba(0,200,255,0.10);
-  --border-h: rgba(0,200,255,0.38);
-  --accent: #00c8ff;
   padding: 0; min-height: auto; gap: 0;
   background: var(--bg-card);
   /* niente overflow:hidden qui: il badge dell'argomento (sotto) sporge
      apposta dall'angolo in alto a destra. Lo shimmer hover ha già il
      proprio overflow:hidden locale, quindi resta contenuto lo stesso. */
+}
+[data-theme="light"] .fond-node.fond-node-room-term {
+  --text-muted: #5a7a9a;
+  --border: rgba(0,100,200,0.16);
 }
 .fond-node-room-term::before, .fond-node-room-term::after { display: none; }
 .fond-term-bar {
