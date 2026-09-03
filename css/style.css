@@ -1899,11 +1899,13 @@ body {
 .fond-branch-progress { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .fond-branch {
+  position: relative;
   border: 1px solid var(--border);
   border-top: 3px solid var(--branch-accent, var(--border));
   border-radius: 8px;
   background: var(--bg-surf);
   padding: 1.1rem 1rem 1.6rem;
+  overflow: hidden;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .fond-branch-focused {
@@ -1912,7 +1914,21 @@ body {
 }
 .fond-branch-empty { opacity: 0.85; }
 
+/* Fuoco animato (WebGL, vedi js/fire-effect.js) acceso solo sul
+   ramo su cui ci si è "concentrati": riempie il riquadro dietro al
+   contenuto (z-index sotto head/path), colorato via hue-rotate CSS
+   invece di uno shader diverso per ramo. */
+.fond-branch-fire-canvas {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.fond-branch-fire-canvas-blue { filter: hue-rotate(200deg) saturate(1.3); }
+.fond-branch-fire-canvas-dfir { filter: hue-rotate(260deg) saturate(1.15); }
+
 .fond-branch-head {
+  position: relative; z-index: 1;
   display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.75rem;
   margin-bottom: 1.25rem;
 }
@@ -1948,7 +1964,7 @@ body {
   background: rgba(255,255,255,0.04);
 }
 
-.fond-path-branch { gap: 1.75rem; }
+.fond-path-branch { position: relative; z-index: 1; gap: 1.75rem; }
 .fond-path-branch .fond-path-item,
 .fond-path-branch .fond-path-item:nth-child(odd),
 .fond-path-branch .fond-path-item:nth-child(even) {
@@ -1960,6 +1976,7 @@ body {
 .fond-node-preview .fond-node-title { color: var(--text-dim); }
 
 .fond-branch-more-soon {
+  position: relative; z-index: 1;
   margin: auto 0 0.25rem;
   padding-top: 1.5rem;
   text-align: center;

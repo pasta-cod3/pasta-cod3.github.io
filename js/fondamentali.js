@@ -239,6 +239,68 @@ function setFocusBranch(branchId) {
   saveState(fondState);
 }
 
+/* ─── FUOCO SUL RAMO SCELTO (vedi js/fire-effect.js) ─────────
+   Un solo canvas WebGL alla volta, acceso solo sul ramo su cui
+   fondState.focusBranch punta. teardownBranchFire() va chiamato
+   da ogni vista che sostituisce #fondApp diversa dalla mappa,
+   altrimenti il contesto WebGL resterebbe agganciato a un canvas
+   ormai staccato dal DOM. ─────────────────────────────────── */
+let fondFireCanvas = null;
+let fondFireMouseHandlers = null;
+
+/* Il fuoco segue il mouse solo su desktop vero (mouse fine, non
+   touch): su mobile l'hover non esiste davvero e vale la pena
+   risparmiare i listener oltre che il calcolo per fragment. */
+function isDesktopPointer() {
+  return window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+}
+
+function teardownBranchFire() {
+  if (typeof FondFire !== 'undefined') FondFire.stop();
+  if (fondFireMouseHandlers) {
+    fondFireMouseHandlers.el.removeEventListener('mousemove', fondFireMouseHandlers.move);
+    fondFireMouseHandlers.el.removeEventListener('mouseleave', fondFireMouseHandlers.leave);
+    fondFireMouseHandlers = null;
+  }
+  if (fondFireCanvas) { fondFireCanvas.remove(); fondFireCanvas = null; }
+}
+
+function syncBranchFire() {
+  teardownBranchFire();
+  const branchId = fondState.focusBranch;
+  // Il fuoco è pensato per reagire al mouse: su mobile (niente hover
+  // vero) non ha senso accenderlo, risparmia anche GPU e batteria.
+  if (!branchId || typeof FondFire === 'undefined' || !isDesktopPointer()) return;
+  const branchEl = document.querySelector(`.fond-branch[data-branch="${branchId}"]`);
+  if (!branchEl) return;
+  requestAnimationFrame(() => {
+    const rect = branchEl.getBoundingClientRect();
+    const w = Math.round(rect.width), h = Math.round(rect.height);
+    if (!w || !h) return;
+    const canvas = document.createElement('canvas');
+    canvas.className = `fond-branch-fire-canvas fond-branch-fire-canvas-${branchId}`;
+    canvas.setAttribute('aria-hidden', 'true');
+    branchEl.insertBefore(canvas, branchEl.firstChild);
+    if (!FondFire.start(canvas, w, h)) {
+      canvas.remove();
+      return;
+    }
+    fondFireCanvas = canvas;
+    if (isDesktopPointer()) {
+      const move = e => {
+        const r = branchEl.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width;
+        const ny = 1 - (e.clientY - r.top) / r.height; // y invertita, stessa convenzione di _uv nello shader
+        FondFire.setMouse(nx, ny);
+      };
+      const leave = () => FondFire.setMouse(-1, -1);
+      branchEl.addEventListener('mousemove', move);
+      branchEl.addEventListener('mouseleave', leave);
+      fondFireMouseHandlers = { el: branchEl, move, leave };
+    }
+  });
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(FOND_STORAGE_KEY);
@@ -381,6 +443,7 @@ function renderThmBox(room) {
 /* ─── RENDER: NICKNAME GATE ──────────────────────────────── */
 
 function renderGate() {
+  teardownBranchFire();
   const app = document.getElementById('fondApp');
   app.innerHTML = `
     <div class="fond-gate">
@@ -674,11 +737,13 @@ function renderModules() {
   });
 
   layoutCircuit(edges);
+  syncBranchFire();
 }
 
 /* ─── RENDER: MAPPA DI UN MODULO (le sue stanze) ─────────── */
 
 function renderModuleMap(moduleIndex) {
+  teardownBranchFire();
   const mod = MODULES[moduleIndex];
   const stats = moduleStats(moduleIndex);
   const app = document.getElementById('fondApp');
@@ -944,6 +1009,7 @@ window.addEventListener('resize', () => {
 /* ─── RENDER: STANZA (lettura + quiz) ────────────────────── */
 
 function renderRoom(moduleIndex, roomIndexInModule) {
+  teardownBranchFire();
   const mod = MODULES[moduleIndex];
   const roomId = mod.roomIds[roomIndexInModule];
   const room = ROOM_BY_ID.get(roomId);
