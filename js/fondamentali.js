@@ -3514,8 +3514,20 @@ function layoutCircuit(edges) {
       const [x1, y1] = c1;
       const [x2, y2] = c2;
       const forcedElbowY = elbowBefore ? resolveElbowY(elbowBefore) : null;
-      const ymid = (forcedElbowY != null) ? forcedElbowY : (y1 + y2) / 2;
-      const d = `M ${x1} ${y1} C ${x1} ${ymid}, ${x2} ${ymid}, ${x2} ${y2}`;
+      let d;
+      if (forcedElbowY != null && Math.abs(x2 - x1) > 1) {
+        // Bivio: la svolta orizzontale deve stare TUTTA sulla riga
+        // dell'elbow, non spalmata su una S-curve (altrimenti taglia
+        // in diagonale dentro le card sotto). Due tratti verticali
+        // dritti + un angolo smussato sulla riga dell'elbow.
+        const dir = x2 > x1 ? 1 : -1;
+        const r = Math.max(2, Math.min(18, Math.abs(x2 - x1) / 2, Math.abs(forcedElbowY - y1) / 2, Math.abs(y2 - forcedElbowY) / 2));
+        d = `M ${x1} ${y1} L ${x1} ${forcedElbowY - r} Q ${x1} ${forcedElbowY} ${x1 + dir * r} ${forcedElbowY} `
+          + `L ${x2 - dir * r} ${forcedElbowY} Q ${x2} ${forcedElbowY} ${x2} ${forcedElbowY + r} L ${x2} ${y2}`;
+      } else {
+        const ymid = (forcedElbowY != null) ? forcedElbowY : (y1 + y2) / 2;
+        d = `M ${x1} ${y1} C ${x1} ${ymid}, ${x2} ${ymid}, ${x2} ${y2}`;
+      }
 
       const path = svgEl('path', { d, class: `fond-trace fond-trace-${state}` });
       svg.appendChild(path);

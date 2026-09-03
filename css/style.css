@@ -1890,11 +1890,13 @@ body {
 
 .fond-branches {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.25rem, 2.5vw, 2rem);
   align-items: stretch;
 }
-.fond-branch { display: flex; flex-direction: column; }
+.fond-branch { display: flex; flex-direction: column; min-width: 0; }
+.fond-branch-head-meta { min-width: 0; }
+.fond-branch-progress { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .fond-branch {
   border: 1px solid var(--border);
