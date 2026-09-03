@@ -2125,6 +2125,191 @@ const POSTS = [
       "comunicazione tecnica"
     ],
     "excerpt": "L'analisi più rigorosa del mondo non serve a niente se il report che la racconta è ambiguo, pieno di gergo o costruisce conclusioni che i dati non sostengono davvero. Il report è il prodotto finale: è quello su cui verrai giudicato."
+  },
+  {
+    "id": "registry-forensics-windows",
+    "title": "Registry Forensics: cosa nasconde il Registro di Windows",
+    "date": "2026-08-01",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "registry forensics",
+      "Windows",
+      "NTUSER.DAT",
+      "SAM",
+      "Amcache",
+      "ShimCache"
+    ],
+    "excerpt": "Il Registro di Windows non è solo un posto dove vivono le impostazioni di sistema. È un diario che registra quali programmi sono stati eseguiti, quali dispositivi USB sono stati collegati e quali cartelle sono state aperte, spesso anche dopo che l'utente ha provato a cancellare le tracce."
+  },
+  {
+    "id": "browser-forensics-cronologia",
+    "title": "Browser Forensics: cronologia, cache e download come prova digitale",
+    "date": "2026-08-02",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "browser forensics",
+      "cronologia",
+      "SQLite",
+      "cache",
+      "download",
+      "navigazione privata"
+    ],
+    "excerpt": "Ogni sito visitato, ogni file scaricato e quasi ogni ricerca digitata lascia una traccia nei database SQLite del browser. Anche cancellare la cronologia manualmente non basta a farla sparire davvero: ecco dove guardare e cosa sopravvive."
+  },
+  {
+    "id": "linux-forensics-artefatti",
+    "title": "Linux Forensics: gli artefatti che restano su un server compromesso",
+    "date": "2026-08-03",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "Linux forensics",
+      "bash history",
+      "auth.log",
+      "cron",
+      "systemd",
+      "incident response"
+    ],
+    "excerpt": "Un attaccante che ottiene una shell su un server Linux lascia tracce in decine di posti diversi: log di autenticazione, cronologia della shell, cron job, unit systemd. Sapere dove guardare, in ordine, fa la differenza tra ricostruire l'attacco e restare bloccati."
+  },
+  {
+    "id": "email-forensics-analisi-header",
+    "title": "Email Forensics: leggere un header per scoprire una falsificazione",
+    "date": "2026-08-04",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "email forensics",
+      "header analysis",
+      "Received",
+      "spoofing",
+      "EML"
+    ],
+    "excerpt": "Il corpo di un'email si può falsificare con un editor di testo in due minuti. L'header no, o almeno non facilmente: ogni server che ha gestito il messaggio lascia una riga Received che è difficile falsificare senza lasciare incongruenze rilevabili."
+  },
+  {
+    "id": "usb-forensics-dispositivi-rimovibili",
+    "title": "USB Forensics: ricostruire una timeline di esfiltrazione completa",
+    "date": "2026-08-06",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "USB forensics",
+      "setupapi",
+      "LNK files",
+      "Jump Lists",
+      "esfiltrazione dati"
+    ],
+    "excerpt": "Sapere che una chiavetta USB è stata collegata non basta a dimostrare cosa è successo dopo. Incrociando il log di installazione del dispositivo con i file LNK e le Jump List di Windows si ricostruisce l'intera timeline: quando, quale dispositivo e quali file sono stati aperti da lì."
+  },
+  {
+    "id": "anti-forensics-tecniche-contromisure",
+    "title": "Anti-Forensics: come un attaccante prova a sparire, e come lo si scopre",
+    "date": "2026-08-07",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "anti-forensics",
+      "timestomping",
+      "log wiping",
+      "steganografia",
+      "contromisure"
+    ],
+    "excerpt": "Ogni tecnica per cancellare le tracce lascia a sua volta una traccia: il tentativo stesso. Timestomping, wiping dei log e cifratura non rendono un attaccante invisibile, lo rendono soltanto un po' più lento da scoprire, e spesso più facile da individuare come tale."
+  },
+  {
+    "id": "malware-analysis-statica-basi",
+    "title": "Malware Analysis Statica: capire un binario senza eseguirlo",
+    "date": "2026-08-09",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "malware analysis",
+      "analisi statica",
+      "PE header",
+      "strings",
+      "hashing",
+      "YARA"
+    ],
+    "excerpt": "Prima di eseguire un file sospetto anche in un ambiente isolato, si può imparare moltissimo senza mai lanciarlo: hash, stringhe leggibili, struttura dell'eseguibile e regole YARA bastano spesso a capire con cosa si ha a che fare."
+  },
+  {
+    "id": "malware-analysis-dinamica-sandbox",
+    "title": "Malware Analysis Dinamica: osservare un campione in una sandbox",
+    "date": "2026-08-11",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "malware analysis",
+      "sandbox",
+      "analisi dinamica",
+      "Process Monitor",
+      "sandbox evasion"
+    ],
+    "excerpt": "Quando l'analisi statica non basta perché il codice è packed o offuscato, resta un'unica strada: eseguire il campione davvero, ma dentro un ambiente isolato e strumentato che registra ogni sua mossa senza lasciargli via di fuga verso la rete reale."
+  },
+  {
+    "id": "mobile-forensics-fondamenti",
+    "title": "Mobile Forensics: acquisire uno smartphone senza comprometterlo",
+    "date": "2026-08-12",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "mobile forensics",
+      "Android",
+      "iOS",
+      "acquisizione logica",
+      "acquisizione fisica"
+    ],
+    "excerpt": "Uno smartphone contiene spesso più prove digitali di un intero laptop: posizione, messaggi, app installate, cronologia di navigazione. Acquisirlo correttamente è più delicato che acquisire un disco, perché il dispositivo continua a comunicare con la rete finché non lo si isola."
+  },
+  {
+    "id": "cloud-forensics-log-investigativi",
+    "title": "Cloud Forensics: indagare quando il disco non esiste più",
+    "date": "2026-08-13",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "cloud forensics",
+      "CloudTrail",
+      "log investigativi",
+      "AWS",
+      "evidenza volatile"
+    ],
+    "excerpt": "Non si può collegare un write blocker a un bucket S3. In cloud, l'unica prova disponibile è spesso il log delle API, e quel log ha una scadenza: se non viene esportato e conservato in tempo, sparisce per sempre insieme a ogni possibilità di ricostruire l'accaduto."
+  },
+  {
+    "id": "ioc-threat-intel-condivisione",
+    "title": "Dagli IOC alla Threat Intelligence: condividere quello che si è scoperto",
+    "date": "2026-08-14",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "IOC",
+      "threat intelligence",
+      "MISP",
+      "STIX",
+      "TAXII",
+      "pivoting"
+    ],
+    "excerpt": "Ogni indagine chiusa produce indicatori di compromissione: hash, IP, domini, chiavi del Registro. Lasciarli in un report PDF dimenticato in un archivio significa sprecare l'unica cosa che potrebbe aiutare un altro team a bloccare lo stesso attaccante prima che colpisca ancora."
+  },
+  {
+    "id": "caso-studio-incident-response-completo",
+    "title": "Caso di studio: un incidente ransomware dall'allerta al report finale",
+    "date": "2026-07-31",
+    "cat": "blue",
+    "tags": [
+      "DFIR",
+      "incident response",
+      "caso di studio",
+      "ransomware",
+      "timeline",
+      "capstone"
+    ],
+    "excerpt": "Un caso di studio completo che mette insieme tutto il percorso DFIR: acquisizione, memoria, registro, rete, malware e report. Non una teoria isolata, ma la sequenza reale con cui un analista affronta un incidente dall'allerta iniziale fino alla testimonianza finale."
   }
 ];
 // [POSTS:END]

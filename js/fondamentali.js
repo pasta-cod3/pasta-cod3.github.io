@@ -124,7 +124,13 @@ const THM_DATA = {
   'Autopsy': { url: 'https://tryhackme.com/room/btautopsye0', icon: 'https://cdn-images.tryhackme.com/room-icons/3a5bffa10dcb6fec1e4ae8b63fedddd2.png' },
   'Windows Forensics 1': { url: 'https://tryhackme.com/room/windowsforensics1', icon: 'https://cdn-images.tryhackme.com/room-icons/4f3a37633c01bc4453668af0f2d3e7ef.png' },
   'Threat Intelligence Tools': { url: 'https://tryhackme.com/room/threatinteltools', icon: 'https://cdn-images.tryhackme.com/room-icons/66704dd0e54a1f39bff7b1a1-1735575413195' },
-  'Introduction to AWS Security Tools': { url: 'https://tryhackme.com/room/introductiontoawssecuritytools', icon: 'https://cdn-images.tryhackme.com/room-icons/68baea2454c82afe90fd7020-1782374116372' }
+  'Introduction to AWS Security Tools': { url: 'https://tryhackme.com/room/introductiontoawssecuritytools', icon: 'https://cdn-images.tryhackme.com/room-icons/68baea2454c82afe90fd7020-1782374116372' },
+  'Forensics - Registry Furensics': { url: 'https://tryhackme.com/room/registry-forensics-aoc2025-h6k9j2l5p8', icon: 'https://cdn-images.tryhackme.com/room-icons/5e9c5d0148cf664325c8a075-1763744545793' },
+  'Linux Server Forensics': { url: 'https://tryhackme.com/room/linuxserverforensics', icon: 'https://cdn-images.tryhackme.com/room-icons/d8c12baec1d8e5b3ba412d37f6c2e2f3.png' },
+  'MAL: Malware Introductory': { url: 'https://tryhackme.com/room/malmalintroductory', icon: 'https://cdn-images.tryhackme.com/room-icons/8ea4be420cf856b5ff78bb2206bb3dbb.png' },
+  'Malware Analysis - Egg-xecutable': { url: 'https://tryhackme.com/room/malware-sandbox-aoc2025-SD1zn4fZQt', icon: 'https://cdn-images.tryhackme.com/room-icons/5f9c7574e201fe31dad228fc-1762635119390' },
+  'Mobile Acquisition': { url: 'https://tryhackme.com/room/mobileacquisition', icon: 'https://cdn-images.tryhackme.com/room-icons/5de96d9ca744773ea7ef8c00-1746735905728' },
+  'Intro to Cyber Threat Intel': { url: 'https://tryhackme.com/room/cyberthreatintel', icon: 'https://cdn-images.tryhackme.com/room-icons/66704dd0e54a1f39bff7b1a1-1735575216267' }
 };
 
 function thmUrl(name) {
@@ -215,6 +221,8 @@ const MODULE_VISUAL = [
   { icon: shieldIcon,                       cmd: 'lynis audit --type HARDENING' },
   { icon: signalIcon,                       cmd: 'misp-feed --type THREAT_INTEL' },
   { icon: fingerprintIcon,                  cmd: 'vol -f dump.raw --type DFIR' },
+  { icon: fingerprintIcon,                  cmd: 'reg query --type ARTEFATTI' },
+  { icon: fingerprintIcon,                  cmd: 'yara -r rules.yar --type MALWARE' },
 ];
 
 /* Effetto macchina da scrivere per il mini-terminale dei moduli:
@@ -2754,6 +2762,450 @@ const ROOMS = [
         ], correct: 1
       }
     ]
+  },
+  {
+    id: 'registry-forensics-windows',
+    title: 'Registry Forensics: cosa nasconde il Registro di Windows',
+    excerpt: "Il Registro di Windows non è solo un posto dove vivono le impostazioni di sistema. È un diario che registra quali programmi sono stati eseguiti, quali dispositivi USB sono stati collegati e quali cartelle sono state aperte.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Forensics - Registry Furensics', difficulty: 'media', note: "Investiga il Registro di Windows dal vivo, applicando le stesse chiavi descritte nell'articolo." }
+    ],
+    quiz: [
+      {
+        q: "Cosa registra la chiave USBSTOR del Registro?",
+        options: [
+          "Solo l'ultimo dispositivo USB collegato al sistema",
+          "Produttore, modello e numero di serie di ogni dispositivo di archiviazione USB mai collegato",
+          "Le password usate per accedere ai dispositivi USB",
+          "Solo i dispositivi USB attualmente collegati"
+        ], correct: 1
+      },
+      {
+        q: "Perché Amcache è particolarmente prezioso per dimostrare che un malware è girato su una macchina?",
+        options: [
+          "Perché cancella automaticamente i programmi malevoli",
+          "Perché include l'hash SHA-1 dell'eseguibile, confrontabile subito con VirusTotal",
+          "Perché mostra il codice sorgente completo del programma eseguito",
+          "Perché funziona solo su sistemi con antivirus disattivato"
+        ], correct: 1
+      },
+      {
+        q: "Cosa permettono di ricostruire le ShellBags, anche dopo che un'unità è stata rimossa?",
+        options: [
+          "Le password salvate dal browser",
+          "Le cartelle che l'utente ha navigato con Esplora Risorse, incluso il percorso completo",
+          "L'elenco dei siti web visitati",
+          "Solo i file eseguibili installati sul sistema"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'browser-forensics-cronologia',
+    title: 'Browser Forensics: cronologia, cache e download come prova digitale',
+    excerpt: "Ogni sito visitato e ogni file scaricato lasciano una traccia nei database SQLite del browser. Cancellare la cronologia manualmente non basta a farla sparire davvero.",
+    difficulty: 'media',
+    thm: [],
+    quiz: [
+      {
+        q: "In che formato Chrome ed Edge salvano tipicamente cronologia e download?",
+        options: [
+          "File di testo semplice non strutturato",
+          "Database SQLite, interrogabili con query SQL standard",
+          "Fogli di calcolo Excel",
+          "File cifrati impossibili da leggere senza la password dell'utente"
+        ], correct: 1
+      },
+      {
+        q: "Cosa può sopravvivere anche dopo che l'utente ha svuotato la cronologia dall'interfaccia del browser?",
+        options: [
+          "Nulla, la cancellazione è sempre totale e irreversibile",
+          "Cache, cookie e righe cancellate ancora presenti nello spazio non allocato del file SQLite",
+          "Solo le password salvate",
+          "Solo i segnalibri"
+        ], correct: 1
+      },
+      {
+        q: "La navigazione privata protegge principalmente da cosa?",
+        options: [
+          "Da qualunque tipo di indagine forense, incluso l'accesso al sistema operativo",
+          "Da un'altra persona che usa lo stesso computer dopo, non da un'analisi del sistema operativo o della memoria",
+          "Dal proprio provider internet in ogni caso",
+          "Da qualsiasi estensione installata nel browser"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'linux-forensics-artefatti',
+    title: 'Linux Forensics: gli artefatti che restano su un server compromesso',
+    excerpt: "Un attaccante che ottiene una shell su un server Linux lascia tracce in decine di posti diversi: log di autenticazione, bash history, cron job, unit systemd.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Linux Server Forensics', difficulty: 'media', note: "Analizza un server Linux compromesso applicando gli stessi artefatti (auth.log, cron, processi) descritti nell'articolo." }
+    ],
+    quiz: [
+      {
+        q: "Cosa suggerisce un file auth.log assente o con dimensione anomala rispetto alla normale rotazione?",
+        options: [
+          "Un problema di spazio su disco senza rilevanza per l'indagine",
+          "Un possibile tentativo di log wiping da parte dell'attaccante",
+          "Che il server non ha mai ricevuto alcun accesso",
+          "Un aggiornamento automatico del sistema operativo"
+        ], correct: 1
+      },
+      {
+        q: "Perché controllare /proc/<PID>/exe è più affidabile del solo output di ps per identificare un processo sospetto?",
+        options: [
+          "Perché ps non mostra mai processi malevoli",
+          "Perché mostra il percorso reale del binario in esecuzione, anche se il nome visualizzato in ps è ingannevole",
+          "Perché richiede privilegi minori di ps",
+          "Perché è l'unico modo per vedere le connessioni di rete"
+        ], correct: 1
+      },
+      {
+        q: "Perché un ctime più recente di un mtime \"pulito\" è un indizio di timestomping su Linux?",
+        options: [
+          "Non lo è, sono sempre identici per definizione",
+          "Perché il ctime cambia automaticamente ogni volta che i metadati del file vengono toccati, incluso l'uso di touch per alterare gli altri timestamp",
+          "Perché il ctime si aggiorna solo una volta al mese",
+          "Perché il ctime riguarda solo i permessi del file"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'email-forensics-analisi-header',
+    title: "Email Forensics: leggere un header per scoprire una falsificazione",
+    excerpt: "Il body di un'email si falsifica in due minuti. L'header no: ogni server che ha gestito il messaggio lascia una riga Received difficile da falsificare senza incongruenze.",
+    difficulty: 'facile',
+    thm: [],
+    quiz: [
+      {
+        q: "In che ordine vanno lette le righe Received per ricostruire il percorso reale di un'email?",
+        options: [
+          "Dall'alto verso il basso",
+          "Dal basso verso l'alto, perché ogni server aggiunge la propria riga in cima alle precedenti",
+          "L'ordine non ha alcuna importanza",
+          "Solo l'ultima riga in assoluto conta"
+        ], correct: 1
+      },
+      {
+        q: "Cosa indica tipicamente un esito \"spf=fail\" e \"dmarc=fail\" nel campo Authentication-Results?",
+        options: [
+          "Un problema temporaneo del server di posta senza altre implicazioni",
+          "Un forte indizio che l'email è stata falsificata (spoofing) nonostante il campo From sembri legittimo",
+          "Che l'email è sicuramente autentica",
+          "Che il destinatario ha una casella di posta piena"
+        ], correct: 1
+      },
+      {
+        q: "Perché il campo Reply-To è rilevante in un attacco di Business Email Compromise?",
+        options: [
+          "Non è mai rilevante in questo tipo di attacco",
+          "Perché può dirottare le risposte verso un indirizzo diverso e sconosciuto, senza che la vittima se ne accorga a colpo d'occhio",
+          "Perché contiene sempre l'indirizzo IP dell'attaccante",
+          "Perché è l'unico campo che non può mai essere falsificato"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'usb-forensics-dispositivi-rimovibili',
+    title: 'USB Forensics: ricostruire una timeline di esfiltrazione completa',
+    excerpt: "Sapere che una chiavetta è stata collegata non basta. Incrociando il log di installazione del dispositivo con i file LNK e le Jump List si ricostruisce l'intera timeline.",
+    difficulty: 'media',
+    thm: [],
+    quiz: [
+      {
+        q: "Cosa fornisce setupapi.dev.log che la sola chiave USBSTOR del Registro non mostra?",
+        options: [
+          "Il nome del proprietario del dispositivo USB",
+          "Il timestamp preciso di ogni singolo evento di connessione, non solo la prima e l'ultima aggregate",
+          "Il contenuto esatto dei file copiati sul dispositivo",
+          "La marca del dispositivo, che il Registro invece non registra mai"
+        ], correct: 1
+      },
+      {
+        q: "Cosa incorpora un file LNK creato quando si apre un documento da un'unità USB?",
+        options: [
+          "Solo il nome del file, senza altri dettagli",
+          "Il numero di serie del volume di origine, utile per correlarlo alla chiavetta USB identificata",
+          "La password dell'utente che ha aperto il file",
+          "Il contenuto completo del file aperto"
+        ], correct: 1
+      },
+      {
+        q: "Perché le Jump List sono utili anche quando i file LNK nella cartella Recent sono stati cancellati manualmente?",
+        options: [
+          "Perché sono file separati con una propria gestione, e spesso sopravvivono a quella cancellazione",
+          "Perché si aggiornano automaticamente ogni ora indipendentemente da tutto",
+          "Perché non esistono davvero, è un mito diffuso tra gli analisti",
+          "Perché richiedono privilegi di amministratore per essere cancellate"
+        ], correct: 0
+      }
+    ]
+  },
+  {
+    id: 'anti-forensics-tecniche-contromisure',
+    title: 'Anti-Forensics: come un attaccante prova a sparire, e come lo si scopre',
+    excerpt: "Ogni tecnica per cancellare le tracce lascia a sua volta una traccia: il tentativo stesso. Timestomping, log wiping e cifratura non rendono un attaccante invisibile.",
+    difficulty: 'media',
+    thm: [],
+    quiz: [
+      {
+        q: "Cosa rivela spesso una discrepanza tra i timestamp in $STANDARD_INFORMATION e $FILE_NAME su NTFS?",
+        options: [
+          "Un normale comportamento del filesystem senza alcun significato",
+          "Un possibile tentativo di timestomping, perché $FILE_NAME è più raramente falsificato",
+          "Che il file è stato compresso con un packer",
+          "Che il disco ha settori danneggiati"
+        ], correct: 1
+      },
+      {
+        q: "Cosa genera automaticamente Windows quando il log di sicurezza viene cancellato completamente?",
+        options: [
+          "Nessun evento, la cancellazione è sempre silenziosa",
+          "Un Event ID 1102, tipicamente registrato in un log diverso non toccato dall'attaccante",
+          "Una notifica email automatica all'amministratore",
+          "Il blocco immediato dell'account che ha effettuato la cancellazione"
+        ], correct: 1
+      },
+      {
+        q: "Anche quando un file è stato cifrato o cancellato in modo sicuro (wiping), cosa può comunque dimostrare un analista?",
+        options: [
+          "Nulla, l'anti-forensics rende sempre impossibile ogni conclusione",
+          "Che lo strumento di cifratura o wiping è stato eseguito su quella macchina, tramite Prefetch o Amcache",
+          "Solo il contenuto integrale del file originale",
+          "Il nome reale dell'attaccante"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'malware-analysis-statica-basi',
+    title: 'Malware Analysis Statica: capire un binario senza eseguirlo',
+    excerpt: "Prima di eseguire un file sospetto, si può imparare moltissimo senza mai lanciarlo: hash, stringhe leggibili, struttura dell'eseguibile e regole YARA.",
+    difficulty: 'media',
+    thm: [
+      { name: 'MAL: Malware Introductory', difficulty: 'facile', note: "Il primo passo pratico nell'analisi malware, applicando gli stessi principi di base descritti nell'articolo." }
+    ],
+    quiz: [
+      {
+        q: "Perché calcolare l'hash di un campione è sempre il primo passo, prima di ogni altra manipolazione?",
+        options: [
+          "Perché rimuove automaticamente eventuali virus dal file",
+          "Perché identifica univocamente il file e permette di confrontarlo con database noti come VirusTotal",
+          "Perché è richiesto per aprire il file con un editor esadecimale",
+          "Perché comprime il file per l'archiviazione"
+        ], correct: 1
+      },
+      {
+        q: "Quale combinazione di import nell'header PE è tipicamente associata a tecniche di process injection?",
+        options: [
+          "printf e scanf",
+          "VirtualAllocEx, WriteProcessMemory e CreateRemoteThread usati insieme",
+          "GetTickCount da solo",
+          "MessageBoxA usato una sola volta"
+        ], correct: 1
+      },
+      {
+        q: "Cosa indica un'entropia complessiva molto alta (vicina a 8) in un eseguibile?",
+        options: [
+          "Che il file è scritto in un linguaggio di programmazione moderno",
+          "Che il file è probabilmente packed o contiene payload compressi/cifrati",
+          "Che il file è sicuramente innocuo",
+          "Che il file non può essere eseguito su Windows"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'malware-analysis-dinamica-sandbox',
+    title: 'Malware Analysis Dinamica: osservare un campione in una sandbox',
+    excerpt: "Quando l'analisi statica non basta, resta un'unica strada: eseguire il campione in un ambiente isolato e strumentato che registra ogni sua mossa.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Malware Analysis - Egg-xecutable', difficulty: 'media', note: "Applica gli strumenti di analisi dinamica in sandbox descritti nell'articolo su un campione reale." }
+    ],
+    quiz: [
+      {
+        q: "Perché una sandbox per malware analysis usa una rete simulata (INetSim/FakeNet-NG) invece di internet reale?",
+        options: [
+          "Per risparmiare banda di rete",
+          "Per far credere al malware di essere online e osservare a chi prova a connettersi, senza dargli una connessione reale",
+          "Perché internet reale è troppo lento per l'analisi",
+          "Non è mai necessario, si usa sempre internet reale"
+        ], correct: 1
+      },
+      {
+        q: "Cosa permette di osservare Process Monitor durante l'esecuzione di un campione?",
+        options: [
+          "Solo l'uso della CPU del processo",
+          "Ogni operazione su file, Registro e rete effettuata dal processo in tempo reale",
+          "Solo il traffico di rete cifrato",
+          "Il codice sorgente originale del malware"
+        ], correct: 1
+      },
+      {
+        q: "Cosa fanno tipicamente le tecniche di sandbox evasion usate da malware sofisticati?",
+        options: [
+          "Rendono il malware permanentemente inattivo su ogni sistema",
+          "Rilevano segnali tipici di virtualizzazione o assenza di interazione umana e si comportano in modo innocuo per non rivelarsi",
+          "Cancellano automaticamente ogni traccia di sé stessi",
+          "Aumentano deliberatamente il proprio traffico di rete per farsi notare"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'mobile-forensics-fondamenti',
+    title: 'Mobile Forensics: acquisire uno smartphone senza comprometterlo',
+    excerpt: "Uno smartphone contiene spesso più prove digitali di un intero laptop. Acquisirlo correttamente richiede di isolarlo dalla rete prima di ogni altra operazione.",
+    difficulty: 'media',
+    thm: [
+      { name: 'Mobile Acquisition', difficulty: 'facile', note: "Mette in pratica proprio le sfide e i metodi di acquisizione mobile descritti nell'articolo." }
+    ],
+    quiz: [
+      {
+        q: "Perché isolare un dispositivo mobile dalla rete è il primo gesto, prima di qualunque acquisizione?",
+        options: [
+          "Per risparmiare batteria durante l'analisi",
+          "Per impedire wipe da remoto, sincronizzazioni cloud o notifiche che alterano i dati dopo il sequestro",
+          "Perché altrimenti il dispositivo si spegne automaticamente",
+          "Non è mai necessario se il dispositivo è bloccato da un PIN"
+        ], correct: 1
+      },
+      {
+        q: "Qual è la differenza principale tra acquisizione logica e acquisizione fisica di uno smartphone?",
+        options: [
+          "Sono esattamente la stessa cosa con nomi diversi",
+          "La logica estrae dati tramite le API di sistema (backup), la fisica crea un'immagine bit a bit dell'intera memoria incluso lo spazio non allocato",
+          "La fisica funziona solo su iOS, la logica solo su Android",
+          "La logica richiede sempre il jailbreak del dispositivo"
+        ], correct: 1
+      },
+      {
+        q: "Perché iOS è generalmente più complesso da acquisire fisicamente rispetto ad Android?",
+        options: [
+          "Perché iOS non ha memoria interna",
+          "Perché Apple cifra l'intero storage di default e limita fortemente le acquisizioni fisiche complete senza vulnerabilità specifiche",
+          "Perché iOS non supporta i backup",
+          "Perché iOS è open source e quindi più difficile da analizzare"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'cloud-forensics-log-investigativi',
+    title: 'Cloud Forensics: indagare quando il disco non esiste più',
+    excerpt: "Non si può collegare un write blocker a un bucket S3. In cloud, l'unica prova disponibile è spesso il log delle API, e quel log ha una scadenza.",
+    difficulty: 'media',
+    thm: [],
+    quiz: [
+      {
+        q: "Cosa registra AWS CloudTrail?",
+        options: [
+          "Solo il traffico di rete a livello di pacchetto",
+          "Ogni chiamata effettuata contro le API di AWS: chi, cosa, quando e da quale indirizzo IP",
+          "Solo gli accessi falliti al portale di amministrazione",
+          "Il contenuto dei file salvati sui bucket S3"
+        ], correct: 1
+      },
+      {
+        q: "Perché la cloud forensics è strutturalmente diversa dalla forensics su infrastruttura fisica?",
+        options: [
+          "Perché in cloud non esistono mai prove digitali",
+          "Perché non esiste un disco fisico da isolare e l'evidenza (i log) ha una scadenza attiva secondo la policy di conservazione",
+          "Perché il cloud è sempre più lento da analizzare",
+          "Perché richiede sempre l'autorizzazione del provider prima di ogni indagine"
+        ], correct: 1
+      },
+      {
+        q: "Cosa bisogna fare PRIMA di spegnere o modificare un'istanza cloud compromessa che va preservata per analisi?",
+        options: [
+          "Niente di particolare, si può spegnere direttamente",
+          "Creare uno snapshot del volume di storage associato, l'equivalente cloud dell'imaging di un disco",
+          "Cancellare tutti i log per evitare confusione",
+          "Contattare esclusivamente le forze dell'ordine prima di ogni altra azione tecnica"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'ioc-threat-intel-condivisione',
+    title: 'Dagli IOC alla Threat Intelligence: condividere quello che si è scoperto',
+    excerpt: "Ogni indagine produce indicatori di compromissione. Lasciarli in un report archiviato significa sprecare l'unica cosa che potrebbe aiutare un altro team a bloccare lo stesso attaccante.",
+    difficulty: 'facile',
+    thm: [
+      { name: 'Intro to Cyber Threat Intel', difficulty: 'facile', note: "Introduce concretamente framework e standard di threat intelligence descritti nell'articolo." }
+    ],
+    quiz: [
+      {
+        q: "Secondo la Piramide del Dolore, perché bloccare una TTP (tecnica) causa più \"dolore\" all'attaccante che bloccare un hash?",
+        options: [
+          "Non è vero, hanno esattamente lo stesso effetto",
+          "Perché un hash cambia con una semplice ricompilazione, mentre cambiare una tecnica richiede ripensare l'intero attacco",
+          "Perché le TTP sono più facili da individuare degli hash",
+          "Perché gli hash non sono mai affidabili come indicatori"
+        ], correct: 1
+      },
+      {
+        q: "A cosa servono insieme STIX e TAXII?",
+        options: [
+          "STIX è un antivirus, TAXII è un firewall",
+          "STIX è il formato per strutturare i dati di threat intelligence, TAXII è il protocollo per scambiarli automaticamente tra sistemi",
+          "Sono due nomi diversi per la stessa piattaforma MISP",
+          "Servono solo per la cifratura delle email"
+        ], correct: 1
+      },
+      {
+        q: "Cosa indica l'etichetta TLP:AMBER su un'informazione di intelligence condivisa?",
+        options: [
+          "È condivisibile pubblicamente senza restrizioni",
+          "È condivisibile solo all'interno dell'organizzazione dei destinatari diretti",
+          "Deve essere immediatamente cancellata",
+          "Riguarda solo indicatori di rete, mai file"
+        ], correct: 1
+      }
+    ]
+  },
+  {
+    id: 'caso-studio-incident-response-completo',
+    title: "Caso di studio: un incidente ransomware dall'allerta al report finale",
+    excerpt: "Un caso di studio completo che mette insieme tutto il percorso DFIR: acquisizione, memoria, registro, rete, malware e report, nell'ordine reale con cui un analista affronta un incidente.",
+    difficulty: 'difficile',
+    thm: [],
+    quiz: [
+      {
+        q: "Perché nel caso di studio il server compromesso viene isolato dalla rete ma lasciato ACCESO, invece di essere spento subito?",
+        options: [
+          "Per motivi puramente estetici, non ha alcun impatto sull'indagine",
+          "Perché spegnerlo cancellerebbe per sempre i dati volatili in RAM, seguendo il principio dell'ordine di volatilità",
+          "Perché spegnere un server richiede sempre l'autorizzazione del CEO",
+          "Perché un server acceso consuma meno energia di uno spento"
+        ], correct: 1
+      },
+      {
+        q: "Cosa indica il pattern osservato nel traffico di rete, con dati trasferiti in uscita poco prima della cifratura?",
+        options: [
+          "Un normale backup automatico pianificato",
+          "Un pattern di doppia estorsione, in cui i dati vengono esfiltrati prima di essere cifrati",
+          "Un errore di configurazione del firewall senza alcuna intenzionalità",
+          "Un aggiornamento software di routine"
+        ], correct: 1
+      },
+      {
+        q: "Qual è l'ordine corretto, secondo il caso di studio, con cui affrontare le fasi di un incidente di questo tipo?",
+        options: [
+          "Report prima di tutto, poi si decide se indagare",
+          "Memoria prima del disco, disco prima degli artefatti, artefatti prima della timeline, timeline prima del report",
+          "Timeline prima di qualunque acquisizione",
+          "L'ordine non ha alcuna importanza, basta raccogliere tutto insieme alla fine"
+        ], correct: 1
+      }
+    ]
   }
 ];
 
@@ -2838,6 +3290,20 @@ const MODULES = [
     subtitle: "Dall'acquisizione della prova al report finale: come si raccoglie, analizza e racconta un'evidenza digitale in modo che regga.",
     branch: 'dfir',
     roomIds: ['forensica-digitale-introduzione', 'acquisizione-forense-catena-di-custodia', 'memory-forensics-volatility', 'timeline-analysis-artefatti-windows', 'network-forensics-pcap', 'report-forense-difendibile']
+  },
+  {
+    id: 'dfir-artefatti-sistema',
+    title: 'DFIR: Artefatti di Windows e Linux',
+    subtitle: 'Registro, browser, filesystem Linux, email e dispositivi USB: dove si nascondono le prove quando si scende nel dettaglio di un singolo sistema.',
+    branch: 'dfir',
+    roomIds: ['registry-forensics-windows', 'browser-forensics-cronologia', 'linux-forensics-artefatti', 'email-forensics-analisi-header', 'usb-forensics-dispositivi-rimovibili', 'anti-forensics-tecniche-contromisure']
+  },
+  {
+    id: 'dfir-malware-risposta-avanzata',
+    title: 'DFIR: Malware Analysis e Risposta Avanzata',
+    subtitle: 'Analisi statica e dinamica del malware, mobile e cloud forensics, threat intelligence condivisa, e un caso di studio completo dall\'allerta al report.',
+    branch: 'dfir',
+    roomIds: ['malware-analysis-statica-basi', 'malware-analysis-dinamica-sandbox', 'mobile-forensics-fondamenti', 'cloud-forensics-log-investigativi', 'ioc-threat-intel-condivisione', 'caso-studio-incident-response-completo']
   }
 ];
 

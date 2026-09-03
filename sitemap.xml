@@ -2,747 +2,807 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pasta-cod3.github.io/</loc>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-09-03</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/about.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/fondamentali.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/contatti.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/acquisizione-forense-catena-di-custodia.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/papercut-critical-rce-vulnerability.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/report-forense-difendibile.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/network-forensics-pcap.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/timeline-analysis-artefatti-windows.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-31</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/memory-forensics-volatility.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-30</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/av-edr-evasion-tecniche.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/insecure-deserialization-rce.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/windows-persistence-registry-scheduled-task-wmi.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-27</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/password-spraying-active-directory.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/golden-ticket-dcsync-active-directory.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-25</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/mimikatz-credential-dumping.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/ssrf-server-side-request-forgery.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/anatomia-attacco-ransomware.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-22</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/malware-tipologie-fondamentali.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-21</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/owasp-top-10.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-20</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/biometria-autenticazione-fisica.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-19</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/active-directory-ldap-fondamenti.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-18</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/iam-rbac-privilegio-minimo.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/risk-management-analisi-rischio.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/cyber-kill-chain-mitre-attack.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/microsoft-patch-tuesday-421-cves.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/cyber-kill-chain-mitre-attack.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/ioc-threat-intel-condivisione.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/cloud-forensics-log-investigativi.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/mobile-forensics-fondamenti.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/malware-analysis-dinamica-sandbox.html</loc>
+    <lastmod>2026-08-11</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/vmware-vcenter-apt-campaign.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/malware-analysis-statica-basi.html</loc>
+    <lastmod>2026-08-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/progress-loadmaster-rce-cve-2026-8037.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/anti-forensics-tecniche-contromisure.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/usb-forensics-dispositivi-rimovibili.html</loc>
+    <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/mckesson-healthcare-breach-284-million.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/email-forensics-analisi-header.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/linux-forensics-artefatti.html</loc>
+    <lastmod>2026-08-03</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/browser-forensics-cronologia.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/registry-forensics-windows.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/caso-studio-incident-response-completo.html</loc>
+    <lastmod>2026-07-31</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/chaindrop-npm-supply-chain.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/dropbox-lenovo-email-verification-breach.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-07-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/ironworm-rust-ebpf-rootkit.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/qtfy-chinese-hacking-platform-disrupted.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-07-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/android-17-ech-privacy-browsing.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/medusa-ransomware-500-orgs.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-30</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/psn-breach-lulzsec-2011.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-25</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/medusa-ransomware-500-orgs.html</loc>
+    <lastmod>2026-06-25</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/samy-worm-xss-myspace-2005.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/target-breach-hvac-2013.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/mafiaboyy-ddos-2000.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-22</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/operation-aurora-google-cina-2009.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-21</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/osint-difensivo-monitoraggio.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-20</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/backup-recovery-strategia-3-2-1.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-19</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/soc-analyst-giornata-tipo.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-18</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/network-segmentation-vlan-dmz.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-17</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/honeypot-deception-technology.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/cloud-security-aws-misconfigurazioni.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/email-security-spf-dkim-dmarc.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-14</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/forensica-digitale-introduzione.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/edr-endpoint-detection-response.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/zero-trust-architettura.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/google-dorking-recon-avanzato.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-11</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/gunra-ransomware-critical-infra.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/google-dorking-recon-avanzato.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/antivirus-come-funziona-detection.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/wifi-attacchi-wpa2.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/c2-framework-rilevamento.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-07</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/post-exploitation-persistence-linux.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/buffer-overflow-basi.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/file-inclusion-lfi-rfi.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-04</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/pivoting-tunneling-reti.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-03</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/web-shells-upload-bypass.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/active-directory-attacchi-base.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/hugging-face-700-rogue-ai-agents.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-05-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/italia-sesta-ransomware-mondo-2025.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-05-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/silent-ransom-unc3753-law-firms.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-05-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/medtronic-3-8-million-breach.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-22</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/come-funziona-internet-v2.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/mississippi-medical-center-ransomware.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/manchester-airports-data-breach-travelers.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-20</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/signature-healthcare-ambulance-divert.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/apple-coruna-webkit-exploit-ios-legacy.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/autenticazione-identita-digitale.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/blackcat-professionisti-cybersec-condannati.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/codewall-ai-agent-mckinsey-lilli.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/come-funziona-internet.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/come-funziona-un-firewall.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/come-funzionano-le-password.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/commissione-europea-breach-ivanti.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/crackarmor-linux-apparmor-vulnerabilita.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/crittografia-basi.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/cve-2026-20127-cisco-sdwan-cvss10.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/cve-2026-3909-3910-chrome-zero-day.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/dns-il-telefono-di-internet.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/fortigate-ngfw-credenziali-servizio.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/glassworm-supply-chain-vscode.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/illinois-minnesota-dati-governo-esposti.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/ingegneria-sociale.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-18</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/lacoste-ransomware-lapsus.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/lexisnexis-breach-aws-lexis1234.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/crackarmor-linux-apparmor-vulnerabilita.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/match-group-dating-apps-breach.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/autenticazione-identita-digitale.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/come-funzionano-le-password.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/cve-2026-20127-cisco-sdwan-cvss10.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/modello-cia.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/modello-osi.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/apple-coruna-webkit-exploit-ios-legacy.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/panera-bread-shinyhunters-breach.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/blackcat-professionisti-cybersec-condannati.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/pki-certificati-digitali.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/cve-2026-3909-3910-chrome-zero-day.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/rust-crates-malicious-cicd-env.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/ingegneria-sociale.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/storm-2561-seo-poisoning-vpn.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/illinois-minnesota-dati-governo-esposti.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pasta-cod3.github.io/posts/stryker-handala-wiper-intune.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/trump-cyber-strategy-offensive-privati.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://pasta-cod3.github.io/posts/match-group-dating-apps-breach.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/unc6426-github-aws-supply-chain.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/panera-bread-shinyhunters-breach.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/come-funziona-internet.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/commissione-europea-breach-ivanti.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/lexisnexis-breach-aws-lexis1234.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/stryker-handala-wiper-intune.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/come-funziona-un-firewall.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/modello-osi.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/crittografia-basi.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/pki-certificati-digitali.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/trump-cyber-strategy-offensive-privati.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/fortigate-ngfw-credenziali-servizio.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/zestix-iab-credenziali-aviazione-difesa.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/dns-il-telefono-di-internet.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/rust-crates-malicious-cicd-env.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/glassworm-supply-chain-vscode.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/storm-2561-seo-poisoning-vpn.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/codewall-ai-agent-mckinsey-lilli.html</loc>
+    <lastmod>2026-03-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/clusit-report-2026-italia.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/morris-worm.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/kevin-mitnick.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/stuxnet.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/anonymous-lulzsec.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-07</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/caso-hess-cuckoo-egg.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/iran-apt-plc-attacks.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/sony-hack-2014.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/storia-ransomware.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-04</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/wikileaks-assange.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-03</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/edward-snowden.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/cypherpunks.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/russian-critical-infra-routers.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/cose-il-blue-team.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/analisi-log-windows-event-id.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pasta-cod3.github.io/posts/jfrog-artifactory-cve-authentication-bypass.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-11</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/wireshark-analisi-traffico.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pasta-cod3.github.io/posts/jfrog-artifactory-cve-authentication-bypass.html</loc>
+    <lastmod>2026-02-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/incident-response-processo.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/ids-ips-suricata.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/threat-intelligence-principianti.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-07</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/hardening-windows.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/hardening-linux.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/vulnerability-management.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-04</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/phishing-riconoscere-rispondere.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-03</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/analisi-malware-base.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/threat-hunting-intro.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/carecloud-3-7-million-patients.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/cose-il-penetration-testing.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/ricognizione-passiva-osint.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-11</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/ricognizione-attiva-nmap.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/introduzione-metasploit.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/password-cracking-hashcat-hydra.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/sql-injection-basi.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-07</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/xss-cross-site-scripting.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/privilege-escalation-linux.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/privilege-escalation-windows.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-04</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/reverse-shell-bind-shell.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-03</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/burp-suite-basi.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/report-penetration-test.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/dark-web-credenziali-italiane-2025.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-11-20</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/ai-cybercrime-moltiplicatore-rischio.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-10-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/ransomware-sanita-italiana.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/hacktivismo-state-sponsored-europa.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-06-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/tiktok-gdpr-530-milioni.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-05-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/nis2-recepimento-italia-dlgs-138.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-03-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/noname057-ddos-italia-2025.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-02-18</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/deepfake-crosetto-voice-cloning.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-02-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/lateral-movement-red-team.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-01-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/siem-blue-team.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-01-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pasta-cod3.github.io/posts/storia-hacking-captain-crunch.html</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2024-12-20</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>
