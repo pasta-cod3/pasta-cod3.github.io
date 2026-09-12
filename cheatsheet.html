@@ -69,6 +69,20 @@
 </head>
 <body>
 
+<!-- ── VIDEO BG ─────────────────────────────────────────── -->
+<video id="bgVideo" class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+  <source src="assets/video/background.mp4" type="video/mp4">
+</video>
+<script>
+  (function () {
+    var v = document.getElementById('bgVideo');
+    if (!v) return;
+    var resume = function () { if (v.paused && !document.hidden) v.play().catch(function () {}); };
+    v.addEventListener('pause', resume);
+    document.addEventListener('visibilitychange', resume);
+  })();
+</script>
+
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
 
 <div class="nav-overlay" id="navOverlay"></div>

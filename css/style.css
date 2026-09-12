@@ -95,6 +95,26 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
 ::selection { background: var(--accent); color: var(--bg); }
 
+/* ── VIDEO BG ──────────────────────────────────────────── */
+/* Default: pagine di lettura (articoli, fondamentali, cheatsheet...) —
+   discreto, chi legge deve concentrarsi sul contenuto, non sul video. */
+.bg-video {
+  position: fixed; inset: 0; z-index: -1;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0.12;
+  filter: saturate(1.1) brightness(0.65);
+}
+[data-theme="light"] .bg-video { opacity: 0.12; filter: saturate(1.1); }
+/* Solo in home: più d'impatto, nessun contenuto da leggere con attenzione. */
+.bg-video-hero { opacity: 0.35; filter: saturate(1.1); }
+[data-theme="light"] .bg-video-hero { opacity: 0.18; }
+/* Video pesante: niente su mobile (dati/batteria) e a chi preferisce meno movimento */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .bg-video { display: none; }
+}
+
 /* ── CANVAS BG ───────────────────────────────────────────── */
 #spaceCanvas {
   position: fixed; inset: 0; z-index: 0;
