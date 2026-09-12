@@ -1,15 +1,15 @@
 # FTP Enumeration
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 45min
 **Prerequisiti:** [01-SMB-NetBIOS-Enumeration.md](01-SMB-NetBIOS-Enumeration.md)
-**Lab:** INE PTS — Service Enumeration
+**Lab:** INE PTS, Service Enumeration
 
 ---
 
 ## Obiettivo
 
-FTP (porta 21) e spesso il primo servizio "facile" incontrato nei lab: login anonimo mal configurato, banner rivelatori, versioni con backdoor storiche note. Rapido da enumerare, spesso decisivo per l'accesso iniziale.
+FTP è spesso il primo servizio "facile" che incontri in un lab, e vale la pena trattarlo come tale: login anonimo mal configurato, banner che si raccontano da soli, e — se sei fortunato — una versione con una backdoor storica nota. Ci vogliono pochi minuti per enumerarlo, ma può essere l'intero accesso iniziale che stavi cercando.
 
 ---
 
@@ -17,7 +17,7 @@ FTP (porta 21) e spesso il primo servizio "facile" incontrato nei lab: login ano
 
 ### Anonymous login
 
-Molti server FTP di lab permettono login con utente `anonymous` e qualsiasi password (spesso una email fittizia per convenzione). E la prima cosa da provare sempre.
+Molti server FTP di lab permettono login con utente `anonymous` e qualsiasi password (spesso una email fittizia per convenzione). È la prima cosa da provare sempre.
 
 ### Banner grabbing
 
@@ -82,7 +82,7 @@ nc -nv 10.10.10.5 21
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — FTP enumeration basics
+### Lab 1: TryHackMe, FTP enumeration basics
 **Obiettivo:** identificare se il login anonimo e permesso e recuperare eventuali file interessanti
 **Difficulty:** Facile
 **Time:** 20 min
@@ -97,13 +97,13 @@ nc -nv 10.10.10.5 21
 ## Common Mistakes
 
 - Saltare il banner grabbing e andare dritti al brute force -> spesso il login anonimo basta, nessun brute force necessario
-- Non controllare i permessi di scrittura sulla share FTP -> un FTP anonimo scrivibile puo permettere upload di webshell se combinato con un servizio web che serve la stessa directory
+- Non controllare i permessi di scrittura sulla share FTP -> un FTP anonimo scrivibile può permettere upload di webshell se combinato con un servizio web che serve la stessa directory
 
 ---
 
 ## Link Utili
 
-- [vsftpd GitHub — changelog storico](https://github.com/vsftpd/vsftpd)
+- [vsftpd GitHub: changelog storico](https://github.com/vsftpd/vsftpd)
 
 ---
 
@@ -121,8 +121,3 @@ nc -nv 10.10.10.5 21
 - [ ] So identificare la versione esatta via banner grabbing
 - [ ] Riconosco vsftpd 2.3.4 come esempio storico di backdoor nota
 
----
-
-## Note personali
-
-_(spazio libero)_

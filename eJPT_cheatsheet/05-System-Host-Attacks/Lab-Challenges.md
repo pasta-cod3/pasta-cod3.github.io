@@ -1,6 +1,6 @@
-# Lab Challenges — System/Host Attacks
+# Lab Challenges: System/Host Attacks
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare attacchi host Windows/Linux, password attack e credential dumping prima di passare al Metasploit Framework in modo strutturato.
+Fin qui hai visto ogni tecnica isolata: MS17-010 da una parte, Hydra dall'altra, mimikatz per conto suo. I due esercizi qui sotto ti fanno mettere tutto in fila su un caso solo, dalla scoperta fino al credential dumping, così quando arrivi a Metasploit hai già lo schema mentale pronto invece di improvvisarlo lì per lì.
 
 ---
 
-## Challenge 1 — Dalla scoperta all'accesso su un host Windows datato
+## Challenge 1: Dalla scoperta all'accesso su un host Windows datato
 
 **Target:** una macchina Windows lab con SMB esposto (es. TryHackMe Blue, HTB Legacy)
 
@@ -26,7 +26,7 @@ Esercizi pratici per consolidare attacchi host Windows/Linux, password attack e 
 
 ---
 
-## Challenge 2 — Password attack end-to-end
+## Challenge 2: Password attack end-to-end
 
 **Task:**
 1. Trova un servizio con login esposto (SSH/FTP/form web) su un host lab
@@ -39,15 +39,15 @@ Esercizi pratici per consolidare attacchi host Windows/Linux, password attack e 
 
 ## Common Mistakes
 
-- Passare direttamente al credential dumping senza aver prima ottenuto privilegi sufficienti -> comandi falliscono senza un motivo chiaro se non si controlla `getuid`/`whoami` prima
-- Non testare il riuso di credenziali trovate su tutti i servizi della rete -> si perdono host facilmente raggiungibili
+- Passare direttamente al credential dumping senza aver prima ottenuto privilegi sufficienti -> comandi falliscono senza un motivo chiaro se non controlli `getuid`/`whoami` prima
+- Non testare il riuso di credenziali trovate su tutti i servizi della rete -> ti lasci indietro host facilmente raggiungibili
 
 ---
 
 ## Link Utili
 
-- [TryHackMe — Blue](https://tryhackme.com/room/blue)
-- [HackTheBox — Legacy](https://www.hackthebox.com/)
+- [TryHackMe: Blue](https://tryhackme.com/room/blue)
+- [HackTheBox: Legacy](https://www.hackthebox.com/)
 
 ---
 
@@ -64,8 +64,3 @@ Esercizi pratici per consolidare attacchi host Windows/Linux, password attack e 
 - [ ] So collegare vulnerability assessment, exploitation e credential dumping in un flusso unico
 - [ ] Sono pronto a passare agli attacchi di rete
 
----
-
-## Note personali
-
-_(spazio libero)_

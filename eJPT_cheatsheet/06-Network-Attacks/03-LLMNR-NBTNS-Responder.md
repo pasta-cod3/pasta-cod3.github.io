@@ -1,27 +1,27 @@
 # LLMNR/NBT-NS Poisoning con Responder
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [02-Sniffing-Wireshark.md](02-Sniffing-Wireshark.md)
-**Lab:** TryHackMe — Attacktive Directory / Network Services 2
+**Lab:** TryHackMe, Attacktive Directory / Network Services 2
 
 ---
 
 ## Obiettivo
 
-Sfruttare la risoluzione nomi di fallback di Windows (LLMNR/NBT-NS/mDNS) per farsi passare per un servizio richiesto per errore e catturare hash NTLMv2 di autenticazione. Uno degli attacchi piu affidabili su reti Windows/AD mal configurate.
+Non serve avvelenare nessuna cache qui: basta stare in ascolto e aspettare che qualcuno sbagli un nome di risorsa. Windows, quando il DNS normale fallisce, prova a chiedere in broadcast "chi è questo nome?" — e tu rispondi prima del vero servizio, fingendoti quello richiesto, catturando l'hash NTLMv2 che il client ti manda pensando di autenticarsi altrove. È passivo, è silenzioso, ed è uno degli attacchi più affidabili che troverai su reti Windows/AD mal configurate: spesso è solo questione di aspettare.
 
 ---
 
 ## Concetti chiave
 
-### Perche esiste LLMNR/NBT-NS
+### Perché esiste LLMNR/NBT-NS
 
-Quando la risoluzione DNS normale fallisce (es. typo in un nome di share `\\fileserver\shair`), Windows prova in broadcast/multicast con LLMNR (Link-Local Multicast Name Resolution) e NBT-NS (NetBIOS Name Service) prima di arrendersi. Chiunque sulla rete puo rispondere per primo affermando "sono io quel nome".
+Quando la risoluzione DNS normale fallisce (es. typo in un nome di share `\\fileserver\shair`), Windows prova in broadcast/multicast con LLMNR (Link-Local Multicast Name Resolution) e NBT-NS (NetBIOS Name Service) prima di arrendersi. Chiunque sulla rete può rispondere per primo affermando "sono io quel nome".
 
 ### Flusso dell'attacco
 
-1. Un client cerca una risorsa con nome errato o non piu esistente
+1. Un client cerca una risorsa con nome errato o non più esistente
 2. DNS non risponde -> il client tenta LLMNR/NBT-NS in broadcast
 3. Responder (in ascolto) risponde per primo, fingendosi il servizio richiesto
 4. Il client tenta l'autenticazione SMB verso Responder -> invia hash NTLMv2 della sessione
@@ -90,13 +90,13 @@ Disabilita NBT-NS: impostazioni scheda di rete -> WINS -> "Disable NetBIOS over 
 
 ## Evasion / Bypass Techniques
 
-Se il traffico broadcast non raggiunge la vittima (VLAN separate), combina con [01-MITM-ARP-Spoofing.md](01-MITM-ARP-Spoofing.md) per posizionarsi sullo stesso segmento, oppure attendi passivamente: l'attacco e spesso solo questione di tempo su reti Windows con molti client.
+Se il traffico broadcast non raggiunge la vittima perché sei su una VLAN separata, combina con [01-MITM-ARP-Spoofing.md](01-MITM-ARP-Spoofing.md) per posizionarti sullo stesso segmento. Altrimenti non serve fare nulla di speciale: lascia Responder acceso e attendi, su una rete Windows con molti client è quasi sempre solo questione di tempo.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Network Services 2 / Responder basics
+### Lab 1: TryHackMe, Network Services 2 / Responder basics
 **Obiettivo:** catturare e crackare un hash NTLMv2 con Responder
 **Difficulty:** Media
 **Time:** 45 min
@@ -110,7 +110,7 @@ Se il traffico broadcast non raggiunge la vittima (VLAN separate), combina con [
 
 ## Common Mistakes
 
-- Lasciare attivi tutti i moduli di Responder (SMB/HTTP/WPAD) in ambienti reali senza autorizzazione esplicita -> puo interferire con servizi legittimi
+- Lasciare attivi tutti i moduli di Responder (SMB/HTTP/WPAD) in ambienti reali senza autorizzazione esplicita -> può interferire con servizi legittimi
 - Aspettarsi risultati immediati -> l'attacco dipende dal comportamento naturale degli utenti sulla rete
 - Confondere hashcat mode 5600 (NetNTLMv2) con 1000 (NTLM hash da SAM/NTDS) -> mode sbagliato non crackera mai nulla
 
@@ -118,8 +118,8 @@ Se il traffico broadcast non raggiunge la vittima (VLAN separate), combina con [
 
 ## Link Utili
 
-- [Responder — GitHub ufficiale](https://github.com/lgandx/Responder)
-- [Impacket — ntlmrelayx](https://github.com/fortra/impacket)
+- [Responder: GitHub ufficiale](https://github.com/lgandx/Responder)
+- [Impacket: ntlmrelayx](https://github.com/fortra/impacket)
 
 ---
 
@@ -133,13 +133,8 @@ Se il traffico broadcast non raggiunge la vittima (VLAN separate), combina con [
 
 ## Checklist di padronanza
 
-- [ ] So spiegare perche LLMNR/NBT-NS esistono e perche sono abusabili
+- [ ] So spiegare perché LLMNR/NBT-NS esistono e perché sono abusabili
 - [ ] So avviare Responder e leggere un hash catturato
 - [ ] So crackare un hash NetNTLMv2 con il mode hashcat corretto
 - [ ] Conosco la mitigazione da proporre in un report
 
----
-
-## Note personali
-
-_(spazio libero)_

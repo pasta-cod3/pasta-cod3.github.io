@@ -1,6 +1,6 @@
 # Wordlists Cheatsheet
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1h
 **Prerequisiti:** [05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md](../05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md)
 **Lab:** riferimento trasversale
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Sapere dove trovare, come generare e come combinare wordlist per password attack, brute force e directory enumeration — passaggio spesso sottovalutato ma decisivo per la riuscita di un attacco a dizionario.
+Le wordlist sono la parte noiosa che si sottovaluta sempre, finché non ti capita di far fallire un attacco a dizionario per aver usato la lista sbagliata. Qui trovi dove pescare quelle già pronte su Kali, come generarne di su misura per il target che hai davanti, e come combinarle con le rules per moltiplicarne l'efficacia senza scaricare terabyte di variazioni.
 
 ---
 
-## Wordlist gia presenti su Kali
+## Wordlist già presenti su Kali
 
 | Percorso | Contenuto | Uso tipico |
 |----------|-----------|------------|
@@ -28,21 +28,21 @@ Sapere dove trovare, come generare e come combinare wordlist per password attack
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 ```
 
-Se seclists non e installata: `sudo apt install seclists` (o clona da GitHub).
+Se seclists non è installata te ne accorgi subito perché i path sopra non esistono: `sudo apt install seclists`, oppure clonala da GitHub.
 
 ---
 
 ## Generare wordlist custom
 
-### cewl — estrai parole da un sito web target
+### cewl: estrai parole da un sito web target
 
 ```bash
 cewl -d 2 -m 5 -w custom-words.txt http://target.com
 ```
 
-Utile quando il target ha una cultura aziendale/gergo specifico che finisce spesso nelle password (nome prodotto, slogan, ecc.).
+Utile quando il target ha un gergo aziendale suo, perché quel gergo, nome del prodotto, slogan, termini interni, finisce quasi sempre dentro le password dei dipendenti.
 
-### crunch — genera combinazioni secondo pattern
+### crunch: genera combinazioni secondo pattern
 
 ```bash
 # password numeriche di 4 cifre
@@ -52,7 +52,7 @@ crunch 4 4 0123456789 -o pin4.txt
 crunch 6 6 -t @@@@%% -o custom-pattern.txt
 ```
 
-### cupp — profilo personalizzato basato su dati noti del target
+### cupp: profilo personalizzato basato su dati noti del target
 
 ```bash
 cupp -i
@@ -63,7 +63,7 @@ cupp -i
 
 ## Combinare wordlist con regole (rules)
 
-Le rules trasformano ogni parola della wordlist base in varianti plausibili (maiuscole, numeri finali, leetspeak) senza dover generare manualmente milioni di combinazioni.
+Le rules fanno il lavoro sporco al posto tuo: prendono ogni parola della wordlist base e generano varianti plausibili (maiuscole, numeri finali, leetspeak) senza che tu debba creare a mano milioni di combinazioni.
 
 ```bash
 # hashcat con la rule "best64" (inclusa di default)
@@ -73,7 +73,7 @@ hashcat -m 1000 -a 0 hash.txt rockyou.txt -r /usr/share/hashcat/rules/best64.rul
 john --wordlist=rockyou.txt --rules hash.txt
 ```
 
-**Spiegazione:** `best64.rule` applica ~64 trasformazioni comuni (append numero, capitalize, leet) a ogni parola — spesso trasforma una wordlist debole in un attacco molto piu efficace senza aumentare troppo il tempo di esecuzione.
+**Perché funziona:** `best64.rule` applica una sessantina di trasformazioni comuni (numero in fondo, iniziale maiuscola, leet) a ogni parola, e spesso basta questo per trasformare una wordlist debole in un attacco molto più efficace, senza far esplodere i tempi di esecuzione.
 
 ---
 
@@ -82,8 +82,3 @@ john --wordlist=rockyou.txt --rules hash.txt
 - **Prerequisito:** [05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md](../05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md)
 - **Combinazione con:** [03-Enumeration/05-Web-Enumeration.md](../03-Enumeration/05-Web-Enumeration.md)
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,15 +1,15 @@
 # Session Hijacking / Fixation
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [01-Session-Management.md](01-Session-Management.md)
-**Lab:** PortSwigger Academy — Session fixation
+**Lab:** PortSwigger Academy, modulo Session fixation
 
 ---
 
 ## Obiettivo
 
-Sfruttare la mancata rigenerazione del session ID al login (fixation) o la trasmissione/esposizione del cookie (hijacking) per impersonare un utente autenticato.
+Non serve sempre rubare un cookie per impersonare qualcuno: se l'app non rigenera il session ID al login, basta che tu ne conosca uno in anticipo e aspetti che la vittima ci faccia login sopra. È il principio della fixation, distinto (ma spesso confuso) con l'hijacking vero e proprio — il furto diretto del cookie già autenticato. Qui vedi come sfruttare entrambi per impersonare un utente autenticato.
 
 ---
 
@@ -17,7 +17,7 @@ Sfruttare la mancata rigenerazione del session ID al login (fixation) o la trasm
 
 ### Session Fixation
 
-Se l'applicazione NON rigenera il session ID dopo il login (usa lo stesso ID assegnato prima dell'autenticazione), un attaccante puo:
+Se l'applicazione NON rigenera il session ID dopo il login (usa lo stesso ID assegnato prima dell'autenticazione), un attaccante può:
 1. Ottenere un session ID valido ma non autenticato
 2. Costringere la vittima a usarlo (link con `?PHPSESSID=xxx`, o cookie impostato via subdomain)
 3. Attendere che la vittima faccia login: il session ID resta lo stesso, ora autenticato
@@ -25,7 +25,7 @@ Se l'applicazione NON rigenera il session ID dopo il login (usa lo stesso ID ass
 
 ### Session Hijacking
 
-Furto diretto del session ID gia autenticato (via XSS, sniffing su HTTP non cifrato, log esposti).
+Furto diretto del session ID già autenticato (via XSS, sniffing su HTTP non cifrato, log esposti).
 
 ---
 
@@ -53,7 +53,7 @@ curl -b cookies_pre.txt -c cookies_post.txt -d "user=admin&pass=admin123" http:/
 diff <(grep session cookies_pre.txt) <(grep session cookies_post.txt)
 ```
 
-**Output atteso:** se il valore e identico prima e dopo il login, l'app e vulnerabile a fixation.
+**Output atteso:** se il valore è identico prima e dopo il login, l'app è vulnerabile a fixation.
 
 **Spiegazione:** un'app sicura deve emettere un NUOVO session ID al momento dell'autenticazione, invalidando quello pre-login.
 
@@ -78,13 +78,13 @@ tcpdump -i eth0 -A 'tcp port 80' | grep -i cookie
 
 ## Evasion / Bypass Techniques
 
-Non applicabile in senso WAF; la "tecnica" qui e principalmente la scelta del vettore di consegna del session ID fissato (link, subdomain cookie scoping, header custom accettato dall'app).
+Non applicabile in senso WAF; la "tecnica" qui è principalmente la scelta del vettore di consegna del session ID fissato (link, subdomain cookie scoping, header custom accettato dall'app).
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Session fixation
+### Lab 1: PortSwigger, Session fixation
 **Obiettivo:** dimostrare che il session ID non cambia dopo il login
 **Difficulty:** Medio
 **Time:** 30 min
@@ -98,15 +98,15 @@ Non applicabile in senso WAF; la "tecnica" qui e principalmente la scelta del ve
 
 ## Common Mistakes
 
-- Dare per scontato che HTTPS risolva sempre il problema -> la fixation e indipendente da HTTPS, riguarda la logica applicativa
-- Non testare la rigenerazione anche dopo logout/privilege change (es. da utente normale ad admin) -> stesso principio si applica a ogni cambio di privilegio
+- Dare per scontato che HTTPS risolva sempre il problema -> la fixation non c'entra con la cifratura del traffico, riguarda la logica applicativa
+- Non testare la rigenerazione anche dopo logout/privilege change (es. da utente normale ad admin) -> lo stesso principio si applica a ogni cambio di privilegio, non solo al login iniziale
 
 ---
 
 ## Link Utili
 
 - [OWASP Session Fixation](https://owasp.org/www-community/attacks/Session_fixation)
-- [PortSwigger — Session fixation](https://portswigger.net/web-security/authentication)
+- [PortSwigger: Session fixation](https://portswigger.net/web-security/authentication)
 
 ---
 
@@ -124,8 +124,3 @@ Non applicabile in senso WAF; la "tecnica" qui e principalmente la scelta del ve
 - [ ] So costruire un exploit di fixation completo
 - [ ] So riconoscere quando l'hijacking richiede HTTPS assente o XSS
 
----
-
-## Note personali
-
-_(spazio libero)_

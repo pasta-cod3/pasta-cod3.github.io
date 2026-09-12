@@ -1,6 +1,6 @@
 # Burp Suite Recipes
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [00-Fundamentals/Burp-Suite-Setup.md](../00-Fundamentals/Burp-Suite-Setup.md)
 **Lab:** riferimento trasversale
@@ -9,7 +9,7 @@
 
 ## Obiettivo
 
-Ricette pronte per le situazioni ricorrenti durante un engagement: automazione con macro, session handling per token dinamici, uso efficace di Intruder.
+Ci sono un paio di situazioni in Burp che ti capitano in praticamente ogni engagement — un token CSRF che cambia a ogni richiesta e ti manda in crash il bruteforce, una sessione che scade a metà scansione — e la prima volta che ci sbatti contro perdi mezz'ora a capire perché niente funziona. Qui trovi le ricette già pronte per quei casi: macro di login, session handling per token dinamici, e i pattern di Intruder/Comparer che userai più spesso.
 
 ---
 
@@ -30,16 +30,16 @@ Ricette pronte per le situazioni ricorrenti durante un engagement: automazione c
 3. Aggiungi "Update a parameter" per iniettare il token estratto nella richiesta successiva
 ```
 
-**Spiegazione:** indispensabile per Hydra/Intruder su form protetti da token CSRF che cambia ad ogni richiesta — senza questa rule, ogni tentativo di bruteforce fallisce per token non valido, non per credenziali sbagliate.
+**Spiegazione:** indispensabile per Hydra/Intruder su form protetti da token CSRF che cambia ad ogni richiesta: senza questa rule, ogni tentativo di bruteforce fallisce per token non valido, non per credenziali sbagliate.
 
-## Intruder — Attack types
+## Intruder: Attack types
 
 | Tipo | Uso |
 |------|-----|
 | Sniper | un payload set, una posizione alla volta |
 | Battering ram | stesso payload in tutte le posizioni contemporaneamente |
-| Pitchfork | piu payload set, sincronizzati (posizione N con valore N) |
-| Cluster bomb | piu payload set, tutte le combinazioni (bruteforce completo) |
+| Pitchfork | più payload set, sincronizzati (posizione N con valore N) |
+| Cluster bomb | più payload set, tutte le combinazioni (bruteforce completo) |
 
 ## Match and Replace per bypass client-side
 
@@ -64,8 +64,3 @@ Replace: (vuoto)
 - **Prerequisito:** [00-Fundamentals/Burp-Suite-Setup.md](../00-Fundamentals/Burp-Suite-Setup.md)
 - **Combinazione con:** [06-Authentication-Authorization/05-Credential-Attacks.md](../06-Authentication-Authorization/05-Credential-Attacks.md)
 
----
-
-## Note personali
-
-_(spazio libero)_

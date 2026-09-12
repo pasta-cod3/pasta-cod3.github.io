@@ -1,15 +1,15 @@
 # Host Discovery
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1h
 **Prerequisiti:** [01-Nmap-Fundamentals.md](01-Nmap-Fundamentals.md)
-**Lab:** INE PTS — Network Scanning
+**Lab:** INE PTS, Network Scanning
 
 ---
 
 ## Obiettivo
 
-Identificare quali host sono "vivi" su una rete/subnet prima di investire tempo nello scanning porta-per-porta. In eJPTv2 spesso si parte da un range intero (es. `10.10.10.0/24`), non da un singolo IP: la host discovery è il primo vero step operativo.
+In eJPTv2 raramente ti danno un singolo IP: più spesso ti trovi davanti un range intero (`10.10.10.0/24`), e lanciare `-p-` su 254 indirizzi che magari non esistono nemmeno è tempo buttato. La host discovery risolve esattamente questo: capire quali host sono davvero "vivi" prima di investire minuti preziosi nello scanning porta-per-porta. È il primo vero step operativo, ed è anche dove impari che "non risponde al ping" non vuol dire "non esiste".
 
 ---
 
@@ -79,7 +79,7 @@ nmap -Pn -p 80,443,445 10.10.10.20
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Network Discovery
+### Lab 1: INE PTS, Network Discovery
 **Obiettivo:** mappare tutti gli host attivi su una subnet /24 di lab con almeno 2 metodi diversi
 **Difficulty:** Facile
 **Time:** 30 min
@@ -119,8 +119,3 @@ nmap -Pn -p 80,443,445 10.10.10.20
 - [ ] Capisco quando e perché ICMP può essere filtrato
 - [ ] So usare `-Pn` correttamente quando serve
 
----
-
-## Note personali
-
-_(spazio libero)_

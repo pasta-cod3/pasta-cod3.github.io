@@ -1,15 +1,15 @@
 # Business Logic Flaws
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2h
 **Prerequisiti:** [06-Authentication-Authorization/04-IDOR.md](../06-Authentication-Authorization/04-IDOR.md)
-**Lab:** PortSwigger Academy — Business logic vulnerabilities
+**Lab:** PortSwigger Academy: Business logic vulnerabilities
 
 ---
 
 ## Obiettivo
 
-Trovare falle nella LOGICA dell'applicazione, non nel codice: passaggi che possono essere saltati, ripetuti, invertiti o eseguiti fuori dall'ordine previsto dagli sviluppatori. Nessun tool automatico trova questo tipo di vulnerabilita — richiede comprensione del workflow applicativo e pensiero laterale.
+Qui cambi completamente approccio rispetto a SQLi o XSS: non stai cercando un carattere che il parser interpreta male, stai cercando un passaggio della LOGICA dell'applicazione che può essere saltato, ripetuto, invertito o eseguito fuori dall'ordine che lo sviluppatore aveva in mente. Nessuno scanner te lo trova, perché uno scanner non sa cosa "dovrebbe" succedere in quel workflow — lo sai solo tu, dopo averlo mappato con calma. È il tipo di vulnerabilità più soddisfacente da trovare in eWPT: non richiede exploit complessi, solo la domanda giusta al momento giusto.
 
 ---
 
@@ -45,7 +45,7 @@ Ogni volta che vedi "Step 1 -> Step 2 -> Step 3", chiediti: cosa succede se salt
 
 **Setup:**
 - Target: registrazione utente con step "email verification" prima dell'attivazione account
-- Vulnerability: lo step finale di attivazione non verifica se lo step precedente e stato completato
+- Vulnerability: lo step finale di attivazione non verifica se lo step precedente è stato completato
 
 **Step-by-step:**
 ```
@@ -54,7 +54,7 @@ Ogni volta che vedi "Step 1 -> Step 2 -> Step 3", chiediti: cosa succede se salt
 3. Prova a chiamare direttamente /activate con un ID valido, saltando /verify_email
 ```
 
-**Spiegazione:** se il server valida solo "l'ID esiste" e non "lo step precedente e stato completato con successo", l'intero controllo di verifica email e bypassabile.
+**Spiegazione:** se il server valida solo "l'ID esiste" e non "lo step precedente è stato completato con successo", l'intero controllo di verifica email è bypassabile.
 
 ### Esempio 2: validazione prezzo solo lato client
 
@@ -65,7 +65,7 @@ Ogni volta che vedi "Step 1 -> Step 2 -> Step 3", chiediti: cosa succede se salt
 4. Forward la richiesta modificata
 ```
 
-**Spiegazione:** se il server si fida del prezzo inviato dal client invece di ricalcolarlo server-side dal catalogo prodotti, questo permette manipolazione diretta del prezzo — vedi [05-Price-Manipulation.md](05-Price-Manipulation.md) per approfondimento.
+**Spiegazione:** se il server si fida del prezzo inviato dal client invece di ricalcolarlo server-side dal catalogo prodotti, questo permette manipolazione diretta del prezzo: vedi [05-Price-Manipulation.md](05-Price-Manipulation.md) per approfondimento.
 
 ### Esempio 3: coupon/sconto riutilizzabile oltre il limite previsto
 
@@ -79,13 +79,13 @@ Ogni volta che vedi "Step 1 -> Step 2 -> Step 3", chiediti: cosa succede se salt
 
 ## Evasion / Bypass Techniques
 
-Non applicabile come WAF evasion; la "tecnica" e interamente nell'analisi del workflow e nell'individuare assunzioni implicite non verificate server-side.
+Non applicabile come WAF evasion; la "tecnica" è interamente nell'analisi del workflow e nell'individuare assunzioni implicite non verificate server-side.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — High-level logic vulnerability
+### Lab 1 (PortSwigger): High-level logic vulnerability
 **Obiettivo:** bypassare un controllo di flusso mal implementato
 **Difficulty:** Difficile
 **Time:** 1h
@@ -107,7 +107,7 @@ Non applicabile come WAF evasion; la "tecnica" e interamente nell'analisi del wo
 
 ## Link Utili
 
-- [PortSwigger — Business logic vulnerabilities](https://portswigger.net/web-security/logic-flaws)
+- [PortSwigger: Business logic vulnerabilities](https://portswigger.net/web-security/logic-flaws)
 
 ---
 
@@ -124,8 +124,3 @@ Non applicabile come WAF evasion; la "tecnica" e interamente nell'analisi del wo
 - [ ] So identificare assunzioni implicite non verificate server-side
 - [ ] So testare step fuori ordine/saltati
 
----
-
-## Note personali
-
-_(spazio libero)_

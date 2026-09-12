@@ -3,13 +3,13 @@
 **Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** nessuno
-**Lab:** INE PTS — Introduzione
+**Lab:** INE PTS, Introduzione
 
 ---
 
 ## Obiettivo
 
-Capire il vocabolario e la metodologia di base che userai in ogni fase dell'esame eJPTv2: cos'è un assessment, che differenza c'è tra i vari tipi di test, come si struttura un pentest e cosa significa operare in modo autorizzato.
+Prima di lanciare il primo nmap ti serve il vocabolario giusto, altrimenti passi l'esame ripetendo termini a memoria senza sapere perché li usi in quel momento. Qui vedi cos'è davvero un assessment, come si differenzia un pentest da un vulnerability assessment o da un red team engagement, come si struttura un lavoro dall'inizio alla fine, e — cosa che sottovaluti finché non ti capita — cosa significa avere l'autorizzazione scritta prima di toccare qualsiasi cosa.
 
 ---
 
@@ -52,12 +52,12 @@ Formula concettuale: **Risk = Threat x Vulnerability x Impact**.
 
 ### Fasi standard di un penetration test (metodologia tipo PTES)
 
-1. **Pre-engagement** — scope, rules of engagement (RoE), autorizzazione scritta
-2. **Information Gathering** — recon passivo e attivo
-3. **Threat Modeling / Vulnerability Analysis** — mappare i vettori d'attacco plausibili
-4. **Exploitation** — sfruttare le vulnerabilità individuate
-5. **Post-Exploitation** — privilege escalation, pivoting, raccolta prove di impatto
-6. **Reporting** — documentare tutto con evidenze riproducibili
+1. **Pre-engagement**: scope, rules of engagement (RoE), autorizzazione scritta
+2. **Information Gathering**: recon passivo e attivo
+3. **Threat Modeling / Vulnerability Analysis**: mappare i vettori d'attacco plausibili
+4. **Exploitation**: sfruttare le vulnerabilità individuate
+5. **Post-Exploitation**: privilege escalation, pivoting, raccolta prove di impatto
+6. **Reporting**: documentare tutto con evidenze riproducibili
 
 ### Autorizzazione e Rules of Engagement
 
@@ -89,13 +89,13 @@ Finestra di test: 09:00-18:00, giorni lavorativi
 Contatto di emergenza: security-team@cliente.local
 ```
 
-**Spiegazione:** ogni voce limita legalmente e operativamente cosa puoi fare — uscire da questo perimetro, anche per errore, è un problema serio in un engagement reale.
+**Spiegazione:** ogni voce limita legalmente e operativamente cosa puoi fare: uscire da questo perimetro, anche per errore, è un problema serio in un engagement reale.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Panoramica ambiente
+### Lab 1: INE PTS, Panoramica ambiente
 **Obiettivo:** familiarizzare con l'interfaccia del lab, la VPN, e la struttura a flag/domande dell'esame eJPTv2
 **Difficulty:** Facile
 **Time:** 20 min
@@ -117,8 +117,8 @@ Contatto di emergenza: security-team@cliente.local
 
 ## Link Utili
 
-- [PTES — Penetration Testing Execution Standard](http://www.pentest-standard.org/)
-- [NIST SP 800-115 — Technical Guide to Information Security Testing](https://csrc.nist.gov/publications/detail/sp/800-115/final)
+- [PTES: Penetration Testing Execution Standard](http://www.pentest-standard.org/)
+- [NIST SP 800-115: Technical Guide to Information Security Testing](https://csrc.nist.gov/publications/detail/sp/800-115/final)
 
 ---
 
@@ -137,8 +137,3 @@ Contatto di emergenza: security-team@cliente.local
 - [ ] Capisco perché l'autorizzazione scritta è sempre necessaria
 - [ ] So cos'è la CIA triad e faccio esempi concreti di violazione per ciascun pilastro
 
----
-
-## Note personali
-
-_(spazio libero)_

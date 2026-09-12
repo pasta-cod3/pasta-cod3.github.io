@@ -1,6 +1,6 @@
-# Lab Challenges — Metasploit Framework
+# Lab Challenges: Metasploit Framework
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare l'intero flusso Metasploit — scanning auxiliary, exploit, meterpreter — prima di passare a exploitation manuale e post-exploitation avanzata.
+Auxiliary, exploit e meterpreter li hai visti uno per uno: ora li metti in fila senza guida, dalla mappatura della rete fino a una sessione privilegiata, prima di passare a exploitation manuale e post-exploitation avanzata.
 
 ---
 
-## Challenge 1 — Mappatura rete completa con auxiliary
+## Challenge 1: Mappatura rete completa con auxiliary
 
 **Target:** una rete lab con almeno 3-5 host (es. INE PTS network o VM locali)
 
@@ -26,7 +26,7 @@ Esercizi pratici per consolidare l'intero flusso Metasploit — scanning auxilia
 
 ---
 
-## Challenge 2 — Dall'exploit alla sessione privilegiata
+## Challenge 2: Dall'exploit alla sessione privilegiata
 
 **Task:**
 1. Sfrutta l'host identificato nella Challenge 1 con l'exploit corrispondente
@@ -40,14 +40,14 @@ Esercizi pratici per consolidare l'intero flusso Metasploit — scanning auxilia
 
 ## Common Mistakes
 
-- Saltare la fase auxiliary e andare a caso sugli exploit -> tasso di successo molto piu basso e piu rumore generato
-- Non salvare risultati nel workspace -> perdi tutto il lavoro chiudendo msfconsole senza database attivo
+- Saltare la fase auxiliary e andare a caso sugli exploit -> tasso di successo molto più basso e più rumore generato
+- Non salvare risultati nel workspace -> chiudi msfconsole senza database attivo e perdi tutto il lavoro fatto
 
 ---
 
 ## Link Utili
 
-- [Rapid7 — Metasploit Module Library](https://www.rapid7.com/db/modules/)
+- [Rapid7: Metasploit Module Library](https://www.rapid7.com/db/modules/)
 
 ---
 
@@ -64,8 +64,3 @@ Esercizi pratici per consolidare l'intero flusso Metasploit — scanning auxilia
 - [ ] So condurre l'intero flusso auxiliary -> exploit -> meterpreter senza guida
 - [ ] Sono pronto a passare a exploitation manuale e post-exploitation
 
----
-
-## Note personali
-
-_(spazio libero)_

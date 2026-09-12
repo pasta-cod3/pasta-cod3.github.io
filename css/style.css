@@ -620,12 +620,19 @@ body {
   0%, 100% { opacity: 0; }
   50%      { opacity: 1; }
 }
+.stat-box-fond-tags {
+  position: absolute; top: 0.7rem; right: 0.75rem; z-index: 2;
+  display: flex; align-items: center; gap: 0.35rem;
+}
 .stat-box-fond-tag {
-  position: absolute; top: 0.7rem; right: 0.75rem;
   font-family: var(--ff-m); font-size: 8.5px; font-weight: 700;
   letter-spacing: 0.04em; color: #04140f;
   background: var(--c-fond); padding: 2px 6px; border-radius: 20px;
-  box-shadow: 0 0 8px rgba(0,221,136,0.6);
+  box-shadow: 0 0 8px rgba(0,221,136,0.6); white-space: nowrap;
+}
+.stat-box-fond-tag-cheat {
+  color: var(--c-fond); background: rgba(0,221,136,0.1);
+  border: 1px solid rgba(0,221,136,0.45); box-shadow: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .stat-box-fond { animation: none !important; }
@@ -777,6 +784,13 @@ body {
   letter-spacing: 0.04em; color: #04140f;
   background: var(--c-fond); padding: 3px 8px; border-radius: 20px;
   box-shadow: 0 0 10px rgba(0,221,136,0.6);
+}
+.cat-card-fond-tag-alt {
+  position: absolute; top: 2.35rem; right: 0.85rem; z-index: 2;
+  font-family: var(--ff-m); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.04em; color: var(--c-fond);
+  background: rgba(0,221,136,0.1); padding: 3px 8px; border-radius: 20px;
+  border: 1px solid rgba(0,221,136,0.45);
 }
 @media (prefers-reduced-motion: reduce) {
   .cat-card-fond::before { animation: none !important; opacity: 0; }
@@ -1662,7 +1676,12 @@ body {
    PERCORSO FONDAMENTALI (fondamentali.html)
 ══════════════════════════════════════════════════════════ */
 
-.fond-back-btn { display: inline-flex; margin-bottom: 1.5rem; }
+.fond-hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem; }
+.fond-back-btn, .fond-cheatsheet-btn { display: inline-flex; margin-bottom: 0; }
+.fond-cheatsheet-btn:hover {
+  border-color: var(--c-fond); color: var(--c-fond); background: rgba(0,221,136,0.08);
+  box-shadow: 0 0 18px rgba(0,221,136,0.28), 0 0 0 1px rgba(0,221,136,0.3);
+}
 .fond-content { max-width: 900px; margin: 0 auto; padding-bottom: 4rem; }
 .fond-room { max-width: 720px; margin-left: auto; margin-right: auto; }
 

@@ -1,21 +1,21 @@
 # SQLi Fundamentals
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 3h
 **Prerequisiti:** [02-Scanning-Enumeration/03-Web-Enumeration.md](../02-Scanning-Enumeration/03-Web-Enumeration.md)
-**Lab:** PortSwigger Academy — SQL injection
+**Lab:** PortSwigger Academy: SQL injection
 
 ---
 
 ## Obiettivo
 
-Capire come e perche l'input utente non sanitizzato dentro una query SQL permette di alterarne la logica. E la base per tutte le varianti (error/union/blind) trattate nei file successivi.
+Una query SQL costruita concatenando l'input dell'utente senza controlli è come una frase a cui manca la punteggiatura giusta: basta chiudere una stringa nel punto sbagliato (o giusto, dal tuo punto di vista) e il database esegue tutt'altro rispetto a quello che lo sviluppatore aveva in mente. Qui capisci il meccanismo di base — il perché, non solo il come — perché è la fondamenta su cui poggiano tutte le varianti (error/union/blind) che vedi nei file successivi.
 
 ---
 
 ## Concetti chiave
 
-### Perche funziona
+### Perché funziona
 
 ```sql
 -- Query originale nell'applicazione:
@@ -68,7 +68,7 @@ SELECT * FROM users WHERE username='admin' --' AND password='INPUT2'
 1' AND '1'='2
 ```
 
-**Spiegazione:** se `'1'='1` restituisce risultati diversi da `'1'='2'`, l'input influenza la query — conferma dell'injection prima ancora di sapere il tipo esatto (error/union/blind).
+**Spiegazione:** se `'1'='1` restituisce risultati diversi da `'1'='2'`, l'input influenza la query, a conferma dell'injection prima ancora di sapere il tipo esatto (error/union/blind).
 
 ### Esempio 2: identificare il numero di colonne (necessario per UNION, vedi file dedicato)
 
@@ -82,13 +82,13 @@ SELECT * FROM users WHERE username='admin' --' AND password='INPUT2'
 
 ## Evasion / Bypass Techniques
 
-Vedi [06-Encoding-Bypasses.md](06-Encoding-Bypasses.md) per la lista completa: qui solo la logica di base — se il carattere `'` viene filtrato, prova a chiudere il contesto con `"`, backtick, o senza quote (contesto numerico).
+Vedi [06-Encoding-Bypasses.md](06-Encoding-Bypasses.md) per la lista completa: qui solo la logica di base, se il carattere `'` viene filtrato, prova a chiudere il contesto con `"`, backtick, o senza quote (contesto numerico).
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
+### Lab 1: PortSwigger: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
 **Obiettivo:** bypassare un filtro categoria per vedere prodotti nascosti
 **Difficulty:** Facile
 **Time:** 20 min
@@ -110,7 +110,7 @@ Vedi [06-Encoding-Bypasses.md](06-Encoding-Bypasses.md) per la lista completa: q
 
 ## Link Utili
 
-- [PortSwigger Academy — SQL injection](https://portswigger.net/web-security/sql-injection)
+- [PortSwigger Academy: SQL injection](https://portswigger.net/web-security/sql-injection)
 - [OWASP SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)
 
 ---
@@ -128,10 +128,5 @@ Vedi [06-Encoding-Bypasses.md](06-Encoding-Bypasses.md) per la lista completa: q
 - [ ] So confermare una SQLi con test base
 - [ ] So identificare il DB engine dal comportamento
 - [ ] So contare le colonne con ORDER BY
-- [ ] Capisco perche il commento SQL "spezza" la query originale
+- [ ] Capisco perché il commento SQL "spezza" la query originale
 
----
-
-## Note personali
-
-_(spazio libero)_

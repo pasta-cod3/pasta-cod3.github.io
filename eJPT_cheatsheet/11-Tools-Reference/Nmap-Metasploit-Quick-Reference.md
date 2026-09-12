@@ -1,6 +1,6 @@
 # Nmap / Metasploit Quick Reference
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 30 min
 **Prerequisiti:** [02-Footprinting-Scanning/01-Nmap-Fundamentals.md](../02-Footprinting-Scanning/01-Nmap-Fundamentals.md), [07-Metasploit-Framework/01-Msfconsole-Basics.md](../07-Metasploit-Framework/01-Msfconsole-Basics.md)
 **Lab:** riferimento trasversale
@@ -9,29 +9,29 @@
 
 ## Obiettivo
 
-Un'unica pagina di riferimento veloce con i comandi nmap e msfconsole/meterpreter usati piu spesso — pensata per essere consultata durante il lab senza dover riaprire i file dettagliati.
+Quando sei dentro un lab con il tempo che corre, l'ultima cosa che vuoi è riaprire cinque file diversi per ricordarti la sintassi di un flag nmap o di un comando msfconsole che usi praticamente ogni volta. Questa pagina esiste per quello: i comandi che finisci per digitare più spesso, raccolti in un unico posto, pronti da copiare senza pensarci due volte.
 
 ---
 
-## Nmap — flag piu usate
+## Nmap: flag più usate
 
 | Flag | Significato |
 |------|--------------|
 | `-sS` | SYN scan (default se root, semi-aperto, veloce) |
-| `-sT` | TCP connect scan (no root necessario, piu rumoroso) |
+| `-sT` | TCP connect scan (no root necessario, più rumoroso) |
 | `-sU` | UDP scan |
 | `-sV` | version detection |
 | `-sC` | script default (equivalente a `--script=default`) |
 | `-A` | OS detect + version + script + traceroute (aggressivo) |
 | `-p-` | tutte le 65535 porte |
 | `-p 21,22,80` | porte specifiche |
-| `--top-ports 100` | le 100 porte piu comuni |
+| `--top-ports 100` | le 100 porte più comuni |
 | `-O` | OS fingerprinting |
 | `-T0`..`-T5` | timing, da paranoid a insane |
-| `--min-rate=5000` | forza velocita minima pacchetti/sec |
+| `--min-rate=5000` | forza velocità minima pacchetti/sec |
 | `-Pn` | salta host discovery (tratta l'host come up) |
-| `-n` | no DNS resolution (piu veloce) |
-| `--script vuln` | script NSE categoria vulnerabilita |
+| `-n` | no DNS resolution (più veloce) |
+| `--script vuln` | script NSE categoria vulnerabilità |
 | `-oN/-oX/-oG/-oA` | output normale/XML/grepable/tutti i formati |
 
 ```bash
@@ -42,7 +42,7 @@ nmap -sV -sC -p$(cat allports.txt | grep open | cut -d'/' -f1 | tr '\n' ',') -oN
 
 ---
 
-## msfconsole — comandi essenziali
+## msfconsole: comandi essenziali
 
 | Comando | Uso |
 |---------|-----|
@@ -61,7 +61,7 @@ nmap -sV -sC -p$(cat allports.txt | grep open | cut -d'/' -f1 | tr '\n' ',') -oN
 
 ---
 
-## Meterpreter — comandi essenziali
+## Meterpreter: comandi essenziali
 
 | Comando | Uso |
 |---------|-----|
@@ -81,8 +81,3 @@ nmap -sV -sC -p$(cat allports.txt | grep open | cut -d'/' -f1 | tr '\n' ',') -oN
 
 - **Prerequisito:** [02-Footprinting-Scanning/01-Nmap-Fundamentals.md](../02-Footprinting-Scanning/01-Nmap-Fundamentals.md), [07-Metasploit-Framework/01-Msfconsole-Basics.md](../07-Metasploit-Framework/01-Msfconsole-Basics.md)
 
----
-
-## Note personali
-
-_(spazio libero)_

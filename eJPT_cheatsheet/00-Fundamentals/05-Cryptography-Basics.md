@@ -1,15 +1,15 @@
 # Cryptography Basics
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** [04-Windows-Fundamentals.md](04-Windows-Fundamentals.md)
-**Lab:** INE PTS — Cryptography Fundamentals
+**Lab:** INE PTS, Cryptography Fundamentals
 
 ---
 
 ## Obiettivo
 
-Avere abbastanza crittografia applicata da riconoscere tipi di hash, capire cosa protegge TLS e sapere quando/come attaccare password hashate — non serve teoria matematica approfondita per eJPTv2, serve riconoscimento pratico.
+Buona notizia: non ti serve la matematica dietro RSA o AES, ti serve il riconoscimento pratico. Vedere una stringa di 32 caratteri hex e pensare subito "MD5, provo prima quello con hashcat" invece di tirare a indovinare, capire cosa TLS protegge davvero e cosa no, e sapere quando una password hashata è realisticamente crackabile e quando stai solo sprecando ore di GPU: è tutto quello che ti serve qui, niente di più.
 
 ---
 
@@ -20,7 +20,7 @@ Avere abbastanza crittografia applicata da riconoscere tipi di hash, capire cosa
 | Caratteristica | Hashing | Cifratura (Encryption) |
 |------------------|---------|---------------------------|
 | Reversibile? | No (one-way) | Si, con la chiave giusta |
-| Uso tipico | integrita, storage password | confidenzialita dei dati in transito/riposo |
+| Uso tipico | integrità, storage password | confidenzialità dei dati in transito/riposo |
 | Esempio | SHA-256, bcrypt | AES, RSA |
 
 ### Simmetrico vs Asimmetrico
@@ -46,7 +46,7 @@ Avere abbastanza crittografia applicata da riconoscere tipi di hash, capire cosa
 1. Client Hello (cifrari supportati)
 2. Server Hello + certificato (chiave pubblica)
 3. Scambio/derivazione chiave di sessione (asimmetrico -> simmetrico)
-4. Comunicazione cifrata simmetricamente (piu veloce per il traffico effettivo)
+4. Comunicazione cifrata simmetricamente (più veloce per il traffico effettivo)
 
 ### Hash password che incontrerai nel pentest
 
@@ -55,7 +55,7 @@ Avere abbastanza crittografia applicata da riconoscere tipi di hash, capire cosa
 | Windows locale (SAM) | NTLM | `whoami`-accessibile via Mimikatz/hashdump, crackabile con hashcat mode 1000 |
 | Active Directory | NTLM / Kerberos (AS-REP, TGS) | vedi Kerberoasting in [05-System-Host-Attacks](../05-System-Host-Attacks/) |
 | Linux `/etc/shadow` | SHA-512 crypt (`$6$...`) | hashcat mode 1800 |
-| Applicazioni web moderne | bcrypt (`$2b$...`), scrypt, Argon2 | molto piu lente da crackare per design |
+| Applicazioni web moderne | bcrypt (`$2b$...`), scrypt, Argon2 | molto più lente da crackare per design |
 
 ---
 
@@ -84,7 +84,7 @@ Analyzing '5f4dcc3b5aa765d61d8327deb882cf99'
 [+] Domain Cached Credentials
 ```
 
-**Spiegazione:** la lunghezza (32 caratteri hex) e la struttura suggeriscono MD5; il valore reale corrisponde ad hash MD5 di "password" — utile confermarlo prima di lanciare hashcat con il modulo sbagliato.
+**Spiegazione:** la lunghezza (32 caratteri hex) e la struttura suggeriscono MD5; il valore reale corrisponde ad hash MD5 di "password": utile confermarlo prima di lanciare hashcat con il modulo sbagliato.
 
 ### Esempio 2: ispezionare un certificato TLS
 
@@ -92,7 +92,7 @@ Analyzing '5f4dcc3b5aa765d61d8327deb882cf99'
 openssl s_client -connect target.com:443 -servername target.com </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -dates
 ```
 
-**Spiegazione:** rivela subject/issuer/validita del certificato — utile per fingerprinting (nomi interni nel subject, CA usata) e per capire se e self-signed (spesso indice di ambiente di test/interno).
+**Spiegazione:** rivela subject/issuer/validità del certificato: utile per fingerprinting (nomi interni nel subject, CA usata) e per capire se e self-signed (spesso indice di ambiente di test/interno).
 
 ---
 
@@ -100,14 +100,14 @@ openssl s_client -connect target.com:443 -servername target.com </dev/null 2>/de
 
 - Lanciare hashcat con il modulo `-m` sbagliato -> nessun crack anche se la wordlist contiene la password giusta
 - Confondere hashing con cifratura in un report -> imprecisione che salta subito all'occhio del reviewer
-- Sottovalutare bcrypt/Argon2 come "crackabili facilmente come MD5" -> il cost factor li rende ordini di grandezza piu lenti
+- Sottovalutare bcrypt/Argon2 come "crackabili facilmente come MD5" -> il cost factor li rende ordini di grandezza più lenti
 
 ---
 
 ## Link Utili
 
-- [Hashcat — example hashes](https://hashcat.net/wiki/doku.php?id=example_hashes)
-- [OWASP — Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
+- [Hashcat: example hashes](https://hashcat.net/wiki/doku.php?id=example_hashes)
+- [OWASP: Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
 
 ---
 
@@ -123,11 +123,6 @@ openssl s_client -connect target.com:443 -servername target.com </dev/null 2>/de
 
 - [ ] So la differenza tra hashing e cifratura con un esempio ciascuno
 - [ ] So riconoscere a colpo d'occhio MD5/SHA1/SHA256/NTLM da lunghezza e formato
-- [ ] Capisco perche bcrypt e piu sicuro di MD5 per le password
+- [ ] Capisco perché bcrypt e più sicuro di MD5 per le password
 - [ ] So spiegare a grandi linee cosa succede in un TLS handshake
 
----
-
-## Note personali
-
-_(spazio libero)_

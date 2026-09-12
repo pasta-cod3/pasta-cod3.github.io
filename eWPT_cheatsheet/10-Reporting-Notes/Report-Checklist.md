@@ -1,6 +1,6 @@
 # Report Checklist
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 30 min
 **Prerequisiti:** [CVSS-Scoring.md](CVSS-Scoring.md)
 **Lab:** riferimento trasversale
@@ -9,7 +9,7 @@
 
 ## Obiettivo
 
-Checklist finale da scorrere prima di consegnare/consegnare mentalmente un report di penetration test, per non dimenticare componenti essenziali.
+La tecnica del test la padroneggi, ma è facile arrivare alla fine di un engagement stanco e consegnare un report a cui manca l'Executive Summary o con uno screenshot tagliato male — e sono proprio quei dettagli che il cliente nota per primi. Questa è la checklist che scorri prima di premere invio, per non lasciare fuori i pezzi che contano.
 
 ---
 
@@ -19,18 +19,18 @@ Checklist finale da scorrere prima di consegnare/consegnare mentalmente un repor
 - [ ] Executive Summary (vedi [Executive-Summary-Template.md](Executive-Summary-Template.md))
 - [ ] Scope dell'engagement (cosa era incluso/escluso)
 - [ ] Metodologia usata (es. OWASP Testing Guide, PTES)
-- [ ] Sommario vulnerabilita (tabella con severita e stato)
-- [ ] Dettaglio di ogni vulnerabilita (vedi [Vulnerability-Template.md](Vulnerability-Template.md))
+- [ ] Sommario vulnerabilità (tabella con severità e stato)
+- [ ] Dettaglio di ogni vulnerabilità (vedi [Vulnerability-Template.md](Vulnerability-Template.md))
 - [ ] Score CVSS per ogni finding (vedi [CVSS-Scoring.md](CVSS-Scoring.md))
 - [ ] Appendice con evidenze (screenshot, request/response raw)
 - [ ] Conclusioni e raccomandazioni generali
 
 ---
 
-## Checklist qualita per singolo finding
+## Checklist qualità per singolo finding
 
 - [ ] Titolo chiaro e specifico (non generico)
-- [ ] Severita giustificata con vettore CVSS completo
+- [ ] Severità giustificata con vettore CVSS completo
 - [ ] Passi di riproduzione testati e ripetibili da chi legge
 - [ ] Evidenza concreta allegata (non solo descrizione testuale)
 - [ ] Remediation specifica e attuabile (non generica tipo "sistemare la sicurezza")
@@ -50,7 +50,7 @@ Checklist finale da scorrere prima di consegnare/consegnare mentalmente un repor
 
 ## Common Mistakes
 
-- Consegnare un report con solo output di tool automatici senza analisi manuale -> in eWPT (e nella pratica reale) questo abbassa drasticamente la qualita percepita
+- Consegnare un report con solo output di tool automatici senza analisi manuale -> in eWPT (e nella pratica reale) questo abbassa drasticamente la qualità percepita
 - Dimenticare l'Executive Summary -> spesso l'unica parte letta dai decision-maker non tecnici
 
 ---
@@ -60,8 +60,3 @@ Checklist finale da scorrere prima di consegnare/consegnare mentalmente un repor
 - **Prerequisito:** [CVSS-Scoring.md](CVSS-Scoring.md)
 - **Prossimo Step:** [Executive-Summary-Template.md](Executive-Summary-Template.md)
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,15 +1,15 @@
 # Service, Version & OS Detection
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1h
 **Prerequisiti:** [03-Port-Scanning-Techniques.md](03-Port-Scanning-Techniques.md)
-**Lab:** INE PTS — Network Scanning
+**Lab:** INE PTS, Network Scanning
 
 ---
 
 ## Obiettivo
 
-Identificare con precisione servizio, versione software e sistema operativo dietro ogni porta aperta: è il ponte diretto verso la vulnerability assessment, perché ogni versione nota apre la ricerca di CVE/exploit pubblici.
+Una porta aperta da sola non ti dice quasi nulla: è la versione esatta del servizio dietro — `vsftpd 2.3.4`, non solo "ftp" — che trasforma un elenco di porte in una lista di potenziali exploit. Qui impari a spremere da nmap (e, quando serve, da una connessione netcat manuale) quel dettaglio in più: è il ponte diretto verso la vulnerability assessment, perché ogni versione nota apre subito la ricerca di CVE pubblici.
 
 ---
 
@@ -83,7 +83,7 @@ sudo nmap -O --osscan-guess -p 22,445 10.10.10.5
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Fingerprinting
+### Lab 1: INE PTS, Fingerprinting
 **Obiettivo:** identificare versione esatta di almeno 3 servizi e stimare l'OS di un host di lab
 **Difficulty:** Facile
 **Time:** 30 min
@@ -123,8 +123,3 @@ sudo nmap -O --osscan-guess -p 22,445 10.10.10.5
 - [ ] So fare banner grabbing manuale con netcat/curl
 - [ ] Capisco i limiti dell'OS fingerprinting con -O
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,6 +1,6 @@
 # Automation Scripts
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [Scripting-Snippets.md](Scripting-Snippets.md)
 **Lab:** riferimento trasversale
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Script pronti per automatizzare la fase iniziale di un engagement (recon + scan + enum), da lanciare all'inizio di ogni sessione di lab/esame per risparmiare tempo manuale ripetitivo.
+Le prime mezz'ora di ogni lab/esame sono quasi sempre le stesse: whois, dns, scan completo, enum web. Rifarle a mano ogni volta è tempo che togli al ragionamento vero, quindi qui trovi script pronti da lanciare in automatico appena entri su un target nuovo — così arrivi ai dati interessanti prima, e passi il resto del tempo a interpretarli invece che a raccoglierli.
 
 ---
 
-## Script Bash — recon + scan iniziale completo
+## Script Bash: recon + scan iniziale completo
 
 ```bash
 #!/usr/bin/env bash
@@ -28,7 +28,7 @@ dig "$TARGET" ANY > "$TARGET/recon/dns.txt"
 echo "[*] Full port scan"
 nmap -p- --min-rate=5000 -oN "$TARGET/scan/allports.txt" "$TARGET"
 
-PORTS=$(grep -oP '\d{1,5}/open' "$TARGET/scan/allports.txt" | cut -d/ -f1 | tr '\n' ',' | sed 's/,$//')
+PORTS=$(grep -oP '^\d{1,5}(?=/tcp\s+open)' "$TARGET/scan/allports.txt" | tr '\n' ',' | sed 's/,$//')
 
 echo "[*] Service detection su porte: $PORTS"
 nmap -sV -sC -p "$PORTS" -oN "$TARGET/scan/services.txt" "$TARGET"
@@ -42,7 +42,7 @@ fi
 echo "[*] Fatto. Risultati in ./$TARGET/"
 ```
 
-## Script Python — batch check subdomain live
+## Script Python: batch check subdomain live
 
 ```python
 #!/usr/bin/env python3
@@ -59,7 +59,7 @@ for sub in subs:
         pass
 ```
 
-## Script Bash — monitor continuo di un endpoint (per race condition/timing testing ripetuto)
+## Script Bash: monitor continuo di un endpoint (per race condition/timing testing ripetuto)
 
 ```bash
 #!/usr/bin/env bash
@@ -85,8 +85,3 @@ done
 - **Prerequisito:** [Scripting-Snippets.md](Scripting-Snippets.md)
 - **Combinazione con:** [04-SQL-Injection/07-SQLMap-Automation.md](../04-SQL-Injection/07-SQLMap-Automation.md)
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,15 +1,15 @@
 # Google/GitHub Dorking
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [03-OSINT-Tools.md](03-OSINT-Tools.md)
-**Lab:** TryHackMe — Google Dorking
+**Lab:** TryHackMe, Google Dorking
 
 ---
 
 ## Obiettivo
 
-Usare gli operatori di ricerca avanzata su Google e GitHub per trovare file esposti, credenziali, pannelli di login e codice sorgente collegato al target. Tecnica passiva al 100%, non genera traffico verso il target.
+A volte la falla più critica dell'engagement non la trovi con Burp, la trova Google: un file `.env` indicizzato per errore, una chiave API committata su GitHub e mai revocata. Qui impari a usare gli operatori di ricerca avanzata su Google e GitHub per scovare file esposti, credenziali, pannelli di login e codice sorgente collegato al target — tecnica passiva al 100%, non genera traffico verso il target.
 
 ---
 
@@ -59,11 +59,11 @@ site:target.com intitle:"index of" "backup"
 ```
 org:nome-azienda password
 org:nome-azienda "api_key"
-"target.com" filename:.env
-"target.com" filename:config extension:php
+"target.com" path:*.env
+"target.com" path:*.php path:config
 ```
 
-**Spiegazione:** sviluppatori committano per errore credenziali/chiavi in repository pubblici (anche fork temporanei poi cancellati ma ancora in cache).
+**Spiegazione:** sviluppatori committano per errore credenziali/chiavi in repository pubblici (anche fork temporanei poi cancellati ma ancora in cache). La code search di GitHub non usa più i qualificatori legacy `filename:`/`extension:`: il filtro per nome/estensione file si fa con `path:` (es. `path:*.env` o `path:config.php`).
 
 ### Esempio 3: pannelli admin e tecnologia esposta
 
@@ -83,7 +83,7 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target. Attenzi
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Google Dorking
+### Lab 1: TryHackMe, Google Dorking
 **Obiettivo:** applicare dork per trovare file/pannelli esposti su target di laboratorio
 **Difficulty:** Facile
 **Time:** 30 min
@@ -98,7 +98,7 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target. Attenzi
 ## Common Mistakes
 
 - Limitarsi a Google -> GitHub dorking trova spesso secret che Google non indicizza
-- Ignorare la cache -> una pagina rimossa puo essere ancora visibile in cache Google/Wayback
+- Ignorare la cache -> una pagina rimossa può essere ancora visibile in cache Google/Wayback
 
 ---
 
@@ -124,8 +124,3 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target. Attenzi
 - [ ] Ho consultato la GHDB almeno una volta
 - [ ] So documentare i risultati con URL precisi
 
----
-
-## Note personali
-
-_(spazio libero)_

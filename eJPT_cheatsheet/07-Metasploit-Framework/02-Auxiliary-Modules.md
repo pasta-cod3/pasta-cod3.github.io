@@ -1,15 +1,15 @@
 # Auxiliary Modules
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [01-Msfconsole-Basics.md](01-Msfconsole-Basics.md)
-**Lab:** INE PTS — Metasploit scanning labs
+**Lab:** INE PTS, Metasploit scanning labs
 
 ---
 
 ## Obiettivo
 
-Usare i moduli auxiliary di Metasploit per scanning, enumeration e brute force, spesso piu comodi degli strumenti standalone perche i risultati finiscono direttamente nel database del workspace.
+Potresti fare tutto questo con nmap, hydra e i tool standalone che già conosci — e in certi casi è anche più rapido. Ma i moduli auxiliary di Metasploit per scanning, enumeration e brute force hanno un vantaggio che ti conviene sfruttare: ogni risultato finisce direttamente nel database del workspace, pronto per essere riusato dal modulo successivo senza reinserirlo a mano.
 
 ---
 
@@ -22,12 +22,12 @@ Usare i moduli auxiliary di Metasploit per scanning, enumeration e brute force, 
 | scanner | `auxiliary/scanner/portscan/tcp` | port scanning integrato |
 | scanner (version) | `auxiliary/scanner/smb/smb_version` | fingerprint versione servizio |
 | scanner (login) | `auxiliary/scanner/smb/smb_login` | brute force credenziali |
-| dos | `auxiliary/dos/...` | test di stabilita (usare con cautela, solo lab autorizzati) |
+| dos | `auxiliary/dos/...` | test di stabilità (usare con cautela, solo lab autorizzati) |
 | admin | `auxiliary/admin/...` | interazione amministrativa non-exploit |
 
-### Perche preferire auxiliary a strumenti standalone
+### Perché preferire auxiliary a strumenti standalone
 
-Ogni host/servizio/credenziale trovato da un modulo auxiliary viene salvato automaticamente nel database (`hosts`, `services`, `creds`), disponibile per moduli successivi senza doverlo reinserire.
+Ogni host/servizio/credenziale trovato da un modulo auxiliary viene salvato automaticamente nel database (`hosts`, `services`, `creds`): il modulo di brute force che lanci dopo non deve nemmeno sapere quali host esistono, li recupera da lì.
 
 ---
 
@@ -35,10 +35,10 @@ Ogni host/servizio/credenziale trovato da un modulo auxiliary viene salvato auto
 
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
-| auxiliary/scanner/portscan/tcp | `set RHOSTS 10.10.10.0/24; run` | porte aperte su range | piu lento di nmap, utile quando nmap non e disponibile |
+| auxiliary/scanner/portscan/tcp | `set RHOSTS 10.10.10.0/24; run` | porte aperte su range | più lento di nmap, utile quando nmap non e disponibile |
 | auxiliary/scanner/smb/smb_version | `set RHOSTS 10.10.10.5; run` | versione SMB/OS | popola automaticamente il db |
 | auxiliary/scanner/ftp/ftp_version | `set RHOSTS 10.10.10.5; run` | banner FTP | rapido check preliminare |
-| auxiliary/scanner/smb/smb_login | `set RHOSTS ...; set USER_FILE ...; set PASS_FILE ...; run` | credenziali valide | brute force, rispetta THREADS per velocita |
+| auxiliary/scanner/smb/smb_login | `set RHOSTS ...; set USER_FILE ...; set PASS_FILE ...; run` | credenziali valide | brute force, rispetta THREADS per velocità |
 
 ---
 
@@ -87,13 +87,13 @@ msf6 > services -p 445
 msf6 > creds
 ```
 
-**Spiegazione:** questi comandi funzionano indipendentemente dal modulo attivo e mostrano tutto cio che e stato raccolto nel workspace corrente — il vero valore aggiunto rispetto a tool standalone.
+**Spiegazione:** questi comandi funzionano indipendentemente dal modulo attivo e mostrano tutto ciò che è stato raccolto nel workspace corrente: il vero valore aggiunto rispetto a tool standalone.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Network scanning con auxiliary
+### Lab 1: INE PTS, Network scanning con auxiliary
 **Obiettivo:** mappare una rete lab intera usando solo moduli auxiliary
 **Difficulty:** Media
 **Time:** 1h
@@ -116,7 +116,7 @@ msf6 > creds
 
 ## Link Utili
 
-- [Rapid7 — Metasploit Module Library](https://www.rapid7.com/db/modules/)
+- [Rapid7: Metasploit Module Library](https://www.rapid7.com/db/modules/)
 
 ---
 
@@ -135,8 +135,3 @@ msf6 > creds
 - [ ] So consultare hosts/services/creds dal database
 - [ ] So esportare i risultati raccolti
 
----
-
-## Note personali
-
-_(spazio libero)_

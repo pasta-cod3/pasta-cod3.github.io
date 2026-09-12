@@ -1,15 +1,15 @@
 # Meterpreter e Msfvenom
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2.5h
 **Prerequisiti:** [03-Exploit-Modules.md](03-Exploit-Modules.md)
-**Lab:** INE PTS — Meterpreter labs
+**Lab:** INE PTS, Meterpreter labs
 
 ---
 
 ## Obiettivo
 
-Operare in modo efficace dentro una sessione meterpreter e generare payload standalone con msfvenom per scenari dove non serve/non esiste un exploit diretto (es. file malevolo da consegnare, comando da eseguire su un servizio gia compromesso).
+Una sessione meterpreter aperta e lasciata lì, senza saperci navigare dentro, vale poco più di un accesso che potresti perdere al primo riavvio del processo. Qui impari a operare in modo efficace dentro la sessione, e a generare payload standalone con msfvenom per gli scenari dove non esiste un exploit diretto — un file malevolo da consegnare, un comando da eseguire su un servizio già compromesso in altro modo.
 
 ---
 
@@ -17,11 +17,11 @@ Operare in modo efficace dentro una sessione meterpreter e generare payload stan
 
 ### Meterpreter vs shell semplice
 
-Meterpreter e un payload avanzato che gira interamente in memoria, offre comandi strutturati (non solo una shell testuale), supporta migrazione tra processi, e cifra la comunicazione con il framework — molto piu robusto di una reverse shell netcat.
+Meterpreter e un payload avanzato che gira interamente in memoria, offre comandi strutturati (non solo una shell testuale), supporta migrazione tra processi, e cifra la comunicazione con il framework: molto più robusto di una reverse shell netcat.
 
 ### Migrazione di processo
 
-Il processo in cui gira meterpreter puo terminare (es. se e nato da un exploit su un servizio che si riavvia). `migrate` sposta la sessione in un processo piu stabile/appropriato (es. `explorer.exe` su Windows) senza perdere l'accesso.
+Il processo in cui gira meterpreter può terminare — per esempio se è nato da un exploit su un servizio che si riavvia da solo — e con lui la sessione. `migrate` sposta la sessione in un processo più stabile/appropriato (es. `explorer.exe` su Windows) senza perdere l'accesso: è uno dei comandi che ti salva da un accesso perso per una banalità.
 
 ---
 
@@ -56,7 +56,7 @@ Meterpreter     : x64/windows
 Server username : NT AUTHORITY\SYSTEM
 ```
 
-**Spiegazione:** `sysinfo`/`getuid` orientano subito su OS e privilegio corrente; `hashdump` estrae gli hash locali SAM (richiede privilegio SYSTEM/admin) — collegato a [../05-System-Host-Attacks/04-Credential-Dumping-Mimikatz.md](../05-System-Host-Attacks/04-Credential-Dumping-Mimikatz.md).
+**Spiegazione:** `sysinfo`/`getuid` orientano subito su OS e privilegio corrente; `hashdump` estrae gli hash locali SAM (richiede privilegio SYSTEM/admin): collegato a [../05-System-Host-Attacks/04-Credential-Dumping-Mimikatz.md](../05-System-Host-Attacks/04-Credential-Dumping-Mimikatz.md).
 
 ### Esempio 2: download/upload file
 
@@ -98,7 +98,7 @@ msf6 exploit(multi/handler) > run
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Meterpreter e generazione payload
+### Lab 1: INE PTS, Meterpreter e generazione payload
 **Obiettivo:** generare un payload standalone, avviare un handler, ottenere ed esplorare una sessione
 **Difficulty:** Media
 **Time:** 1h
@@ -121,7 +121,7 @@ msf6 exploit(multi/handler) > run
 
 ## Link Utili
 
-- [Msfvenom Cheat Sheet — Rapid7](https://www.offsec.com/metasploit-unleashed/msfvenom/)
+- [Msfvenom Cheat Sheet: Rapid7](https://www.offsec.com/metasploit-unleashed/msfvenom/)
 
 ---
 
@@ -140,8 +140,3 @@ msf6 exploit(multi/handler) > run
 - [ ] So configurare correttamente un handler corrispondente al payload
 - [ ] So trasferire file dentro/fuori da una sessione meterpreter
 
----
-
-## Note personali
-
-_(spazio libero)_

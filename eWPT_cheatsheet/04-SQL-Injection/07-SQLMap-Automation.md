@@ -1,15 +1,15 @@
 # SQLMap Automation
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2.5h
 **Prerequisiti:** [06-Encoding-Bypasses.md](06-Encoding-Bypasses.md)
-**Lab:** HTB / DVWA — pratica sqlmap
+**Lab:** HTB / DVWA: pratica sqlmap
 
 ---
 
 ## Obiettivo
 
-Usare sqlmap in modo efficace: non come "bacchetta magica" ma come acceleratore dopo aver gia confermato manualmente l'injection. In eWPT devi saper interpretare e guidare sqlmap, non solo lanciarlo.
+sqlmap non è una bacchetta magica, anche se il primo istinto è trattarlo come tale: lanciarlo su un URL a caso e sperare. Funziona bene quando lo usi come acceleratore dopo aver già confermato l'injection a mano — sai già che tecnica e che DB engine aspettarti, e lo guidi invece di lasciarlo indovinare. In eWPT questa distinzione conta: devi saper interpretare quello che sqlmap fa, non solo leggerne l'output.
 
 ---
 
@@ -18,7 +18,7 @@ Usare sqlmap in modo efficace: non come "bacchetta magica" ma come acceleratore 
 ### Workflow corretto
 
 1. Conferma l'injection manualmente (vedi file precedenti)
-2. Usa sqlmap per automatizzare l'estrazione, non per scoprire la vulnerabilita da zero
+2. Usa sqlmap per automatizzare l'estrazione, non per scoprire la vulnerabilità da zero
 3. Salva sempre la richiesta raw da Burp e passala a sqlmap con `-r` per massima precisione
 
 ---
@@ -51,7 +51,7 @@ sqlmap -r request.txt -p id --batch -D nome_db --tables
 sqlmap -r request.txt -p id --batch -D nome_db -T users --dump
 ```
 
-**Spiegazione:** usare `-r request.txt` (richiesta raw con cookie/header completi) e molto piu affidabile di ricostruire l'URL a mano — evita falsi negativi dovuti a sessione/token mancanti.
+**Spiegazione:** usare `-r request.txt` (richiesta raw con cookie/header completi) è molto più affidabile di ricostruire l'URL a mano: evita falsi negativi dovuti a sessione/token mancanti.
 
 ### Esempio 2: SQLi via POST body
 
@@ -65,15 +65,15 @@ sqlmap -u "http://target.com/login.php" --data "username=admin&password=test" -p
 sqlmap -u "http://target.com/profile" --cookie="TrackingId=abc123*" --batch
 ```
 
-**Spiegazione:** l'asterisco `*` indica a sqlmap il punto esatto di injection quando non e un parametro standard GET/POST.
+**Spiegazione:** l'asterisco `*` indica a sqlmap il punto esatto di injection quando non è un parametro standard GET/POST.
 
-### Esempio 4: forzare tecnica e DB engine specifici (piu veloce, meno rumoroso)
+### Esempio 4: forzare tecnica e DB engine specifici (più veloce, meno rumoroso)
 
 ```bash
 sqlmap -r request.txt -p id --batch --technique=BT --dbms=mysql
 ```
 
-**Spiegazione:** se sai gia (da test manuale) che e blind boolean+time su MySQL, limitare `--technique` e `--dbms` velocizza drasticamente lo scan evitando tentativi inutili su altre tecniche/DB.
+**Spiegazione:** se sai già (da test manuale) che è blind boolean+time su MySQL, limitare `--technique` e `--dbms` velocizza drasticamente lo scan evitando tentativi inutili su altre tecniche/DB.
 
 ### Esempio 5: ottenere una shell dal DB (se privilegi sufficienti)
 
@@ -94,15 +94,15 @@ sqlmap -r request.txt -p id --batch --tamper=space2comment,between,charencode --
 |------|-----|
 | `--tamper=` | applica trasformazioni per bypassare WAF |
 | `--random-agent` | varia lo User-Agent per ogni richiesta |
-| `--delay=N` | pausa tra richieste, riduce rilevabilita/rate-limit |
-| `--level=5 --risk=3` | test piu approfonditi (piu lento, piu payload provati) |
+| `--delay=N` | pausa tra richieste, riduce rilevabilità/rate-limit |
+| `--level=5 --risk=3` | test più approfonditi (più lento, più payload provati) |
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: DVWA — SQL injection (low/medium/high)
-**Obiettivo:** automatizzare estrazione dati su tutti i livelli di difficolta
+### Lab 1: DVWA: SQL injection (low/medium/high)
+**Obiettivo:** automatizzare estrazione dati su tutti i livelli di difficoltà
 **Difficulty:** Facile-Medio
 **Time:** 1h
 
@@ -116,8 +116,8 @@ sqlmap -r request.txt -p id --batch --tamper=space2comment,between,charencode --
 ## Common Mistakes
 
 - Lanciare sqlmap direttamente su un URL senza sessione/cookie autenticato -> molte injection sono dietro login, serve `--cookie` o `-r` con richiesta autenticata completa
-- Non forzare `--technique`/`--dbms` quando gia li conosci -> spreco di tempo e richieste
-- Fidarsi ciecamente del risultato "not injectable" -> alza `--level` e `--risk` prima di escludere la vulnerabilita
+- Non forzare `--technique`/`--dbms` quando già li conosci -> spreco di tempo e richieste
+- Fidarsi ciecamente del risultato "not injectable" -> alza `--level` e `--risk` prima di escludere la vulnerabilità
 
 ---
 
@@ -143,8 +143,3 @@ sqlmap -r request.txt -p id --batch --tamper=space2comment,between,charencode --
 - [ ] So enumerare DB/tabelle/colonne e fare dump mirato
 - [ ] So usare tamper script per bypassare WAF
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,14 +1,14 @@
-# TryHackMe — Burp Suite: The Complete Guide (Walkthrough Notes)
+# TryHackMe: Burp Suite: The Complete Guide (Walkthrough Notes)
 
 **Difficulty:** Facile-Medio
 **Time to complete (stimato):** 3-4h (serie completa di room)
-**Vulnerability:** N/A — percorso di apprendimento strumento, non una singola vulnerabilita
+**Vulnerability:** N/A (percorso di apprendimento strumento, non una singola vulnerabilità)
 
 ---
 
 ## Obiettivo
 
-Serie di room TryHackMe dedicata interamente a Burp Suite: dal setup base fino a Intruder, Extensions, e workflow avanzati. Percorso consigliato PRIMA di iniziare seriamente le sezioni tematiche di questo cheatsheet, se Burp non e ancora familiare.
+Se ti ritrovi ancora a cliccare a caso nell'interfaccia di Burp mentre dovresti concentrarti sulla vulnerabilità, il problema non è la tecnica: è che non hai ancora automatizzato lo strumento. Questa serie di room TryHackMe è pensata apposta per quel gap, dal setup base fino a Intruder ed Extensions — falla PRIMA di buttarti sulle sezioni tematiche del cheatsheet se Burp non ti è ancora familiare, così dopo non perdi tempo a lottare con il tool invece che con il target.
 
 ---
 
@@ -18,25 +18,25 @@ Serie di room TryHackMe dedicata interamente a Burp Suite: dal setup base fino a
 Consolida quanto visto in [00-Fundamentals/Burp-Suite-Setup.md](../00-Fundamentals/Burp-Suite-Setup.md): setup proxy, certificato, uso base di Repeater.
 
 ### 2. Burp Proxy
-Intercept ON/OFF, HTTP history, Match and Replace — pratica sul flusso completo di intercettazione.
+Intercept ON/OFF, HTTP history, Match and Replace: pratica sul flusso completo di intercettazione.
 
 ### 3. Burp Intruder
-Le 4 modalita di attacco (Sniper, Battering ram, Pitchfork, Cluster bomb) — pratica su un form di login per consolidare [09-Tools-Reference/Burp-Suite-Recipes.md](../09-Tools-Reference/Burp-Suite-Recipes.md).
+Le 4 modalità di attacco (Sniper, Battering ram, Pitchfork, Cluster bomb): pratica su un form di login per consolidare [09-Tools-Reference/Burp-Suite-Recipes.md](../09-Tools-Reference/Burp-Suite-Recipes.md).
 
 ### 4. Burp Decoder & Comparer
-Encoding/decoding rapido, diff tra risposte — utile trasversalmente per XSS/SQLi encoding.
+Encoding/decoding rapido, diff tra risposte: utile trasversalmente per XSS/SQLi encoding.
 
 ### 5. Burp Extensions
 Installazione da BApp Store: consigliate Logger++, Turbo Intruder, DOM Invader (nativo in Burp moderno).
 
 ### 6. Sequencer
-Analisi entropia token di sessione — vedi [06-Authentication-Authorization/01-Session-Management.md](../06-Authentication-Authorization/01-Session-Management.md).
+Analisi entropia token di sessione: vedi [06-Authentication-Authorization/01-Session-Management.md](../06-Authentication-Authorization/01-Session-Management.md).
 
 ---
 
 ## Key Lessons
 
-- Investire tempo nella padronanza di Burp PRIMA di attaccare vulnerabilita specifiche ripaga enormemente in velocita durante l'esame
+- Investire tempo nella padronanza di Burp PRIMA di attaccare vulnerabilità specifiche ripaga enormemente in velocità durante l'esame
 - Le Session Handling Rules e le Macro sono spesso sottovalutate ma indispensabili per automazione su form con token dinamici
 - Conoscere le scorciatoie da tastiera di Burp (Ctrl+R per Repeater, Ctrl+I per Intruder) velocizza molto il workflow sotto pressione di tempo
 
@@ -47,8 +47,3 @@ Analisi entropia token di sessione — vedi [06-Authentication-Authorization/01-
 - **Prerequisito:** [00-Fundamentals/Burp-Suite-Setup.md](../00-Fundamentals/Burp-Suite-Setup.md)
 - **Combinazione con:** [09-Tools-Reference/Burp-Suite-Recipes.md](../09-Tools-Reference/Burp-Suite-Recipes.md)
 
----
-
-## Note personali
-
-_(annota qui le funzionalita di Burp che usi meno e su cui vuoi tornare)_

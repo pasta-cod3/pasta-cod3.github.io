@@ -1,15 +1,15 @@
 # Port Scanning Techniques
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [02-Host-Discovery.md](02-Host-Discovery.md)
-**Lab:** INE PTS — Network Scanning
+**Lab:** INE PTS, Network Scanning
 
 ---
 
 ## Obiettivo
 
-Capire a fondo la differenza tra le tecniche di scan TCP/UDP e come scegliere quella giusta in base a privilegi, tempo disponibile e necessità di evasione. Fondamentale per non perdere porte importanti durante l'esame.
+`-sS` o `-sT`? UDP sì o no? Non sono scelte a caso: dipendono da quali privilegi hai sulla tua macchina, da quanto tempo hai a disposizione e da quanto vuoi farti notare. Capire a fondo queste tecniche di scan TCP/UDP e i loro compromessi è quello che ti evita di scoprire, troppo tardi in un lab o all'esame, che una porta importante non l'avevi proprio vista.
 
 ---
 
@@ -84,17 +84,17 @@ sudo nmap -sS -f -D RND:10 -p 445 10.10.10.5
 
 ## Evasion / Bypass Techniques
 
-- `-f` / `--mtu` — frammentazione pacchetti
-- `-D decoy1,decoy2,ME` — decoy scan
-- `-S spoofed_ip` — spoofing IP sorgente (richiede di poter ricevere le risposte, raro in pratica)
-- `--scan-delay` — rallenta i pacchetti per evitare soglie di rate-limiting IDS
+- `-f` / `--mtu`: frammentazione pacchetti
+- `-D decoy1,decoy2,ME`: decoy scan
+- `-S spoofed_ip`: spoofing IP sorgente (richiede di poter ricevere le risposte, raro in pratica)
+- `--scan-delay`: rallenta i pacchetti per evitare soglie di rate-limiting IDS
 - In molti lab eJPTv2 non c'è IDS attivo: capire il concetto conta più che applicarlo sempre
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Advanced Scanning
+### Lab 1: INE PTS, Advanced Scanning
 **Obiettivo:** confrontare risultati di -sT vs -sS e individuare porte UDP aperte su un host multi-servizio
 **Difficulty:** Medio
 **Time:** 45 min
@@ -135,8 +135,3 @@ sudo nmap -sS -f -D RND:10 -p 445 10.10.10.5
 - [ ] So quando e perché fare uno scan UDP mirato
 - [ ] Ho provato almeno una tecnica di evasion di base
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,15 +1,15 @@
 # API Enumeration
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [04-Virtual-Host-Enum.md](04-Virtual-Host-Enum.md)
-**Lab:** PortSwigger Academy — API testing
+**Lab:** PortSwigger Academy, API testing
 
 ---
 
 ## Obiettivo
 
-Scoprire endpoint API REST/GraphQL, documentazione esposta, e versioni parallele dell'API. Le API sono spesso meno testate del frontend web e hanno controlli di autorizzazione piu deboli (terreno fertile per IDOR).
+Mentre il frontend viene rifinito e testato, l'API che lo alimenta resta spesso un passo indietro: meno testata, con controlli di autorizzazione più deboli — terreno fertile per IDOR. Qui impari a scoprire endpoint REST/GraphQL, documentazione esposta e versioni parallele dell'API, a partire da quella v1 "legacy" che quasi sempre nessuno ha mai davvero disattivato.
 
 ---
 
@@ -23,6 +23,11 @@ Scoprire endpoint API REST/GraphQL, documentazione esposta, e versioni parallele
 | `/api/`, `/api/v1/`, `/api/v2/` | versioni parallele, spesso v1 meno protetta |
 | Swagger/OpenAPI | `/swagger.json`, `/api-docs`, `/openapi.json` |
 | GraphQL introspection | `/graphql` con query `__schema` |
+
+### REST vs GraphQL: enumerazione diversa
+
+- **REST:** la superficie è distribuita su molti path/endpoint (`/api/v1/users`, `/api/v1/orders`, ...): l'enumerazione si basa su directory/parameter fuzzing (gobuster/ffuf) e sulla lettura dei file JS, perché ogni risorsa ha una propria route.
+- **GraphQL:** tipicamente un unico endpoint (`/graphql` o `/api/graphql`) espone tutte le operazioni: qui il fuzzing di path serve solo a trovare l'endpoint stesso, mentre l'enumerazione vera e propria della superficie (query, mutation, tipi disponibili) passa dall'introspection query. Se l'introspection è disabilitata in produzione, si ricostruisce lo schema per tentativi (field suggestion / errori verbosi) o con tool dedicati (InQL per Burp, GraphQL Voyager, clairvoyance).
 
 ---
 
@@ -63,7 +68,7 @@ curl -s http://target.com/api-docs
 ]
 ```
 
-**Spiegazione:** Swagger/OpenAPI documenta l'intera superficie API inclusi endpoint admin: se esposto pubblicamente e un enorme vantaggio in fase di enumerazione.
+**Spiegazione:** Swagger/OpenAPI documenta l'intera superficie API inclusi endpoint admin: se esposto pubblicamente è un enorme vantaggio in fase di enumerazione.
 
 ### Esempio 3: GraphQL introspection
 
@@ -73,7 +78,7 @@ curl -s -X POST http://target.com/graphql \
   -d '{"query":"{__schema{types{name,fields{name}}}}"}' | jq
 ```
 
-**Spiegazione:** se l'introspection e abilitata in produzione (errore comune), rivela l'intero schema: tutte le query/mutation disponibili, comprese quelle non documentate pubblicamente.
+**Spiegazione:** se l'introspection è abilitata in produzione (errore comune), rivela l'intero schema: tutte le query/mutation disponibili, comprese quelle non documentate pubblicamente.
 
 ### Esempio 4: testare versioni API parallele
 
@@ -83,7 +88,7 @@ curl http://target.com/api/v2/users/1
 curl http://target.com/api/users/1
 ```
 
-**Spiegazione:** spesso `v1` resta attiva per retrocompatibilita ma con controlli di sicurezza meno aggiornati rispetto a `v2`.
+**Spiegazione:** spesso `v1` resta attiva per retrocompatibilità ma con controlli di sicurezza meno aggiornati rispetto a `v2`.
 
 ---
 
@@ -100,7 +105,7 @@ Alcuni rate-limiter naive contano per IP dichiarato nell'header invece che per c
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — API testing basics
+### Lab 1: PortSwigger, API testing basics
 **Obiettivo:** enumerare endpoint da JS e Swagger, testare IDOR su API
 **Difficulty:** Medio
 **Time:** 1h
@@ -114,15 +119,15 @@ Alcuni rate-limiter naive contano per IP dichiarato nell'header invece che per c
 
 ## Common Mistakes
 
-- Testare solo l'endpoint "v2" documentato -> controlla sempre se v1/legacy e ancora raggiungibile
-- Non controllare i file JS -> spesso la mappa completa dell'API e li, non serve nemmeno fuzzare
+- Testare solo l'endpoint "v2" documentato -> controlla sempre se v1/legacy è ancora raggiungibile
+- Non controllare i file JS -> spesso la mappa completa dell'API è lì, non serve nemmeno fuzzare
 
 ---
 
 ## Link Utili
 
 - [OWASP API Security Top 10](https://owasp.org/www-project-api-security/)
-- [PortSwigger — API testing](https://portswigger.net/web-security/api-testing)
+- [PortSwigger: API testing](https://portswigger.net/web-security/api-testing)
 
 ---
 
@@ -141,8 +146,3 @@ Alcuni rate-limiter naive contano per IP dichiarato nell'header invece che per c
 - [ ] So testare GraphQL introspection
 - [ ] Testo sempre le versioni API parallele (v1 vs v2)
 
----
-
-## Note personali
-
-_(spazio libero)_

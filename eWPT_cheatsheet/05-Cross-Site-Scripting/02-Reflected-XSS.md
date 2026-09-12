@@ -1,15 +1,15 @@
 # Reflected XSS
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [01-XSS-Fundamentals.md](01-XSS-Fundamentals.md)
-**Lab:** PortSwigger Academy — Reflected XSS
+**Lab:** PortSwigger Academy, Reflected XSS
 
 ---
 
 ## Obiettivo
 
-Sfruttare parametri riflessi immediatamente nella response (query string, form) per costruire un link malevolo che esegue JS nel browser della vittima al click.
+È la forma più semplice di XSS da capire, ed è anche quella che ti farà scoprire subito il vincolo più fastidioso del reflected: il payload non basta trovarlo, devi anche convincere qualcuno a cliccarlo. Qui vedi come sfruttare parametri riflessi immediatamente nella response (query string, form) per costruire un link malevolo che esegue JS nel browser della vittima al click.
 
 ---
 
@@ -42,7 +42,7 @@ La vittima deve cliccare il link (social engineering, email, messaggio); l'esecu
 http://target.com/search?q=<script>alert(document.domain)</script>
 ```
 
-**Output atteso:** popup con il dominio del target — conferma che il payload esegue nel contesto dell'origine corretta.
+**Output atteso:** popup con il dominio del target: conferma che il payload esegue nel contesto dell'origine corretta.
 
 ### Esempio 2: reflected XSS in attributo HTML
 
@@ -72,7 +72,7 @@ Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md). Nota specifica per reflected: se l'
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Reflected XSS into attribute with angle brackets HTML-encoded
+### Lab 1: PortSwigger, Reflected XSS into attribute with angle brackets HTML-encoded
 **Obiettivo:** bypassare encoding parziale e ottenere esecuzione
 **Difficulty:** Medio
 **Time:** 30 min
@@ -86,14 +86,14 @@ Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md). Nota specifica per reflected: se l'
 
 ## Common Mistakes
 
-- Testare solo nel browser senza controllare il sorgente -> l'encoding parziale (solo `<>` ma non `"`) si vede solo guardando l'HTML generato
-- Dimenticare l'URL-encoding quando condividi il link PoC -> il link puo rompersi o essere alterato dal client di destinazione
+- Testare solo nel browser senza controllare il sorgente -> l'encoding parziale (solo `<>` ma non `"`) lo noti solo guardando l'HTML generato, non l'output visivo della pagina
+- Dimenticare l'URL-encoding quando condividi il link PoC -> ti si rompe il link proprio nel momento in cui deve funzionare, o viene alterato dal client di destinazione
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — Reflected XSS](https://portswigger.net/web-security/cross-site-scripting/reflected)
+- [PortSwigger: Reflected XSS](https://portswigger.net/web-security/cross-site-scripting/reflected)
 
 ---
 
@@ -110,8 +110,3 @@ Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md). Nota specifica per reflected: se l'
 - [ ] So adattare il payload al contesto (HTML body vs attributo)
 - [ ] So URL-encodare correttamente il link finale
 
----
-
-## Note personali
-
-_(spazio libero)_

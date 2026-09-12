@@ -1,15 +1,15 @@
 # SNMP Enumeration
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1h
 **Prerequisiti:** [03-SSH-Enumeration.md](03-SSH-Enumeration.md)
-**Lab:** INE PTS — Service Enumeration
+**Lab:** INE PTS, Service Enumeration
 
 ---
 
 ## Obiettivo
 
-SNMP (UDP 161) e uno dei servizi piu "generosi" da enumerare quando mal configurato: con la community string giusta puo rivelare utenti, processi, share, interfacce di rete e persino informazioni installate sul sistema. Spesso sottovalutato perche UDP.
+Molti lo saltano perché "è solo UDP e lento", e questo è esattamente il motivo per cui SNMP mal configurato è così redditizio: con la community string giusta (spesso letteralmente `public`) diventa uno dei servizi più generosi che incontrerai, capace di rivelarti utenti, processi, interfacce di rete e software installato senza che tu debba autenticarti con nulla di reale.
 
 ---
 
@@ -17,7 +17,7 @@ SNMP (UDP 161) e uno dei servizi piu "generosi" da enumerare quando mal configur
 
 ### Community string
 
-SNMP v1/v2c usa una "community string" come forma debole di autenticazione, inviata in chiaro. Le default piu comuni sono `public` (sola lettura) e `private` (lettura/scrittura). Molte installazioni non cambiano mai questi default.
+SNMP v1/v2c usa una "community string" come forma debole di autenticazione, inviata in chiaro. Le default più comuni sono `public` (sola lettura) e `private` (lettura/scrittura). Molte installazioni non cambiano mai questi default.
 
 ### MIB (Management Information Base)
 
@@ -39,7 +39,7 @@ I dati SNMP sono organizzati in una struttura gerarchica (OID). Alcuni rami MIB 
 | onesixtyone | `onesixtyone -c community.txt target` | brute force community string | veloce, buono per lo scan iniziale |
 | snmpwalk | `snmpwalk -c public -v1 target` | dump completo albero MIB | il tool principale per l'enumerazione vera e propria |
 | nmap | `nmap -sU --script snmp-processes,snmp-win32-users -p161 target` | processi/utenti via NSE | integra bene lo scan UDP |
-| snmp-check | `snmp-check target` | output formattato e leggibile | alternativa piu "pulita" a snmpwalk grezzo |
+| snmp-check | `snmp-check target` | output formattato e leggibile | alternativa più "pulita" a snmpwalk grezzo |
 
 ---
 
@@ -78,13 +78,13 @@ iso.3.6.1.4.1.77.1.2.25.1.1 = STRING: "Administrator"
 iso.3.6.1.4.1.77.1.2.25.1.1 = STRING: "svc_sql"
 ```
 
-**Spiegazione:** questo OID specifico (Host Resources MIB) su Windows con SNMP abilitato restituisce direttamente la lista account locali, spesso piu completa di quella ottenibile via SMB null session.
+**Spiegazione:** questo OID specifico (Host Resources MIB) su Windows con SNMP abilitato restituisce direttamente la lista account locali, spesso più completa di quella ottenibile via SMB null session.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — SNMP deep enumeration
+### Lab 1: INE PTS, SNMP deep enumeration
 **Obiettivo:** trovare la community string corretta ed estrarre utenti/processi via SNMP
 **Difficulty:** Medio
 **Time:** 40 min
@@ -92,14 +92,14 @@ iso.3.6.1.4.1.77.1.2.25.1.1 = STRING: "svc_sql"
 **Walkthrough breve:**
 1. Bruteforce community string con onesixtyone
 2. Dump completo con snmpwalk -c <community> -v1
-3. Filtra output per utenti, processi e porte in ascolto, incrocia con l'enumerazione SMB gia fatta
+3. Filtra output per utenti, processi e porte in ascolto, incrocia con l'enumerazione SMB già fatta
 
 ---
 
 ## Common Mistakes
 
-- Saltare SNMP perche "e solo UDP e lento" -> spesso e la fonte piu ricca di informazioni dell'intera enumeration
-- Provare solo `public` senza controllare anche `private` -> `private` puo permettere anche scrittura, non solo lettura
+- Saltare SNMP perché "è solo UDP e lento" -> spesso è la fonte più ricca di informazioni dell'intera enumeration
+- Provare solo `public` senza controllare anche `private` -> `private` può permettere anche scrittura, non solo lettura
 - Non filtrare l'output enorme di snmpwalk -> perdersi tra migliaia di righe, usare sempre grep mirato
 
 ---
@@ -124,8 +124,3 @@ iso.3.6.1.4.1.77.1.2.25.1.1 = STRING: "svc_sql"
 - [ ] So usare snmpwalk per dump mirati con OID specifici
 - [ ] Conosco almeno 2-3 OID utili per utenti/processi
 
----
-
-## Note personali
-
-_(spazio libero)_

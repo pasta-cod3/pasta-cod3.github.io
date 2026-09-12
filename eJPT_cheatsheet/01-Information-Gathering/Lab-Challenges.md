@@ -1,6 +1,6 @@
-# Lab Challenges — Information Gathering
+# Lab Challenges: Information Gathering
 
-**Difficolta:** Beginner-Intermediate
+**Difficoltà:** Beginner-Intermediate
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare l'intera fase di information gathering prima di passare a footprinting/scanning.
+La teoria dei tre file precedenti si fissa solo se la metti in pratica per intero, dall'inizio alla fine: questi esercizi ti fanno percorrere tutta la fase di information gathering su un target reale (di lab), prima di passare a footprinting/scanning con basi solide sotto i piedi.
 
 ---
 
-## Challenge 1 — Recon completo passivo
+## Challenge 1: Recon completo passivo
 
 **Target:** un dominio a scelta autorizzato per test (lab INE PTS o TryHackMe)
 
@@ -27,7 +27,7 @@ Esercizi pratici per consolidare l'intera fase di information gathering prima di
 
 ---
 
-## Challenge 2 — Primo contatto attivo
+## Challenge 2: Primo contatto attivo
 
 **Task:**
 1. Banner grab su almeno 3 servizi (SSH, FTP, HTTP) con netcat/curl
@@ -47,7 +47,7 @@ Esercizi pratici per consolidare l'intera fase di information gathering prima di
 
 ## Link Utili
 
-- [TryHackMe — OSINT room](https://tryhackme.com/)
+- [TryHackMe: OSINT room](https://tryhackme.com/)
 - [Exploit-DB](https://www.exploit-db.com/)
 
 ---
@@ -65,8 +65,3 @@ Esercizi pratici per consolidare l'intera fase di information gathering prima di
 - [ ] Ho un template di note riutilizzabile per la recon
 - [ ] Sono pronto a passare al footprinting/scanning attivo
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,15 +1,15 @@
 # Footprinting
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [00-Fundamentals/Networking-Basics.md](../00-Fundamentals/Networking-Basics.md)
-**Lab:** TryHackMe — Passive Reconnaissance
+**Lab:** TryHackMe, Passive Reconnaissance
 
 ---
 
 ## Obiettivo
 
-Raccogliere informazioni pubbliche sul target senza toccarlo direttamente (recon passivo): whois, DNS, registrar, hosting/cloud provider. E il primo step di ogni engagement, definisce la superficie di attacco prima ancora di mandare un pacchetto al target.
+Prima ancora di mandare un solo pacchetto al target, puoi già sapere parecchio su di lui: chi è il registrant, dove sono i name server, se è dietro Cloudflare o su un'istanza cloud dimenticata. Questo è il recon passivo — whois, DNS, registrar, hosting/cloud provider — ed è il primo step di ogni engagement proprio perché disegna la superficie di attacco senza lasciare traccia nei log del target.
 
 ---
 
@@ -17,17 +17,17 @@ Raccogliere informazioni pubbliche sul target senza toccarlo direttamente (recon
 
 ### Whois
 
-Rivela registrant, name server, date di registrazione/scadenza. Utile per capire chi gestisce il dominio e se e ospitato su cloud (AWS, Azure, Cloudflare).
+Rivela registrant, name server, date di registrazione/scadenza. Utile per capire chi gestisce il dominio e se è ospitato su cloud (AWS, Azure, Cloudflare).
 
 ### DNS record types rilevanti
 
 | Record | Significato |
 |--------|-------------|
 | A / AAAA | IP v4/v6 del dominio |
-| MX | server di posta — rivela provider (Google Workspace, O365) |
-| TXT | SPF/DKIM/verifiche — spesso rivela servizi terzi in uso |
-| NS | name server — chi gestisce il DNS |
-| CNAME | alias — utile per scoprire subdomain takeover |
+| MX | server di posta: rivela provider (Google Workspace, O365) |
+| TXT | SPF/DKIM/verifiche: spesso rivela servizi terzi in uso |
+| NS | name server: chi gestisce il DNS |
+| CNAME | alias: utile per scoprire subdomain takeover |
 
 ---
 
@@ -37,7 +37,7 @@ Rivela registrant, name server, date di registrazione/scadenza. Utile per capire
 |------|---------------|--------|------|
 | whois | `whois target.com` | registrant, NS, date | dati a volte redatti (GDPR) |
 | nslookup | `nslookup target.com` | A record | rapido |
-| dig | `dig target.com ANY` | tutti i record | piu completo di nslookup |
+| dig | `dig target.com ANY` | tutti i record | più completo di nslookup; molti resolver moderni limitano/ignorano `ANY` (RFC 8482), meglio interrogare i tipi singolarmente |
 | host | `host -t mx target.com` | record specifico | leggero |
 
 ---
@@ -52,7 +52,7 @@ dig target.com A
 dig target.com MX
 dig target.com TXT
 dig target.com NS
-dig axfr target.com @ns1.target.com   # tenta zone transfer, spesso negato
+dig axfr @ns1.target.com target.com   # tenta zone transfer, spesso negato
 ```
 
 **Output atteso:**
@@ -70,7 +70,7 @@ dig target.com +short
 whois $(dig target.com +short | tail -1) | grep -i "orgname\|netname"
 ```
 
-**Spiegazione:** se l'IP appartiene a range Cloudflare/AWS/Akamai, il target reale e probabilmente dietro un WAF/CDN — attacchi diretti all'IP spesso falliscono, serve trovare l'IP origine.
+**Spiegazione:** se l'IP appartiene a range Cloudflare/AWS/Akamai, il target reale è probabilmente dietro un WAF/CDN: gli attacchi diretti all'IP spesso falliscono, serve trovare l'IP origine.
 
 ---
 
@@ -85,7 +85,7 @@ whois $(dig target.com +short | tail -1) | grep -i "orgname\|netname"
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Passive Reconnaissance
+### Lab 1: TryHackMe, Passive Reconnaissance
 **Obiettivo:** eseguire whois/DNS recon su un target di laboratorio
 **Difficulty:** Facile
 **Time:** 30 min
@@ -106,8 +106,8 @@ whois $(dig target.com +short | tail -1) | grep -i "orgname\|netname"
 
 ## Link Utili
 
-- [crt.sh — Certificate Transparency](https://crt.sh/)
-- [OWASP Testing Guide — Information Gathering](https://owasp.org/www-project-web-security-testing-guide/)
+- [crt.sh: Certificate Transparency](https://crt.sh/)
+- [OWASP Testing Guide: Information Gathering](https://owasp.org/www-project-web-security-testing-guide/)
 
 ---
 
@@ -126,8 +126,3 @@ whois $(dig target.com +short | tail -1) | grep -i "orgname\|netname"
 - [ ] So riconoscere un provider cloud/CDN dall'IP
 - [ ] Ho provato uno zone transfer (anche se fallito)
 
----
-
-## Note personali
-
-_(spazio libero)_

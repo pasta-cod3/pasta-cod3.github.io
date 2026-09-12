@@ -3,13 +3,13 @@
 **Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [01-Web-Fundamentals-HTTP.md](01-Web-Fundamentals-HTTP.md)
-**Lab:** DVWA / bWAPP — SQL Injection
+**Lab:** DVWA / bWAPP, SQL Injection
 
 ---
 
 ## Obiettivo
 
-Riconoscere e sfruttare a livello base una SQL Injection: bypass di autenticazione, estrazione dati con UNION, uso di sqlmap. eJPTv2 richiede solo le varianti più comuni, non l'approfondimento completo che si trova in eWPT.
+`admin' OR '1'='1' --` è probabilmente il payload più famoso di tutta la sicurezza informatica, e la prima volta che ti funziona davvero su un login capisci perché: una singola virgoletta lasciata scappare in una query cambia completamente il significato di quello che il database esegue. Qui vedi come riconoscere e sfruttare a livello base una SQL Injection — bypass di autenticazione, estrazione dati con UNION, uso di sqlmap. L'eJPTv2 richiede solo le varianti più comuni; l'approfondimento vero (blind, time-based, encoding avanzato) è materia da eWPT.
 
 ---
 
@@ -96,7 +96,7 @@ sqlmap -u "http://target.com/item?id=1" --batch -D webapp -T users --dump
 
 ## Lab Hands-On
 
-### Lab 1: DVWA — SQL Injection (livello low/medium)
+### Lab 1: DVWA, SQL Injection (livello low/medium)
 **Obiettivo:** eseguire bypass login e UNION-based extraction
 **Difficulty:** Facile-Media
 **Time:** 45 min
@@ -118,8 +118,8 @@ sqlmap -u "http://target.com/item?id=1" --batch -D webapp -T users --dump
 
 ## Link Utili
 
-- [sqlmap — documentazione ufficiale](https://github.com/sqlmapproject/sqlmap/wiki)
-- [PortSwigger Academy — SQL injection](https://portswigger.net/web-security/sql-injection)
+- [sqlmap: documentazione ufficiale](https://github.com/sqlmapproject/sqlmap/wiki)
+- [PortSwigger Academy: SQL injection](https://portswigger.net/web-security/sql-injection)
 
 ---
 
@@ -138,8 +138,3 @@ sqlmap -u "http://target.com/item?id=1" --batch -D webapp -T users --dump
 - [ ] So costruire una UNION SELECT per estrarre dati
 - [ ] So usare sqlmap per il flusso dbs -> tables -> dump
 
----
-
-## Note personali
-
-_(spazio libero)_

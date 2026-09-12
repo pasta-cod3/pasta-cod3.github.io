@@ -1,30 +1,32 @@
 # CSRF Attacks
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [02-Session-Hijacking.md](02-Session-Hijacking.md)
-**Lab:** PortSwigger Academy — CSRF
+**Lab:** PortSwigger Academy, modulo CSRF
 
 ---
 
 ## Obiettivo
 
-Costruire richieste malevole che sfruttano l'autenticazione gia attiva della vittima nel suo browser, forzando azioni indesiderate (cambio password, trasferimento fondi, modifica email) senza che la vittima se ne accorga.
+Il CSRF gioca sporco con una caratteristica innocua del browser: allega sempre i cookie di sessione, indipendentemente da chi ha originato la richiesta. Qui vedi come costruire richieste malevole che sfruttano l'autenticazione già attiva della vittima nel suo browser, forzando azioni indesiderate (cambio password, trasferimento fondi, modifica email) senza che se ne accorga.
 
 ---
 
 ## Concetti chiave
 
-### Perche funziona
+### Perché funziona
 
-Il browser allega automaticamente i cookie di sessione ad ogni richiesta verso il dominio corrispondente, indipendentemente dal sito che ha originato la richiesta — se l'app non verifica un token anti-CSRF o l'origine della richiesta, non distingue una richiesta legittima da una forzata.
+Il browser allega automaticamente i cookie di sessione ad ogni richiesta verso il dominio corrispondente, indipendentemente dal sito che ha originato la richiesta: se l'app non verifica un token anti-CSRF o l'origine della richiesta, non distingue una richiesta legittima da una forzata.
+
+Dal 2020 i browser moderni impostano `SameSite=Lax` di default sui cookie che non specificano l'attributo, il che blocca già molte richieste cross-site via POST/fetch/XHR. Un token anti-CSRF (o un controllo `Origin`) resta comunque necessario perché `Lax` non protegge gli endpoint GET che cambiano stato (navigazione top-level, vedi Evasion), non protegge da richieste provenienti da un subdomain dello stesso "site", e molte API impostano deliberatamente `SameSite=None` per supportare integrazioni cross-site legittime, perdendo così la protezione di default.
 
 ### Difese comuni e come verificarle
 
 | Difesa | Come verificarne l'assenza/debolezza |
 |--------|------------------------------------------|
 | CSRF token | rimuovi il parametro token, o riusa un token di un'altra sessione |
-| Controllo header `Referer`/`Origin` | rimuovi l'header o testa se il controllo e bypassabile |
+| Controllo header `Referer`/`Origin` | rimuovi l'header o testa se il controllo è bypassabile |
 | `SameSite=Strict/Lax` sul cookie | verifica il flag nel `Set-Cookie` |
 
 ---
@@ -33,7 +35,7 @@ Il browser allega automaticamente i cookie di sessione ad ogni richiesta verso i
 
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
-| Burp — Generate CSRF PoC | click destro su richiesta > Engagement tools | HTML pronto | genera il form automaticamente |
+| Burp: Generate CSRF PoC | click destro su richiesta > Engagement tools | HTML pronto | genera il form automaticamente |
 | Browser | apertura HTML PoC | esecuzione reale | verifica finale |
 
 ---
@@ -55,22 +57,22 @@ Il browser allega automaticamente i cookie di sessione ad ogni richiesta verso i
 </html>
 ```
 
-**Spiegazione:** l'auto-submit via JS elimina la necessita che la vittima clicchi manualmente; basta che visiti la pagina mentre e loggata sul target.
+**Spiegazione:** l'auto-submit via JS elimina la necessità che la vittima clicchi manualmente; basta che visiti la pagina mentre è loggata sul target.
 
-### Esempio 2: CSRF via GET (piu semplice, se l'endpoint accetta GET per azioni sensibili)
+### Esempio 2: CSRF via GET (più semplice, se l'endpoint accetta GET per azioni sensibili)
 
 ```html
 <img src="http://target.com/api/transfer?to=attacker&amount=1000" style="display:none">
 ```
 
-**Spiegazione:** un endpoint che modifica stato accettando GET e vulnerabile anche solo caricando un'immagine, senza bisogno di form/JS.
+**Spiegazione:** un endpoint che modifica stato accettando GET è vulnerabile anche solo caricando un'immagine, senza bisogno di form/JS.
 
 ### Esempio 3: bypass token CSRF presente ma non legato alla sessione
 
 ```
 1. Ottieni un CSRF token valido dalla TUA sessione (login come te stesso)
 2. Riusa quel token nel form malevolo inviato alla vittima
-3. Se il server valida solo "il token esiste ed e valido" senza legarlo alla sessione specifica, l'attacco funziona comunque
+3. Se il server valida solo "il token esiste ed è valido" senza legarlo alla sessione specifica, l'attacco funziona comunque
 ```
 
 ### Esempio 4: bypass controllo Referer con meta tag
@@ -94,19 +96,19 @@ Il browser allega automaticamente i cookie di sessione ad ogni richiesta verso i
 
 ### Bypass basato su subdomain (cookie scoping ampio)
 
-Se il cookie e impostato con `Domain=.target.com` (non ristretto al subdomain esatto), un XSS o controllo debole su QUALSIASI subdomain puo condurre CSRF sul dominio principale.
+Se il cookie è impostato con `Domain=.target.com` (non ristretto al subdomain esatto), un XSS o controllo debole su QUALSIASI subdomain può condurre CSRF sul dominio principale.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — CSRF where token validation depends on request method
+### Lab 1: PortSwigger, CSRF where token validation depends on request method
 **Obiettivo:** bypassare validazione token cambiando metodo HTTP
 **Difficulty:** Medio
 **Time:** 30 min
 
 **Walkthrough breve:**
-1. Osserva che il token e validato solo su POST
+1. Osserva che il token è validato solo su POST
 2. Ripeti la stessa azione via GET
 3. Conferma che l'azione avviene senza validazione token
 
@@ -114,14 +116,14 @@ Se il cookie e impostato con `Domain=.target.com` (non ristretto al subdomain es
 
 ## Common Mistakes
 
-- Testare solo endpoint POST -> molti endpoint GET modificano stato senza che gli sviluppatori se ne accorgano
-- Non verificare se il token e legato alla sessione specifica -> un token "valido ma non legato" e comunque exploitabile
+- Testare solo endpoint POST -> molti endpoint GET modificano stato senza che gli sviluppatori se ne accorgano, e sono ancora più facili da sfruttare
+- Non verificare se il token è legato alla sessione specifica -> un token "valido ma non legato" ti sembra una protezione solida finché non scopri che non lo è
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — CSRF](https://portswigger.net/web-security/csrf)
+- [PortSwigger: CSRF](https://portswigger.net/web-security/csrf)
 - [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
 
 ---
@@ -136,12 +138,7 @@ Se il cookie e impostato con `Domain=.target.com` (non ristretto al subdomain es
 ## Checklist di padronanza
 
 - [ ] So costruire un PoC CSRF con auto-submit
-- [ ] So testare se un token e legato alla sessione specifica
+- [ ] So testare se un token è legato alla sessione specifica
 - [ ] So verificare il flag SameSite e le sue reali limitazioni
 - [ ] So usare il generatore CSRF PoC di Burp
 
----
-
-## Note personali
-
-_(spazio libero)_

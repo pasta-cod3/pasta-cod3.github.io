@@ -1,6 +1,6 @@
-# Lab Challenges — Scanning & Enumeration
+# Lab Challenges: Scanning & Enumeration
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Consolidare l'intero flusso di scanning ed enumeration prima di passare alle vulnerabilita specifiche (SQLi, XSS, LFI, ecc.).
+Prima di passare alle vulnerabilità specifiche (SQLi, XSS, LFI e compagnia), fermati qui a consolidare l'intero flusso di scanning ed enumeration: è la parte che si salta più volentieri sotto pressione, ed è quasi sempre quella che poi ti fa perdere la vulnerabilità più ovvia.
 
 ---
 
-## Challenge 1 — Mappa completa dell'attack surface
+## Challenge 1: Mappa completa dell'attack surface
 
 **Task:**
 1. Full port scan (TCP + UDP top ports) su un target di laboratorio
@@ -24,19 +24,19 @@ Consolidare l'intero flusso di scanning ed enumeration prima di passare alle vul
 
 ---
 
-## Challenge 2 — Bypass di un 403
+## Challenge 2: Bypass di un 403
 
 **Task:**
 1. Trova una directory/path che risponde 403
 2. Prova almeno 4 tecniche di bypass diverse (case, header, slash, method override)
-3. Documenta quale tecnica ha funzionato e perche
+3. Documenta quale tecnica ha funzionato e perché
 
 ---
 
 ## Common Mistakes
 
 - Passare alla fase di exploitation con un'enumerazione parziale -> torna sempre qui se ti blocchi in seguito
-- Non ripetere l'enumerazione su ogni vhost/subdomain scoperto -> ogni vhost e una superficie a se
+- Non ripetere l'enumerazione su ogni vhost/subdomain scoperto -> ogni vhost è una superficie a sé
 
 ---
 
@@ -51,10 +51,5 @@ Consolidare l'intero flusso di scanning ed enumeration prima di passare alle vul
 
 - [ ] Ho una mappa completa e documentata di un target di lab
 - [ ] Ho praticato bypass di controlli 403
-- [ ] Sono pronto a passare alle vulnerabilita specifiche
+- [ ] Sono pronto a passare alle vulnerabilità specifiche
 
----
-
-## Note personali
-
-_(spazio libero)_

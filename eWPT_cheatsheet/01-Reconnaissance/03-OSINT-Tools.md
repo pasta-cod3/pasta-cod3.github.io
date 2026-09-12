@@ -1,15 +1,15 @@
 # OSINT Tools
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 3h
-**Prerequisiti:** [01-Footprinting.md](01-Footprinting.md)
-**Lab:** TryHackMe — OSINT
+**Prerequisiti:** [02-Fingerprinting.md](02-Fingerprinting.md)
+**Lab:** TryHackMe, OSINT
 
 ---
 
 ## Obiettivo
 
-Raccogliere informazioni su persone, email ed infrastruttura legate al target tramite fonti pubbliche: social media, breach database, domain history. Utile per attacchi di social engineering, password spraying mirato e per capire la storia dell'infrastruttura.
+Le persone dietro un'organizzazione lasciano tracce pubbliche che valgono quanto una vulnerabilità tecnica: un pattern email, una password riciclata da un breach vecchio di anni, un subdomain che qualcuno ha dimenticato online. Qui raccogli queste informazioni da fonti pubbliche — social media, breach database, domain history — utili per password spraying mirato, social engineering, o semplicemente per capire come è cresciuta nel tempo l'infrastruttura che stai testando.
 
 ---
 
@@ -83,8 +83,8 @@ exiftool *.pdf | grep -i "author\|software\|creator"
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — OSINT
-**Obiettivo:** raccogliere informazioni su un target fittizio con piu tool OSINT
+### Lab 1: TryHackMe, OSINT
+**Obiettivo:** raccogliere informazioni su un target fittizio con più tool OSINT
 **Difficulty:** Medio
 **Time:** 1h
 
@@ -98,7 +98,7 @@ exiftool *.pdf | grep -i "author\|software\|creator"
 ## Common Mistakes
 
 - Fermarsi alla prima fonte (solo Google) -> combina almeno 3 fonti diverse per email/subdomain
-- Ignorare Wayback Machine -> spesso l'endpoint vulnerabile e stato "rimosso" dal menu ma resta raggiungibile
+- Ignorare Wayback Machine -> spesso l'endpoint vulnerabile è stato "rimosso" dal menu ma resta raggiungibile
 
 ---
 
@@ -111,7 +111,7 @@ exiftool *.pdf | grep -i "author\|software\|creator"
 
 ## Connessioni
 
-- **Prerequisito:** [01-Footprinting.md](01-Footprinting.md)
+- **Prerequisito:** [02-Fingerprinting.md](02-Fingerprinting.md)
 - **Prossimo Step:** [04-Dorking.md](04-Dorking.md)
 - **Combinazione con:** [06-Authentication-Authorization/05-Credential-Attacks.md](../06-Authentication-Authorization/05-Credential-Attacks.md)
 
@@ -124,8 +124,3 @@ exiftool *.pdf | grep -i "author\|software\|creator"
 - [ ] So estrarre metadata da documenti pubblici
 - [ ] So costruire una wordlist di username plausibili dal pattern email
 
----
-
-## Note personali
-
-_(spazio libero)_

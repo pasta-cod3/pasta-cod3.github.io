@@ -1,6 +1,6 @@
-# Lab Challenges — Reconnaissance
+# Lab Challenges: Reconnaissance
 
-**Difficolta:** Beginner-Intermediate
+**Difficoltà:** Beginner-Intermediate
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare l'intera fase di reconnaissance prima di passare a scanning/enumeration.
+Prima di passare a scanning/enumeration, mettiti alla prova qui: due esercizi pratici per consolidare l'intera fase di reconnaissance mentre è ancora fresca, invece di scoprire più avanti di averla solo letta senza mai farla per intero.
 
 ---
 
-## Challenge 1 — Recon completo passivo
+## Challenge 1: Recon completo passivo
 
 **Target:** un dominio a scelta autorizzato per test (es. lab TryHackMe/HTB)
 
@@ -27,7 +27,7 @@ Esercizi pratici per consolidare l'intera fase di reconnaissance prima di passar
 
 ---
 
-## Challenge 2 — Fingerprint stack tecnologico
+## Challenge 2: Fingerprint stack tecnologico
 
 **Task:**
 1. whatweb + wappalyzer sullo stesso target
@@ -47,7 +47,7 @@ Esercizi pratici per consolidare l'intera fase di reconnaissance prima di passar
 
 ## Link Utili
 
-- [TryHackMe — OSINT room](https://tryhackme.com/)
+- [TryHackMe: OSINT room](https://tryhackme.com/)
 - [Hack The Box](https://www.hackthebox.com/)
 
 ---
@@ -65,8 +65,3 @@ Esercizi pratici per consolidare l'intera fase di reconnaissance prima di passar
 - [ ] Ho un template di note riutilizzabile per la recon
 - [ ] Sono pronto a passare allo scanning attivo
 
----
-
-## Note personali
-
-_(spazio libero)_

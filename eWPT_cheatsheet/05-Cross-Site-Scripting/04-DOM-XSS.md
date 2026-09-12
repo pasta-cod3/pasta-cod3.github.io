@@ -1,15 +1,15 @@
 # DOM-Based XSS
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2.5h
 **Prerequisiti:** [03-Stored-XSS.md](03-Stored-XSS.md)
-**Lab:** PortSwigger Academy — DOM XSS
+**Lab:** PortSwigger Academy, DOM XSS
 
 ---
 
 ## Obiettivo
 
-Individuare vulnerabilita che vivono interamente nel codice JavaScript lato client: nessun dato "sospetto" tocca mai il server, l'exploit avviene tramite sorgenti (source) e destinazioni (sink) JS pericolose.
+Qui la caccia cambia registro: niente request malformate da guardare nei log, niente traffico "sospetto" verso il server, perché il dato non lo tocca proprio. La vulnerabilità vive interamente nel codice JavaScript lato client, e la trovi solo leggendo quel codice — o osservando come una sorgente (source) controllabile finisce dentro una destinazione (sink) pericolosa.
 
 ---
 
@@ -43,8 +43,8 @@ document.getElementById("output").innerHTML = decodeURIComponent(pos);
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
 | Browser DevTools | Sources tab, breakpoint su sink | traccia flusso dato | fondamentale per DOM XSS |
-| Burp DOM Invader | estensione Burp | evidenzia source/sink automaticamente | molto piu veloce del debug manuale |
-| view-source / JS file | lettura manuale codice | individua pattern source->sink | quando DOM Invader non e disponibile |
+| Burp DOM Invader | estensione Burp | evidenzia source/sink automaticamente | molto più veloce del debug manuale |
+| view-source / JS file | lettura manuale codice | individua pattern source->sink | quando DOM Invader non è disponibile |
 
 ---
 
@@ -56,7 +56,7 @@ document.getElementById("output").innerHTML = decodeURIComponent(pos);
 http://target.com/page#<img src=x onerror=alert(1)>
 ```
 
-**Spiegazione:** il fragment (`#...`) non viene mai inviato al server, quindi non appare in nessun log server-side; l'intera vulnerabilita e osservabile solo leggendo il JS client-side.
+**Spiegazione:** il fragment (`#...`) non viene mai inviato al server, quindi non appare in nessun log server-side; l'intera vulnerabilità è osservabile solo leggendo il JS client-side.
 
 ### Esempio 2: DOM XSS via postMessage senza validazione origin
 
@@ -72,7 +72,7 @@ PoC da hostare su dominio attaccante:
 <iframe src="http://target.com/page" onload="this.contentWindow.postMessage('<img src=x onerror=alert(document.domain)>', '*')"></iframe>
 ```
 
-**Spiegazione:** la pagina target accetta messaggi da QUALSIASI origine (`*` implicito o controllo origin mancante) e li scrive direttamente nel DOM — un iframe malevolo su un altro sito puo iniettare codice.
+**Spiegazione:** la pagina target accetta messaggi da QUALSIASI origine (`*` implicito o controllo origin mancante) e li scrive direttamente nel DOM: un iframe malevolo su un altro sito può iniettare codice.
 
 ### Esempio 3: DOM XSS via jQuery `$()` come sink implicito
 
@@ -91,7 +91,13 @@ http://target.com/page#<img src=x onerror=alert(1)>
 
 ### Bypass sanitizzazione parziale lato client
 
-Se il codice fa `decodeURIComponent()` prima di scrivere nel sink, un doppio URL-encoding del payload puo bypassare filtri che controllano solo la stringa raw prima della decodifica.
+Con un solo `decodeURIComponent()` nel sink (come nell'esempio sopra), basta una singola codifica URL per bypassare un filtro che ispeziona solo la stringa raw pre-decodifica (niente `<` letterale nella richiesta):
+
+```
+http://target.com/page#%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E
+```
+
+Il doppio URL-encoding serve in uno scenario diverso: quando un WAF/proxy davanti all'app decodifica UNA volta per ispezionare il valore (vede ancora caratteri percent-encoded, non `<`, e lo lascia passare) e poi il codice client applica un'ULTERIORE `decodeURIComponent()` esplicita, completando la decodifica fino all'HTML eseguibile:
 
 ```
 http://target.com/page#%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
@@ -101,7 +107,7 @@ http://target.com/page#%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — DOM XSS in document.write sink using source location.search
+### Lab 1: PortSwigger, DOM XSS in document.write sink using source location.search
 **Obiettivo:** individuare source/sink e costruire PoC
 **Difficulty:** Difficile
 **Time:** 1h
@@ -115,14 +121,14 @@ http://target.com/page#%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
 
 ## Common Mistakes
 
-- Cercare DOM XSS solo guardando la response HTML server-side -> il flusso vive interamente nel JS, serve leggere il codice client
-- Dimenticare che `location.hash` non arriva mai al server -> nessuna traccia in log server, ma comunque exploitabile
+- Cercare DOM XSS solo guardando la response HTML server-side -> non troverai mai nulla così, il flusso vive interamente nel JS, serve leggere il codice client
+- Dimenticare che `location.hash` non arriva mai al server -> nessuna traccia in log server, ma resta comunque perfettamente sfruttabile
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — DOM-based XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based)
+- [PortSwigger: DOM-based XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based)
 - [DOM XSS Wiki (OWASP)](https://owasp.org/www-community/DOM_Based_XSS)
 
 ---
@@ -140,8 +146,3 @@ http://target.com/page#%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
 - [ ] So usare DOM Invader o leggere manualmente il JS per trovarle
 - [ ] So costruire un PoC DOM XSS via hash/search/postMessage
 
----
-
-## Note personali
-
-_(spazio libero)_

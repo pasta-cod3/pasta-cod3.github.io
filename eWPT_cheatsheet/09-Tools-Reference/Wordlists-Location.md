@@ -1,6 +1,6 @@
 # Wordlists Location
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 30 min
 **Prerequisiti:** nessuno
 **Lab:** riferimento trasversale
@@ -9,7 +9,7 @@
 
 ## Obiettivo
 
-Sapere dove trovare rapidamente le wordlist giuste su Kali/sistemi con SecLists installato, senza perdere tempo a cercarle durante l'esame.
+Sai già che ti serve una wordlist per il directory brute-force, ma il nome esatto del file dentro `/usr/share/seclists/` non te lo ricordi mai al momento giusto. Questa pagina è la mappa: dove sta rockyou, dove sono le liste di SecLists organizzate per caso d'uso, e quale scegliere a seconda della fase in cui sei.
 
 ---
 
@@ -45,7 +45,7 @@ git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
 | Directory discovery iniziale | `Discovery/Web-Content/common.txt` |
 | Directory discovery approfondito | `Discovery/Web-Content/raft-medium-directories.txt` |
 | Vhost/subdomain | `Discovery/DNS/subdomains-top1million-5000.txt` |
-| Password spraying | `Passwords/Common-Credentials/10-million-password-list-top-1000.txt` |
+| Password spraying | `Passwords/Common-Credentials/xato-net-10-million-passwords-1000.txt` |
 | Parametri nascosti | `Discovery/Web-Content/burp-parameter-names.txt` |
 
 ---
@@ -54,8 +54,3 @@ git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
 
 - **Combinazione con:** [02-Scanning-Enumeration/03-Web-Enumeration.md](../02-Scanning-Enumeration/03-Web-Enumeration.md), [06-Authentication-Authorization/05-Credential-Attacks.md](../06-Authentication-Authorization/05-Credential-Attacks.md)
 
----
-
-## Note personali
-
-_(spazio libero)_

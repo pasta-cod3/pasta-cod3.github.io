@@ -1,15 +1,15 @@
 # Nmap Fundamentals
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [00-Fundamentals/02-Networking-Basics.md](../00-Fundamentals/02-Networking-Basics.md)
-**Lab:** INE PTS — Network Scanning
+**Lab:** INE PTS, Network Scanning
 
 ---
 
 ## Obiettivo
 
-Padroneggiare nmap come strumento centrale di footprinting e scanning: tipi di scan, timing, formati di output. È lo strumento più usato in tutto l'esame eJPTv2, va conosciuto a fondo prima di passare a host discovery e port scanning avanzato.
+Se dovessi salvare un solo tool prima dell'esame, sarebbe questo: nmap è lo strumento che userai più di ogni altro in tutto l'eJPTv2, e vale la pena conoscerlo a fondo — tipi di scan, timing, formati di output — prima ancora di arrivare a host discovery e port scanning avanzato. Non è solo "il comando che lancio e aspetto": ogni flag che scegli qui ha un compromesso preciso tra velocità, accuratezza e rilevabilità, ed è quel compromesso che deciderai consapevolmente andando avanti nei prossimi file.
 
 ---
 
@@ -97,16 +97,16 @@ nmap -sU --top-ports 20 -oN scan-udp.txt 10.10.10.5
 
 ## Evasion / Bypass Techniques
 
-- `-f` — frammenta i pacchetti per evadere IDS/firewall semplici basati su pattern matching
-- `-D RND:10` — decoy scan, genera pacchetti da IP falsi insieme al reale
-- `--data-length 25` — aggiunge padding random per evitare firme basate su lunghezza pacchetto
+- `-f`: frammenta i pacchetti per evadere IDS/firewall semplici basati su pattern matching
+- `-D RND:10`: decoy scan, genera pacchetti da IP falsi insieme al reale
+- `--data-length 25`: aggiunge padding random per evitare firme basate su lunghezza pacchetto
 - In un contesto di esame/lab autorizzato l'evasion serve più a capire il concetto che a essere strettamente necessaria: la maggior parte dei target di lab non ha IDS attivo
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Nmap
+### Lab 1: TryHackMe, Nmap
 **Obiettivo:** esercitarsi con tutti i tipi di scan e timing template su un target controllato
 **Difficulty:** Facile
 **Time:** 45 min
@@ -129,7 +129,7 @@ nmap -sU --top-ports 20 -oN scan-udp.txt 10.10.10.5
 ## Link Utili
 
 - [Nmap Reference Guide](https://nmap.org/book/man.html)
-- [Nmap Cheat Sheet — SANS](https://www.sans.org/posters/)
+- [Nmap Cheat Sheet: SANS](https://www.sans.org/posters/)
 
 ---
 
@@ -148,8 +148,3 @@ nmap -sU --top-ports 20 -oN scan-udp.txt 10.10.10.5
 - [ ] So salvare output in tutti i formati utili
 - [ ] Ho provato almeno una tecnica di evasion
 
----
-
-## Note personali
-
-_(spazio libero)_

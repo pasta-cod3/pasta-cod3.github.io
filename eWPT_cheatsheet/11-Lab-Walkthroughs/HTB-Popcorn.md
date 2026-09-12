@@ -1,4 +1,4 @@
-# HTB — Popcorn (Walkthrough Notes)
+# HTB: Popcorn (Walkthrough Notes)
 
 **Difficulty:** Medium
 **Time to root (stimato):** 2h
@@ -8,7 +8,7 @@
 
 ## Obiettivo
 
-Macchina Linux che combina enumerazione web classica, un upload abuse su un'applicazione di file sharing, e una privilege escalation basata su un exploit kernel noto — buon esercizio per la chain completa upload-to-root.
+Popcorn è la macchina giusta per abituarti a pensare in termini di catena completa invece che di singola tecnica isolata: enumeri un'app di file sharing, trovi non uno ma potenzialmente più punti di upload, bypassi il controllo tipo file per arrivare a una webshell, e chiudi con un kernel exploit — la sequenza upload-to-root che ricapita più spesso di quanto pensi.
 
 ---
 
@@ -21,8 +21,8 @@ gobuster dir -u http://target.com -w /usr/share/seclists/Discovery/Web-Content/r
 ```
 Aspettati un'applicazione web di file sharing/torrent tracker.
 
-### 2. Identificazione funzionalita di upload
-Cerca form che permettono upload di file (es. immagine di anteprima per un torrent) — candidato diretto per [08-Exploitation-PostEx/01-File-Upload-Abuse.md](../08-Exploitation-PostEx/01-File-Upload-Abuse.md).
+### 2. Identificazione funzionalità di upload
+Cerca form che permettono upload di file (es. immagine di anteprima per un torrent): candidato diretto per [08-Exploitation-PostEx/01-File-Upload-Abuse.md](../08-Exploitation-PostEx/01-File-Upload-Abuse.md).
 
 ### 3. Bypass controllo tipo file
 Applica sistematicamente le tecniche di bypass upload (double extension, polyglot, MIME type spoofing) per caricare una webshell PHP.
@@ -40,9 +40,9 @@ Verifica versione kernel e cerca exploit noti corrispondenti con `searchsploit`/
 
 ## Key Lessons
 
-- Le applicazioni di file sharing spesso hanno funzionalita di upload multiple (avatar, anteprima, allegati): mappale tutte, non fermarti alla prima trovata
-- Un kernel Linux datato e sempre un candidato per privesc rapida: controlla `uname -a` come primo passo dopo l'esecuzione iniziale
-- La chain completa (upload -> webshell -> reverse shell -> privesc kernel) e uno scenario ricorrente in eWPT
+- Le applicazioni di file sharing spesso hanno funzionalità di upload multiple (avatar, anteprima, allegati): mappale tutte, non fermarti alla prima trovata
+- Un kernel Linux datato è sempre un candidato per privesc rapida: controlla `uname -a` come primo passo dopo l'esecuzione iniziale
+- La chain completa (upload -> webshell -> reverse shell -> privesc kernel) è uno scenario ricorrente in eWPT
 
 ---
 
@@ -50,8 +50,3 @@ Verifica versione kernel e cerca exploit noti corrispondenti con `searchsploit`/
 
 - **Combinazione con:** [08-Exploitation-PostEx/01-File-Upload-Abuse.md](../08-Exploitation-PostEx/01-File-Upload-Abuse.md), [08-Exploitation-PostEx/05-Privilege-Escalation.md](../08-Exploitation-PostEx/05-Privilege-Escalation.md)
 
----
-
-## Note personali
-
-_(annota qui i tuoi comandi esatti e le differenze rispetto a queste note generiche)_

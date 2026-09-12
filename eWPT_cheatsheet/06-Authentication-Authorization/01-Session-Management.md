@@ -1,15 +1,15 @@
 # Session Management
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [00-Fundamentals/HTTP-HTTPS-Deep-Dive.md](../00-Fundamentals/HTTP-HTTPS-Deep-Dive.md)
-**Lab:** PortSwigger Academy — Authentication
+**Lab:** PortSwigger Academy, modulo Authentication
 
 ---
 
 ## Obiettivo
 
-Capire come le applicazioni mantengono lo stato di autenticazione (cookie di sessione, JWT, token) e quali difetti di implementazione rendono le sessioni attaccabili.
+Prima di attaccare una sessione devi capire come vive: il meccanismo che tiene "loggato" un utente tra una richiesta e l'altra è quasi sempre un cookie, un JWT o un token, e ognuno porta i suoi difetti di implementazione tipici. Qui vedi come le applicazioni mantengono lo stato di autenticazione e quali flag/scelte deboli rendono le sessioni attaccabili — è la base su cui si appoggiano i file successivi su hijacking, CSRF e JWT.
 
 ---
 
@@ -33,9 +33,9 @@ Set-Cookie: session=abc123; HttpOnly; Secure; SameSite=Strict; Path=/
 |-----------------|---------|
 | `HttpOnly` | leggibile via `document.cookie` (XSS -> furto sessione) |
 | `Secure` | inviato anche su HTTP in chiaro |
-| `SameSite` | inviato cross-site (favorisce CSRF) |
+| `SameSite` | senza l'attributo i browser moderni applicano `Lax` di default (mitiga già molti CSRF); solo con `SameSite=None` esplicito (richiede `Secure`) il cookie viaggia cross-site senza restrizioni |
 
-### Qualita del session ID
+### Qualità del session ID
 
 Un buon session ID deve essere lungo, casuale (alta entropia) e imprevedibile. ID sequenziali o brevi sono indovinabili.
 
@@ -58,13 +58,13 @@ Un buon session ID deve essere lungo, casuale (alta entropia) e imprevedibile. I
 1. Cattura una richiesta che genera un nuovo token/session ID (es. login)
 2. Send to Sequencer
 3. Avvia cattura di centinaia di token
-4. Analizza: se l'entropia stimata e bassa, il token e prevedibile
+4. Analizza: se l'entropia stimata è bassa, il token è prevedibile
 ```
 
 ### Esempio 2: verifica manuale flag cookie
 
 ```bash
-curl -sI http://target.com/login -d "user=test&pass=test" | grep -i set-cookie
+curl -s -D - -o /dev/null http://target.com/login -d "user=test&pass=test" | grep -i set-cookie
 ```
 
 **Output atteso:**
@@ -72,7 +72,7 @@ curl -sI http://target.com/login -d "user=test&pass=test" | grep -i set-cookie
 Set-Cookie: session=abc123; Path=/
 ```
 
-**Spiegazione:** l'assenza di `HttpOnly`/`Secure`/`SameSite` in questo output e gia una scoperta da documentare, indipendentemente da altri exploit.
+**Spiegazione:** l'assenza di `HttpOnly`/`Secure`/`SameSite` in questo output è già una scoperta da documentare, indipendentemente da altri exploit.
 
 ### Esempio 3: session ID prevedibile (pattern temporale/sequenziale)
 
@@ -82,20 +82,20 @@ session=1000235
 session=1000236
 ```
 
-**Spiegazione:** se il session ID e chiaramente incrementale o basato su timestamp, puoi provare a indovinare/forzare sessioni di altri utenti.
+**Spiegazione:** se il session ID è chiaramente incrementale o basato su timestamp, puoi provare a indovinare/forzare sessioni di altri utenti.
 
 ---
 
 ## Evasion / Bypass Techniques
 
-Non applicabile in senso di evasion WAF; la "tecnica" qui e l'analisi statistica (Sequencer) per dimostrare debolezza dell'entropia del token.
+Non applicabile in senso di evasion WAF; la "tecnica" qui è l'analisi statistica (Sequencer) per dimostrare debolezza dell'entropia del token.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — analisi di un token di sessione debole
-**Obiettivo:** dimostrare prevedibilita di un session ID
+### Lab 1: PortSwigger, analisi di un token di sessione debole
+**Obiettivo:** dimostrare prevedibilità di un session ID
 **Difficulty:** Medio
 **Time:** 45 min
 
@@ -108,15 +108,15 @@ Non applicabile in senso di evasion WAF; la "tecnica" qui e l'analisi statistica
 
 ## Common Mistakes
 
-- Controllare solo la presenza del cookie, non i suoi flag -> HttpOnly/Secure/SameSite sono controlli distinti da verificare tutti
-- Non testare mai l'entropia del session ID -> spesso sottovalutato ma segnalabile come finding a se
+- Controllare solo la presenza del cookie, non i suoi flag -> HttpOnly/Secure/SameSite sono controlli distinti, vanno verificati tutti e tre
+- Non testare mai l'entropia del session ID -> è un controllo che si salta facilmente, ma resta un finding segnalabile a sé
 
 ---
 
 ## Link Utili
 
 - [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
-- [PortSwigger — Authentication](https://portswigger.net/web-security/authentication)
+- [PortSwigger: Authentication](https://portswigger.net/web-security/authentication)
 
 ---
 
@@ -133,8 +133,3 @@ Non applicabile in senso di evasion WAF; la "tecnica" qui e l'analisi statistica
 - [ ] So usare Burp Sequencer per analizzare entropia
 - [ ] So riconoscere pattern prevedibili in un session ID
 
----
-
-## Note personali
-
-_(spazio libero)_

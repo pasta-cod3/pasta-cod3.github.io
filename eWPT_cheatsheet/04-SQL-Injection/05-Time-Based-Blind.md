@@ -1,15 +1,15 @@
 # Time-Based Blind SQLi
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2h
 **Prerequisiti:** [04-Blind-SQLi.md](04-Blind-SQLi.md)
-**Lab:** PortSwigger Academy — Blind SQLi with time delays
+**Lab:** PortSwigger Academy: Blind SQLi with time delays
 
 ---
 
 ## Obiettivo
 
-Estrarre dati quando l'applicazione non mostra alcun differenziale visibile (ne errori, ne contenuto diverso), misurando il tempo di risposta indotto da funzioni di sleep condizionali nel DB.
+A volte nemmeno il differenziale booleano c'è: la pagina è identica in ogni caso, vero o falso. In quel vicolo cieco resta un'ultima leva: il tempo. Se riesci a far eseguire una `SLEEP` condizionale nel DB, la risposta arriva più lenta quando la condizione è vera — un segnale che nessuna sanitizzazione dell'output può nascondere. È la tecnica più lenta di tutte, ma anche l'ultima a cedere.
 
 ---
 
@@ -18,10 +18,10 @@ Estrarre dati quando l'applicazione non mostra alcun differenziale visibile (ne 
 ### Principio
 
 ```sql
-' OR IF(1=1, SLEEP(5), 0) --   -- risposta ritardata di 5s se la condizione e vera
+' OR IF(1=1, SLEEP(5), 0) --   -- risposta ritardata di 5s se la condizione è vera
 ```
 
-E la tecnica piu lenta ma anche la piu affidabile: funziona anche quando l'output e completamente invisibile (es. la query e usata solo per un controllo interno, l'app risponde sempre uguale).
+È la tecnica più lenta ma anche la più affidabile: funziona anche quando l'output è completamente invisibile (es. la query è usata solo per un controllo interno, l'app risponde sempre uguale).
 
 ---
 
@@ -49,7 +49,7 @@ E la tecnica piu lenta ma anche la piu affidabile: funziona anche quando l'outpu
 time curl "http://target.com/item?id=1' AND SLEEP(5)--%20"
 ```
 
-**Output atteso:** la richiesta impiega ~5s in piu rispetto al normale — conferma diretta dell'injection anche senza vedere alcun output.
+**Output atteso:** la richiesta impiega ~5s in più rispetto al normale: conferma diretta dell'injection anche senza vedere alcun output.
 
 ### Esempio 2: estrazione dati con condizione booleana + sleep
 
@@ -58,7 +58,7 @@ time curl "http://target.com/item?id=1' AND SLEEP(5)--%20"
 ' AND IF(ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>109, SLEEP(3), 0) --
 ```
 
-**Spiegazione:** stesso principio della blind boolean, ma il "vero/falso" si misura in secondi di ritardo invece che in differenza di contenuto — molto piu lento (una richiesta per ogni bit di informazione, con sleep multi-secondo), ma applicabile ovunque.
+**Spiegazione:** stesso principio della blind boolean, ma il "vero/falso" si misura in secondi di ritardo invece che in differenza di contenuto, molto più lento (una richiesta per ogni bit di informazione, con sleep multi-secondo), ma applicabile ovunque.
 
 ### Esempio 3: equivalenti per altri DB engine
 
@@ -91,7 +91,7 @@ Esegui sempre una baseline (richiesta senza sleep) prima di interpretare un rita
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Blind SQL injection with time delays
+### Lab 1: PortSwigger: Blind SQL injection with time delays
 **Obiettivo:** confermare ed estrarre dati via time-based blind
 **Difficulty:** Difficile
 **Time:** 1h
@@ -105,14 +105,14 @@ Esegui sempre una baseline (richiesta senza sleep) prima di interpretare un rita
 
 ## Common Mistakes
 
-- Non fare una baseline prima di concludere che il delay sia dovuto al payload -> la rete puo introdurre latenza normale
+- Non fare una baseline prima di concludere che il delay sia dovuto al payload -> la rete può introdurre latenza normale
 - Usare sleep troppo lunghi in automazione -> rallenta enormemente l'estrazione, calibra il tempo minimo necessario per essere affidabile (2-3s spesso bastano)
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — Blind SQLi with time delays](https://portswigger.net/web-security/sql-injection/blind)
+- [PortSwigger: Blind SQLi with time delays](https://portswigger.net/web-security/sql-injection/blind)
 
 ---
 
@@ -130,8 +130,3 @@ Esegui sempre una baseline (richiesta senza sleep) prima di interpretare un rita
 - [ ] So fare una baseline prima di interpretare un ritardo
 - [ ] So quando passare a sqlmap invece di continuare manualmente
 
----
-
-## Note personali
-
-_(spazio libero)_

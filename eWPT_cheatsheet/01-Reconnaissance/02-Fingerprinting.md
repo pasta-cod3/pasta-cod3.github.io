@@ -1,15 +1,15 @@
 # Fingerprinting
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [01-Footprinting.md](01-Footprinting.md)
-**Lab:** TryHackMe — Active Reconnaissance
+**Lab:** TryHackMe, Active Reconnaissance
 
 ---
 
 ## Obiettivo
 
-Identificare tecnologia, framework e versioni usate dal target: web server, linguaggio backend, CMS, librerie JS. Ogni versione nota ti apre la strada a CVE pubblici e a un attacco mirato invece che a tentativi random.
+Una versione software nota è oro: invece di provare payload a caso, cerchi il CVE giusto e vai dritto al punto. Qui identifichi lo stack del target — web server, linguaggio backend, CMS, librerie JS — partendo da indizi che spesso il team di sviluppo lascia esposti senza accorgersene: header, cookie name, path statici, persino il footer della pagina.
 
 ---
 
@@ -31,7 +31,7 @@ Identificare tecnologia, framework e versioni usate dal target: web server, ling
 
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
-| whatweb | `whatweb -a 3 http://target.com` | stack tecnologico | `-a 3` aggressivita massima |
+| whatweb | `whatweb -a 3 http://target.com` | stack tecnologico | `-a 3` = aggressivo (più richieste per plugin); il massimo è `-a 4` (Heavy) |
 | wappalyzer | estensione browser | stack tecnologico | visuale, comodo durante navigazione |
 | nmap | `nmap -sV -p 80,443 target.com` | versione servizio | banner grabbing |
 | curl | `curl -I http://target.com` | header response | manuale, sempre affidabile |
@@ -65,7 +65,7 @@ curl "http://target.com/api/users/abc"   # ID non numerico dove atteso intero
 ### Esempio 3: banner grabbing manuale
 
 ```bash
-nc -nv target.com 80
+nc -v target.com 80
 HEAD / HTTP/1.1
 Host: target.com
 
@@ -76,13 +76,13 @@ Host: target.com
 ## Evasion / Bypass Techniques
 
 ### Header spoofing/nascondere il fingerprint (lato difensivo, utile da riconoscere)
-Alcuni target rimuovono `Server`/`X-Powered-By`: non fermarti li, usa comportamenti specifici (formato errori, header custom come `X-Drupal-Cache`) per identificare comunque lo stack.
+Alcuni target rimuovono `Server`/`X-Powered-By`: non fermarti lì, usa comportamenti specifici (formato errori, header custom come `X-Drupal-Cache`) per identificare comunque lo stack.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Active Reconnaissance
+### Lab 1: TryHackMe, Active Reconnaissance
 **Obiettivo:** fingerprint completo di un target di laboratorio
 **Difficulty:** Facile
 **Time:** 45 min
@@ -96,7 +96,7 @@ Alcuni target rimuovono `Server`/`X-Powered-By`: non fermarti li, usa comportame
 
 ## Common Mistakes
 
-- Fidarsi ciecamente della versione dichiarata negli header -> puo essere modificata/nascosta, verifica con comportamento (es. path specifici del CMS)
+- Fidarsi ciecamente della versione dichiarata negli header -> può essere modificata/nascosta, verifica con comportamento (es. path specifici del CMS)
 - Non controllare il footer HTML -> molti CMS/temi lasciano credit "Powered by X vY" visibile nel markup
 
 ---
@@ -123,8 +123,3 @@ Alcuni target rimuovono `Server`/`X-Powered-By`: non fermarti li, usa comportame
 - [ ] So cercare CVE per una versione software trovata
 - [ ] Ho un workflow ripetibile di fingerprint
 
----
-
-## Note personali
-
-_(spazio libero)_

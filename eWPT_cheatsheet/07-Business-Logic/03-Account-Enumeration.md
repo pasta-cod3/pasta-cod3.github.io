@@ -1,15 +1,15 @@
 # Account Enumeration
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [02-Race-Conditions.md](02-Race-Conditions.md)
-**Lab:** PortSwigger Academy — Username enumeration
+**Lab:** PortSwigger Academy: Username enumeration
 
 ---
 
 ## Obiettivo
 
-Determinare se username/email esistono nel sistema sfruttando differenze di risposta (messaggio, status code, tempo) tra tentativo su account esistente e non esistente — base per attacchi mirati di credential stuffing/spraying.
+"Invalid username" e "Invalid password" sembrano due messaggi innocui, ma messi a confronto ti dicono esattamente quali account esistono senza che tu abbia mai indovinato una password. È una vulnerabilità che gli sviluppatori spesso considerano un dettaglio di UX, non di sicurezza, e invece è la base per rendere efficace qualsiasi attacco successivo di credential stuffing/spraying: perché sprecare tentativi su username che non esistono?
 
 ---
 
@@ -17,11 +17,11 @@ Determinare se username/email esistono nel sistema sfruttando differenze di risp
 
 ### Dove cercano enumeration
 
-| Funzionalita | Differenziale tipico |
+| Funzionalità | Differenziale tipico |
 |---------------|------------------------|
 | Login | "Invalid username" vs "Invalid password" |
 | Password reset | "Email inviata" solo se l'account esiste |
-| Registrazione | "Username gia in uso" |
+| Registrazione | "Username già in uso" |
 | Login (timing) | tempo di risposta diverso se l'account esiste (hash verificato vs no) |
 
 ---
@@ -47,7 +47,7 @@ curl -s -d "username=nonexistentuser999&password=x" http://target.com/login
 # -> "Invalid username"
 ```
 
-**Spiegazione:** due messaggi distinti rivelano immediatamente se un username esiste, senza bisogno di indovinare la password — usa questa differenza per validare un'intera wordlist di username candidati prima di un attacco di password spraying (vedi [06-Authentication-Authorization/05-Credential-Attacks.md](../06-Authentication-Authorization/05-Credential-Attacks.md)).
+**Spiegazione:** due messaggi distinti rivelano immediatamente se un username esiste, senza bisogno di indovinare la password: usa questa differenza per validare un'intera wordlist di username candidati prima di un attacco di password spraying (vedi [06-Authentication-Authorization/05-Credential-Attacks.md](../06-Authentication-Authorization/05-Credential-Attacks.md)).
 
 ### Esempio 2: enumeration via status code/redirect diverso
 
@@ -61,20 +61,23 @@ done
 ### Esempio 3: enumeration via timing attack (quando i messaggi sono identici)
 
 ```python
-import requests, time
+import requests, statistics
 
-def check(username):
-    start = time.time()
-    requests.post("http://target.com/login", data={"username": username, "password": "wrongpass"})
-    return time.time() - start
+def measure(username, samples=20):
+    times = []
+    for _ in range(samples):
+        t = requests.post("http://target.com/login",
+                           data={"username": username, "password": "wrongpass"}).elapsed.total_seconds()
+        times.append(t)
+    return statistics.median(times)
 
-# Un account esistente spesso impiega piu tempo (verifica hash password reale)
-# Un account inesistente spesso risponde piu velocemente (short-circuit prima dell'hash check)
-print("admin:", check("admin"))
-print("nonexistent999:", check("nonexistent999"))
+# Un account esistente spesso impiega più tempo (verifica hash password reale)
+# Un account inesistente spesso risponde più velocemente (short-circuit prima dell'hash check)
+print("admin:", measure("admin"))
+print("nonexistent999:", measure("nonexistent999"))
 ```
 
-**Spiegazione:** anche quando messaggio e status code sono identici (buona pratica di sicurezza), la differenza di tempo tra "verifica hash bcrypt di una password reale" e "rifiuta subito, utente non trovato" puo restare misurabile e sfruttabile.
+**Spiegazione:** anche quando messaggio e status code sono identici (buona pratica di sicurezza), la differenza di tempo tra "verifica hash bcrypt di una password reale" e "rifiuta subito, utente non trovato" può restare misurabile e sfruttabile, ma tipicamente si tratta di **pochi millisecondi**, facilmente coperti dal rumore di rete. Un singolo confronto (una richiesta contro un'altra) non è affidabile: serve misurare più campioni per candidato (10-20+) e confrontare la mediana, non un solo tentativo. Vedi [04-Timing-Attacks.md](04-Timing-Attacks.md) per la metodologia statistica completa.
 
 ### Esempio 4: enumeration via funzione "password dimenticata"
 
@@ -90,13 +93,13 @@ curl -s -d "email=admin@target.com" http://target.com/forgot-password
 
 ## Evasion / Bypass Techniques
 
-Non applicabile in senso WAF; la tecnica e interamente nell'analisi statistica delle differenze di risposta — ripeti ogni test piu volte per escludere rumore di rete prima di concludere che esista un differenziale timing.
+Non applicabile in senso WAF; la tecnica è interamente nell'analisi statistica delle differenze di risposta: ripeti ogni test più volte per escludere rumore di rete prima di concludere che esista un differenziale timing.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Username enumeration via subtly different responses
+### Lab 1 (PortSwigger): Username enumeration via subtly different responses
 **Obiettivo:** distinguere username validi da invalidi tramite differenza sottile nella risposta
 **Difficulty:** Medio
 **Time:** 30 min
@@ -110,14 +113,14 @@ Non applicabile in senso WAF; la tecnica e interamente nell'analisi statistica d
 
 ## Common Mistakes
 
-- Fermarsi al confronto del solo messaggio visibile -> controlla anche header, status code, lunghezza esatta della risposta (spesso il differenziale e minuscolo)
-- Non ripetere i timing test piu volte -> la rete introduce rumore, serve una media su piu campioni per essere affidabili
+- Fermarsi al confronto del solo messaggio visibile -> controlla anche header, status code, lunghezza esatta della risposta (spesso il differenziale è minuscolo)
+- Non ripetere i timing test più volte -> la rete introduce rumore, serve una media su più campioni per essere affidabili
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — Username enumeration](https://portswigger.net/web-security/authentication/other-mechanisms)
+- [PortSwigger: Username enumeration](https://portswigger.net/web-security/authentication/other-mechanisms)
 
 ---
 
@@ -135,8 +138,3 @@ Non applicabile in senso WAF; la tecnica e interamente nell'analisi statistica d
 - [ ] So eseguire un timing attack base con script Python
 - [ ] So automatizzare l'enumeration su una wordlist con Burp Intruder
 
----
-
-## Note personali
-
-_(spazio libero)_

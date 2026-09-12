@@ -1,15 +1,15 @@
 # SSH Enumeration
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 45min
 **Prerequisiti:** [02-FTP-Enumeration.md](02-FTP-Enumeration.md)
-**Lab:** INE PTS — Service Enumeration
+**Lab:** INE PTS, Service Enumeration
 
 ---
 
 ## Obiettivo
 
-SSH (porta 22) e raramente exploitabile direttamente, ma l'enumerazione della versione e degli algoritmi supportati puo rivelare vulnerabilita note e orientare gli attacchi a credenziali successivi (password attack, key reuse).
+Non aspettarti di trovare un exploit diretto contro SSH: succede raramente. Quello che invece ti dà davvero è un indizio sull'età del sistema (dalla versione e dagli algoritmi supportati) e, più concretamente, il bersaglio giusto per gli attacchi a credenziali che arriveranno dopo, una volta che hai una userlist da altri servizi.
 
 ---
 
@@ -25,7 +25,7 @@ Alcune versioni vulnerabili di OpenSSH (es. CVE-2018-15473) permettevano di dist
 
 ### Algoritmi supportati
 
-La lista di key exchange, cifrari e MAC supportati da un server SSH puo rivelare indirettamente l'eta del software (versioni datate spesso mantengono algoritmi deboli per compatibilita).
+La lista di key exchange, cifrari e MAC supportati da un server SSH può rivelare indirettamente l'età del software (versioni datate spesso mantengono algoritmi deboli per compatibilità).
 
 ---
 
@@ -69,13 +69,13 @@ ssh-audit 10.10.10.5
 hydra -L users.txt -P /usr/share/wordlists/rockyou.txt ssh://10.10.10.5 -t 4
 ```
 
-**Spiegazione:** SSH tollera pochi tentativi al secondo prima di rallentare/bloccare (fail2ban e comune); `-t 4` limita i thread paralleli per non saturare la connessione ed evitare lockout, e piu efficace se la userlist viene da enumeration precedente (SMB, SNMP) invece di essere generica.
+**Spiegazione:** SSH tollera pochi tentativi al secondo prima di rallentare/bloccare (fail2ban è comune); `-t 4` limita i thread paralleli per non saturare la connessione ed evitare lockout, è più efficace se la userlist viene da enumeration precedente (SMB, SNMP) invece di essere generica.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — SSH fingerprint & brute force
+### Lab 1: INE PTS, SSH fingerprint & brute force
 **Obiettivo:** identificare versione OpenSSH esatta e tentare accesso con una userlist raccolta da altri servizi
 **Difficulty:** Facile
 **Time:** 30 min
@@ -115,8 +115,3 @@ hydra -L users.txt -P /usr/share/wordlists/rockyou.txt ssh://10.10.10.5 -t 4
 - [ ] Conosco il concetto di user enumeration via timing (CVE-2018-15473)
 - [ ] So impostare un brute force mirato e limitato con hydra
 
----
-
-## Note personali
-
-_(spazio libero)_

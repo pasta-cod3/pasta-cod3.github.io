@@ -3,13 +3,13 @@
 **Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [../00-Fundamentals/02-Networking-Basics.md](../00-Fundamentals/02-Networking-Basics.md)
-**Lab:** TryHackMe — Network Services / ARP Poisoning
+**Lab:** TryHackMe, Network Services / ARP Poisoning
 
 ---
 
 ## Obiettivo
 
-Capire come un attaccante sulla stessa LAN può posizionarsi come man-in-the-middle tra due host avvelenando la cache ARP, per poi intercettare o manipolare il traffico. È la base per gli attacchi di sniffing e Responder trattati nei file successivi.
+ARP non è mai stato pensato per un mondo ostile: chiunque sulla stessa LAN può affermare "sono io quell'IP" e nessuno glielo chiede due volte. Qui vedi come un attaccante sfrutta esattamente questa fiducia cieca per posizionarsi come man-in-the-middle tra due host, avvelenando la cache ARP di entrambi per poi intercettare o manipolare il loro traffico. È la base su cui si appoggiano sniffing e Responder nei prossimi file: senza questa posizione privilegiata, quelle tecniche non hanno niente da intercettare.
 
 ---
 
@@ -95,13 +95,13 @@ sudo bettercap -iface eth0
 
 ## Evasion / Bypass Techniques
 
-Non è un attacco da "evadere" verso il target, ma da nascondere alla rete: limitare il rate degli ARP reply e usare `arp.spoof.fullduplex` con parsimonia riduce le anomalie rilevabili da IDS/arpwatch. In ambito d'esame/lab autorizzato la stealth non è prioritaria.
+Qui non stai evadendo il target, stai cercando di non farti notare dalla rete stessa: limitare il rate degli ARP reply e usare `arp.spoof.fullduplex` con parsimonia riduce le anomalie rilevabili da IDS/arpwatch. In un lab o in esame la stealth quasi mai ti serve davvero, ma vale la pena sapere che esiste per quando conterà.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Network Services / MITM basics
+### Lab 1: TryHackMe, Network Services / MITM basics
 **Obiettivo:** eseguire ARP poisoning tra due macchine lab e osservare il traffico intercettato
 **Difficulty:** Media
 **Time:** 45 min
@@ -124,8 +124,8 @@ Non è un attacco da "evadere" verso il target, ma da nascondere alla rete: limi
 
 ## Link Utili
 
-- [Ettercap — documentazione ufficiale](https://www.ettercap-project.org/)
-- [Bettercap — documentazione ufficiale](https://www.bettercap.org/)
+- [Ettercap: documentazione ufficiale](https://www.ettercap-project.org/)
+- [Bettercap: documentazione ufficiale](https://www.bettercap.org/)
 
 ---
 
@@ -144,8 +144,3 @@ Non è un attacco da "evadere" verso il target, ma da nascondere alla rete: limi
 - [ ] So usare bettercap per un MITM rapido
 - [ ] Conosco i limiti dell'attacco (stessa LAN, traffico cifrato)
 
----
-
-## Note personali
-
-_(spazio libero)_

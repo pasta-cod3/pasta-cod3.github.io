@@ -1,15 +1,15 @@
 # Encoding Bypasses (SQLi)
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2h
 **Prerequisiti:** [05-Time-Based-Blind.md](05-Time-Based-Blind.md)
-**Lab:** PortSwigger Academy — WAF bypass labs
+**Lab:** PortSwigger Academy: WAF bypass labs
 
 ---
 
 ## Obiettivo
 
-Raccolta di tecniche per bypassare filtri/WAF che bloccano quote, keyword SQL, o pattern noti di injection. Sezione "cheatsheet puro" da consultare durante l'esame.
+Prima o poi un WAF o un filtro applicativo ti blocca proprio l'apice o la keyword `UNION` che stavi per usare. Questa pagina è la lista di contromisure pronte per quel momento, da scorrere in ordine finché una non passa: niente teoria, solo quello che serve durante l'esame quando il tempo stringe.
 
 ---
 
@@ -90,7 +90,7 @@ Nessun tool dedicato: lista di payload da provare manualmente o via Burp Intrude
 
 ## Evasion / Bypass Techniques
 
-Questo intero file e la sezione evasion. In aggiunta, per sqlmap: usa gli script `--tamper` predefiniti (es. `space2comment`, `charencode`, `between`) invece di reinventare la ruota manualmente quando automatizzi.
+Questo intero file è la sezione evasion. In aggiunta, per sqlmap: usa gli script `--tamper` predefiniti (es. `space2comment`, `charencode`, `between`) invece di reinventare la ruota manualmente quando automatizzi.
 
 ```bash
 sqlmap -u "http://target.com/item?id=1" --tamper=space2comment,charencode --batch
@@ -100,7 +100,7 @@ sqlmap -u "http://target.com/item?id=1" --tamper=space2comment,charencode --batc
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — SQL injection with filter bypass via XML encoding
+### Lab 1: PortSwigger: SQL injection with filter bypass via XML encoding
 **Obiettivo:** bypassare un filtro applicativo su input SQLi
 **Difficulty:** Difficile
 **Time:** 45 min
@@ -122,7 +122,7 @@ sqlmap -u "http://target.com/item?id=1" --tamper=space2comment,charencode --batc
 ## Link Utili
 
 - [sqlmap tamper scripts](https://github.com/sqlmapproject/sqlmap/tree/master/tamper)
-- [PayloadsAllTheThings — WAF bypass](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection)
+- [PayloadsAllTheThings: WAF bypass](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection)
 
 ---
 
@@ -139,8 +139,3 @@ sqlmap -u "http://target.com/item?id=1" --tamper=space2comment,charencode --batc
 - [ ] So usare hex/CHAR() encoding per evitare stringhe letterali
 - [ ] So configurare tamper script in sqlmap
 
----
-
-## Note personali
-
-_(spazio libero)_

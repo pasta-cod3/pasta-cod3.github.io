@@ -1,6 +1,6 @@
-# Lab Challenges — Authentication & Authorization
+# Lab Challenges: Authentication & Authorization
 
-**Difficolta:** Intermediate-Advanced
+**Difficoltà:** Intermediate-Advanced
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,22 +9,22 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare session management, CSRF, IDOR, credential attacks e JWT.
+Qui è dove le tecniche viste nella sezione smettono di essere singoli trucchi isolati e iniziano a combinarsi: esercizi pratici per consolidare session management, CSRF, IDOR, credential attacks e JWT, con l'obiettivo di arrivare a un impatto concreto, non solo a una prova di concetto.
 
 ---
 
-## Challenge 1 — Account takeover completo
+## Challenge 1: Account takeover completo
 
 **Task:**
 1. Trova un endpoint IDOR che espone dati di un altro utente
 2. Verifica se lo stesso endpoint permette anche la SCRITTURA (cambio email/password)
-3. Se si, esegui un account takeover completo cambiando le credenziali di un altro utente
+3. Se sì, esegui un account takeover completo cambiando le credenziali di un altro utente
 
 **Deliverable:** documentazione step-by-step con impatto dimostrato.
 
 ---
 
-## Challenge 2 — JWT privilege escalation
+## Challenge 2: JWT privilege escalation
 
 **Task:**
 1. Ottieni un JWT come utente normale
@@ -33,7 +33,7 @@ Esercizi pratici per consolidare session management, CSRF, IDOR, credential atta
 
 ---
 
-## Challenge 3 — CSRF su azione critica
+## Challenge 3: CSRF su azione critica
 
 **Task:**
 1. Trova un'azione sensibile (cambio password/email) senza protezione CSRF adeguata
@@ -44,8 +44,8 @@ Esercizi pratici per consolidare session management, CSRF, IDOR, credential atta
 
 ## Common Mistakes
 
-- Considerare IDOR e CSRF come vulnerabilita "minori" -> spesso portano ad account takeover completo, massimo impatto per eWPT
-- Non concatenare le vulnerabilita -> IDOR + CSRF + JWT deboli spesso si combinano per un impatto molto maggiore della singola falla
+- Considerare IDOR e CSRF come vulnerabilità "minori" -> spesso portano ad account takeover completo, massimo impatto per eWPT
+- Non concatenare le vulnerabilità -> IDOR + CSRF + JWT deboli si combinano spesso per un impatto molto maggiore della singola falla, e un report che le mostra insieme vale più di tre segnalazioni isolate
 
 ---
 
@@ -63,8 +63,3 @@ Esercizi pratici per consolidare session management, CSRF, IDOR, credential atta
 - [ ] Ho costruito un PoC CSRF funzionante
 - [ ] Sono pronto a passare a Business Logic
 
----
-
-## Note personali
-
-_(spazio libero)_

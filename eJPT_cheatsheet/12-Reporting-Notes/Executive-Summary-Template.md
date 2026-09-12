@@ -1,6 +1,6 @@
 # Executive Summary Template
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1h
 **Prerequisiti:** nessuno
 **Lab:** riferimento trasversale
@@ -9,15 +9,15 @@
 
 ## Obiettivo
 
-Template compilabile per un report di penetration test, dalla executive summary alle raccomandazioni finali. Usalo come base per i report che scrivi durante i lab di pratica.
+Il primo report che scrivi fa sempre un po' paura: hai tutte le note del lab sparse ovunque e non sai da dove iniziare a metterle in forma. Questo è un template compilabile, dalla executive summary alle raccomandazioni finali, pensato apposta per quel momento: prendilo come base, riempi le parentesi quadre con i tuoi dati reali e hai già la struttura di un report professionale.
 
 ---
 
 ## 1. Executive Summary
 
-[Nome cliente/lab] ha incaricato [nome tester] di condurre un penetration test su [scope: rete interna / host specifici / applicazione web] tra il [data inizio] e il [data fine]. L'obiettivo era identificare vulnerabilita sfruttabili e valutarne l'impatto reale sulla sicurezza dell'ambiente.
+[Nome cliente/lab] ha incaricato [nome tester] di condurre un penetration test su [scope: rete interna / host specifici / applicazione web] tra il [data inizio] e il [data fine]. L'obiettivo era identificare vulnerabilità sfruttabili e valutarne l'impatto reale sulla sicurezza dell'ambiente.
 
-Sono state identificate **[N] vulnerabilita totali**: [N] Critical, [N] High, [N] Medium, [N] Low. La vulnerabilita piu significativa e stata [titolo finding piu grave], che ha permesso [accesso ottenuto: es. shell come SYSTEM/root su host X].
+Sono state identificate **[N] vulnerabilità totali**: [N] Critical, [N] High, [N] Medium, [N] Low. La vulnerabilità più significativa è stata [titolo finding più grave], che ha permesso [accesso ottenuto: es. shell come SYSTEM/root su host X].
 
 ---
 
@@ -37,13 +37,13 @@ Sono state identificate **[N] vulnerabilita totali**: [N] Critical, [N] High, [N
 
 Il test ha seguito le fasi standard di un penetration test:
 
-1. Information Gathering — raccolta passiva/attiva di informazioni sul target
-2. Footprinting & Scanning — mappatura host, porte, servizi
-3. Enumeration — identificazione versioni, share, utenti, configurazioni
-4. Vulnerability Assessment — correlazione servizi/versioni con CVE noti
-5. Exploitation — sfruttamento controllato delle vulnerabilita identificate
-6. Post-Exploitation — privilege escalation, pivoting, verifica impatto reale
-7. Reporting — documentazione di findings e raccomandazioni
+1. Information Gathering: raccolta passiva/attiva di informazioni sul target
+2. Footprinting & Scanning: mappatura host, porte, servizi
+3. Enumeration: identificazione versioni, share, utenti, configurazioni
+4. Vulnerability Assessment: correlazione servizi/versioni con CVE noti
+5. Exploitation: sfruttamento controllato delle vulnerabilità identificate
+6. Post-Exploitation: privilege escalation, pivoting, verifica impatto reale
+7. Reporting: documentazione di findings e raccomandazioni
 
 ---
 
@@ -61,9 +61,9 @@ Per ogni finding, in una sezione dedicata sotto, includi: **Descrizione**, **Imp
 
 ## 5. Raccomandazioni
 
-- [Priorita immediata] [es. Applicare patch MS17-010 / disabilitare SMBv1]
-- [Priorita breve termine] [es. Rafforzare policy password, disabilitare LLMNR/NBT-NS]
-- [Priorita medio termine] [es. Segmentazione di rete, hardening configurazioni]
+- [Priorità immediata] [es. Applicare patch MS17-010 / disabilitare SMBv1]
+- [Priorità breve termine] [es. Rafforzare policy password, disabilitare LLMNR/NBT-NS]
+- [Priorità medio termine] [es. Segmentazione di rete, hardening configurazioni]
 
 ---
 
@@ -77,8 +77,3 @@ Il test ha dimostrato che [sintesi rischio complessivo: es. "un attaccante con a
 
 - **Combinazione con:** [12-Reporting-Notes/Report-Writing-Tips.md](Report-Writing-Tips.md), [04-Vulnerability-Assessment/03-CVE-CVSS-Scoring.md](../04-Vulnerability-Assessment/03-CVE-CVSS-Scoring.md)
 
----
-
-## Note personali
-
-_(spazio libero)_

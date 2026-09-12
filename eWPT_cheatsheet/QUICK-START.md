@@ -1,4 +1,4 @@
-# Quick Start — Flusso Rapido (30 min)
+# Quick Start: Flusso Rapido (30 min)
 
 **Obiettivo:** avere un primo giro veloce su un target web sconosciuto, il flusso mentale che userai in ogni engagement/lab eWPT.
 
@@ -6,13 +6,13 @@
 
 ## Prerequisiti
 
-- [ ] Burp Suite configurato (vedi [Burp-Suite-Setup](00-Fundamentals/Burp-Suite-Setup.md))
+- [ ] Burp Suite configurato (vedi [Burp Suite Setup](00-Fundamentals/Burp-Suite-Setup.md))
 - [ ] VPN lab connessa, target raggiungibile (`ping`/`curl`)
 - [ ] Terminale con nmap, gobuster/ffuf, whatweb, sqlmap installati
 
 ---
 
-## Fase 1 — Recon passivo (5 min)
+## Fase 1: Recon passivo (5 min)
 
 ```bash
 whois target.com
@@ -25,7 +25,7 @@ Riferimento: [01-Reconnaissance/01-Footprinting.md](01-Reconnaissance/01-Footpri
 
 ---
 
-## Fase 2 — Scanning attivo (10 min)
+## Fase 2: Scanning attivo (10 min)
 
 ```bash
 # Tutte le porte, veloce
@@ -39,7 +39,7 @@ Riferimento: [02-Scanning-Enumeration/01-Port-Scanning.md](02-Scanning-Enumerati
 
 ---
 
-## Fase 3 — Web enumeration (10 min)
+## Fase 3: Web enumeration (10 min)
 
 ```bash
 whatweb -a 3 http://target.com
@@ -50,7 +50,7 @@ Riferimento: [02-Scanning-Enumeration/03-Web-Enumeration.md](02-Scanning-Enumera
 
 ---
 
-## Fase 4 — Test manuale nei punti caldi (5 min)
+## Fase 4: Test manuale nei punti caldi (5 min)
 
 Passa ogni parametro visibile (query string, form, header, cookie) attraverso Burp Proxy/Repeater e prova rapidamente:
 

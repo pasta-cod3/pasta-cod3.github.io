@@ -1,6 +1,6 @@
-# Lab Challenges — File Inclusion
+# Lab Challenges: File Inclusion
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare la chain completa LFI/RFI -> RCE.
+Hai visto la teoria file per file: ora la rimetti insieme da solo. Questi esercizi ti fanno ripercorrere l'intera chain LFI/RFI -> RCE senza qualcuno che ti guida passo passo come nelle pagine precedenti.
 
 ---
 
-## Challenge 1 — LFI to RCE completa
+## Challenge 1: LFI to RCE completa
 
 **Task:**
 1. Trova un parametro vulnerabile a LFI
@@ -25,7 +25,7 @@ Esercizi pratici per consolidare la chain completa LFI/RFI -> RCE.
 
 ---
 
-## Challenge 2 — Bypass filtro progressivo
+## Challenge 2: Bypass filtro progressivo
 
 **Task:**
 1. Su un lab con filtro attivo, identifica il tipo di controllo
@@ -36,7 +36,7 @@ Esercizi pratici per consolidare la chain completa LFI/RFI -> RCE.
 
 ## Common Mistakes
 
-- Fermarsi alla sola lettura file senza tentare l'escalation a RCE -> in eWPT la chain completa e spesso richiesta
+- Fermarsi alla sola lettura file senza tentare l'escalation a RCE -> in eWPT la chain completa è spesso richiesta
 - Non verificare i permessi del processo web prima di dare per scontato che un file non sia accessibile
 
 ---
@@ -54,8 +54,3 @@ Esercizi pratici per consolidare la chain completa LFI/RFI -> RCE.
 - [ ] So applicare sistematicamente le tecniche di evasion
 - [ ] Sono pronto a passare a SQL Injection
 
----
-
-## Note personali
-
-_(spazio libero)_

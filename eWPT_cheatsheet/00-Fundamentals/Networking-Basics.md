@@ -1,15 +1,15 @@
 # Networking Basics
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 3h
 **Prerequisiti:** nessuno
-**Lab:** TryHackMe — Network Fundamentals
+**Lab:** TryHackMe, Network Fundamentals
 
 ---
 
 ## Obiettivo
 
-Rinfrescare i concetti di rete indispensabili prima di attaccare applicazioni web: modello OSI/TCP-IP, socket, three-way handshake, e come leggere un `nmap`/`tcpdump` senza pensarci troppo. In eWPT il layer di rete e solo un mezzo per arrivare al layer 7 (HTTP), ma se non lo capisci ti perdi nella lettura degli scan.
+In eWPT il livello di rete è quasi sempre solo un mezzo per arrivare al layer 7 (HTTP): non ti serve diventare un esperto di routing, ma se non hai chiari OSI/TCP-IP, socket e three-way handshake finisci per leggere l'output di `nmap` o `tcpdump` senza capire davvero cosa significhi "filtered" invece di "closed" — e quella differenza, più avanti, ti costa tempo o ti fa saltare un servizio importante.
 
 ---
 
@@ -35,7 +35,7 @@ Client <- SYN/ACK  <- Server
 Client -> ACK      -> Server
 ```
 
-Un port scanner "SYN scan" (`nmap -sS`) manda solo il primo pacchetto e non completa l'handshake: piu veloce, meno rumoroso nei log applicativi (ma comunque loggato a livello firewall).
+Un port scanner "SYN scan" (`nmap -sS`, detto anche *half-open scan*) manda il SYN iniziale e, se riceve SYN/ACK, invia un RST invece dell'ACK finale: la connessione TCP non viene mai completata, quindi è più veloce e spesso non arriva a livello applicativo (resta comunque visibile nei log di firewall/IDS).
 
 ### Porte comuni per web pentesting
 
@@ -52,7 +52,7 @@ Un port scanner "SYN scan" (`nmap -sS`) manda solo il primo pacchetto e non comp
 
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
-| ping | `ping -c 4 target` | RTT, host up/down | ICMP puo essere filtrato |
+| ping | `ping -c 4 target` | RTT, host up/down | ICMP può essere filtrato |
 | traceroute | `traceroute target` | hop di rete | utile per capire load balancer/WAF davanti |
 | netstat/ss | `ss -tulpn` | socket locali in ascolto | lato tuo host, non del target |
 | tcpdump | `tcpdump -i eth0 port 80` | cattura pacchetti | debug proxy/VPN lab |
@@ -61,7 +61,7 @@ Un port scanner "SYN scan" (`nmap -sS`) manda solo il primo pacchetto e non comp
 
 ## Payload / Esempi
 
-### Esempio 1: verificare raggiungibilita e capire se c'e un proxy davanti
+### Esempio 1: verificare raggiungibilità e capire se c'è un proxy davanti
 
 ```bash
 ping -c 2 target.com
@@ -75,13 +75,13 @@ HTTP/1.1 200 OK
 Server: nginx/1.18.0
 ```
 
-**Spiegazione:** l'header `Server` da un primo indizio tecnologico; se manca o e generico ("cloudflare") probabilmente c'e un reverse proxy/CDN davanti al target reale.
+**Spiegazione:** l'header `Server` dà un primo indizio tecnologico; se manca o è generico ("cloudflare") probabilmente c'è un reverse proxy/CDN davanti al target reale.
 
 ---
 
 ## Evasion / Bypass Techniques
 
-Nota: a livello di rete pura in eWPT non serve evasion avanzata (niente IDS evasion stile OSCP). Ricorda solo che `nmap -sS` e piu silenzioso di `-sT`, e che ICMP bloccato non vuol dire host down (`-Pn`).
+Nota: a livello di rete pura in eWPT non serve evasion avanzata (niente IDS evasion stile OSCP). Ricorda solo che `nmap -sS` è più silenzioso di `-sT`, e che ICMP bloccato non vuol dire host down (`-Pn`).
 
 ---
 
@@ -127,8 +127,3 @@ Nota: a livello di rete pura in eWPT non serve evasion avanzata (niente IDS evas
 - [ ] So leggere un three-way handshake in Wireshark
 - [ ] Ho collegato le porte comuni ai servizi web
 
----
-
-## Note personali
-
-_(spazio libero)_

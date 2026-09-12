@@ -1,15 +1,15 @@
 # XSS Fundamentals
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [00-Fundamentals/HTTP-HTTPS-Deep-Dive.md](../00-Fundamentals/HTTP-HTTPS-Deep-Dive.md)
-**Lab:** PortSwigger Academy — XSS
+**Lab:** PortSwigger Academy, XSS
 
 ---
 
 ## Obiettivo
 
-Capire come e dove l'input utente finisce nel DOM/HTML senza sanitizzazione, permettendo l'esecuzione di JavaScript arbitrario nel browser della vittima. Base per reflected/stored/DOM XSS trattate nei file successivi.
+La domanda da farti prima di qualsiasi payload non è "che script uso" ma "dove finisce esattamente il mio input nella pagina": in un tag HTML, in un attributo, dentro uno script inline? Da quella risposta discende tutto il resto. Qui vedi come riconoscere i punti dove l'input utente arriva nel DOM/HTML senza sanitizzazione, permettendo l'esecuzione di JavaScript arbitrario nel browser della vittima — la base su cui si appoggiano reflected, stored e DOM XSS, trattate nei file successivi.
 
 ---
 
@@ -53,7 +53,7 @@ Capire come e dove l'input utente finisce nel DOM/HTML senza sanitizzazione, per
 <svg onload=alert(1)>
 ```
 
-**Spiegazione:** se il popup di alert appare, l'input e riflesso senza sanitizzazione in un contesto HTML eseguibile; se non appare, controlla il sorgente della pagina (view-source) per capire come e stato filtrato/escaped l'input.
+**Spiegazione:** se il popup di alert appare, l'input è riflesso senza sanitizzazione in un contesto HTML eseguibile; se non appare, controlla il sorgente della pagina (view-source) per capire come è stato filtrato/escaped l'input.
 
 ### Esempio 2: identificare il contesto esatto guardando il sorgente
 
@@ -67,13 +67,13 @@ curl "http://target.com/search?q=UNIQUESTRING123" | grep -A2 -B2 "UNIQUESTRING12
 
 ## Evasion / Bypass Techniques
 
-Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per la lista completa di bypass; qui solo il concetto: se `<script>` e filtrato, prova tag/handler alternativi come `<img onerror=>`, `<svg onload=>`.
+Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per la lista completa di bypass; qui solo il concetto: se `<script>` è filtrato, prova tag/handler alternativi come `<img onerror=>`, `<svg onload=>`.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Reflected XSS into HTML context with nothing encoded
+### Lab 1: PortSwigger, Reflected XSS into HTML context with nothing encoded
 **Obiettivo:** confermare XSS riflessa base
 **Difficulty:** Facile
 **Time:** 15 min
@@ -87,14 +87,14 @@ Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per la lista completa di bypass; qui
 
 ## Common Mistakes
 
-- Provare solo `<script>` -> molti filtri lo bloccano per primo, ma lasciano passare `<img onerror=>` o `<svg onload=>`
-- Non guardare il sorgente HTML della risposta -> capire il contesto esatto risparmia decine di tentativi a caso
+- Provare solo `<script>` -> è il primo tag che ogni filtro blocca, ma quasi sempre lasciano passare `<img onerror=>` o `<svg onload=>`
+- Non guardare il sorgente HTML della risposta -> ti risparmia decine di tentativi a caso: il contesto esatto ti dice subito quale payload ha senso provare
 
 ---
 
 ## Link Utili
 
-- [PortSwigger Academy — XSS](https://portswigger.net/web-security/cross-site-scripting)
+- [PortSwigger Academy: XSS](https://portswigger.net/web-security/cross-site-scripting)
 - [OWASP XSS](https://owasp.org/www-community/attacks/xss/)
 
 ---
@@ -112,8 +112,3 @@ Vedi [06-WAF-Evasion.md](06-WAF-Evasion.md) per la lista completa di bypass; qui
 - [ ] So identificare il contesto di injection dal sorgente HTML
 - [ ] So costruire payload di conferma base
 
----
-
-## Note personali
-
-_(spazio libero)_

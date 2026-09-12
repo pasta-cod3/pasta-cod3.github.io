@@ -1,15 +1,15 @@
 # Windows Fundamentals
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [03-Linux-Fundamentals.md](03-Linux-Fundamentals.md)
-**Lab:** INE PTS — Windows Fundamentals
+**Lab:** INE PTS, Windows Fundamentals
 
 ---
 
 ## Obiettivo
 
-Capire i concetti Windows/Active Directory essenziali: la maggior parte degli host in un lab eJPTv2 e Windows, e senza queste basi enumeration e privilege escalation restano incomprensibili.
+Se vieni dal mondo Linux, preparati a un cambio di paradigma: qui non ci sono `/etc/passwd` e permessi ottali, ma SAM, LSASS e una gerarchia di gruppi che decide chi controlla cosa. La maggior parte degli host che incontri in un lab eJPTv2 è Windows, spesso agganciato a un dominio Active Directory, e senza questi concetti di base l'enumeration e la privilege escalation restano una sequenza di comandi che copi senza capire cosa stai davvero guardando.
 
 ---
 
@@ -24,7 +24,7 @@ Capire i concetti Windows/Active Directory essenziali: la maggior parte degli ho
 | Gruppo locale importante | Administrators, Users, Remote Desktop Users | controlla i privilegi locali |
 | Gruppo di dominio importante | Domain Admins, Enterprise Admins | controllo totale sul dominio se compromesso |
 
-### Active Directory — concetti base
+### Active Directory: concetti base
 
 | Concetto | Significato |
 |----------|-------------|
@@ -56,8 +56,8 @@ Capire i concetti Windows/Active Directory essenziali: la maggior parte degli ho
 
 ### Registry essenziale
 
-- `HKLM\SYSTEM`, `HKLM\SAM` — configurazione di sistema e account (accesso ristretto)
-- `HKCU\...\Run` — chiavi di autorun tipiche per persistenza
+- `HKLM\SYSTEM`, `HKLM\SAM`: configurazione di sistema e account (accesso ristretto)
+- `HKCU\...\Run`: chiavi di autorun tipiche per persistenza
 - Accesso da riga di comando: `reg query HKLM\Software\...`
 
 ---
@@ -67,7 +67,7 @@ Capire i concetti Windows/Active Directory essenziali: la maggior parte degli ho
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
 | net.exe | `net user`, `net localgroup administrators` | utenti/gruppi locali | disponibile su ogni Windows |
-| PowerShell | `Get-LocalUser`, `whoami /priv` | info dettagliate utente/privilegi | piu potente di cmd, spesso monitorato |
+| PowerShell | `Get-LocalUser`, `whoami /priv` | info dettagliate utente/privilegi | più potente di cmd, spesso monitorato |
 | wmic (legacy) | `wmic qfe list` | patch/hotfix installati | deprecato nelle build recenti ma ancora comune |
 | whoami | `whoami /all` | utente, gruppi, privilegi correnti | primo comando dopo ogni shell ottenuta |
 
@@ -84,7 +84,7 @@ Get-LocalGroupMember Administrators
 systeminfo
 ```
 
-**Spiegazione:** i primi comandi da lanciare dopo aver ottenuto accesso: chi sono, che privilegi ho, chi altro c'e sulla macchina, che versione/patch level ha il sistema (utile per cercare exploit di privesc noti).
+**Spiegazione:** i primi comandi da lanciare dopo aver ottenuto accesso: chi sono, che privilegi ho, chi altro c'è sulla macchina, che versione/patch level ha il sistema (utile per cercare exploit di privesc noti).
 
 ### Esempio 2: verificare i privilegi correnti per privesc
 
@@ -101,21 +101,21 @@ Privilege Name               Description                    State
 SeImpersonatePrivilege       Impersonate a client...         Enabled
 ```
 
-**Spiegazione:** `SeImpersonatePrivilege` abilitato e il prerequisito classico per tecniche di privesc come i "potato exploit" (vedi [08-Exploitation-PostEx/03-Privilege-Escalation-Windows.md](../08-Exploitation-PostEx/03-Privilege-Escalation-Windows.md)).
+**Spiegazione:** `SeImpersonatePrivilege` abilitato è il prerequisito classico per tecniche di privesc come i "potato exploit" (vedi [08-Exploitation-PostEx/03-Privilege-Escalation-Windows.md](../08-Exploitation-PostEx/03-Privilege-Escalation-Windows.md)).
 
 ---
 
 ## Common Mistakes
 
-- Confondere un utente locale amministratore con "Domain Admin" — privilegi completamente diversi
-- Ignorare `whoami /priv` — molte privesc Windows dipendono da privilegi specifici abilitati, non solo dal gruppo
-- Dimenticare che PowerShell puo essere loggato/monitorato (AMSI, transcript) — rilevante per capire perche un payload "funziona in lab ma non in produzione"
+- Confondere un utente locale amministratore con "Domain Admin": privilegi completamente diversi
+- Ignorare `whoami /priv`: molte privesc Windows dipendono da privilegi specifici abilitati, non solo dal gruppo
+- Dimenticare che PowerShell può essere loggato/monitorato (AMSI, transcript): rilevante per capire perché un payload "funziona in lab ma non in produzione"
 
 ---
 
 ## Link Utili
 
-- [Microsoft Docs — Active Directory Domain Services](https://learn.microsoft.com/windows-server/identity/ad-ds/active-directory-domain-services)
+- [Microsoft Docs: Active Directory Domain Services](https://learn.microsoft.com/windows-server/identity/ad-ds/active-directory-domain-services)
 - [ADSecurity.org](https://adsecurity.org/)
 
 ---
@@ -135,8 +135,3 @@ SeImpersonatePrivilege       Impersonate a client...         Enabled
 - [ ] So enumerare utenti/gruppi/privilegi con cmd e PowerShell
 - [ ] Capisco cosa sono OU e GPO in Active Directory
 
----
-
-## Note personali
-
-_(spazio libero)_

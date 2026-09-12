@@ -2,3 +2,4 @@
 _site/
 .bundle/
 vendor/
+ignorare_questa_cartella_per_push_github/

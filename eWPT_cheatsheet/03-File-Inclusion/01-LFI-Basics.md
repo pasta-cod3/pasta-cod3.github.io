@@ -1,15 +1,15 @@
 # LFI Basics
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [02-Scanning-Enumeration/03-Web-Enumeration.md](../02-Scanning-Enumeration/03-Web-Enumeration.md)
-**Lab:** PortSwigger Academy — Path Traversal
+**Lab:** PortSwigger Academy (Path Traversal)
 
 ---
 
 ## Obiettivo
 
-Sfruttare parametri che caricano file lato server (`?page=`, `?file=`, `?template=`) per leggere file arbitrari sul filesystem: e spesso il primo passo verso RCE (vedi [Wrappers-PHP.md](Wrappers-PHP.md) e [LFI-Advanced.md](02-LFI-Advanced.md)).
+Il primo parametro `?page=` o `?file=` che incontri sembra innocuo: carica un pezzo di pagina diverso in base al valore che gli passi. Ma se quel valore non è sanitizzato, stai dicendo al server di aprire un file qualsiasi sul filesystem, non solo quelli previsti da chi ha scritto l'app. Qui vedi come riconoscere questi parametri e leggere file arbitrari; è spesso solo il primo passo di una chain che finisce in RCE (vedi [04-Wrappers-PHP.md](04-Wrappers-PHP.md) e [LFI-Advanced.md](02-LFI-Advanced.md)), quindi capire bene questo meccanismo di base ti torna utile molto più avanti.
 
 ---
 
@@ -17,7 +17,7 @@ Sfruttare parametri che caricano file lato server (`?page=`, `?file=`, `?templat
 
 ### Dove cercare LFI
 
-Qualsiasi parametro che sembra riferirsi a un file/path e candidato:
+Qualsiasi parametro che sembra riferirsi a un file/path è candidato:
 ```
 ?page=about.php
 ?file=report.pdf
@@ -31,7 +31,7 @@ Qualsiasi parametro che sembra riferirsi a un file/path e candidato:
 ```
 ../  ->  sale di una directory
 ```
-Ripetuto piu volte porta alla root del filesystem, da cui si naviga verso file noti come `/etc/passwd`.
+Ripetuto abbastanza volte ti porta alla radice del filesystem: da lì il resto è navigare verso file che sai essere lì, come `/etc/passwd`.
 
 ---
 
@@ -40,8 +40,8 @@ Ripetuto piu volte porta alla root del filesystem, da cui si naviga verso file n
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
 | curl | `curl "URL?page=../../../etc/passwd"` | contenuto file | manuale, sempre parti da qui |
-| Burp Intruder | payload list di traversal | risposte comparabili | utile per trovare profondita corretta |
-| ffuf | fuzzing profondita traversal | risposte comparabili | automatizza il tentativo di piu `../` |
+| Burp Intruder | payload list di traversal | risposte comparabili | utile per trovare profondità corretta |
+| ffuf | fuzzing profondità traversal | risposte comparabili | automatizza il tentativo di più `../` |
 
 ---
 
@@ -66,9 +66,9 @@ root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 ```
 
-**Spiegazione:** il numero di `../` deve superare la profondita della directory corrente; se non sai la profondita esatta, ripeti la sequenza molte volte (i `../` in eccesso oltre la root vengono ignorati dal filesystem).
+**Spiegazione:** il numero di `../` deve superare la profondità della directory corrente; se non sai la profondita esatta, ripeti la sequenza molte volte (i `../` in eccesso oltre la root vengono ignorati dal filesystem).
 
-### Esempio 2: trovare la profondita corretta con Burp Intruder
+### Esempio 2: trovare la profondità corretta con Burp Intruder
 
 ```
 Payload position: ?page=§../§../../../etc/passwd
@@ -104,13 +104,13 @@ Payload list: 1,2,3,4,5,6,7,8,9,10 ripetizioni di "../"
 
 ### Bypass whitelist di estensione (append forzato)
 
-Se l'app forza `.php` alla fine del path, usare i wrapper (vedi [Wrappers-PHP.md](Wrappers-PHP.md)) o un null byte su sistemi vecchi.
+Se l'app forza `.php` alla fine del path, usare i wrapper (vedi [04-Wrappers-PHP.md](04-Wrappers-PHP.md)) o un null byte su sistemi vecchi.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — File path traversal, simple case
+### Lab 1: PortSwigger Academy (File path traversal, simple case)
 **Obiettivo:** leggere `/etc/passwd` tramite parametro vulnerabile
 **Difficulty:** Facile
 **Time:** 20 min
@@ -124,16 +124,16 @@ Se l'app forza `.php` alla fine del path, usare i wrapper (vedi [Wrappers-PHP.md
 
 ## Common Mistakes
 
-- Fermarsi al primo tentativo di `../../etc/passwd` senza variare la profondita -> prova sempre un range di ripetizioni
+- Fermarsi al primo tentativo di `../../etc/passwd` senza variare la profondità -> prova sempre un range di ripetizioni
 - Dimenticare l'encoding quando il traversal diretto viene filtrato -> molti WAF/filtri bloccano solo la stringa letterale `../`
-- Non pensare ai file Windows (`..\..\windows\win.ini`) se il target e IIS/ASP
+- Non pensare ai file Windows (`..\..\windows\win.ini`) se il target è IIS/ASP
 
 ---
 
 ## Link Utili
 
 - [OWASP Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal)
-- [PortSwigger Academy — Path Traversal](https://portswigger.net/web-security/file-path-traversal)
+- [PortSwigger Academy: Path Traversal](https://portswigger.net/web-security/file-path-traversal)
 
 ---
 
@@ -141,19 +141,14 @@ Se l'app forza `.php` alla fine del path, usare i wrapper (vedi [Wrappers-PHP.md
 
 - **Prerequisito:** [02-Scanning-Enumeration/03-Web-Enumeration.md](../02-Scanning-Enumeration/03-Web-Enumeration.md)
 - **Prossimo Step:** [02-LFI-Advanced.md](02-LFI-Advanced.md)
-- **Combinazione con:** [Wrappers-PHP.md](Wrappers-PHP.md)
+- **Combinazione con:** [04-Wrappers-PHP.md](04-Wrappers-PHP.md)
 
 ---
 
 ## Checklist di padronanza
 
 - [ ] So identificare parametri candidati a LFI
-- [ ] So costruire path traversal con profondita variabile
+- [ ] So costruire path traversal con profondità variabile
 - [ ] Conosco almeno 3 tecniche di encoding per bypassare filtri base
 - [ ] Ho letto con successo /etc/passwd su un lab
 
----
-
-## Note personali
-
-_(spazio libero)_

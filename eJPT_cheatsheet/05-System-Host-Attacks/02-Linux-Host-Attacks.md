@@ -1,15 +1,15 @@
 # Linux Host Attacks
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [../00-Fundamentals/03-Linux-Fundamentals.md](../00-Fundamentals/03-Linux-Fundamentals.md)
-**Lab:** INE PTS labs / TryHackMe — Vulnversity, HTB — Lame
+**Lab:** INE PTS labs / TryHackMe, Vulnversity, HTB, Lame
 
 ---
 
 ## Obiettivo
 
-Attaccare servizi e misconfigurazioni tipiche di un host Linux (SSH, servizi di rete datati, permessi errati) per ottenere un primo punto d'appoggio prima della post-exploitation.
+Lato Linux il gioco cambia poco nella logica ma cambia parecchio nei dettagli: qui attacchi servizi e misconfigurazioni tipiche di un host Linux (SSH, servizi di rete datati, permessi errati) per ottenere un primo punto d'appoggio prima della post-exploitation. Se hai già visto il lato Windows, riconoscerai lo schema — versione vecchia, exploit pubblico, credenziali deboli — solo che qui i sospetti abituali si chiamano vsftpd, Samba e cron invece di SMB e RDP.
 
 ---
 
@@ -24,15 +24,15 @@ Attaccare servizi e misconfigurazioni tipiche di un host Linux (SSH, servizi di 
 | Samba | 139/445 | versioni vulnerabili (es. CVE-2017-7494 "SambaCry") |
 | Servizi web | 80/443 | applicazioni datate con CVE pubblici |
 
-### Shellshock (CVE-2014-6271) — cenno storico
+### Shellshock (CVE-2014-6271): cenno storico
 
-Vulnerabilita in Bash che permetteva RCE tramite variabili d'ambiente malformate passate a script CGI (`() { :; }; comando`). Storicamente rilevante, ancora presente in alcuni lab didattici per insegnare il concetto di command injection tramite header HTTP.
+Vulnerabilità in Bash che permetteva RCE tramite variabili d'ambiente malformate passate a script CGI (`() {:; }; comando`). Difficilmente la trovi ancora in produzione, ma resta un ottimo esempio didattico di command injection tramite header HTTP, ed è per questo che sopravvive in alcuni lab.
 
 ### Misconfigurazioni comuni che aprono la porta all'accesso iniziale
 
 | Misconfigurazione | Rischio |
 |--------------------|---------|
-| Cron job world-writable | un utente non privilegiato puo modificare uno script eseguito da root/altro utente |
+| Cron job world-writable | un utente non privilegiato può modificare uno script eseguito da root/altro utente |
 | Sudo mal configurato | comandi eseguibili come root senza password o con binari sfruttabili (approfondito in post-exploitation) |
 | Chiavi SSH private esposte (backup, share) | accesso diretto senza bisogno di brute force |
 
@@ -79,13 +79,13 @@ chmod 600 id_rsa
 ssh -i id_rsa user@10.10.10.5
 ```
 
-**Spiegazione:** se una chiave privata viene trovata durante l'enumeration (es. in un backup su FTP/NFS/SMB), i permessi vanno ristretti (`600`) altrimenti SSH rifiuta di usarla; e spesso la via di accesso piu diretta, va sempre controllata prima del brute force.
+**Spiegazione:** se una chiave privata viene trovata durante l'enumeration (es. in un backup su FTP/NFS/SMB), i permessi vanno ristretti (`600`) altrimenti SSH rifiuta di usarla; e spesso la via di accesso più diretta, va sempre controllata prima del brute force.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Vulnversity (sezione servizi Linux)
+### Lab 1: TryHackMe, Vulnversity (sezione servizi Linux)
 **Obiettivo:** enumerare e sfruttare un servizio Linux vulnerabile per ottenere accesso iniziale
 **Difficulty:** Facile
 **Time:** 40 min
@@ -100,7 +100,7 @@ ssh -i id_rsa user@10.10.10.5
 ## Common Mistakes
 
 - Saltare l'enumerazione della versione esatta -> impossibile trovare l'exploit giusto con searchsploit
-- Non controllare permessi/chiavi trovate durante l'enumeration prima del brute force -> si perde tempo su un attacco piu lento quando esisteva gia un accesso diretto
+- Non controllare permessi/chiavi trovate durante l'enumeration prima del brute force -> si perde tempo su un attacco più lento quando esisteva già un accesso diretto
 - Brute force SSH aggressivo senza throttling -> falsi negativi per timeout o rate limiting del servizio
 
 ---
@@ -125,10 +125,5 @@ ssh -i id_rsa user@10.10.10.5
 - [ ] So identificare e sfruttare servizi Linux con exploit pubblici noti
 - [ ] So eseguire un brute force SSH mirato e controllato
 - [ ] So riconoscere e usare chiavi SSH trovate durante l'enumeration
-- [ ] Conosco a livello concettuale Shellshock e le misconfigurazioni cron/sudo piu comuni
+- [ ] Conosco a livello concettuale Shellshock e le misconfigurazioni cron/sudo più comuni
 
----
-
-## Note personali
-
-_(spazio libero)_

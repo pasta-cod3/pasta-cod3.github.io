@@ -3,13 +3,13 @@
 **Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** [../00-Fundamentals/02-Networking-Basics.md](../00-Fundamentals/02-Networking-Basics.md)
-**Lab:** INE PTS — Web module / DVWA
+**Lab:** INE PTS, Web module / DVWA
 
 ---
 
 ## Obiettivo
 
-Avere le basi HTTP necessarie prima di affrontare SQLi/XSS/LFI: metodi, status code, struttura di richiesta/risposta, cookie/sessioni. eJPTv2 tratta il web solo a livello introduttivo rispetto a eWPT, ma queste basi sono comunque richieste.
+Da qui in poi il target smette di essere "una macchina con delle porte aperte" e diventa un'applicazione web, e serve un vocabolario diverso per parlarne. Prima di affrontare SQLi/XSS/LFI ti servono le basi HTTP: metodi, status code, struttura di richiesta/risposta, cookie/sessioni. L'eJPTv2 tratta il web solo a livello introduttivo rispetto a eWPT, ma queste basi sono comunque richieste e valgono anche fuori esame, ogni volta che apri Burp.
 
 ---
 
@@ -106,7 +106,7 @@ curl -X POST -d "user=admin&pass=admin" http://target.com/login  # POST: dati ne
 
 ## Lab Hands-On
 
-### Lab 1: DVWA — osservazione richieste HTTP
+### Lab 1: DVWA, osservazione richieste HTTP
 **Obiettivo:** familiarizzare con request/response reali usando Burp/DevTools
 **Difficulty:** Facile
 **Time:** 20 min
@@ -127,7 +127,7 @@ curl -X POST -d "user=admin&pass=admin" http://target.com/login  # POST: dati ne
 
 ## Link Utili
 
-- [MDN — HTTP overview](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+- [MDN: HTTP overview](https://developer.mozilla.org/en-US/docs/Web/HTTP)
 
 ---
 
@@ -145,8 +145,3 @@ curl -X POST -d "user=admin&pass=admin" http://target.com/login  # POST: dati ne
 - [ ] So leggere status code comuni
 - [ ] Capisco come funzionano cookie/sessioni e i flag di sicurezza principali
 
----
-
-## Note personali
-
-_(spazio libero)_

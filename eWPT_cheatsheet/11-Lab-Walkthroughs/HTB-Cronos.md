@@ -1,14 +1,14 @@
-# HTB — Cronos (Walkthrough Notes)
+# HTB: Cronos (Walkthrough Notes)
 
 **Difficulty:** Medium
 **Time to root (stimato):** 2h
-**Vulnerability:** DNS zone transfer -> vhost enumeration -> SQL Injection -> RCE via webshell -> cron job privesc
+**Vulnerability:** DNS zone transfer -> vhost enumeration -> SQL Injection -> RCE via OS Command Injection -> cron job privesc
 
 ---
 
 ## Obiettivo
 
-Macchina Linux che copre l'intera catena di metodologia eWPT: DNS recon, virtual host discovery, SQL injection per bypass autenticazione, upload webshell, e privilege escalation tramite cron job mal configurato.
+Cronos è quasi un riassunto in scala ridotta di tutta la metodologia eWPT, ed è per questo che vale la pena rifarla più di una volta: parti da un DNS zone transfer che quasi nessuno controlla per abitudine, scopri vhost nascosti che l'enumerazione HTTP diretta non avrebbe mai rivelato, bypassi un login con SQLi, ed esci con un privesc via cron job — la stessa distrazione di configurazione che vedrai ricorrere in molte macchine reali.
 
 ---
 
@@ -18,7 +18,7 @@ Macchina Linux che copre l'intera catena di metodologia eWPT: DNS recon, virtual
 ```bash
 dig axfr target.com @target.com
 ```
-Un DNS zone transfer riuscito rivela subdomain/vhost non altrimenti scopribili — vedi [01-Reconnaissance/01-Footprinting.md](../01-Reconnaissance/01-Footprinting.md).
+Un DNS zone transfer riuscito rivela subdomain/vhost non altrimenti scopribili: vedi [01-Reconnaissance/01-Footprinting.md](../01-Reconnaissance/01-Footprinting.md).
 
 ### 2. Virtual host discovery
 Aggiungi i vhost trovati a `/etc/hosts` e ripeti l'enumerazione web su ciascuno, seguendo [02-Scanning-Enumeration/04-Virtual-Host-Enum.md](../02-Scanning-Enumeration/04-Virtual-Host-Enum.md).
@@ -30,9 +30,13 @@ Testa il form di login con i payload base di [04-SQL-Injection/01-SQLi-Fundament
 ```
 Se il bypass funziona, sei dentro un pannello amministrativo.
 
-### 4. RCE via funzionalita admin (upload/edit file)
+### 4. RCE via command injection su un tool di rete del pannello admin
 
-Molti pannelli admin di questo tipo offrono una funzionalita di editing/upload file direttamente sfruttabile per caricare una webshell — vedi [08-Exploitation-PostEx/01-File-Upload-Abuse.md](../08-Exploitation-PostEx/01-File-Upload-Abuse.md).
+Molti pannelli admin di questo tipo espongono una funzionalità "di rete" (es. ping/traceroute) che passa l'input utente non sanitizzato a una chiamata di sistema (`system()`/`exec()`): un classico caso di OS Command Injection, non di file upload. Vedi [08-Exploitation-PostEx/02-RCE-Techniques.md](../08-Exploitation-PostEx/02-RCE-Techniques.md):
+```
+127.0.0.1; id
+127.0.0.1 && id
+```
 
 ### 5. Privilege escalation via cron job
 
@@ -40,24 +44,19 @@ Molti pannelli admin di questo tipo offrono una funzionalita di editing/upload f
 cat /etc/crontab
 ls -la /var/www/*/  # cerca script eseguiti periodicamente e scrivibili dall'utente corrente
 ```
-Se uno script eseguito da cron come root e scrivibile dal tuo utente, modificalo per ottenere una reverse shell privilegiata.
+Se uno script eseguito da cron come root è scrivibile dal tuo utente, modificalo per ottenere una reverse shell privilegiata.
 
 ---
 
 ## Key Lessons
 
-- Il DNS zone transfer, quando riuscito, e una delle scoperte piu preziose e sottovalutate della recon passiva
-- La stessa vulnerabilita (SQLi) puo servire sia per bypass auth sia, in altri contesti, per estrazione dati — adatta l'obiettivo al contesto
+- Il DNS zone transfer, quando riuscito, è una delle scoperte più preziose e sottovalutate della recon passiva
+- La stessa vulnerabilità (SQLi) può servire sia per bypass auth sia, in altri contesti, per estrazione dati: adatta l'obiettivo al contesto
 - I cron job che eseguono script scrivibili da utenti a basso privilegio sono un vettore di privesc estremamente comune
 
 ---
 
 ## Connessioni
 
-- **Combinazione con:** [01-Reconnaissance/01-Footprinting.md](../01-Reconnaissance/01-Footprinting.md), [04-SQL-Injection/01-SQLi-Fundamentals.md](../04-SQL-Injection/01-SQLi-Fundamentals.md), [08-Exploitation-PostEx/05-Privilege-Escalation.md](../08-Exploitation-PostEx/05-Privilege-Escalation.md)
+- **Combinazione con:** [01-Reconnaissance/01-Footprinting.md](../01-Reconnaissance/01-Footprinting.md), [04-SQL-Injection/01-SQLi-Fundamentals.md](../04-SQL-Injection/01-SQLi-Fundamentals.md), [08-Exploitation-PostEx/02-RCE-Techniques.md](../08-Exploitation-PostEx/02-RCE-Techniques.md), [08-Exploitation-PostEx/05-Privilege-Escalation.md](../08-Exploitation-PostEx/05-Privilege-Escalation.md)
 
----
-
-## Note personali
-
-_(annota qui i tuoi comandi esatti e le differenze rispetto a queste note generiche)_

@@ -1,15 +1,15 @@
 # Evasion Filters (File Inclusion)
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 1.5h
 **Prerequisiti:** [04-Wrappers-PHP.md](04-Wrappers-PHP.md)
-**Lab:** PortSwigger Academy — Path traversal, various defenses
+**Lab:** PortSwigger Academy (Path traversal, various defenses)
 
 ---
 
 ## Obiettivo
 
-Raccogliere in un unico posto tutte le tecniche di bypass filtro per LFI/RFI: e la sezione "cheatsheet puro" da consultare rapidamente durante l'esame quando un filtro blocca il traversal diretto.
+Prima o poi il traversal diretto ti si spegne in faccia: un filtro toglie `../`, blocca la parola "etc", o forza un'estensione finale. Questa pagina è il tuo riferimento per quel momento: tutte le tecniche di bypass raccolte in un unico posto, da provare in ordine quando sei sotto esame e non hai tempo di improvvisare da zero.
 
 ---
 
@@ -28,7 +28,7 @@ Raccogliere in un unico posto tutte le tecniche di bypass filtro per LFI/RFI: e 
 
 ## Strumenti
 
-Nessun tool dedicato: questa sezione e una lista di payload da provare in sequenza con Burp Repeater/Intruder.
+Nessun tool dedicato: questa sezione è una lista di payload da provare in sequenza con Burp Repeater/Intruder.
 
 ---
 
@@ -74,16 +74,16 @@ Se l'app forza un prefisso tipo `pages/` + input:
 
 ## Evasion / Bypass Techniques
 
-Questo intero file E la sezione evasion — vedi Payload/Esempi sopra per la lista completa.
+Questo intero file è la sezione evasion: vedi Payload/Esempi sopra per la lista completa.
 
-**Regola pratica:** prova sempre in quest'ordine — traversal diretto, poi doppio encoding, poi wrapper (se disponibili), poi combinazioni case/backslash.
+**Regola pratica:** prova sempre in quest'ordine: traversal diretto, poi doppio encoding, poi wrapper (se disponibili), poi combinazioni case/backslash.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — path traversal con vari controlli difensivi
-**Obiettivo:** applicare la lista di bypass su lab con filtri progressivamente piu stretti
+### Lab 1: PortSwigger Academy (path traversal con vari controlli difensivi)
+**Obiettivo:** applicare la lista di bypass su lab con filtri progressivamente più stretti
 **Difficulty:** Difficile
 **Time:** 1h
 
@@ -103,15 +103,15 @@ Questo intero file E la sezione evasion — vedi Payload/Esempi sopra per la lis
 
 ## Link Utili
 
-- [PayloadsAllTheThings — Directory Traversal](https://github.com/swisskyrepo/PayloadsAllTheThings)
-- [PortSwigger Academy — Path traversal defenses](https://portswigger.net/web-security/file-path-traversal)
+- [PayloadsAllTheThings: Directory Traversal](https://github.com/swisskyrepo/PayloadsAllTheThings)
+- [PortSwigger Academy: Path traversal defenses](https://portswigger.net/web-security/file-path-traversal)
 
 ---
 
 ## Connessioni
 
 - **Prerequisito:** [04-Wrappers-PHP.md](04-Wrappers-PHP.md)
-- **Prossimo Step:** [Lab-Challenges.md](Lab-Challenges.md)
+- **Prossimo Step:** [06-SSRF-Basics.md](06-SSRF-Basics.md)
 - **Combinazione con:** [01-LFI-Basics.md](01-LFI-Basics.md)
 
 ---
@@ -122,8 +122,3 @@ Questo intero file E la sezione evasion — vedi Payload/Esempi sopra per la lis
 - [ ] So riconoscere il tipo di filtro dal comportamento della risposta
 - [ ] Ho un ordine sistematico di tentativi (non a caso)
 
----
-
-## Note personali
-
-_(spazio libero)_

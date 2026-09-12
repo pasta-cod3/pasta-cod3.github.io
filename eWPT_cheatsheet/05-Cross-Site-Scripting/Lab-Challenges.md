@@ -1,6 +1,6 @@
-# Lab Challenges — Cross-Site Scripting
+# Lab Challenges: Cross-Site Scripting
 
-**Difficolta:** Intermediate-Advanced
+**Difficoltà:** Intermediate-Advanced
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare tutte le varianti di XSS viste nella sezione.
+Leggere le tecniche è un conto, ritrovarle senza indicazioni su un target vero è un altro: questi esercizi servono a consolidare tutte le varianti di XSS viste nella sezione, dal PoC minimo fino a un impatto che reggerebbe in un report reale.
 
 ---
 
-## Challenge 1 — Le tre varianti sullo stesso target
+## Challenge 1: Le tre varianti sullo stesso target
 
 **Task:**
 1. Trova ed exploita una reflected XSS
@@ -24,18 +24,18 @@ Esercizi pratici per consolidare tutte le varianti di XSS viste nella sezione.
 
 ---
 
-## Challenge 2 — Da alert() a impatto reale
+## Challenge 2: Da alert() a impatto reale
 
 **Task:**
-1. Su una stored XSS gia confermata, trasforma il PoC `alert(1)` in furto cookie funzionante
-2. Se il cookie e HttpOnly, costruisci invece un'azione privilegiata eseguita per conto della vittima
+1. Su una stored XSS già confermata, trasforma il PoC `alert(1)` in furto cookie funzionante
+2. Se il cookie è HttpOnly, costruisci invece un'azione privilegiata eseguita per conto della vittima
 
 ---
 
 ## Common Mistakes
 
 - Fermarsi ad `alert(1)` senza dimostrare impatto reale -> in un report professionale serve sempre la prova di impatto concreto
-- Non provare DOM XSS perche "piu difficile" -> spesso e la piu sottovalutata e quindi la piu presente in ambienti reali
+- Non provare DOM XSS perché "più difficile" -> è proprio per questo che resta la più sottovalutata, e quindi la più presente in ambienti reali
 
 ---
 
@@ -52,8 +52,3 @@ Esercizi pratici per consolidare tutte le varianti di XSS viste nella sezione.
 - [ ] Ho dimostrato impatto reale oltre al semplice alert()
 - [ ] Sono pronto a passare ad Authentication & Authorization
 
----
-
-## Note personali
-
-_(spazio libero)_

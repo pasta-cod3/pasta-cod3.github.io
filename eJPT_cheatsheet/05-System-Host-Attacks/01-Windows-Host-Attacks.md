@@ -1,15 +1,15 @@
 # Windows Host Attacks
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2.5h
 **Prerequisiti:** [../00-Fundamentals/04-Windows-Fundamentals.md](../00-Fundamentals/04-Windows-Fundamentals.md), [../04-Vulnerability-Assessment/03-CVE-CVSS-Scoring.md](../04-Vulnerability-Assessment/03-CVE-CVSS-Scoring.md)
-**Lab:** INE PTS labs / TryHackMe — Blue, HTB — Legacy
+**Lab:** INE PTS labs / TryHackMe, Blue, HTB, Legacy
 
 ---
 
 ## Obiettivo
 
-Attaccare servizi tipici di un host Windows (RDP, SMB, servizi di rete) usando vulnerabilita note e attacchi a credenziali, come primo punto d'appoggio prima di passare a Metasploit ed exploitation vera e propria.
+Hai fatto il vulnerability assessment, hai una lista di CVE in mano: ora è il momento di trasformarla in accesso reale. Qui attacchi i servizi tipici di un host Windows (RDP, SMB, servizi di rete) usando vulnerabilità note e attacchi a credenziali — il primo punto d'appoggio prima di passare a Metasploit e all'exploitation vera e propria. Sono gli attacchi più "affidabili" del blueprint eJPT: poche sorprese, tanta ripetizione, e proprio per questo vale la pena farli bene.
 
 ---
 
@@ -26,11 +26,11 @@ Attaccare servizi tipici di un host Windows (RDP, SMB, servizi di rete) usando v
 
 ### MS17-010 (EternalBlue) come case study
 
-Vulnerabilita nel protocollo SMBv1 di Windows (CVE-2017-0143/0144/0145/0146/0147/0148) che permette RCE non autenticata. Colpisce sistemi Windows non patchati (tipicamente Windows 7/Server 2008 in lab). E uno degli esempi piu comuni nei lab entry-level per la sua affidabilita e semplicita di sfruttamento tramite Metasploit.
+Vulnerabilità nel protocollo SMBv1 di Windows (CVE-2017-0143/0144/0145/0146/0147/0148) che permette RCE non autenticata. Colpisce sistemi Windows non patchati (tipicamente Windows 7/Server 2008 in lab). Se in un lab eJPT trovi SMBv1 aperto e la macchina è vecchia, la prima cosa che ti passa per la testa dovrebbe essere questa CVE: è uno degli esempi più comuni nei lab entry-level per la sua affidabilità e semplicità di sfruttamento tramite Metasploit.
 
 ### BlueKeep (CVE-2019-0708)
 
-Vulnerabilita RCE nel Remote Desktop Protocol (RDP) su Windows datati (7/Server 2008 R2) prima dell'autenticazione. Concettualmente simile a MS17-010 ma sul servizio RDP; da conoscere per l'esame anche solo a livello teorico.
+Vulnerabilità RCE nel Remote Desktop Protocol (RDP) su Windows datati (7/Server 2008 R2) prima dell'autenticazione. Concettualmente simile a MS17-010 ma sul servizio RDP; da conoscere per l'esame anche solo a livello teorico.
 
 ---
 
@@ -38,9 +38,9 @@ Vulnerabilita RCE nel Remote Desktop Protocol (RDP) su Windows datati (7/Server 
 
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
-| nmap NSE | `nmap --script smb-vuln-ms17-010 -p 445 target` | conferma vulnerabilita | vedi [../04-Vulnerability-Assessment/02-Nmap-NSE-Scripts.md](../04-Vulnerability-Assessment/02-Nmap-NSE-Scripts.md) |
+| nmap NSE | `nmap --script smb-vuln-ms17-010 -p 445 target` | conferma vulnerabilità | vedi [../04-Vulnerability-Assessment/02-Nmap-NSE-Scripts.md](../04-Vulnerability-Assessment/02-Nmap-NSE-Scripts.md) |
 | hydra | `hydra -L users.txt -P pass.txt rdp://target` | credenziali valide | brute force RDP, vedi [03-Password-Attacks-Hydra-John-Hashcat.md](03-Password-Attacks-Hydra-John-Hashcat.md) |
-| crackmapexec/netexec | `nxc smb target -u users.txt -p pass.txt` | spray credenziali su SMB | ottimo per password spraying su piu host |
+| crackmapexec/netexec | `nxc smb target -u users.txt -p pass.txt` | spray credenziali su SMB | ottimo per password spraying su più host |
 | psexec.py (Impacket) | `psexec.py user:pass@target` | shell system-level | richiede credenziali admin valide |
 
 ---
@@ -61,16 +61,16 @@ msfconsole -q -x "use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS 10.10
 [*] Meterpreter session 1 opened
 ```
 
-**Spiegazione:** prima si conferma la vulnerabilita con NSE, poi si usa il modulo Metasploit dedicato (vedi [../07-Metasploit-Framework/03-Exploit-Modules.md](../07-Metasploit-Framework/03-Exploit-Modules.md)) per ottenere una sessione meterpreter SYSTEM.
+**Spiegazione:** prima si conferma la vulnerabilità con NSE, poi si usa il modulo Metasploit dedicato (vedi [../07-Metasploit-Framework/03-Exploit-Modules.md](../07-Metasploit-Framework/03-Exploit-Modules.md)) per ottenere una sessione meterpreter SYSTEM.
 
-### Esempio 2: accesso con credenziali gia note (credential reuse)
+### Esempio 2: accesso con credenziali già note (credential reuse)
 
 ```bash
 crackmapexec smb 10.10.10.0/24 -u admin -p 'Password123!'
 psexec.py admin:'Password123!'@10.10.10.5
 ```
 
-**Spiegazione:** se una password e stata trovata (es. in uno share SMB, vedi [../03-Enumeration/01-SMB-NetBIOS-Enumeration.md](../03-Enumeration/01-SMB-NetBIOS-Enumeration.md)), si verifica il riuso su tutta la rete prima di provare exploit piu complessi — spesso e la via piu rapida in un lab eJPT.
+**Spiegazione:** se una password e stata trovata (es. in uno share SMB, vedi [../03-Enumeration/01-SMB-NetBIOS-Enumeration.md](../03-Enumeration/01-SMB-NetBIOS-Enumeration.md)), si verifica il riuso su tutta la rete prima di provare exploit più complessi: spesso e la via più rapida in un lab eJPT.
 
 ### Esempio 3: brute force RDP mirato
 
@@ -89,19 +89,19 @@ hydra -l administrator -P /usr/share/wordlists/rockyou.txt rdp://10.10.10.5 -t 4
 
 ## Evasion / Bypass Techniques
 
-Su host con account lockout policy attiva, il brute force puo bloccare l'utente target: preferire **password spraying** (poche password comuni su molti utenti) rispetto al brute force classico (molte password su un utente) per restare sotto la soglia di lockout.
+Su host con account lockout policy attiva, il brute force classico può bloccarti l'utente target prima ancora di trovare la password giusta — un modo pessimo per finire un lab. Preferisci il **password spraying** (poche password comuni su molti utenti) al brute force classico (molte password su un utente): resti sotto la soglia di lockout e spesso trovi comunque qualcosa.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Blue
+### Lab 1: TryHackMe, Blue
 **Obiettivo:** sfruttare MS17-010 su una macchina Windows 7 di lab
 **Difficulty:** Facile
 **Time:** 45 min
 
 **Walkthrough breve:**
-1. Scansiona e conferma la vulnerabilita SMB con NSE
+1. Scansiona e conferma la vulnerabilità SMB con NSE
 2. Usa il modulo Metasploit ms17_010_eternalblue per ottenere shell
 3. Da meterpreter, esegui `getuid` per confermare i privilegi ottenuti
 
@@ -109,16 +109,16 @@ Su host con account lockout policy attiva, il brute force puo bloccare l'utente 
 
 ## Common Mistakes
 
-- Provare l'exploit senza aver confermato la vulnerabilita -> spreco di tempo su target non vulnerabili
+- Provare l'exploit senza aver confermato la vulnerabilità -> spreco di tempo su target non vulnerabili
 - Brute force RDP con wordlist enormi senza throttling -> lockout dell'account o rilevazione da parte di sistemi di difesa
-- Dimenticare di provare credenziali gia trovate su TUTTI i servizi Windows (SMB/RDP/WinRM) -> credential reuse e molto comune nei lab
+- Dimenticare di provare credenziali già trovate su TUTTI i servizi Windows (SMB/RDP/WinRM) -> credential reuse e molto comune nei lab
 
 ---
 
 ## Link Utili
 
-- [MS17-010 advisory — Microsoft](https://learn.microsoft.com/en-us/security-updates/securitybulletins/2017/ms17-010)
-- [Impacket toolkit — GitHub](https://github.com/fortra/impacket)
+- [MS17-010 advisory: Microsoft](https://learn.microsoft.com/en-us/security-updates/securitybulletins/2017/ms17-010)
+- [Impacket toolkit: GitHub](https://github.com/fortra/impacket)
 
 ---
 
@@ -137,8 +137,3 @@ Su host con account lockout policy attiva, il brute force puo bloccare l'utente 
 - [ ] So eseguire un brute force RDP mirato senza causare lockout
 - [ ] Conosco a livello concettuale BlueKeep
 
----
-
-## Note personali
-
-_(spazio libero)_

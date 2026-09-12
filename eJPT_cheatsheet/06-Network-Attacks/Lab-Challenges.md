@@ -1,6 +1,6 @@
-# Lab Challenges — Network Attacks
+# Lab Challenges: Network Attacks
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare MITM, sniffing e poisoning su una rete lab prima di passare a Metasploit ed exploitation.
+MITM, sniffing e Responder funzionano meglio in sequenza che da soli: qui li metti in fila su una rete lab vera, dalla posizione di man-in-the-middle fino a una credenziale o un hash in mano, prima di passare a Metasploit ed exploitation.
 
 ---
 
-## Challenge 1 — MITM completo con estrazione credenziali
+## Challenge 1: MITM completo con estrazione credenziali
 
 **Target:** due macchine lab su una LAN condivisa (es. TryHackMe network o VM locali)
 
@@ -27,7 +27,7 @@ Esercizi pratici per consolidare MITM, sniffing e poisoning su una rete lab prim
 
 ---
 
-## Challenge 2 — Cattura e cracking hash NTLMv2
+## Challenge 2: Cattura e cracking hash NTLMv2
 
 **Task:**
 1. Avvia Responder sulla rete lab
@@ -41,14 +41,14 @@ Esercizi pratici per consolidare MITM, sniffing e poisoning su una rete lab prim
 
 ## Common Mistakes
 
-- Saltare direttamente a Responder senza aver verificato la connettivita di rete di base -> perdi tempo a debuggare un setup, non l'attacco
-- Non documentare i passaggi in tempo reale -> difficile ricostruire la catena per il report finale
+- Saltare direttamente a Responder senza aver verificato la connettività di rete di base -> finisci a debuggare un setup, non a portare avanti l'attacco
+- Non documentare i passaggi in tempo reale -> a fine giornata non ricostruisci più la catena per il report finale
 
 ---
 
 ## Link Utili
 
-- [TryHackMe — Network Services rooms](https://tryhackme.com/)
+- [TryHackMe: Network Services rooms](https://tryhackme.com/)
 
 ---
 
@@ -65,8 +65,3 @@ Esercizi pratici per consolidare MITM, sniffing e poisoning su una rete lab prim
 - [ ] So spiegare l'intera catena MITM -> sniffing -> Responder a qualcun altro
 - [ ] Sono pronto a passare a Metasploit Framework
 
----
-
-## Note personali
-
-_(spazio libero)_

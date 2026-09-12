@@ -1,15 +1,15 @@
 # DNS Attacks
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [../01-Information-Gathering/01-Passive-Recon-OSINT.md](../01-Information-Gathering/01-Passive-Recon-OSINT.md)
-**Lab:** TryHackMe — DNS in Detail
+**Lab:** TryHackMe, DNS in Detail
 
 ---
 
 ## Obiettivo
 
-Capire i principali vettori di attacco legati al DNS: spoofing/cache poisoning locale, zone transfer come fuga di informazioni, e subdomain takeover. Completa il quadro degli attacchi network-level insieme a MITM e Responder.
+Chiudi il quadro degli attacchi di rete con il DNS, il servizio che tutti danno per scontato finché non è mal configurato. Qui vedi i principali vettori: spoofing/cache poisoning locale (che ti serve solo se sei già in MITM), zone transfer come fuga clamorosa di informazioni quando un server DNS è troppo permissivo, e subdomain takeover, dove basta un CNAME dimenticato per prendersi un pezzo del dominio della vittima.
 
 ---
 
@@ -22,11 +22,11 @@ Capire i principali vettori di attacco legati al DNS: spoofing/cache poisoning l
 
 ### Zone transfer come vettore
 
-Un DNS server mal configurato che permette `AXFR` a chiunque rivela l'intera zona (tutti i sottodomini, IP interni, record MX/TXT) — gia trattato lato enumerazione in [../03-Enumeration/07-SMTP-DNS-Enumeration.md](../03-Enumeration/07-SMTP-DNS-Enumeration.md), qui lo inquadriamo come vettore di attacco/ricognizione avanzata.
+Un DNS server mal configurato che permette `AXFR` a chiunque rivela l'intera zona (tutti i sottodomini, IP interni, record MX/TXT): già trattato lato enumerazione in [../03-Enumeration/07-SMTP-DNS-Enumeration.md](../03-Enumeration/07-SMTP-DNS-Enumeration.md), qui lo inquadriamo come vettore di attacco/ricognizione avanzata.
 
 ### Subdomain takeover (cenno)
 
-Se un record CNAME punta a un servizio esterno (es. `blog.target.com -> qualcosa.herokuapp.com`) e quel servizio non e piu registrato, un attaccante puo registrarlo e servire contenuto arbitrario sotto il dominio della vittima.
+Capita più spesso di quanto pensi: se un record CNAME punta a un servizio esterno (es. `blog.target.com -> qualcosa.herokuapp.com`) e quel servizio non è più registrato, chiunque può registrarlo al posto della vittima e servire contenuto arbitrario sotto un dominio che sembra legittimo — un sottodominio dimenticato dopo la fine di un progetto è il candidato tipico.
 
 ---
 
@@ -55,7 +55,7 @@ target.com A 10.10.10.100
 sudo ettercap -T -q -i eth0 -P dns_spoof -M arp:remote /10.10.10.5// /10.10.10.1//
 ```
 
-**Spiegazione:** una volta in MITM, ogni richiesta DNS della vittima per `target.com` riceve come risposta l'IP scelto dall'attaccante invece di quello reale — utile per reindirizzare la vittima verso una pagina di phishing/cattura credenziali.
+**Spiegazione:** una volta in MITM, ogni richiesta DNS della vittima per `target.com` riceve come risposta l'IP scelto dall'attaccante invece di quello reale: utile per reindirizzare la vittima verso una pagina di phishing/cattura credenziali.
 
 ### Esempio 2: verifica manuale di zone transfer
 
@@ -85,7 +85,7 @@ curl -sI https://qualcosa.herokuapp.com
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — DNS in Detail
+### Lab 1: TryHackMe, DNS in Detail
 **Obiettivo:** enumerare record DNS e verificare zone transfer su un dominio lab
 **Difficulty:** Facile
 **Time:** 30 min
@@ -99,15 +99,15 @@ curl -sI https://qualcosa.herokuapp.com
 
 ## Common Mistakes
 
-- Confondere zone transfer negato (comune, ben configurato) con vulnerabilita reale -> non tutti i DNS server sono attaccabili
-- Fare DNS spoofing senza essere gia in posizione MITM -> il pacchetto falso arriva sempre dopo quello legittimo e viene ignorato
+- Confondere zone transfer negato (comune, ben configurato) con vulnerabilità reale -> non tutti i DNS server sono attaccabili
+- Fare DNS spoofing senza essere già in posizione MITM -> il pacchetto falso arriva sempre dopo quello legittimo e viene ignorato
 - Ignorare i record TXT (SPF/DKIM) che spesso rivelano provider terzi in uso
 
 ---
 
 ## Link Utili
 
-- [RFC 5936 — DNS Zone Transfer (AXFR)](https://www.rfc-editor.org/rfc/rfc5936)
+- [RFC 5936: DNS Zone Transfer (AXFR)](https://www.rfc-editor.org/rfc/rfc5936)
 
 ---
 
@@ -124,10 +124,5 @@ curl -sI https://qualcosa.herokuapp.com
 - [ ] So spiegare la differenza tra DNS spoofing locale e cache poisoning
 - [ ] So verificare se un DNS server permette zone transfer
 - [ ] So riconoscere un candidato a subdomain takeover
-- [ ] So combinare DNS spoofing con una posizione MITM gia ottenuta
+- [ ] So combinare DNS spoofing con una posizione MITM già ottenuta
 
----
-
-## Note personali
-
-_(spazio libero)_

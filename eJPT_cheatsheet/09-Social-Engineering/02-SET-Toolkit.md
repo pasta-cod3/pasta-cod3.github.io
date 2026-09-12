@@ -1,15 +1,15 @@
 # Social-Engineer Toolkit (SET)
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1h
 **Prerequisiti:** [01-Phishing-Basics.md](01-Phishing-Basics.md)
-**Lab:** INE PTS — Social Engineering module (simulazione controllata)
+**Lab:** INE PTS, Social Engineering module (simulazione controllata)
 
 ---
 
 ## Obiettivo
 
-Conoscere l'uso base di SET, il framework open-source per simulare attacchi di social engineering (credential harvester, payload email) dentro un ambiente di lab isolato. eJPTv2 richiede di sapere cosa fa SET e come si naviga il menu, non necessariamente di lanciarlo contro infrastrutture reali.
+Una volta capito cosa rende efficace un'email di phishing, il passo successivo naturale è vedere lo strumento che lo automatizza: SET. Qui impari a navigare il suo menu (tutto numerato, niente da temere) per arrivare a un credential harvester funzionante dentro un ambiente di lab isolato. L'eJPTv2 richiede di sapere cosa fa SET e come ci si arriva dentro il menu, non di lanciarlo contro infrastrutture reali.
 
 ---
 
@@ -69,7 +69,7 @@ set> 1
 set> 2
 ```
 
-**Spiegazione:** SET e interamente guidato da menu numerati; ogni scelta apre un sottomenu piu specifico. Per l'esame eJPTv2 basta sapere identificare quale sequenza di menu porta a un credential harvester.
+**Spiegazione:** SET e interamente guidato da menu numerati; ogni scelta apre un sottomenu più specifico. Per l'esame eJPTv2 basta sapere identificare quale sequenza di menu porta a un credential harvester.
 
 ### Esempio 2: credential harvester su pagina clonata (lab isolato)
 
@@ -97,13 +97,13 @@ Press {return} to continue.
 
 ## Evasion / Bypass Techniques
 
-Non applicabile in senso offensivo: l'unico "bypass" rilevante e la somiglianza visiva della pagina clonata con l'originale, che e gia il vettore principale dell'attacco.
+Non applicabile in senso offensivo: l'unico "bypass" rilevante è la somiglianza visiva della pagina clonata con l'originale, che è già il vettore principale dell'attacco.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — SET credential harvester su webapp di lab
+### Lab 1: INE PTS, SET credential harvester su webapp di lab
 **Obiettivo:** clonare una pagina di login interna e catturare credenziali di test
 **Difficulty:** Facile
 **Time:** 30 min
@@ -142,10 +142,5 @@ Non applicabile in senso offensivo: l'unico "bypass" rilevante e la somiglianza 
 
 - [ ] So navigare il menu di SET fino al credential harvester
 - [ ] Capisco dove SET salva le credenziali catturate
-- [ ] So perche va usato solo in lab isolato/scope autorizzato
+- [ ] So perché va usato solo in lab isolato/scope autorizzato
 
----
-
-## Note personali
-
-_(spazio libero)_

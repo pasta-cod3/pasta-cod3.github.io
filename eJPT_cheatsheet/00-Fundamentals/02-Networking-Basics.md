@@ -3,13 +3,13 @@
 **Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [01-Cybersecurity-Concepts.md](01-Cybersecurity-Concepts.md)
-**Lab:** INE PTS — Networking Fundamentals
+**Lab:** INE PTS, Networking Fundamentals
 
 ---
 
 ## Obiettivo
 
-Avere basi di networking solide: senza capire OSI/TCP-IP, porte, subnetting e ARP, ogni fase successiva (scanning, enumeration, exploitation di rete) diventa un elenco di comandi mandati a memoria senza comprensione.
+Qui non c'è niente di offensivo in senso stretto, ma è la base su cui poggia tutto il resto: se non capisci davvero OSI/TCP-IP, porte, subnetting e ARP, ogni fase successiva (scanning, enumeration, exploitation di rete) diventa un elenco di comandi lanciati a memoria, dove non sai spiegare perché uno SYN scan è "half-open" o perché un host non risponde al ping. Investi tempo qui: si ripaga da solo appena inizi a interpretare l'output di nmap invece di limitarti a leggerlo.
 
 ---
 
@@ -44,7 +44,7 @@ Server -> Client: SYN-ACK
 Client -> Server: ACK
 ```
 
-Questo è alla base di come funziona uno scan TCP connect (`-sT`) e uno SYN scan (`-sS`, che si ferma dopo il SYN-ACK senza completare la connessione — "half-open").
+Questo è alla base di come funziona uno scan TCP connect (`-sT`) e uno SYN scan (`-sS`, che si ferma dopo il SYN-ACK senza completare la connessione: "half-open").
 
 ### Subnetting / CIDR essenziale
 
@@ -130,7 +130,7 @@ sudo tcpdump -i eth0 tcp port 80 -nn
 curl http://10.10.10.5
 ```
 
-**Spiegazione:** vedrai i flag SYN, SYN-ACK, ACK nell'output di tcpdump — utile per capire davvero cosa fa uno scan TCP prima di lanciarlo alla cieca.
+**Spiegazione:** vedrai i flag SYN, SYN-ACK, ACK nell'output di tcpdump: utile per capire davvero cosa fa uno scan TCP prima di lanciarlo alla cieca.
 
 ---
 
@@ -138,14 +138,14 @@ curl http://10.10.10.5
 
 - Scansionare l'indirizzo di rete o broadcast come se fosse un host valido
 - Non capire perché UDP scan è lento/inaffidabile (nessuna risposta può significare "aperto" o "filtrato")
-- Assumere che ICMP bloccato significhi host down — molti host sono raggiungibili anche senza rispondere al ping
+- Assumere che ICMP bloccato significhi host down: molti host sono raggiungibili anche senza rispondere al ping
 
 ---
 
 ## Link Utili
 
-- [Subnetting practice — subnettingpractice.com](https://subnettingpractice.com/)
-- [IANA — porte registrate](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
+- [Subnetting practice: subnettingpractice.com](https://subnettingpractice.com/)
+- [IANA: porte registrate](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
 
 ---
 
@@ -164,8 +164,3 @@ curl http://10.10.10.5
 - [ ] Conosco a memoria le porte comuni della tabella sopra
 - [ ] So la differenza pratica tra TCP e UDP durante uno scan
 
----
-
-## Note personali
-
-_(spazio libero)_

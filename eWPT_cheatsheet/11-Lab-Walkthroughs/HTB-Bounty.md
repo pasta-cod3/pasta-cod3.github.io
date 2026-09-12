@@ -1,4 +1,4 @@
-# HTB — Bounty (Walkthrough Notes)
+# HTB: Bounty (Walkthrough Notes)
 
 **Difficulty:** Easy
 **Time to root (stimato):** 1-1.5h
@@ -8,7 +8,7 @@
 
 ## Obiettivo
 
-Macchina Windows/IIS classica per esercitarsi sul bypass di un upload filter che blocca `.aspx` ma non estensioni alternative eseguibili da IIS, seguito da una privilege escalation locale nota.
+Bounty ti insegna una lezione che ti torna utile in ogni test di upload da qui in avanti: bloccare `.aspx` sembra sufficiente finché non scopri che IIS esegue tranquillamente anche altre estensioni a cui nessuno pensa. È una macchina Windows/IIS classica, breve ma diretta: bypassa il filtro, carica la webshell, poi trova il privilegio locale che ti porta a root.
 
 ---
 
@@ -24,7 +24,7 @@ Aspettati IIS (porta 80) come servizio principale.
 ```bash
 gobuster dir -u http://target.com -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -x aspx,asp,txt,config
 ```
-Cerca funzionalita di upload file (spesso un form "transfer.aspx" o simile).
+Cerca funzionalità di upload file (spesso un form "transfer.aspx" o simile).
 
 ### 3. Bypass upload filter
 Se `.aspx`/`.asp` sono bloccati, prova estensioni alternative eseguibili da IIS legacy come `.config` (vedi [08-Exploitation-PostEx/01-File-Upload-Abuse.md](../08-Exploitation-PostEx/01-File-Upload-Abuse.md)):
@@ -44,7 +44,7 @@ Enumera con WinPEAS/manualmente: privilegi di processo, servizi con permessi deb
 ## Key Lessons
 
 - Le blacklist di estensione IIS vanno testate sistematicamente con l'intera lista di [01-File-Upload-Abuse.md](../08-Exploitation-PostEx/01-File-Upload-Abuse.md)
-- `web.config` puo essere un vettore di RCE su IIS anche quando `.aspx` e bloccato
+- `web.config` può essere un vettore di RCE su IIS anche quando `.aspx` è bloccato
 - Verifica sempre i privilegi del token utente (`whoami /priv`) appena ottenuta esecuzione
 
 ---
@@ -53,8 +53,3 @@ Enumera con WinPEAS/manualmente: privilegi di processo, servizi con permessi deb
 
 - **Combinazione con:** [08-Exploitation-PostEx/01-File-Upload-Abuse.md](../08-Exploitation-PostEx/01-File-Upload-Abuse.md), [08-Exploitation-PostEx/05-Privilege-Escalation.md](../08-Exploitation-PostEx/05-Privilege-Escalation.md)
 
----
-
-## Note personali
-
-_(annota qui i tuoi comandi esatti e le differenze rispetto a queste note generiche)_

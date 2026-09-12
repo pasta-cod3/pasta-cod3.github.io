@@ -1,15 +1,15 @@
 # IDOR (Insecure Direct Object Reference)
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [03-CSRF-Attacks.md](03-CSRF-Attacks.md)
-**Lab:** PortSwigger Academy — Access control
+**Lab:** PortSwigger Academy, modulo Access control
 
 ---
 
 ## Obiettivo
 
-Identificare endpoint che espongono risorse tramite identificatori diretti (ID numerico, UUID, filename) senza verificare che l'utente autenticato abbia effettivamente diritto ad accedervi. E una delle vulnerabilita piu frequenti e piu redditizie in eWPT.
+Cambiare un numero nell'URL e vedere apparire il profilo di qualcun altro è probabilmente il momento più "questo non dovrebbe funzionare così" che proverai in tutto l'esame — ed è esattamente quello che serve per trovare un IDOR. Qui vedi come identificare endpoint che espongono risorse tramite identificatori diretti (ID numerico, UUID, filename) senza verificare che l'utente autenticato abbia effettivamente diritto ad accedervi: una delle vulnerabilità più frequenti e più redditizie in eWPT, perché richiede zero payload sofisticati.
 
 ---
 
@@ -19,10 +19,10 @@ Identificare endpoint che espongono risorse tramite identificatori diretti (ID n
 
 ```
 GET /api/user/123/profile   <- il tuo profilo, id=123
-GET /api/user/124/profile   <- prova a cambiare id: e il profilo di un altro utente?
+GET /api/user/124/profile   <- prova a cambiare id: è il profilo di un altro utente?
 ```
 
-Se la response restituisce dati dell'utente 124 senza errore di autorizzazione, e IDOR.
+Se la response restituisce dati dell'utente 124 senza errore di autorizzazione, è IDOR.
 
 ### Categorie
 
@@ -61,7 +61,7 @@ curl -b "session=TUO_COOKIE" "http://target.com/api/user/124/profile"
 GET /api/document/a1b2c3d4-e5f6-7890-abcd-ef1234567890/download
 ```
 
-**Spiegazione:** un ID "non indovinabile" (UUID) non e una protezione se l'ID stesso trapela altrove nell'applicazione (notifiche, log pubblici, risposte di altre API).
+**Spiegazione:** un ID "non indovinabile" (UUID) non è una protezione se l'ID stesso trapela altrove nell'applicazione (notifiche, log pubblici, risposte di altre API).
 
 ### Esempio 3: enumerazione massiva con Burp Intruder
 
@@ -72,7 +72,7 @@ Payload type: Numbers, range 1-1000
 
 **Spiegazione:** automatizza il controllo su centinaia di ID in sequenza, filtrando poi per status code 200 e dimensione response diversa dal "not found" standard.
 
-### Esempio 4: IDOR verticale — accesso a funzione admin cambiando solo il path
+### Esempio 4: IDOR verticale, accesso a funzione admin cambiando solo il path
 
 ```bash
 curl -b "session=TUO_COOKIE_UTENTE_NORMALE" "http://target.com/admin/users/delete?id=5"
@@ -86,7 +86,7 @@ curl -b "session=TUO_COOKIE_UTENTE_NORMALE" "http://target.com/admin/users/delet
 curl -b "session=TUO_COOKIE" -X PUT "http://target.com/api/user/124/email" -d "email=attacker@evil.com"
 ```
 
-**Spiegazione:** l'IDOR non riguarda solo la lettura: la scrittura/modifica di risorse altrui e spesso ancora piu grave (impatto: account takeover).
+**Spiegazione:** l'IDOR non riguarda solo la lettura: la scrittura/modifica di risorse altrui è spesso ancora più grave (impatto: account takeover).
 
 ---
 
@@ -106,7 +106,7 @@ curl -b "session=TUO_COOKIE" -X PUT "http://target.com/api/user/124/email" -d "e
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Insecure direct object references
+### Lab 1: PortSwigger, Insecure direct object references
 **Obiettivo:** accedere a dati/documenti di un altro utente
 **Difficulty:** Medio
 **Time:** 30 min
@@ -120,16 +120,16 @@ curl -b "session=TUO_COOKIE" -X PUT "http://target.com/api/user/124/email" -d "e
 
 ## Common Mistakes
 
-- Testare IDOR solo su GET -> testa sempre anche PUT/POST/DELETE, spesso meno controllati
-- Fermarsi al primo endpoint protetto -> un'app puo avere controlli incoerenti tra endpoint diversi, verificane sempre piu di uno
-- Non provare IDOR verticale (funzioni admin) -> spesso il controllo di ruolo manca del tutto lato server
+- Testare IDOR solo su GET -> testa sempre anche PUT/POST/DELETE, spesso meno controllati di quanto pensi
+- Fermarsi al primo endpoint protetto -> un'app può avere controlli incoerenti tra endpoint diversi, quindi verificane sempre più di uno prima di concludere che è tutto a posto
+- Non provare IDOR verticale (funzioni admin) -> spesso il controllo di ruolo manca del tutto lato server, non solo per quell'endpoint che hai già testato
 
 ---
 
 ## Link Utili
 
-- [OWASP — Insecure Direct Object References](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References)
-- [PortSwigger — Access control vulnerabilities](https://portswigger.net/web-security/access-control)
+- [OWASP: Insecure Direct Object References](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References)
+- [PortSwigger: Access control vulnerabilities](https://portswigger.net/web-security/access-control)
 
 ---
 
@@ -148,8 +148,3 @@ curl -b "session=TUO_COOKIE" -X PUT "http://target.com/api/user/124/email" -d "e
 - [ ] Testo sempre lettura E scrittura, non solo GET
 - [ ] So bypassare controlli 403 basati su path esatto
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,15 +1,15 @@
 # Virtual Host Enumeration
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [03-Web-Enumeration.md](03-Web-Enumeration.md)
-**Lab:** HTB — macchine multi-vhost
+**Lab:** HTB, macchine multi-vhost
 
 ---
 
 ## Obiettivo
 
-Scoprire subdomain e virtual host non risolvibili via DNS pubblico ma serviti dallo stesso server tramite header `Host`. Applicazioni "nascoste" (staging, admin, api) spesso vivono qui.
+Un solo IP può nascondere più applicazioni distinte, invisibili al DNS pubblico e raggiungibili solo se sai quale header `Host` chiedere. È qui che spesso si trovano gli ambienti "dimenticati" — staging, admin, api interne — che nessuno protegge quanto il sito principale perché "tanto non li trova nessuno".
 
 ---
 
@@ -17,7 +17,7 @@ Scoprire subdomain e virtual host non risolvibili via DNS pubblico ma serviti da
 
 ### Come funziona il virtual hosting
 
-Un singolo server IP puo ospitare piu siti distinti in base all'header `Host` della richiesta HTTP. Se conosci solo l'IP, provando `Host` diversi puoi scoprire applicazioni non linkate da nessuna parte pubblicamente.
+Un singolo server IP può ospitare più siti distinti in base all'header `Host` della richiesta HTTP. Se conosci solo l'IP, provando `Host` diversi puoi scoprire applicazioni non linkate da nessuna parte pubblicamente.
 
 ---
 
@@ -26,7 +26,7 @@ Un singolo server IP puo ospitare piu siti distinti in base all'header `Host` de
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
 | ffuf | `ffuf -w wordlist -H "Host: FUZZ.target.com" -u http://target.com` | vhost validi | filtra per size response |
-| gobuster vhost | `gobuster vhost -u http://target.com -w wordlist` | vhost validi | modalita dedicata |
+| gobuster vhost | `gobuster vhost -u http://target.com -w wordlist --append-domain` | vhost validi | modalità dedicata |
 | wfuzz | `wfuzz -w wordlist -H "Host: FUZZ.target.com" http://target.com` | vhost validi | alternativa a ffuf |
 
 ---
@@ -50,6 +50,8 @@ api                    [Status: 200, Size: 892]
 
 **Spiegazione:** `-fs 1234` esclude tutte le response di dimensione uguale a quella del vhost "non esistente" di default (misuralo prima con un host fittizio), isolando i vhost reali configurati.
 
+**Nota:** dalla v3.6 di gobuster, la modalità `vhost` richiede `--append-domain` per costruire l'header come `parola.target.com`; senza questo flag gobuster usa le parole della wordlist così come sono come Host completo (utile solo se la wordlist contiene già FQDN).
+
 ### Esempio 2: verifica manuale con curl
 
 ```bash
@@ -60,7 +62,7 @@ curl -H "Host: staging.target.com" http://target.com -v
 
 ## Evasion / Bypass Techniques
 
-Nota: aggiungi sempre il vhost trovato al file `/etc/hosts` locale per navigarlo normalmente (link relativi, redirect, cookie legati al dominio funzionano solo cosi):
+Nota: aggiungi sempre il vhost trovato al file `/etc/hosts` locale per navigarlo normalmente (link relativi, redirect, cookie legati al dominio funzionano solo così):
 
 ```bash
 echo "TARGET_IP staging.target.com" | sudo tee -a /etc/hosts
@@ -70,7 +72,7 @@ echo "TARGET_IP staging.target.com" | sudo tee -a /etc/hosts
 
 ## Lab Hands-On
 
-### Lab 1: HTB — macchina con vhost nascosto
+### Lab 1: HTB, macchina con vhost nascosto
 **Obiettivo:** scoprire un'applicazione admin/staging non linkata
 **Difficulty:** Medio
 **Time:** 45 min
@@ -91,7 +93,7 @@ echo "TARGET_IP staging.target.com" | sudo tee -a /etc/hosts
 
 ## Link Utili
 
-- [SecLists — subdomains wordlist](https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS)
+- [SecLists: subdomains wordlist](https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS)
 
 ---
 
@@ -108,8 +110,3 @@ echo "TARGET_IP staging.target.com" | sudo tee -a /etc/hosts
 - [ ] So aggiungere vhost trovati a /etc/hosts
 - [ ] Ripeto sempre l'enumerazione completa su ogni vhost scoperto
 
----
-
-## Note personali
-
-_(spazio libero)_

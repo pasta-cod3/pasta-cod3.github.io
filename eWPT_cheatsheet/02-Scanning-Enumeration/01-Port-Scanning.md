@@ -1,15 +1,15 @@
 # Port Scanning
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [00-Fundamentals/Networking-Basics.md](../00-Fundamentals/Networking-Basics.md)
-**Lab:** HTB — qualsiasi macchina web-focused
+**Lab:** HTB, qualsiasi macchina web-focused
 
 ---
 
 ## Obiettivo
 
-Mappare rapidamente e con precisione le porte aperte del target: e il primo comando attivo dell'engagement e definisce tutta l'enumerazione successiva.
+Questo è il primo comando davvero attivo dell'engagement — il momento in cui smetti di osservare da fuori e inizi a toccare il target — e ogni scelta che fai qui si ripercuote a valle: una scansione superficiale ti fa perdere un servizio su porta non standard che magari è proprio quello vulnerabile. Qui mappi rapidamente e con precisione le porte aperte, la base su cui si costruisce tutta l'enumerazione successiva.
 
 ---
 
@@ -22,7 +22,7 @@ Mappare rapidamente e con precisione le porte aperte del target: e il primo coma
 | `-sS` | SYN scan (half-open) | default se root, veloce e discreto |
 | `-sT` | TCP connect | usato se non root, handshake completo |
 | `-sU` | UDP scan | lento, spesso saltato per tempo ma non va dimenticato |
-| `-Pn` | skip host discovery | usalo se ICMP e bloccato |
+| `-Pn` | skip host discovery | usalo se ICMP è bloccato |
 
 ---
 
@@ -31,7 +31,7 @@ Mappare rapidamente e con precisione le porte aperte del target: e il primo coma
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
 | nmap | `nmap -p- target` | porte aperte | full scan, lento |
-| masscan | `masscan -p1-65535 target --rate=1000` | porte aperte | molto piu veloce di nmap su range ampi |
+| masscan | `masscan -p1-65535 target --rate=1000` | porte aperte | molto più veloce di nmap su range ampi |
 | rustscan | `rustscan -a target -- -sV` | porte + pipe a nmap | veloce, integra nmap per version detect |
 
 ---
@@ -58,7 +58,7 @@ PORT     STATE SERVICE VERSION
 443/tcp  open  ssl/http Apache httpd 2.4.41
 ```
 
-**Spiegazione:** separare full-scan (veloce, solo porte) da scan dettagliato (lento, su porte gia note) e la pratica standard per non perdere tempo con `-sV` su tutte le 65535 porte.
+**Spiegazione:** separare full-scan (veloce, solo porte) da scan dettagliato (lento, su porte già note) è la pratica standard per non perdere tempo con `-sV` su tutte le 65535 porte.
 
 ### Esempio 2: scan UDP mirato (spesso dimenticato)
 
@@ -66,7 +66,7 @@ PORT     STATE SERVICE VERSION
 nmap -sU --top-ports 20 target.com
 ```
 
-**Spiegazione:** UDP e lento da scansionare per intero, ma i top-port (DNS 53, SNMP 161, NTP 123) rivelano spesso servizi utili in poco tempo.
+**Spiegazione:** UDP è lento da scansionare per intero, ma i top-port (DNS 53, SNMP 161, NTP 123) rivelano spesso servizi utili in poco tempo.
 
 ---
 
@@ -79,13 +79,13 @@ nmap -sS -T2 -f target.com          # frammenta pacchetti, timing lento
 nmap --data-length 25 target.com    # padding per confondere firme IDS
 ```
 
-Nota: in eWPT l'evasion IDS non e centrale come in esami offensive avanzati, ma sapere che esiste `-T` (timing) e `-f` (fragment) e utile.
+Nota: in eWPT l'evasion IDS non è centrale come in esami offensive avanzati, ma sapere che esiste `-T` (timing) e `-f` (fragment) è utile.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: HTB — qualsiasi macchina "easy" web
+### Lab 1: HTB, qualsiasi macchina "easy" web
 **Obiettivo:** eseguire scan completo e passare a enumerazione servizi
 **Difficulty:** Facile
 **Time:** 30 min
@@ -107,7 +107,7 @@ Nota: in eWPT l'evasion IDS non e centrale come in esami offensive avanzati, ma 
 ## Link Utili
 
 - [Nmap Reference Guide](https://nmap.org/book/man.html)
-- [HTB Academy — Network Enumeration](https://academy.hackthebox.com/)
+- [HTB Academy: Network Enumeration](https://academy.hackthebox.com/)
 
 ---
 
@@ -126,8 +126,3 @@ Nota: in eWPT l'evasion IDS non e centrale come in esami offensive avanzati, ma 
 - [ ] So interpretare open/closed/filtered
 - [ ] Ho automatizzato l'estrazione delle porte per il secondo scan
 
----
-
-## Note personali
-
-_(spazio libero)_

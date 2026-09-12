@@ -1,15 +1,15 @@
 # Credential Dumping con Mimikatz
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2h
 **Prerequisiti:** [01-Windows-Host-Attacks.md](01-Windows-Host-Attacks.md)
-**Lab:** INE PTS labs (rete Windows con accesso amministrativo gia ottenuto)
+**Lab:** INE PTS labs (rete Windows con accesso amministrativo già ottenuto)
 
 ---
 
 ## Obiettivo
 
-Capire come vengono estratte le credenziali da un host Windows gia compromesso (SAM locale, memoria LSASS) e come riutilizzarle per muoversi lateralmente, come ponte concettuale verso la post-exploitation.
+Hai già una sessione SYSTEM su un host Windows: a questo punto la domanda giusta non è più "come entro", ma "chi altro posso raggiungere da qui". La risposta passa quasi sempre dalle credenziali che quell'host ha in memoria o nel proprio database locale. Qui vedi da dove si estraggono (SAM locale, memoria LSASS) e come si riutilizzano per muoversi lateralmente — il ponte concettuale verso tutta la post-exploitation che segue.
 
 ---
 
@@ -23,11 +23,11 @@ Capire come vengono estratte le credenziali da un host Windows gia compromesso (
 | LSASS (memoria di processo) | credenziali in chiaro/hash di sessioni attive (incl. utenti di dominio) | privilegi SYSTEM/debug |
 | NTDS.dit | database utenti dell'intero dominio Active Directory | accesso al Domain Controller |
 
-**Importante:** il credential dumping richiede SEMPRE privilegi elevati gia ottenuti (admin locale o SYSTEM) — non e una tecnica di accesso iniziale, ma di post-exploitation, ed e per questo che va studiata dopo aver capito come ottenere un primo shell (vedi [01-Windows-Host-Attacks.md](01-Windows-Host-Attacks.md)).
+**Importante, e facile da confondere quando si è agli inizi:** il credential dumping richiede SEMPRE privilegi elevati già ottenuti (admin locale o SYSTEM). Non è una tecnica di accesso iniziale, è post-exploitation pura — per questo va studiata dopo aver capito come ottenere una prima shell (vedi [01-Windows-Host-Attacks.md](01-Windows-Host-Attacks.md)), non prima.
 
-### Pass-the-Hash (PtH) — concetto
+### Pass-the-Hash (PtH): concetto
 
-Windows autentica spesso usando l'hash NTLM stesso (non la password in chiaro): se si ottiene l'hash di un utente, lo si puo usare direttamente per autenticarsi su altri sistemi della rete, senza mai conoscere la password reale. E una delle tecniche di lateral movement piu comuni in ambienti Windows/AD.
+Il dettaglio che cambia tutto: Windows autentica spesso usando l'hash NTLM stesso, non la password in chiaro. Questo significa che se ottieni l'hash di un utente, puoi usarlo direttamente per autenticarti su altri sistemi della rete senza mai conoscere (né craccare) la password reale. Non è un dettaglio tecnico marginale — è una delle tecniche di lateral movement più comuni in ambienti Windows/AD, e la vedrai spuntare ovunque una volta che impari a riconoscerla.
 
 ---
 
@@ -88,7 +88,7 @@ crackmapexec smb 10.10.10.0/24 -u administrator -H aad3b435b51404eeaad3b435b5140
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Windows post-exploitation lab
+### Lab 1: INE PTS, Windows post-exploitation lab
 **Obiettivo:** dopo aver ottenuto SYSTEM su un host Windows, estrarre e riutilizzare credenziali su altri host della rete
 **Difficulty:** Intermedio
 **Time:** 1h
@@ -104,14 +104,14 @@ crackmapexec smb 10.10.10.0/24 -u administrator -H aad3b435b51404eeaad3b435b5140
 
 - Provare a dumpare credenziali senza aver prima verificato i privilegi (`getuid`/`whoami`) -> fallisce silenziosamente o con errore di accesso negato
 - Craccare l'hash NTLM quando basterebbe il pass-the-hash diretto -> perdita di tempo inutile
-- Non testare gli hash trovati su TUTTA la rete raggiungibile -> si perde spesso l'opportunita di lateral movement piu rapida del lab
+- Non testare gli hash trovati su TUTTA la rete raggiungibile -> si perde spesso l'opportunità di lateral movement più rapida del lab
 
 ---
 
 ## Link Utili
 
-- [Mimikatz — GitHub](https://github.com/gentilkiwi/mimikatz)
-- [Pass-the-Hash — MITRE ATT&CK T1550.002](https://attack.mitre.org/techniques/T1550/002/)
+- [Mimikatz: GitHub](https://github.com/gentilkiwi/mimikatz)
+- [Pass-the-Hash: MITRE ATT&CK T1550.002](https://attack.mitre.org/techniques/T1550/002/)
 
 ---
 
@@ -125,13 +125,8 @@ crackmapexec smb 10.10.10.0/24 -u administrator -H aad3b435b51404eeaad3b435b5140
 
 ## Checklist di padronanza
 
-- [ ] Capisco perche il credential dumping richiede privilegi gia elevati
+- [ ] Capisco perché il credential dumping richiede privilegi già elevati
 - [ ] So estrarre hash SAM con meterpreter o mimikatz
 - [ ] So spiegare il concetto di pass-the-hash
-- [ ] So testare un hash trovato su piu host della rete
+- [ ] So testare un hash trovato su più host della rete
 
----
-
-## Note personali
-
-_(spazio libero)_

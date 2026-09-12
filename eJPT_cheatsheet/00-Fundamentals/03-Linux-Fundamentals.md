@@ -3,13 +3,13 @@
 **Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [02-Networking-Basics.md](02-Networking-Basics.md)
-**Lab:** INE PTS — Linux Fundamentals
+**Lab:** INE PTS, Linux Fundamentals
 
 ---
 
 ## Obiettivo
 
-Muoversi con sicurezza in un ambiente Linux (sia come attack box che come target da enumerare/exploitare), capendo filesystem, permessi e i comandi che userai di continuo durante l'esame.
+Linux qui gioca due ruoli: è la tua attack box (Kali o simili) e, spessissimo, anche il target che devi enumerare ed exploitare. Vale la pena muoversi con sicurezza da entrambi i lati: capire filesystem e permessi non è un esercizio accademico, è quello che ti fa notare al volo un binario SUID sospetto o un cron job scrivibile mentre stai enumerando una macchina sotto tempo.
 
 ---
 
@@ -23,7 +23,7 @@ Muoversi con sicurezza in un ambiente Linux (sia come attack box che come target
 | `/home` | home degli utenti standard |
 | `/root` | home dell'utente root |
 | `/var/log` | log di sistema e servizi |
-| `/tmp` | file temporanei, spesso scrivibile da tutti — comodo per staging di file durante exploitation |
+| `/tmp` | file temporanei, spesso scrivibile da tutti: comodo per staging di file durante exploitation |
 | `/usr/bin`, `/usr/sbin` | binari di sistema |
 | `/proc` | filesystem virtuale con info sui processi in esecuzione |
 
@@ -105,7 +105,7 @@ for ip in $(cat hosts.txt); do
 done
 ```
 
-**Spiegazione:** loop su una lista di IP per uno scan rapido delle porte più comuni — pattern che ritroverai spesso quando devi lavorare su più host in un lab.
+**Spiegazione:** loop su una lista di IP per uno scan rapido delle porte più comuni: pattern che ritroverai spesso quando devi lavorare su più host in un lab.
 
 ### Esempio 3: cercare credenziali in chiaro
 
@@ -121,13 +121,13 @@ grep -ri "password" /var/www/html --include=*.php -n
 
 - Dimenticare `2>/dev/null` in `find /` -> output illeggibile pieno di "Permission denied"
 - Confondere permessi ottali (es. 755) con quelli simbolici (`rwxr-xr-x`) durante `chmod`
-- Non controllare mai crontab e file SUID durante la post-exploitation — sono tra i vettori di privesc più comuni
+- Non controllare mai crontab e file SUID durante la post-exploitation: sono tra i vettori di privesc più comuni
 
 ---
 
 ## Link Utili
 
-- [GTFOBins](https://gtfobins.github.io/) — abuso di binari Unix per privesc/bypass
+- [GTFOBins](https://gtfobins.github.io/): abuso di binari Unix per privesc/bypass
 - [Linux Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html)
 
 ---
@@ -147,8 +147,3 @@ grep -ri "password" /var/www/html --include=*.php -n
 - [ ] Conosco i path chiave del filesystem (`/etc/passwd`, `/etc/shadow`, `/tmp`)
 - [ ] So scrivere un semplice loop bash su una lista di IP
 
----
-
-## Note personali
-
-_(spazio libero)_

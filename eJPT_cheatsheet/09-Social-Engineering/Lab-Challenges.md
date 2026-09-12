@@ -1,6 +1,6 @@
-# Lab Challenges — Social Engineering
+# Lab Challenges: Social Engineering
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,24 +9,24 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare i concetti di social engineering in ambiente controllato prima di passare alle Web Application Attacks.
+Prima di lasciarti alle spalle il social engineering e tornare a target puramente tecnici, mettiti alla prova su queste due challenge: triage di email sospette e un credential harvester end-to-end. Sono l'ultima occasione di questa sezione per collegare teoria e pratica prima di passare alle Web Application Attacks.
 
 ---
 
-## Challenge 1 — Triage di email di phishing
+## Challenge 1: Triage di email di phishing
 
 **Target:** dataset di email di esempio (lab TryHackMe o forniti dal corso INE)
 
 **Task:**
 1. Analizza 5 email campione ed elenca gli indicatori di phishing trovati in ognuna (mittente, link, urgenza, allegati)
 2. Classifica ogni email come phishing/spear phishing/legittima con motivazione
-3. Verifica whois/eta di registrazione dei domini sospetti
+3. Verifica whois/età di registrazione dei domini sospetti
 
 **Deliverable:** tabella email/indicatori-trovati/classificazione.
 
 ---
 
-## Challenge 2 — Credential harvester end-to-end
+## Challenge 2: Credential harvester end-to-end
 
 **Target:** webapp di login interna al lab (VM isolata)
 
@@ -49,7 +49,7 @@ Esercizi pratici per consolidare i concetti di social engineering in ambiente co
 
 ## Link Utili
 
-- [TryHackMe — Social Engineering rooms](https://tryhackme.com/)
+- [TryHackMe: Social Engineering rooms](https://tryhackme.com/)
 
 ---
 
@@ -66,8 +66,3 @@ Esercizi pratici per consolidare i concetti di social engineering in ambiente co
 - [ ] So spiegare la differenza tra test autorizzato e attacco reale
 - [ ] Sono pronto a passare alle Web Application Attacks
 
----
-
-## Note personali
-
-_(spazio libero)_

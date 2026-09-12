@@ -1,15 +1,15 @@
 # Web Enumeration
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** [04-SNMP-Enumeration.md](04-SNMP-Enumeration.md)
-**Lab:** INE PTS — Web Enumeration
+**Lab:** INE PTS, Web Enumeration
 
 ---
 
 ## Obiettivo
 
-Anche se eJPTv2 non richiede la profondita di eWPT sul web, ogni lab con un servizio HTTP/HTTPS va comunque enumerato: fingerprint dello stack, directory/file nascosti, virtual host. Base necessaria prima di [10-Web-Application-Attacks](../10-Web-Application-Attacks/).
+Qui non ti serve la profondità che vedrai in eWPT, ma non puoi nemmeno saltarla: qualunque servizio HTTP/HTTPS incontri in un lab va comunque enumerato a fondo — fingerprint dello stack, directory/file nascosti, virtual host. Considerala la base minima indispensabile prima di arrivare a [10-Web-Application-Attacks](../10-Web-Application-Attacks/), dove quello che trovi qui inizia a diventare exploit.
 
 ---
 
@@ -21,11 +21,11 @@ Header HTTP (`Server`, `X-Powered-By`), cookie di sessione (es. `PHPSESSID`, `JS
 
 ### Directory/file brute force
 
-Le applicazioni web spesso espongono percorsi non linkati pubblicamente (pannelli admin, backup, file di config) che una wordlist mirata puo scoprire.
+Le applicazioni web spesso espongono percorsi non linkati pubblicamente (pannelli admin, backup, file di config) che una wordlist mirata può scoprire.
 
 ### Virtual host enumeration
 
-Un singolo IP puo ospitare piu siti distinti tramite header `Host`; enumerare i vhost puo rivelare applicazioni "nascoste" non raggiungibili dall'IP diretto.
+Un singolo IP può ospitare più siti distinti tramite header `Host`; enumerare i vhost può rivelare applicazioni "nascoste" non raggiungibili dall'IP diretto.
 
 ---
 
@@ -36,7 +36,7 @@ Un singolo IP puo ospitare piu siti distinti tramite header `Host`; enumerare i 
 | whatweb | `whatweb -a 3 http://target` | stack tecnologico rilevato | intensity 3 = aggressivo ma sicuro |
 | gobuster | `gobuster dir -u http://target -w wordlist.txt` | directory/file trovati | veloce, scritto in Go |
 | ffuf | `ffuf -u http://target/FUZZ -w wordlist.txt` | fuzzing flessibile | ottimo anche per vhost/parametri |
-| nikto | `nikto -h http://target` | vulnerabilita web note + misconfigurazioni | scan rumoroso ma rapido |
+| nikto | `nikto -h http://target` | vulnerabilità web note + misconfigurazioni | scan rumoroso ma rapido |
 
 ---
 
@@ -55,7 +55,7 @@ HTTPServer[Ubuntu Linux][Apache/2.4.29 (Ubuntu)], IP[10.10.10.5],
 PHP[7.2.24], X-Powered-By[PHP/7.2.24]
 ```
 
-**Spiegazione:** in un solo comando si ottiene server web, OS sottostante, linguaggio e versione — punto di partenza per cercare CVE noti.
+**Spiegazione:** in un solo comando si ottiene server web, OS sottostante, linguaggio e versione: punto di partenza per cercare CVE noti.
 
 ### Esempio 2: directory brute force
 
@@ -77,7 +77,7 @@ ffuf -u http://10.10.10.5 -H "Host: FUZZ.target.local" -w subdomains.txt -fs 123
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Web fingerprint & brute force
+### Lab 1: INE PTS, Web fingerprint & brute force
 **Obiettivo:** identificare stack tecnologico e almeno 2 directory/file non linkati pubblicamente
 **Difficulty:** Facile
 **Time:** 40 min
@@ -99,7 +99,7 @@ ffuf -u http://10.10.10.5 -H "Host: FUZZ.target.local" -w subdomains.txt -fs 123
 
 ## Link Utili
 
-- [SecLists — wordlist di riferimento](https://github.com/danielmiessler/SecLists)
+- [SecLists: wordlist di riferimento](https://github.com/danielmiessler/SecLists)
 
 ---
 
@@ -117,8 +117,3 @@ ffuf -u http://10.10.10.5 -H "Host: FUZZ.target.local" -w subdomains.txt -fs 123
 - [ ] So eseguire directory/file brute force con gobuster e ffuf
 - [ ] So enumerare virtual host quando presenti
 
----
-
-## Note personali
-
-_(spazio libero)_

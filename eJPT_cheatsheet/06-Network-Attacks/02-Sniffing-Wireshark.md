@@ -3,13 +3,13 @@
 **Difficoltà:** Beginner-Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [01-MITM-ARP-Spoofing.md](01-MITM-ARP-Spoofing.md)
-**Lab:** TryHackMe — Wireshark: The Basics
+**Lab:** TryHackMe, Wireshark: The Basics
 
 ---
 
 ## Obiettivo
 
-Catturare e analizzare traffico di rete per estrarre credenziali in chiaro, identificare protocolli e comprendere cosa sta succedendo sulla rete durante o dopo un MITM. Competenza trasversale usata in quasi tutte le fasi di un assessment eJPTv2.
+Ora che sei in posizione MITM, hai traffico che ti passa sotto il naso — ma un flusso di pacchetti grezzi non ti dice niente finché non sai cosa cercare e come guardarlo. Qui impari a catturare e analizzare traffico di rete per estrarre credenziali in chiaro, identificare protocolli e capire cosa sta succedendo davvero sulla rete durante o dopo un MITM. È una competenza trasversale: la userai in quasi ogni fase di un assessment eJPTv2, non solo qui.
 
 ---
 
@@ -22,7 +22,7 @@ Catturare e analizzare traffico di rete per estrarre credenziali in chiaro, iden
 
 ### Modalità promiscua
 
-Per catturare traffico non indirizzato alla propria interfaccia serve la modalità promiscua (o essere già man-in-the-middle come nel file precedente). Su reti switched senza MITM si vede solo il proprio traffico e il broadcast.
+Per catturare traffico non indirizzato alla propria interfaccia serve la modalità promiscua, oppure essere già in posizione man-in-the-middle come nel file precedente. Su reti switched senza MITM vedi solo il tuo traffico e il broadcast: se ti aspettavi di vedere tutto e non vedi niente, è quasi sempre questo il motivo.
 
 ### Protocolli in chiaro comuni da cercare
 
@@ -92,7 +92,7 @@ tshark -r cattura.pcap -Y "ftp.request.command==\"USER\" or ftp.request.command=
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Wireshark: The Basics
+### Lab 1: TryHackMe, Wireshark: The Basics
 **Obiettivo:** analizzare una pcap fornita ed estrarre credenziali FTP/HTTP
 **Difficulty:** Facile
 **Time:** 40 min
@@ -114,7 +114,7 @@ tshark -r cattura.pcap -Y "ftp.request.command==\"USER\" or ftp.request.command=
 
 ## Link Utili
 
-- [Wireshark — Display Filter Reference](https://www.wireshark.org/docs/dfref/)
+- [Wireshark: Display Filter Reference](https://www.wireshark.org/docs/dfref/)
 
 ---
 
@@ -133,8 +133,3 @@ tshark -r cattura.pcap -Y "ftp.request.command==\"USER\" or ftp.request.command=
 - [ ] So usare Follow TCP Stream per ricostruire una sessione
 - [ ] So riconoscere protocolli che trasportano credenziali in chiaro
 
----
-
-## Note personali
-
-_(spazio libero)_

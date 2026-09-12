@@ -1,15 +1,15 @@
 # File Inclusion & Command Injection Basics
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [03-XSS-Basics.md](03-XSS-Basics.md)
-**Lab:** DVWA / bWAPP — File Inclusion & Command Injection
+**Lab:** DVWA / bWAPP, File Inclusion & Command Injection
 
 ---
 
 ## Obiettivo
 
-Riconoscere Local/Remote File Inclusion e Command Injection a livello base: dove si trovano, come confermarle, impatto potenziale. Versione introduttiva rispetto alla trattazione approfondita di eWPT (wrapper PHP, evasion filtri).
+Un parametro `?page=about.php` sembra il posto meno pericoloso di un'applicazione, finché non ci provi `../../../../etc/passwd` e il server te lo restituisce senza fare una piega. Qui vedi come riconoscere Local/Remote File Inclusion e Command Injection a livello base: dove cercarle, come confermarle, quale impatto hanno davvero. È la versione introduttiva rispetto alla trattazione approfondita di eWPT (wrapper PHP, evasion filtri) — qui basta riconoscere il pattern e dimostrarlo.
 
 ---
 
@@ -21,7 +21,7 @@ Un parametro che seleziona un file lato server (es. `?page=about.php`) senza val
 
 ### Remote File Inclusion (RFI)
 
-Variante piu rara oggi (richiede `allow_url_include` attivo in PHP): il parametro accetta un URL esterno, permettendo di includere ed eseguire codice ospitato su un server controllato dall'attaccante.
+Variante più rara oggi (richiede `allow_url_include` attivo in PHP): il parametro accetta un URL esterno, permettendo di includere ed eseguire codice ospitato su un server controllato dall'attaccante.
 
 ### Command Injection
 
@@ -60,7 +60,7 @@ daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 ...
 ```
 
-**Spiegazione:** il numero di `../` deve essere sufficiente a risalire dalla directory web root fino alla radice del filesystem; qualche `../` di troppo non e un problema (il sistema ignora quelli oltre la radice).
+**Spiegazione:** il numero di `../` deve essere sufficiente a risalire dalla directory web root fino alla radice del filesystem; qualche `../` di troppo non è un problema (il sistema ignora quelli oltre la radice).
 
 ### Esempio 2: command injection su un campo ping/tool web
 
@@ -71,7 +71,7 @@ Input campo IP: 127.0.0.1 && cat /etc/passwd
 
 **Output atteso:** l'output del comando `ping` seguito dall'output di `whoami`/`cat /etc/passwd` nella stessa risposta.
 
-**Spiegazione:** funzionalita web che eseguono comandi di sistema (tool "ping IP" integrati in dashboard di rete, ecc.) sono un bersaglio classico: se l'input non e sanitizzato, qualsiasi separatore di shell permette di concatenare comandi arbitrari.
+**Spiegazione:** funzionalità web che eseguono comandi di sistema (tool "ping IP" integrati in dashboard di rete, ecc.) sono un bersaglio classico: se l'input non è sanitizzato, qualsiasi separatore di shell permette di concatenare comandi arbitrari.
 
 ---
 
@@ -84,7 +84,7 @@ Input campo IP: 127.0.0.1 && cat /etc/passwd
 
 ## Lab Hands-On
 
-### Lab 1: DVWA — File Inclusion e Command Injection (livello low)
+### Lab 1: DVWA, File Inclusion e Command Injection (livello low)
 **Obiettivo:** dimostrare LFI su /etc/passwd e command injection su modulo ping
 **Difficulty:** Facile
 **Time:** 30 min
@@ -98,15 +98,15 @@ Input campo IP: 127.0.0.1 && cat /etc/passwd
 
 ## Common Mistakes
 
-- Fermarsi al primo tentativo di path traversal senza variare il numero di `../` -> spesso serve calibrare in base alla profondita reale della webroot
+- Fermarsi al primo tentativo di path traversal senza variare il numero di `../` -> spesso serve calibrare in base alla profondità reale della webroot
 - Ignorare i log applicativi come possibile target di LFI-to-RCE (log poisoning) -> tecnica avanzata ma concettualmente utile da conoscere
 
 ---
 
 ## Link Utili
 
-- [PortSwigger Academy — Path traversal](https://portswigger.net/web-security/file-path-traversal)
-- [PortSwigger Academy — OS command injection](https://portswigger.net/web-security/os-command-injection)
+- [PortSwigger Academy: Path traversal](https://portswigger.net/web-security/file-path-traversal)
+- [PortSwigger Academy: OS command injection](https://portswigger.net/web-security/os-command-injection)
 
 ---
 
@@ -124,8 +124,3 @@ Input campo IP: 127.0.0.1 && cat /etc/passwd
 - [ ] Conosco la differenza tra LFI e RFI
 - [ ] So concatenare comandi con `;`, `&&`, `|` in una command injection
 
----
-
-## Note personali
-
-_(spazio libero)_

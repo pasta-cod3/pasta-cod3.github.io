@@ -18,6 +18,12 @@ kramdown:
 plugins:
   - jekyll-seo-tag
 
+# Cheatsheet (eWPT, eJPT...): ogni file ha il proprio permalink esplicito
+# in front matter, generato dallo script di migrazione.
+collections:
+  cheatsheets:
+    output: true
+
 # File/cartelle da NON pubblicare
 exclude:
   - "*.py"
@@ -29,6 +35,11 @@ exclude:
   - Gemfile.lock
   - ".github"
   - node_modules
+  # Sorgenti grezzi dei cheatsheet (eJPT/eWPT, importati come git subtree):
+  # solo materiale di input per scripts/sync_cheatsheets.py, che rigenera
+  # _cheatsheets/ con il front matter Jekyll. Non vanno pubblicati as-is.
+  - eJPT_cheatsheet
+  - eWPT_cheatsheet
 
 # Variabili globali accessibili nei template Liquid
 social:

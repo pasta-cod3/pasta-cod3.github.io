@@ -1,6 +1,6 @@
 # Linux for WebHacking
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 3h
 **Prerequisiti:** nessuno (ripasso eJPTv2)
 **Lab:** OverTheWire Bandit (opzionale, refresh)
@@ -9,7 +9,7 @@
 
 ## Obiettivo
 
-Consolidare la command line Linux usata quotidianamente durante un web assessment: gestione file, testo, permessi, processi, e i comandi che userai per manipolare payload, wordlist e output di tool.
+Durante un engagement web passerai più tempo nel terminale che dentro Burp: costruire wordlist su misura, ripulire l'output di gobuster, incatenare grep/sed/awk per isolare un parametro tra migliaia di righe. Qui consolidi la command line Linux che usi ogni giorno — gestione file, testo, permessi, processi — non come ripasso teorico ma come attrezzi che tirerai fuori in continuazione.
 
 ---
 
@@ -27,7 +27,7 @@ comando 2>&1            # unisce stderr a stdout
 ### Permessi file (rilevante per privesc post-exploitation)
 
 ```
--rwsr-xr-x  <- SUID bit (s al posto di x nel gruppo owner)
+-rwsr-xr-x  <- SUID bit (la "s" sostituisce la "x" nel blocco owner/user, non nel gruppo)
 ```
 
 ---
@@ -39,7 +39,7 @@ comando 2>&1            # unisce stderr a stdout
 | grep | `grep -i "password" file.txt` | righe matching | `-r` ricorsivo, `-E` regex estesa |
 | sed | `sed 's/http/https/g' file.txt` | testo modificato | utile per manipolare wordlist/payload |
 | awk | `awk -F: '{print $1}' /etc/passwd` | campo estratto | parsing output CSV-like |
-| cut | `cut -d: -f1 /etc/passwd` | campo estratto | piu semplice di awk per split banali |
+| cut | `cut -d: -f1 /etc/passwd` | campo estratto | più semplice di awk per split banali |
 | find | `find / -perm -4000 2>/dev/null` | file SUID | privesc enumeration |
 | xargs | `cat urls.txt \| xargs -I{} curl -sI {}` | esegue comando per ogni riga | batch requests |
 
@@ -75,7 +75,7 @@ cat subdomains.txt | xargs -P 10 -I{} curl -sI https://{} -o /dev/null -w "%{htt
 
 ## Evasion / Bypass Techniques
 
-Non applicabile direttamente: questo file e strumentale. Vedi le sezioni tematiche per evasion specifiche (WAF, filtri).
+Non applicabile direttamente: questo file è strumentale. Vedi le sezioni tematiche per evasion specifiche (WAF, filtri).
 
 ---
 
@@ -118,12 +118,7 @@ Non applicabile direttamente: questo file e strumentale. Vedi le sezioni tematic
 ## Checklist di padronanza
 
 - [ ] So usare grep/sed/awk/cut senza cercare online
-- [ ] So costruire pipe di piu comandi
+- [ ] So costruire pipe di più comandi
 - [ ] So usare xargs per batch di richieste
 - [ ] Ho un set di alias/script pronti nel mio ambiente
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} — pasta-cod3</title>
+  <meta name="description" content="Cheatsheet {{ page.cert_label }}: {{ page.title }}. Guida tecnica di riferimento per la certificazione {{ page.cert_label }}.">
+  <meta name="author" content="stewe — pasta-cod3">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <!-- ── FAVICON ──────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- OG -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="{{ page.title | escape }} — {{ page.cert_label }}">
+  <meta property="og:description" content="Cheatsheet {{ page.cert_label }}: {{ page.title }}.">
+  <meta property="og:url"         content="{{ site.url }}{{ page.url }}">
+  <meta property="og:site_name"   content="pasta-cod3">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="/css/style.css" as="style" fetchpriority="high">
+  <link rel="stylesheet" href="/css/style.css" fetchpriority="high">
+
+  {% if page.cert == "ewpt" %}{% assign cert_color = "#f5a623" %}{% else %}{% assign cert_color = "#2ea44f" %}{% endif %}
+  {% assign guide_color = "#9955ff" %}
+  {% if page.section == "Guida" %}{% assign page_accent = guide_color %}{% else %}{% assign page_accent = cert_color %}{% endif %}
+
+  <style>
+    .cheat-wrap { max-width: 1180px; margin: 0 auto; padding: calc(var(--gap)*2) var(--gap) calc(var(--gap)*4); }
+
+    .cheat-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: calc(var(--gap)*1.5); align-items: start; }
+    @media (max-width: 900px) { .cheat-layout { grid-template-columns: minmax(0, 1fr); } }
+    .cheat-layout > * { min-width: 0; }
+
+    /* ── Sidebar ─────────────────────────────────────── */
+    .cheat-sidebar-toggle {
+      display: none; width: 100%; margin-bottom: 1rem;
+      background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+      font-family: var(--ff-m); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+      padding: .75rem 1rem; border-radius: var(--r); cursor: pointer; text-align: left;
+    }
+    @media (max-width: 900px) { .cheat-sidebar-toggle { display: block; } }
+
+    .cheat-sidebar {
+      position: sticky; top: calc(var(--gap)*1.5);
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1rem; max-height: calc(100vh - var(--gap)*3); overflow-y: auto;
+    }
+    @media (max-width: 900px) {
+      .cheat-sidebar { display: none; position: static; max-height: none; margin-bottom: 1.5rem; }
+      .cheat-sidebar.open { display: block; }
+    }
+
+    .cheat-cert-badge {
+      display: inline-block; font-family: var(--ff-m); font-size: 11px; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 1rem;
+      background: {{ cert_color }}22; color: {{ cert_color }}; border: 1px solid {{ cert_color }}55;
+    }
+
+    .cheat-tree-section { margin-bottom: 1.1rem; }
+    .cheat-tree-section-label {
+      font-family: var(--ff-m); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      font-weight: 700; color: var(--accent); text-shadow: 0 0 8px var(--glow-s), 0 0 18px var(--glow);
+      margin-bottom: .5rem; padding-left: .1rem;
+    }
+    .cheat-tree-list { list-style: none; margin: 0; padding: 0; }
+    .cheat-tree-link {
+      display: block; padding: .35rem .5rem; border-radius: 4px;
+      font-family: var(--ff-b); font-size: .85rem; color: var(--text-dim);
+      text-decoration: none; line-height: 1.4; transition: background .15s, color .15s;
+    }
+    .cheat-tree-link:hover { color: var(--text); background: rgba(255,255,255,.03); }
+    .cheat-tree-link.active { color: {{ cert_color }}; background: {{ cert_color }}14; font-weight: 600; }
+
+    /* ── Sezione "Guida" (indice + quick start): evidenziata per distinguerla dalle sezioni tecniche ── */
+    .cheat-tree-section-main {
+      padding-bottom: .9rem; margin-bottom: 1.3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cheat-tree-section-main .cheat-tree-section-label {
+      color: {{ guide_color }}; font-weight: 700; font-size: 10.5px; text-shadow: none;
+    }
+    .cheat-tree-section-main .cheat-tree-link { color: {{ guide_color }}; opacity: .82; }
+    .cheat-tree-section-main .cheat-tree-link:hover { opacity: 1; background: {{ guide_color }}10; }
+    .cheat-tree-section-main .cheat-tree-link.active { color: {{ guide_color }}; background: {{ guide_color }}1f; opacity: 1; }
+
+    /* ── Content ─────────────────────────────────────── */
+    .cheat-eyebrow {
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: .12em;
+      color: {{ page_accent }}; margin-bottom: .5rem; text-transform: uppercase;
+    }
+    .cheat-title {
+      font-family: var(--ff-d); font-size: clamp(1.3rem, 3.6vw, 2rem);
+      font-weight: 800; line-height: 1.25; color: var(--text);
+      margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border);
+    }
+    .cheat-body { color: var(--text); line-height: 1.85; font-size: .98rem; }
+    .cheat-body h2 {
+      font-family: var(--ff-d); font-size: 1.1rem; font-weight: 700;
+      color: var(--accent); margin: 2.25rem 0 .75rem;
+      padding-left: .75rem; border-left: 3px solid {{ page_accent }};
+    }
+    .cheat-body h3 { font-family: var(--ff-m); font-size: .92rem; font-weight: 500; color: var(--text); margin: 1.6rem 0 .5rem; }
+    .cheat-body h4 { font-family: var(--ff-m); font-size: .82rem; font-weight: 500; color: var(--text-dim); margin: 1.2rem 0 .4rem; text-transform: uppercase; letter-spacing: .04em; }
+    .cheat-body p { margin-bottom: 1.1rem; overflow-wrap: break-word; }
+    .cheat-body pre, .cheat-body table { max-width: 100%; }
+    .cheat-body ul, .cheat-body ol { margin: 0 0 1.1rem 1.4rem; line-height: 1.85; }
+    .cheat-body li::marker { color: {{ page_accent }}; }
+    .cheat-body strong { color: var(--accent); font-weight: 600; }
+    .cheat-body a { color: var(--accent); }
+    .cheat-body blockquote {
+      border-left: 3px solid {{ page_accent }}; margin: 1.5rem 0;
+      padding: .75rem 1.25rem; background: rgba(0,200,255,.04);
+      border-radius: 0 6px 6px 0; color: var(--text-dim); font-style: italic;
+    }
+    .cheat-body code {
+      font-family: var(--ff-m); font-size: .85em;
+      background: rgba(0,200,255,.08); color: var(--accent);
+      padding: .15em .4em; border-radius: 3px;
+    }
+    .cheat-body pre {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 6px; padding: 1.1rem; overflow-x: auto; margin-bottom: 1.5rem;
+    }
+    .cheat-body pre code { background: none; padding: 0; font-size: .8rem; color: var(--accent); display: block; line-height: 1.7; }
+    .cheat-body table {
+      width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;
+      font-size: .88rem; overflow-x: auto; display: block;
+    }
+    .cheat-body th, .cheat-body td {
+      border: 1px solid var(--border); padding: .5rem .75rem; text-align: left; vertical-align: top;
+    }
+    .cheat-body th {
+      background: var(--bg-surf); color: var(--text); font-family: var(--ff-m);
+      font-size: .75rem; letter-spacing: .04em; text-transform: uppercase;
+    }
+    .cheat-body input[type="checkbox"] { margin-right: .5em; accent-color: {{ page_accent }}; }
+    .cheat-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    /* Syntax highlighting (rouge), stessa palette del post layout */
+    .cheat-body .highlight { background: var(--bg-card) !important; border-radius: 6px; padding: 1rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    .cheat-body .highlight .k, .cheat-body .highlight .kd { color: #ff3060; }
+    .cheat-body .highlight .s, .cheat-body .highlight .s1, .cheat-body .highlight .s2 { color: #00dd88; }
+    .cheat-body .highlight .c, .cheat-body .highlight .c1 { color: #4a7a9b; font-style: italic; }
+    .cheat-body .highlight .n, .cheat-body .highlight .nb { color: #d8f0ff; }
+    .cheat-body .highlight .nf { color: #00c8ff; }
+    .cheat-body .highlight .mi, .cheat-body .highlight .mf { color: #ffaa20; }
+
+    .cheat-back {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: .08em;
+      color: var(--text-dim); text-decoration: none; margin-bottom: 1.5rem; transition: color .18s;
+    }
+    .cheat-back:hover { color: var(--accent); }
+  </style>
+
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+</head>
+<body>
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
+  <a href="/" class="nav-drawer-link">Home</a>
+  <a href="/" class="nav-drawer-link" data-cat="red">Red Team</a>
+  <a href="/" class="nav-drawer-link" data-cat="blue">Blue Team</a>
+  <a href="/" class="nav-drawer-link" data-cat="storia">Storia</a>
+  <a href="/" class="nav-drawer-link" data-cat="news">News</a>
+  <a href="/fondamentali.html" class="nav-drawer-link nav-fond">
+    <span class="nav-fond-drawer-row">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></span>
+    <span class="nav-fond-drawer-desc">45 stanze interattive, quiz, TryHackMe — sempre gratis.</span>
+  </a>
+  <a href="/cheatsheet.html" class="nav-drawer-link active">Cheatsheet</a>
+  <a href="/about.html" class="nav-drawer-link">Chi sono</a>
+  <a href="/contatti.html" class="nav-drawer-link">Contatti</a>
+</nav>
+
+<header class="site-header">
+  <a href="/" class="logo">pasta<span>-</span>cod3</a>
+  <nav class="nav-center" aria-label="Navigazione principale">
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/" data-cat="red">Red Team</a></li>
+      <li><a href="/" data-cat="blue">Blue Team</a></li>
+      <li><a href="/" data-cat="storia">Storia</a></li>
+      <li><a href="/" data-cat="news">News</a></li>
+      <li class="nav-fond-wrap">
+        <a href="/fondamentali.html" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
+        <span class="nav-fond-tip">
+          <span class="nav-fond-tip-head">Percorso Fondamentali</span>
+          45 stanze interattive, quiz e sfide pratiche con TryHackMe. Sempre gratis, nessun account a pagamento.
+          <a class="nav-fond-tip-cta" href="/fondamentali.html">Apri il percorso →</a>
+        </span>
+      </li>
+      <li><a href="/cheatsheet.html" class="active">Cheatsheet</a></li>
+      <li><a href="/about.html">Chi sono</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <div class="cheat-wrap">
+    <a href="/cheatsheet.html" class="cheat-back">← Tutti i cheatsheet</a>
+
+    <div class="cheat-layout">
+      <button class="cheat-sidebar-toggle" id="cheatSidebarToggle">☰ Indice sezioni</button>
+
+      <aside class="cheat-sidebar" id="cheatSidebar">
+        <span class="cheat-cert-badge">{{ page.cert_label }}</span>
+        <nav class="cheat-tree" aria-label="Indice cheatsheet">
+          {% assign items = site.cheatsheets | where: "cert", page.cert | sort: "sort_key" %}
+          {% assign sections = items | group_by: "section" %}
+          {% for sec in sections %}
+            <div class="cheat-tree-section{% if sec.name == 'Guida' %} cheat-tree-section-main{% endif %}">
+              <div class="cheat-tree-section-label">{{ sec.name }}</div>
+              <ul class="cheat-tree-list">
+                {% for it in sec.items %}
+                  <li>
+                    <a href="{{ it.url }}" class="cheat-tree-link{% if it.url == page.url %} active{% endif %}">{{ it.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </nav>
+      </aside>
+
+      <article class="cheat-content">
+        <p class="cheat-eyebrow">{{ page.cert_label }} · {{ page.section }}</p>
+        <h1 class="cheat-title">{{ page.title }}</h1>
+        <div class="cheat-body">
+          {{ content }}
+        </div>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+  </div>
+  <nav class="f-nav" aria-label="Footer navigation">
+    <a href="/">Home</a>
+    <a href="/about.html">Chi sono</a>
+    <a href="/contatti.html">Contatti</a>
+  </nav>
+  <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="/js/static-pages.js"></script>
+<script>
+  (function(){
+    var btn = document.getElementById('cheatSidebarToggle');
+    var sidebar = document.getElementById('cheatSidebar');
+    if (!btn || !sidebar) return;
+    btn.addEventListener('click', function(){ sidebar.classList.toggle('open'); });
+    sidebar.addEventListener('click', function(e){
+      if (e.target.closest('a')) sidebar.classList.remove('open');
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,15 +1,15 @@
 # Phishing Basics
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** [00-Fundamentals/01-Cybersecurity-Concepts.md](../00-Fundamentals/01-Cybersecurity-Concepts.md)
-**Lab:** INE PTS — Social Engineering module (simulazione controllata)
+**Lab:** INE PTS, Social Engineering module (simulazione controllata)
 
 ---
 
 ## Obiettivo
 
-Capire come funziona un attacco di phishing/spear phishing dal punto di vista dell'attaccante per poterlo simulare in un engagement autorizzato (social engineering assessment) e per saperlo riconoscere/difendere lato blue team. eJPTv2 tratta il social engineering a livello concettuale e di simulazione controllata, non come tecnica da usare fuori da un lab/engagement con autorizzazione scritta.
+Dopo capitoli pieni di nmap e shell, questa sezione cambia registro: qui l'obiettivo non è un servizio vulnerabile, è una persona che clicca. Capisci come funziona un attacco di phishing/spear phishing dal punto di vista di chi lo costruisce, per poterlo simulare in un engagement autorizzato e per saperlo riconoscere/difendere lato blue team. L'eJPTv2 tratta il social engineering a livello concettuale e di simulazione controllata: non è una licenza per provarlo fuori da un lab o da un engagement con autorizzazione scritta.
 
 ---
 
@@ -27,15 +27,15 @@ Capire come funziona un attacco di phishing/spear phishing dal punto di vista de
 
 ### Anatomia di una email di phishing
 
-1. **Mittente falsificato** — dominio simile (typosquatting: `paypa1.com`) o spoofing dell'header From
-2. **Urgenza/paura** — "il tuo account sara sospeso", pressione a cliccare subito
-3. **Link ingannevole** — testo visibile diverso dall'URL reale (hover per verificare)
-4. **Allegato malevolo** — macro Office, PDF con JavaScript, eseguibile mascherato
-5. **Landing page clonata** — pagina di login identica all'originale che cattura le credenziali inserite
+1. **Mittente falsificato**: dominio simile (typosquatting: `paypa1.com`) o spoofing dell'header From
+2. **Urgenza/paura**: "il tuo account sara sospeso", pressione a cliccare subito
+3. **Link ingannevole**: testo visibile diverso dall'URL reale (hover per verificare)
+4. **Allegato malevolo**: macro Office, PDF con JavaScript, eseguibile mascherato
+5. **Landing page clonata**: pagina di login identica all'originale che cattura le credenziali inserite
 
 ### Clonazione di pagine di login (concetto)
 
-In un engagement autorizzato si puo clonare la pagina di login di un servizio interno (es. portale webmail aziendale) per misurare quanti utenti inseriscono le credenziali. Il principio tecnico e semplice (copia HTML/CSS/JS del form + backend che salva l'input), ma va fatto **solo** dentro lo scope firmato dal cliente, con dominio/hosting dedicato al test e piano di comunicazione post-test (debrief, non punizione).
+In un engagement autorizzato si può clonare la pagina di login di un servizio interno (es. portale webmail aziendale) per misurare quanti utenti inseriscono le credenziali. Il principio tecnico è semplice (copia HTML/CSS/JS del form + backend che salva l'input), ma va fatto **solo** dentro lo scope firmato dal cliente, con dominio/hosting dedicato al test e piano di comunicazione post-test (debrief, non punizione).
 
 ---
 
@@ -76,13 +76,13 @@ Domain Name: MAIL-VERIFY-PORTAL.NET
 Creation Date: 2026-08-02T00:00:00Z   <- dominio registrato pochi giorni fa: forte indicatore
 ```
 
-**Spiegazione:** un dominio registrato da pochissimi giorni e quasi sempre un segnale di campagna phishing appena lanciata; e uno dei controlli piu veloci in fase di triage.
+**Spiegazione:** un dominio registrato da pochissimi giorni e quasi sempre un segnale di campagna phishing appena lanciata; e uno dei controlli più veloci in fase di triage.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Phishing awareness / Social Engineering intro
+### Lab 1: TryHackMe, Phishing awareness / Social Engineering intro
 **Obiettivo:** riconoscere indicatori di phishing in email di esempio
 **Difficulty:** Facile
 **Time:** 30 min
@@ -97,15 +97,15 @@ Creation Date: 2026-08-02T00:00:00Z   <- dominio registrato pochi giorni fa: for
 ## Common Mistakes
 
 - Testare tecniche di phishing fuori da uno scope autorizzato -> illegale, oltre che eticamente scorretto
-- Concentrarsi solo sull'email e ignorare vishing/smishing -> un assessment SE completo copre piu canali
+- Concentrarsi solo sull'email e ignorare vishing/smishing -> un assessment SE completo copre più canali
 - Non fare debrief post-test -> il valore del test e formativo, va sempre condiviso con gli utenti coinvolti
 
 ---
 
 ## Link Utili
 
-- [TryHackMe — Phishing rooms](https://tryhackme.com/)
-- [GoPhish — Open Source Phishing Framework](https://getgophish.com/)
+- [TryHackMe: Phishing rooms](https://tryhackme.com/)
+- [GoPhish: Open Source Phishing Framework](https://getgophish.com/)
 
 ---
 
@@ -121,10 +121,5 @@ Creation Date: 2026-08-02T00:00:00Z   <- dominio registrato pochi giorni fa: for
 
 - [ ] So elencare i 5 indicatori principali di una email di phishing
 - [ ] Conosco la differenza tra phishing/spear phishing/whaling/vishing/smishing
-- [ ] Capisco perche la clonazione di pagine va fatta solo in scope autorizzato
+- [ ] Capisco perché la clonazione di pagine va fatta solo in scope autorizzato
 
----
-
-## Note personali
-
-_(spazio libero)_

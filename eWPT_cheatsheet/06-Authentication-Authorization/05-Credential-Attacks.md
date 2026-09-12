@@ -1,15 +1,15 @@
 # Credential Attacks
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [04-IDOR.md](04-IDOR.md)
-**Lab:** HTB / DVWA — brute force login
+**Lab:** HTB / DVWA, brute force login
 
 ---
 
 ## Obiettivo
 
-Testare la robustezza dei meccanismi di autenticazione tramite bruteforce, dictionary attack, credential stuffing e password spraying, rispettando i limiti di rate/lockout tipici di un ambiente reale.
+Qui torni alle basi, ma con più criterio di un semplice "lancio Hydra e vediamo": testi la robustezza dei meccanismi di autenticazione tramite bruteforce, dictionary attack, credential stuffing e password spraying, sapendo quale tecnica scegliere e rispettando i limiti di rate/lockout tipici di un ambiente reale — cosa che in lab si dimentica facilmente, ma in un engagement vero ti gioca brutti scherzi.
 
 ---
 
@@ -21,7 +21,7 @@ Testare la robustezza dei meccanismi di autenticazione tramite bruteforce, dicti
 |---------|-------------|-----------------|
 | Bruteforce | tutte le combinazioni possibili | spazio piccolo (PIN, username corti) |
 | Dictionary attack | wordlist di password comuni su un utente noto | utente noto, password debole sospetta |
-| Credential stuffing | credenziali reali trapelate (breach) su piu account | riuso password tra servizi diversi |
+| Credential stuffing | credenziali reali trapelate (breach) su più account | riuso password tra servizi diversi |
 | Password spraying | poche password comuni su MOLTI utenti | evita lockout per singolo utente |
 
 ---
@@ -31,7 +31,7 @@ Testare la robustezza dei meccanismi di autenticazione tramite bruteforce, dicti
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
 | Hydra | `hydra -l admin -P rockyou.txt target.com http-post-form "..."` | credenziali valide | supporta molti protocolli |
-| Burp Intruder | Cluster bomb su user+pass | risposta per combinazione | piu controllo su condizioni di successo |
+| Burp Intruder | Cluster bomb su user+pass | risposta per combinazione | più controllo su condizioni di successo |
 | ffuf | fuzzing su form POST | risposta filtrata per size | leggero e veloce |
 
 ---
@@ -45,7 +45,7 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt target.com \
   http-post-form "/login:username=^USER^&password=^PASS^:Invalid credentials"
 ```
 
-**Spiegazione:** l'ultimo campo (`Invalid credentials`) e la stringa che identifica un tentativo FALLITO nella response — Hydra la usa per distinguere successo da fallimento.
+**Spiegazione:** l'ultimo campo (`Invalid credentials`) è la stringa che identifica un tentativo FALLITO nella response: Hydra la usa per distinguere successo da fallimento.
 
 ### Esempio 2: password spraying per evitare lockout
 
@@ -67,7 +67,7 @@ done
 4. Analizza per "Response received" length o "Grep - Match" sul messaggio di errore
 ```
 
-**Spiegazione:** Burp Intruder e preferibile a Hydra quando il form richiede un token CSRF che cambia ad ogni richiesta (serve macro/session handling rule).
+**Spiegazione:** Burp Intruder è preferibile a Hydra quando il form richiede un token CSRF che cambia ad ogni richiesta (serve macro/session handling rule).
 
 ### Esempio 4: credential stuffing con lista breach nota
 
@@ -92,7 +92,7 @@ X-Forwarded-For: 1.2.3.4  (varia ad ogni richiesta)
 ```
 admin / Admin / ADMIN
 ```
-Alcuni sistemi trattano username come case-sensitive per il lockout counter ma case-insensitive per il login stesso — variare il case puo resettare il contatore di tentativi falliti.
+Alcuni sistemi trattano username come case-sensitive per il lockout counter ma case-insensitive per il login stesso: variare il case può resettare il contatore di tentativi falliti.
 
 ### Rallentare per restare sotto la soglia di detection
 
@@ -106,8 +106,8 @@ hydra -l admin -P wordlist.txt -t 1 -W 5 target.com http-post-form "..."
 
 ## Lab Hands-On
 
-### Lab 1: DVWA — Brute Force (low/medium/high)
-**Obiettivo:** bruteforce del login con Hydra/Burp su livelli di difficolta crescente
+### Lab 1: DVWA, Brute Force (low/medium/high)
+**Obiettivo:** bruteforce del login con Hydra/Burp su livelli di difficoltà crescente
 **Difficulty:** Facile-Medio
 **Time:** 1h
 
@@ -120,16 +120,16 @@ hydra -l admin -P wordlist.txt -t 1 -W 5 target.com http-post-form "..."
 
 ## Common Mistakes
 
-- Ignorare completamente i limiti di rate in un engagement reale -> puoi causare DoS involontario o bloccare account legittimi, sempre da concordare con il cliente
-- Usare bruteforce classico quando password spraying sarebbe piu efficace ed evita lockout
-- Non gestire token CSRF dinamici -> Hydra fallisce silenziosamente se il form richiede un token che cambia ad ogni richiesta
+- Ignorare completamente i limiti di rate in un engagement reale -> puoi causare DoS involontario o bloccare account legittimi, sempre da concordare con il cliente prima
+- Usare bruteforce classico quando password spraying sarebbe più efficace ed evita lockout
+- Non gestire token CSRF dinamici -> Hydra fallisce silenziosamente se il form richiede un token che cambia ad ogni richiesta, e perdi tempo a capire perché "non funziona niente"
 
 ---
 
 ## Link Utili
 
 - [Hydra GitHub](https://github.com/vanhauser-thc/thc-hydra)
-- [SecLists — Passwords](https://github.com/danielmiessler/SecLists/tree/master/Passwords)
+- [SecLists: Passwords](https://github.com/danielmiessler/SecLists/tree/master/Passwords)
 
 ---
 
@@ -145,11 +145,6 @@ hydra -l admin -P wordlist.txt -t 1 -W 5 target.com http-post-form "..."
 
 - [ ] So la differenza pratica tra bruteforce, dictionary, stuffing, spraying
 - [ ] So usare Hydra per form POST con rilevamento fallimento corretto
-- [ ] So usare Burp Intruder quando c'e un token CSRF dinamico
+- [ ] So usare Burp Intruder quando c'è un token CSRF dinamico
 - [ ] Conosco tecniche per evitare/ridurre lockout
 
----
-
-## Note personali
-
-_(spazio libero)_

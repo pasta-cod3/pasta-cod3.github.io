@@ -1,6 +1,6 @@
-# Lab Challenges — Footprinting & Scanning
+# Lab Challenges: Footprinting & Scanning
 
-**Difficolta:** Beginner-Intermediate
+**Difficoltà:** Beginner-Intermediate
 **Time to Master:** variabile
 **Prerequisiti:** tutti i file di questa sezione
 **Lab:** raccolta
@@ -9,11 +9,11 @@
 
 ## Obiettivo
 
-Esercizi pratici per consolidare l'intera fase di footprinting/scanning prima di passare all'enumeration dei servizi.
+Prima di passare all'enumeration dei servizi vale la pena fermarsi e ripetere l'intera fase di footprinting/scanning su una subnet vera, senza saltare passaggi: questi esercizi ti ci portano, dalla discovery al confronto tra scan "normale" ed evasivo.
 
 ---
 
-## Challenge 1 — Mappatura completa di una subnet
+## Challenge 1: Mappatura completa di una subnet
 
 **Target:** una subnet /24 di lab (es. INE PTS o TryHackMe network)
 
@@ -26,7 +26,7 @@ Esercizi pratici per consolidare l'intera fase di footprinting/scanning prima di
 
 ---
 
-## Challenge 2 — Scan sotto vincoli di evasione
+## Challenge 2: Scan sotto vincoli di evasione
 
 **Task:**
 1. Ripeti lo scan di un host del Challenge 1 usando `-f`, `-D RND:10` e `-T2`
@@ -46,7 +46,7 @@ Esercizi pratici per consolidare l'intera fase di footprinting/scanning prima di
 
 ## Link Utili
 
-- [TryHackMe — Nmap room](https://tryhackme.com/)
+- [TryHackMe: Nmap room](https://tryhackme.com/)
 - [Nmap Network Scanning (libro ufficiale, capitoli gratuiti online)](https://nmap.org/book/toc.html)
 
 ---
@@ -64,8 +64,3 @@ Esercizi pratici per consolidare l'intera fase di footprinting/scanning prima di
 - [ ] Ho un template di note riutilizzabile per scan e discovery
 - [ ] Sono pronto a passare all'enumeration dei servizi
 
----
-
-## Note personali
-
-_(spazio libero)_

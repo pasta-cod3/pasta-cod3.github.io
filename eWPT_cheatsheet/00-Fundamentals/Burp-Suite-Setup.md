@@ -1,15 +1,15 @@
 # Burp Suite Setup
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [HTTP-HTTPS-Deep-Dive.md](HTTP-HTTPS-Deep-Dive.md)
-**Lab:** PortSwigger Academy — Burp Suite Essentials
+**Lab:** PortSwigger Academy, Burp Suite Essentials
 
 ---
 
 ## Obiettivo
 
-Configurare Burp Suite come strumento centrale per tutto l'esame eWPT: proxy, certificato, workflow Proxy/Repeater/Intruder/Decoder. Senza un setup solido perdi tempo prezioso durante l'esame.
+Burp Suite è lo strumento che userai per l'intero esame eWPT, quindi vale la pena passare la prima ora a configurarlo bene invece di scoprire a metà lab che il certificato non è installato o che hai lasciato Intercept acceso per sbaglio. Qui monti il proxy, il certificato CA e il workflow Proxy -> Repeater -> Intruder -> Decoder che ripeterai decine di volte su ogni target.
 
 ---
 
@@ -78,17 +78,18 @@ Browser -> Burp Proxy (127.0.0.1:8080) -> Target
 
 ### Match and Replace per bypassare controlli client-side
 ```
-Proxy > Options > Match and Replace
+Proxy > Options > Match and Replace > Add
+Type: Response header
 Match: Content-Security-Policy: .*
 Replace: (vuoto)
 ```
-Rimuove la CSP dalle response per testare XSS senza restrizioni durante l'analisi (solo in ambiente di test autorizzato).
+Rimuove la CSP dalle response per testare XSS senza restrizioni durante l'analisi (solo in ambiente di test autorizzato). Il campo `Type` va impostato su "Response header", altrimenti la regola non matcha l'header nella response.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Burp Suite Essentials
+### Lab 1: PortSwigger, Burp Suite Essentials
 **Obiettivo:** consolidare Proxy/Repeater/Intruder/Decoder
 **Difficulty:** Facile
 **Time:** 1h
@@ -130,8 +131,3 @@ Rimuove la CSP dalle response per testare XSS senza restrizioni durante l'analis
 - [ ] So usare Decoder per encoding/decoding rapido
 - [ ] Ho salvato un progetto Burp persistente per lo studio
 
----
-
-## Note personali
-
-_(spazio libero)_

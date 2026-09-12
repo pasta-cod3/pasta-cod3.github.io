@@ -1,15 +1,15 @@
 # Passive Recon & OSINT
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [00-Fundamentals/02-Networking-Basics.md](../00-Fundamentals/02-Networking-Basics.md)
-**Lab:** INE PTS — Information Gathering
+**Lab:** INE PTS, Information Gathering
 
 ---
 
 ## Obiettivo
 
-Raccogliere informazioni pubbliche su un target (organizzazione o dominio) senza inviare traffico direttamente verso i suoi sistemi. E il primo step di ogni engagement e definisce la superficie di attacco iniziale.
+Prima di toccare qualsiasi cosa del target, c'è un'enorme quantità di informazioni che puoi raccogliere senza inviargli nemmeno un pacchetto: whois, DNS, email dei dipendenti, versioni passate del sito su Wayback Machine. È il primo step di ogni engagement, e il motivo per cui ci si passa del tempo non è burocrazia, è che ogni dettaglio raccolto qui (un subdomain dimenticato, un provider di posta, un nome di dipendente) definisce la superficie di attacco con cui lavorerai da qui in avanti.
 
 ---
 
@@ -83,7 +83,7 @@ shodan search "org:\"Target Org\""
 shodan host 93.184.216.34
 ```
 
-**Spiegazione:** Shodan indicizza banner di servizi esposti su internet — puo rivelare servizi dimenticati (VPN, pannelli admin, IoT) prima ancora di fare uno scan attivo.
+**Spiegazione:** Shodan indicizza banner di servizi esposti su internet: può rivelare servizi dimenticati (VPN, pannelli admin, IoT) prima ancora di fare uno scan attivo.
 
 ---
 
@@ -95,7 +95,7 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target. L'unico
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Passive Information Gathering
+### Lab 1: INE PTS, Passive Information Gathering
 **Obiettivo:** raccogliere quante piu informazioni possibili su un dominio assegnato senza toccarlo direttamente
 **Difficulty:** Facile
 **Time:** 30 min
@@ -139,8 +139,3 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target. L'unico
 - [ ] Conosco almeno un uso pratico di Shodan
 - [ ] So consultare la Wayback Machine per endpoint storici
 
----
-
-## Note personali
-
-_(spazio libero)_

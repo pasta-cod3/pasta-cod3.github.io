@@ -1,15 +1,15 @@
-# Password Attacks — Hydra, John, Hashcat
+# Password Attacks: Hydra, John, Hashcat
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2h
 **Prerequisiti:** [../00-Fundamentals/05-Cryptography-Basics.md](../00-Fundamentals/05-Cryptography-Basics.md)
-**Lab:** INE PTS labs / TryHackMe — Crack the Hash
+**Lab:** INE PTS labs / TryHackMe, Crack the Hash
 
 ---
 
 ## Obiettivo
 
-Padroneggiare i tre strumenti principali per attacchi a password: brute force online contro servizi di rete (Hydra), cracking offline di hash (John the Ripper), cracking offline accelerato via GPU (Hashcat).
+Nei file precedenti hai già usato Hydra e hashdump un po' "a intuito": qui è il momento di capire davvero cosa stai facendo, perché quasi ogni lab eJPT a un certo punto ti mette in mano un servizio con login o un hash e ti aspetta al varco. Padroneggia i tre strumenti principali — brute force online contro servizi di rete (Hydra), cracking offline di hash (John the Ripper), cracking offline accelerato via GPU (Hashcat) — e saprai sempre quale dei tre tirare fuori a seconda di cosa hai davanti.
 
 ---
 
@@ -20,15 +20,15 @@ Padroneggiare i tre strumenti principali per attacchi a password: brute force on
 | Tipo | Strumento | Quando si usa |
 |------|-----------|-----------------|
 | Online (contro un servizio) | Hydra, Medusa | quando hai solo un servizio di rete raggiungibile (SSH/FTP/RDP/form web) |
-| Offline (contro un hash gia estratto) | John the Ripper, Hashcat | quando hai gia ottenuto un hash (SAM, /etc/shadow, dump DB) |
+| Offline (contro un hash già estratto) | John the Ripper, Hashcat | quando hai già ottenuto un hash (SAM, /etc/shadow, dump DB) |
 
-L'attacco offline e sempre preferibile quando possibile: nessun rischio di lockout/rilevazione, velocita molto piu alta.
+Se puoi scegliere, scegli sempre l'offline: nessun rischio di lockout o rilevazione, e la velocità non è nemmeno paragonabile — è la differenza tra provare password una alla volta e provarne miliardi al secondo.
 
 ### Wordlist principali
 
 | Wordlist | Percorso tipico | Note |
 |----------|-------------------|------|
-| rockyou.txt | `/usr/share/wordlists/rockyou.txt` | ~14M password reali da leak, la piu usata in lab |
+| rockyou.txt | `/usr/share/wordlists/rockyou.txt` | ~14M password reali da leak, la più usata in lab |
 | SecLists | `/usr/share/seclists/` | collezione ampia (username, password, fuzzing) |
 | crunch | generata al volo | pattern custom (es. solo numerica, lunghezza fissa) |
 | cewl | generata dal sito target | wordlist basata su parole del sito web del target |
@@ -70,7 +70,7 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.10.10.5 http-post-form \
 [80][http-post-form] host: 10.10.10.5   login: admin   password: admin123
 ```
 
-**Spiegazione:** `^USER^`/`^PASS^` sono placeholder sostituiti da Hydra; l'ultima parte della stringa e la firma di risposta che indica fallimento, necessaria per distinguere tentativo riuscito da fallito.
+**Spiegazione:** `^USER^`/`^PASS^` sono placeholder sostituiti da Hydra; l'ultima parte della stringa è la firma di risposta che indica fallimento, necessaria per distinguere tentativo riuscito da fallito.
 
 ### Esempio 2: cracking hash NTLM con John
 
@@ -84,7 +84,7 @@ john --show ntlm-hashes.txt
 administrator:Password123!:::
 ```
 
-**Spiegazione:** dopo un dump di hash NTLM (vedi [04-Credential-Dumping-Mimikatz.md](04-Credential-Dumping-Mimikatz.md)), John prova ogni parola della wordlist contro l'hash fino a trovare match; `--show` visualizza i risultati gia craccati.
+**Spiegazione:** dopo un dump di hash NTLM (vedi [04-Credential-Dumping-Mimikatz.md](04-Credential-Dumping-Mimikatz.md)), John prova ogni parola della wordlist contro l'hash fino a trovare match; `--show` visualizza i risultati già craccati.
 
 ### Esempio 3: cracking hash Linux /etc/shadow con Hashcat
 
@@ -98,13 +98,13 @@ hashcat -m 1800 -a 0 shadow-hashes.txt /usr/share/wordlists/rockyou.txt
 
 ## Evasion / Bypass Techniques
 
-Per servizi con account lockout policy, preferire **password spraying** (una password comune contro molti utenti, con delay tra i tentativi) invece del brute force classico (`hydra -t 1` con pausa, oppure crackmapexec con `--continue-on-success` per spraying su piu host contemporaneamente).
+Per servizi con account lockout policy, preferire **password spraying** (una password comune contro molti utenti, con delay tra i tentativi) invece del brute force classico (`hydra -t 1` con pausa, oppure crackmapexec con `--continue-on-success` per spraying su più host contemporaneamente).
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: TryHackMe — Crack the Hash
+### Lab 1: TryHackMe, Crack the Hash
 **Obiettivo:** identificare il tipo di hash e craccarlo con lo strumento corretto
 **Difficulty:** Facile
 **Time:** 45 min
@@ -127,7 +127,7 @@ Per servizi con account lockout policy, preferire **password spraying** (una pas
 ## Link Utili
 
 - [Hashcat example hashes (mode reference)](https://hashcat.net/wiki/doku.php?id=example_hashes)
-- [SecLists — GitHub](https://github.com/danielmiessler/SecLists)
+- [SecLists: GitHub](https://github.com/danielmiessler/SecLists)
 
 ---
 
@@ -146,8 +146,3 @@ Per servizi con account lockout policy, preferire **password spraying** (una pas
 - [ ] So identificare un formato hash e sceglierne il mode corretto in Hashcat
 - [ ] Conosco la differenza tra brute force e password spraying e quando preferire l'uno o l'altro
 
----
-
-## Note personali
-
-_(spazio libero)_

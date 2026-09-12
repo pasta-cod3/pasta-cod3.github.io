@@ -1,15 +1,15 @@
 # Msfconsole Basics
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 2h
 **Prerequisiti:** [../04-Vulnerability-Assessment/03-CVE-CVSS-Scoring.md](../04-Vulnerability-Assessment/03-CVE-CVSS-Scoring.md)
-**Lab:** INE PTS — Metasploit Framework labs
+**Lab:** INE PTS, Metasploit Framework labs
 
 ---
 
 ## Obiettivo
 
-Padroneggiare l'interfaccia msfconsole: navigazione tra moduli, ricerca, configurazione opzioni, gestione workspace/database. E il punto d'ingresso obbligato per tutto cio che riguarda auxiliary/exploit/meterpreter nell'esame eJPTv2.
+Metasploit è il tool con cui probabilmente passerai più tempo in assoluto durante l'esame, quindi vale la pena non trattarlo come una scatola nera da cui copiare comandi. Qui impari a padroneggiare l'interfaccia msfconsole davvero: navigazione tra moduli, ricerca, configurazione opzioni, gestione workspace/database. È il punto d'ingresso obbligato per tutto ciò che riguarda auxiliary/exploit/meterpreter — sbagliare le basi qui si ripercuote su ogni file successivo.
 
 ---
 
@@ -19,15 +19,15 @@ Padroneggiare l'interfaccia msfconsole: navigazione tra moduli, ricerca, configu
 
 | Tipo modulo | Path esempio | Scopo |
 |-------------|--------------|-------|
-| exploit | `exploit/windows/smb/ms17_010_eternalblue` | sfrutta una vulnerabilita specifica |
+| exploit | `exploit/windows/smb/ms17_010_eternalblue` | sfrutta una vulnerabilità specifica |
 | auxiliary | `auxiliary/scanner/smb/smb_version` | scanning, enumeration, brute force (non da accesso diretto) |
-| post | `post/windows/gather/hashdump` | azioni post-exploitation su una sessione gia aperta |
+| post | `post/windows/gather/hashdump` | azioni post-exploitation su una sessione già aperta |
 | payload | `windows/x64/meterpreter/reverse_tcp` | codice eseguito sul target dopo l'exploit |
 | encoder/nop | vari | offuscamento payload (uso limitato con AV moderni) |
 
 ### Database Metasploit (msfdb)
 
-Metasploit puo salvare host, servizi, credenziali e loot in un database PostgreSQL, condiviso tra tutte le sessioni msfconsole aperte sullo stesso workspace.
+Un dettaglio che si sottovaluta all'inizio: Metasploit può salvare host, servizi, credenziali e loot in un database PostgreSQL, condiviso tra tutte le sessioni msfconsole aperte sullo stesso workspace. Se lo inizializzi fin da subito, ogni comando successivo ti restituisce qualcosa di riusabile invece di sparire nello scroll del terminale.
 
 ---
 
@@ -72,7 +72,7 @@ msf6 exploit(windows/smb/ms17_010_eternalblue) > set LHOST 10.10.14.2
 msf6 exploit(windows/smb/ms17_010_eternalblue) > setg LHOST 10.10.14.2
 ```
 
-**Spiegazione:** `set` vale solo per il modulo corrente, `setg` imposta la variabile globalmente per tutti i moduli caricati nella sessione — utile per LHOST che resta lo stesso durante l'intero engagement.
+**Spiegazione:** `set` vale solo per il modulo corrente, `setg` imposta la variabile globalmente per tutti i moduli caricati nella sessione: utile per LHOST che resta lo stesso durante l'intero engagement.
 
 ### Esempio 3: workspace e database
 
@@ -97,7 +97,7 @@ msf6 > services
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Metasploit Framework Fundamentals
+### Lab 1: INE PTS, Metasploit Framework Fundamentals
 **Obiettivo:** familiarizzare con search/use/set/show/info su almeno 5 moduli diversi
 **Difficulty:** Facile
 **Time:** 45 min
@@ -105,7 +105,7 @@ msf6 > services
 **Walkthrough breve:**
 1. Inizializza il database con `msfdb init`
 2. Crea un workspace dedicato al lab
-3. Cerca ed esplora moduli auxiliary e exploit per i servizi gia enumerati in [03-Enumeration](../03-Enumeration/)
+3. Cerca ed esplora moduli auxiliary e exploit per i servizi già enumerati in [03-Enumeration](../03-Enumeration/)
 
 ---
 
@@ -119,7 +119,7 @@ msf6 > services
 
 ## Link Utili
 
-- [Metasploit Unleashed — Offensive Security](https://www.offsec.com/metasploit-unleashed/)
+- [Metasploit Unleashed: Offensive Security](https://www.offsec.com/metasploit-unleashed/)
 
 ---
 
@@ -138,8 +138,3 @@ msf6 > services
 - [ ] So usare workspace per isolare engagement diversi
 - [ ] So consultare hosts/services/creds dal database
 
----
-
-## Note personali
-
-_(spazio libero)_

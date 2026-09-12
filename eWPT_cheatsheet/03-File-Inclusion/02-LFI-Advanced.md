@@ -1,15 +1,15 @@
 # LFI Advanced
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 3h
 **Prerequisiti:** [01-LFI-Basics.md](01-LFI-Basics.md)
-**Lab:** HTB — macchine con LFI-to-RCE
+**Lab:** HTB (macchine con LFI-to-RCE)
 
 ---
 
 ## Obiettivo
 
-Trasformare una LFI in RCE tramite log poisoning e altre tecniche avanzate: e uno dei chain di attacco piu comuni e piu richiesti nell'esame eWPT.
+Una LFI che legge solo `/etc/passwd` è un mezzo risultato: il salto vero è trasformarla in esecuzione di codice, e il log poisoning è la tecnica più usata per farlo. L'idea è più semplice di quanto sembri la prima volta che la vedi: se riesci a far scrivere del codice PHP dentro un file che il server logga già (uno header, un tentativo di login), e poi includi quel file con la LFI, il server esegue quello che ci hai messo. È uno dei chain d'attacco più richiesti nell'esame eWPT, quindi vale la pena farlo diventare un riflesso.
 
 ---
 
@@ -27,7 +27,7 @@ Se riesci a scrivere codice PHP in un file che il server logga (access log, erro
 
 ### Session Poisoning (PHP)
 
-I file di sessione PHP (`/var/lib/php/sessions/sess_<id>`) contengono dati controllati dall'utente: se il nome del file e prevedibile (basato sul cookie `PHPSESSID`), puoi avvelenarli e poi includerli.
+I file di sessione PHP (`/var/lib/php/sessions/sess_<id>`) contengono dati controllati dall'utente: se il nome del file è prevedibile (basato sul cookie `PHPSESSID`), puoi avvelenarli e poi includerli.
 
 ---
 
@@ -72,7 +72,7 @@ ssh '<?php system($_GET["cmd"]); ?>'@target.com
 curl "http://target.com/index.php?page=../../../../var/log/auth.log&cmd=id"
 ```
 
-**Spiegazione:** funziona solo se `/var/log/auth.log` e leggibile dall'utente web (spesso richiede privilegi elevati, ma vale la pena testare).
+**Spiegazione:** funziona solo se `/var/log/auth.log` è leggibile dall'utente web (spesso richiede privilegi elevati, ma vale la pena testare).
 
 ### Esempio 3: PHP session poisoning
 
@@ -93,20 +93,20 @@ curl -b cookies.txt "http://target.com/index.php?page=../../../../var/lib/php/se
 
 ### Bypass filtro estensione con path troncato
 
-Se l'app forza `.php` in append e c'e un limite di lunghezza path in PHP < 5.3 (raro), un path molto lungo puo troncare l'estensione forzata.
+Se l'app forza `.php` in append e c'è un limite di lunghezza path in PHP < 5.3 (raro), un path molto lungo può troncare l'estensione forzata.
 
 ### Uso di /proc/self/environ (legacy, raro oggi)
 
 ```
 ?page=../../../../proc/self/environ
 ```
-Con User-Agent avvelenato allo stesso modo del log poisoning, se `environ` e leggibile.
+Con User-Agent avvelenato allo stesso modo del log poisoning, se `environ` è leggibile.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: HTB — LFI to RCE via log poisoning
+### Lab 1: HTB (LFI to RCE via log poisoning)
 **Obiettivo:** ottenere RCE partendo da una LFI confermata
 **Difficulty:** Difficile
 **Time:** 1.5h
@@ -127,8 +127,8 @@ Con User-Agent avvelenato allo stesso modo del log poisoning, se `environ` e leg
 
 ## Link Utili
 
-- [HackTricks — LFI to RCE](https://book.hacktricks.xyz/)
-- [OWASP Testing Guide — LFI](https://owasp.org/www-project-web-security-testing-guide/)
+- [HackTricks: LFI to RCE](https://book.hacktricks.xyz/)
+- [OWASP Testing Guide: LFI](https://owasp.org/www-project-web-security-testing-guide/)
 
 ---
 
@@ -147,8 +147,3 @@ Con User-Agent avvelenato allo stesso modo del log poisoning, se `environ` e leg
 - [ ] So collegare LFI a RCE end-to-end
 - [ ] Ho provato session poisoning almeno una volta
 
----
-
-## Note personali
-
-_(spazio libero)_

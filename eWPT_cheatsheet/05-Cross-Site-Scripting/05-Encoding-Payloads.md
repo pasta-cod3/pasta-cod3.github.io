@@ -1,15 +1,15 @@
 # Encoding Payloads (XSS)
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 1.5h
 **Prerequisiti:** [04-DOM-XSS.md](04-DOM-XSS.md)
-**Lab:** PortSwigger Academy — XSS contexts
+**Lab:** PortSwigger Academy, XSS contexts
 
 ---
 
 ## Obiettivo
 
-Costruire payload XSS efficaci in contesti particolari (dentro attributi, dentro JS, dentro CSS) usando encoding HTML entity, URL, Unicode e JS string escaping. Sezione "cheatsheet puro" per adattare rapidamente un payload al contesto trovato.
+Il payload da manuale `<script>alert(1)</script>` funziona solo quando sei fortunato: appena finisci dentro un attributo, uno script inline o un blocco CSS, ti serve una variante costruita apposta con l'encoding giusto. Qui trovi come costruire payload XSS efficaci in questi contesti particolari usando encoding HTML entity, URL, Unicode e JS string escaping — è la sezione "cheatsheet puro" da tenere a portata di mano per adattare rapidamente un payload al contesto che hai davanti.
 
 ---
 
@@ -21,7 +21,7 @@ Costruire payload XSS efficaci in contesti particolari (dentro attributi, dentro
 |----------|---------|-----------------|
 | HTML entity | `&#60;script&#62;` | bypass filtro su `<`/`>` letterali |
 | URL encoding | `%3Cscript%3E` | payload in query string |
-| Unicode escape (JS) | `<script>` | dentro contesto JavaScript stringa |
+| Unicode escape (JS) | `\u003Cscript\u003E` | dentro contesto JavaScript stringa |
 | HTML entity decimale/esadecimale | `&#x3C;script&#x3E;` | varianti di bypass filtro regex |
 
 ---
@@ -61,7 +61,7 @@ Se l'input finisce in `var name = "INPUT";`:
 <a href="javascript:alert(1)">click</a>
 ```
 
-Se il valore dell'attributo e controllato dall'utente:
+Se il valore dell'attributo è controllato dall'utente:
 ```
 javascript:alert(document.cookie)
 ```
@@ -74,25 +74,25 @@ javascript:alert(document.cookie)
 <img/src=x/onerror=alert(1)>
 ```
 
-### Esempio 5: payload polyglot (funziona in piu contesti contemporaneamente)
+### Esempio 5: payload polyglot (funziona in più contesti contemporaneamente)
 
 ```
 jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert(1) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloaD=alert(1)//>
 ```
 
-**Spiegazione:** payload progettato per eseguire indipendentemente dal contesto esatto (attributo, tag, script) — utile quando non sei sicuro di dove finisce l'input.
+**Spiegazione:** payload progettato per eseguire indipendentemente dal contesto esatto (attributo, tag, script), utile quando non sei sicuro di dove finisce l'input.
 
 ---
 
 ## Evasion / Bypass Techniques
 
-Questo intero file e la sezione evasion basata su encoding. Combina sempre encoding + tag/handler alternativi (vedi [06-WAF-Evasion.md](06-WAF-Evasion.md)) per massimizzare le probabilita di bypass.
+Questo intero file è la sezione evasion basata su encoding. Combina sempre encoding + tag/handler alternativi (vedi [06-WAF-Evasion.md](06-WAF-Evasion.md)) per massimizzare le probabilità di bypass.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Reflected XSS into a JavaScript string with angle brackets HTML-encoded
+### Lab 1: PortSwigger, Reflected XSS into a JavaScript string with angle brackets HTML-encoded
 **Obiettivo:** costruire payload adatto al contesto JS string
 **Difficulty:** Difficile
 **Time:** 30 min
@@ -106,15 +106,15 @@ Questo intero file e la sezione evasion basata su encoding. Combina sempre encod
 
 ## Common Mistakes
 
-- Usare sempre lo stesso payload `<script>alert(1)</script>` in ogni contesto -> spesso serve un payload specifico per contesto attributo/JS/CSS
-- Non provare i polyglot quando il contesto esatto non e chiaro -> risparmiano tempo di tentativo/errore
+- Usare sempre lo stesso payload `<script>alert(1)</script>` in ogni contesto -> quasi mai funziona ovunque, serve un payload specifico per contesto attributo/JS/CSS
+- Non provare i polyglot quando il contesto esatto non è chiaro -> ti risparmiano un bel po' di tentativi a vuoto
 
 ---
 
 ## Link Utili
 
-- [PayloadsAllTheThings — XSS](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection)
-- [PortSwigger — XSS cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
+- [PayloadsAllTheThings: XSS](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection)
+- [PortSwigger: XSS cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 
 ---
 
@@ -129,10 +129,5 @@ Questo intero file e la sezione evasion basata su encoding. Combina sempre encod
 
 - [ ] So costruire payload per contesto attributo/JS/CSS
 - [ ] Conosco almeno 3 encoding diversi (HTML entity, URL, Unicode)
-- [ ] So usare un payload polyglot quando il contesto e incerto
+- [ ] So usare un payload polyglot quando il contesto è incerto
 
----
-
-## Note personali
-
-_(spazio libero)_

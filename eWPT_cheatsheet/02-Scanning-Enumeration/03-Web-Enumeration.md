@@ -1,15 +1,15 @@
 # Web Enumeration
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 3h
 **Prerequisiti:** [02-Service-Detection.md](02-Service-Detection.md)
-**Lab:** HTB Academy — Attacking Web Applications with Ffuf
+**Lab:** HTB Academy, Attacking Web Applications with Ffuf
 
 ---
 
 ## Obiettivo
 
-Mappare l'intera superficie del sito: directory, file, backup, endpoint nascosti non linkati dal menu. E dove si trova la maggior parte delle vulnerabilita in eWPT.
+La pagina che vedi nel menu è solo una frazione di quello che il server serve davvero: dietro ci sono spesso backup dimenticati, pannelli admin non linkati, endpoint che qualcuno ha lasciato "temporaneamente" online mesi fa. Qui mappi l'intera superficie del sito — directory, file, endpoint nascosti — ed è, non a caso, dove si trova la maggior parte delle vulnerabilità in eWPT.
 
 ---
 
@@ -71,7 +71,7 @@ ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt \
   -fs 4242
 ```
 
-**Spiegazione:** `-fs` filtra per dimensione response, escludendo risposte "non trovate" identiche — trova parametri GET nascosti che l'app accetta silenziosamente.
+**Spiegazione:** `-fs` filtra per dimensione response, escludendo risposte "non trovate" identiche: trova parametri GET nascosti che l'app accetta silenziosamente.
 
 ### Esempio 3: ricerca ricorsiva automatica
 
@@ -102,7 +102,7 @@ curl -H "X-Original-URL: /admin/" http://target.com/
 
 ## Lab Hands-On
 
-### Lab 1: HTB Academy — Attacking Web Applications with Ffuf
+### Lab 1: HTB Academy, Attacking Web Applications with Ffuf
 **Obiettivo:** trovare endpoint nascosti con fuzzing avanzato
 **Difficulty:** Medio
 **Time:** 1.5h
@@ -125,7 +125,7 @@ curl -H "X-Original-URL: /admin/" http://target.com/
 ## Link Utili
 
 - [SecLists GitHub](https://github.com/danielmiessler/SecLists)
-- [HTB Academy — Ffuf](https://academy.hackthebox.com/)
+- [HTB Academy: Ffuf](https://academy.hackthebox.com/)
 
 ---
 
@@ -144,8 +144,3 @@ curl -H "X-Original-URL: /admin/" http://target.com/
 - [ ] Conosco almeno 3 tecniche di bypass 403
 - [ ] So filtrare i falsi positivi nel fuzzing
 
----
-
-## Note personali
-
-_(spazio libero)_

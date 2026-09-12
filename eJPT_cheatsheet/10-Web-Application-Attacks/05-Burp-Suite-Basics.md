@@ -1,6 +1,6 @@
 # Burp Suite Basics
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** [01-Web-Fundamentals-HTTP.md](01-Web-Fundamentals-HTTP.md)
 **Lab:** DVWA / qualsiasi webapp di lab
@@ -9,7 +9,7 @@
 
 ## Obiettivo
 
-Configurare e usare Burp Suite Community a livello base: proxy, intercept, Repeater, Intruder. Prerequisito pratico per tutti gli altri file di questa sezione.
+Fin qui hai testato SQLi/XSS/LFI a mano nella barra degli indirizzi o con curl: funziona, ma diventa scomodo in fretta. Burp Suite è lo strumento che userai davvero per il resto della sezione (e per il resto della tua vita da pentester web): qui configuri proxy, intercept, Repeater e Intruder a livello base — è il prerequisito pratico per tutti gli altri file di questa sezione, non un capitolo a parte da saltare.
 
 ---
 
@@ -28,7 +28,7 @@ Configurare e usare Burp Suite Community a livello base: proxy, intercept, Repea
 
 1. Avvia Burp, verifica che il Proxy listener sia su `127.0.0.1:8080` (default)
 2. Configura il browser per usare quel proxy (manualmente o con estensione tipo FoxyProxy)
-3. Visita `http://burpsuite` (o `http://burp`) dal browser proxato per scaricare e installare il certificato CA di Burp — necessario per intercettare HTTPS senza warning
+3. Visita `http://burpsuite` (o `http://burp`) dal browser proxato per scaricare e installare il certificato CA di Burp: necessario per intercettare HTTPS senza warning
 
 ---
 
@@ -57,7 +57,7 @@ Configurare e usare Burp Suite Community a livello base: proxy, intercept, Repea
 2. Nel tab Repeater, modifica il parametro `id` in vari modi (`1'`, `1 OR 1=1`, ecc.)
 3. Premi "Send" e confronta le risposte
 
-**Spiegazione:** Repeater e lo strumento principale per confermare manualmente vulnerabilita (SQLi, XSS, LFI) prima o al posto di tool automatici come sqlmap.
+**Spiegazione:** Repeater e lo strumento principale per confermare manualmente vulnerabilità (SQLi, XSS, LFI) prima o al posto di tool automatici come sqlmap.
 
 ### Esempio 3: Intruder per brute force di base
 
@@ -72,7 +72,7 @@ Configurare e usare Burp Suite Community a livello base: proxy, intercept, Repea
 
 ## Lab Hands-On
 
-### Lab 1: DVWA con Burp — flusso completo
+### Lab 1: DVWA con Burp, flusso completo
 **Obiettivo:** proxare tutto il traffico verso DVWA e usare Repeater/Intruder
 **Difficulty:** Facile
 **Time:** 30 min
@@ -94,7 +94,7 @@ Configurare e usare Burp Suite Community a livello base: proxy, intercept, Repea
 
 ## Link Utili
 
-- [PortSwigger — Getting started with Burp Suite](https://portswigger.net/burp/documentation/desktop/getting-started)
+- [PortSwigger: Getting started with Burp Suite](https://portswigger.net/burp/documentation/desktop/getting-started)
 
 ---
 
@@ -113,8 +113,3 @@ Configurare e usare Burp Suite Community a livello base: proxy, intercept, Repea
 - [ ] So usare Repeater per test ripetuti
 - [ ] So impostare un attacco Intruder di base
 
----
-
-## Note personali
-
-_(spazio libero)_

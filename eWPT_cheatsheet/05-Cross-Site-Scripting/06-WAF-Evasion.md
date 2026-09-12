@@ -1,15 +1,15 @@
 # WAF Evasion (XSS)
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 2h
 **Prerequisiti:** [05-Encoding-Payloads.md](05-Encoding-Payloads.md)
-**Lab:** PortSwigger Academy — XSS filter evasion
+**Lab:** PortSwigger Academy, XSS filter evasion
 
 ---
 
 ## Obiettivo
 
-Raccolta sistematica di tecniche per bypassare filtri/WAF che bloccano tag, keyword o pattern noti di XSS. Sezione "cheatsheet puro" da scorrere in ordine durante l'esame.
+Un WAF che blocca `<script>` ti sembra un muro solo finché non scopri quanti altri modi esistono per far eseguire JavaScript al browser: tag alternativi, case diverse, nesting, funzioni ricostruite a runtime. Questa è la raccolta sistematica di quelle tecniche per bypassare filtri/WAF che bloccano tag, keyword o pattern noti di XSS — una sezione "cheatsheet puro" da scorrere in ordine quando il payload ovvio non passa.
 
 ---
 
@@ -50,7 +50,6 @@ Nessun tool dedicato: lista di payload da provare in sequenza con Burp Repeater/
 
 ```html
 <scr<script>ipt>alert(1)</scr</script>ipt>
-<img src=x one­rror=alert(1)>    -- carattere invisibile tra "on" ed "error" in alcuni filtri regex deboli
 ```
 
 ### Esempio 3: bypass case-sensitive
@@ -92,13 +91,13 @@ Se un file JSONP o libreria ospitata sul dominio whitelisted permette callback a
 
 ## Evasion / Bypass Techniques
 
-Questo intero file e la sezione evasion. **Regola pratica:** prova in ordine — tag/handler alternativo, poi case variation, poi nesting, poi encoding (vedi [05-Encoding-Payloads.md](05-Encoding-Payloads.md)), poi CSP bypass se applicabile.
+Questo intero file è la sezione evasion. **Regola pratica:** prova in ordine: tag/handler alternativo, poi case variation, poi nesting, poi encoding (vedi [05-Encoding-Payloads.md](05-Encoding-Payloads.md)), poi CSP bypass se applicabile.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: PortSwigger — Reflected XSS with some SVG markup allowed
+### Lab 1: PortSwigger, Reflected XSS with some SVG markup allowed
 **Obiettivo:** bypassare blacklist parziale su tag
 **Difficulty:** Difficile
 **Time:** 45 min
@@ -112,15 +111,15 @@ Questo intero file e la sezione evasion. **Regola pratica:** prova in ordine —
 
 ## Common Mistakes
 
-- Fermarsi al primo tag bloccato -> esistono decine di tag/handler alternativi, non solo script/img/svg
+- Fermarsi al primo tag bloccato -> è il modo più veloce per convincerti che l'app sia sicura quando non lo è: esistono decine di tag/handler alternativi, non solo script/img/svg
 - Non controllare la CSP prima di dare per scontato che l'app sia protetta -> molte CSP hanno whitelist troppo ampie o mancano `object-src`/`base-uri`
 
 ---
 
 ## Link Utili
 
-- [PortSwigger — XSS cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
-- [PayloadsAllTheThings — XSS filter bypass](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection)
+- [PortSwigger: XSS cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
+- [PayloadsAllTheThings: XSS filter bypass](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection)
 
 ---
 
@@ -137,8 +136,3 @@ Questo intero file e la sezione evasion. **Regola pratica:** prova in ordine —
 - [ ] So bypassare filtri case-sensitive e a rimozione singola
 - [ ] So valutare la robustezza di una CSP
 
----
-
-## Note personali
-
-_(spazio libero)_

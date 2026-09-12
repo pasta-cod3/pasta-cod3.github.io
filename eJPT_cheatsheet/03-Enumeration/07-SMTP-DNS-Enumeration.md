@@ -1,15 +1,15 @@
 # SMTP & DNS Enumeration
 
-**Difficolta:** Intermediate
+**Difficoltà:** Intermediate
 **Time to Master:** 1h
 **Prerequisiti:** [06-NFS-RPC-Enumeration.md](06-NFS-RPC-Enumeration.md)
-**Lab:** INE PTS — Service Enumeration
+**Lab:** INE PTS, Service Enumeration
 
 ---
 
 ## Obiettivo
 
-SMTP e DNS sono servizi spesso trascurati ma utili per la user enumeration (SMTP) e per rivelare la struttura interna di una rete (DNS zone transfer). Entrambi generano informazioni riusabili nelle fasi successive.
+Sono due servizi facili da ignorare perché "non si exploitano", e infatti non è quello il punto: SMTP con `VRFY` aperto ti regala una lista di utenti validi, un DNS zone transfer riuscito ti regala la mappa interna di una rete. In entrambi i casi non stai attaccando nulla, stai solo raccogliendo materiale che userai concretamente nella fase successiva.
 
 ---
 
@@ -25,7 +25,7 @@ SMTP e DNS sono servizi spesso trascurati ma utili per la user enumeration (SMTP
 
 ### DNS zone transfer (AXFR)
 
-Un DNS server mal configurato puo permettere il trasferimento completo della zona a chiunque lo richieda, rivelando tutti i record (subdomain, IP interni, host mail) in un colpo solo. I resolver moderni spesso limitano AXFR, ma resta un test da fare sempre.
+Un DNS server mal configurato può permettere il trasferimento completo della zona a chiunque lo richieda, rivelando tutti i record (subdomain, IP interni, host mail) in un colpo solo. I resolver moderni spesso limitano AXFR, ma resta un test da fare sempre.
 
 ---
 
@@ -55,7 +55,7 @@ backup@10.10.10.5 exists
 guest@10.10.10.5 does not exist
 ```
 
-**Spiegazione:** la userlist risultante puo essere riusata direttamente per un brute force mirato su SSH/FTP/web login (vedi [../05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md](../05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md)).
+**Spiegazione:** la userlist risultante può essere riusata direttamente per un brute force mirato su SSH/FTP/web login (vedi [../05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md](../05-System-Host-Attacks/03-Password-Attacks-Hydra-John-Hashcat.md)).
 
 ### Esempio 2: VRFY manuale via netcat
 
@@ -69,7 +69,7 @@ VRFY root
 250 2.1.5 root <root@localhost>
 ```
 
-**Spiegazione:** una risposta 250 conferma l'esistenza dell'utente; un 550 tipicamente indica utente inesistente — utile quando VRFY non e disabilitato dal server.
+**Spiegazione:** una risposta 250 conferma l'esistenza dell'utente; un 550 tipicamente indica utente inesistente: utile quando VRFY non e disabilitato dal server.
 
 ### Esempio 3: tentativo di zone transfer DNS
 
@@ -84,13 +84,13 @@ mail.target.com.   300  IN  A     10.10.10.6
 internal.target.com. 300 IN A    10.10.10.20
 ```
 
-**Spiegazione:** una zona trasferita con successo rivela host interni non altrimenti scopribili via enumerazione esterna — quasi sempre negato su target moderni, ma sempre da provare.
+**Spiegazione:** una zona trasferita con successo rivela host interni non altrimenti scopribili via enumerazione esterna: quasi sempre negato su target moderni, ma sempre da provare.
 
 ---
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Mail & DNS enumeration
+### Lab 1: INE PTS, Mail & DNS enumeration
 **Obiettivo:** enumerare almeno 3 utenti via SMTP e verificare se il DNS permette zone transfer
 **Difficulty:** Medio
 **Time:** 35 min
@@ -106,7 +106,7 @@ internal.target.com. 300 IN A    10.10.10.20
 
 - Usare solo VRFY quando e disabilitato -> ricontrollare con RCPT TO, spesso il comportamento differisce comunque tra utenti validi/non validi
 - Provare axfr solo verso il resolver pubblico e non verso i nameserver autoritativi specifici del dominio -> il transfer va tentato contro ogni NS elencato
-- Non incrociare le userlist raccolte da SMTP con quelle di SMB/SNMP -> combinare le fonti aumenta le probabilita di successo nei password attack
+- Non incrociare le userlist raccolte da SMTP con quelle di SMB/SNMP -> combinare le fonti aumenta le probabilità di successo nei password attack
 
 ---
 
@@ -130,8 +130,3 @@ internal.target.com. 300 IN A    10.10.10.20
 - [ ] So tentare uno zone transfer DNS con dig axfr
 - [ ] So riusare le userlist raccolte per i password attack successivi
 
----
-
-## Note personali
-
-_(spazio libero)_

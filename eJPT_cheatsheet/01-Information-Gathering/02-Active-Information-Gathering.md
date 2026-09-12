@@ -1,15 +1,15 @@
 # Active Information Gathering
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** [01-Passive-Recon-OSINT.md](01-Passive-Recon-OSINT.md)
-**Lab:** INE PTS — Information Gathering
+**Lab:** INE PTS, Information Gathering
 
 ---
 
 ## Obiettivo
 
-Passare dalla raccolta passiva a un primo contatto diretto e controllato con l'infrastruttura target: banner grabbing, tentativi di zone transfer, ping/traceroute. E il ponte verso footprinting/scanning veri e propri.
+Qui è dove il target inizia a "vedere" qualcosa di te, anche se solo un pacchetto ICMP o una connessione netcat su una porta: passi dalla raccolta passiva a un primo contatto diretto ma ancora leggero e controllato — banner grabbing, tentativi di zone transfer, ping/traceroute. Pensalo come il ponte verso footprinting e scanning veri e propri: non stai ancora enumerando a fondo, stai solo bussando piano per vedere chi risponde.
 
 ---
 
@@ -20,16 +20,16 @@ Passare dalla raccolta passiva a un primo contatto diretto e controllato con l'i
 | Caratteristica | Passivo | Attivo |
 |------------------|---------|--------|
 | Traffico verso il target | nessuno | si, diretto |
-| Rilevabilita | invisibile | puo generare log/alert (IDS/IPS) |
+| Rilevabilita | invisibile | può generare log/alert (IDS/IPS) |
 | Esempi | whois, OSINT | ping, banner grab, zone transfer |
 
 ### Quando l'active recon richiede autorizzazione esplicita
 
-Qualsiasi pacchetto inviato direttamente al target e "in scope" solo se coperto dalle Rules of Engagement (vedi [00-Fundamentals/01-Cybersecurity-Concepts.md](../00-Fundamentals/01-Cybersecurity-Concepts.md)). In laboratorio questo e implicito, ma e la mentalita corretta da portarsi dietro per un engagement reale.
+Qualsiasi pacchetto inviato direttamente al target è "in scope" solo se coperto dalle Rules of Engagement (vedi [00-Fundamentals/01-Cybersecurity-Concepts.md](../00-Fundamentals/01-Cybersecurity-Concepts.md)). In laboratorio questo è implicito, ma è la mentalità corretta da portarsi dietro per un engagement reale.
 
 ### Banner grabbing
 
-Molti servizi rispondono con informazioni di versione al primo contatto (banner) — spesso sufficiente per cercare exploit noti senza ulteriore enumerazione.
+Molti servizi rispondono con informazioni di versione al primo contatto (banner): spesso sufficiente per cercare exploit noti senza ulteriore enumerazione.
 
 ---
 
@@ -37,7 +37,7 @@ Molti servizi rispondono con informazioni di versione al primo contatto (banner)
 
 | Tool | Comando base | Output | Note |
 |------|---------------|--------|------|
-| ping / traceroute | `ping -c 4 target.com` | raggiungibilita, hop | ICMP puo essere filtrato |
+| ping / traceroute | `ping -c 4 target.com` | raggiungibilità, hop | ICMP può essere filtrato |
 | netcat | `nc -nv target.com 22` | banner del servizio | funziona su quasi ogni servizio testuale |
 | dig axfr | `dig axfr @ns1.target.com target.com` | tentativo zone transfer | quasi sempre negato su server moderni |
 | curl | `curl -sI http://target.com` | header HTTP di risposta | rivela server/tecnologia |
@@ -68,7 +68,7 @@ SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.5
 dig axfr @ns1.target.com target.com
 ```
 
-**Spiegazione:** se mal configurato, un zone transfer riuscito restituisce l'intera mappa DNS interna del dominio (subdomain, IP interni) — misconfigurazione critica ma rara oggi.
+**Spiegazione:** se mal configurato, un zone transfer riuscito restituisce l'intera mappa DNS interna del dominio (subdomain, IP interni): misconfigurazione critica ma rara oggi.
 
 ### Esempio 3: header HTTP per fingerprint rapido
 
@@ -83,21 +83,21 @@ Server: Apache/2.4.41 (Ubuntu)
 X-Powered-By: PHP/7.4.3
 ```
 
-**Spiegazione:** `Server` e `X-Powered-By` rivelano stack tecnologico — primo indizio per cercare vulnerabilita note in quella versione specifica.
+**Spiegazione:** `Server` e `X-Powered-By` rivelano stack tecnologico: primo indizio per cercare vulnerabilità note in quella versione specifica.
 
 ---
 
 ## Common Mistakes
 
 - Lanciare uno scan aggressivo come primo pacchetto verso il target invece di un banner grab leggero
-- Aspettarsi che lo zone transfer funzioni sempre — sui server moderni e quasi sempre negato, non e un fallimento della metodologia
-- Ignorare header HTTP "minori" (X-Powered-By, Server) che spesso rivelano piu del contenuto della pagina
+- Aspettarsi che lo zone transfer funzioni sempre: sui server moderni e quasi sempre negato, non e un fallimento della metodologia
+- Ignorare header HTTP "minori" (X-Powered-By, Server) che spesso rivelano più del contenuto della pagina
 
 ---
 
 ## Link Utili
 
-- [RFC 1035 — DNS](https://www.rfc-editor.org/rfc/rfc1035)
+- [RFC 1035: DNS](https://www.rfc-editor.org/rfc/rfc1035)
 
 ---
 
@@ -114,10 +114,5 @@ X-Powered-By: PHP/7.4.3
 - [ ] So fare banner grabbing manuale con netcat su almeno 3 servizi diversi
 - [ ] So tentare (e interpretare l'esito di) uno zone transfer DNS
 - [ ] So leggere gli header HTTP per un primo fingerprint tecnologico
-- [ ] Capisco la differenza di rischio/rilevabilita tra recon passiva e attiva
+- [ ] Capisco la differenza di rischio/rilevabilità tra recon passiva e attiva
 
----
-
-## Note personali
-
-_(spazio libero)_

@@ -1,15 +1,15 @@
 # Google Dorking & Search Engines
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1.5h
 **Prerequisiti:** [02-Active-Information-Gathering.md](02-Active-Information-Gathering.md)
-**Lab:** INE PTS — Information Gathering
+**Lab:** INE PTS, Information Gathering
 
 ---
 
 ## Obiettivo
 
-Usare operatori di ricerca avanzata su Google e GitHub per trovare file esposti, credenziali e pannelli di login collegati al target. Tecnica passiva al 100%: nessun traffico diretto al target.
+Google e GitHub hanno già indicizzato più cose del target di quanto pensi, e trovarle è ancora recon passiva al 100%: nessun traffico diretto verso il target, solo query mirate a un motore di ricerca. Con gli operatori giusti (`site:`, `filetype:`, `inurl:`) e qualche dork della GHDB scopri file esposti per errore, credenziali finite in un repository pubblico, pannelli di login che nessuno pensava fossero raggiungibili da fuori.
 
 ---
 
@@ -28,7 +28,7 @@ Usare operatori di ricerca avanzata su Google e GitHub per trovare file esposti,
 
 ### GHDB (Google Hacking Database)
 
-Raccolta pubblica su Exploit-DB di dork gia pronti, categorizzati per tipo di risultato (file sensibili, pannelli di login, messaggi di errore, ecc.) — punto di partenza migliore rispetto a inventare dork da zero.
+Raccolta pubblica su Exploit-DB di dork già pronti, categorizzati per tipo di risultato (file sensibili, pannelli di login, messaggi di errore, ecc.): punto di partenza migliore rispetto a inventare dork da zero.
 
 ---
 
@@ -86,7 +86,7 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target.
 
 ## Lab Hands-On
 
-### Lab 1: INE PTS — Dorking Practice
+### Lab 1: INE PTS, Dorking Practice
 **Obiettivo:** applicare dork per trovare file/pannelli esposti su target di laboratorio
 **Difficulty:** Facile
 **Time:** 25 min
@@ -101,7 +101,7 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target.
 ## Common Mistakes
 
 - Limitarsi a Google -> il dorking su GitHub trova spesso secret che Google non indicizza
-- Ignorare la cache -> una pagina rimossa puo essere ancora visibile in cache/Wayback Machine
+- Ignorare la cache -> una pagina rimossa può essere ancora visibile in cache/Wayback Machine
 
 ---
 
@@ -127,8 +127,3 @@ Tecnica interamente passiva: nessuna evasion necessaria verso il target.
 - [ ] Ho consultato la GHDB almeno una volta
 - [ ] So documentare i risultati con URL precisi
 
----
-
-## Note personali
-
-_(spazio libero)_

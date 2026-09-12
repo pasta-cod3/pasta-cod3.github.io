@@ -1,6 +1,6 @@
 # Command-Line Tools Quick Reference
 
-**Difficolta:** Beginner
+**Difficoltà:** Beginner
 **Time to Master:** 1h
 **Prerequisiti:** [00-Fundamentals/Linux-for-WebHacking.md](../00-Fundamentals/Linux-for-WebHacking.md)
 **Lab:** riferimento trasversale
@@ -9,7 +9,7 @@
 
 ## Obiettivo
 
-Riferimento rapido con flag e opzioni dei tool CLI usati piu spesso durante un engagement eWPT, per non perdere tempo a cercare la sintassi esatta durante l'esame.
+Durante l'esame non hai tempo di aprire il man di nmap per ricordarti se era `-sV` o `-sC` a fare cosa. Questa è la pagina che tieni aperta in un tab: le flag di nmap, curl, gobuster/ffuf e sqlmap che usi davvero, senza il resto del manuale che non ti serve in quel momento.
 
 ---
 
@@ -65,8 +65,3 @@ Riferimento rapido con flag e opzioni dei tool CLI usati piu spesso durante un e
 - **Prerequisito:** [00-Fundamentals/Linux-for-WebHacking.md](../00-Fundamentals/Linux-for-WebHacking.md)
 - **Prossimo Step:** [Scripting-Snippets.md](Scripting-Snippets.md)
 
----
-
-## Note personali
-
-_(spazio libero)_
