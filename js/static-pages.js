@@ -240,6 +240,97 @@ function initSearchShortcut() {
   });
 }
 
+/* ─── CURSORE CUSTOM (solo desktop, puntatore fine) ──────── */
+
+function initCustomCursor() {
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  // Il sito applica un CSS zoom non standard su <html> (vedi style.css) che
+  // ri-scala l'intero subtree renderizzato, comprese le coordinate di un
+  // elemento position:fixed — senza compensare, il cursore finisce spostato
+  // di un fattore pari allo zoom attivo. Si legge il fattore corrente e si
+  // divide la posizione target prima di applicarla.
+  let zoomFactor = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+  window.addEventListener('resize', () => {
+    zoomFactor = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+  });
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let rx = mx, ry = my;
+  let started = false;
+
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    if (!started) {
+      started = true;
+      rx = mx; ry = my;
+      document.documentElement.classList.add('has-custom-cursor');
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest && e.target.closest('a, button, [role="button"], input, .cat-card, .stat-box')) {
+      ring.classList.add('is-active');
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest && e.target.closest('a, button, [role="button"], input, .cat-card, .stat-box')) {
+      ring.classList.remove('is-active');
+    }
+  });
+
+  function raf() {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    dot.style.left  = (mx / zoomFactor) + 'px';
+    dot.style.top   = (my / zoomFactor) + 'px';
+    ring.style.left = (rx / zoomFactor) + 'px';
+    ring.style.top  = (ry / zoomFactor) + 'px';
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
+
+/* ─── REVEAL INTESTAZIONI DI SEZIONE ─────────────────────── */
+
+function initSectionReveal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const targets = document.querySelectorAll('.section-hdr');
+  if (!targets.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.style.opacity = '';
+      el.classList.add('hdr-visible');
+      el.addEventListener('animationend', () => el.classList.remove('hdr-visible'), { once: true });
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.2 });
+  targets.forEach(t => { t.style.opacity = '0'; obs.observe(t); });
+}
+
+/* ─── ZOOM TRANSITION: pulizia a fine ingresso ───────────── */
+/* body.page-zoom-enter tiene #spaceCanvas a opacity:0 per tutta la
+   durata dello zoom (vedi style.css — un transform sul body lo
+   ingrandirebbe insieme al resto, mostrando testo sgranato). Il
+   canvas torna visibile solo a transizione FINITA, ascoltando
+   l'animationend reale del body invece di un secondo timer/keyframe
+   a mano: così le due durate non devono restare sincronizzate. */
+function initPageZoomEnter() {
+  const body = document.body;
+  if (!body.classList.contains('page-zoom-enter')) return;
+  body.addEventListener('animationend', e => {
+    if (e.target === body && e.animationName === 'page-zoom-out') {
+      body.classList.remove('page-zoom-enter');
+    }
+  });
+}
+
 /* ─── TERMINAL ANIMATION (about.html) ───────────────────── */
 /* L'animazione principale è inline in about.html per garantire
    l'ordine di esecuzione. Questo blocco aggiunge solo eventuale
@@ -262,4 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearchToggle();
   initSearchShortcut();
   initTerminalExtras();
+  initCustomCursor();
+  initSectionReveal();
+  initPageZoomEnter();
 });

@@ -27,16 +27,19 @@
   <meta property="og:url"         content="https://pasta-cod3.github.io/about.html">
 
   <!-- ── PERF ─────────────────────────────────────────────── -->
-  <!-- Fonts: non-blocking load, varianti ridotte da 13 a 7 -->
+  <!-- Fonts: non-blocking load (set completo: alcune varianti "ridotte"
+       qui mancavano pesi davvero usati altrove nel CSS globale — es. Orbitron
+       800 per .logo/.line1, 600 per .btn-ghost — coperti prima solo dal
+       @import in style.css, ora rimosso perché render-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   <link rel="stylesheet" media="print" onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   <noscript>
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   </noscript>
   <link rel="stylesheet" href="css/style.css" fetchpriority="high">
 
@@ -63,35 +66,25 @@
 </head>
 <body>
 
-<!-- ── VIDEO BG ─────────────────────────────────────────── -->
-<video id="bgVideo" class="bg-video" autoplay muted loop playsinline aria-hidden="true">
-  <source src="assets/video/background.mp4" type="video/mp4">
-</video>
-<script>
-  (function () {
-    var v = document.getElementById('bgVideo');
-    if (!v) return;
-    var resume = function () { if (v.paused && !document.hidden) v.play().catch(function () {}); };
-    v.addEventListener('pause', resume);
-    document.addEventListener('visibilitychange', resume);
-  })();
-</script>
-
 <!-- ── CANVAS ─────────────────────────────────────────── -->
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
 <!-- ── NAV ───────────────────────────────────────────── -->
 <div class="nav-overlay" id="navOverlay"></div>
 <nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
   <a href="index.html"    class="nav-drawer-link">Home</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="red-team">Red Team</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="blue-team">Blue Team</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="storia">Storia</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="notizie">Notizie</a>
+  <a href="red-team.html"    class="nav-drawer-link">Red Team</a>
+  <a href="blue-team.html"    class="nav-drawer-link">Blue Team</a>
+  <a href="storia.html"    class="nav-drawer-link">Storia</a>
+  <a href="notizie.html"    class="nav-drawer-link">Notizie</a>
   <a href="fondamentali.html" class="nav-drawer-link nav-fond">
     <span class="nav-fond-drawer-row">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></span>
     <span class="nav-fond-drawer-desc">77 stanze interattive, quiz, TryHackMe — sempre gratis.</span>
   </a>
+  <a href="cheatsheet.html" class="nav-drawer-link">Cheatsheet</a>
   <a href="about.html"    class="nav-drawer-link active">Chi sono</a>
   <a href="contatti.html" class="nav-drawer-link">Contatti</a>
 </nav>
@@ -102,10 +95,10 @@
   <nav class="nav-center" aria-label="Navigazione principale">
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="index.html" data-cat="red-team">Red Team</a></li>
-      <li><a href="index.html" data-cat="blue-team">Blue Team</a></li>
-      <li><a href="index.html" data-cat="storia">Storia</a></li>
-      <li><a href="index.html" data-cat="notizie">Notizie</a></li>
+      <li><a href="red-team.html">Red Team</a></li>
+      <li><a href="blue-team.html">Blue Team</a></li>
+      <li><a href="storia.html">Storia</a></li>
+      <li><a href="notizie.html">Notizie</a></li>
       <li class="nav-fond-wrap">
         <a href="fondamentali.html" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
         <span class="nav-fond-tip">
@@ -114,6 +107,7 @@
           <a class="nav-fond-tip-cta" href="fondamentali.html">Apri il percorso →</a>
         </span>
       </li>
+      <li><a href="cheatsheet.html">Cheatsheet</a></li>
       <li><a href="about.html" class="active">Chi sono</a></li>
       <li><a href="contatti.html">Contatti</a></li>
     </ul>
@@ -132,8 +126,9 @@
 <main class="static-main">
 
   <!-- ── HERO ───────────────────────────────────────── -->
-  <div class="static-hero" style="position:relative;overflow:hidden;">
+  <div class="static-hero">
     <div class="scan-line" aria-hidden="true"></div>
+    <canvas id="staticHeroScene" class="hero-scene" aria-hidden="true"></canvas>
     <div class="static-hero-inner">
       <p class="eyebrow">00 / Chi sono</p>
 
@@ -426,5 +421,14 @@
 <script src="js/vendor/lenis.min.js"></script>
 <script src="js/static-pages.js"></script>
 <script src="js/static-cinematic.js"></script>
+<script type="module">
+  import { createNetworkScene } from './js/hero-scene.js';
+  createNetworkScene({
+    canvasId: 'staticHeroScene',
+    containerSelector: '.static-hero',
+    nodeCount: 35,
+    cameraZ: 15,
+  });
+</script>
 </body>
 </html>

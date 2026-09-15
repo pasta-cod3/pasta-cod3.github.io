@@ -7,7 +7,7 @@
 
   <!-- ── SEO ──────────────────────────────────────────────── -->
   <title>Cheatsheet certificazioni | pasta-cod3 Cybersecurity Blog</title>
-  <meta name="description" content="Cheatsheet tecnici di riferimento per le certificazioni di penetration testing: eWPT ed eJPT, organizzati per argomento, con lab e walkthrough.">
+  <meta name="description" content="Cheatsheet tecnici di riferimento per le certificazioni di penetration testing: eWPT ed eJPT, organizzati per argomento.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://pasta-cod3.github.io/cheatsheet.html">
 
@@ -21,18 +21,18 @@
   <!-- OG -->
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="Cheatsheet certificazioni | pasta-cod3">
-  <meta property="og:description" content="Cheatsheet tecnici per eWPT ed eJPT: enumeration, exploitation, tool, lab e walkthrough.">
+  <meta property="og:description" content="Cheatsheet tecnici per eWPT ed eJPT: enumeration, exploitation, tool ed esempi pratici.">
   <meta property="og:url"         content="https://pasta-cod3.github.io/cheatsheet.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   <link rel="stylesheet" media="print" onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   <noscript>
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   </noscript>
   <link rel="stylesheet" href="css/style.css" fetchpriority="high">
 
@@ -46,52 +46,115 @@
       font-weight: 800; line-height: 1.15; color: var(--text); margin: 1rem 0 1rem;
     }
     .cheat-hub-lead { color: var(--text-dim); font-size: 1rem; line-height: 1.7; max-width: 640px; }
+
+    /* Sezione card fuori dalla hero (che resta la sola intro), a piena
+       larghezza come le altre sezioni del sito: prima le due card erano
+       compresse dentro il contenitore da 720px dell'hero, qui hanno
+       spazio proprio e una piccola etichetta a fargli da intestazione. */
+    .cheat-hub-section {
+      max-width: var(--max); margin: 0 auto;
+      padding: clamp(2.5rem,5vw,3.5rem) var(--gap) clamp(4rem,7vw,6rem);
+    }
+    .cheat-hub-label {
+      display: flex; align-items: center; gap: .6rem;
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 1.5rem;
+    }
+    .cheat-hub-label::before { content:''; width: 24px; height: 1px; background: var(--border-h); }
+
     .cheat-hub-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--gap); margin-top: calc(var(--gap)*1.5);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--gap); perspective: 1000px;
     }
     .cheat-hub-card {
-      display: block; background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1.5rem; text-decoration: none; transition: border-color .2s, transform .2s;
+      display: block; position: relative; overflow: hidden;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.75rem 1.6rem 1.6rem;
+      text-decoration: none;
+      transition: transform .24s cubic-bezier(0.34,1.56,0.64,1), border-color .2s ease, box-shadow .24s ease;
+      animation: cheat-hub-card-in .6s cubic-bezier(0.22,1,0.36,1) both;
+      --hub-acc: var(--accent); --hub-glow: rgba(0,200,255,0.3);
     }
-    .cheat-hub-card:not(.disabled):hover { border-color: var(--border-h); transform: translateY(-2px); }
+    .cheat-hub-card:nth-child(2) { animation-delay: .12s; }
+    @keyframes cheat-hub-card-in {
+      from { opacity: 0; transform: translateY(20px) scale(.97); filter: blur(6px); }
+      to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    .cheat-hub-card:not(.disabled):hover {
+      border-color: var(--hub-acc);
+      box-shadow: 0 0 32px var(--hub-glow), 0 10px 34px rgba(0,0,0,0.4);
+      transform: translateY(-4px);
+    }
     .cheat-hub-card.disabled { opacity: .55; cursor: default; }
+    .cheat-hub-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--hub-acc); box-shadow: 0 0 10px var(--hub-acc), 0 0 22px var(--hub-acc);
+      opacity: 0; transition: opacity .2s ease;
+    }
+    .cheat-hub-card:hover::before { opacity: 1; }
+    .cheat-hub-card::after {
+      content: ''; position: absolute; top: 0; left: 0; width: 38%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      transform: translateX(-130%) skewX(-15deg); pointer-events: none;
+    }
+    .cheat-hub-card:hover::after { animation: card-shimmer .82s ease forwards; }
+
     .cheat-hub-card-badge {
       display: inline-block; font-family: var(--ff-m); font-size: 11px; letter-spacing: .08em;
-      text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: .9rem;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 1.1rem;
     }
     .cheat-hub-card-title {
       font-family: var(--ff-d); font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: .5rem;
     }
     .cheat-hub-card-desc { color: var(--text-dim); font-size: .9rem; line-height: 1.6; margin-bottom: 1rem; }
-    .cheat-hub-card-meta { font-family: var(--ff-m); font-size: 11px; color: var(--text-dim); }
+    .cheat-hub-card-meta { font-family: var(--ff-m); font-size: 11px; color: var(--text-dim); display: block; margin-bottom: 1.2rem; }
+    .cheat-hub-card-actions { display: flex; flex-wrap: wrap; gap: .6rem; position: relative; z-index: 2; }
+
+    .cheat-hub-card-open, .cheat-hub-card-download {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: var(--ff-m); font-size: 11px; font-weight: 700;
+      letter-spacing: .05em; text-decoration: none;
+      padding: .6rem 1.15rem; border-radius: 6px;
+      transition: transform .2s cubic-bezier(0.34,1.56,0.64,1), box-shadow .2s ease, color .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .cheat-hub-card-open {
+      background: var(--hub-acc); color: #04140f; border: 1px solid var(--hub-acc);
+      box-shadow: 0 2px 14px var(--hub-glow);
+    }
+    .cheat-hub-card-open .arrow { display: inline-block; transition: transform .2s ease; }
+    .cheat-hub-card-open:hover {
+      box-shadow: 0 0 26px var(--hub-glow), 0 6px 22px var(--hub-glow);
+      transform: translateY(-2px);
+    }
+    .cheat-hub-card-open:hover .arrow { transform: translateX(3px); }
+    .cheat-hub-card-download {
+      background: transparent; color: var(--text-dim); border: 1px solid var(--border);
+    }
+    .cheat-hub-card-download:hover {
+      color: var(--hub-acc); border-color: var(--hub-acc);
+      background: color-mix(in srgb, var(--hub-acc) 10%, transparent);
+      transform: translateY(-2px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cheat-hub-card { animation: none; }
+    }
   </style>
 </head>
 <body>
 
-<!-- ── VIDEO BG ─────────────────────────────────────────── -->
-<video id="bgVideo" class="bg-video" autoplay muted loop playsinline aria-hidden="true">
-  <source src="assets/video/background.mp4" type="video/mp4">
-</video>
-<script>
-  (function () {
-    var v = document.getElementById('bgVideo');
-    if (!v) return;
-    var resume = function () { if (v.paused && !document.hidden) v.play().catch(function () {}); };
-    v.addEventListener('pause', resume);
-    document.addEventListener('visibilitychange', resume);
-  })();
-</script>
-
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
 <div class="nav-overlay" id="navOverlay"></div>
 <nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
   <a href="index.html"    class="nav-drawer-link">Home</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="red">Red Team</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="blue">Blue Team</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="storia">Storia</a>
-  <a href="index.html"    class="nav-drawer-link" data-cat="news">News</a>
+  <a href="red-team.html"    class="nav-drawer-link">Red Team</a>
+  <a href="blue-team.html"    class="nav-drawer-link">Blue Team</a>
+  <a href="storia.html"    class="nav-drawer-link">Storia</a>
+  <a href="notizie.html"    class="nav-drawer-link">News</a>
   <a href="fondamentali.html" class="nav-drawer-link nav-fond">
     <span class="nav-fond-drawer-row">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></span>
     <span class="nav-fond-drawer-desc">77 stanze interattive, quiz, TryHackMe — sempre gratis.</span>
@@ -106,10 +169,10 @@
   <nav class="nav-center" aria-label="Navigazione principale">
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="index.html" data-cat="red">Red Team</a></li>
-      <li><a href="index.html" data-cat="blue">Blue Team</a></li>
-      <li><a href="index.html" data-cat="storia">Storia</a></li>
-      <li><a href="index.html" data-cat="news">News</a></li>
+      <li><a href="red-team.html">Red Team</a></li>
+      <li><a href="blue-team.html">Blue Team</a></li>
+      <li><a href="storia.html">Storia</a></li>
+      <li><a href="notizie.html">News</a></li>
       <li class="nav-fond-wrap">
         <a href="fondamentali.html" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
         <span class="nav-fond-tip">
@@ -132,35 +195,46 @@
 </header>
 
 <main class="static-main">
-  <div class="static-hero" style="position:relative;overflow:hidden;">
+  <div class="static-hero">
     <div class="scan-line" aria-hidden="true"></div>
     <div class="static-hero-inner">
       <p class="eyebrow">Guide tecniche / Cheatsheet</p>
       <h1 class="cheat-hub-title">Cheatsheet per le certificazioni</h1>
       <p class="cheat-hub-lead">
         Riferimento tecnico completo per la preparazione alle certificazioni di penetration testing:
-        ogni tecnica con obiettivo, comandi verificati, payload ed esempi pratici, oltre a lab e walkthrough dedicati.
+        ogni tecnica con obiettivo, comandi verificati, payload ed esempi pratici.
       </p>
+    </div>
+  </div>
 
-      <div class="cheat-hub-grid">
-        <a href="/cheatsheet/ewpt/" class="cheat-hub-card">
-          <span class="cheat-hub-card-badge" style="background:#f5a62322;color:#f5a623;border:1px solid #f5a62355;">eWPT</span>
-          <div class="cheat-hub-card-title">eWPT Cheatsheet</div>
-          <p class="cheat-hub-card-desc">
-            Web Application Penetration Testing: enumeration, LFI/RFI, SQL injection, XSS, auth &amp; authorization,
-            business logic, exploitation e post-exploitation.
-          </p>
-          <span class="cheat-hub-card-meta">12 sezioni · reporting incluso</span>
-        </a>
+  <div class="cheat-hub-section">
+    <p class="cheat-hub-label">→ Scegli la tua certificazione</p>
+    <div class="cheat-hub-grid">
+      <div class="cheat-hub-card" style="--hub-acc:#f5a623;--hub-glow:rgba(245,166,35,0.35);">
+        <span class="cheat-hub-card-badge" style="background:#f5a62322;color:#f5a623;border:1px solid #f5a62355;">eWPT</span>
+        <div class="cheat-hub-card-title">eWPT Cheatsheet</div>
+        <p class="cheat-hub-card-desc">
+          Web Application Penetration Testing: enumeration, LFI/RFI, SQL injection, XSS, auth &amp; authorization,
+          business logic, exploitation e post-exploitation.
+        </p>
+        <span class="cheat-hub-card-meta">12 sezioni · reporting incluso</span>
+        <div class="cheat-hub-card-actions">
+          <a href="/cheatsheet/ewpt/" class="cheat-hub-card-open">Apri cheatsheet <span class="arrow">→</span></a>
+          <a href="assets/downloads/eWPT-cheatsheet.zip" class="cheat-hub-card-download" download>⬇ Scarica ZIP</a>
+        </div>
+      </div>
 
-        <a href="/cheatsheet/ejpt/" class="cheat-hub-card">
-          <span class="cheat-hub-card-badge" style="background:#2ea44f22;color:#2ea44f;border:1px solid #2ea44f55;">eJPT</span>
-          <div class="cheat-hub-card-title">eJPT Cheatsheet</div>
-          <p class="cheat-hub-card-desc">
-            Junior Penetration Tester: fondamentali di rete, footprinting, enumeration, Metasploit, host e network attack.
-          </p>
-          <span class="cheat-hub-card-meta">14 sezioni · reporting incluso</span>
-        </a>
+      <div class="cheat-hub-card" style="--hub-acc:#2ea44f;--hub-glow:rgba(46,164,79,0.35);">
+        <span class="cheat-hub-card-badge" style="background:#2ea44f22;color:#2ea44f;border:1px solid #2ea44f55;">eJPT</span>
+        <div class="cheat-hub-card-title">eJPT Cheatsheet</div>
+        <p class="cheat-hub-card-desc">
+          Junior Penetration Tester: fondamentali di rete, footprinting, enumeration, Metasploit, host e network attack.
+        </p>
+        <span class="cheat-hub-card-meta">14 sezioni · reporting incluso</span>
+        <div class="cheat-hub-card-actions">
+          <a href="/cheatsheet/ejpt/" class="cheat-hub-card-open">Apri cheatsheet <span class="arrow">→</span></a>
+          <a href="assets/downloads/eJPT-cheatsheet.zip" class="cheat-hub-card-download" download>⬇ Scarica ZIP</a>
+        </div>
       </div>
     </div>
   </div>

@@ -2551,6 +2551,7 @@ function initHeroReveal() {
   if (reduced || typeof gsap === 'undefined') return;
 
   const eyebrow = hero.querySelector('.eyebrow');
+  const eyebrowBar = hero.querySelector('.eyebrow-bar');
   const lines   = hero.querySelectorAll('.line1, .line2, .line3');
   const sub     = hero.querySelector('.subtitle');
   const ctas    = hero.querySelectorAll('.hero-cta > *');
@@ -2559,14 +2560,16 @@ function initHeroReveal() {
 
   gsap.set([eyebrow, sub, ...ctas], { opacity: 0, y: 16, filter: 'blur(7px)' });
   gsap.set(lines, { opacity: 0, y: 24, filter: 'blur(11px)' });
+  if (eyebrowBar) gsap.set(eyebrowBar, { scaleX: 0 });
   gsap.set(stats, {
     opacity: 0, y: 22, rotateX: -22,
     transformPerspective: 700, transformOrigin: '50% 100%',
   });
 
-  gsap.timeline({ defaults: { ease: 'power3.out' } })
-    .to(eyebrow, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5 })
-    .to(lines, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.65, stagger: 0.12 }, '-=0.2')
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+    .to(eyebrow, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5 });
+  if (eyebrowBar) tl.to(eyebrowBar, { scaleX: 1, duration: 0.45, ease: 'power2.out' }, '<');
+  tl.to(lines, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.65, stagger: 0.12 }, '-=0.2')
     .to(sub, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5 }, '-=0.35')
     .to(ctas, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.45, stagger: 0.08, clearProps: 'transform,filter' }, '-=0.25')
     .to(stats, {
@@ -2586,6 +2589,16 @@ const CAT_LABEL = {
   'storia': 'Storia',
   'fond':   'Fondamentali',
   'news':   'Notizie',
+};
+
+// Ogni categoria ha ora una pagina dedicata (SEO propria, niente più
+// scroll infinito su un'unica lista): i click su categoria portano lì.
+const CAT_URLS = {
+  'red':    'red-team.html',
+  'blue':   'blue-team.html',
+  'storia': 'storia.html',
+  'news':   'notizie.html',
+  'fond':   'fondamentali.html',
 };
 
 function fmtDate(iso) {
@@ -2674,17 +2687,40 @@ function render() {
   const filtered = getFiltered();
 
   // Sorted: newest first
-  const sorted = [...filtered].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+  let sorted = [...filtered].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+
+  // La home mostra solo un assaggio degli ultimi articoli, non l'archivio
+  // intero: chi vuole scorrere una categoria per intero va sulla sua
+  // pagina dedicata (vedi CAT_URLS). Una ricerca o un tag specifico
+  // restano invece query mirate, e mostrano tutti i risultati.
+  const HOME_PREVIEW_LIMIT = 12;
+  const isNarrowQuery = !!(activeTag || searchQ.trim());
+  const totalCount = sorted.length;
+  if (!isNarrowQuery) sorted = sorted.slice(0, HOME_PREVIEW_LIMIT);
 
   list.innerHTML = sorted.map(buildCard).join('');
   if (noR) noR.classList.toggle('visible', sorted.length === 0);
+
+  const note = document.getElementById('previewNote');
+  if (note) {
+    if (!isNarrowQuery && totalCount > HOME_PREVIEW_LIMIT) {
+      note.hidden = false;
+      note.innerHTML = `Stai vedendo gli ultimi ${sorted.length} di ${totalCount} articoli — esplora una categoria per l'archivio completo: `
+        + Object.entries(CAT_URLS)
+            .filter(([c]) => c !== 'fond')
+            .map(([c, url]) => `<a href="${url}">${CAT_LABEL[c]}</a>`)
+            .join(' · ');
+    } else {
+      note.hidden = true;
+    }
+  }
 
   // Section title
   const title = document.getElementById('articlesSectionTitle');
   if (title) {
     title.textContent = activeCat
       ? CAT_LABEL[activeCat] + ' — ' + sorted.length + ' articol' + (sorted.length===1?'o':'i')
-      : 'Tutti gli articoli';
+      : 'Ultimi articoli';
   }
 
   // Sidebar count
@@ -2716,7 +2752,16 @@ function render() {
   const animCards = cards.slice(0, ANIM_CARDS_MAX);
   cards.slice(ANIM_CARDS_MAX).forEach(card => { card.style.opacity = '1'; });
 
-  if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && animCards.length) {
+  // Con un filtro (tag o ricerca) attivo il set di risultati è piccolo e la
+  // sezione è già a schermo quando scatta il render: il reveal "on scroll"
+  // di ScrollTrigger non attraversa mai la sua soglia (le card sono già
+  // dentro il 92% al momento della creazione del batch), quindi l'opacity:0
+  // impostata sotto non viene mai tolta e i risultati restano invisibili
+  // pur essendo nel DOM. Per una query mirata l'utente si aspetta comunque
+  // un feedback immediato, non un'animazione legata allo scroll: si salta
+  // il batch ScrollTrigger e si mostra tutto subito, come nel fallback
+  // reduced-motion qui sotto.
+  if (!prefersReducedMotion && !isNarrowQuery && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && animCards.length) {
     // render() ricrea il DOM ad ogni filtro: rimuove i trigger delle card precedenti
     ScrollTrigger.getAll().forEach(st => {
       if (st.trigger?.classList?.contains('article-card')) st.kill();
@@ -2888,15 +2933,30 @@ function classifyTag(tag) {
   return 'scenario';
 }
 
+/* Con ~160 articoli il tag-cloud sfiora le 650 etichette uniche, ma circa
+   l'80% compare su un solo post: un "filtro" che porta a un solo risultato
+   non è un filtro, è solo rumore che rende introvabili i tag che contano
+   davvero. Si mostrano solo i tag condivisi da almeno 2 articoli — tiene
+   fuori i nomi propri/incidenti unici, tiene dentro i temi ricorrenti. */
+const TAG_MIN_FREQ = 2;
+function getTagFreq() {
+  const freq = {};
+  POSTS.forEach(p => (p.tags || []).forEach(t => { freq[t] = (freq[t] || 0) + 1; }));
+  return freq;
+}
+function getFilterableTags() {
+  const freq = getTagFreq();
+  return Object.keys(freq).filter(t => freq[t] >= TAG_MIN_FREQ);
+}
+
 function buildTagPanel() {
   const panel = document.getElementById('tagPanel');
   if (!panel) return;
 
   /* frequency map for sorting within groups */
-  const freq = {};
-  POSTS.forEach(p => (p.tags || []).forEach(t => { freq[t] = (freq[t] || 0) + 1; }));
+  const freq = getTagFreq();
 
-  const allTags = [...new Set(POSTS.flatMap(p => p.tags || []))];
+  const allTags = getFilterableTags();
   const groups  = {};
   TAG_GROUPS.forEach(g => { groups[g.key] = []; });
   allTags.forEach(tag => { groups[classifyTag(tag)].push(tag); });
@@ -2956,9 +3016,8 @@ function initTagPanel() {
   if (!trigger || !panel) return;
 
   /* aggiorna badge count */
-  const allTags = [...new Set(POSTS.flatMap(p => p.tags || []))];
   const countEl = document.getElementById('tagPanelCount');
-  if (countEl) countEl.textContent = allTags.length;
+  if (countEl) countEl.textContent = getFilterableTags().length;
 
   trigger.addEventListener('click', e => {
     e.stopPropagation();
@@ -2983,7 +3042,7 @@ function initTagPanel() {
 
 function buildTagsUI() {
   /* Mantiene il filter-sheet mobile; sidebar tags ora gestita dal panel */
-  const allTags = [...new Set(POSTS.flatMap(p=>p.tags||[]))].sort();
+  const allTags = getFilterableTags().sort();
   const el = document.getElementById('filterSheetTags');
   if (!el) return;
   el.innerHTML = allTags.map(t=>
@@ -3012,13 +3071,14 @@ function syncTagUI() {
 
 
 /* ──────────────────────────────────────────────────────────
-   ▶ 3D TILT — mouse tracking su stat-box e cat-card
+   ▶ 3D TILT — mouse tracking su cat-card
+   (le stat-box della hero sono una fascia editoriale piatta, non
+   più delle card: il tilt 3D non si applica più lì di proposito)
    ────────────────────────────────────────────────────────── */
 function init3DTilt() {
-  /* 3D tilt su stat-box e cat-card */
-  document.querySelectorAll('.stat-box, .cat-card').forEach(el => {
+  document.querySelectorAll('.cat-card').forEach(el => {
     let tiltRaf = null, lastEvt = null;
-    const maxTilt = el.classList.contains('stat-box') ? 14 : 10;
+    const maxTilt = 10;
     el.addEventListener('mousemove', e => {
       lastEvt = e;
       if (tiltRaf) return; // un solo rAF in coda per frame: niente layout read/write ad ogni mousemove
@@ -3151,41 +3211,33 @@ function buildHeroReveal(sourceEl, catKey, subText) {
   return wrap;
 }
 
-function heroTransition(sourceEl, catKey, onReveal) {
-  const wrap = buildHeroReveal(sourceEl, catKey, '[ accesso categoria ]');
-  setTimeout(() => {
-    onReveal?.();
-    setTimeout(() => {
-      wrap.style.transition = 'opacity .45s ease';
-      wrap.style.opacity    = '0';
-      setTimeout(() => wrap.remove(), 470);
-    }, 60);
-  }, 720);
-}
-
-/* Variante per navigazione a pagina esterna */
+/* Apertura di un articolo dal carosello — resta il reveal radiale
+   "pulito" con badge di categoria e titolo dell'articolo. */
 function heroPageTransition(sourceEl, catKey, href) {
   const postTitle = sourceEl.querySelector('.inf-front-title')?.textContent?.trim().slice(0, 38) || '';
   buildHeroReveal(sourceEl, catKey, postTitle ? `> ${postTitle}` : '[ caricamento articolo ]');
   setTimeout(() => { window.location.href = href; }, 780);
 }
 
+/* Selezione di una sezione (Red Team, Blue Team, Storia, Notizie,
+   Fondamentali): zoom in semplice sulla pagina che si lascia, la
+   pagina di destinazione fa lo speculare zoom out al caricamento
+   (vedi .page-zoom-enter, aggiunta al <body> di quelle pagine). */
+function categoryZoomTransition(href) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.location.href = href;
+    return;
+  }
+  document.body.classList.add('page-zoom-exit');
+  setTimeout(() => { window.location.href = href; }, 420);
+}
+
 /* ──────────────────────────────────────────────────────────
    ▶ CAT FILTER
    ────────────────────────────────────────────────────────── */
 function syncCatUI() {
-  ['sidebarCats','filterSheetCats'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.querySelectorAll('[data-cat]').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.cat === activeCat);
-    });
-  });
-  // Nav links
-  document.querySelectorAll('[data-cat]').forEach(a => {
-    if (a.tagName !== 'BUTTON') return;
-  });
-  // Reset button
+  // Reset button (le categorie ora sono pagine dedicate: qui resta solo
+  // il filtro per tag sulla lista "Ultimi articoli" della home)
   const rb = document.getElementById('resetFilter');
   if (rb) rb.style.display = (activeCat||activeTag) ? '' : 'none';
 }
@@ -3378,14 +3430,6 @@ function initFilterSheet() {
   btn?.addEventListener('click', openSheet);
   overlay?.addEventListener('click', closeSheet);
   close?.addEventListener('click', closeSheet);
-
-  // Cat buttons in sheet
-  document.querySelectorAll('#filterSheetCats [data-cat]').forEach(b => {
-    b.addEventListener('click', () => {
-      setCategory(b.dataset.cat);
-      closeSheet();
-    });
-  });
 }
 
 
@@ -3393,20 +3437,13 @@ function initFilterSheet() {
    ▶ CATEGORY CLICK HANDLERS
    ────────────────────────────────────────────────────────── */
 function initCatHandlers() {
-  const scrollToArticles = () =>
-    document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-  // Sidebar (no animation, direct filter)
-  document.querySelectorAll('#sidebarCats [data-cat]').forEach(btn => {
-    btn.addEventListener('click', () => setCategory(btn.dataset.cat));
-  });
-
-  // Category cards — hero expand transition
+  // Category cards, stat box e link di navigazione portano tutti alla
+  // pagina dedicata della categoria, con reveal radiale + breach glitch
+  // (vedi categoryZoomTransition) — non una filtrazione in pagina.
   document.querySelectorAll('.cat-card[data-cat]').forEach(card => {
     const trigger = () => {
       const cat = card.dataset.cat;
-      if (cat === 'fond') { window.location.href = 'fondamentali.html'; return; }
-      heroTransition(card, cat, () => { setCategory(cat); scrollToArticles(); });
+      categoryZoomTransition(CAT_URLS[cat] || 'index.html');
     };
     card.addEventListener('click', trigger);
     card.addEventListener('keydown', e => {
@@ -3414,24 +3451,14 @@ function initCatHandlers() {
     });
   });
 
-  // Stat boxes — hero expand transition
   document.querySelectorAll('.stat-box[data-cat]').forEach(box => {
     const trigger = () => {
       const cat = box.dataset.cat;
-      if (cat === 'fond') { window.location.href = 'fondamentali.html'; return; }
-      heroTransition(box, cat, () => { setCategory(cat); scrollToArticles(); });
+      categoryZoomTransition(CAT_URLS[cat] || 'index.html');
     };
     box.addEventListener('click', trigger);
     box.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
-    });
-  });
-
-  // Nav links
-  document.querySelectorAll('.nav-links [data-cat], .f-nav [data-cat]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      setCategory(a.dataset.cat);
     });
   });
 
@@ -3446,10 +3473,21 @@ function initCatHandlers() {
 /* ──────────────────────────────────────────────────────────
    ▶ INFINITE CAROUSELS (Red Team, Blue Team, Storia)
    ────────────────────────────────────────────────────────── */
+/* Una durata fissa in secondi uguale per tutte non basta per una
+   velocità percepita uguale: la pista è lunga quanto le card che
+   contiene, quindi a parità di secondi Red/Blue (39/44 articoli)
+   percorrono molta più strada di Storia (18) nello stesso tempo e
+   sembrano molto più veloci, anche con --car-dur identico. Si fissa
+   invece la velocità (secondi per card) sul valore di riferimento di
+   Storia — indicata come "quasi ideale" — e la si applica a tutte,
+   così la durata di ognuna si ricalcola da sola in base a quante card
+   ha. La direzione alterna invece nel CSS (.inf-car[data-cat]
+   .inf-car-track), non qui. */
+const SEC_PER_CARD = 46 / 18;
 const CAR_CATS = [
-  { key: 'red',    label: 'Red Team',  dur: 38 },
-  { key: 'blue',   label: 'Blue Team', dur: 44 },
-  { key: 'storia', label: 'Storia',    dur: 41 },
+  { key: 'red',    label: 'Red Team' },
+  { key: 'blue',   label: 'Blue Team' },
+  { key: 'storia', label: 'Storia' },
 ];
 
 function buildFlipCard(post, staggerIdx, isFirst) {
@@ -3478,9 +3516,10 @@ function initInfCarousels() {
   const wrap = document.getElementById('infCarsWrap');
   if (!wrap) return;
 
-  CAR_CATS.forEach(({ key, label, dur }) => {
+  CAR_CATS.forEach(({ key, label }) => {
     const posts = POSTS.filter(p => p.cat === key);
     if (!posts.length) return;
+    const dur = Math.round(posts.length * SEC_PER_CARD);
 
     /* build HTML — duplicate cards for seamless infinite loop */
     const firstSet  = posts.map((p, i) => buildFlipCard(p, i, true)).join('');
@@ -3567,17 +3606,116 @@ function initTheme() {
 }
 
 
+
+
 /* ──────────────────────────────────────────────────────────
-   ▶ RESTORE SESSION FILTER (from nav drawer nav)
+   ▶ CUSTOM CURSOR — punto + anello con follow ad easing,
+   solo desktop con puntatore fine. Mai su touch/coarse o con
+   prefers-reduced-motion: in quel caso non si inizializza nulla
+   e il cursore di sistema resta quello predefinito.
    ────────────────────────────────────────────────────────── */
-function restoreFilter() {
-  const cat = sessionStorage.getItem('filterCat');
-  if (cat) {
-    sessionStorage.removeItem('filterCat');
-    activeCat = cat;
+function initCustomCursor() {
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  // Il sito applica un CSS zoom non standard su <html> (vedi style.css) che
+  // ri-scala l'intero subtree renderizzato, comprese le coordinate di un
+  // elemento position:fixed — senza compensare, il cursore finisce spostato
+  // di un fattore pari allo zoom attivo. Si legge il fattore corrente e si
+  // divide la posizione target prima di applicarla.
+  let zoomFactor = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+  window.addEventListener('resize', () => {
+    zoomFactor = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+  });
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let rx = mx, ry = my;
+  let started = false;
+
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    if (!started) {
+      started = true;
+      rx = mx; ry = my;
+      document.documentElement.classList.add('has-custom-cursor');
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest && e.target.closest('a, button, [role="button"], input, .cat-card, .stat-box')) {
+      ring.classList.add('is-active');
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest && e.target.closest('a, button, [role="button"], input, .cat-card, .stat-box')) {
+      ring.classList.remove('is-active');
+    }
+  });
+
+  function raf() {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    dot.style.left  = (mx / zoomFactor) + 'px';
+    dot.style.top   = (my / zoomFactor) + 'px';
+    ring.style.left = (rx / zoomFactor) + 'px';
+    ring.style.top  = (ry / zoomFactor) + 'px';
+    requestAnimationFrame(raf);
   }
+  requestAnimationFrame(raf);
 }
 
+/* ──────────────────────────────────────────────────────────
+   ▶ MAGNETIC CTA — le due call-to-action dell'hero si spostano
+   leggermente verso il cursore quando è nelle vicinanze.
+   ────────────────────────────────────────────────────────── */
+function initMagneticButtons() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.querySelectorAll('.hero-cta .btn-primary, .hero-cta .btn-ghost').forEach(btn => {
+    const range = 14; // px massimi di spostamento
+    let raf = null, lastEvt = null;
+    btn.addEventListener('mousemove', e => {
+      lastEvt = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const r = btn.getBoundingClientRect();
+        const dx = (lastEvt.clientX - (r.left + r.width / 2)) / (r.width / 2);
+        const dy = (lastEvt.clientY - (r.top + r.height / 2)) / (r.height / 2);
+        btn.style.transform = `translate(${dx * range}px, ${dy * range}px)`;
+      });
+    });
+    btn.addEventListener('mouseleave', () => {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      btn.style.transform = '';
+    });
+  });
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▶ SECTION REVEAL — le sezioni entrano leggermente a fuoco
+   scorrendo, per legare visivamente le sezioni tra loro.
+   ────────────────────────────────────────────────────────── */
+function initSectionReveal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const targets = document.querySelectorAll('.section-hdr');
+  if (!targets.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.style.opacity = '';
+      el.classList.add('hdr-visible');
+      el.addEventListener('animationend', () => el.classList.remove('hdr-visible'), { once: true });
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.2 });
+  targets.forEach(t => { t.style.opacity = '0'; obs.observe(t); });
+}
 
 /* ──────────────────────────────────────────────────────────
    ▶ INIT
@@ -3587,7 +3725,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroReveal();
   initCanvas();
   initTheme();
-  restoreFilter();
   updateCounts();
   buildTagsUI();
   syncCatUI();
@@ -3600,4 +3737,7 @@ document.addEventListener('DOMContentLoaded', () => {
   init3DTilt();
   initInfCarousels();
   initTagPanel();
+  initCustomCursor();
+  initMagneticButtons();
+  initSectionReveal();
 });

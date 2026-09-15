@@ -525,7 +525,10 @@ function renderGate() {
   `;
   const form = document.getElementById('fondGateForm');
   const input = document.getElementById('fondNicknameInput');
-  input.focus();
+  // preventScroll: senza, il focus programmatico al caricamento fa scattare
+  // lo scroll automatico del browser fino all'input, scavalcando l'hero
+  // sopra (titolo/sottotitolo) prima ancora che l'utente li legga.
+  input.focus({ preventScroll: true });
   form.addEventListener('submit', e => {
     e.preventDefault();
     const nick = input.value.trim();

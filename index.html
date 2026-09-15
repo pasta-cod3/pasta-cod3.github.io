@@ -35,18 +35,21 @@
   <meta name="twitter:site"        content="@stewe_sec">
 
   <!-- ── PERFORMANCE ──────────────────────────────────────── -->
-  <!-- Fonts: non-blocking load, varianti ridotte da 13 a 7 -->
+  <!-- Fonts: non-blocking load (set completo: alcune varianti "ridotte"
+       qui mancavano pesi davvero usati altrove nel CSS globale — es. Orbitron
+       800 per .logo/.line1, 600 per .btn-ghost — coperti prima solo dal
+       @import in style.css, ora rimosso perché render-blocking) -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   <link rel="stylesheet" media="print" onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   <noscript>
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   </noscript>
   <link rel="preload" href="css/style.css" as="style" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css" fetchpriority="high">
@@ -114,38 +117,30 @@
 </head>
 <body>
 
-<!-- ── VIDEO BG ─────────────────────────────────────────── -->
-<video id="bgVideo" class="bg-video bg-video-hero" autoplay muted loop playsinline aria-hidden="true">
-  <source src="assets/video/background.mp4" type="video/mp4">
-</video>
-<script>
-  // Alcuni video molto corti/loopati vengono messi in pausa dal browser
-  // (throttling di rendering, tab non a fuoco): li facciamo ripartire.
-  (function () {
-    var v = document.getElementById('bgVideo');
-    if (!v) return;
-    var resume = function () { if (v.paused && !document.hidden) v.play().catch(function () {}); };
-    v.addEventListener('pause', resume);
-    document.addEventListener('visibilitychange', resume);
-  })();
-</script>
-
 <!-- ── CYBERPUNK CANVAS BG ─────────────────────────────── -->
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
+
+<!-- ── GRAIN TEXTURE ────────────────────────────────────── -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- ── CUSTOM CURSOR (desktop) ─────────────────────────── -->
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
 <!-- ── NAV OVERLAY (mobile) ───────────────────────────── -->
 <div class="nav-overlay" id="navOverlay"></div>
 
 <!-- ── NAV DRAWER (mobile) ────────────────────────────── -->
 <nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
-  <a href="#" class="nav-drawer-link" data-cat="red">Red Team</a>
-  <a href="#" class="nav-drawer-link" data-cat="blue">Blue Team</a>
-  <a href="#" class="nav-drawer-link" data-cat="storia">Storia</a>
-  <a href="#" class="nav-drawer-link" data-cat="news">Notizie</a>
-  <a href="#" class="nav-drawer-link nav-fond" data-cat="fond">
+  <a href="red-team.html" class="nav-drawer-link">Red Team</a>
+  <a href="blue-team.html" class="nav-drawer-link">Blue Team</a>
+  <a href="storia.html" class="nav-drawer-link">Storia</a>
+  <a href="notizie.html" class="nav-drawer-link">Notizie</a>
+  <a href="fondamentali.html" class="nav-drawer-link nav-fond">
     <span class="nav-fond-drawer-row">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></span>
     <span class="nav-fond-drawer-desc">77 stanze interattive, quiz, TryHackMe — sempre gratis.</span>
   </a>
+  <a href="cheatsheet.html" class="nav-drawer-link">Cheatsheet</a>
   <a href="about.html"    class="nav-drawer-link">Chi sono</a>
   <a href="contatti.html" class="nav-drawer-link">Contatti</a>
 </nav>
@@ -162,12 +157,11 @@
   <div class="filter-sheet-section">
     <div class="filter-sheet-section-title">Categoria</div>
     <div class="filter-sheet-cats" id="filterSheetCats">
-      <button class="filter-sheet-cat-btn active" data-cat="">Tutte</button>
-      <button class="filter-sheet-cat-btn c-red"    data-cat="red">Red Team</button>
-      <button class="filter-sheet-cat-btn c-blue"   data-cat="blue">Blue Team</button>
-      <button class="filter-sheet-cat-btn c-storia" data-cat="storia">Storia</button>
-      <button class="filter-sheet-cat-btn c-news"   data-cat="news">Notizie</button>
-      <button class="filter-sheet-cat-btn c-fond nav-fond-chip" data-cat="fond">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></button>
+      <a class="filter-sheet-cat-btn c-red"    href="red-team.html">Red Team</a>
+      <a class="filter-sheet-cat-btn c-blue"   href="blue-team.html">Blue Team</a>
+      <a class="filter-sheet-cat-btn c-storia" href="storia.html">Storia</a>
+      <a class="filter-sheet-cat-btn c-news"   href="notizie.html">Notizie</a>
+      <a class="filter-sheet-cat-btn c-fond nav-fond-chip" href="fondamentali.html">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></a>
     </div>
   </div>
   <div class="filter-sheet-section">
@@ -197,18 +191,19 @@
 
   <nav class="nav-center" aria-label="Navigazione principale">
     <ul class="nav-links">
-      <li><a href="#" data-cat="red">Red Team</a></li>
-      <li><a href="#" data-cat="blue">Blue Team</a></li>
-      <li><a href="#" data-cat="storia">Storia</a></li>
-      <li><a href="#" data-cat="news">Notizie</a></li>
+      <li><a href="red-team.html">Red Team</a></li>
+      <li><a href="blue-team.html">Blue Team</a></li>
+      <li><a href="storia.html">Storia</a></li>
+      <li><a href="notizie.html">Notizie</a></li>
       <li class="nav-fond-wrap">
-        <a href="#" data-cat="fond" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
+        <a href="fondamentali.html" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
         <span class="nav-fond-tip">
           <span class="nav-fond-tip-head">Percorso Fondamentali</span>
           77 stanze interattive, quiz e sfide pratiche con TryHackMe. Sempre gratis, nessun account a pagamento.
           <a class="nav-fond-tip-cta" href="fondamentali.html">Apri il percorso →</a>
         </span>
       </li>
+      <li><a href="cheatsheet.html">Cheatsheet</a></li>
       <li><a href="about.html">Chi sono</a></li>
       <li><a href="contatti.html">Contatti</a></li>
     </ul>
@@ -245,55 +240,45 @@
 ══════════════════════════════════════════════════════ -->
 <section class="hero page-hero" aria-label="Hero">
   <div class="hero-glow" aria-hidden="true"></div>
+  <canvas id="heroScene" class="hero-scene" aria-hidden="true"></canvas>
 
-  <div class="hero-left">
-    <p class="eyebrow">Cybersecurity Blog — ITA</p>
+  <div class="hero-main">
+    <p class="eyebrow"><span class="eyebrow-bar" aria-hidden="true"></span>Cybersecurity Blog — ITA</p>
     <h1>
-      <span class="line1">HACK THE</span>
-      <span class="line2">SYSTEM.</span>
-      <span class="line3">DEFEND IT.</span>
+      <span class="line1">IL SISTEMA</span>
+      <span class="line2">PIÙ SICURO</span>
+      <span class="line3">È QUELLO CHE NON ESISTE.</span>
     </h1>
     <p class="subtitle">
-      Red team, blue team, storia dell'hacking, fondamentali e notizie dal mondo
-      della sicurezza informatica. In italiano. Senza filtri.
+      Impara a riconoscere i segnali prima che sia tardi: red team, blue team,
+      storia e notizie di sicurezza informatica.
     </p>
     <div class="hero-cta">
       <a href="#articles" class="btn-primary">→ Inizia a leggere</a>
-      <a href="#categories" class="btn-ghost">Categorie</a>
+      <a href="#categories" class="btn-link">Esplora le categorie <span aria-hidden="true">→</span></a>
     </div>
   </div>
 
-  <div class="hero-right" aria-label="Statistiche articoli">
-    <div class="stats-grid" id="statsGrid">
-      <div class="stat-box s1" data-cat="red" role="button" tabindex="0" aria-label="Filtra articoli Red Team">
-        <div class="stat-corner" aria-hidden="true"></div>
-        <div class="stat-num" id="cnt-red">—</div>
-        <div class="stat-label">Red Team</div>
-      </div>
-      <div class="stat-box s2" data-cat="blue" role="button" tabindex="0" aria-label="Filtra articoli Blue Team">
-        <div class="stat-corner" aria-hidden="true"></div>
-        <div class="stat-num" id="cnt-blue">—</div>
-        <div class="stat-label">Blue Team</div>
-      </div>
-      <div class="stat-box s3" data-cat="storia" role="button" tabindex="0" aria-label="Filtra articoli Storia">
-        <div class="stat-corner" aria-hidden="true"></div>
-        <div class="stat-num" id="cnt-storia">—</div>
-        <div class="stat-label">Storia</div>
-      </div>
-      <div class="stat-box s4" data-cat="news" role="button" tabindex="0" aria-label="Filtra articoli Notizie">
-        <div class="stat-corner" aria-hidden="true"></div>
-        <div class="stat-num" id="cnt-news">—</div>
-        <div class="stat-label">Notizie</div>
-      </div>
-      <div class="stat-box s5 stat-box-fond" data-cat="fond" role="button" tabindex="0" aria-label="Filtra articoli Fondamentali — percorso interattivo gratuito, ora con cheatsheet eJPT/eWPT">
-        <div class="stat-corner" aria-hidden="true"></div>
-        <div class="stat-box-fond-tags">
-          <span class="stat-box-fond-tag">GRATIS</span>
-          <span class="stat-box-fond-tag stat-box-fond-tag-cheat">+ Cheatsheet</span>
-        </div>
-        <div class="stat-num" id="cnt-fond">—</div>
-        <div class="stat-label">Fondamentali <em>— percorso gratuito, quiz, TryHackMe e cheatsheet eJPT/eWPT</em></div>
-      </div>
+  <div class="hero-stats" id="statsGrid" aria-label="Statistiche articoli">
+    <div class="stat-box s1" data-cat="red" role="button" tabindex="0" aria-label="Filtra articoli Red Team">
+      <div class="stat-num" id="cnt-red">—</div>
+      <div class="stat-label">Red Team</div>
+    </div>
+    <div class="stat-box s2" data-cat="blue" role="button" tabindex="0" aria-label="Filtra articoli Blue Team">
+      <div class="stat-num" id="cnt-blue">—</div>
+      <div class="stat-label">Blue Team</div>
+    </div>
+    <div class="stat-box s3" data-cat="storia" role="button" tabindex="0" aria-label="Filtra articoli Storia">
+      <div class="stat-num" id="cnt-storia">—</div>
+      <div class="stat-label">Storia</div>
+    </div>
+    <div class="stat-box s4" data-cat="news" role="button" tabindex="0" aria-label="Filtra articoli Notizie">
+      <div class="stat-num" id="cnt-news">—</div>
+      <div class="stat-label">Notizie</div>
+    </div>
+    <div class="stat-box s5" data-cat="fond" role="button" tabindex="0" aria-label="Filtra articoli Fondamentali — percorso interattivo gratuito, ora con cheatsheet eJPT/eWPT">
+      <div class="stat-num" id="cnt-fond">—</div>
+      <div class="stat-label">Fondamentali <span class="stat-fond-badge">Gratis</span></div>
     </div>
   </div>
 </section>
@@ -358,8 +343,10 @@
 
     <div class="cat-card c-fond cat-card-fond" data-cat="fond" role="button" tabindex="0" aria-label="Fondamentali: percorso interattivo gratuito con quiz, stanze pratiche e cheatsheet eJPT/eWPT">
       <div class="cat-bar" aria-hidden="true"></div>
-      <span class="cat-card-fond-tag">100% GRATIS</span>
-      <span class="cat-card-fond-tag-alt">+ Cheatsheet</span>
+      <div class="cat-card-fond-tags">
+        <span class="cat-card-fond-tag">100% Gratis</span>
+        <span class="cat-card-fond-tag-alt">+ Cheatsheet</span>
+      </div>
       <div class="cat-num">CAT — 005</div>
       <div class="cat-name">Fondamentali</div>
       <p class="cat-desc">TCP/IP, crittografia, DNS, firewall — più un percorso interattivo con quiz e stanze pratiche su TryHackMe. Sempre gratuito.</p>
@@ -380,7 +367,7 @@
   <div class="section-hdr">
     <div class="hdr-left">
       <span class="s-label" aria-hidden="true">02 /</span>
-      <h2 class="s-title" id="articlesSectionTitle">Tutti gli articoli</h2>
+      <h2 class="s-title" id="articlesSectionTitle">Ultimi articoli</h2>
     </div>
     <div class="hdr-right">
       <button class="tag-panel-trigger" id="tagPanelTrigger" aria-expanded="false" aria-controls="tagPanel">
@@ -415,14 +402,13 @@
     <!-- SIDEBAR (desktop) -->
     <aside class="filter-sidebar" aria-label="Filtri articoli">
       <div class="sidebar-section">
-        <div class="sidebar-section-title">Categoria</div>
-        <div class="sidebar-cats" id="sidebarCats" role="group" aria-label="Filtra per categoria">
-          <button class="sidebar-cat-btn active" data-cat="">Tutte</button>
-          <button class="sidebar-cat-btn c-red"    data-cat="red">Red Team</button>
-          <button class="sidebar-cat-btn c-blue"   data-cat="blue">Blue Team</button>
-          <button class="sidebar-cat-btn c-storia" data-cat="storia">Storia</button>
-          <button class="sidebar-cat-btn c-news"   data-cat="news">Notizie</button>
-          <button class="sidebar-cat-btn c-fond nav-fond-chip" data-cat="fond">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></button>
+        <div class="sidebar-section-title">Esplora per categoria</div>
+        <div class="sidebar-cats" id="sidebarCats" role="group" aria-label="Categorie">
+          <a class="sidebar-cat-btn c-red"    href="red-team.html"  data-cat="red">Red Team</a>
+          <a class="sidebar-cat-btn c-blue"   href="blue-team.html" data-cat="blue">Blue Team</a>
+          <a class="sidebar-cat-btn c-storia" href="storia.html"    data-cat="storia">Storia</a>
+          <a class="sidebar-cat-btn c-news"   href="notizie.html"   data-cat="news">Notizie</a>
+          <a class="sidebar-cat-btn c-fond nav-fond-chip" href="fondamentali.html" data-cat="fond">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></a>
         </div>
       </div>
 
@@ -440,6 +426,7 @@
       <div class="no-results" id="noResults" role="status">
         Nessun articolo trovato per questa ricerca.
       </div>
+      <p class="preview-note" id="previewNote" hidden></p>
     </div>
   </div>
 </section>
@@ -473,11 +460,11 @@
   </div>
 
   <nav class="f-nav" aria-label="Footer navigation">
-    <a href="#" data-cat="red">Red Team</a>
-    <a href="#" data-cat="blue">Blue Team</a>
-    <a href="#" data-cat="storia">Storia</a>
-    <a href="#" data-cat="news">Notizie</a>
-    <a href="#" data-cat="fond" class="f-nav-fond">Fondamentali ✦</a>
+    <a href="red-team.html">Red Team</a>
+    <a href="blue-team.html">Blue Team</a>
+    <a href="storia.html">Storia</a>
+    <a href="notizie.html">Notizie</a>
+    <a href="fondamentali.html" class="f-nav-fond">Fondamentali ✦</a>
     <a href="about.html">Chi sono</a>
     <a href="contatti.html">Contatti</a>
   </nav>
@@ -492,5 +479,6 @@
 <script src="js/vendor/ScrollTrigger.min.js"></script>
 <script src="js/vendor/lenis.min.js"></script>
 <script src="js/main.js"></script>
+<script type="module" src="js/hero-scene.js"></script>
 </body>
 </html>

@@ -2,9 +2,6 @@
    pasta-cod3 — style.css v2.0 — Cyberpunk Azure Edition
    ═══════════════════════════════════════════════════════════════ */
 
-/* FONTS — preloaded in HTML, @import as fallback */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
-
 /* ── DESIGN TOKENS ─────────────────────────────────────────── */
 :root {
   /* BG */
@@ -95,26 +92,6 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
 ::selection { background: var(--accent); color: var(--bg); }
 
-/* ── VIDEO BG ──────────────────────────────────────────── */
-/* Default: pagine di lettura (articoli, fondamentali, cheatsheet...) —
-   discreto, chi legge deve concentrarsi sul contenuto, non sul video. */
-.bg-video {
-  position: fixed; inset: 0; z-index: -1;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  opacity: 0.12;
-  filter: saturate(1.1) brightness(0.65);
-}
-[data-theme="light"] .bg-video { opacity: 0.12; filter: saturate(1.1); }
-/* Solo in home: più d'impatto, nessun contenuto da leggere con attenzione. */
-.bg-video-hero { opacity: 0.35; filter: saturate(1.1); }
-[data-theme="light"] .bg-video-hero { opacity: 0.18; }
-/* Video pesante: niente su mobile (dati/batteria) e a chi preferisce meno movimento */
-@media (max-width: 768px), (prefers-reduced-motion: reduce) {
-  .bg-video { display: none; }
-}
-
 /* ── CANVAS BG ───────────────────────────────────────────── */
 #spaceCanvas {
   position: fixed; inset: 0; z-index: 0;
@@ -157,15 +134,16 @@ body {
 }
 .logo {
   font-family: var(--ff-d);
-  font-size: clamp(14px, 2vw, 18px);
-  font-weight: 700;
+  font-size: clamp(19px, 2.6vw, 24px);
+  font-weight: 800;
   color: var(--text);
   text-decoration: none;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.11em;
   flex-shrink: 0;
-  transition: color var(--t);
-  text-shadow: 0 0 18px rgba(0,200,255,0.18);
+  transition: color var(--t), text-shadow var(--t);
+  text-shadow: 0 0 22px rgba(0,200,255,0.4), 0 0 44px rgba(0,200,255,0.15);
 }
+.logo:hover { text-shadow: 0 0 26px rgba(0,200,255,0.6), 0 0 56px rgba(0,200,255,0.25); }
 .logo:hover { animation: logo-glitch 0.44s ease; }
 .logo span  { color: var(--accent); animation: dash-blink 2.4s ease-in-out infinite; }
 
@@ -456,20 +434,38 @@ body {
 ══════════════════════════════════════════════════════════ */
 .hero {
   position: relative; z-index: 10;
-  display: flex; align-items: center; gap: var(--gap);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
   padding: clamp(4rem,8vw,7rem) var(--gap) clamp(3rem,6vw,5rem);
   max-width: var(--max); margin: 0 auto;
   min-height: 84vh;
 }
 .hero-glow {
-  position: absolute; top: 15%; left: 35%;
-  transform: translateX(-50%);
-  width: 70vw; height: 50vh;
-  background: radial-gradient(ellipse,rgba(0,150,255,0.07) 0%,transparent 70%);
-  pointer-events: none; filter: blur(30px);
+  position: absolute; top: 6%; left: 30%; z-index: 0;
+  width: 62vw; height: 62vh;
+  background:
+    radial-gradient(ellipse at 28% 22%, rgba(0,190,255,0.11) 0%, transparent 55%),
+    radial-gradient(ellipse at 78% 64%, rgba(0,100,255,0.07) 0%, transparent 60%);
+  pointer-events: none; filter: blur(46px);
 }
-.hero-left { flex: 1; min-width: 0; }
-.hero-right { flex: 0 0 300px; }
+/* Scena 3D (Three.js) — rete/topologia astratta, scoperta solo nella hero
+   della home. Sotto al testo (z-index 1 < 2), sopra al glow (0). Nascosta
+   finché non renderizza il primo frame per non mostrare un canvas vuoto;
+   se WebGL non è disponibile resta invisibile e il video/canvas di sfondo
+   già presenti restano l'unica ambientazione, senza alcuna rottura. */
+.hero-scene {
+  position: absolute; inset: 0; z-index: 1;
+  pointer-events: none;
+  opacity: 0; transition: opacity 1.4s ease;
+}
+.hero-scene.is-ready { opacity: 1; }
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .hero-scene { display: none; }
+}
+.hero-main {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 900px;
+}
 
 .eyebrow {
   font-family: var(--ff-m); font-size: 10.5px;
@@ -480,6 +476,14 @@ body {
 .eyebrow::before {
   content: '';display: inline-block;
   width: 28px; height: 1px; background: var(--accent);
+}
+/* Nella hero della home lo span .eyebrow-bar sostituisce lo ::before
+   perché deve poter essere animato (scaleX) dal reveal GSAP. */
+.hero .eyebrow::before { display: none; }
+.eyebrow-bar {
+  display: inline-block;
+  width: 28px; height: 1px; background: var(--accent);
+  transform-origin: left center;
 }
 
 .hero h1 {
@@ -493,10 +497,18 @@ body {
 }
 .line2 {
   font-size: clamp(2.4rem,5.5vw,5rem);
-  font-weight: 900; color: var(--accent);
-  letter-spacing: -0.02em; display: block;
-  text-shadow: 0 0 40px var(--glow-s), 0 0 80px var(--glow);
+  font-weight: 900; letter-spacing: -0.02em; display: block;
+  background: linear-gradient(100deg, var(--accent) 0%, #8fe9ff 45%, var(--accent) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 0 26px var(--glow-s);
+  animation: line2-sheen 8s ease-in-out infinite;
 }
+@keyframes line2-sheen {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@media (prefers-reduced-motion: reduce) { .line2 { animation: none; } }
 .line3 {
   font-size: clamp(1.2rem,2.8vw,2.5rem);
   font-weight: 400; color: var(--text-dim);
@@ -520,19 +532,7 @@ body {
   border-radius: var(--r); border: 1px solid var(--accent);
   cursor: pointer; position: relative; overflow: hidden;
   transition: background var(--t), color var(--t), transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 0 16px rgba(0,200,255,0.45), 0 4px 18px rgba(0,200,255,0.22), inset 0 1px 0 rgba(255,255,255,0.18);
-}
-/* Glow pulsante: pseudo-elemento con box-shadow statico "alto", solo l'opacity
-   viene animata (compositor-only) invece di ripetere il box-shadow ad ogni frame */
-.btn-primary::before {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  box-shadow: 0 0 28px rgba(0,200,255,0.70), 0 6px 26px rgba(0,200,255,0.38);
-  opacity: 0; pointer-events: none;
-  animation: btn-glow-pulse 3s ease-in-out infinite;
-}
-@keyframes btn-glow-pulse {
-  0%, 100% { opacity: 0; }
-  50%      { opacity: 1; }
+  box-shadow: 0 2px 14px rgba(0,200,255,0.22);
 }
 .btn-primary::after {
   content: ''; position: absolute; inset: 0;
@@ -545,7 +545,6 @@ body {
   background: transparent; color: var(--accent);
   box-shadow: 0 0 35px rgba(0,200,255,0.85), 0 0 0 1px var(--accent), 0 10px 35px rgba(0,200,255,0.35);
   transform: translateY(-2px) scale(1.03);
-  animation: none;
 }
 .btn-primary:hover::after { transform: translateX(130%); }
 
@@ -573,90 +572,118 @@ body {
 }
 .btn-ghost:hover::after { transform: translateX(130%); }
 
-/* STATS GRID */
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; perspective: 900px; }
+/* Link secondario editoriale — usato solo nella hero della home al posto
+   di un secondo bottone bordato: un testo con sottolineatura che si apre
+   e una freccia che scivola, più leggero di due box affiancati. */
+.btn-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--text); text-decoration: none;
+  font-family: var(--ff-b); font-size: 13.5px; font-weight: 500;
+  padding: 0.75rem 0.15rem; position: relative;
+  transition: color var(--t);
+}
+.btn-link::after {
+  content: ''; position: absolute; left: 0.15rem; right: 0.15rem; bottom: 0.62rem;
+  height: 1px; background: var(--text-dim);
+  transform: scaleX(0.32); transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), background-color 0.3s ease;
+}
+.btn-link span {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.btn-link:hover { color: var(--accent); }
+.btn-link:hover::after { transform: scaleX(1); background: var(--accent); }
+.btn-link:hover span { transform: translateX(4px); }
+
+/* HERO STATS — fascia editoriale sottile, non una dashboard di card:
+   numeri grandi, etichette minime, un filo verticale a separare le
+   voci. Il feedback all'hover è un bordo inferiore colorato che si
+   accende, non un box che si illumina — più cinematografico, meno
+   "widget". */
+.hero-stats {
+  position: relative; z-index: 2; width: 100%;
+  display: flex; flex-wrap: wrap;
+  margin-top: clamp(2.75rem, 6vw, 4.5rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  perspective: 900px;
+}
 .stat-box {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-  border-radius: 6px; padding: 1rem 1.1rem;
+  flex: 1 1 0; min-width: 108px;
+  padding: 0 1.5rem 0.55rem;
+  border-left: 1px solid var(--border);
+  border-bottom: 2px solid transparent;
   cursor: pointer;
-  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease, border-color 0.2s ease;
-  position: relative; overflow: hidden;
-  will-change: transform;
-  --glow-color: rgba(0,200,255,0.35);
+  transition: border-color 0.25s ease;
 }
-.stat-box::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: currentColor; opacity: 0.65;
-  box-shadow: 0 0 10px currentColor, 0 0 22px currentColor;
-}
-.stat-box::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% -10%, rgba(255,255,255,0.07) 0%, transparent 65%);
-  pointer-events: none;
-}
-.stat-box:hover {
-  border-color: currentColor;
-  box-shadow: 0 0 28px var(--glow-color), 0 12px 40px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.02);
-}
-.s1 { color: var(--c-red);    --glow-color: rgba(255,48,96,0.45); }
-.s2 { color: var(--c-blue);   --glow-color: rgba(32,144,255,0.45); }
-.s3 { color: var(--c-storia); --glow-color: rgba(255,170,32,0.45); }
-.s4 { color: var(--c-news);   --glow-color: rgba(153,85,255,0.45); }
-.s5 { color: var(--c-fond);   --glow-color: rgba(0,221,136,0.45); grid-column: span 2; }
+.stat-box:first-child { border-left: none; padding-left: 0; }
+.stat-box:hover { border-bottom-color: currentColor; }
+
+.s1 { color: var(--c-red); }
+.s2 { color: var(--c-blue); }
+.s3 { color: var(--c-storia); }
+.s4 { color: var(--c-news); }
+.s5 { color: var(--c-fond); }
 
 .stat-num {
-  font-family: var(--ff-d); font-size: 2rem;
+  font-family: var(--ff-d); font-size: clamp(1.7rem, 2.6vw, 2.1rem);
   font-weight: 700; line-height: 1;
-  margin-bottom: 0.2rem;
-  text-shadow: 0 0 18px currentColor;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 0 16px currentColor;
   transition: text-shadow 0.2s ease;
 }
-.stat-box:hover .stat-num { text-shadow: 0 0 30px currentColor, 0 0 55px currentColor; }
+.stat-box:hover .stat-num { text-shadow: 0 0 28px currentColor, 0 0 48px currentColor; }
 .stat-label {
   font-family: var(--ff-m); font-size: 9.5px;
   text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.65;
 }
-.stat-label em {
-  display: block; font-style: normal; text-transform: none;
-  font-size: 9.5px; letter-spacing: 0.01em; opacity: 0.85; margin-top: 0.3rem;
+.stat-fond-badge {
+  display: inline-block; margin-left: 0.45em; vertical-align: 1px;
+  font-family: var(--ff-m); font-size: 8px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; color: #04140f;
+  background: var(--c-fond); padding: 1.5px 5px; border-radius: 20px;
 }
 
-/* Stat-box "Fondamentali": più invitante, con badge gratis */
-.stat-box-fond {
-  border-color: rgba(0,221,136,0.4);
-  box-shadow: 0 0 14px rgba(0,221,136,0.12);
+/* ZOOM TRANSITION — click su una sezione (Red/Blue/Storia/Notizie/
+   Fondamentali): la pagina che si lascia fa un piccolo zoom in mentre
+   sfuma, quella di destinazione parte leggermente ingrandita/trasparente
+   e fa lo zoom out inverso al caricamento (vedi .page-zoom-enter più
+   sotto e categoryZoomTransition in main.js). Sostituisce il vecchio
+   breach-glitch + reveal radiale con label, troppo elaborato per una
+   semplice navigazione tra sezioni. */
+body.page-zoom-exit {
+  animation: page-zoom-in 0.42s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: 50% 50%;
 }
-.stat-box-fond:hover::after { animation: none; opacity: 0; }
-/* Glow pulsante sul pseudo-elemento ::after già presente su .stat-box (overlay
-   radiale): si aggiunge solo box-shadow + opacity animata, compositor-only */
-.stat-box-fond::after {
-  box-shadow: 0 0 26px rgba(0,221,136,0.3);
-  opacity: 0;
-  animation: stat-fond-glow 2.8s ease-in-out infinite;
+@keyframes page-zoom-in {
+  from { transform: scale(1);     opacity: 1; }
+  to   { transform: scale(1.06); opacity: 0; }
 }
-@keyframes stat-fond-glow {
-  0%, 100% { opacity: 0; }
-  50%      { opacity: 1; }
+/* Aggiunta lato server (front matter/layout) sul <body> delle pagine di
+   destinazione: parte da qui e torna a riposo da sola, senza JS. */
+body.page-zoom-enter {
+  animation: page-zoom-out 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: 50% 50%;
 }
-.stat-box-fond-tags {
-  position: absolute; top: 0.7rem; right: 0.75rem; z-index: 2;
-  display: flex; align-items: center; gap: 0.35rem;
+@keyframes page-zoom-out {
+  from { transform: scale(1.06); opacity: 0; }
+  to   { transform: scale(1);     opacity: 1; }
 }
-.stat-box-fond-tag {
-  font-family: var(--ff-m); font-size: 8.5px; font-weight: 700;
-  letter-spacing: 0.04em; color: #04140f;
-  background: var(--c-fond); padding: 2px 6px; border-radius: 20px;
-  box-shadow: 0 0 8px rgba(0,221,136,0.6); white-space: nowrap;
-}
-.stat-box-fond-tag-cheat {
-  color: var(--c-fond); background: rgba(0,221,136,0.1);
-  border: 1px solid rgba(0,221,136,0.45); box-shadow: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .stat-box-fond { animation: none !important; }
-}
+/* #spaceCanvas è fixed, ma un transform sul <body> gli crea comunque un
+   nuovo containing block: il canvas (già rasterizzato via JS ai pixel
+   del viewport) finisce anche lui dentro lo scale e si vede ingrandito/
+   sgranato invece di restare fermo come uno sfondo fisso dovrebbe. Più
+   semplice farlo sparire per tutta la transizione che provare a
+   compensare la scala con un contro-transform. (.grain-overlay resta
+   fuori: è un rumore al 3% di opacità, la distorsione non si vede.)
+   Il canvas resta a opacity:0 per l'intera durata della classe — la
+   riaccende JS in static-pages.js con initPageZoomEnter(), solo dopo
+   l'evento animationend del body, quindi mai mentre il transform è
+   ancora a metà (niente più sincronizzare due durate a mano). */
+#spaceCanvas { transition: opacity 0.3s ease; }
+body.page-zoom-exit #spaceCanvas { transition-duration: 0.12s; opacity: 0; }
+body.page-zoom-enter #spaceCanvas { opacity: 0; }
 
 /* HERO TRANSITION — reveal radiale dal punto di click */
 .hero-reveal {
@@ -733,7 +760,7 @@ body {
 ══════════════════════════════════════════════════════════ */
 .section {
   max-width: var(--max); margin: 0 auto;
-  padding: clamp(2.5rem,5vw,4rem) var(--gap);
+  padding: clamp(3.25rem,6.5vw,5.5rem) var(--gap);
   position: relative; z-index: 10;
 }
 .section-hdr {
@@ -742,6 +769,11 @@ body {
   margin-bottom: clamp(1.5rem,3vw,2.5rem); gap: 1rem;
 }
 .hdr-left { display: flex; align-items: baseline; gap: 0.7rem; }
+@keyframes section-hdr-in {
+  from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0px); }
+}
+.section-hdr.hdr-visible { animation: section-hdr-in 0.6s cubic-bezier(0.22,1,0.36,1) both; }
 .s-label { font-family: var(--ff-m); font-size: 10.5px; color: var(--accent); opacity: 0.65; }
 .s-title {
   font-family: var(--ff-d);
@@ -780,40 +812,30 @@ body {
   box-shadow: 0 0 28px var(--cat-glow), 0 8px 30px rgba(0,0,0,0.45);
 }
 
-/* Card "Fondamentali": più invitante, sempre gratis */
+/* Card "Fondamentali": è il prodotto di punta (gratuito), quindi non
+   riceve solo un badge in più ma un posto diverso nel layout — banner
+   a piena larghezza sotto le altre quattro, non semplicemente una card
+   allungata. Niente glow pulsante costante: il feedback arriva
+   all'hover, come per le altre card. */
 .cat-card-fond {
-  border-color: rgba(0,221,136,0.35);
-  box-shadow: 0 0 16px rgba(0,221,136,0.12);
+  border-color: rgba(0,221,136,0.3);
+  background: linear-gradient(100deg, rgba(0,221,136,0.06), var(--bg-glass) 60%);
 }
-.cat-card-fond:hover::before { animation: none; opacity: 0; }
-/* Glow pulsante su un pseudo-elemento dedicato (::after è già usato dallo
-   shimmer di .cat-card): solo opacity animata, compositor-only */
-.cat-card-fond::before {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  box-shadow: 0 0 30px rgba(0,221,136,0.32);
-  opacity: 0; pointer-events: none;
-  animation: cat-fond-glow 2.8s ease-in-out infinite;
-}
-@keyframes cat-fond-glow {
-  0%, 100% { opacity: 0; }
-  50%      { opacity: 1; }
+.cat-card-fond-tags {
+  position: absolute; top: 0.85rem; right: 0.85rem; z-index: 2;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem;
 }
 .cat-card-fond-tag {
-  position: absolute; top: 0.85rem; right: 0.85rem; z-index: 2;
   font-family: var(--ff-m); font-size: 9px; font-weight: 700;
-  letter-spacing: 0.04em; color: #04140f;
+  letter-spacing: 0.04em; text-transform: uppercase; color: #04140f;
   background: var(--c-fond); padding: 3px 8px; border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0,221,136,0.6);
+  white-space: nowrap;
 }
 .cat-card-fond-tag-alt {
-  position: absolute; top: 2.35rem; right: 0.85rem; z-index: 2;
   font-family: var(--ff-m); font-size: 9px; font-weight: 700;
   letter-spacing: 0.04em; color: var(--c-fond);
   background: rgba(0,221,136,0.1); padding: 3px 8px; border-radius: 20px;
-  border: 1px solid rgba(0,221,136,0.45);
-}
-@media (prefers-reduced-motion: reduce) {
-  .cat-card-fond::before { animation: none !important; opacity: 0; }
+  border: 1px solid rgba(0,221,136,0.45); white-space: nowrap;
 }
 .cat-bar {
   position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -1127,6 +1149,14 @@ body {
   color: var(--text-dim); font-family: var(--ff-m); font-size: 14px;
 }
 .no-results.visible { display: block; }
+.preview-note {
+  margin-top: 1.5rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--ff-m); font-size: 11.5px; color: var(--text-dim);
+  line-height: 1.8;
+}
+.preview-note a { color: var(--accent); text-decoration: none; }
+.preview-note a:hover { text-decoration: underline; }
 
 /* Article card shimmer keyframe */
 @keyframes card-shimmer {
@@ -1278,6 +1308,13 @@ body {
   animation: inf-scroll var(--car-dur, 40s) linear infinite;
 }
 .inf-car:hover .inf-car-track.scroll-run { animation-play-state: paused; }
+/* Direzione alternata riga per riga (il contenuto è duplicato 2x apposta
+   per un loop senza scatti, quindi si può invertire lo stesso keyframe
+   con animation-direction senza bisogno di un secondo @keyframes). */
+.inf-car[data-cat="red"]    .inf-car-track.scroll-run,
+.inf-car[data-cat="storia"] .inf-car-track.scroll-run {
+  animation-direction: reverse;
+}
 
 /* — Flip card — */
 .inf-flip {
@@ -1438,11 +1475,11 @@ body {
 ══════════════════════════════════════════════════════════ */
 .static-main { max-width: var(--max); margin: 0 auto; }
 .static-hero {
-  position: relative; z-index: 10;
+  position: relative; z-index: 10; overflow: hidden;
   padding: clamp(4rem,8vw,6rem) var(--gap) clamp(2rem,4vw,3rem);
   border-bottom: 1px solid var(--border);
 }
-.static-hero-inner { max-width: 720px; }
+.static-hero-inner { max-width: 720px; position: relative; z-index: 2; }
 .static-page-title {
   font-family: var(--ff-d);
   font-size: clamp(2.5rem,6vw,4.5rem);
@@ -1606,7 +1643,7 @@ body {
 
 /* SCAN LINE (decorative) */
 .scan-line {
-  position: absolute; left: 0; right: 0; height: 1px;
+  position: absolute; left: 0; right: 0; height: 1px; z-index: 2;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.4; pointer-events: none;
   animation: scan 6s linear infinite;
@@ -1651,10 +1688,7 @@ body {
   .search-wrap { display: none; }
   .hamburger { display: flex; }
   .search-toggle-btn { display: flex !important; }
-  .hero { flex-direction: column; min-height: auto; padding-top: 3.5rem; }
-  .hero-right { flex: none; width: 100%; }
-  .stats-grid { grid-template-columns: 1fr 1fr 1fr; }
-  .s5 { grid-column: span 1; }
+  .hero { min-height: auto; padding-top: 3.5rem; }
   .articles-layout { grid-template-columns: 1fr; }
   .filter-sidebar { display: none; }
   .filter-drawer-btn { display: flex; }
@@ -1663,9 +1697,15 @@ body {
 
 @media (max-width: 620px) {
   .cat-grid { grid-template-columns: 1fr 1fr; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .s5 { grid-column: span 2; }
-  .hero-cta { flex-direction: column; }
+  .cat-card-fond { padding: 1.4rem 1.4rem 1.2rem; }
+  .cat-card-fond-tags { position: static; margin-bottom: 0.6rem; }
+  .hero-stats { border-top: none; padding-top: 0; }
+  .stat-box {
+    flex: 1 1 40%; min-width: 130px;
+    border-left: none; border-top: 1px solid var(--border);
+    padding: 1rem 0 0.5rem;
+  }
+  .hero-cta { flex-direction: column; align-items: flex-start; }
   .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
   .site-footer { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
   .about-block { grid-template-columns: 1fr; }
@@ -1681,14 +1721,15 @@ body {
 /* LIGHT THEME OVERRIDES */
 [data-theme="light"] .article-card,
 [data-theme="light"] .cat-card,
-[data-theme="light"] .stat-box,
 [data-theme="light"] .search-wrap { background: rgba(255,255,255,0.75); }
 [data-theme="light"] .nav-drawer { background: #fff; }
 [data-theme="light"] .filter-sheet { background: #fff; }
-[data-theme="light"] .terminal-box { background: #0a1929; border-color: rgba(0,100,200,0.2); }
-[data-theme="light"] .terminal-box .t-prompt { color: var(--c-fond); }
-[data-theme="light"] .terminal-box .t-cmd    { color: #dff2ff; }
-[data-theme="light"] .terminal-box .t-output { color: #7aadcc; }
+/* .terminal-box restava forzato scuro (#0a1929) anche in light mode — le
+   uniche card del sito a non seguire il tema, mentre .terminal-box già
+   usa var(--bg-card)/var(--text) di base: basta lasciarle fare il loro
+   lavoro invece di sovrascriverle con colori fissi pensati solo per lo
+   sfondo scuro. */
+[data-theme="light"] .terminal-bar { background: rgba(0,40,80,0.04); }
 
 #sidebarTags,#filterSheetTags,.sidebar-tags,.filter-sheet-tags{display:none!important;}
 
@@ -1696,11 +1737,83 @@ body {
    PERCORSO FONDAMENTALI (fondamentali.html)
 ══════════════════════════════════════════════════════════ */
 
+/* Ingresso cinematografico dell'hero, sullo stesso principio della home
+   (fade + blur-pull + salita, a cascata) ma con la palette verde del
+   percorso invece del ciano della home — così la pagina si distingue
+   subito ma resta coerente con lo stesso linguaggio visivo. */
+.fond-hero { position: relative; overflow: hidden; }
+.fond-hero-glow {
+  position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+  z-index: 0; width: min(900px, 140vw); height: 420px;
+  background: radial-gradient(ellipse at 50% 30%, rgba(0,221,136,0.16) 0%, transparent 62%);
+  filter: blur(40px); pointer-events: none;
+  animation: fond-hero-glow-pulse 5s ease-in-out infinite;
+}
+@keyframes fond-hero-glow-pulse {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+.fond-hero .static-hero-inner { position: relative; z-index: 2; }
+
+@keyframes fond-hero-in {
+  from { opacity: 0; transform: translateY(22px); filter: blur(9px); }
+  to   { opacity: 1; transform: translateY(0);     filter: blur(0); }
+}
+.fond-hero .fond-hero-actions,
+.fond-hero .eyebrow,
+.fond-hero .fond-hline1,
+.fond-hero .fond-hline2,
+.fond-hero .static-subtitle {
+  animation: fond-hero-in 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+.fond-hero .fond-hero-actions   { animation-delay: 0s; }
+.fond-hero .eyebrow             { animation-delay: 0.12s; }
+.fond-hero .fond-hline1         { animation-delay: 0.22s; }
+.fond-hero .fond-hline2         { animation-delay: 0.34s; }
+.fond-hero .static-subtitle     { animation-delay: 0.5s; }
+
+/* Titolo su due righe come in home (line1 piatta, line2 con sheen):
+   qui lo sheen usa il verde di brand del percorso invece del ciano. */
+.fond-hero .static-page-title { display: block; }
+.fond-hline1 { display: block; color: var(--text); }
+.fond-hline2 {
+  display: block;
+  background: linear-gradient(100deg, var(--c-fond) 0%, #baffe0 45%, var(--c-fond) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 0 26px rgba(0,221,136,0.45);
+  animation: fond-hero-in 0.7s cubic-bezier(0.22,1,0.36,1) both, fond-line2-sheen 8s ease-in-out infinite;
+  animation-delay: 0.34s, 1s;
+}
+@keyframes fond-line2-sheen {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* Barra dell'eyebrow che si "apre" invece di comparire già intera. */
+.fond-hero .eyebrow::before {
+  animation: fond-eyebrow-bar 0.5s 0.12s cubic-bezier(0.22,1,0.36,1) both;
+  transform-origin: left center;
+}
+@keyframes fond-eyebrow-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fond-hero-glow { animation: none; opacity: 0.85; }
+}
+
 .fond-hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem; }
-.fond-back-btn, .fond-cheatsheet-btn { display: inline-flex; margin-bottom: 0; }
+.fond-back-btn { display: inline-flex; margin-bottom: 0; }
+/* Pieno e luminoso: gli appunti cheatsheet erano troppo nascosti, questo
+   bottone deve saltare all'occhio rispetto al semplice "torna indietro". */
+.fond-cheatsheet-btn {
+  display: inline-flex; margin-bottom: 0;
+  background: var(--c-fond); color: #04140f; border-color: var(--c-fond);
+  box-shadow: 0 0 16px rgba(0,221,136,0.55), 0 4px 18px rgba(0,221,136,0.3), inset 0 1px 0 rgba(255,255,255,0.18);
+}
 .fond-cheatsheet-btn:hover {
-  border-color: var(--c-fond); color: var(--c-fond); background: rgba(0,221,136,0.08);
-  box-shadow: 0 0 18px rgba(0,221,136,0.28), 0 0 0 1px rgba(0,221,136,0.3);
+  color: #04140f; background: var(--c-fond);
+  box-shadow: 0 0 26px rgba(0,221,136,0.8), 0 6px 24px rgba(0,221,136,0.4);
+  transform: translateY(-1px);
 }
 .fond-content { max-width: 900px; margin: 0 auto; padding-bottom: 4rem; }
 .fond-room { max-width: 720px; margin-left: auto; margin-right: auto; }
@@ -2489,6 +2602,67 @@ body {
   .fond-node { min-height: 96px; }
   .fond-path-wrap { padding: 1.75rem 1.1rem 2.25rem; }
   .fond-thm-cards { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   GRAIN — texture di profondità, sostituisce il "flat neon"
+   con una superficie materica leggerissima (mix-blend overlay).
+   Puramente decorativo: pointer-events none, mai sopra il focus.
+══════════════════════════════════════════════════════════ */
+.grain-overlay {
+  position: fixed; inset: 0; z-index: 500; pointer-events: none;
+  opacity: 0.035; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="light"] .grain-overlay { opacity: 0.022; }
+@media (max-width: 768px) { .grain-overlay { display: none; } }
+
+/* ══════════════════════════════════════════════════════════
+   CUSTOM CURSOR — solo desktop con puntatore fine, mai su
+   touch/coarse pointer, disattivato con prefers-reduced-motion
+   (gestito anche via JS, che non inizializza nulla in quel caso).
+══════════════════════════════════════════════════════════ */
+.cursor-dot, .cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none; border-radius: 50%;
+  opacity: 0; will-change: left, top;
+}
+.cursor-dot {
+  width: 5px; height: 5px; background: var(--accent);
+  box-shadow: 0 0 8px var(--glow-s);
+  transform: translate(-50%,-50%);
+  transition: opacity 0.25s ease;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid var(--border-h);
+  transform: translate(-50%,-50%);
+  transition: width 0.25s cubic-bezier(0.16,1,0.3,1), height 0.25s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+}
+html.has-custom-cursor .cursor-dot,
+html.has-custom-cursor .cursor-ring { opacity: 1; }
+html.has-custom-cursor,
+html.has-custom-cursor a, html.has-custom-cursor button,
+html.has-custom-cursor [role="button"], html.has-custom-cursor input { cursor: none; }
+.cursor-ring.is-active {
+  width: 52px; height: 52px;
+  border-color: var(--accent);
+  background: rgba(0,200,255,0.06);
+}
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   MAGNETIC CTA — le due call-to-action dell'hero seguono
+   leggermente il cursore quando ci si avvicina (section 5).
+══════════════════════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary, .btn-ghost { transition: background var(--t), color var(--t), box-shadow 0.2s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
