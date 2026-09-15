@@ -1,5 +1,5 @@
 .claude/
 _site/
 .bundle/
-vendor/
+/vendor/
 ignorare_questa_cartella_per_push_github/
