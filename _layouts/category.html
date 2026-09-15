@@ -280,6 +280,9 @@
 <script>
   (function () {
     'use strict';
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
     const items  = Array.from(document.querySelectorAll('.cat-feed-item'));
     const search = document.getElementById('catSearch');
     const tagBar = document.getElementById('catTags');
@@ -312,18 +315,39 @@
 
     // Reveal a scroll — stesso spirito del resto del sito: appare una
     // volta sola quando entra in viewport, rispetta reduced-motion.
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-      let n = 0;
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          el.style.animationDelay = `${Math.min(n++, 8) * 0.06}s`;
-          el.classList.add('cf-visible');
-          obs.unobserve(el);
-        });
-      }, { threshold: 0.12 });
-      items.forEach(el => obs.observe(el));
+    // Un IntersectionObserver singolo con un contatore globale capped
+    // (vecchia versione) fa sì che durante uno scroll normale molte card
+    // entrino nello stesso frame e ricevano tutte lo stesso ritardo
+    // massimo appena il contatore satura: sembra un caricamento "a
+    // scatti" invece di una cascata fluida. ScrollTrigger.batch (stessa
+    // tecnica già usata per la lista articoli in home) raggruppa gli
+    // elementi che entrano insieme e applica uno stagger relativo AL
+    // GRUPPO, non globale, quindi resta lineare qualunque sia la
+    // velocità di scroll.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.batch(items, {
+        start: 'top 90%',
+        once: true,
+        batchMax: window.innerWidth < 768 ? 4 : 8,
+        onEnter: batch => {
+          batch.forEach((el, i) => {
+            el.style.animationDelay = `${i * 0.06}s`;
+            el.classList.add('cf-visible');
+          });
+        },
+      });
+      // I trigger vengono misurati appena lo script gira, prima che il
+      // font async (preload+swap) sostituisca il fallback di sistema:
+      // il conseguente reflow del testo sposta le card più in basso, ma
+      // ScrollTrigger non ricalcola da solo per un semplice cambio di
+      // font — restano ancorati alle coordinate vecchie e non scattano
+      // mai scorrendo normalmente. Un refresh quando i font sono pronti
+      // (più uno a window.load come rete di sicurezza per altri reflow,
+      // es. la scena di rete nell'hero) risolve alla radice.
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => ScrollTrigger.refresh());
+      }
+      window.addEventListener('load', () => ScrollTrigger.refresh());
     } else {
       items.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; el.style.filter = 'none'; });
     }

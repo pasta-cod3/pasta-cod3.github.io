@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (hasGsap) {
     gsap.registerPlugin(ScrollTrigger);
+    // I trigger vengono misurati prima che il font async (preload+swap)
+    // sostituisca il fallback di sistema: il reflow del testo che segue
+    // sposta i blocchi più in basso, ma ScrollTrigger non ricalcola da
+    // solo per un cambio di font — restano ancorati a coordinate vecchie
+    // e non scattano più scorrendo normalmente.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+    window.addEventListener('load', () => ScrollTrigger.refresh());
     if (typeof Lenis !== 'undefined') {
       const lenis = new Lenis({
         duration: 1.2,

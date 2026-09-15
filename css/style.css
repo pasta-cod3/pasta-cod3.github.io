@@ -685,6 +685,13 @@ body.page-zoom-enter {
 body.page-zoom-exit #spaceCanvas { transition-duration: 0.12s; opacity: 0; }
 body.page-zoom-enter #spaceCanvas { opacity: 0; }
 
+/* I carousel Red/Blue/Storia in fondo alla home continuano a scorrere
+   di loro conto (animazione CSS indipendente sul track) mentre il body
+   fa lo zoom: senza mettere in pausa quello scorrimento, durante
+   l'uscita restano l'unica cosa ancora in movimento sotto lo zoom,
+   invece di sparire insieme al resto in un'unica transizione coerente. */
+body.page-zoom-exit .inf-car-track.scroll-run { animation-play-state: paused; }
+
 /* HERO TRANSITION — reveal radiale dal punto di click */
 .hero-reveal {
   position: fixed; inset: 0; z-index: 9998; pointer-events: none;

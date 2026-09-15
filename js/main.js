@@ -2520,6 +2520,18 @@ function initSmoothScroll() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
+  // I trigger delle card (articoli, carousel) vengono misurati appena
+  // gira questo script, prima che il font async (preload+swap) sostituisca
+  // il fallback di sistema: il reflow del testo che segue sposta le card
+  // più in basso, ma ScrollTrigger non ricalcola da solo per un cambio
+  // di font — restavano ancorati a coordinate vecchie e non scattavano
+  // mai scorrendo normalmente. Refresh quando i font sono pronti, più
+  // uno a window.load come rete di sicurezza per altri reflow tardivi.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced || typeof Lenis === 'undefined') return;
 
