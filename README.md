@@ -118,6 +118,16 @@ python3 scripts/optimize_images.py
 
 genera la variante `.webp` accanto all'originale (che resta invariato).
 
+**Prima di ogni release di contenuti** (uno o più post nuovi pubblicati), rilancia:
+
+```bash
+python3 scripts/generate_llms_txt.py
+```
+
+`llms.txt` è generato da questo script a partire dai front matter reali in `_posts/`,
+non va più editato a mano: farlo significa che il prossimo rilancio dello script
+sovrascrive la modifica senza preavviso.
+
 <br>
 
 ## Come contribuire
