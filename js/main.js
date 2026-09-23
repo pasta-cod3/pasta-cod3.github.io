@@ -3730,6 +3730,55 @@ function initSectionReveal() {
 }
 
 /* ──────────────────────────────────────────────────────────
+   ▶ SEARCH DEEP-LINK (?q=termine)
+   Rende reale il SearchAction dichiarato nel JSON-LD della home:
+   senza questo, /?q=... per un crawler è una pagina senza risultati.
+   ────────────────────────────────────────────────────────── */
+function initSearchFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  if (!q) return;
+
+  const isDesktop = window.innerWidth >= 920;
+  const input = document.getElementById(isDesktop ? 'searchInput' : 'searchInputMobile');
+  if (input) input.value = q;
+
+  if (!isDesktop) {
+    const bar = document.getElementById('searchMobileBar');
+    if (bar) bar.classList.add('open');
+  }
+
+  searchQ = q;
+  render();
+  runSearch(q, isDesktop ? 'searchDropdown' : 'searchDropdownMobile');
+
+  const el = document.getElementById('articles');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* Mantiene l'URL sincronizzato mentre si digita, cosi' il link e' condivisibile
+   e il back/forward del browser torna sulla query precedente. */
+function initSearchParamSync() {
+  const inputs = [document.getElementById('searchInput'), document.getElementById('searchInputMobile')]
+    .filter(Boolean);
+  if (!inputs.length) return;
+
+  let t;
+  const sync = (value) => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const v = value.trim();
+      const url = v
+        ? window.location.pathname + '?q=' + encodeURIComponent(v)
+        : window.location.pathname;
+      history.replaceState(null, '', url);
+    }, 400);
+  };
+
+  inputs.forEach(inp => inp.addEventListener('input', e => sync(e.target.value)));
+}
+
+/* ──────────────────────────────────────────────────────────
    ▶ INIT
    ────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -3743,6 +3792,8 @@ document.addEventListener('DOMContentLoaded', () => {
   render();
   initSearch();
   initSearchToggle();
+  initSearchFromQuery();
+  initSearchParamSync();
   initNav();
   initFilterSheet();
   initCatHandlers();
