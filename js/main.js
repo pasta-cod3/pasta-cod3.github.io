@@ -2631,7 +2631,7 @@ function buildCard(post) {
     <div class="article-meta">
       <time class="article-date" datetime="${post.date}">${fmtDate(post.date)}</time>
       <div class="article-tags">
-        ${(post.tags||[]).map(t=>`<span class="tag-chip" data-tag="${t}">${t}</span>`).join('')}
+        ${(post.tags||[]).map(t=>`<button type="button" class="tag-chip" data-tag="${t}" aria-pressed="${t === activeTag}">${t}</button>`).join('')}
       </div>
     </div>
   </article>`;
@@ -2979,7 +2979,7 @@ function buildTagPanel() {
 
   const makeChip = t => {
     const d = delay; delay += 0.018;
-    return `<span class="tag-chip${t === activeTag ? ' active' : ''}" data-tag="${t}" style="animation-delay:${d.toFixed(3)}s">${t}</span>`;
+    return `<button type="button" class="tag-chip${t === activeTag ? ' active' : ''}" data-tag="${t}" aria-pressed="${t === activeTag}" style="animation-delay:${d.toFixed(3)}s">${t}</button>`;
   };
 
   panel.innerHTML = TAG_GROUPS
@@ -3058,7 +3058,7 @@ function buildTagsUI() {
   const el = document.getElementById('filterSheetTags');
   if (!el) return;
   el.innerHTML = allTags.map(t=>
-    `<span class="tag-chip${t===activeTag?' active':''}" data-tag="${t}">${t}</span>`
+    `<button type="button" class="tag-chip${t===activeTag?' active':''}" data-tag="${t}" aria-pressed="${t===activeTag}">${t}</button>`
   ).join('');
   el.querySelectorAll('.tag-chip').forEach(chip => {
     chip.addEventListener('click', () => {
@@ -3071,7 +3071,9 @@ function buildTagsUI() {
 
 function syncTagUI() {
   document.querySelectorAll('.tag-chip').forEach(c => {
-    c.classList.toggle('active', c.dataset.tag === activeTag);
+    const isActive = c.dataset.tag === activeTag;
+    c.classList.toggle('active', isActive);
+    c.setAttribute('aria-pressed', isActive);
   });
   /* ricostruisce il panel se aperto per aggiornare lo stato attivo */
   const panel = document.getElementById('tagPanel');
@@ -3425,21 +3427,49 @@ function initFilterSheet() {
   const sheet   = document.getElementById('filterSheet');
   const overlay = document.getElementById('filterOverlay');
   const close   = document.getElementById('filterSheetClose');
+  if (!btn || !sheet) return;
+
+  // aria-modal="true" sul markup dichiara il pannello come dialog modale:
+  // Esc per chiudere e un focus trap sono il minimo perché quella
+  // dichiarazione sia vera, non solo un attributo.
+  const FOCUSABLE = 'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])';
+  let lastFocused = null;
 
   function openSheet() {
-    sheet?.classList.add('open');
+    lastFocused = document.activeElement;
+    sheet.classList.add('open');
     overlay?.classList.add('active');
-    btn?.setAttribute('aria-expanded','true');
+    btn.setAttribute('aria-expanded','true');
     document.body.style.overflow = 'hidden';
+    close?.focus();
+    document.addEventListener('keydown', onKeydown);
   }
   function closeSheet() {
-    sheet?.classList.remove('open');
+    sheet.classList.remove('open');
     overlay?.classList.remove('active');
-    btn?.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-expanded','false');
     document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown);
+    // <body> non è focusable (nessun tabindex): .focus() su di esso è un
+    // no-op silenzioso e il focus resterebbe intrappolato sul pulsante
+    // ormai nascosto dentro il pannello. btn è sempre un target valido.
+    const restore = (lastFocused && lastFocused !== document.body && document.contains(lastFocused))
+      ? lastFocused : btn;
+    restore.focus();
+  }
+  function onKeydown(e) {
+    if (e.key === 'Escape') { e.preventDefault(); closeSheet(); return; }
+    if (e.key !== 'Tab') return;
+    // Rieseguita ad ogni Tab: filterSheetTags si ricostruisce quando i
+    // tag cambiano, un elenco statico dei focusable andrebbe stantio.
+    const focusables = [...sheet.querySelectorAll(FOCUSABLE)].filter(el => el.offsetParent !== null);
+    if (!focusables.length) return;
+    const first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 
-  btn?.addEventListener('click', openSheet);
+  btn.addEventListener('click', openSheet);
   overlay?.addEventListener('click', closeSheet);
   close?.addEventListener('click', closeSheet);
 }
@@ -3730,6 +3760,55 @@ function initSectionReveal() {
 }
 
 /* ──────────────────────────────────────────────────────────
+   ▶ SEARCH DEEP-LINK (?q=termine)
+   Rende reale il SearchAction dichiarato nel JSON-LD della home:
+   senza questo, /?q=... per un crawler è una pagina senza risultati.
+   ────────────────────────────────────────────────────────── */
+function initSearchFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  if (!q) return;
+
+  const isDesktop = window.innerWidth >= 920;
+  const input = document.getElementById(isDesktop ? 'searchInput' : 'searchInputMobile');
+  if (input) input.value = q;
+
+  if (!isDesktop) {
+    const bar = document.getElementById('searchMobileBar');
+    if (bar) bar.classList.add('open');
+  }
+
+  searchQ = q;
+  render();
+  runSearch(q, isDesktop ? 'searchDropdown' : 'searchDropdownMobile');
+
+  const el = document.getElementById('articles');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* Mantiene l'URL sincronizzato mentre si digita, cosi' il link e' condivisibile
+   e il back/forward del browser torna sulla query precedente. */
+function initSearchParamSync() {
+  const inputs = [document.getElementById('searchInput'), document.getElementById('searchInputMobile')]
+    .filter(Boolean);
+  if (!inputs.length) return;
+
+  let t;
+  const sync = (value) => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const v = value.trim();
+      const url = v
+        ? window.location.pathname + '?q=' + encodeURIComponent(v)
+        : window.location.pathname;
+      history.replaceState(null, '', url);
+    }, 400);
+  };
+
+  inputs.forEach(inp => inp.addEventListener('input', e => sync(e.target.value)));
+}
+
+/* ──────────────────────────────────────────────────────────
    ▶ INIT
    ────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -3743,6 +3822,8 @@ document.addEventListener('DOMContentLoaded', () => {
   render();
   initSearch();
   initSearchToggle();
+  initSearchFromQuery();
+  initSearchParamSync();
   initNav();
   initFilterSheet();
   initCatHandlers();

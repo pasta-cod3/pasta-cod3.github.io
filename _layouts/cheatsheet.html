@@ -26,8 +26,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="preload" href="/css/style.css" as="style" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.css" fetchpriority="high">
+  <link rel="preload" href="/css/style.min.css" as="style" fetchpriority="high">
+  <link rel="stylesheet" href="/css/style.min.css" fetchpriority="high">
 
   {% if page.cert == "ewpt" %}{% assign cert_color = "#f5a623" %}{% else %}{% assign cert_color = "#2ea44f" %}{% endif %}
   {% assign guide_color = "#9955ff" %}
@@ -162,8 +162,10 @@
   </style>
 
   <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  {% include feed-link.html %}
 </head>
 <body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
 <div class="grain-overlay" aria-hidden="true"></div>
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
@@ -212,7 +214,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="cheat-wrap">
     <a href="/cheatsheet.html" class="cheat-back">← Tutti i cheatsheet</a>
 
@@ -254,6 +256,7 @@
   <div class="f-left">
     <div class="f-logo">pasta<em>-</em>cod3</div>
     <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+    <div class="f-license">Codice <a href="/LICENSE">MIT</a> · Contenuti <a href="/LICENSE-CONTENT">CC BY-NC-SA 4.0</a></div>
   </div>
   <nav class="f-nav" aria-label="Footer navigation">
     <a href="/">Home</a>
@@ -263,7 +266,7 @@
   <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
 </footer>
 
-<script src="/js/static-pages.js"></script>
+<script src="/js/static-pages.min.js"></script>
 <script>
   (function(){
     var btn = document.getElementById('cheatSidebarToggle');

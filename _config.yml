@@ -3,6 +3,7 @@ description: Blog di cybersecurity in italiano — stewe
 baseurl:     ""
 url:         "https://pasta-cod3.github.io"
 author:      stewe
+email:       stefano.comida@protonmail.com
 
 # URL dei post → /posts/nome-del-post.html  (stessa struttura di prima)
 permalink:   /posts/:slug.html
@@ -17,6 +18,29 @@ kramdown:
 # Plugin attivi su GitHub Pages
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# --- Feed RSS/Atom (genera /feed.xml) ---
+feed:
+  path: feed.xml
+  posts_limit: 30
+  excerpt_only: true
+
+# --- Sitemap (generata automaticamente da jekyll-sitemap) ---
+sitemap:
+  exclude:
+    - "/404.html"
+    - "/llms.txt"
+
+# Il 404 non deve finire nel sitemap né avere layout (pagina non ancora
+# creata: la scope semplicemente non ha effetto finche' non esiste)
+defaults:
+  - scope:
+      path: "404.html"
+    values:
+      sitemap: false
+      layout: null
 
 # Cheatsheet (eWPT, eJPT...): ogni file ha il proprio permalink esplicito
 # in front matter, generato dallo script di migrazione.

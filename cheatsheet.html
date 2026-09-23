@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="it" data-theme="dark">
 <head>
@@ -34,7 +36,7 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   </noscript>
-  <link rel="stylesheet" href="css/style.css" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.min.css" fetchpriority="high">
 
   <script>
     (function(){ var t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
@@ -140,8 +142,10 @@
       .cheat-hub-card { animation: none; }
     }
   </style>
+  {% include feed-link.html %}
 </head>
 <body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
 
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
 <div class="grain-overlay" aria-hidden="true"></div>
@@ -194,7 +198,7 @@
   </div>
 </header>
 
-<main class="static-main">
+<main id="main" class="static-main">
   <div class="static-hero">
     <div class="scan-line" aria-hidden="true"></div>
     <div class="static-hero-inner">
@@ -244,6 +248,7 @@
   <div class="f-left">
     <div class="f-logo">pasta<em>-</em>cod3</div>
     <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+    <div class="f-license">Codice <a href="LICENSE">MIT</a> · Contenuti <a href="LICENSE-CONTENT">CC BY-NC-SA 4.0</a></div>
   </div>
   <nav class="f-nav" aria-label="Footer navigation">
     <a href="index.html">Home</a>
@@ -253,6 +258,6 @@
   <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
 </footer>
 
-<script src="js/static-pages.js"></script>
+<script src="js/static-pages.min.js"></script>
 </body>
 </html>

@@ -29,8 +29,13 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": {{ page.title | jsonify }},
-    "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
-    "author": { "@type": "Person", "name": "stewe" },
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Person",
+      "@id": "https://pasta-cod3.github.io/#person",
+      "name": "Stefano Comida",
+      "url": "https://pasta-cod3.github.io/about.html"
+    },
     "publisher": { "@type": "Organization", "name": "pasta-cod3" }
   }
   </script>
@@ -47,8 +52,8 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   </noscript>
-  <link rel="preload" href="/css/style.css" as="style" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.css" fetchpriority="high">
+  <link rel="preload" href="/css/style.min.css" as="style" fetchpriority="high">
+  <link rel="stylesheet" href="/css/style.min.css" fetchpriority="high">
 
   {% assign cat = page.cat %}
   {% if cat == "red" %}{% assign cat_color = "#ff3060" %}{% assign cat_label = "Red Team" %}
@@ -137,8 +142,10 @@
   </style>
 
   <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  {% include feed-link.html %}
 </head>
 <body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
 <div class="grain-overlay" aria-hidden="true"></div>
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
@@ -188,7 +195,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="post-wrap">
     <a href="/" class="post-back">← Torna agli articoli</a>
     <p class="post-eyebrow">{{ cat_label }} · {{ page.date | date: "%d %B %Y" }}</p>
@@ -211,6 +218,7 @@
   <div class="f-left">
     <div class="f-logo">pasta<em>-</em>cod3</div>
     <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+    <div class="f-license">Codice <a href="/LICENSE">MIT</a> · Contenuti <a href="/LICENSE-CONTENT">CC BY-NC-SA 4.0</a></div>
   </div>
   <nav class="f-nav" aria-label="Footer navigation">
     <a href="/">Home</a>
@@ -220,11 +228,11 @@
   <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
 </footer>
 
-<script src="/js/static-pages.js"></script>
+<script src="/js/static-pages.min.js"></script>
 <script src="/js/vendor/gsap.min.js"></script>
 <script src="/js/vendor/ScrollTrigger.min.js"></script>
 <script src="/js/vendor/lenis.min.js"></script>
-<script src="/js/post-reveal.js"></script>
+<script src="/js/post-reveal.min.js"></script>
 <script type="module">
   const mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
   if (mermaidBlocks.length) {

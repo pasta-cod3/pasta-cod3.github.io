@@ -1,0 +1,28 @@
+Licenza dei contenuti — pasta-cod3
+
+Questa licenza copre i contenuti editoriali del sito: gli articoli in
+_posts/, le pagine del percorso Fondamentali e i cheatsheet in
+_cheatsheets/ (testo, struttura, spiegazioni). Non copre il codice
+sorgente del sito (HTML/CSS/JS/script), che è sotto licenza MIT — vedi
+LICENSE.
+
+I contenuti sono di Stefano Comida (stewe / stewe.sec) e sono rilasciati
+sotto:
+
+Creative Commons Attribuzione — Non commerciale — Condividi allo stesso
+modo 4.0 Internazionale (CC BY-NC-SA 4.0)
+
+Testo completo della licenza: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it
+Codice legale: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.it
+
+In sintesi (questo riassunto non sostituisce il testo della licenza):
+
+- Attribuzione — Devi indicare l'autore (Stefano Comida, pasta-cod3.github.io)
+  e un link alla licenza, indicando se sono state apportate modifiche.
+- NonCommerciale — Non puoi usare il materiale per scopi commerciali.
+- CondividiAlloStessoModo — Se remixi, trasformi o crei a partire dal
+  materiale, devi distribuire i tuoi contributi con la stessa licenza
+  dell'originale.
+
+Le tecniche di sicurezza descritte negli articoli hanno scopo puramente
+educativo: vedi il disclaimer su ogni articolo e su about.html.

@@ -96,6 +96,40 @@ Il percorso interattivo **Fondamentali** (`fondamentali.html`) va oltre queste 2
 
 <br>
 
+## Sviluppo
+
+Il build su GitHub Pages è quello legacy (nessun workflow Actions): `css/style.min.css`
+e i vari `js/*.min.js` sono generati e committati a mano, non ricostruiti ad ogni deploy.
+Dopo aver modificato `css/style.css` o uno script in `js/`, rilancia:
+
+```bash
+./scripts/minify_assets.sh
+```
+
+e verifica in locale (`bundle exec jekyll serve`) prima di committare i `.min.*` aggiornati
+insieme al sorgente. Le pagine referenziano solo i file `.min.*`: dimenticare questo passo
+lascia il sito a servire una versione minificata ormai disallineata dal sorgente.
+
+Per le immagini in `assets/`, dopo averne aggiunta una nuova:
+
+```bash
+python3 scripts/optimize_images.py
+```
+
+genera la variante `.webp` accanto all'originale (che resta invariato).
+
+**Prima di ogni release di contenuti** (uno o più post nuovi pubblicati), rilancia:
+
+```bash
+python3 scripts/generate_llms_txt.py
+```
+
+`llms.txt` è generato da questo script a partire dai front matter reali in `_posts/`,
+non va più editato a mano: farlo significa che il prossimo rilancio dello script
+sovrascrive la modifica senza preavviso.
+
+<br>
+
 ## Come contribuire
 
 Il progetto non accetta contributi diretti al contenuto degli articoli, che riflettono lo studio e la voce personale dell'autore. Sono invece sempre benvenute segnalazioni e proposte:
@@ -109,7 +143,6 @@ Il progetto non accetta contributi diretti al contenuto degli articoli, che rifl
 ## Roadmap
 
 - [ ] Dominio personalizzato
-- [ ] Feed RSS
 - [ ] Sezione dedicata ai write up delle CTF
 
 <br>
@@ -136,7 +169,9 @@ Ogni articolo punta a essere tecnico ma chiaro, senza supponenza e senza semplif
 
 ## Licenza
 
-Il codice sorgente del sito è liberamente consultabile e riutilizzabile per scopi didattici. I contenuti degli articoli restano di proprietà dell'autore, salvo diversa indicazione.
+Il codice sorgente del sito è sotto licenza [MIT](LICENSE): liberamente riutilizzabile, anche per scopi commerciali, con la sola richiesta di mantenere la nota di copyright.
+
+I contenuti degli articoli, del percorso Fondamentali e dei cheatsheet sono sotto [Creative Commons BY-NC-SA 4.0](LICENSE-CONTENT): puoi condividerli e adattarli citando l'autore, non per scopi commerciali, e redistribuendo con la stessa licenza.
 
 <br>
 

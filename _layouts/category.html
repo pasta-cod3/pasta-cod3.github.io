@@ -37,8 +37,8 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
   </noscript>
-  <link rel="preload" href="css/style.css" as="style" fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css" fetchpriority="high">
+  <link rel="preload" href="css/style.min.css" as="style" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.min.css" fetchpriority="high">
 
   <script>
     (function(){ var t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
@@ -133,8 +133,10 @@
       .cat-feed-item { opacity: 1; transform: none; filter: none; animation: none; }
     }
   </style>
+  {% include feed-link.html %}
 </head>
 <body class="page-zoom-enter">
+<a class="skip-link" href="#main">Vai al contenuto</a>
 
 <canvas id="spaceCanvas" aria-hidden="true"></canvas>
 <div class="grain-overlay" aria-hidden="true"></div>
@@ -191,7 +193,7 @@
 {% assign all_tags = "" | split: "" %}
 {% for post in posts %}{% assign all_tags = all_tags | concat: post.tags %}{% endfor %}
 {% assign top_tags = all_tags | uniq | slice: 0, 12 %}
-<main class="static-main">
+<main id="main" class="static-main">
   <div class="cat-hero">
     <canvas id="staticHeroScene" class="hero-scene" aria-hidden="true"></canvas>
     <div class="cat-hero-inner">
@@ -247,6 +249,7 @@
   <div class="f-left">
     <div class="f-logo">pasta<em>-</em>cod3</div>
     <div class="f-copy">© 2026 — Tutti i diritti riservati</div>
+    <div class="f-license">Codice <a href="LICENSE">MIT</a> · Contenuti <a href="LICENSE-CONTENT">CC BY-NC-SA 4.0</a></div>
   </div>
   <nav class="f-nav" aria-label="Footer navigation">
     <a href="red-team.html">Red Team</a>
@@ -266,9 +269,9 @@
 <script src="js/vendor/gsap.min.js"></script>
 <script src="js/vendor/ScrollTrigger.min.js"></script>
 <script src="js/vendor/lenis.min.js"></script>
-<script src="js/static-pages.js"></script>
+<script src="js/static-pages.min.js"></script>
 <script type="module">
-  import { createNetworkScene } from './js/hero-scene.js';
+  import { createNetworkScene } from './js/hero-scene.min.js';
   createNetworkScene({
     canvasId: 'staticHeroScene',
     containerSelector: '.cat-hero',
