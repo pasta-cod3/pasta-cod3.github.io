@@ -2672,6 +2672,40 @@ html.has-custom-cursor [role="button"], html.has-custom-cursor input { cursor: n
   .btn-primary, .btn-ghost { transition: background var(--t), color var(--t), box-shadow 0.2s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1); }
 }
 
+/* ══════════════════════════════════════════════════════════
+   404 / ERROR PAGE (Patch 06) — nessun colore o font nuovo,
+   solo i token gia' definiti in testa al file.
+══════════════════════════════════════════════════════════ */
+.error-page {
+  min-height: 56vh;
+  display: flex; flex-direction: column; align-items: flex-start;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(4rem,10vw,8rem) var(--gap) clamp(3rem,6vw,5rem);
+}
+.error-page .error-code {
+  font-family: var(--ff-m); font-size: 12px;
+  color: var(--c-red); letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 1rem;
+}
+.error-page h1 {
+  font-family: var(--ff-d);
+  font-size: clamp(2rem,5vw,3.25rem);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 1.25rem; letter-spacing: -0.01em;
+}
+.error-page > p {
+  font-size: clamp(14px,1.8vw,16px); color: var(--text-dim);
+  line-height: 1.75; margin-bottom: 2rem; max-width: 46ch;
+}
+.error-nav {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.error-hint { font-size: 13px; color: var(--text-muted); }
+.error-hint a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
 @media (prefers-reduced-motion: reduce) {
   .fond-trace-done, .fond-trace-active, .fond-flow-dot, .fond-trophy-award::after,
   .fond-trophy-icon, .fond-trophy-award::before,

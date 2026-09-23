@@ -1,0 +1,138 @@
+---
+---
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#020c18">
+
+  <!-- ── SEO ──────────────────────────────────────────────── -->
+  <title>Pagina non trovata (404) | pasta-cod3</title>
+  <meta name="description" content="La pagina che cerchi non esiste o è stata spostata. Torna alla home o esplora Red Team, Blue Team, Storia, Notizie e Fondamentali.">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- ── FAVICON ──────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico">
+
+  <!-- ── PERF ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="css/style.css" fetchpriority="high">
+
+  <script>
+    (function(){ var t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); })();
+  </script>
+  {% include feed-link.html %}
+</head>
+<body>
+
+<!-- ── CANVAS ─────────────────────────────────────────── -->
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<!-- ── NAV ───────────────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menu mobile">
+  <a href="index.html"    class="nav-drawer-link">Home</a>
+  <a href="red-team.html"    class="nav-drawer-link">Red Team</a>
+  <a href="blue-team.html"    class="nav-drawer-link">Blue Team</a>
+  <a href="storia.html"    class="nav-drawer-link">Storia</a>
+  <a href="notizie.html"    class="nav-drawer-link">Notizie</a>
+  <a href="fondamentali.html" class="nav-drawer-link nav-fond">
+    <span class="nav-fond-drawer-row">Fondamentali <span class="nav-fond-drawer-tag">GRATIS</span></span>
+    <span class="nav-fond-drawer-desc">77 stanze interattive, quiz, TryHackMe — sempre gratis.</span>
+  </a>
+  <a href="cheatsheet.html" class="nav-drawer-link">Cheatsheet</a>
+  <a href="about.html"    class="nav-drawer-link">Chi sono</a>
+  <a href="contatti.html" class="nav-drawer-link">Contatti</a>
+</nav>
+
+<!-- ── HEADER ────────────────────────────────────────── -->
+<header class="site-header">
+  <a href="index.html" class="logo">pasta<span>-</span>cod3</a>
+  <nav class="nav-center" aria-label="Navigazione principale">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="red-team.html">Red Team</a></li>
+      <li><a href="blue-team.html">Blue Team</a></li>
+      <li><a href="storia.html">Storia</a></li>
+      <li><a href="notizie.html">Notizie</a></li>
+      <li class="nav-fond-wrap">
+        <a href="fondamentali.html" class="nav-fond">Fondamentali<span class="nav-fond-badge">GRATIS</span></a>
+        <span class="nav-fond-tip">
+          <span class="nav-fond-tip-head">Percorso Fondamentali</span>
+          77 stanze interattive, quiz e sfide pratiche con TryHackMe. Sempre gratis, nessun account a pagamento.
+          <a class="nav-fond-tip-cta" href="fondamentali.html">Apri il percorso →</a>
+        </span>
+      </li>
+      <li><a href="cheatsheet.html">Cheatsheet</a></li>
+      <li><a href="about.html">Chi sono</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">◐ LIGHT</button>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════════════════ -->
+<main id="main" class="error-page">
+  <p class="error-code">404 // NOT FOUND</p>
+  <h1>Questa pagina non esiste.</h1>
+  <p>
+    Il link potrebbe essere vecchio, oppure la pagina è stata spostata.
+    Da qui puoi ripartire:
+  </p>
+
+  <nav class="error-nav" aria-label="Percorsi suggeriti">
+    <a href="index.html" class="btn-ghost">Tutti gli articoli</a>
+    <a href="red-team.html" class="btn-ghost">Red Team</a>
+    <a href="blue-team.html" class="btn-ghost">Blue Team</a>
+    <a href="storia.html" class="btn-ghost">Storia</a>
+    <a href="notizie.html" class="btn-ghost">Notizie</a>
+    <a href="fondamentali.html" class="btn-ghost">Fondamentali</a>
+  </nav>
+
+  <p class="error-hint">
+    Cerchi un articolo specifico? Usa la ricerca dalla
+    <a href="index.html">pagina principale</a>.
+  </p>
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="f-left">
+    <div class="f-logo">pasta<em>-</em>cod3</div>
+    <div class="f-copy">© 2026, Tutti i diritti riservati</div>
+  </div>
+  <nav class="f-nav" aria-label="Footer navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">Chi sono</a>
+    <a href="contatti.html">Contatti</a>
+  </nav>
+  <div class="f-status"><div class="dot" aria-hidden="true"></div>SISTEMA ONLINE</div>
+</footer>
+
+<script src="js/static-pages.js"></script>
+</body>
+</html>
