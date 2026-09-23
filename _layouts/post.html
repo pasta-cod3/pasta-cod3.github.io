@@ -29,8 +29,13 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": {{ page.title | jsonify }},
-    "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
-    "author": { "@type": "Person", "name": "stewe" },
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Person",
+      "@id": "https://pasta-cod3.github.io/#person",
+      "name": "Stefano Comida",
+      "url": "https://pasta-cod3.github.io/about.html"
+    },
     "publisher": { "@type": "Organization", "name": "pasta-cod3" }
   }
   </script>
