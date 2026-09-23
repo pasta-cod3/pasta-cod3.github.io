@@ -46,7 +46,7 @@ function diffBadge(level, extraClass) {
    Il bagliore, il fluttuare e l'inclinazione 3D sono in CSS. */
 function circuitBadge(size) {
   size = size || 20;
-  return `<img class="fond-trophy-icon" src="assets/icons/circuit-badge.png" width="${size}" height="${size}" alt="" aria-hidden="true">`;
+  return `<img class="fond-trophy-icon" src="assets/icons/circuit-badge.webp" width="${size}" height="${size}" alt="" aria-hidden="true">`;
 }
 
 function targetIcon(size) {

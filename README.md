@@ -96,6 +96,30 @@ Il percorso interattivo **Fondamentali** (`fondamentali.html`) va oltre queste 2
 
 <br>
 
+## Sviluppo
+
+Il build su GitHub Pages è quello legacy (nessun workflow Actions): `css/style.min.css`
+e i vari `js/*.min.js` sono generati e committati a mano, non ricostruiti ad ogni deploy.
+Dopo aver modificato `css/style.css` o uno script in `js/`, rilancia:
+
+```bash
+./scripts/minify_assets.sh
+```
+
+e verifica in locale (`bundle exec jekyll serve`) prima di committare i `.min.*` aggiornati
+insieme al sorgente. Le pagine referenziano solo i file `.min.*`: dimenticare questo passo
+lascia il sito a servire una versione minificata ormai disallineata dal sorgente.
+
+Per le immagini in `assets/`, dopo averne aggiunta una nuova:
+
+```bash
+python3 scripts/optimize_images.py
+```
+
+genera la variante `.webp` accanto all'originale (che resta invariato).
+
+<br>
+
 ## Come contribuire
 
 Il progetto non accetta contributi diretti al contenuto degli articoli, che riflettono lo studio e la voce personale dell'autore. Sono invece sempre benvenute segnalazioni e proposte:
@@ -109,7 +133,6 @@ Il progetto non accetta contributi diretti al contenuto degli articoli, che rifl
 ## Roadmap
 
 - [ ] Dominio personalizzato
-- [ ] Feed RSS
 - [ ] Sezione dedicata ai write up delle CTF
 
 <br>

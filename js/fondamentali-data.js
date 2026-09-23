@@ -61,12 +61,12 @@ const THM_DATA = {
   'Intro to Cyber Threat Intel': { url: 'https://tryhackme.com/room/cyberthreatintel', icon: 'https://cdn-images.tryhackme.com/room-icons/66704dd0e54a1f39bff7b1a1-1735575216267' }
 };
 const MODULE_VISUAL = [
-  { img: 'assets/icons/networking.png',     cmd: 'nmap --type NETWORKING' },
-  { img: 'assets/icons/cybersecurity.png',  cmd: 'gpg --type SECURITY_CORE' },
-  { img: 'assets/icons/access-control.png', cmd: 'whoami --type IDENTITY_ACCESS' },
-  { img: 'assets/icons/hacker.png',         cmd: 'social-eng --type HUMAN_FACTOR' },
+  { img: 'assets/icons/networking.webp',     cmd: 'nmap --type NETWORKING' },
+  { img: 'assets/icons/cybersecurity.webp',  cmd: 'gpg --type SECURITY_CORE' },
+  { img: 'assets/icons/access-control.webp', cmd: 'whoami --type IDENTITY_ACCESS' },
+  { img: 'assets/icons/hacker.webp',         cmd: 'social-eng --type HUMAN_FACTOR' },
   { img: 'assets/icons/recon-binoculars.svg',              cmd: 'nikto --type WEB_RECON' },
-  { img: 'assets/icons/exploit.png',                       cmd: 'exploit --type HANDS_ON_PWN' },
+  { img: 'assets/icons/exploit.webp',                       cmd: 'exploit --type HANDS_ON_PWN' },
   { img: 'assets/icons/post-exploit-skull.svg',            cmd: 'post --type LATERAL_MOVEMENT' },
   { img: 'assets/icons/blue-monitor-activity.svg',         cmd: 'tail -f --type SOC_MONITOR' },
   { img: 'assets/icons/blue-hardening-shield.svg',         cmd: 'lynis audit --type HARDENING' },
@@ -397,7 +397,7 @@ const ROOMS = [
     title: 'Cyber Kill Chain e MITRE ATT&CK',
     excerpt: "Ogni attacco informatico segue delle fasi riconoscibili. Cyber Kill Chain e MITRE ATT&CK sono i due framework che le descrivono — e che ogni difensore usa per capire dove intervenire.",
     difficulty: 'media',
-    icon: 'assets/icons/rooms/mitre-attack.png', iconGlow: '#c0392b',
+    icon: 'assets/icons/rooms/mitre-attack.webp', iconGlow: '#c0392b',
     thm: [
       { name: 'Cyber Kill Chain', difficulty: 'media', note: "Applica le fasi della Kill Chain a uno scenario di attacco reale, passo dopo passo." },
       { name: 'Unified Kill Chain', difficulty: 'media', note: "Combina Kill Chain e MITRE ATT&CK in un unico framework, con un caso pratico da seguire fase per fase." }
@@ -1180,7 +1180,7 @@ const ROOMS = [
     title: 'Google Dorking e OSINT avanzato',
     excerpt: "I motori di ricerca indicizzano più di quanto pensiamo. Operatori Google, GHDB, Shodan e Censys per trovare quello che non dovrebbe essere pubblico — senza toccare il target.",
     difficulty: 'facile',
-    icon: 'assets/icons/rooms/shodan.png', iconGlow: '#e6394a',
+    icon: 'assets/icons/rooms/shodan.webp', iconGlow: '#e6394a',
     thm: [
       { name: 'Pre Security', difficulty: 'facile', note: "Buona base di ricognizione open source prima di affinare le tecniche di dorking avanzato." }
     ],
@@ -1298,7 +1298,7 @@ const ROOMS = [
     title: 'SQL Injection: le basi',
     excerpt: "Al primo posto della OWASP Top 10 da decenni. Come una query costruita concatenando input utente diventa un varco per leggere l\'intero database — e come i prepared statement lo chiudono.",
     difficulty: 'media',
-    icon: 'assets/icons/rooms/sqlmap.png', iconGlow: '#e67e22',
+    icon: 'assets/icons/rooms/sqlmap.webp', iconGlow: '#e67e22',
     thm: [
       { name: 'OWASP Top 10', difficulty: 'media', note: "La SQL Injection è una delle vulnerabilità principali coperte dalla room, con esempi pratici da sfruttare." }
     ],
@@ -1613,7 +1613,7 @@ const ROOMS = [
     title: 'IDS/IPS con Suricata',
     excerpt: "Il firewall guarda porte e protocolli, non dentro il traffico. Suricata analizza in profondità: differenza IDS/IPS, regole custom, e come integrarlo in un SOC.",
     difficulty: 'media',
-    icon: 'assets/icons/rooms/suricata.png', iconGlow: '#e8393a',
+    icon: 'assets/icons/rooms/suricata.webp', iconGlow: '#e8393a',
     thm: [
       { name: 'Snort', difficulty: 'media', note: "Le regole Suricata sono compatibili con quelle di Snort: qui le scrivi e le testi contro traffico reale." }
     ],
@@ -1805,7 +1805,7 @@ const ROOMS = [
     title: 'Vulnerability Management',
     excerpt: "Non puoi proteggere ciò che non conosci. Le 4 fasi del VM: inventario, scanning, prioritizzazione con CVSS/SSVC, remediation — un processo continuo, non un\'attività una tantum.",
     difficulty: 'media',
-    icon: 'assets/icons/rooms/greenbone.png', iconGlow: '#1e7a3d',
+    icon: 'assets/icons/rooms/greenbone.webp', iconGlow: '#1e7a3d',
     thm: [
       { name: 'Security Principles', difficulty: 'facile', note: "Inquadra il vulnerability management nel contesto più ampio dei principi di sicurezza." },
       { name: 'Nmap', difficulty: 'facile', note: "Nmap è uno degli strumenti citati nell\'articolo per l\'inventario e lo scanning iniziale." }
@@ -2198,7 +2198,7 @@ const ROOMS = [
     title: 'Threat Intelligence per principianti: capire chi attacca e come',
     excerpt: "La threat intelligence trasforma dati grezzi in conoscenza utile per la difesa. Tipi di intelligence, fonti OSINT, MISP e come integrare gli IOC nei sistemi di difesa.",
     difficulty: 'facile',
-    icon: 'assets/icons/rooms/misp.png', iconGlow: '#00b4d8',
+    icon: 'assets/icons/rooms/misp.webp', iconGlow: '#00b4d8',
     thm: [
       { name: 'Threat Intelligence Tools', difficulty: 'facile', note: "Gli stessi strumenti OSINT descritti nell'articolo, messi in pratica direttamente in questa stanza." }
     ],
@@ -2432,7 +2432,7 @@ const ROOMS = [
     title: 'Forensica Digitale: principi, metodologia e strumenti per il DFIR',
     excerpt: "La forensica digitale è la scienza di raccogliere e analizzare prove digitali mantenendo la loro integrità. Principi fondamentali, catena di custodia, analisi della memoria e del disco.",
     difficulty: 'facile',
-    icon: 'assets/icons/rooms/autopsy.png', iconGlow: '#3366cc',
+    icon: 'assets/icons/rooms/autopsy.webp', iconGlow: '#3366cc',
     thm: [
       { name: 'Autopsy', difficulty: 'facile', note: "Il tool descritto nell'articolo per l'analisi del disco, messo in pratica direttamente in questa stanza." }
     ],
@@ -2510,7 +2510,7 @@ const ROOMS = [
     title: 'Memory Forensics con Volatility: cosa vive nella RAM',
     excerpt: "Un malware fileless non tocca quasi mai il disco. Le sue tracce vivono solo in RAM, e spariscono al primo riavvio. La memory forensics, e Volatility in particolare, è come si cattura quella prova prima che svanisca.",
     difficulty: 'media',
-    icon: 'assets/icons/rooms/volatility.png', iconGlow: '#ff4000',
+    icon: 'assets/icons/rooms/volatility.webp', iconGlow: '#ff4000',
     thm: [
       { name: 'Memory Forensics', difficulty: 'media', note: "Il tool e la metodologia descritti nell'articolo, applicati direttamente su un dump di memoria reale in questa stanza." }
     ],
@@ -2588,7 +2588,7 @@ const ROOMS = [
     title: 'Network Forensics: ricostruire un attacco da un file pcap',
     excerpt: "Un IDS ha generato un alert tre settimane fa e nessuno l'ha guardato. Ora bisogna capire cosa è successo esaminando il traffico catturato allora. La network forensics è l'analisi del traffico quando l'attacco è già finito.",
     difficulty: 'media',
-    icon: 'assets/icons/rooms/zeek.png', iconGlow: '#00b4d8',
+    icon: 'assets/icons/rooms/zeek.webp', iconGlow: '#00b4d8',
     thm: [],
     quiz: [
       {
@@ -2888,7 +2888,7 @@ const ROOMS = [
     title: 'Malware Analysis Statica: capire un binario senza eseguirlo',
     excerpt: "Prima di eseguire un file sospetto, si può imparare moltissimo senza mai lanciarlo: hash, stringhe leggibili, struttura dell'eseguibile e regole YARA.",
     difficulty: 'media',
-    icon: 'assets/icons/rooms/yara.png', iconGlow: '#cc0000',
+    icon: 'assets/icons/rooms/yara.webp', iconGlow: '#cc0000',
     thm: [
       { name: 'MAL: Malware Introductory', difficulty: 'facile', note: "Il primo passo pratico nell'analisi malware, applicando gli stessi principi di base descritti nell'articolo." }
     ],
