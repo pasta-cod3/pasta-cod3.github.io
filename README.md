@@ -169,7 +169,9 @@ Ogni articolo punta a essere tecnico ma chiaro, senza supponenza e senza semplif
 
 ## Licenza
 
-Il codice sorgente del sito è liberamente consultabile e riutilizzabile per scopi didattici. I contenuti degli articoli restano di proprietà dell'autore, salvo diversa indicazione.
+Il codice sorgente del sito è sotto licenza [MIT](LICENSE): liberamente riutilizzabile, anche per scopi commerciali, con la sola richiesta di mantenere la nota di copyright.
+
+I contenuti degli articoli, del percorso Fondamentali e dei cheatsheet sono sotto [Creative Commons BY-NC-SA 4.0](LICENSE-CONTENT): puoi condividerli e adattarli citando l'autore, non per scopi commerciali, e redistribuendo con la stessa licenza.
 
 <br>
 

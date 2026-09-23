@@ -1484,6 +1484,9 @@ body.page-zoom-exit .inf-car-track.scroll-run { animation-play-state: paused; }
 .f-logo { font-family: var(--ff-d); font-size: 15px; font-weight: 700; }
 .f-logo em { color: var(--accent); font-style: normal; }
 .f-copy { font-family: var(--ff-m); font-size: 10px; color: var(--text-dim); }
+.f-license { font-family: var(--ff-m); font-size: 10px; color: var(--text-dim); }
+.f-license a { color: var(--text-dim); text-decoration: none; transition: color var(--t); }
+.f-license a:hover { color: var(--accent); }
 .f-nav { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 .f-nav a { font-family: var(--ff-m); font-size: 10.5px; color: var(--text-dim); text-decoration: none; transition: color var(--t); }
 .f-nav a:hover { color: var(--accent); }

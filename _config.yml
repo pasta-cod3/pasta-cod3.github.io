@@ -3,6 +3,7 @@ description: Blog di cybersecurity in italiano — stewe
 baseurl:     ""
 url:         "https://pasta-cod3.github.io"
 author:      stewe
+email:       stefano.comida@protonmail.com
 
 # URL dei post → /posts/nome-del-post.html  (stessa struttura di prima)
 permalink:   /posts/:slug.html
